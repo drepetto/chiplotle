@@ -22,9 +22,6 @@
  *  See the file "COPYING" for the text of the license.
 """
 
-
-
-
 import serial
 import chiplotle_hpgl
 import sys
@@ -46,6 +43,10 @@ class Plotter(object):
     def __init__(self, ser, lang='hpgl', writeToSerial = True, 
         writeToFile = False, defaultFileName = "default.hpgl", 
         xoff='1', xon='0'):
+        
+        #Victor, how should we handle the version???
+        self.versionString = "chiplotle v.9"
+        
         
         if lang == 'hpgl':
             self.lang = chiplotle_hpgl.Hpgl()
