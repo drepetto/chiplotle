@@ -1,0 +1,9 @@
+####################################################################################
+###                                                                              ###
+###     Command file for Compiling and Binding the HP7550 Print Server           ###
+###                                                                              ###
+####################################################################################
+von
+pas user1.hp7550.pas -opt 3
+bind -b prsvr.user1.hp7550 /com/prsvr user1.hp7550.bin
+voff
