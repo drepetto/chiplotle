@@ -1,10 +1,16 @@
 import random
-import run_chiplotle_OSX
+import run_chiplotle_UNIX
 
-p = run_chiplotle_OSX.p
+from languages import chiplotle_hpgl as chpgl
+
+
+
+
+
+c = run_chiplotle_UNIX.c
 
 #start in a random spot
-p.goto(random.randint(p.left(), p.right()), random.randint(p.bottom(), p.top()))
+c.output.goto(random.randint(c.output.left(), c.output.right()), random.randint(c.output.bottom(), c.output.top()))
 
 # how many gestures do we wnat to do?
 
@@ -12,24 +18,22 @@ p.goto(random.randint(p.left(), p.right()), random.randint(p.bottom(), p.top()))
 
 #for gesture in range(numGestures):
 
-keepGoing = True
-
 penNum = 1
 
-while keepGoing:
+while True:
     #print "gesture %d:" % gesture
 
-    p.sp(penNum)
+    c.eat = chpgl.sp(penNum)
 
     whichGesture = random.randint(0,4)
     
     if whichGesture == 0:
         print "circle!"
-        p.circle(random.randint(10,5000), random.randint(1,180))
+        c.eat = chpgl.circle(random.randint(10,5000), random.randint(1,180))
     
     elif whichGesture == 1:
         print "rect!"
-        p.edgeRectRelative(random.randint(10,5000), random.randint(10,5000))        
+        c.eat = chpgl.edgeRectRelative(random.randint(10,5000), random.randint(10,5000))        
 
     elif whichGesture == 2:
         print "filled rect!"
@@ -45,18 +49,18 @@ while keepGoing:
         angle = random.randint(0,3) * 45
         
         print "fillType: %d space: %d angle: %d" % (ft, space, angle)
-        p.fillType(ft, space, angle)
-        p.shadeRectRelative(random.randint(10,2000), random.randint(10,2000))
+        c.eat = chpgl.fillType(ft, space, angle)
+        c.eat = chpgl.shadeRectRelative(random.randint(10,2000), random.randint(10,2000))
 
     elif whichGesture == 3:
         print "draw a crazy line!"
-        p.pd()
-        p.goto(random.randint(p.left(), p.right()), random.randint(p.bottom(), p.top()))
-        p.pu()
+        c.eat = chpgl.pd()
+        c.eat = chpgl.goto(random.randint(c.output.left(), c.output.right()), random.randint(c.output.bottom(), c.output.top()))
+        c.eat = chpgl.pu()
         
     elif whichGesture == 4:
         print "just jump around!"
-        p.goto(random.randint(p.left(), p.right()), random.randint(p.bottom(), p.top()))
+        c.eat = chpgl.goto(random.randint(c.output.left(), c.output.right()), random.randint(c.output.bottom(), c.output.top()))
         
     #pick a new pen?
     pickPen = random.randint(0,99)
@@ -64,7 +68,7 @@ while keepGoing:
         penNum += 1
 
     if penNum == 9:
-        keepGoing = False
+        break
         
-p.sp(0)
+c.eat = chpgl.sp(0)
 

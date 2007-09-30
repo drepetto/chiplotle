@@ -207,7 +207,7 @@ class Plotter(object):
     @property
     def marginsHard(self):
         """Get margins of paper."""
-        m = [] 
+        m = '' 
         while len(m) < 9:
             self.ser.flushInput()
             self._writePort(self.lang.outputHardClipLimits())
@@ -219,7 +219,7 @@ class Plotter(object):
     @property
     def marginsSoft(self):
         """Get margins of paper."""
-        m = []
+        m = ''
         while len(m) < 9:
             self.ser.flushInput()
             self._writePort(self.lang.outputP1P2())
