@@ -144,6 +144,7 @@ class Canvas(object):
             out = grob
         else:
             print "Don't know ", grob
+            out = " "
 
         self.data.append(out)
 

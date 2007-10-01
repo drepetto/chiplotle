@@ -42,7 +42,7 @@ plt = raw_input("""1. generic plotter
 if plt == '1':
     p = plotter.Plotter(ser)
 elif plt == '2':
-    p = dx1300.DX1300(ser)
+    p = dxy1300.DXY1300(ser)
 elif plt == '3':
     p = hp7475a.HP7475A(ser)
 elif plt == '4':
