@@ -8,7 +8,7 @@
 import hpgl
 import math
 from utils import *
-import numpy as np
+#import numpy as np
 
 def edgeRect(x, y, sx, sy, rot):
     tl = (-sx / 2., sy / 2.)

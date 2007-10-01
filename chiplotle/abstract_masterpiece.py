@@ -3,14 +3,10 @@ import run_chiplotle_UNIX
 
 from languages import chiplotle_hpgl as chpgl
 
-
-
-
-
 c = run_chiplotle_UNIX.c
 
 #start in a random spot
-c.output.goto(random.randint(c.output.left(), c.output.right()), random.randint(c.output.bottom(), c.output.top()))
+c.eat = chpgl.goto(random.randint(c.output.left(), c.output.right()), random.randint(c.output.bottom(), c.output.top()))
 
 # how many gestures do we wnat to do?
 
