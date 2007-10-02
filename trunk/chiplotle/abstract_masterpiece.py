@@ -5,6 +5,9 @@ from languages import chiplotle_hpgl as chpgl
 
 c = run_chiplotle_UNIX.c
 
+pens = raw_input("\nhow many pens do you want to use? ")
+numPens = int(pens)
+
 #start in a random spot
 c.eat = chpgl.goto(random.randint(c.output.left(), c.output.right()), random.randint(c.output.bottom(), c.output.top()))
 
@@ -63,7 +66,7 @@ while True:
     if pickPen < 25:
         penNum += 1
 
-    if penNum == 9:
+    if penNum == numPens + 1:
         break
         
 c.eat = chpgl.sp(0)

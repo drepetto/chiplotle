@@ -320,8 +320,9 @@ def pu():
 def selectPen(penNum = 0):
     return hpgl.selectPen(penNum)
     
-def sp(penNum = 0):
-    selectPen(penNum)
+#def sp(penNum = 0):
+#    self.selectPen(penNum)
+sp = selectPen
 
 def tickLength(tp = 0.5, tn = 0.5):
     return hpgl.tickLength(tp, tn)
@@ -407,7 +408,7 @@ def outputDigiPoint(self):
     MISC I/O, PLOTTER QUERIES, ERRORS, SETUP
 """
 
-def abortCommand(self):
+def abortCommand():
     """Tells the plotter to discard commands in its buffer."""
     return hpgl.abortCommand()
 
