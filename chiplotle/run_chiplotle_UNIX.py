@@ -28,13 +28,13 @@ for i,port in enumerate(ttys):
 sp = raw_input("\nuse serial port [0 - %d]: " % (i - 1))
 
 print "okay, opening %s..." % ttys[int(sp)]
-ser = serial.Serial("/dev/" + ttys[int(sp)], 9600, timeout= 1)
+ser = serial.Serial("/dev/" + ttys[int(sp)], 9600, timeout=.1)
 
 
 # ------------------------
 print "\nChoose a plotter:\a"
 plt = raw_input("""1. generic plotter
-2. DX1300
+2. DXY1300
 3. HP7475A
 4. HP7550A
 5. HP7595A

@@ -42,7 +42,6 @@ class Plotter(object):
         if kwargs.has_key('xon'):
             self.xon = kwargs['xon']
             kwargs.pop('xon')
-
         
 # Only these commands will be sent to the plotter. All other will be eaten. Burp.
         self.allowedHPGLCommands = tuple([
@@ -51,7 +50,6 @@ class Plotter(object):
         'OD','OE','OF','OH','OI','OO','OP','OS','OW','PA','PD','PR',
         'PS','PT','PU','RA','RO','RR','SA','SC','SI','SL','SM','SP',
         'SR','SS','TL','UC','VS','WG','XT','YT'])
-
 
         self.initialize()
 
@@ -63,27 +61,22 @@ class Plotter(object):
         self._writePort(self.lang.escapePlotterOn())
         self._writePort(self.lang.initialize())
         
-        #self.plotterID = self.getPlotterID()
-        #print "got ID: " + self.plotterID
-        
-
-        #self.marginsHard = self.getHardMargins()
-        #self.marginsSoft = self.getSoftMargins()
+        self.marginsHard = self.refreshMarginsHard
+        self.marginsSoft = self.refreshMarginsSoft
 
     @property
     def id(self):
         """Get name of plotter being used."""
         self.ser.flushInput()
         self._writePort(self.lang.outputID())
-        id = self._readPort(100)
-    
-        while len(id) == 0:
-            #print "len == 0, trying again..."
-            self.ser.flushInput()
-            self._writePort(self.lang.outputID())
-            id = self._readPort(100)
         
-        #print "got %d bytes" % len(id)
+        id = ''
+        input = ' '
+        
+        while input != '':
+            input = self._readByte()
+            id += input
+
         return id.strip('\r')
 
 
@@ -161,7 +154,7 @@ class Plotter(object):
 
     def _readPort(self, numBytes = 100):
         """Read numBytes from the serial port"""
-        print "waiting for %d bytes..." % numBytes
+        #print "waiting for %d bytes..." % numBytes
         return self.ser.read(numBytes)
 
     
@@ -169,22 +162,33 @@ class Plotter(object):
     def getError(self):
         self.ser.flushInput();
         self._writePort(self.lang.extendedError())
-        err = self._readPort()
-        while len(err) == 0:
-            self.ser.flushInput()
-            err = self._readPort()
-        return self._readPort()
+        
+        err = ''
+        input = ' '
+        
+        while input != '':
+            input = self._readByte()
+            err += input
+        
+        return err
     
     def bufferSpace(self):
         #print "getting bufferSpace..."
-        bspace = '' 
-        while len(bspace) == 0:
-            self.ser.flushInput()
-            self._writePortControl(self.lang.escapeOutputBufferSpace())
-            bspace = self._readPort()
+        self.ser.flushInput()
+        self._writePortControl(self.lang.escapeOutputBufferSpace())
         
-        #print "buffer space: ", bspace
-        return int(bspace)
+        bs = ''
+        input = ' '
+        
+        while input != '':
+            input = self._readByte()
+            bs += input
+        
+        #print "buffer space: ", bs
+        if bs == '':
+            return 0
+            
+        return int(bs)
 
 
     def filterCommands(self, code):            
@@ -205,28 +209,50 @@ class Plotter(object):
     """
 
     @property
-    def marginsHard(self):
-        """Get margins of paper."""
-        m = '' 
-        while len(m) < 9:
-            self.ser.flushInput()
-            self._writePort(self.lang.outputHardClipLimits())
-            m = self._readPort()
+    def refreshMarginsHard(self):
+        """
+            Get hard margins of paper.
+            This is set automatically at startup. Call this function
+            explicitly if you change the paper size/orientation in some way
+        """
+        #print "getting hard margins..."
+        
+        self.ser.flushInput()
+        self._writePort(self.lang.outputHardClipLimits())
+        
+        m = ''
+        input = ' '
+        
+        while input != '':
+            input = self._readByte()
+            m += input
+
         m = m.split(',')
         m = tuple([int(n) for n in m])
         return m
 
     @property
-    def marginsSoft(self):
-        """Get margins of paper."""
+    def refreshMarginsSoft(self):
+        """
+            Get soft margins of paper.
+            This is set automatically at startup. Call this function
+            explicitly if you change the paper size/orientation in some way
+        """
+        #print "getting soft margins..."
+        
+        self.ser.flushInput()
+        self._writePort(self.lang.outputP1P2())
+        
         m = ''
-        while len(m) < 9:
-            self.ser.flushInput()
-            self._writePort(self.lang.outputP1P2())
-            m = self._readPort()
+        input = ' '
+        
+        while input != '':
+            input = self._readByte()
+            m += input
+
         m = m.split(',')
         m = tuple([int(n) for n in m])
-        return m
+        return m 
 
     def bottom(self, hard=True):
         """Get lowest coordinate."""
