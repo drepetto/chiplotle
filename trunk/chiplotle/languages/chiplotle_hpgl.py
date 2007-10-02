@@ -47,7 +47,7 @@ def edgeCircle(x, y, rad):
 
 
 def randomWalk(steps=100, step_size_var=500):
-    self.penDown()
+    penDown()
     for i in range(steps):
         r = random.randint(1, step_size_var)
         A = random.random() * math.pi * 2
@@ -64,7 +64,7 @@ def plotAsciiArt(text, char_size, compensation = 1):
     return plotText(text, char_size, h, 0, 0, -0.3)      
 
 
-def plotText(self, text, b=None, h=None, angle=None, char_s=None, line_s=None, chunk=10):
+def plotText(text, b=None, h=None, angle=None, char_s=None, line_s=None, chunk=10):
     """Print text ."""
     out = ''
     # replace all \n by \n\r
@@ -340,22 +340,22 @@ def velocitySelect(v = None, pen = None):
 
 
         
-def inputP1P2(self, p1x = None, p1y = None, p2x = None, p2y = None):
+def inputP1P2(p1x = None, p1y = None, p2x = None, p2y = None):
     return hpgl.inputP1P2(p1x, p1y, p2x, p2y)
 
-def inputWindow(self, xLL = None, yLL = None, xUR = None, yUR = None):
+def inputWindow(xLL = None, yLL = None, xUR = None, yUR = None):
     return hpgl.inputWindow(xLL, yLL, xUR, yUR)
 
-def outputHardClipLimits(self):
+def outputHardClipLimits():
     return hpgl.outputHardClipLimits()
 
-def outputP1P2(self):
+def outputP1P2():
     return hpgl.outputP1P2()
 
-def outputWindow(self):
+def outputWindow():
     return hpgl.outputWindow()
 
-def paperSize(self, size = None):
+def paperSize(size = None):
     return hpgl.paperSize(size)
 
     
@@ -372,19 +372,19 @@ def scale(xMin, xMax, yMin, yMax):
     PAPER CONTROLS
 """
 
-def advanceFrame(self):
+def advanceFrame():
     return hpgl.advanceFrame()
     
-def advanceFullPage(self):
+def advanceFullPage():
     return hpgl.advanceFullPage()
     
-def advanceHalfPage(self):
+def advanceHalfPage():
     return hpgl.advanceHalfPage()  
 
-def enableCutLine(self, n):
+def enableCutLine(n):
     return hpgl.enableCutLine(n)
 
-def pageFeed(self, n = None):
+def pageFeed(n = None):
     return hpgl.pageFeed(n)
 
 
@@ -392,13 +392,13 @@ def pageFeed(self, n = None):
 """
     DIGITIZER CONTROLS
 """
-def clearDigitizer(self):
+def clearDigitizer():
     return hpgl.clearDigitizer()
     
-def digitizePoint(self):
+def digitizePoint():
     return hpgl.digitizePoint()
 
-def outputDigiPoint(self):
+def outputDigiPoint():
     return hpgl.outputDigiPoint()
 
 
@@ -412,51 +412,51 @@ def abortCommand():
     """Tells the plotter to discard commands in its buffer."""
     return hpgl.abortCommand()
 
-def automaticPen(self, p = None):
+def automaticPen(p = None):
     return hpgl.automaticPen(p)
 
-def bufferPlot(self):
+def bufferPlot():
     return hpgl.bufferPlot()
 
-def defaultInstruction(self):
+def defaultInstruction():
     return hpgl.defaultInstruction()
 
-def defineKey(self, key = None, function = None):
+def defineKey(key = None, function = None):
     return hpgl.defineKey()
 
     
-def initialize(self):
+def initialize():
     """Initialize plotter."""
     return hpgl.initialize()
 
-def inputMask(self, e = 233, s = 0, p = 0):
+def inputMask(e = 233, s = 0, p = 0):
     return hpgl.inputMask(e, s, p)
 
-def notReady(self):
+def notReady():
     return hpgl.notReady()
     
-def outputError(self):
+def outputError():
     return hpgl.outputError()
 
-def outputID(self):
+def outputID():
     return hpgl.outputID()
 
-def outputKey(self):
+def outputKey():
     return hpgl.outputKey()
 
-def outputOptions(self):
+def outputOptions():
     return hpgl.outputOptions()
 
-def outputStatus(self):
+def outputStatus():
     return hpgl.outputStatus()
 
-def outputCarouselType(self):
+def outputCarouselType():
     return hpgl.outputCarouselType()
 
-def replot(self, n = 1):
+def replot(n = 1):
     return hpgl.replot(n)
     
-def writeToDisplay(self, text):
+def writeToDisplay(text):
     return hpgl.writeToDisplay(text)
 
 
@@ -465,13 +465,13 @@ def writeToDisplay(self, text):
     DCI (Device Control Instructions) escape commands ----------------------------
 """
 
-def escapePlotterOn(self):
+def escapePlotterOn():
     return hpgl.escapePlotterOn() 
 
-def escapeHS2(self, minbytes=81, xon='17'):
+def escapeHS2(minbytes=81, xon='17'):
     return hpgl.escapeHS2(minbytes, xon)
 
-def escapeXoff(self, xoff='19', interchar_speed=0):
+def escapeXoff(xoff='19', interchar_speed=0):
     return hpgl.escapeXoff(xoff, interchar_speed)
 
 
