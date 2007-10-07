@@ -24,11 +24,15 @@ class Grob(object):
             self.rot = kwargs['rot']
             kwargs.pop('rot')
 
-        self.col = 1
-        if kwargs.has_key('col'):
-            self.col = kwargs['col']
-            kwargs.pop('col')
+        self.color = 1
+        if kwargs.has_key('color'):
+            self.color = kwargs['color']
+            kwargs.pop('color')
 
+        self.line_type = None
+        if kwargs.has_key('line_type'):
+            self.line_type = kwargs['line_type']
+            kwargs.pop('line_type')
 
         
     def draw(self):
@@ -134,6 +138,11 @@ class Canvas(object):
     def __init__(self, output):
         self.output = output
         self.data = []
+
+    def write2file(self, file_name):
+        f = open(file_name, 'w')
+        f.write(self.data)
+        f.close()
 
     def write(self, grob):
         if isinstance(grob, Grob):
