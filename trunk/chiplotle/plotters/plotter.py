@@ -61,22 +61,16 @@ class Plotter(object):
         self._writePort(self.lang.escapePlotterOn())
         self._writePort(self.lang.initialize())
         
-        self.marginsHard = self.refreshMarginsHard
-        self.marginsSoft = self.refreshMarginsSoft
+        self.marginsHard = self.refreshMarginsHard()
+        self.marginsSoft = self.refreshMarginsSoft()
 
     @property
     def id(self):
         """Get name of plotter being used."""
         self.ser.flushInput()
         self._writePort(self.lang.outputID())
-        
-        id = ''
-        input = ' '
-        
-        while input != '':
-            input = self._readByte()
-            id += input
-
+       
+        id = self._readPort()
         return id.strip('\r')
 
 
@@ -97,20 +91,22 @@ class Plotter(object):
         dataLen = len(data)
         dataSpace = self.bufferSpace()
         
-        #print "total command length: %d" % dataLen
-        #print "free buffer space: %d" % dataSpace
+        print "total command length: %d" % dataLen
+        print "free buffer space: %d" % dataSpace
         
         # uh oh, not enough space!
         if dataLen > dataSpace:        
             print "uh oh, too much data!"
-            numChunks = (dataLen / 1000) + 1
+            numChunks = (dataLen / 250) + 1
+            print 'numChunks=', numChunks
 
             for i in range(numChunks):
                 self.sleepWhileBufferFull()
                 
-                start = i * 1000
-                end = start + 1000
-                
+                print 'chunk =', i
+                start = i * 250
+                end = start + 250
+                print data[start:end]                
                 self.ser.write(data[start:end])            
         
         # buffer space is fine, just send it as is!
@@ -133,13 +129,19 @@ class Plotter(object):
         #print "writing control message..."
         self.ser.write(data)
     
+    def plotFile(self, filename):
+        f = open(filename, 'r')
+        fs = f.readlines()
+        for l in fs:
+            self.write(l)
+
 
     def sleepWhileBufferFull(self):
         """
             sleeps until the buffer has some room in it.
         """
         space = self.bufferSpace()  
-        if space < 250:
+        if space < 1000:
             print 'Buffer getting full, sleeping...'
             while True:
                 time.sleep(1)
@@ -152,10 +154,20 @@ class Plotter(object):
         byte = self.ser.read()
         return byte
 
-    def _readPort(self, numBytes = 100):
-        """Read numBytes from the serial port"""
-        #print "waiting for %d bytes..." % numBytes
-        return self.ser.read(numBytes)
+    def _readPort(self):
+        """Read data from the serial port"""
+
+        print 'Reading from port...'
+        while self.ser.inWaiting() == 0:
+            pass
+
+        m = ''
+        input = 'xxx'
+        while input != '':
+            input = self._readByte()
+            m += input
+
+        return m
 
     
     
@@ -163,31 +175,15 @@ class Plotter(object):
         self.ser.flushInput();
         self._writePort(self.lang.extendedError())
         
-        err = ''
-        input = ' '
-        
-        while input != '':
-            input = self._readByte()
-            err += input
-        
+        err = self._readPort()
         return err
     
     def bufferSpace(self):
-        #print "getting bufferSpace..."
-        self.ser.flushInput()
+        print "getting bufferSpace..."
+        #self.ser.flushInput()
         self._writePortControl(self.lang.escapeOutputBufferSpace())
-        
-        bs = ''
-        input = ' '
-        
-        while input != '':
-            input = self._readByte()
-            bs += input
-        
-        #print "buffer space: ", bs
-        if bs == '':
-            return 0
-            
+        bs = self._readPort()
+        print "buffer space: ", bs
         return int(bs)
 
 
@@ -208,7 +204,6 @@ class Plotter(object):
         PAGE SIZE, MARGINS, CLIPPING, ROTATION
     """
 
-    @property
     def refreshMarginsHard(self):
         """
             Get hard margins of paper.
@@ -219,19 +214,12 @@ class Plotter(object):
         
         self.ser.flushInput()
         self._writePort(self.lang.outputHardClipLimits())
-        
-        m = ''
-        input = ' '
-        
-        while input != '':
-            input = self._readByte()
-            m += input
 
+        m = self._readPort()
         m = m.split(',')
         m = tuple([int(n) for n in m])
         return m
 
-    @property
     def refreshMarginsSoft(self):
         """
             Get soft margins of paper.
@@ -243,13 +231,8 @@ class Plotter(object):
         self.ser.flushInput()
         self._writePort(self.lang.outputP1P2())
         
-        m = ''
-        input = ' '
-        
-        while input != '':
-            input = self._readByte()
-            m += input
 
+        m = self._readPort()
         m = m.split(',')
         m = tuple([int(n) for n in m])
         return m 
@@ -288,16 +271,16 @@ class Plotter(object):
     def centerX(self, hard = True):
         """Get center point X."""
         if hard:
-            return (self.right() - self.left()) / 2
+            return (self.right() + self.left()) / 2
         else:
-            return (self.right(false) - self.left(false)) / 2
+            return (self.right(false) + self.left(false)) / 2
             
     def centerY(self, hard = True):
         """Get center point Y."""
         if hard:
-            return (self.top() - self.bottom()) / 2
+            return (self.top() + self.bottom()) / 2
         else:
-            return (self.top(false) - self.bottom(false)) / 2
+            return (self.top(false) + self.bottom(false)) / 2
 
     def centerPoint(self, hard = True):
         """Get center point X."""
