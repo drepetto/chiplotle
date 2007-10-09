@@ -96,6 +96,14 @@ def plotTextFile(filename, pen=None):
     out += plotText(f.read())
     return out
 
+def plotFile(filename):
+    """Open file [filename] and return its content.  """
+    f = open(filename)
+    fs = f.read()
+    #fs = fs.replace('\n', '')
+    #fs = fs.replace('\r', '')
+    f.close()
+    return fs
 
 def absCharSize(w = None, h = None):
     return hpgl.absCharSize(w, h)
@@ -338,8 +346,6 @@ def yTick():
 def velocitySelect(v = None, pen = None):
     """ Set pen's velocity."""
     return hpgl.velocitySelect(v, pen)
-
-
 
         
 def inputP1P2(p1x = None, p1y = None, p2x = None, p2y = None):

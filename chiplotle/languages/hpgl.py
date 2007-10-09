@@ -618,7 +618,7 @@ def escapePlotterOff():
     """
     return chr(27) + '.)'	
 
-def escapteSetPlotterConfiguration(maxBufSize, dtrControl):
+def escapeSetPlotterConfiguration(maxBufSize, dtrControl):
     """
         Enables or disables hardwire handshake mode, monitor mode,
         and data transmission mode.
