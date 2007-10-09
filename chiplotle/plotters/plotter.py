@@ -76,8 +76,9 @@ class Plotter(object):
 
     def _writePort(self, data):
         """ Write data to serial port """
+        #print "_writePort data in: %s", data
         data = self.filterCommands(data)
-        #print "_writePort got %s" % data
+        #print "_writePort after filtering: %s" % data
 
         self.semaphoreBuffer(data)
         #or,  write directly...
@@ -187,7 +188,8 @@ class Plotter(object):
         return int(bs)
 
 
-    def filterCommands(self, code):            
+    def filterCommands(self, code):
+        #print "filterCommands got: %s", code
         out = ''
         code_lines = splitCommandString(code)
         for c in code_lines:
@@ -196,6 +198,7 @@ class Plotter(object):
             else:
                 print "*** WARNING: Command [%s] not allowed by %s plotter!!\a" % (c, self.type)
 
+        #print "filterCommands returning: %s", out
         return out
     
 
@@ -311,7 +314,7 @@ class Plotter(object):
 ####  utility functions -----------------------------        
 
 def splitCommandString(string):
-    string = string.replace(' ', '')
+    #string = string.replace(' ', '')
     string = string.replace('\n','')
     string = string.replace(';',';@')
     comms = string.split('@')
