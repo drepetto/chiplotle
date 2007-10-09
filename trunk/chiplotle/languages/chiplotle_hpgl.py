@@ -77,6 +77,8 @@ def plotText(text, b=None, h=None, angle=None, char_s=None, line_s=None, chunk=1
         out += charPlot(char_s, line_s)
     for i in range(0, len(text), chunk):
         out += label(text[i:i + 10])
+        
+    #print "out: ", out
 
     return out
 
