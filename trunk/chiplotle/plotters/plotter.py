@@ -61,6 +61,9 @@ class Plotter(object):
         self._writePort(self.lang.escapePlotterOn())
         self._writePort(self.lang.initialize())
         
+        #self.ser.write(self.lang.escapeHS2(100, self.xon))
+        #self.ser.write(self.lang.escapeXoff(self.xoff))
+
         self.marginsHard = self.refreshMarginsHard()
         self.marginsSoft = self.refreshMarginsSoft()
 
@@ -90,31 +93,25 @@ class Plotter(object):
     def semaphoreBuffer(self, data):
         """ If the data is larger than the available buffer space we break it up into chunks!  """
         dataLen = len(data)
-        dataSpace = self.bufferSpace()
-        
+        bufferSpace = self.bufferSpace()
         print "total command length: %d" % dataLen
-        print "free buffer space: %d" % dataSpace
-        
         # uh oh, not enough space!
-        if dataLen > dataSpace:        
+        if dataLen > bufferSpace:        
             print "uh oh, too much data!"
-            numChunks = (dataLen / 250) + 1
-            print 'numChunks=', numChunks
+            numChunks = (dataLen / 1000) + 1
 
             for i in range(numChunks):
                 self.sleepWhileBufferFull()
                 
-                print 'chunk =', i
-                start = i * 250
-                end = start + 250
-                print data[start:end]                
+                start = i * 1000
+                end = start + 1000
+                
                 self.ser.write(data[start:end])            
         
         # buffer space is fine, just send it as is!
         else:
             self.ser.write(data)
         #print "done writing to port..."
-        
         
 
     def _writePortControl(self, data):
@@ -130,12 +127,6 @@ class Plotter(object):
         #print "writing control message..."
         self.ser.write(data)
     
-    def plotFile(self, filename):
-        f = open(filename, 'r')
-        fs = f.readlines()
-        for l in fs:
-            self.write(l)
-
 
     def sleepWhileBufferFull(self):
         """
@@ -158,7 +149,7 @@ class Plotter(object):
     def _readPort(self):
         """Read data from the serial port"""
 
-        print 'Reading from port...'
+        print '_readPort: Reading from port...'
         while self.ser.inWaiting() == 0:
             pass
 
@@ -180,11 +171,11 @@ class Plotter(object):
         return err
     
     def bufferSpace(self):
-        print "getting bufferSpace..."
-        #self.ser.flushInput()
+        #print "getting bufferSpace..."
+        self.ser.flushInput()
         self._writePortControl(self.lang.escapeOutputBufferSpace())
+        #print "buffer space: ", bs
         bs = self._readPort()
-        print "buffer space: ", bs
         return int(bs)
 
 
@@ -276,22 +267,57 @@ class Plotter(object):
         if hard:
             return (self.right() + self.left()) / 2
         else:
-            return (self.right(false) + self.left(false)) / 2
+            return (self.right(False) + self.left(False)) / 2
             
     def centerY(self, hard = True):
         """Get center point Y."""
         if hard:
             return (self.top() + self.bottom()) / 2
         else:
-            return (self.top(false) + self.bottom(false)) / 2
+            return (self.top(False) + self.bottom(False)) / 2
 
     def centerPoint(self, hard = True):
         """Get center point X."""
         if hard:
             return tuple([self.centerX(), self.centerY()])
         else:
-            return tuple([self.centerX(false), self.centerY(false)])            
+            return tuple([self.centerX(False), self.centerY(False)])            
 
+    @property
+    def actualPosition(self):
+        self._writePort(self.lang.outputActualPosition())
+        return self._readPort()
+
+    def setCoordinates(self):
+        raw_input("Put plotter in lower left corner. Then press Enter.")
+        ll = self.actualPosition
+        ll = ll.split(',')[0:2]
+        ll = [int(n) for n in ll]
+        raw_input("Put plotter in upper right corner. Then press Enter.")
+        ur = self.actualPosition
+        ur = ur.split(',')[0:2]
+        ur = [int(n) for n in ur]
+        #print ll
+        #print ur
+        
+        center = self.centerPoint()
+
+        new_length_x = (ur[0] - ll[0]) / 2
+        new_length_y = (ur[1] - ll[1]) / 2
+
+        ll_new_x = center[0] - new_length_x
+        ll_new_y = center[1] - new_length_y
+        ur_new_x = center[0] + new_length_x
+        ur_new_y = center[1] + new_length_y
+
+        print 'll_new_x', ll_new_x
+        print 'll_new_y', ll_new_y
+        print 'ur_new_x', ur_new_x
+        print 'ur_new_y', ur_new_y
+
+        self._writePort(self.lang.inputP1P2(ll[0], ll[1], ur[0], ur[1]))
+        self._writePort(self.lang.scale(ll_new_x, ur_new_x, ll_new_y, ur_new_y))
+         
 
     def selfTest(self):
         """Prints the ID of the plotter in the center of the page"""
@@ -323,4 +349,24 @@ def splitCommandString(string):
     return comms
 
 
-    
+### TRASH -------------------------------------------
+
+    def semaphoreBuffer2(self, data):
+        """ this is trying to do handshaking stuff"""
+        data = data.replace(';', ';@')
+        data = data.split('@')
+        for e in data:
+            fromPlotter = self.ser.read(self.ser.inWaiting())
+            print 'fromPlotter:',fromPlotter
+            time.sleep(.025)
+            if fromPlotter == self.xoff:
+                print "found xoff"
+                while True:
+                    time.sleep(2)
+                    fromPlotter = self.ser.read(self.ser.inWaiting())
+                    if fromPlotter == self.xon:
+                        print "found xon"
+                        break
+            
+            self.ser.write(e)            
+                    
