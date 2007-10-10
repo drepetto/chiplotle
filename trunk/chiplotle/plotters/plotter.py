@@ -228,7 +228,6 @@ class Plotter(object):
         self.ser.flushInput()
         self._writePort(self.lang.outputP1P2())
         
-
         m = self._readPort()
         m = m.split(',')
         m = tuple([int(n) for n in m])
@@ -291,6 +290,28 @@ class Plotter(object):
         self._writePort(self.lang.outputActualPosition())
         return self._readPort()
 
+    def setAndScalePlotWindow(self):
+        """
+            sets new P1 and P2 points, then sets scale so that we still have the same virtual dimensions
+            that means that you can plot an image with absolute coordinates corresponding to the plotter's
+            native paper size without having to change the source file.
+        """
+        raw_input("Put plotter in lower left corner, then press Enter.")
+        ll = self.actualPosition
+        ll = ll.split(',')[0:2]
+        ll = [int(n) for n in ll]
+        raw_input("Put plotter in upper right corner, then press Enter.")
+        ur = self.actualPosition
+        ur = ur.split(',')[0:2]
+        ur = [int(n) for n in ur]
+
+        self._writePort(self.lang.inputP1P2(ll[0], ll[1], ur[0], ur[1]))
+        self._writePort(self.lang.scale(self.left(), self.right(), self.bottom(), self.top()))
+        
+        self.marginsSoft = self.refreshMarginsSoft()
+        
+        print "New window set."
+
     def setCoordinates(self):
         raw_input("Put plotter in lower left corner. Then press Enter.")
         ll = self.actualPosition
@@ -302,7 +323,7 @@ class Plotter(object):
         ur = [int(n) for n in ur]
         #print ll
         #print ur
-        
+
         center = self.centerPoint()
 
         new_length_x = (ur[0] - ll[0]) / 2
@@ -320,19 +341,19 @@ class Plotter(object):
 
         self._writePort(self.lang.inputP1P2(ll[0], ll[1], ur[0], ur[1]))
         self._writePort(self.lang.scale(ll_new_x, ur_new_x, ll_new_y, ur_new_y))
-         
+
 
     def selfTest(self):
         """Prints the ID of the plotter in the center of the page"""
         #print "getting pen 1"
-        self.lang.sp(1)
+        self.sp(1)
         #print "going to center"
-        self.lang.gotoC()
+        self.gotoC()
         #print "getting ID"
         #print "plotting id"
-        self.lang.plotText(self.lang.plotterID)
+        self.plotText(self.id)
         #print "putting back pen"
-        self.lang.sp(0)
+        self.sp(0)
            
 
     """
@@ -386,11 +407,18 @@ class Plotter(object):
     def labelOrigin(self, positionNum = 1):
         self._writePort(self.lang.labelOrigin(positionNum))
 
-
+    def newLine(self):
+        self._writePort(self.lang.newLine())
+        
     def outputLabelLength(self):
         self._writePort(self.lang.outputLabelLength())
         
-
+    def plotText(self, text):
+        self._writePort(self.lang.plotText(text))
+    
+    def plotTextFile(self, filename):
+        self._writePort(self.lang.plotTextFile(filename))
+        
     def printBufferedLabel(self):
         self._writePort(self.lang.printBufferedLabel())
         
@@ -557,10 +585,6 @@ class Plotter(object):
     def velocitySelect(self, v = None, pen = None):
         """ Set pen's velocity."""
         self._writePort(self.lang.velocitySelect(v, p))
-    
-
-
-
 
     def inputWindow(self, xLL = None, yLL = None, xUR = None, yUR = None):
         self._writePort(self.lang.inputWindow(xLL, yLL, xUR, yUR))
@@ -694,6 +718,9 @@ class Plotter(object):
     def outputCarouselType(self):
         self._writePort(self.lang.outputCarouselType())
 
+    def plotFile(self, filename):
+        self._writePort(self.lang.plotFile(filename))
+        
     def replot(self, n = 1):
         self._writePort(self.lang.replot(n))
         
@@ -723,7 +750,7 @@ class Plotter(object):
 
 def splitCommandString(string):
     #string = string.replace(' ', '')
-    string = string.replace('\n','')
+    #string = string.replace('\n','')
     string = string.replace(';',';@')
     comms = string.split('@')
     comms = filter(lambda x: x!= '', comms)
