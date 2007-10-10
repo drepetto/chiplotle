@@ -59,6 +59,6 @@ print "plotter ID: " + p.id
 print "margins: left: %d right: %d bottom: %d top: %d" % (p.left(), p.right(), p.bottom(), p.top())
 print "centerX: %d centerY: %d" % (p.centerX(), p.centerY())
 
-c = Canvas(p)
+#c = Canvas(p)
 
 

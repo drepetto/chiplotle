@@ -9,7 +9,7 @@
 import sys
 sys.path += ['../']
 import serial
-from languages import hpgl
+from languages import chiplotle_hpgl
 import time
 
 
@@ -27,8 +27,9 @@ class Plotter(object):
 
         self.type = 'Generic'
         self.ser = ser
+        self.memory = []
         
-        self.lang = hpgl
+        self.lang = chiplotle_hpgl
         if kwargs.has_key('lang'):
             self.lang = kwargs['lang']
             kwargs.pop('lang')
@@ -51,10 +52,10 @@ class Plotter(object):
         'PS','PT','PU','RA','RO','RR','SA','SC','SI','SL','SM','SP',
         'SR','SS','TL','UC','VS','WG','XT','YT'])
 
-        self.initialize()
+        self.initializePlotter()
 
 
-    def initialize(self):
+    def initializePlotter(self):
         self.ser.flushInput()
         self.ser.flushOutput()
     
@@ -82,6 +83,8 @@ class Plotter(object):
         #print "_writePort data in: %s", data
         data = self.filterCommands(data)
         #print "_writePort after filtering: %s" % data
+
+        self.memory.append(data)
 
         self.semaphoreBuffer(data)
         #or,  write directly...
@@ -332,7 +335,386 @@ class Plotter(object):
         self.lang.sp(0)
            
 
+    """
+        TEXT OUTPUT & SETTINGS
+    """
+        
+    def absCharSize(self, w = None, h = None):
+        self._writePort(self.lang.absCharSize(w, h))
 
+    def absoluteDirection(self, run = 1, rise = 0):
+        self._writePort(self.lang.absoluteDirection(run, rise))
+        
+    def altCharSet(self, n = 0):
+        self._writePort(self.lang.altCharSet(n))
+
+    def charChordAngle(self, angle = 5):
+        self._writePort(self.lang.charChordAngle(angle))
+        
+    def bufferLabel(self, text = None):
+        self._writePort(self.lang.bufferLabel(text))
+    
+    def charPlot(self, spaces = None, lines = None):
+        self._writePort(self.lang.charPlot(spaces, lines))
+
+    def charSelectionMode(self, switch = 0, fallback = 0):
+        self._writePort(self.lang.charSelectionMode(switch, fallback))
+        
+    def charSet(self, set = 0):
+        self._writePort(self.lang.charSet(set))        
+
+    def charSlant(self, angle = 0):
+        tan = angle * 2 * math.pi / 360.
+        self._writePort(self.lang.charSlant(tan))
+        
+    def defineLabelTerminator(self, t = chr(3)):
+        self._writePort(self.lang.defineLableTerminator(t))
+    
+    def directionVertical(self, dir = 0):
+        self._writePort(self.lang.directionVertical(dir))
+
+    def extraSpace(self, spaces = 0, lines = 0):
+        self._writePort(self.lang.extraSpace(spaces, lines))
+
+    def invokeCharSlant(self, slot = 0, left = None):
+        self._writePort(self.lang.invokeCharSlant(slote, left))
+    
+    def label(self, text):
+        #print "label got: %s" % text
+        self._writePort(self.lang.label(text))
+
+    def labelOrigin(self, positionNum = 1):
+        self._writePort(self.lang.labelOrigin(positionNum))
+
+
+    def outputLabelLength(self):
+        self._writePort(self.lang.outputLabelLength())
+        
+
+    def printBufferedLabel(self):
+        self._writePort(self.lang.printBufferedLabel())
+        
+    def relCharSize(self, w = None, h = None):
+        self._writePort(self.lang.relCharSize(w, h))
+
+    def relativeDirection(self, run = 1, rise = 0):
+        self._writePort(self.lang.relativeDirection(run, rise))
+                
+    def selectAltCharSet(self):
+        self._writePort(self.lang.selectAltCharSet())
+
+    def symbolMode(self, char = None):
+        self._writePort(self.lang.symbolMode(char))
+
+    def selectStandardCharSet(self):
+        self._writePort(self.lang.selectStandardCharSet())
+    
+    
+    
+    """
+        DRAWING PRIMITIVES & SETTINGS
+    """
+        
+    def arcAbsolute(self, x, y, aa, ca = 5):
+        self._writePort(self.lang.arcAbsolute(x, y, aa, ca))
+    
+    def arcRelative(self, x, y, aa, ca = 5):
+        self._writePort(self.lang.arcRelative(x, y, aa, ca))
+        
+    def chordTolerance(self, type = 0):
+        self._writePort(self.lang.chordTolerance(type))
+
+    def circle(self, rad, ca = 5):
+        self._writePort(self.lang.circle(rad, ca))
+
+    def curvedLineGenerator(self, n = None, inputDelay = None):
+        self._writePort(self.lang.curvedLineGenerator(n, inputDelay))
+
+    def edgePolygon(self):
+        self._writePort(self.lang.edgePolygon())
+    
+    def edgeRectRelative(self, x, y):
+        self._writePort(self.lang.edgeRectRelative(x,y))
+ 
+    def edgeRectAbsolute(self, x, y):
+        self._writePort(self.lang.edgeRectAbsolute(x,y))
+
+    def edgeWedge(self, r, sa, swa, ca=5):
+        self._writePort(self.lang.edgeWedge(r, sa, swa, ca))
+
+    def fillPolygon(self):
+        self._writePort(self.lang.fillPolygon())
+
+    def fillType(self, type=1, space=None,  angle=0):
+        self._writePort(self.lang.fillType(type, space, angle))
+
+
+    def lineType(self, patNum, patLength = 4):
+        self._writePort(self.lang.lineType(pattype, patlength))
+
+    def plotPolygon(self, n = 0):
+        self._writePort(self.lang.plotPolygon(n))
+
+
+
+    def shadeRectAbsolute(self, x, y):        
+        self._writePort(self.lang.shadeRectAbsolute(x, y))
+    
+    def shadeRectRelative(self, x, y):
+        self._writePort(self.lang.shadeRectRelative(x, y))
+
+    def shadeWedge(self, r, sa, swa, ca = 5):
+        self._writePort(self.lang.shadeWedge(r, sa, swa, ca))
+
+
+    """
+        DIRECT PEN CONTROL & INFO
+    """
+    
+    def accelSelect(self, accel = None, pen = None):
+        self._writePort(self.lang.accelSelect(accel, pen))
+
+
+
+    def forceSelect(self, force = None, pen = None):
+        self._writePort(self.lang.forceSelect(force, pen))
+        
+    def goto(self, x, y):
+        """Alias for plotAbsolute() with only one point"""
+        self.plotAbsolute((x, y))
+    
+    def gotoC(self, hard = True):
+        self.goto(self.centerX(hard), self.centerY(hard))
+        
+    def gotoBL(self, hard = True):
+        self.goto(self.left(hard), self.bottom(hard))        
+        
+    def gotoBR(self, hard = True):
+        self.goto(self.right(hard), self.bottom(hard)) 
+
+    def gotoTL(self, hard = True):
+        self.goto(self.left(hard), self.top(hard))        
+        
+    def gotoTR(self, hard = True):
+        self.goto(self.right(hard), self.top(hard))        
+
+
+    def outputCommandedPosition(self):
+        self._writePort(self.lang.outputCommandedPosition())
+                
+    def plotAbsolute(self, coords = None):
+        """
+            Plot Absolute.
+            Takes a tuple of any number of sets of points:
+            (0,0,100,100,2500,1000) will go to three different points:
+                0,0 100,100 2500,1000
+        """
+        self._writePort(self.lang.plotAbsolute(coords))
+
+    def plotRelative(self, coords = None):
+        """
+            Plot Relative.
+            Takes a tuple of any number of sets of points:
+            (0,0,100,100,2500,1000) will go to three different points:
+                0,0 100,100 2500,1000
+        """
+        self._writePort(self.lang.plotRelative(coords))
+
+    def penDown(self, coords = None):
+        """Pen Down."""
+        self._writePort(self.lang.penDown(coords))
+
+    def pd(self):
+        """Alias for penDown()"""
+        self.penDown()
+
+    def penThickness(self, thickness = 0.3):
+        self._writePort(self.lang.penThickness(thickness))
+        
+    def penUp(self, coords = None):
+        """Pen Up."""
+        self._writePort(self.lang.penUp(coords))
+
+    def pu(self):
+        """Alias for penUp()"""
+        self.penUp()
+    
+    def selectPen(self, penNum = 0):
+        self._writePort(self.lang.selectPen(penNum))
+        
+    def sp(self, penNum = 0):
+        self.selectPen(penNum)
+
+    def tickLength(self, tp = 0.5, tn = 0.5):
+        self._writePort(self.lang.tickLength(tp, tn))
+
+    def xTick(self):
+        self._writePort(self.lang.xTick())
+
+    def yTick(self):
+        self._writePort(self.lang.yTick())        
+                    
+    def velocitySelect(self, v = None, pen = None):
+        """ Set pen's velocity."""
+        self._writePort(self.lang.velocitySelect(v, p))
+    
+
+
+
+
+    def inputWindow(self, xLL = None, yLL = None, xUR = None, yUR = None):
+        self._writePort(self.lang.inputWindow(xLL, yLL, xUR, yUR))
+        #print "doing getHardMargins()"
+        self.marginsHard = self.getHardMargins()
+        #print "doing getSoftMargins()"
+        self.marginsSoft = self.getSoftMargins()
+
+    def left(self, hard = True):
+        """Get leftmost coordinate."""
+        if hard:
+            return self.marginsHard[0]
+        else:
+            return self.marginsSoft[0]
+
+    def outputHardClipLimits(self):
+        self._writePort(self.lang.outputHardClipLimits())
+
+    def outputP1P2(self):
+        self._writePort(self.lang.outputP1P2())
+
+    def outputWindow(self):
+        self._writePort(self.lang.outputWindow())
+
+    def paperSize(self, size = None):
+        self._writePort(self.lang.paperSize(size))
+        #print "doing getHardMargins()"
+        self.marginsHard = self.getHardMargins()
+        #print "doing getSoftMargins()"
+        self.marginsSoft = self.getSoftMargins()
+
+    def rotate(self, angle = 0):
+        self.rotateCoordSystem(angle)
+        #print "doing getHardMargins()"
+        self.marginsHard = self.getHardMargins()
+        #print "doing getSoftMargins()"
+        self.marginsSoft = self.getSoftMargins()
+        
+    def rotateCoordSystem(self, angle = 0):
+        self._writePort(self.lang.rotateCoordSystem(angle))
+        
+    def scale(self, xMin, xMax, yMin, yMax):
+        self._writePort(self.lang.scale(xMin, xMax, yMin, yMax))
+        #print "doing getHardMargins()"
+        self.marginsHard = self.getHardMargins()
+        #print "doing getSoftMargins()"
+        self.marginsSoft = self.getSoftMargins()
+
+    """
+        PAPER CONTROLS
+    """
+
+    def advanceFrame(self):
+        self._writePort(self.lang.advanceFrame())
+        
+    def advanceFullPage(self):
+        self._writePort(self.lang.advanceFullPage())
+        
+    def advanceHalfPage(self):
+        self._writePort(self.lang.advanceHalfPage())   
+
+    def enableCutLine(self, n):
+        self._writePort(self.lang.enableCutLine(n))
+
+    def pageFeed(self, n = None):
+        self._writePort(self.lang.pageFeed(n))
+
+
+
+    """
+        DIGITIZER CONTROLS
+    """
+    def clearDigitizer(self):
+        self._writePort(self.lang.clearDigitizer())
+        
+    def digitizePoint(self):
+        self._writePort(self.lang.digitizePoint())
+
+    def outputDigiPoint(self):
+        self._writePort(self.lang.outputDigiPoint())
+
+
+
+
+    """
+        MISC I/O, PLOTTER QUERIES, ERRORS, SETUP
+    """
+    
+    def abortCommand(self):
+        """Tells the plotter to discard commands in its buffer."""
+        self._writePort(self.lang.abortCommand())
+	
+    def automaticPen(self, p = None):
+        self._writePort(self.lang.automaticPen(p))
+
+    def bufferPlot(self):
+		self._writePort(self.lang.bufferPlot())
+
+    def defaultInstruction(self):
+        self._writePort(self.lang.defaultInstruction())
+
+    def defineKey(self, key = None, function = None):
+        self._writePort(self.lang.defineKey())
+
+
+    def initialize(self):
+        """Initialize plotter."""
+        self._writePort(self.lang.initialize())
+
+    def inputMask(self, e = 233, s = 0, p = 0):
+        self._writePort(self.lang.inputMask(e, s, p))
+
+    def notReady(self):
+        self._writePort(self.lang.notReady())
+        
+    def outputError(self):
+        self._writePort(self.lang.outputError())
+
+    def outputID(self):
+        self._writePort(self.lang.outputID())
+
+    def outputKey(self):
+        self._writePort(self.lang.outputKey())
+
+    def outputOptions(self):
+        self._writePort(self.lang.outputOptions())
+
+    def outputStatus(self):
+        self._writePort(self.lang.outputStatus())
+
+    def outputCarouselType(self):
+        self._writePort(self.lang.outputCarouselType())
+
+    def replot(self, n = 1):
+        self._writePort(self.lang.replot(n))
+        
+    def writeToDisplay(self, text):
+        self._writePort(self.lang.writeToDisplay(text))
+
+
+    """
+        DCI (Device Control Instructions) escape commands ----------------------------
+    """
+
+    def escapePlotterOn(self):
+        self._writePortControl( self.lang.escapePlotterOn() )
+
+    def escapeHS2(self, minbytes=81, xon='17'):
+        self._writePortControl(self.lang.escapeHS2(minbytes, xon))
+        self.xon = str(xon) 
+    
+    def escapeXoff(self, xoff='19', interchar_speed=0):
+        self._writePortControl(self.lang.escapeXoff(xoff, interchar_speed))
+        self.xoff = str(xoff)
 
 
 
