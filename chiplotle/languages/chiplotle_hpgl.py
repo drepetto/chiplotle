@@ -91,6 +91,13 @@ def nudge(x, y):
     """Alias for plotRelative() with only one x,y pair."""
     return plotRelative((x,y))
 
+def newLine():
+    """
+        Alias for charPlot()
+        Move down one line and back to the left margin
+    """
+    return charPlot()
+        
 pd = penDown
 pu = penUp
 
@@ -137,8 +144,9 @@ def plotFile(filename):
     """Open file [filename] and return its content.  """
     f = open(filename)
     fs = f.read()
-    #fs = fs.replace('\n', '')
-    #fs = fs.replace('\r', '')
+    #need to eat these, otherwise they look like commands...
+    fs = fs.replace('\n', '')
+    fs = fs.replace('\r', '')
     f.close()
     return fs
 
