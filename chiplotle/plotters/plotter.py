@@ -338,16 +338,16 @@ class Plotter(object):
             newRight = self.right()
             
         newLeft = newCenter[0] - (center[0] - self.left())
-        if newLeft < 0:
-            newLeft = 0
+        if newLeft < self.left():
+            newLeft = self.left();
             
         newTop = newCenter[1] + (self.top() - center[1])
         if newTop > self.top():
             newTop = self.top()
 
         newBottom = newCenter[1] - (center[1] - self.bottom())
-        if newBottom < 0:
-            newBottom = 0
+        if newBottom < self.bottom():
+            newBottom = self.bottom()
         
         #print "newRight: %d newLeft: %d newTop: %d newBottom: %d" % (newRight, newLeft, newTop, newBottom)
         
