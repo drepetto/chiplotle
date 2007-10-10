@@ -9,7 +9,7 @@ from languages import chiplotle_hpgl
 from languages import  utils
 import math
 
-class Grob(object):
+class Shape(object):
     def __init__(self, x, y, **kwargs):
         self.x = x
         self.y = y
@@ -41,7 +41,7 @@ class Grob(object):
 
 
 # ---------------------------------
-class Rectangle(Grob):
+class Rectangle(Shape):
     def __init__(self, x, y, **kwargs):
         self.sx = 1
         if kwargs.has_key('sx'):
@@ -58,7 +58,7 @@ class Rectangle(Grob):
             self.fill = kwargs['fill']
             kwargs.pop('fill')
 
-        Grob.__init__(self, x, y, **kwargs)
+        Shape.__init__(self, x, y, **kwargs)
 
     
     def draw(self):
@@ -81,7 +81,7 @@ class Rectangle(Grob):
         return self.y - self.sy / 2. 
 
 
-class Circle(Grob):
+class Circle(Shape):
     def __init__(self, x, y, **kwargs):
         self.rad = 1
         if kwargs.has_key('rad'):
@@ -93,7 +93,7 @@ class Circle(Grob):
             self.fill = kwargs['fill']
             kwargs.pop('fill')
 
-        Grob.__init__(self, x, y, **kwargs)
+        Shape.__init__(self, x, y, **kwargs)
 
 
     def draw(self):
@@ -103,11 +103,11 @@ class Circle(Grob):
             return self.lang.edgeCircle(self.x, self.y, self.rad)
 
 
-class Spiral(Grob):
+class Spiral(Shape):
     def __init__(self, x, y, delta_y=10, rot=3.1415/16, **kwargs ):
         self.delta_y = delta_y
         self.rot = rot
-        Grob.__init__(self, x, y, **kwargs)
+        Shape.__init__(self, x, y, **kwargs)
 
     def draw(self):
         out = self.lang.penUp()
