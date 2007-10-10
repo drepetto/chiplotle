@@ -97,7 +97,7 @@ class Plotter(object):
         """ If the data is larger than the available buffer space we break it up into chunks!  """
         dataLen = len(data)
         bufferSpace = self.bufferSpace()
-        print "total command length: %d" % dataLen
+        #print "total command length: %d" % dataLen
         # uh oh, not enough space!
         if dataLen > bufferSpace:        
             print "uh oh, too much data!"
@@ -152,7 +152,7 @@ class Plotter(object):
     def _readPort(self):
         """Read data from the serial port"""
 
-        print '_readPort: Reading from port...'
+        #print '_readPort: Reading from port...'
         while self.ser.inWaiting() == 0:
             pass
 
@@ -474,8 +474,6 @@ class Plotter(object):
     def accelSelect(self, accel = None, pen = None):
         self._writePort(self.lang.accelSelect(accel, pen))
 
-
-
     def forceSelect(self, force = None, pen = None):
         self._writePort(self.lang.forceSelect(force, pen))
         
@@ -498,7 +496,9 @@ class Plotter(object):
     def gotoTR(self, hard = True):
         self.goto(self.right(hard), self.top(hard))        
 
-
+    def nudge(self, x, y):
+        self.plotRelative((x,y))
+        
     def outputCommandedPosition(self):
         self._writePort(self.lang.outputCommandedPosition())
                 
