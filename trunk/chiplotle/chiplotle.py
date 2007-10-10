@@ -134,28 +134,3 @@ def spiral(x, dy, rot):
     return out + spiral(x, dy/1.1, rot)
 
     
-class Canvas(object):
-    def __init__(self, output):
-        self.output = output
-        self.data = []
-
-    def write2file(self, file_name):
-        f = open(file_name, 'w')
-        f.write(self.data)
-        f.close()
-
-    def write(self, grob):
-        if isinstance(grob, Grob):
-            self.output.write(grob.draw())
-            out = grob.draw()
-        elif isinstance(grob, str):    
-            self.output.write(grob)
-            out = grob
-        else:
-            print "Don't know ", grob
-            out = " "
-
-        self.data.append(out)
-
-    eat = property(fset=write)
-
