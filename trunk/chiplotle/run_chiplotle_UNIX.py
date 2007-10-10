@@ -56,7 +56,8 @@ else:
 # show plotter id, and margins
 print "\n"
 print "plotter ID: " + p.id
-print "margins: left: %d right: %d bottom: %d top: %d" % (p.left(), p.right(), p.bottom(), p.top())
+print "hard margins: left: %d right: %d bottom: %d top: %d" % (p.marginsHard[0], p.marginsHard[2], p.marginsHard[1], p.marginsHard[3])
+print "soft margins: left: %d right: %d bottom: %d top: %d" % (p.marginsSoft[0], p.marginsSoft[2], p.marginsSoft[1], p.marginsSoft[3])
 print "centerX: %d centerY: %d" % (p.centerX(), p.centerY())
 
 #c = Canvas(p)

@@ -65,8 +65,8 @@ class Plotter(object):
         #self.ser.write(self.lang.escapeHS2(100, self.xon))
         #self.ser.write(self.lang.escapeXoff(self.xoff))
 
-        self.marginsHard = self.refreshMarginsHard()
-        self.marginsSoft = self.refreshMarginsSoft()
+        self.refreshMarginsHard()
+        self.refreshMarginsSoft()
 
     @property
     def id(self):
@@ -201,7 +201,7 @@ class Plotter(object):
         PAGE SIZE, MARGINS, CLIPPING, ROTATION
     """
 
-    def refreshMarginsHard(self):
+    def getMarginsHard(self):
         """
             Get hard margins of paper.
             This is set automatically at startup. Call this function
@@ -215,9 +215,13 @@ class Plotter(object):
         m = self._readPort()
         m = m.split(',')
         m = tuple([int(n) for n in m])
+    
         return m
 
-    def refreshMarginsSoft(self):
+    def refreshMarginsHard(self):
+        self.marginsHard = self.getMarginsHard()
+
+    def getMarginsSoft(self):
         """
             Get soft margins of paper.
             This is set automatically at startup. Call this function
@@ -231,8 +235,12 @@ class Plotter(object):
         m = self._readPort()
         m = m.split(',')
         m = tuple([int(n) for n in m])
+        
         return m 
 
+    def refreshMarginsSoft(self):
+        self.marginsSoft = self.getMarginsSoft()
+        
     def bottom(self, hard=True):
         """Get lowest coordinate."""
         if hard:
@@ -312,6 +320,45 @@ class Plotter(object):
         
         print "New window set."
 
+    def setNewCenterPoint(self):
+        raw_input("Put plotter in new center, then press Enter.")
+        newCenter = self.actualPosition
+        newCenter = newCenter.split(',')[0:2]
+        newCenter = [int(n) for n in newCenter]
+        
+        center = self.centerPoint();
+        xMoveDist = newCenter[0] - center[0]
+        yMoveDist = newCenter[1] - center[1]
+        
+        #print "you moved x by: %d and y by: %d" % (xMoveDist, yMoveDist)
+        
+        # new right is the old distance from right to center added to new center X
+        newRight = newCenter[0] + (self.right() - center[0])
+        if newRight > self.right():
+            newRight = self.right()
+            
+        newLeft = newCenter[0] - (center[0] - self.left())
+        if newLeft < 0:
+            newLeft = 0
+            
+        newTop = newCenter[1] + (self.top() - center[1])
+        if newTop > self.top():
+            newTop = self.top()
+
+        newBottom = newCenter[1] - (center[1] - self.bottom())
+        if newBottom < 0:
+            newBottom = 0
+        
+        #print "newRight: %d newLeft: %d newTop: %d newBottom: %d" % (newRight, newLeft, newTop, newBottom)
+        
+        self._writePort(self.lang.inputP1P2(newLeft, newBottom, newRight, newTop))
+        self._writePort(self.lang.scale(0, newRight - newLeft, 0, newTop - newBottom))
+        
+        self.refreshMarginsSoft()
+        
+        print "new soft margins: left: %d right: %d bottom: %d top: %d" % (self.marginsSoft[0], self.marginsSoft[2], self.marginsSoft[1], self.marginsSoft[3])
+        
+    
     def setCoordinates(self):
         raw_input("Put plotter in lower left corner. Then press Enter.")
         ll = self.actualPosition
@@ -341,6 +388,8 @@ class Plotter(object):
 
         self._writePort(self.lang.inputP1P2(ll[0], ll[1], ur[0], ur[1]))
         self._writePort(self.lang.scale(ll_new_x, ur_new_x, ll_new_y, ur_new_y))
+        
+        self.refreshMarginsSoft()
 
 
     def selfTest(self):
