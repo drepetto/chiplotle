@@ -241,57 +241,55 @@ class Plotter(object):
     def refreshMarginsSoft(self):
         self.marginsSoft = self.getMarginsSoft()
         
-    def bottom(self, hard=True):
+    def bottomHard(self):
         """Get lowest coordinate."""
-        if hard:
-            return self.marginsHard[1]
-        else:
-            return self.marginsSoft[1]
+        return self.marginsHard[1]
+    
+    def bottomSoft(self):
+        return self.marginsSoft[1]
 
-    def top(self, hard=True):
+    def topHard(self):
         """Get top coordinate."""
-        if hard:
-            return self.marginsHard[3]
-        else:
-            return self.marginsSoft[3]
+        return self.marginsHard[3]
+    
+    def topSoft(self):
+        return self.marginsSoft[3]
 
-    def left(self, hard=True):
+    def leftHard(self):
         """Get left coordinate."""
-        if hard:
-            return self.marginsHard[0]
-        else:
-            return self.marginsSoft[0]
+        return self.marginsHard[0]
 
+    def leftSoft(self):
+        return self.marginsSoft[0]
 
-    def right(self, hard=True):
+    def rightHard(self):
         """Get right coordinate."""
-        if hard:
-            return self.marginsHard[2]
-        else:
-            return self.marginsSoft[2]
+        return self.marginsHard[2]
 
+    def rightSoft(self):
+        return self.marginsSoft[2]
 
-
-    def centerX(self, hard = True):
+    def centerXHard(self):
         """Get center point X."""
-        if hard:
-            return (self.right() + self.left()) / 2
-        else:
-            return (self.right(False) + self.left(False)) / 2
-            
-    def centerY(self, hard = True):
-        """Get center point Y."""
-        if hard:
-            return (self.top() + self.bottom()) / 2
-        else:
-            return (self.top(False) + self.bottom(False)) / 2
+        return (self.rightHard() + self.leftHard()) / 2
 
-    def centerPoint(self, hard = True):
+    def centerXSoft(self):
+        return (self.rightSoft() + self.leftSoft()) / 2
+
+    def centerYHard(self):
         """Get center point X."""
-        if hard:
-            return tuple([self.centerX(), self.centerY()])
-        else:
-            return tuple([self.centerX(False), self.centerY(False)])            
+        return (self.topHard() + self.bottomHard()) / 2
+
+    def centerYSoft(self):
+        """Get center point X."""
+        return (self.topSoft() + self.bottomSoft()) / 2
+
+    def centerPointHard(self):
+        """Get center point X."""
+        return tuple([self.centerXHard(), self.centerYHard()])
+        
+    def centerPointSoft(self):
+        return tuple([self.centerXSoft(), self.centerYSoft()])            
 
     @property
     def actualPosition(self):
@@ -314,53 +312,74 @@ class Plotter(object):
         ur = [int(n) for n in ur]
 
         self._writePort(self.lang.inputP1P2(ll[0], ll[1], ur[0], ur[1]))
-        self._writePort(self.lang.scale(self.left(), self.right(), self.bottom(), self.top()))
+        self._writePort(self.lang.scale(self.leftHard(), self.rightHard(), self.bottomHard(), self.topHard()))
         
         self.marginsSoft = self.refreshMarginsSoft()
         
         print "New window set."
 
-    def setNewCenterPoint(self):
+    def tweakPlottingArea(self):
+    
+        old_center = self.centerPointSoft()
+        
+        print "Do you want to:"
+        print "1) set a new center via a center point"
+        print "2) set a new center point via two corners"
+        print "3) leave center where it is"
+        
+        choice = int(raw_input("? "))
+        
+        if choice == 1:
+            self.setNewCenterViaPoint()
+        elif choice == 2:
+            self.setNewCenterViaCorners()
+            
+        new_center = self.centerPointSoft()
+        print "old center: %d, %d" % (old_center[0], old_center[1])
+        print "new center: %d, %d" % (new_center[0], new_center[1])
+        
+        TODO: add scaling options here
+
+    def setNewCenterViaPoint(self):
         raw_input("Put plotter in new center, then press Enter.")
         newCenter = self.actualPosition
         newCenter = newCenter.split(',')[0:2]
         newCenter = [int(n) for n in newCenter]
         
-        center = self.centerPoint();
+        center = self.centerPointHard();
         xMoveDist = newCenter[0] - center[0]
         yMoveDist = newCenter[1] - center[1]
         
         #print "you moved x by: %d and y by: %d" % (xMoveDist, yMoveDist)
         
         # new right is the old distance from right to center added to new center X
-        newRight = newCenter[0] + (self.right() - center[0])
-        if newRight > self.right():
-            newRight = self.right()
+        newRight = newCenter[0] + (self.rightHard() - center[0])
+        if newRight > self.rightHard():
+            newRight = self.rightHard()
             
-        newLeft = newCenter[0] - (center[0] - self.left())
-        if newLeft < self.left():
-            newLeft = self.left();
+        newLeft = newCenter[0] - (center[0] - self.leftHard())
+        if newLeft < self.leftHard():
+            newLeft = self.leftHard();
             
-        newTop = newCenter[1] + (self.top() - center[1])
-        if newTop > self.top():
-            newTop = self.top()
+        newTop = newCenter[1] + (self.topHard() - center[1])
+        if newTop > self.topHard():
+            newTop = self.topHard()
 
-        newBottom = newCenter[1] - (center[1] - self.bottom())
-        if newBottom < self.bottom():
-            newBottom = self.bottom()
+        newBottom = newCenter[1] - (center[1] - self.bottomHard())
+        if newBottom < self.bottomHard():
+            newBottom = self.bottomHard()
         
         #print "newRight: %d newLeft: %d newTop: %d newBottom: %d" % (newRight, newLeft, newTop, newBottom)
         
         self._writePort(self.lang.inputP1P2(newLeft, newBottom, newRight, newTop))
-        self._writePort(self.lang.scale(0, newRight - newLeft, 0, newTop - newBottom))
+        #self._writePort(self.lang.scale(0, newRight - newLeft, 0, newTop - newBottom))
         
         self.refreshMarginsSoft()
         
         print "new soft margins: left: %d right: %d bottom: %d top: %d" % (self.marginsSoft[0], self.marginsSoft[2], self.marginsSoft[1], self.marginsSoft[3])
         
     
-    def setNewCenterViaCorners()
-    (self):
+    def setNewCenterViaCorners(self):
         raw_input("Put plotter in lower left corner. Then press Enter.")
         ll = self.actualPosition
         ll = ll.split(',')[0:2]
@@ -372,7 +391,7 @@ class Plotter(object):
         #print ll
         #print ur
 
-        center = self.centerPoint()
+        center = self.centerPointHard()
 
         new_length_x = (ur[0] - ll[0]) / 2
         new_length_y = (ur[1] - ll[1]) / 2
@@ -388,7 +407,7 @@ class Plotter(object):
         print 'ur_new_y', ur_new_y
 
         self._writePort(self.lang.inputP1P2(ll[0], ll[1], ur[0], ur[1]))
-        self._writePort(self.lang.scale(ll_new_x, ur_new_x, ll_new_y, ur_new_y))
+        #self._writePort(self.lang.scale(ll_new_x, ur_new_x, ll_new_y, ur_new_y))
         
         self.refreshMarginsSoft()
 
@@ -559,21 +578,36 @@ class Plotter(object):
         """Alias for plotAbsolute() with only one point"""
         self.plotAbsolute((x, y))
     
-    def gotoC(self, hard = True):
-        self.goto(self.centerX(hard), self.centerY(hard))
-        
-    def gotoBL(self, hard = True):
-        self.goto(self.left(hard), self.bottom(hard))        
-        
-    def gotoBR(self, hard = True):
-        self.goto(self.right(hard), self.bottom(hard)) 
+    def gotoCHard(self):
+        self.goto(self.centerXHard(), self.centerYHard())
 
-    def gotoTL(self, hard = True):
-        self.goto(self.left(hard), self.top(hard))        
-        
-    def gotoTR(self, hard = True):
-        self.goto(self.right(hard), self.top(hard))        
+    def gotoCSoft(self):
+        self.goto(self.centerXSoft(), self.centerYSoft())
+                
+    def gotoBLHard(self):
+        self.goto(self.leftHard(), self.bottomHard())
 
+    def gotoBLSoft(self):
+        self.goto(self.leftSoft(), self.bottomSoft())
+                
+    def gotoBRHard(self):
+        self.goto(self.rightHard(), self.bottomHard())
+
+    def gotoBRSoft(self):
+        self.goto(self.rightSoft(), self.bottomSoft())
+        
+    def gotoTLHard(self):
+        self.goto(self.leftHard(), self.topHard())   
+
+    def gotoTLSoft(self):
+        self.goto(self.leftSoft(), self.topSoft())
+                
+    def gotoTRHard(self):
+        self.goto(self.rightHard(), self.topHard())
+
+    def gotoTRSoft(self):
+        self.goto(self.rightSoft(), self.topSoft())
+        
     def nudge(self, x, y):
         self.plotRelative((x,y))
         
