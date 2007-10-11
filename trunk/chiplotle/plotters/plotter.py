@@ -359,7 +359,8 @@ class Plotter(object):
         print "new soft margins: left: %d right: %d bottom: %d top: %d" % (self.marginsSoft[0], self.marginsSoft[2], self.marginsSoft[1], self.marginsSoft[3])
         
     
-    def setCoordinates(self):
+    def setNewCenterViaCorners()
+    (self):
         raw_input("Put plotter in lower left corner. Then press Enter.")
         ll = self.actualPosition
         ll = ll.split(',')[0:2]
