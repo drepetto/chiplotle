@@ -8,7 +8,7 @@
 from hpgl import *
 import math
 from utils import *
-#import numpy as np
+import random
 
 def edgeRect(x, y, sx, sy, rot):
     tl = (-sx / 2., sy / 2.)
@@ -101,28 +101,48 @@ def newLine():
 pd = penDown
 pu = penUp
 
-def plotAsciiArt(text, char_size, compensation = 1):
-    h = char_size * 5/4.
-    if compensation:
-        h *= 5/4.
-    return plotText(text, char_size, h, 0, 0, -0.3)      
+
+def plotAsciiArt(text, width, height=None, char_spacing=None, line_spacing=-0.3, wiggle=0):
+    if not height:
+        height = width * 5/4.
+    if not char_spacing:
+        char_spacing = width
+
+    
+    # replace all \n by \n\r
+    text = text.replace('\n','\r')
+    
+    out = ''
+    out += absCharSize(width, height)
+
+    for c in text:
+        out += label(c)
+
+        if c == '\r':
+            lspace = line_spacing
+            hspace = 0
+        else:
+            lspace = 0
+            hspace = char_spacing
+
+        w = random.gauss(0,wiggle)
+        out += charPlot(hspace + w, lspace + w)
+    return out    
 
 
-def plotText(text, b=None, h=None, angle=None, char_s=None, line_s=None, chunk=10):
+def plotText(text, width=None, height=None, angle=None):
     """Print text ."""
     out = ''
     # replace all \n by \n\r
     text = text.replace('\n','\n\r')
-    if b and h:
-        out += absCharSize(b, h)
+
+    if width and height:
+        out += absCharSize(width, height)
+
     if angle:
         out += charSlant(angle)   
-    if char_s and line_s:
-        out += charPlot(char_s, line_s)
-    for i in range(0, len(text), chunk):
-        out += label(text[i:i + 10])
-        
-    #print "out: ", out
+
+    out += label(text)
 
     return out
 

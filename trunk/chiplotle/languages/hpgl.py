@@ -93,19 +93,19 @@ def charChordAngle(angle = 5):
     return 'CC%d%s' % (angle, TERMINATOR)
 
 def circle(r, ca = 5):
-    return 'CI%d,%d%s' % (r, ca, TERMINATOR)
+    return 'CI%.4f,%d%s' % (r, ca, TERMINATOR)
 
 def charSelectionMode(switch = 0, fallback = 0):
     return 'CM%d,%d%s' % (switch, fallback, TERMINATOR)
         
-def charPlot(spaces = None, lines = None):
+def charPlot(spaces = 0, lines = 0):
     """
         Move the pen the specified number of spaces and lines
         valid values are -128 to 128
         CP by itself does CR & LF
     """
-    if spaces and lines:
-        return 'CP%d,%d%s' % (spaces, lines, TERMINATOR)
+    if spaces != 0 or lines != 0:
+        return 'CP%.4f,%.4f%s' % (spaces, lines, TERMINATOR)
     else:
         return 'CP%s' % TERMINATOR
 
@@ -118,9 +118,9 @@ def chordTolerance(type = 0):
 def curvedLineGenerator(n = None, inputDelay = None):
     if n:
         if inputDelay:
-            return 'CT%d,%d%s' % (n, inputDelay, TERMINATOR)
+            return 'CV%d,%d%s' % (n, inputDelay, TERMINATOR)
         else:
-            return 'CT%d%s' % (n, TERMINATOR)			
+            return 'CV%d%s' % (n, TERMINATOR)			
         
 def clearDigitizer():
     return 'DC%s' % (TERMINATOR)
@@ -129,7 +129,7 @@ def defaultInstruction():
     return 'DF%s' % (TERMINATOR)
 
 def absoluteDirection(run = 1, rise = 0):
-    return 'DI%d,%d%s' % (run, rise, TERMINATOR)
+    return 'DI%.4f,%.4f%s' % (run, rise, TERMINATOR)
 
 def defineDownloadableCharacter():
     """ DL NOT IMPLEMENTED!!! """
@@ -149,7 +149,7 @@ def defineLabelTerminator(t = chr(3)):
     return 'DT%c%s' % (t, TERMINATOR)
 
 def directionVertical(dir = 0):
-    return 'DV%d%s' % (dir, TERMINATOR)
+    return 'DV%i%s' % (dir, TERMINATOR)
 
 def edgeRectAbsolute(x, y):
     """Draw edge rectangle at absolute position x,y."""
@@ -510,6 +510,8 @@ def selectPenGroup():
     return TERMINATOR
 
 def absCharSize(w = None, h = None):
+    """Default values are width = 0.285cm, height=0.375cm"""
+
     if w == None or h == None:
         return 'SI%s' % TERMINATOR
     else:
