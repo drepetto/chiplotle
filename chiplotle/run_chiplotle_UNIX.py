@@ -8,7 +8,7 @@
 import os
 import re
 import serial
-from chiplotle import *
+#from chiplotle import *
 from languages import chiplotle_hpgl as chpgl
 from plotters import *
 

@@ -338,7 +338,7 @@ class Plotter(object):
         print "old center: %d, %d" % (old_center[0], old_center[1])
         print "new center: %d, %d" % (new_center[0], new_center[1])
         
-        TODO: add scaling options here
+        #TODO: add scaling options here
 
     def setNewCenterViaPoint(self):
         raw_input("Put plotter in new center, then press Enter.")
