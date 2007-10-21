@@ -6,12 +6,12 @@ __license__ = "GPL"
 __url__     = "http://music.columbia.edu/cmc/chiplotle"
 __doc__     = \
 """Chiplotle
-Python library to draw to plotters.
+Python library for pen plotting.
 
 Copyright %s
 Version %s
 License %s
 Homepage %s
 
-""" % (__author__,__version__,__license__,__url__)
+""" % (__authors__,__version__,__license__,__url__)
 

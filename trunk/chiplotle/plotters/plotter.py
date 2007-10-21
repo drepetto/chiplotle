@@ -190,7 +190,7 @@ class Plotter(object):
             if c[0:2].upper() in self.allowedHPGLCommands:
                 out += c
             else:
-                print "*** WARNING: Command [%s] not allowed by %s plotter!!\a" % (c, self.type)
+                print "*** WARNING: Command [%s] not understood by %s plotter!!\a" % (c, self.type)
 
         #print "filterCommands returning: %s", out
         return out
@@ -380,6 +380,8 @@ class Plotter(object):
         
     
     def setNewCenterViaCorners(self):
+        """Sets new P1 and P2 without altering the scale of the coordinate system. """
+
         raw_input("Put plotter in lower left corner. Then press Enter.")
         ll = self.actualPosition
         ll = ll.split(',')[0:2]
@@ -411,6 +413,7 @@ class Plotter(object):
         
         self.refreshMarginsSoft()
 
+        self.marginsSoft = self.refreshMarginsSoft()
 
     def selfTest(self):
         """Prints the ID of the plotter in the center of the page"""
@@ -842,7 +845,9 @@ def splitCommandString(string):
     return comms
 
 
+##################################################
 ### TRASH -------------------------------------------
+##################################################
 
     def semaphoreBuffer2(self, data):
         """ this is trying to do handshaking stuff"""
