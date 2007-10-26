@@ -9,6 +9,7 @@ from hpgl import *
 import math
 from utils import *
 import random
+import re
 
 def edgeRect(x, y, sx, sy, rot):
     tl = (-sx / 2., sy / 2.)
@@ -105,28 +106,48 @@ pu = penUp
 def plotAsciiArt(text, width, height=None, char_spacing=None, line_spacing=-0.3, wiggle=0):
     if not height:
         height = width * 5/4.
-    if not char_spacing:
-        char_spacing = width
 
-    
     # replace all \n by \n\r
     text = text.replace('\n','\r')
+
+    # parse text for spaces
+    charlist = []
+    parsed = []
+    for t in text:
+        charlist.append(t)
+    
+    while len(charlist) > 0:
+        c = charlist.pop(0)
+        if c == ' ':
+            spaces = ' '
+            while len(charlist) > 0 and charlist[0] == ' ':
+                spaces += ' '
+                charlist.pop(0)
+            parsed.append(spaces)
+        else:
+            parsed.append(c)
+    print parsed
+
+
     
     out = ''
     out += absCharSize(width, height)
 
-    for c in text:
-        out += label(c)
+    for c in parsed:
+        if c.startswith(' '):
+            out += charPlot(len(c), 0)
+            if char_spacing:
+                out += charPlot(len(c) * char_spacing, 0)
 
-        if c == '\r':
-            lspace = line_spacing
-            hspace = 0
+        elif c == '\r':
+            out += label(c)
+            out += charPlot(0, line_spacing)
         else:
-            lspace = 0
-            hspace = char_spacing
+            out += label(c)
+            w = random.gauss(0,wiggle)
+            if char_spacing:
+                out += charPlot(char_spacing + w, 0 + w)
 
-        w = random.gauss(0,wiggle)
-        out += charPlot(hspace + w, lspace + w)
     return out    
 
 
