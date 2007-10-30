@@ -671,7 +671,7 @@ class Plotter(object):
                     
     def velocitySelect(self, v = None, pen = None):
         """ Set pen's velocity."""
-        self._writePort(self.lang.velocitySelect(v, p))
+        self._writePort(self.lang.velocitySelect(v, pen))
 
     def inputWindow(self, xLL = None, yLL = None, xUR = None, yUR = None):
         self._writePort(self.lang.inputWindow(xLL, yLL, xUR, yUR))
