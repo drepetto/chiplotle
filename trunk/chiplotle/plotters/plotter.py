@@ -91,7 +91,14 @@ class Plotter(object):
         #self.ser.write(data)
 
 
-    write = _writePort
+    def write(self, data):
+        """ Public access to _writePort. It allows the [data] input to be a (nested) list or tuple of strings. """
+        if type(data) in (list, tuple):
+            for l in data:
+                self.write(l)
+        else:
+            self._writePort(data)
+
 
     def semaphoreBuffer(self, data):
         """ If the data is larger than the available buffer space we break it up into chunks!  """
