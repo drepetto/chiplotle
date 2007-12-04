@@ -682,10 +682,10 @@ class Plotter(object):
 
     def inputWindow(self, xLL = None, yLL = None, xUR = None, yUR = None):
         self._writePort(self.lang.inputWindow(xLL, yLL, xUR, yUR))
-        #print "doing getHardMargins()"
-        self.marginsHard = self.getHardMargins()
-        #print "doing getSoftMargins()"
-        self.marginsSoft = self.getSoftMargins()
+        #print "doing getMarginsHard()"
+        self.marginsHard = self.getMarginsHard()
+        #print "doing getMarginsSoft()"
+        self.marginsSoft = self.getMarginsSoft()
 
     def left(self, hard = True):
         """Get leftmost coordinate."""
@@ -705,27 +705,27 @@ class Plotter(object):
 
     def paperSize(self, size = None):
         self._writePort(self.lang.paperSize(size))
-        #print "doing getHardMargins()"
-        self.marginsHard = self.getHardMargins()
-        #print "doing getSoftMargins()"
-        self.marginsSoft = self.getSoftMargins()
+        #print "doing getMarginsHard()"
+        self.marginsHard = self.getMarginsHard()
+        #print "doing getMarginsSoft()"
+        self.marginsSoft = self.getMarginsSoft()
 
     def rotate(self, angle = 0):
         self.rotateCoordSystem(angle)
-        #print "doing getHardMargins()"
-        self.marginsHard = self.getHardMargins()
-        #print "doing getSoftMargins()"
-        self.marginsSoft = self.getSoftMargins()
+        #print "doing getMarginsHard()"
+        self.marginsHard = self.getMarginsHard()
+        #print "doing getMarginsSoft()"
+        self.marginsSoft = self.getMarginsSoft()
         
     def rotateCoordSystem(self, angle = 0):
         self._writePort(self.lang.rotateCoordSystem(angle))
         
     def scale(self, xMin, xMax, yMin, yMax):
         self._writePort(self.lang.scale(xMin, xMax, yMin, yMax))
-        #print "doing getHardMargins()"
-        self.marginsHard = self.getHardMargins()
-        #print "doing getSoftMargins()"
-        self.marginsSoft = self.getSoftMargins()
+        #print "doing getMarginsHard()"
+        self.marginsHard = self.getMarginsHard()
+        #print "doing getMarginsSoft()"
+        self.marginsSoft = self.getMarginsSoft()
 
     """
         PAPER CONTROLS
