@@ -321,7 +321,7 @@ class Plotter(object):
         self._writePort(self.lang.inputP1P2(ll[0], ll[1], ur[0], ur[1]))
         self._writePort(self.lang.scale(self.leftHard(), self.rightHard(), self.bottomHard(), self.topHard()))
         
-        self.marginsSoft = self.refreshMarginsSoft()
+        self.refreshMarginsSoft()
         
         print "New window set."
 
@@ -420,7 +420,6 @@ class Plotter(object):
         
         self.refreshMarginsSoft()
 
-        self.marginsSoft = self.refreshMarginsSoft()
 
     def selfTest(self):
         """Prints the ID of the plotter in the center of the page"""
