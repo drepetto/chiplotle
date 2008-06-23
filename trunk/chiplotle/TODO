@@ -1,0 +1,62 @@
+
+-----------------------
+Write more examples!
+
+-----------------------
+Write more tests!!
+
+-----------------------
+The following HPGL commands are pending:
+
+   def curvedLineGenerator(n = None, inputDelay = None):
+      if n:
+         if inputDelay:
+            return 'CV%d,%d%s' % (n, inputDelay, TERMINATOR)
+         else:
+            return 'CV%d%s' % (n, TERMINATOR)         
+         
+   def inputMask(e = 233, s = 0, p = 0):
+      """
+         Set masks for Error LED, Status byte, and Positive serial poll.
+         Whatever.
+      """
+      return 'IM%d,%d,%d%s' % (e, s, p, TERMINATOR)
+
+   def invokeCharSlant(slot = 0, left = None):
+      if left:
+         return 'IV%d,%d%s' % (slot, left)
+      else:
+         return 'IV%d%d' % (slot, TERMINATOR)
+
+   def defineKey(key = None, function = None):
+      if key:
+         if function:
+            return 'KY%d,%d%s' % (key, function, TERMINATOR)
+         else:
+            return 'KY%d%s' % (key, TERMINATOR)
+      else:
+         return 'KY%s' % (TERMINATOR)
+
+
+   def escapeSetPlotterConfiguration(maxBufSize, dtrControl):
+      """
+         Enables or disables hardwire handshake mode, monitor mode,
+         and data transmission mode.
+         
+         maxBufSize: sets maximum buffer size
+         dtrControl: Data Terminal Ready (CD) line contro. 
+            A number in the range of 0-31
+            
+         WTF???
+      """
+      return "%c.@[(%d);(%d)];" % (chr(27), maxBufSize, dtrControl)
+
+   def escapeXoff(char='19', interchar_speed=0):
+      """DCI that tells the plotter what the Xoff character will be."""
+      return chr(27) + '.N' + str(interchar_speed) + ';' + str(char) + ':'
+
+   def escapeHS2(minbytes=81, xon='17' ):
+      """Set hand shake mode 2."""
+      return chr(27) + '.I' + str(minbytes) + ';' + ';' + str(xon) + ':'  
+
+
