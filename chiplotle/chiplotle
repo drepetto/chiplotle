@@ -1,0 +1,2 @@
+clear
+python -i $1 -c 'from chiplotle.utils.run_chiplotle_UNIX import *'
