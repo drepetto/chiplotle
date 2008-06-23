@@ -25,7 +25,6 @@ class Rectangle(_ExtendedHPGL):
 
       result = [ ]
       result.append( PU( ) )
-      result.append( PA((self.x, self.y)) )
       result.append( PA((self.x + tl[0], self.y + tl[1])) )
       result.append( PD() )
       result.append( PA((self.x + tr[0], self.y + tr[1])) )
