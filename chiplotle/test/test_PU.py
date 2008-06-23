@@ -37,11 +37,11 @@ def test_PU_05( ):
    '''PU initialize properly with list or tuple of 2.'''
    t = PU([1,2])
    assert type(t.xy) == Scalable
-   assert type(t.x) == Scalable
-   assert type(t.y) == Scalable
+   assert type(t.x) != Scalable
+   assert type(t.y) != Scalable
    assert all(t.xy == [1, 2])
-   assert t.x == [1]
-   assert t.y == [2]
+   assert t.x == 1
+   assert t.y == 2
    assert t.str == 'PU1,2;'
 
 def test_PU_06( ):

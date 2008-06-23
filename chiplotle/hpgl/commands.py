@@ -4,6 +4,7 @@ from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.hpgl.abstract.hpglescape import _HPGLEscape
 from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.abstract.twopoint import _TwoPoint
+from chiplotle.hpgl.abstract.wedge import _Wedge
 from chiplotle.hpgl.scalable import Scalable
 
 class PU(_Positional):
