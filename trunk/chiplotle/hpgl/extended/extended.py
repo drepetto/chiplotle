@@ -8,6 +8,6 @@ class _ExtendedHPGL(_Positional):
    def __str__(self):
       result = ''
       for c in self._subcommands:
-         result += c.str
+         result += c.format
       return result
 
