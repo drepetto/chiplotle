@@ -19,7 +19,11 @@ class _Positional(_HPGLCommand):
       def fget(self):
          return self._xy
       def fset(self, arg):
-         self._xy = Scalable(arg)
+         if arg is None:
+            self._xy = Scalable([ ])
+         else:
+            assert len(arg) % 2 == 0
+            self._xy = Scalable(arg)
       return property(**locals())
 
    @apply
