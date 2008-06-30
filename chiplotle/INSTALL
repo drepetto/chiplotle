@@ -1,12 +1,15 @@
+Chiplotle requires python 2.4 or greater.
 Chiplotle requires NumPy to be installed:
 http://numpy.scipy.org/
+and PySerial:
+http://pyserial.wiki.sourceforge.net/pySerial
 
-After installing NumPy, copy the chiplotle directory wherever you'd like and point Python to its parent directory by setting the PYTHONPATH environment variable.
+After installing NumPy and PySerial, copy the chiplotle directory wherever you'd like and point Python to the Chiplotle module's parent directory by setting the PYTHONPATH environment variable.
 e.g. if you put the chiplotle directory in $HOME/bin/, then in your bashrc file add:
 
 export PYTHONPATH=$PYTHONPATH:$HOME/bin
 
-to run Chiplotle directly without first going into the python interpreter, make your PATH environment variable point to the executable file "chiplotle" found in the main directory.
+to run Chiplotle directly without first going into the python interpreter, make your PATH environment variable point to the executable file "chiplotle" found in the Chiplotle directory.
 e.g. if you put the chiplotle directory in $HOME/bin/, then in your bashrc file add:
 
 export PATH=$PATH:$HOME/bin/chiplotle

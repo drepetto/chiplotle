@@ -608,7 +608,7 @@ class DI(_HPGLCommand):
 
    def __str__(self):
       if self.run and self.rise:
-         return '%s%.4f%.4f%s' % (self._name, self.run, self.rise, self.terminator)
+         return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
          
@@ -620,7 +620,7 @@ class RD(_HPGLCommand):
 
    def __str__(self):
       if self.run and self.rise:
-         return '%s%.4f%.4f%s' % (self._name, self.run, self.rise, self.terminator)
+         return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
          
@@ -640,7 +640,7 @@ class ES(_HPGLCommand):
 
    def __str__(self):
       if self.charspace and self.linespace:
-         return '%s%.4f%.4f%s' % (self._name, self.charspace, self.linespace, 
+         return '%s%.4f,%.4f%s' % (self._name, self.charspace, self.linespace, 
             self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)

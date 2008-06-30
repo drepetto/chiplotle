@@ -20,7 +20,7 @@ class _HPGLCommand(_HPGL):
       attributes = [ ]
       for a in dir(self):
          if not a.startswith('_'):
-            if a not in ('x', 'y', 'str', 'terminator'):
+            if a not in ('x', 'y', 'format', 'terminator'):
                attributes.append( '%s=%s' %(a, str(getattr(self, a))) )
       result = '%s(%s)' % (self._name, ', '.join(attributes))
       return result
