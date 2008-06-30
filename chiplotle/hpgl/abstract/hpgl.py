@@ -6,6 +6,6 @@ class _HPGL(object):
       return self.__class__.__name__
 
    @property
-   def str(self):
+   def format(self):
       return self.__str__()
    

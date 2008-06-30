@@ -10,7 +10,7 @@ def test_PU_01( ):
    assert len(t.xy) == 0
    assert len(t.x) == 0
    assert len(t.y) == 0
-   assert t.str == 'PU;'
+   assert t.format == 'PU;'
 
 def test_PU_02( ):
    '''PU can be initialized with empty list.'''
@@ -21,7 +21,7 @@ def test_PU_02( ):
    assert len(t.xy) == 0
    assert len(t.x) == 0
    assert len(t.y) == 0
-   assert t.str == 'PU;'
+   assert t.format == 'PU;'
 
 def test_PU_03( ):
    '''PU argument must be list-like (list, tuple, Scalable, Ndarray,...).'''
@@ -42,7 +42,7 @@ def test_PU_05( ):
    assert all(t.xy == [1, 2])
    assert t.x == 1
    assert t.y == 2
-   assert t.str == 'PU1,2;'
+   assert t.format == 'PU1,2;'
 
 def test_PU_06( ):
    '''PU initialize properly with list or tuple of length == 2**n.'''
@@ -53,15 +53,15 @@ def test_PU_06( ):
    assert all(t.xy == [1, 2, 3, 4])
    assert all(t.x == [1, 3])
    assert all(t.y == [2, 4])
-   assert t.str == 'PU1,2,3,4;'
+   assert t.format == 'PU1,2,3,4;'
 
 def test_PU_07( ):
    '''Floats are kept as floats in format.'''
    t = PU([1, 0.])
-   assert t.str == 'PU1.0,0.0;'
+   assert t.format == 'PU1.0,0.0;'
 
 def test_PU_08( ):
    '''Ints are kept as ints in format.'''
    t = PU([0, 0])
-   assert t.str == 'PU0,0;'
+   assert t.format == 'PU0,0;'
 

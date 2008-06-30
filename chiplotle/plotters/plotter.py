@@ -42,8 +42,8 @@ class Plotter(object):
 
    def write(self, data):
       """ Public access for writing to serial port. 
-         It allows the -data- input to be a list or tuple. 
-         All elements inside the list must have str attribute"""
+         It allows the <data> input to be a list or tuple. 
+         All elements inside the list must have a <format> attribute"""
       commands =  [ ]
       if type(data) in (list, tuple):
          for c in data:
@@ -51,15 +51,15 @@ class Plotter(object):
             ### TODO how can we check HPGL adecuacy while at the same time 
             ### allowing the user to define his own HPGL objects?
 #            if self._isCommandKnown(c):
-#               commands.append(c.str) 
+#               commands.append(c.format) 
 #            self._isCommandKnown(c)
-            commands.append(c.str) 
+            commands.append(c.format) 
          self._writeStringToPort(''.join(commands))
       else:
 #         if self._isCommandKnown(data):
-#            self._writeStringToPort(data.str)
+#            self._writeStringToPort(data.format)
 #         self._isCommandKnown(data)
-         self._writeStringToPort(data.str)
+         self._writeStringToPort(data.format)
 
 
    ### PRIVATE METHODS ###
@@ -133,7 +133,7 @@ class Plotter(object):
    def _bufferSpace(self):
       #print "getting _bufferSpace..."
       self._serialPort.flushInput()
-      self._serialPort.write(self._hpgl.B().str)
+      self._serialPort.write(self._hpgl.B().format)
       #print "buffer space: ", bs
       bs = self._readPort()
       return int(bs)
