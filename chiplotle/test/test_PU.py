@@ -1,4 +1,5 @@
 from chiplotle import *
+import numpy
 from py.test import raises
 
 def test_PU_01( ):
@@ -37,8 +38,8 @@ def test_PU_05( ):
    '''PU initialize properly with list or tuple of 2.'''
    t = PU([1,2])
    assert type(t.xy) == Scalable
-   assert type(t.x) != Scalable
-   assert type(t.y) != Scalable
+   assert type(t.x) == numpy.int32 
+   assert type(t.y) == numpy.int32 
    assert all(t.xy == [1, 2])
    assert t.x == 1
    assert t.y == 2
