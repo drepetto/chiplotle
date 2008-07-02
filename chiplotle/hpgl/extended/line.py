@@ -8,7 +8,8 @@ class Line(_ExtendedHPGL):
       
    @property
    def _subcommands(self):
-      result =[PU( ), 
+      result = _ExtendedHPGL._subcommands.fget(self)
+      result+=[PU( ), 
                PA(self.xy[0:2]),
                PD(self.xy[2:4]),
                PU()]

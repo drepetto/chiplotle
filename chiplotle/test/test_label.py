@@ -37,3 +37,9 @@ def test_label_06( ):
    l.origin = 5
    assert l.format == 'PU;PA1,1;LO5;LBhello\x03;LO1;'
 
+def test_label_07( ):
+   '''Pen formats correctly.'''
+   l = Label(1, 1, 'hello')
+   l.pen = 5
+   assert l.format == 'SP5;PU;PA1,1;LBhello\x03;'
+
