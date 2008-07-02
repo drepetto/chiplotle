@@ -1,4 +1,5 @@
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
+from chiplotle.hpgl.scalable import Scalable
 
 class _Wedge(_HPGLCommand):
    '''Abstract wedge.'''
