@@ -14,7 +14,8 @@ class RandomWalk(_ExtendedHPGL):
 
    @property
    def _subcommands(self):
-      result = [ PU( ), PA(self.xy) ]
+      result = _ExtendedHPGL._subcommands.fget(self)
+      result += [ PU( ), PA(self.xy) ]
       for i in range(self.steps):
         A = random.random() * math.pi * 2
         r = self.stepSize

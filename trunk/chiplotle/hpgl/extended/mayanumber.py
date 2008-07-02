@@ -40,8 +40,7 @@ class MayaNumber(_ExtendedHPGL):
 
    @property
    def _subcommands(self):
-      #result = [PU( ), PA(self.xy)]
-      result = []
+      result = _ExtendedHPGL._subcommands.fget(self)
       x = self.x
       y = self.y + \
          (len(self._digitValues) - 1) * (self.size + self._interdigitSpace)

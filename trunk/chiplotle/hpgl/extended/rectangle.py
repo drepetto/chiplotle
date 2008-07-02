@@ -23,7 +23,7 @@ class Rectangle(_ExtendedHPGL):
       bl = rotate2d(bl, self.rotation)
       br = rotate2d(br, self.rotation)
 
-      result = [ ]
+      result = _ExtendedHPGL._subcommands.fget(self)
       result.append( PU( ) )
       result.append( PA((self.x + tl[0], self.y + tl[1])) )
       result.append( PD() )
