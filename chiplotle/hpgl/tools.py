@@ -49,7 +49,7 @@ def parse_hpgl_file(filename):
       ### REMOVE KNOWN INVALID COMMANDS ###
       if head in _knownUnsupportedCommands:
          continue
-      if head in ('PU', 'PD', 'PA', 'PR', 'RA','RR'):
+      if head in ('PU','PD','PA','PR', 'RA','RR', 'ER','EA'):
          body = '(%s)' % c[2:]
       elif head in ('AR', 'AA'):
          body = '(%s),%s' % (c[2:4], c[4:])
