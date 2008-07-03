@@ -47,7 +47,7 @@ class Plotter(object):
       commands =  [ ]
       if type(data) in (list, tuple):
          for c in data:
-            assert hasattr(c, 'str')
+            assert hasattr(c, 'format')
             ### TODO how can we check HPGL adecuacy while at the same time 
             ### allowing the user to define his own HPGL objects?
 #            if self._isCommandKnown(c):

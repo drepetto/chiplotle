@@ -3,6 +3,7 @@ from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.utils import *
 from chiplotle.hpgl.scalable import Scalable
 import chiplotle.hpgl.commands as hpgl
+import re
 
 def _scale_command(cmd, val):
    attrs = cmd.__dict__.keys()
@@ -32,12 +33,14 @@ def transpose(arg, val):
          _transpose_command(c, val)
 
 def parse_hpgl_file(filename):
-   _knownUnsupportedCommands = ('PW',)
+   _knownUnsupportedCommands = ('PW','PC')
    f = open(filename)
    fs = f.read()
    f.close()
    fs = fs.replace('\n',';')
-   commands = fs.split(';')
+   fs = fs.replace('\r',';')
+   #commands = fs.split(';')
+   commands = re.split(';+', fs)
    #print commands
    result = []
    for c in commands:
@@ -46,7 +49,7 @@ def parse_hpgl_file(filename):
       ### REMOVE KNOWN INVALID COMMANDS ###
       if head in _knownUnsupportedCommands:
          continue
-      if head in ('PU', 'PD', 'PA', 'PR'):
+      if head in ('PU', 'PD', 'PA', 'PR', 'RA','RR'):
          body = '(%s)' % c[2:]
       elif head in ('AR', 'AA'):
          body = '(%s),%s' % (c[2:4], c[4:])
@@ -54,9 +57,10 @@ def parse_hpgl_file(filename):
          body = c[2:]
       try:
          cout = eval('hpgl.%s(%s)' % (head, body))
+         result.append(cout)
       except:
-         print '*** ERROR: Could not create %s(%s).' % (head, body)
-      result.append(cout)
+         print '*** ERROR: Could not create %s(%s)' % (head, body)
+         print 'Command skipped. File created anyway. '
    return result
 
 def relativize(data):
