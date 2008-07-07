@@ -21,8 +21,6 @@ class _HPGLCommand(_HPGL):
       for a in dir(self):
          if not a.startswith('_'):
             if not callable(getattr(self, a)):
-               print a
-               raw_input()
                if a not in ('x', 'y', 'format', 'terminator'):
                   attributes.append( '%s=%s' %(a, str(getattr(self, a))) )
       result = '%s(%s)' % (self._name, ', '.join(attributes))
