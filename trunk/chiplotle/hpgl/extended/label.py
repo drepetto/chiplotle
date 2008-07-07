@@ -1,11 +1,12 @@
 from chiplotle.hpgl.extended.extended import _ExtendedHPGL
-from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV
+from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV, SI
 
 class Label(_ExtendedHPGL):
    '''Text label.
    Settable properties:
    x, y:       coordinates of label location.
    text:       the actual text to be printed.
+   charsize:   (w, h) pair defining the absolute character size.
    direction:  the inclination / angle of the text. Should be a pair of values: 
                run (direction on x axis), rise (direction on y axis).
    charspace:  spacing between characters. Positive separates, negatives bring 
@@ -25,10 +26,11 @@ class Label(_ExtendedHPGL):
    vertical:   boolean; print text from left to right (False) or top down (True).
    '''
 
-   def __init__(self, x, y, text, direction=None):
+   def __init__(self, x, y, text):
       _ExtendedHPGL.__init__(self, (x, y)) 
       self.text = text
-      self.direction = direction
+      self.charsize = None
+      self.direction = None
       self.charspace = None
       self.linespace = None
       self.origin = None
@@ -43,6 +45,8 @@ class Label(_ExtendedHPGL):
       result += [PU( ), PA(self.xy)]
       if self.direction:
          result.append(DI(*self.direction))
+      if self.charsize:
+         result.append(SI(*self.charsize))
       if self.charspace and self.linespace:
          result.append(ES(self.charspace, self.linespace))
       if self.origin:
@@ -57,6 +61,8 @@ class Label(_ExtendedHPGL):
       ### unset commands
       if self.direction:
          result.append(DI( ))
+      if self.charsize:
+         result.append(SI( ))
       if self.charspace and self.linespace:
          result.append(ES( ))
       if self.origin:
