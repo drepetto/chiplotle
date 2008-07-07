@@ -9,6 +9,7 @@ from chiplotle.hpgl import commands
 from margin import _PlotterMargin
 import serial
 import time
+import types
 
 
 class Plotter(object):
@@ -45,7 +46,7 @@ class Plotter(object):
          It allows the <data> input to be a list or tuple. 
          All elements inside the list must have a <format> attribute"""
       commands =  [ ]
-      if type(data) in (list, tuple):
+      if type(data) in (list, tuple, types.GeneratorType):
          for c in data:
             assert hasattr(c, 'format')
             ### TODO how can we check HPGL adecuacy while at the same time 
