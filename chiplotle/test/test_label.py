@@ -43,3 +43,9 @@ def test_label_07( ):
    l.pen = 5
    assert l.format == 'SP5;PU;PA1,1;LBhello\x03;'
 
+def test_label_07( ):
+   '''Character size (absolute) formats correctly.'''
+   l = Label(1, 1, 'hello')
+   l.charsize = (2, 1)
+   assert l.format == 'PU;PA1,1;SI2.0000,1.0000;LBhello\x03;SI;'
+
