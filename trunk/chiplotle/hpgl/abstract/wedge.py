@@ -9,7 +9,8 @@ class _Wedge(_HPGLCommand):
       self.sweepangle = sweepangle
       self.chordangle = chordangle
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%.4f,%.4f,%.4f,%.4f%s' % (self._name, self.radius, self.startangle,
                                       self.sweepangle, self.chordangle, 
                                       self.terminator)

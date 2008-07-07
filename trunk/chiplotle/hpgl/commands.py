@@ -33,7 +33,8 @@ class CI(_HPGLCommand):
       self.radius = Scalable(radius)
       self.chordangle = chordangle
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%.4f,%d%s' % (self._name, self.radius, self.chordangle, self.terminator)
 
 class CC(_HPGLCommand):
@@ -41,7 +42,8 @@ class CC(_HPGLCommand):
    def __init__(self, angle=5):   
       self.angle = int(angle)
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.angle, self.terminator)
 
 class AF(_HPGLCommand):
@@ -75,7 +77,8 @@ class AP(_HPGLCommand):
       else:
          self.p = p
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%s%s' % (self._name, self.p, self.terminator)
 
 class AR(_Arc):
@@ -100,7 +103,8 @@ class AS(_HPGLCommand):
       self.accel = accel
       self.pen = pen
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.accel:
          if self.pen:
             return '%s%d,%d%s' \
@@ -132,7 +136,8 @@ class FS(_HPGLCommand):
       self.force = force
       self.pen = pen
 
-   def __str__(self):
+   @property
+   def format(self):
 
       if self.force is None:
          return '%s%s' % (self._name, self.terminator)
@@ -170,7 +175,8 @@ class VS(_HPGLCommand):
          self.vel = args[0]
          self.pen = args[1]
      
-   def __str__(self):
+   @property
+   def format(self):
       if self.pen == None:
          if self.vel == None:
             return '%s%s' % (self._name, self.terminator)
@@ -182,7 +188,8 @@ class VS(_HPGLCommand):
 
 class EP(_HPGLCommand):
    '''Edge Polygon.'''
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%s' % (self._name, self.terminator)
 
 class BF(_HPGLCommand):
@@ -331,7 +338,8 @@ class PS(_HPGLCommand):
    def __init__(self, size = None):
       self.size = size
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.size:
          return '%s%d%s' % (self._name, self.size, self.terminator)
       else:
@@ -345,7 +353,8 @@ class BL(_HPGLCommand):
    def __init__(self, label=None):
       self.label = label
 
-   def __str__(self):
+   @property
+   def format(self):
       if not self.label:
          return '%s%s' % (self._name, self.terminator)
       else:
@@ -373,7 +382,8 @@ class CS(_HPGLCommand):
    def __init__(self, set = 0):   
       self.set = set
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.set, self.terminator)
 
 class CT(_HPGLCommand):
@@ -381,7 +391,8 @@ class CT(_HPGLCommand):
    def __init__(self, type = 0):   
       self.type = type
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.type, self.terminator)
 
 class CA(_HPGLCommand):
@@ -389,7 +400,8 @@ class CA(_HPGLCommand):
    def __init__(self, n = 0):   
       self.n = n
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
 
 class CM(_HPGLCommand):
@@ -398,7 +410,8 @@ class CM(_HPGLCommand):
       self.switch = switch
       self.fallback = fallback
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d,%d%s' % (self._name, self.switch, self.fallback, self.terminator)
 
 class CP(_HPGLCommand):
@@ -411,7 +424,8 @@ class CP(_HPGLCommand):
       self.spaces = spaces
       self.lines = lines
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.spaces:
          if self.fallback:
             return '%s%.4f,%.4f%s' % (self._name, \
@@ -427,7 +441,8 @@ class DT(_HPGLCommand):
    def __init__(self, terminator = chr(3)):   
       self.labelTerminator = terminator
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%c%s' % (self._name, self.labelTerminator, self.terminator)
 
 class LB(_HPGLCommand):
@@ -436,7 +451,8 @@ class LB(_HPGLCommand):
       self.text = text
       self.labelTerminator = chr(3)
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%s%s%s' % (self._name, self.text, self.labelTerminator, self.terminator)
 
 class SP(_HPGLCommand):
@@ -444,7 +460,8 @@ class SP(_HPGLCommand):
    def __init__(self, pen = 0):   
       self.pen = pen
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.pen, self.terminator)
 
 class LT(_HPGLCommand):
@@ -461,7 +478,8 @@ class LT(_HPGLCommand):
       self.pattern = pattern
       self.length = length
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.pattern:
          return '%s%d,%.4f%s' % (self._name, self.pattern, 
          self.length, self.terminator)
@@ -480,7 +498,8 @@ class FT(_HPGLCommand):
       self.space = space
       self.angle = angle
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.space:
          return '%s%d,%.4f,%d%s' % (self._name, self.type, self.space,
          self.angle, self.terminator)
@@ -492,7 +511,8 @@ class PM(_HPGLCommand):
    def __init__(self, n = 0):   
       self.n = n
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
 
 class EC(_HPGLCommand):
@@ -500,7 +520,8 @@ class EC(_HPGLCommand):
    def __init__(self, n = 0):   
       self.n = n
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
 
 class PG(_HPGLCommand):
@@ -508,7 +529,8 @@ class PG(_HPGLCommand):
    def __init__(self, n = None):   
       self.n = n
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.n:
          return '%s%d%s' % (self._name, self.n, self.terminator)
       else:
@@ -519,7 +541,8 @@ class SL(_HPGLCommand):
    def __init__(self, tan = 0):   
       self.tan = tan
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%.4f%s' % (self._name, self.tan, self.terminator)
 
 class SA(_HPGLCommand):
@@ -531,7 +554,8 @@ class RO(_HPGLCommand):
    def __init__(self, angle = 0):   
       self.angle = angle
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.angle, self.terminator)
 
 class RP(_HPGLCommand):
@@ -539,7 +563,8 @@ class RP(_HPGLCommand):
    def __init__(self, n = 1):   
       self.n = n
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
 
 class SM(_HPGLCommand):
@@ -550,7 +575,8 @@ class SM(_HPGLCommand):
    def __init__(self, char = None):
       self.char = char
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.char:
          return '%s%c%s' % (self._name, self.char, self.terminator)
       else:
@@ -587,7 +613,8 @@ class PT(_HPGLCommand):
    def __init__(self, thickness = 0.3):
       self.thickness = thickness
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%.4f%s' % (self._name, self.thickness, self.terminator)
       
 
@@ -606,7 +633,8 @@ class DI(_HPGLCommand):
       self.run = run
       self.rise = rise
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.run and self.rise:
          return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, self.terminator)
       else:
@@ -618,7 +646,8 @@ class RD(_HPGLCommand):
       self.run = run
       self.rise = rise
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.run and self.rise:
          return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, self.terminator)
       else:
@@ -629,7 +658,8 @@ class DV(_HPGLCommand):
    def __init__(self, vertical = 0):
       self.vertical = bool(vertical)
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%i%s' % (self._name, self.vertical, self.terminator)
          
 class ES(_HPGLCommand):
@@ -638,7 +668,8 @@ class ES(_HPGLCommand):
       self.charspace = charspace
       self.linespace = linespace
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.charspace and self.linespace:
          return '%s%.4f,%.4f%s' % (self._name, self.charspace, self.linespace, 
             self.terminator)
@@ -650,7 +681,8 @@ class LO(_HPGLCommand):
    def __init__(self, origin = 1):
       self.origin = origin
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%i%s' % (self._name, self.origin, self.terminator)
 
 class WG(_Wedge):
@@ -675,7 +707,8 @@ class TL(_HPGLCommand):
       self.tp = tp
       self.tn = tn
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%.4f,%.4f%s' % (self._name, self.tp, self.tn, self.terminator)
         
 
@@ -684,7 +717,8 @@ class WD(_HPGLCommand):
    def __init__(self, text):
       self.text = text
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%s%s' % (self._name, self.text, chr(3)) # no terminator??
 
 

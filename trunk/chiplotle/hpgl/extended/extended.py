@@ -14,7 +14,8 @@ class _ExtendedHPGL(_Positional):
          result.append(SP(self.pen))
       return result
 
-   def __str__(self):
+   @property
+   def format(self):
       result = ''
       for c in self._subcommands:
          result += c.format

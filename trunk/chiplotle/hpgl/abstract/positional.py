@@ -50,8 +50,7 @@ class _Positional(_HPGLCommand):
          self.xy[1::2] = arg
       return property(**locals())
 
-   ### OVERRIDES ###
-
-   def __str__(self):
+   @property
+   def format(self):
       coordinates = [str(p) for p in self.xy]
       return '%s%s%s' % (self._name, ','.join(coordinates), self.terminator)

@@ -6,8 +6,9 @@ class _Arc(_Positional):
       self.chordangle = chordangle
       _Positional.__init__(self, xy, transposable)
 
-   def __str__(self):
-      result = _Positional.__str__(self)
+   @property
+   def format(self):
+      result = _Positional.format(self)
       result = result.rstrip(self.terminator)
       return result + ',%d,%d%s' %(self.a, self.chordangle, self.terminator)
 

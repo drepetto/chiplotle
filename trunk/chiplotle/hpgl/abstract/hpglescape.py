@@ -11,10 +11,12 @@ class _HPGLEscape(_HPGL):
          self.__class__._escape = val
       return property(**locals())
 
-   ### OVERRIDES ###
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s.%s' % (self.escape, self._name)
+
+   ### OVERRIDES ###
 
    def __repr__(self):
       return 'Escape(%s, %s)' % (repr(self.escape), self._name)
