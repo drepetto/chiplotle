@@ -18,13 +18,12 @@ class _HPGLCommand(_HPGL):
 
    def __repr__(self):
       attributes = [ ]
-      print dir(self)
-      raw_input()
       for a in dir(self):
          if not a.startswith('_'):
-            if not callable(a):
+            if not callable(getattr(self, a)):
+               print a
+               raw_input()
                if a not in ('x', 'y', 'format', 'terminator'):
-                  print a
                   attributes.append( '%s=%s' %(a, str(getattr(self, a))) )
       result = '%s(%s)' % (self._name, ', '.join(attributes))
       return result
