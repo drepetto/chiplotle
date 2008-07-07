@@ -6,7 +6,8 @@ class _CharSize(_HPGLCommand):
       self.w = w
       self.h = h
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.w and self.h:
          return '%s%.4f,%.4f%s' % (self._name, self.w, self.h, self.terminator)
       else:

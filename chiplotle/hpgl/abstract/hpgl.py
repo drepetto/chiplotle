@@ -7,5 +7,5 @@ class _HPGL(object):
 
    @property
    def format(self):
-      return self.__str__()
+      pass
    

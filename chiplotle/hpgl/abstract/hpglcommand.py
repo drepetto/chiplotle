@@ -11,10 +11,12 @@ class _HPGLCommand(_HPGL):
          self.__class__._terminator = val
       return property(**locals())
 
-   ### OVERRIDES ###
 
-   def __str__(self):
+   @property
+   def format(self):
       return '%s%s' % (self._name, self.terminator)
+
+   ### OVERRIDES ###
 
    def __repr__(self):
       attributes = [ ]

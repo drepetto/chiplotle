@@ -7,7 +7,8 @@ class _TwoPoint(_HPGLCommand):
          assert len(coords) == 4
       self.coords = coords
 
-   def __str__(self):
+   @property
+   def format(self):
       if self.coords:
          return '%s%s%s' % (self._name, ','.join([str(c) 
             for c in self.coords]), self.terminator)
