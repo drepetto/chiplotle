@@ -1,5 +1,6 @@
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.hpgl.abstract.positional import _Positional
+from chiplotle.hpgl.extended.container import Container
 from chiplotle.hpgl.utils import *
 from chiplotle.hpgl.scalable import Scalable
 import chiplotle.hpgl.commands as hpgl
@@ -19,7 +20,11 @@ def _transpose_command(cmd, val):
       cmd._xy[1::2] += val[1]
 
 def scale(arg, val):
-   if isinstance(arg, _HPGLCommand):
+   if isinstance(arg, Container):
+      _scale_command(arg, val)
+      for c in arg:
+         _scale_command(c, val)
+   elif isinstance(arg, _HPGLCommand):
       _scale_command(arg, val)
    elif isinstance(arg, (list, tuple)):
       for c in arg:
