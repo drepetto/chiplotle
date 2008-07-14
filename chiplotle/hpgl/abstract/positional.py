@@ -29,11 +29,7 @@ class _Positional(_HPGLCommand):
    @apply
    def x( ):
       def fget(self):
-         x = self.xy[0::2]
-         if len(x) == 1:
-            return x[0]
-         else:
-            return x
+         return self._getCoord(0)
       def fset(self, arg):
          self.xy[0::2] = arg
       return property(**locals())
@@ -41,14 +37,20 @@ class _Positional(_HPGLCommand):
    @apply
    def y( ):
       def fget(self):
-         y = self.xy[1::2]
-         if len(y) == 1:
-            return y[0]
-         else:
-            return y
+         return self._getCoord(1)
       def fset(self, arg):
          self.xy[1::2] = arg
       return property(**locals())
+
+   def _getCoord(self, n):
+      '''Helper function for x( ) and y( ).'''
+      result = self.xy[n::2]
+      if len(result) == 1:
+         return result[0]
+      else:
+         return result
+
+   ### FORMATTING ###
 
    @property
    def format(self):
