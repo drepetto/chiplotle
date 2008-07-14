@@ -42,7 +42,7 @@ class Label(_ExtendedHPGL):
    def _subcommands(self):
       result = _ExtendedHPGL._subcommands.fget(self)
       ### set commands
-      result += [PU( ), PA(self.xy)]
+      result += [PU( ), PA(self.xyabsolute)]
       if self.direction:
          result.append(DI(*self.direction))
       if self.charsize:
