@@ -25,12 +25,12 @@ class Rectangle(_ExtendedHPGL):
 
       result = _ExtendedHPGL._subcommands.fget(self)
       result.append( PU( ) )
-      result.append( PA((self.x + tl[0], self.y + tl[1])) )
+      result.append( PA((self.xabsolute + tl[0], self.yabsolute + tl[1])) )
       result.append( PD() )
-      result.append( PA((self.x + tr[0], self.y + tr[1])) )
-      result.append( PA((self.x + br[0], self.y + br[1])) )
-      result.append( PA((self.x + bl[0], self.y + bl[1])) )
-      result.append( PA((self.x + tl[0], self.y + tl[1])) )
+      result.append( PA((self.xabsolute + tr[0], self.yabsolute + tr[1])) )
+      result.append( PA((self.xabsolute + br[0], self.yabsolute + br[1])) )
+      result.append( PA((self.xabsolute + bl[0], self.yabsolute + bl[1])) )
+      result.append( PA((self.xabsolute + tl[0], self.yabsolute + tl[1])) )
       result.append( PU() )
       return result
 

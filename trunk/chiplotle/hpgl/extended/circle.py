@@ -13,7 +13,7 @@ class Circle(_ExtendedHPGL):
    @property
    def _subcommands(self):
       result = _ExtendedHPGL._subcommands.fget(self)
-      result.append(PU(self.xy))
+      result.append(PU(self.xyabsolute))
       if self.filled:
          result.append(WG(self.radius, 0, 359))
       else:

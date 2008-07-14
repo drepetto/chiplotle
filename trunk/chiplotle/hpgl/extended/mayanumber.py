@@ -41,8 +41,8 @@ class MayaNumber(_ExtendedHPGL):
    @property
    def _subcommands(self):
       result = _ExtendedHPGL._subcommands.fget(self)
-      x = self.x
-      y = self.y + \
+      x = self.xabsolute
+      y = self.yabsolute + \
          (len(self._digitValues) - 1) * (self.size + self._interdigitSpace)
       for v in self._digitValues:
          result.extend( _MayaDigit(x, y, v, 

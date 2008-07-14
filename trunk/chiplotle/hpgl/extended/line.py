@@ -10,8 +10,8 @@ class Line(_ExtendedHPGL):
    def _subcommands(self):
       result = _ExtendedHPGL._subcommands.fget(self)
       result+=[PU( ), 
-               PA(self.xy[0:2]),
-               PD(self.xy[2:4]),
+               PA(self.xyabsolute[0:2]),
+               PD(self.xyabsolute[2:4]),
                PU()]
       return result
 

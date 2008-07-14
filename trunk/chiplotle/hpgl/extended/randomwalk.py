@@ -1,5 +1,5 @@
 from chiplotle.hpgl.extended.extended import _ExtendedHPGL
-from chiplotle.hpgl.commands import PU, PA, PD
+from chiplotle.hpgl.commands import PU, PA, PD, PR
 from chiplotle.utils.geometry import polar2xy
 import math
 import random
@@ -15,12 +15,12 @@ class RandomWalk(_ExtendedHPGL):
    @property
    def _subcommands(self):
       result = _ExtendedHPGL._subcommands.fget(self)
-      result += [ PU( ), PA(self.xy) ]
+      result += [ PU( ), PA(self.xyabsolute), PD( ) ]
       for i in range(self.steps):
         A = random.random() * math.pi * 2
         r = self.stepSize
         xy = polar2xy(r,A)
-        result.append( PD(xy) )
+        result.append( PR(xy) )
       result.append( PU() )
       return result
 
