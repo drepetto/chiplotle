@@ -649,7 +649,8 @@ class RD(_HPGLCommand):
    @property
    def format(self):
       if self.run and self.rise:
-         return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, self.terminator)
+         return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, 
+            self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
          
@@ -670,9 +671,12 @@ class ES(_HPGLCommand):
 
    @property
    def format(self):
-      if self.charspace and self.linespace:
+      if (not self.charspace is None) and \
+         (not self.linespace is None):
          return '%s%.4f,%.4f%s' % (self._name, self.charspace, self.linespace, 
             self.terminator)
+      elif not self.charspace is None:
+         return '%s%.4f%s' % (self._name, self.charspace, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
          
