@@ -1,4 +1,5 @@
 from chiplotle.hpgl.extended.extended import _ExtendedHPGL
+from chiplotle.hpgl.scalable import Scalable
 from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV, SI
 
 class Label(_ExtendedHPGL):
@@ -9,9 +10,10 @@ class Label(_ExtendedHPGL):
    charsize:   (w, h) pair defining the absolute character size.
    direction:  the inclination / angle of the text. Should be a pair of values: 
                run (direction on x axis), rise (direction on y axis).
-   charspace:  spacing between characters. Positive separates, negatives bring 
-               together.
-   linespace:  spacing between lines. Positive separates, negatives bring together.
+   charspace:  factor to set spacing between characters. Positive separates,
+               negatives bring together. 
+   linespace:  factor to set spacing between lines. Positive separates, 
+               negatives bring together.
    origin:     location of label relative to pen's current location. Possible 
                values:
                      Left Inside Right
@@ -37,18 +39,35 @@ class Label(_ExtendedHPGL):
       self.slant = None
       self.vertical = False
 
-
+   @apply
+   def charsize( ):
+      def fget(self):
+         return self._charsize
+      def fset(self, arg):
+         if isinstance(arg, (list, tuple, Scalable)):
+            if len(arg) == 1:
+               self._charsize = Scalable((arg[0], None))
+            elif len(arg) == 2:
+               self._charsize = Scalable(arg)
+            else:
+               raise ValueError("Character size has two values,\
+                     not 0, not 3, not 4, etc.")
+         else:
+            self._charsize = Scalable((arg, None))
+      return property(**locals())
+            
+         
+            
    @property
    def _subcommands(self):
       result = _ExtendedHPGL._subcommands.fget(self)
       ### set commands
       result += [PU( ), PA(self.xyabsolute)]
-      if self.direction:
-         result.append(DI(*self.direction))
-      if self.charsize:
-         result.append(SI(*self.charsize))
+      result.append(SI(*self.charsize))
       if self.charspace and self.linespace:
          result.append(ES(self.charspace, self.linespace))
+      if self.direction:
+         result.append(DI(*self.direction))
       if self.origin:
          result.append(LO(self.origin))
       if self.slant:
@@ -59,12 +78,11 @@ class Label(_ExtendedHPGL):
       result.append(LB(self.text))
 
       ### unset commands
-      if self.direction:
-         result.append(DI( ))
-      if self.charsize:
-         result.append(SI( ))
+      result.append(SI( ))
       if self.charspace and self.linespace:
          result.append(ES( ))
+      if self.direction:
+         result.append(DI( ))
       if self.origin:
          result.append(LO(1))
       if self.slant:
