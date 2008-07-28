@@ -329,19 +329,18 @@ class PB(_HPGLCommand):
    pass
       
 class PS(_HPGLCommand):
-   """
-       Paper Size
-       0-3 == B or A3 size paper
-       4-127 == A or A4 size paper
-       WTF?
-   """
-   def __init__(self, size = None):
-      self.size = size
+   '''Change the size of the hard clip limits.'''
+   def __init__(self, length = None, width = None):
+      self.length = length
+      self.width = width
 
    @property
    def format(self):
-      if self.size:
-         return '%s%d%s' % (self._name, self.size, self.terminator)
+      if self.length and self.width:
+         return '%s%d,%d%s' % (self._name, self.length, self.width, 
+            self.terminator)
+      elif self.length:
+         return '%s%d%s' % (self._name, self.length, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
 
