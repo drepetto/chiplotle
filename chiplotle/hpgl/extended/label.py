@@ -39,6 +39,8 @@ class Label(_ExtendedHPGL):
       self.slant = None
       self.vertical = False
 
+   ### TODO: replace charsize with two attributes: charwidth and charheight.
+   ### this is broken.
    @apply
    def charsize( ):
       def fget(self):
