@@ -1,7 +1,7 @@
 import numpy
 
 class Scalable(numpy.ndarray):
-   def __new__(subtype, data, dtype=None, copy=False):
+   def __new__(subtype, data, dtype='float32', copy=False):
       # Make sure we are working with an array, and copy the data if requested
       subarr = numpy.array(data, dtype=dtype, copy=copy)
       # Transform 'subarr' from an ndarray to our new subclass.
