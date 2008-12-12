@@ -12,8 +12,8 @@ def test_positional_01( ):
    assert p.y == 2
    assert len(p.xy) == 2
    assert type(p.xy) == Scalable
-   assert type(p.x) == numpy.int32 
-   assert type(p.y) == numpy.int32 
+   assert type(p.x) == numpy.float32 
+   assert type(p.y) == numpy.float32 
 
 
 def test_positional_02( ):
