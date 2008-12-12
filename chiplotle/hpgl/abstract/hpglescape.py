@@ -1,4 +1,5 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
+from chiplotle.utils.get_base_class import get_base_class
 
 class _HPGLEscape(_HPGL):
    _escape = chr(27)
@@ -6,9 +7,11 @@ class _HPGLEscape(_HPGL):
    @apply
    def escape( ):
       def fget(self):
-         return self.__class__._escape
+         baseclass = get_base_class(self, '_HPGLEscape')
+         return baseclass._escape
       def fset(self, val):
-         self.__class__._escape = val
+         baseclass = get_base_class(self, '_HPGLEscape')
+         baseclass._escape = val
       return property(**locals())
 
 
