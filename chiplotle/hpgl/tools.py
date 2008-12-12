@@ -6,18 +6,12 @@ from chiplotle.hpgl.scalable import Scalable
 import chiplotle.hpgl.commands as hpgl
 import re
 
-def _scale_command(cmd, val):
-   attrs = cmd.__dict__.keys()
+def _scale_command(arg, val):
+   attrs = arg.__dict__.keys()
    for an in attrs:
-      a = getattr(cmd, an)
+      a = getattr(arg, an)
       if isinstance(a, Scalable):
          a *= val
-
-def _transpose_command(cmd, val):
-#   if hasattr(cmd, '_xy'):
-   if isinstance(cmd, _Positional) and cmd._transposable:
-      cmd._xy[0::2] += val[0]
-      cmd._xy[1::2] += val[1]
 
 def scale(arg, val):
    if isinstance(arg, Container):
@@ -30,12 +24,19 @@ def scale(arg, val):
       for c in arg:
          _scale_command(c, val)
 
+def _transpose_command(arg, val):
+#   if hasattr(arg, '_xy'):
+   if isinstance(arg, _Positional) and arg._transposable:
+      arg._xy[0::2] += val[0]
+      arg._xy[1::2] += val[1]
+
 def transpose(arg, val):
    if isinstance(arg, _HPGLCommand):
       _transpose_command(arg, val)
    elif isinstance(arg, (list, tuple)):
       for c in arg:
          _transpose_command(c, val)
+
 
 def parse_hpgl_file(filename):
    _knownUnsupportedCommands = ('PW','PC')
