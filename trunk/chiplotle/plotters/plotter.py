@@ -1,9 +1,8 @@
-
-"""
+'''
  *  This file is part of chiplotle.
  *
  *  http://music.columbia.edu/cmc/chiplotle
-"""
+'''
 
 from chiplotle.hpgl import commands 
 from margin import _PlotterMargin
@@ -19,16 +18,17 @@ class Plotter(object):
       self._serialPort = serialPort
       self._hpgl = commands
 
-# Only these commands will be sent to the plotter. All other will be eaten. Burp.
+      ### Only these commands will be sent to the plotter. 
+      ### All other will be eaten. Burp.
       self.allowedHPGLCommands = tuple([
-      '(', ')', 'AA','AR','CA','CI','CP','CS','DC','DF','DI','DP','DR','DT',
-      'EA','ER','EW','FT','IM','IN','IP','IW','LB','LT','OA','OC',
-      'OD','OE','OF','OH','OI','OO','OP','OS','OW','PA','PD','PR',
-      'PS','PT','PU','RA','RO','RR','SA','SC','SI','SL','SM','SP',
-      'SR','SS','TL','UC','VS','WG','XT','YT'])
+      '(', ')', 'AA','AR','CA','CI','CP','CS','DC','DF','DI','DP',
+      'DR','DT','EA','ER','EW','FT','IM','IN','IP','IW','LB','LT',
+      'OA','OC','OD','OE','OF','OH','OI','OO','OP','OS','OW','PA',
+      'PD','PR','PS','PT','PU','RA','RO','RR','SA','SC','SI','SL',
+      'SM','SP', 'SR','SS','TL','UC','VS','WG','XT','YT'])
 
       self.marginHard = _PlotterMargin(self, self._hpgl.OH())
-      self.marginSoft = _PlotterMargin(self, self._hpgl.OW()) # should this be OW?
+      self.marginSoft = _PlotterMargin(self, self._hpgl.OW()) 
 
       self.initializePlotter()
 
@@ -42,9 +42,9 @@ class Plotter(object):
       self.write(self._hpgl.IN())
 
    def write(self, data):
-      """ Public access for writing to serial port. 
+      ''' Public access for writing to serial port. 
          It allows the <data> input to be a list or tuple. 
-         All elements inside the list must have a <format> attribute"""
+         All elements inside the list must have a <format> attribute'''
       commands =  [ ]
       if type(data) in (list, tuple, types.GeneratorType):
          for c in data:
@@ -66,14 +66,14 @@ class Plotter(object):
    ### PRIVATE METHODS ###
 
    def _writeStringToPort(self, data):
-      """ Write data to serial port.
-      -data- is expected to be of type string."""
+      ''' Write data to serial port.
+      -data- is expected to be of type string.'''
       assert type(data) is str
       self._semaphoreBuffer(data)
 
    def _semaphoreBuffer(self, data):
-      """ If the data is larger than the available buffer 
-         space we break it up into chunks!  """
+      ''' If the data is larger than the available buffer 
+         space we break it up into chunks!  '''
       dataLen = len(data)
       bufferSpace = self._bufferSpace()
       #print "total command length: %d" % dataLen
@@ -92,9 +92,9 @@ class Plotter(object):
       
 
    def _sleepWhileBufferFull(self):
-      """
+      '''
          sleeps until the buffer has some room in it.
-      """
+      '''
       space = self._bufferSpace()  
       if space < 1000:
          print 'Buffer getting full, sleeping...'
@@ -113,7 +113,7 @@ class Plotter(object):
       return byte
 
    def _readPort(self):
-      """Read data from the serial port"""
+      '''Read data from the serial port'''
       maxattempts = 16 * 5 # 5 secs.
       countAttempts = 0
       while self._serialPort.inWaiting() == 0 and countAttempts < maxattempts:
@@ -154,7 +154,7 @@ class Plotter(object):
 
    @property
    def id(self):
-      """Get id of plotter."""
+      '''Get id of plotter.'''
       self._serialPort.flushInput()
       self.write(self._hpgl.OI())
       
