@@ -1,4 +1,5 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
+from chiplotle.utils.get_base_class import get_base_class
 
 class _HPGLCommand(_HPGL):
    _terminator = ';'
@@ -6,9 +7,11 @@ class _HPGLCommand(_HPGL):
    @apply
    def terminator( ):
       def fget(self):
-         return self.__class__._terminator
+         baseclass = get_base_class(self, '_HPGLCommand')
+         return baseclass._terminator
       def fset(self, val):
-         self.__class__._terminator = val
+         baseclass = get_base_class(self, '_HPGLCommand')
+         baseclass._terminator = val
       return property(**locals())
 
 
@@ -18,6 +21,7 @@ class _HPGLCommand(_HPGL):
 
    ### OVERRIDES ###
 
+   ### TODO: [VA] make this simpler. remove all but the name?
    def __repr__(self):
       attributes = [ ]
       for a in dir(self):
