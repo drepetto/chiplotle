@@ -1,8 +1,8 @@
-from chiplotle.hpgl.extended.extended import _ExtendedHPGL
+from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.scalable import Scalable
 from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV, SI
 
-class Label(_ExtendedHPGL):
+class Label(_CompoundHPGL):
    '''Text label.
    Settable properties:
    x, y:       coordinates of label location.
@@ -29,7 +29,7 @@ class Label(_ExtendedHPGL):
    '''
 
    def __init__(self, x, y, text):
-      _ExtendedHPGL.__init__(self, (x, y)) 
+      _CompoundHPGL.__init__(self, (x, y)) 
       self.text = text
       self.charsize = None
       self.direction = None
@@ -62,7 +62,7 @@ class Label(_ExtendedHPGL):
             
    @property
    def _subcommands(self):
-      result = _ExtendedHPGL._subcommands.fget(self)
+      result = _CompoundHPGL._subcommands.fget(self)
       ### set commands
       result += [PU( ), PA(self.xyabsolute)]
       result.append(SI(*self.charsize))
