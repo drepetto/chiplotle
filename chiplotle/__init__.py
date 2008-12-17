@@ -1,5 +1,5 @@
 
-__version__ = "v0.9 "
+__version__ = "v0.1 "
 __authors__ = "Victor Adan, Douglas Repetto"
 __license__ = "GPL"
 __url__     = "http://music.columbia.edu/cmc/chiplotle"
