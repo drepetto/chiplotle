@@ -14,6 +14,7 @@ print "\n* * * CHIPLOTLE in the house! * * *\n"
 ser = open_serial( )
 print ser
 
+### TODO: go to 'offline' mode if plotter is not found?
 p = plotters.Plotter(ser)
 print "\nPlotter with ID %s found in selected port." % p.id
 
