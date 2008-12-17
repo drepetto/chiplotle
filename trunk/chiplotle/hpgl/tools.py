@@ -1,6 +1,6 @@
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.hpgl.abstract.positional import _Positional
-from chiplotle.hpgl.extended.container import Container
+from chiplotle.hpgl.compound.container import Container
 from chiplotle.hpgl.utils import *
 from chiplotle.hpgl.scalable import Scalable
 import chiplotle.hpgl.commands as hpgl
