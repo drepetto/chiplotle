@@ -24,7 +24,7 @@ def _remove_modules():
          globals().pop(key)
 
 from chiplotle.hpgl.commands import *
-from chiplotle.hpgl.extended import *
+from chiplotle.hpgl.compound import *
 from chiplotle.hpgl.tools import *
 from chiplotle.hpgl.utils import *
 
