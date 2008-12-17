@@ -1,12 +1,12 @@
-from chiplotle.hpgl.extended.extended import _ExtendedHPGL
+from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.geometry import *
 
-class Rectangle(_ExtendedHPGL):
+class Rectangle(_CompoundHPGL):
    '''Compound Rectangle. Can be rotated. Cannot be filled'''
    def __init__(self, x, y, width, height, rotation=0):
-      _ExtendedHPGL.__init__(self, (x, y)) 
+      _CompoundHPGL.__init__(self, (x, y)) 
       self.width = Scalable(width)
       self.height = Scalable(height)
       self.rotation = rotation
@@ -23,7 +23,7 @@ class Rectangle(_ExtendedHPGL):
       bl = rotate2d(bl, self.rotation)
       br = rotate2d(br, self.rotation)
 
-      result = _ExtendedHPGL._subcommands.fget(self)
+      result = _CompoundHPGL._subcommands.fget(self)
       result.append( PU( ) )
       result.append( PA((self.xabsolute + tl[0], self.yabsolute + tl[1])) )
       result.append( PD() )

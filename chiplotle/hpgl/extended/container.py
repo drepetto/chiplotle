@@ -1,9 +1,9 @@
-from chiplotle.hpgl.extended.extended import _ExtendedHPGL
+from chiplotle.hpgl.compound.compound import _CompoundHPGL
 
-class Container(_ExtendedHPGL, list):
+class Container(_CompoundHPGL, list):
    '''Generic container.'''
    def __init__(self, x, y, shapes=None, pen=None):
-      _ExtendedHPGL.__init__(self, (x, y), pen)
+      _CompoundHPGL.__init__(self, (x, y), pen)
       shapes = shapes or [ ]
       list.__init__(self, shapes)
       self._linkUp( )
@@ -14,7 +14,7 @@ class Container(_ExtendedHPGL, list):
 
    @property
    def _subcommands(self):
-      result = _ExtendedHPGL._subcommands.fget(self)
+      result = _CompoundHPGL._subcommands.fget(self)
       for s in self:
          result.extend(s._subcommands)
       return result

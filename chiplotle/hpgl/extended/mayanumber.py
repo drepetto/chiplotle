@@ -1,13 +1,13 @@
 from __future__ import division
-from chiplotle.hpgl.extended.extended import _ExtendedHPGL
+from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, CI, PA, PR, RA, EA, WG
 from chiplotle.hpgl.tools import transpose, scale
 import copy
 
-class MayaNumber(_ExtendedHPGL):
+class MayaNumber(_CompoundHPGL):
 
    def __init__(self, x, y, value, size=500):
-      _ExtendedHPGL.__init__(self, (x, y)) 
+      _CompoundHPGL.__init__(self, (x, y)) 
       self.value = value
       self.size = size
       self.filled = False
@@ -40,7 +40,7 @@ class MayaNumber(_ExtendedHPGL):
 
    @property
    def _subcommands(self):
-      result = _ExtendedHPGL._subcommands.fget(self)
+      result = _CompoundHPGL._subcommands.fget(self)
       x = self.xabsolute
       y = self.yabsolute + \
          (len(self._digitValues) - 1) * (self.size + self._interdigitSpace)

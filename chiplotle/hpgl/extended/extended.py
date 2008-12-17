@@ -2,7 +2,7 @@ from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.commands import SP
 from chiplotle.hpgl.scalable import Scalable
 
-class _ExtendedHPGL(_Positional):
+class _CompoundHPGL(_Positional):
    def __init__(self, xy, pen=None):
       _Positional.__init__(self, xy, True) 
       self.pen = pen
