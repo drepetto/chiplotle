@@ -44,7 +44,8 @@ class CI(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f,%d%s' % (self._name, self.radius, self.chordangle, self.terminator)
+      return '%s%.4f,%d%s' % (self._name, self.radius, self.chordangle, 
+                              self.terminator)
 
 class CC(_HPGLCommand):
    '''Character chord angle???'''
@@ -114,26 +115,71 @@ class AS(_HPGLCommand):
 
    @property
    def format(self):
-      if self.accel:
-         if self.pen:
-            return '%s%d,%d%s' \
-            % (self._name, self.accel, self.pen, self.terminator)
-         else:
-            return '%s%d%s' % (self._name, self.accel, self.terminator)  
+      if self.accel and self.pen:
+         return '%s%d,%d%s' % (self._name, self.accel, self.pen, 
+                              self.terminator)
+      elif self.accel:
+         return '%s%d%s' % (self._name, self.accel, self.terminator)  
       else:
          return '%s%s' % (self._name, self.terminator) 
+
 
 class EA(_Positional):
    '''Edge Rectangle Absolute.'''
    def __init__(self, xy):
-      assert type(xy) in (tuple, list) and len(xy) == 2
+      assert iter(xy)
+      if len(xy) != 2:
+         raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, True)
+
 
 class ER(_Positional):
    '''Edge Rectangle Relative.'''
    def __init__(self, xy):
-      assert type(xy) in (tuple, list) and len(xy) == 2
+      assert iter(xy)
+      if len(xy) != 2:
+         raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, False)
+
+
+class RA(_Positional):
+   '''Filled Rectangle Absolute.'''
+   def __init__(self, xy):
+      assert iter(xy)
+      if len(xy) != 2:
+         raise ValueError('xy position must be of length 2.')
+      _Positional.__init__(self, xy, True)
+
+
+class RR(_Positional):
+   '''Filled Rectangle Relative.'''
+   def __init__(self, xy):
+      assert iter(xy)
+      if len(xy) != 2:
+         raise ValueError('xy position must be of length 2.')
+      _Positional.__init__(self, xy, False)
+
+
+class VS(_HPGLCommand):
+   ''' 
+      Pen Velocity.
+      v valid range: 0.0-127.9999 (depends on plotter)
+      default depends on plotter and carousel type
+      pen valid range: 1-8
+   '''
+   def __init__(self, vel=None, pen=None):
+      self.vel = vel
+      self.pen = pen
+     
+   @property
+   def format(self):
+      if self.vel and self.pen:
+         return '%s%d,%d%s' % (self._name, self.vel, self.pen, self.terminator)
+      elif self.vel:
+         return '%s%d%s' % (self._name, self.vel, self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
+
 
 class FS(_HPGLCommand):
    '''Set tip force for pen. 
@@ -147,59 +193,18 @@ class FS(_HPGLCommand):
 
    @property
    def format(self):
-
-      if self.force is None:
-         return '%s%s' % (self._name, self.terminator)
-      elif self.pen:
-         return '%s%d,%d%s' % (self._name, self.force, self.pen, self.terminator)
-      else:
+      if self.force and self.pen:
+         return '%s%d,%d%s' % (self._name, self.force, self.pen, 
+                              self.terminator)
+      elif self.force:
          return '%s%d%s' % (self._name, self.force, self.terminator)
-
-
-class RA(_Positional):
-   '''Filled Rectangle Absolute.'''
-   def __init__(self, xy):
-      assert type(xy) in (tuple, list) and len(xy) == 2
-      _Positional.__init__(self, xy, True)
-
-class RR(_Positional):
-   '''Filled Rectangle Relative.'''
-   def __init__(self, xy):
-      assert type(xy) in (tuple, list) and len(xy) == 2
-      _Positional.__init__(self, xy, False)
-
-class VS(_HPGLCommand):
-   ''' 
-      Pen Velocity.
-      v valid range: 0.0-127.9999 (depends on plotter)
-      default depends on plotter and carousel type
-      pen valid range: 1-8
-   '''
-   def __init__(self, *args):
-      ### this can be simpler/cleaner 
-      self.vel = self.pen = None
-      if len(args) == 1:
-         self.vel = args[0]
-      elif len(args) == 2:
-         self.vel = args[0]
-         self.pen = args[1]
-     
-   @property
-   def format(self):
-      if self.pen == None:
-         if self.vel == None:
-            return '%s%s' % (self._name, self.terminator)
-         else:
-            return '%s%d%s' % (self._name, self.vel, self.terminator)
       else:
-         return '%s%d,%d%s' % (self._name, self.vel, 
-                         self.pen, self.terminator)
+         return '%s%s' % (self._name, self.terminator)
+
 
 class EP(_HPGLCommand):
    '''Edge Polygon.'''
-   @property
-   def format(self):
-      return '%s%s' % (self._name, self.terminator)
+
 
 class BF(_HPGLCommand):
    '''Buffer plot.'''
@@ -353,6 +358,7 @@ class PS(_HPGLCommand):
       else:
          return '%s%s' % (self._name, self.terminator)
 
+
 class BL(_HPGLCommand):
    '''
       Stores first 150 chars of text in buffer for later printing
@@ -363,15 +369,15 @@ class BL(_HPGLCommand):
 
    @property
    def format(self):
-      if not self.label:
-         return '%s%s' % (self._name, self.terminator)
-      else:
+      if self.label:
          return '%s%s%s' % (self._name, chr(3), self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
+
 
 class IN(_HPGLCommand):
    '''Initialize.'''
    
-
 
 class SS(_HPGLCommand):
    '''Select standard character set.'''
@@ -394,6 +400,7 @@ class CS(_HPGLCommand):
    def format(self):
       return '%s%d%s' % (self._name, self.set, self.terminator)
 
+
 class CT(_HPGLCommand):
    '''Chord tolerance.'''
    def __init__(self, type = 0):   
@@ -402,6 +409,7 @@ class CT(_HPGLCommand):
    @property
    def format(self):
       return '%s%d%s' % (self._name, self.type, self.terminator)
+
 
 class CA(_HPGLCommand):
    '''Alternative(?) character set.'''
@@ -412,6 +420,7 @@ class CA(_HPGLCommand):
    def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
 
+
 class CM(_HPGLCommand):
    '''Character select mode.'''
    def __init__(self, switch=0, fallback=0):   
@@ -420,7 +429,9 @@ class CM(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%d,%d%s' % (self._name, self.switch, self.fallback, self.terminator)
+      return '%s%d,%d%s' % (self._name, self.switch, self.fallback, 
+                           self.terminator)
+
 
 class CP(_HPGLCommand):
    '''
@@ -434,15 +445,14 @@ class CP(_HPGLCommand):
 
    @property
    def format(self):
-      if self.spaces:
-         if self.fallback:
-            return '%s%.4f,%.4f%s' % (self._name, \
-            self.spaces, self.lines, self.terminator)
-         else:
-            return '%s%.4f%s' % (self._name, self.spaces, self.terminator)
-            
+      if self.spaces and self.lines:
+         return '%s%i,%i%s' % (self._name, self.spaces, self.lines, 
+               self.terminator)
+      elif self.spaces:
+         return '%s%i%s' % (self._name, self.spaces, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
+
 
 class DT(_HPGLCommand):
    '''Define Label terminator.'''
@@ -452,6 +462,7 @@ class DT(_HPGLCommand):
    @property
    def format(self):
       return '%s%c%s' % (self._name, self.labelTerminator, self.terminator)
+
 
 class LB(_HPGLCommand):
    '''Print text 'label'.'''
@@ -463,6 +474,7 @@ class LB(_HPGLCommand):
    def format(self):
       return '%s%s%s%s' % (self._name, self.text, self.labelTerminator, self.terminator)
 
+
 class SP(_HPGLCommand):
    '''Select Pen.'''
    def __init__(self, pen = 0):   
@@ -471,6 +483,7 @@ class SP(_HPGLCommand):
    @property
    def format(self):
       return '%s%d%s' % (self._name, self.pen, self.terminator)
+
 
 class LT(_HPGLCommand):
    '''Define line type:  
@@ -494,6 +507,7 @@ class LT(_HPGLCommand):
       else:
          return '%s%s' % (self._name, self.terminator)
 
+
 class FT(_HPGLCommand):
    ''' Set fill type:
    1:  Solid (space and angle ignored)
@@ -514,6 +528,7 @@ class FT(_HPGLCommand):
       else:
          return '%s%d%s' % (self._name, self.type, self.terminator)
 
+
 class PM(_HPGLCommand):
    '''Plot polygon.'''
    def __init__(self, n = 0):   
@@ -523,6 +538,7 @@ class PM(_HPGLCommand):
    def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
 
+
 class EC(_HPGLCommand):
    '''Enable cut line.'''
    def __init__(self, n = 0):   
@@ -531,6 +547,7 @@ class EC(_HPGLCommand):
    @property
    def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
+
 
 class PG(_HPGLCommand):
    '''Page feed.'''
@@ -544,6 +561,7 @@ class PG(_HPGLCommand):
       else:
          return '%s%s' % (self._name, self.terminator)
 
+
 class SL(_HPGLCommand):
    ''' Character Slant. Argument is tan of desired angle.  '''
    def __init__(self, tan = 0):   
@@ -552,6 +570,7 @@ class SL(_HPGLCommand):
    @property
    def format(self):
       return '%s%.4f%s' % (self._name, self.tan, self.terminator)
+
 
 class SA(_HPGLCommand):
    '''Select alternate character set.'''
@@ -566,6 +585,7 @@ class RO(_HPGLCommand):
    def format(self):
       return '%s%d%s' % (self._name, self.angle, self.terminator)
 
+
 class RP(_HPGLCommand):
    ''' Replot.  '''
    def __init__(self, n = 1):   
@@ -574,6 +594,7 @@ class RP(_HPGLCommand):
    @property
    def format(self):
       return '%s%d%s' % (self._name, self.n, self.terminator)
+
 
 class SM(_HPGLCommand):
    ''' Symbol Mode.  Plots the char at each plotted point. 
@@ -589,6 +610,7 @@ class SM(_HPGLCommand):
          return '%s%c%s' % (self._name, self.char, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
+
 
 class SC(_TwoPoint):
    '''Scale.
@@ -648,6 +670,7 @@ class DI(_HPGLCommand):
       else:
          return '%s%s' % (self._name, self.terminator)
          
+
 class RD(_HPGLCommand):
    '''Relative direction of label.'''
    def __init__(self, run = None, rise = None):
@@ -662,6 +685,7 @@ class RD(_HPGLCommand):
       else:
          return '%s%s' % (self._name, self.terminator)
          
+
 class DV(_HPGLCommand):
    '''Print label vertically (top down).'''
    def __init__(self, vertical = 0):
@@ -671,6 +695,7 @@ class DV(_HPGLCommand):
    def format(self):
       return '%s%i%s' % (self._name, self.vertical, self.terminator)
          
+
 class ES(_HPGLCommand):
    '''Extra space. Defines character space and line space for labels.'''
    def __init__(self, charspace = None, linespace = None):
@@ -679,8 +704,7 @@ class ES(_HPGLCommand):
 
    @property
    def format(self):
-      if (not self.charspace is None) and \
-         (not self.linespace is None):
+      if (not self.charspace is None) and (not self.linespace is None):
          return '%s%.4f,%.4f%s' % (self._name, self.charspace, self.linespace, 
             self.terminator)
       elif not self.charspace is None:
@@ -688,6 +712,7 @@ class ES(_HPGLCommand):
       else:
          return '%s%s' % (self._name, self.terminator)
          
+
 class LO(_HPGLCommand):
    '''Label origin.'''
    def __init__(self, origin = 1):
@@ -697,8 +722,10 @@ class LO(_HPGLCommand):
    def format(self):
       return '%s%i%s' % (self._name, self.origin, self.terminator)
 
+
 class WG(_Wedge):
    '''Filled wedge.'''
+
 
 class EW(_Wedge):
    '''Outlined wedge.'''
@@ -753,6 +780,7 @@ class On(_HPGLEscape):
    def _name(self):
       return '('
    
+
 class Off(_HPGLEscape):
    '''
       Places the plotter in a programmed off-state
@@ -760,6 +788,7 @@ class Off(_HPGLEscape):
    @property
    def _name(self):
       return ')'
+
 
 class ExtendedError(_HPGLEscape):
    '''
@@ -781,6 +810,7 @@ class ExtendedError(_HPGLEscape):
    @property
    def _name(self):
       return 'E'
+
 
 class K(_HPGLEscape):
    '''Abort command: Tells the plotter to discard commands in its buffer.'''
