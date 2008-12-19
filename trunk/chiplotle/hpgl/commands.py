@@ -30,8 +30,17 @@ class PR(_Positional):
 class CI(_HPGLCommand):
    '''Circle'''
    def __init__(self, radius, chordangle=11.25):   
-      self.radius = Scalable(radius)
+      self.radius = radius
       self.chordangle = chordangle
+
+   @apply
+   def radius( ):
+      def fget(self):
+         return self._radius
+      def fset(self, arg):
+         ### TODO: check for type here?
+         self._radius = Scalable(arg)
+      return property(**locals( ))
 
    @property
    def format(self):
