@@ -4,13 +4,9 @@ from chiplotle.hpgl.scalable import Scalable
 
 class _Positional(_HPGLCommand):
    def __init__(self, xy, transposable=True):
-      if not xy is None:
-         assert len(xy) % 2 == 0
-         self._xy = Scalable(xy).ravel()
-      else:
-         self._xy = Scalable([])
       assert isinstance(transposable, bool)
       self._transposable = transposable
+      self.xy = xy
 
    ### MANAGED ATTRIBUTES ###  
 
@@ -20,10 +16,9 @@ class _Positional(_HPGLCommand):
          return self._xy
       def fset(self, arg):
          if arg is None:
-            self._xy = Scalable([ ])
-         else:
-            assert len(arg) % 2 == 0
-            self._xy = Scalable(arg)
+            arg = [ ]
+         assert len(arg) % 2 == 0
+         self._xy = Scalable(arg).ravel( )
       return property(**locals())
 
    @apply
