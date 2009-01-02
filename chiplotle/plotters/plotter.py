@@ -56,11 +56,14 @@ class Plotter(object):
 #            self._isCommandKnown(c)
             commands.append(c.format) 
          self._writeStringToPort(''.join(commands))
-      else:
+      elif isinstance(data, str):
+         self._writeStringToPort(data)
+      elif hasattr(data, 'format'):
 #         if self._isCommandKnown(data):
 #            self._writeStringToPort(data.format)
-#         self._isCommandKnown(data)
          self._writeStringToPort(data.format)
+      else:
+         raise ValueError('Invalid value. Must be str or _HPLGCommand.')
 
 
    ### PRIVATE METHODS ###
