@@ -1,2 +1,2 @@
 clear
-python -i $1 -c 'from chiplotle.utils.run_chiplotle_UNIX import *'
+python -i $1 -c 'import sys; sys.ps1 = "chiplotle> "; del sys; from chiplotle.utils.run_chiplotle_UNIX import *'
