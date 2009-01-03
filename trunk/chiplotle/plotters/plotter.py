@@ -6,7 +6,7 @@
 
 from __future__ import division
 from chiplotle.hpgl import commands 
-from margin import _PlotterMargin
+from chiplotle.plotters import margin
 import math
 import serial
 import time
@@ -30,8 +30,10 @@ class Plotter(object):
       'PD','PR','PS','PT','PU','RA','RO','RR','SA','SC','SI','SL',
       'SM','SP', 'SR','SS','TL','UC','VS','WG','XT','YT'])
 
-      self.marginHard = _PlotterMargin(self, self._hpgl.OH())
-      self.marginSoft = _PlotterMargin(self, self._hpgl.OW()) 
+#      self.marginHard = _PlotterMargin(self, self._hpgl.OH())
+#      self.marginSoft = _PlotterMargin(self, self._hpgl.OW()) 
+      self.marginHard = margin._MarginsHard(self)
+      self.marginSoft = margin._MarginsSoft(self)
 
       self.initializePlotter()
 
