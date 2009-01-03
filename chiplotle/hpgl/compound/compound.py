@@ -34,6 +34,7 @@ class _CompoundHPGL(_Positional):
 
    ### FORMATTING ### 
 
+   ### TODO should _subcommands return a Generator rather than a list?
    @property
    def _subcommands(self):
       result = [ ]
