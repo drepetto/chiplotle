@@ -4,8 +4,10 @@
  *  http://music.columbia.edu/cmc/chiplotle
 '''
 
+from __future__ import division
 from chiplotle.hpgl import commands 
 from margin import _PlotterMargin
+import math
 import serial
 import time
 import types
@@ -17,6 +19,7 @@ class Plotter(object):
       self.memory = []
       self._serialPort = serialPort
       self._hpgl = commands
+      self.bufferSize = self._bufferSpace
 
       ### Only these commands will be sent to the plotter. 
       ### All other will be eaten. Burp.
@@ -68,72 +71,105 @@ class Plotter(object):
 
    ### PRIVATE METHODS ###
 
-   def _writeStringToPort(self, data):
-      ''' Write data to serial port.
-      -data- is expected to be of type string.'''
-      assert type(data) is str
-      self._semaphoreBuffer(data)
+#   def _writeStringToPort(self, data):
+#      ''' Write data to serial port.
+#      -data- is expected to be of type string.'''
+#      assert type(data) is str
+#      self._semaphoreBuffer(data)
 
-   def _semaphoreBuffer(self, data):
-      ''' If the data is larger than the available buffer 
-         space we break it up into chunks!  '''
-      dataLen = len(data)
-      bufferSpace = self._bufferSpace()
-      #print "total command length: %d" % dataLen
-      if dataLen > bufferSpace:      
-         print "Uh oh, too much data!"
-         numChunks = (dataLen / 1000) + 1
-         for i in range(numChunks):
-            self._sleepWhileBufferFull()
-            start = i * 1000
-            end = start + 1000
-            self._serialPort.write(data[start:end])         
-      # buffer space is fine, just send it as is!
-      else:
-         self._serialPort.write(data)
-      #print "done writing to port..."
+#   def _semaphoreBuffer(self, data):
+#      ''' If the data is larger than the available buffer 
+#         space we break it up into chunks!  '''
+#      dataLen = len(data)
+#      bufferSpace = self._bufferSpace
+#      #print "total command length: %d" % dataLen
+#      if dataLen > bufferSpace:      
+#         print "Uh oh, too much data!"
+#         numChunks = (dataLen / 1000) + 1
+#         for i in range(numChunks):
+#            self._sleepWhileBufferFull()
+#            start = i * 1000
+#            end = start + 1000
+#            self._serialPort.write(data[start:end])         
+#      # buffer space is fine, just send it as is!
+#      else:
+#         self._serialPort.write(data)
+#      #print "done writing to port..."
       
+#   def _sleepWhileBufferFull(self):
+#      '''
+#         sleeps until the buffer has some room in it.
+#      '''
+#      space = self._bufferSpace  
+#      if space < 1000:
+#         print 'Buffer getting full, sleeping...'
+#         while True:
+#            time.sleep(1)
+#            space = self._bufferSpace  
+#            if space >= 1000:
+#               print 'Okay, now buffer has room...'
+#               break
 
    def _sleepWhileBufferFull(self):
       '''
          sleeps until the buffer has some room in it.
       '''
-      space = self._bufferSpace()  
-      if space < 1000:
-         print 'Buffer getting full, sleeping...'
-         while True:
+      if self._bufferSpace < self.bufferSize:
+         #print 'Buffer getting full, sleeping...'
+         while self._bufferSpace < self.bufferSize:
             time.sleep(1)
-            space = self._bufferSpace()  
-            if space >= 1000:
-               print 'Okay, now buffer has room...'
-               break
+         #print 'Okay, now buffer has room...'
 
+   def _sliceStringToBufferSize(self, data):
+         result = [ ]
+         count = int(math.ceil(len(data) / self.bufferSize))
+         for i in range(count):
+            result.append(data[i * self.bufferSize: (i+1) * self.bufferSize])
+         return result
+
+   def _writeStringToPort(self, data):
+      ''' Write data to serial port.
+      -data- is expected to be of type string.'''
+      assert type(data) is str
+      data = self._sliceStringToBufferSize(data)
+      for chunk in data:
+         self._sleepWhileBufferFull( )
+         self._serialPort.write(chunk)
+      
 
    ### PRIVATE QUERIES ###
 
-   def _readByte(self):
-      byte = self._serialPort.read()
-      return byte
+#   def _readByte(self):
+#      byte = self._serialPort.read()
+#      return byte
+
+#   def _readPort(self):
+#      '''Read data from the serial port'''
+#      maxattempts = 16 * 5 # 5 secs.
+#      countAttempts = 0
+#      while self._serialPort.inWaiting( )==0 and countAttempts < maxattempts:
+#         countAttempts += 1
+#         time.sleep(1. / 16)
+#      if countAttempts == maxattempts:
+#         print 'No response from plotter. :('
+#         return None
+#
+#      result = ''
+#      input = 'xxx'
+#      while input != '':
+#         input = self._readByte()
+#         result += input
+#      return result
 
    def _readPort(self):
-      '''Read data from the serial port'''
-      maxattempts = 16 * 5 # 5 secs.
-      countAttempts = 0
-      while self._serialPort.inWaiting() == 0 and countAttempts < maxattempts:
-         countAttempts += 1
-         time.sleep(1. / 16)
-      if countAttempts == maxattempts:
-         print 'No response from plotter. :('
-         return None
-
-      m = ''
-      input = 'xxx'
-      while input != '':
-         input = self._readByte()
-         m += input
-      return m
-
+      '''Read data from serial port.'''
+      while self._serialPort.inWaiting( ) == 0:
+         time.sleep(1.0 / 64)
+      result = self._serialPort.readline(eol='\r')
+      #print repr(result)
+      return result
    
+   @property
    def _bufferSpace(self):
       #print "getting _bufferSpace..."
       self._serialPort.flushInput()
