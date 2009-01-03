@@ -1,37 +1,37 @@
-from chiplotle.utils.run_chiplotle_UNIX import p
+from chiplotle.utils.run_chiplotle_UNIX import plotter
 import random
 
 
 def main():
    #p = run_chiplotle_UNIX.p
 
-   width = p.marginSoft.width
-   height = p.marginSoft.height
-   left = p.marginSoft.left
-   right = p.marginSoft.right
-   bottom = p.marginSoft.bottom
-   top = p.marginSoft.top
+   width = plotter.marginSoft.width
+   height = plotter.marginSoft.height
+   left = plotter.marginSoft.left
+   right = plotter.marginSoft.right
+   bottom = plotter.marginSoft.bottom
+   top = plotter.marginSoft.top
 
-   print "width: %d height: %d" % (p.marginSoft.width, p.marginSoft.height)
+   print "width: %d height: %d" % (plotter.marginSoft.width, plotter.marginSoft.height)
    pens = raw_input("\nhow many pens do you want to use? ")
    numPens = int(pens)
 
    #start in a random spot
-   p.goto(random.randint(left, right), random.randint(bottom, top))
+   plotter.goto(random.randint(left, right), random.randint(bottom, top))
    penNum = 1
 
    while True:
-       p.selectPen(penNum)
+       plotter.selectPen(penNum)
 
        whichGesture = random.randint(0,5)
        
        if whichGesture == 0:
            print "circle!"
-           p.circle(random.randint(10,5000), random.randint(1,180))
+           plotter.circle(random.randint(10,5000), random.randint(1,180))
        
        elif whichGesture == 1:
            print "rect!"
-           p.edgeRectRelative(random.randint(10,5000), random.randint(10,5000))        
+           plotter.edgeRectRelative(random.randint(10,5000), random.randint(10,5000))        
 
        elif whichGesture == 2:
            print "filled rect!"
@@ -47,14 +47,14 @@ def main():
            angle = random.randint(0,3) * 45
            
            print "fillType: %d space: %d angle: %d" % (ft, space, angle)
-           p.fillType(ft, space, angle)
-           p.shadeRectRelative(random.randint(10,2000), random.randint(10,2000))
+           plotter.fillType(ft, space, angle)
+           plotter.shadeRectRelative(random.randint(10,2000), random.randint(10,2000))
 
        elif whichGesture == 3:
            print "draw a crazy line!"
-           p.penDown()
-           p.goto(random.randint(left, right), random.randint(bottom, top))
-           p.penUp()
+           plotter.penDown()
+           plotter.goto(random.randint(left, right), random.randint(bottom, top))
+           plotter.penUp()
            
        elif whichGesture == 4:
            print "draw an abstract shape!"
@@ -62,19 +62,19 @@ def main():
            print "numPoints: ", numPoints
            firstX = random.randint(left, right)
            firstY = random.randint(bottom, top)
-           p.goto(firstX, firstY)
-           p.penDown()
+           plotter.goto(firstX, firstY)
+           plotter.penDown()
            xRange = width/5
            yRange = height/5
                    
            for i in range(numPoints):
-               p.nudge(random.randint(-xRange, xRange), random.randint(-yRange, yRange))
-           p.goto(firstX, firstY)
-           p.penUp()
+               plotter.nudge(random.randint(-xRange, xRange), random.randint(-yRange, yRange))
+           plotter.goto(firstX, firstY)
+           plotter.penUp()
            
        elif whichGesture == 5:
            print "just jump around!"
-           p.goto(random.randint(left, right), random.randint(bottom, top))
+           plotter.goto(random.randint(left, right), random.randint(bottom, top))
            
        #pick a new pen?
        pickPen = random.randint(0,99)
@@ -84,7 +84,7 @@ def main():
        if penNum == numPens + 1:
            break
            
-   p.selectPen(0)
+   plotter.selectPen(0)
 
 ### run main if called from command line like so: 
 ### $> python abstract_masterpiece.py
