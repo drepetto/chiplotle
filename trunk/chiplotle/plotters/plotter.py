@@ -46,29 +46,43 @@ class Plotter(object):
       self.write(self._hpgl.On())
       self.write(self._hpgl.IN())
 
+#   def write(self, data):
+#      ''' Public access for writing to serial port. 
+#         It allows the <data> input to be a list or tuple. 
+#         All elements inside the list must have a <format> attribute'''
+#      commands =  [ ]
+#      if type(data) in (list, tuple, types.GeneratorType):
+#         for c in data:
+#            assert hasattr(c, 'format')
+#            ### TODO how can we check HPGL adecuacy while at the same time 
+#            ### allowing the user to define his own HPGL objects?
+##            if self._isCommandKnown(c):
+##               commands.append(c.format) 
+##            self._isCommandKnown(c)
+#            commands.append(c.format) 
+#         self._writeStringToPort(''.join(commands))
+#      elif isinstance(data, str):
+#         self._writeStringToPort(data)
+#      elif hasattr(data, 'format'):
+##         if self._isCommandKnown(data):
+##            self._writeStringToPort(data.format)
+#         self._writeStringToPort(data.format)
+#      else:
+#         raise ValueError('Invalid value. Must be str or _HPLGCommand.')
+
    def write(self, data):
-      ''' Public access for writing to serial port. 
-         It allows the <data> input to be a list or tuple. 
-         All elements inside the list must have a <format> attribute'''
-      commands =  [ ]
+      '''Public access for writing to serial port. 
+         data can be an iterator, a string or an _HPGLCommand. '''
       if type(data) in (list, tuple, types.GeneratorType):
          for c in data:
-            assert hasattr(c, 'format')
-            ### TODO how can we check HPGL adecuacy while at the same time 
-            ### allowing the user to define his own HPGL objects?
-#            if self._isCommandKnown(c):
-#               commands.append(c.format) 
-#            self._isCommandKnown(c)
-            commands.append(c.format) 
-         self._writeStringToPort(''.join(commands))
+            self.write(c) 
+      elif hasattr(data, 'format'):
+         self._writeStringToPort(data.format)
       elif isinstance(data, str):
          self._writeStringToPort(data)
-      elif hasattr(data, 'format'):
-#         if self._isCommandKnown(data):
-#            self._writeStringToPort(data.format)
-         self._writeStringToPort(data.format)
       else:
-         raise ValueError('Invalid value. Must be str or _HPLGCommand.')
+         raise ValueError('Invalid value. \
+         Must be str, iterator or _HPLGCommand.')
 
 
    ### PRIVATE METHODS ###
@@ -175,6 +189,7 @@ class Plotter(object):
    def _bufferSpace(self):
       #print "getting _bufferSpace..."
       self._serialPort.flushInput()
+      self._serialPort.flushOutput()
       self._serialPort.write(self._hpgl.B().format)
       #print "buffer space: ", bs
       bs = self._readPort()
