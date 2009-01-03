@@ -1,5 +1,6 @@
+from chiplotle.hpgl import commands
 
-class _PlotterMargin(object):
+class _PlotterMargins(object):
    def __init__(self, plotter, queryCommand):  
       self._plotter = plotter
       self._queryCommand = queryCommand
@@ -44,3 +45,11 @@ class _PlotterMargin(object):
       return str(self._get())
 
 
+class _MarginsSoft(_PlotterMargins):
+   def __init__(self, plotter):
+      _PlotterMargins.__init__(self, plotter, commands.OW( )) 
+
+
+class _MarginsHard(_PlotterMargins):
+   def __init__(self, plotter):
+      _PlotterMargins.__init__(self, plotter, commands.OH( )) 
