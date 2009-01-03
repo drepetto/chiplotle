@@ -12,20 +12,22 @@ from chiplotle.utils.open_serial import open_serial
 print "\n* * * CHIPLOTLE in the house! * * *\n"
 
 ser = open_serial( )
-print ser
+#print ser
 
 ### TODO: go to 'offline' mode if plotter is not found?
-p = plotters.Plotter(ser)
-print "\nPlotter with ID %s found in selected port." % p.id
+plotter = plotters.Plotter(ser)
+print "\nPlotter with ID %s found in selected port." % plotter.id
 
 print "\nChoose a plotter type:"
-for i, p in enumerate(dir(plotters)):
-   print '[%d] %s' % (i,  p)
+for i, plotter in enumerate(dir(plotters)):
+   print '[%d] %s' % (i,  plotter)
 
-p = plotters.__dict__[ dir(plotters)[int(raw_input())] ](ser)
+plotter = plotters.__dict__[ dir(plotters)[int(raw_input())] ](ser)
 
-print "\nPlotter [p] with ID %s opened. " % p.id
-print "Drawing area: %s" % p.marginSoft
-print "Status: %s" % p.status
+print "\nPlotter [plotter] with ID %s opened. " % plotter.id
+print "Drawing area: %s" % plotter.marginSoft
+print "Status: %s" % plotter.status
+print "Buffer Size: %s" % plotter.bufferSize
+print "\n"
 
 
