@@ -1,5 +1,6 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.compound.line import Line
+from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.ispair import ispair
 
 class GroovyFrame(_CompoundHPGL):
@@ -7,8 +8,8 @@ class GroovyFrame(_CompoundHPGL):
       _CompoundHPGL.__init__(self, xy, pen)
       assert ispair(wh1)
       assert ispair(wh2)
-      self.wh1 = wh1
-      self.wh2 = wh2
+      self.wh1 = Scalable(wh1)
+      self.wh2 = Scalable(wh2)
       self.linesPerSide = linesPerSide
 
    def _computePointLocations(self, line):
