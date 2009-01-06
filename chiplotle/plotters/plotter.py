@@ -189,10 +189,9 @@ class Plotter(object):
    def _bufferSpace(self):
       #print "getting _bufferSpace..."
       self._serialPort.flushInput()
-      self._serialPort.flushOutput()
       self._serialPort.write(self._hpgl.B().format)
-      #print "buffer space: ", bs
       bs = self._readPort()
+      #print "buffer space: ", bs
       return int(bs)
 
 
