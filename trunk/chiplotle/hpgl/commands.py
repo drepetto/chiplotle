@@ -6,6 +6,7 @@ from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.abstract.twopoint import _TwoPoint
 from chiplotle.hpgl.abstract.wedge import _Wedge
 from chiplotle.hpgl.scalable import Scalable
+from chiplotle.utils.ispair import ispair
 
 class PU(_Positional):
    '''Pen Up. x,y coordinates are absolute.'''
@@ -28,7 +29,12 @@ class PR(_Positional):
       _Positional.__init__(self, xy, False)
 
 class CI(_HPGLCommand):
-   '''Circle'''
+   '''
+   Circle
+   Draws a circle using the specified radius and chord tolerance. 
+   If you want a filled circle, refer to the WB or PM instruction.
+   SYNTAX: CI radius(, chord tolerance);
+   '''
    def __init__(self, radius, chordangle=None):   
       self.radius = radius
       self.chordangle = chordangle
@@ -51,71 +57,101 @@ class CI(_HPGLCommand):
          return '%s%s%s' % (self._name, self.radius, self.terminator)
 
 class CC(_HPGLCommand):
-   '''Character chord angle???'''
-   def __init__(self, angle=5):   
-      self.angle = int(angle)
+   '''
+   Character chord angle.
+   Sets the chord angle that determines the smoothness of characters
+   drawn when you select one of the arc-font character sets for labeling.
+   SYNTAX: CC chord angle; or CC;
+   '''
+   def __init__(self, angle=None):   
+      self.angle = angle
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.angle, self.terminator)
+      if self.angle:
+         return '%s%i%s' % (self._name, self.angle, self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
 
 class AF(_HPGLCommand):
-   '''Advance full page.'''
+   '''
+   Advance full page.
+   Advances roll paper one full page length and establishes the 
+   origin at the center of the new page.
+   SYNTAX: AF;
+   '''
    
 
 class AH(_HPGLCommand):
-   '''Advance half page.'''
+   '''
+   Advance half page.
+   Advances roll paper one half page length and establishes the 
+   origin at the center of the new page.
+   SYNTAX: AH;
+   '''
    
 
 class AP(_HPGLCommand):
    '''
-      Automatic Pen operations
-      for 7550:
-      bit_no dec_val state meaning
-      0     1      1    lift pen if down too long without motion
-      0     0      0    do not lift pen until PU received
-      1     2      1    put pen away if too long without  motion
-      1     0      0    do not put pen away until SP0 received
-      2     4      1    do not get new pen until drawing starts
-      2     0      0    get pen immediately after SP command
-      3     8      1    merge all pen up moves
-      3     0      0    do not merge all pen up moves
+   Automatic Pen operations
+   Controls automatic pen operations sich as returning a pen
+   to the carousel if it has been in the holder without drawing
+   for a certain time.
+   SYNTAX: AP; or AP n;
 
-      default is 7 on 7550
-      codes are 0 to 255 with default of 95 on the DraftMaster
+   For 7550:
+   bit_no dec_val state meaning
+   0     1      1    lift pen if down too long without motion
+   0     0      0    do not lift pen until PU received
+   1     2      1    put pen away if too long without  motion
+   1     0      0    do not put pen away until SP0 received
+   2     4      1    do not get new pen until drawing starts
+   2     0      0    get pen immediately after SP command
+   3     8      1    merge all pen up moves
+   3     0      0    do not merge all pen up moves
+
+   default is 7 on 7550
+   codes are 0 to 255 with default of 95 on the DraftMaster
    '''
-   def __init__(self, p=''):   
-      if p != '':
-         self.p = int(p)
-      else:
-         self.p = p
+   def __init__(self, n=None):   
+      self.n = n
 
    @property
    def format(self):
-      return '%s%s%s' % (self._name, self.p, self.terminator)
+      if self.n:
+         return '%s%i%s' % (self._name, self.n, self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
+         
 
 class AA(_Arc):
    '''
    Arch Absolute
    Draws an arc, using absolute coordinates, that starts at the
    current pen location and uses the specified center point.
-   SYNTAX: AA X,Y,arc angle(, chord tolerance);
+   SYNTAX: AA X,Y,arc angle(,chord tolerance);
    '''
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, True)
 
 class AR(_Arc):
-   '''Arch Relative'''
+   '''
+   Arch Relative
+   Draws an arc, using relative coordinates, that starts at the
+   current pen location and uses the specified center point.
+   SYNTAX: AR X,Y,arc angle(,chord tolerance);
+   '''
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, False)
 
 class AS(_HPGLCommand):
    '''
-      Acceleration Select
-      Can be set per-pen or for all pens at once.
-
-      default on 7550: 6
-      default on DM: 4
+   Acceleration Select
+   Sets pen acceleration for one or all pens. The default
+   acceleration is suitable for all recommended pen and media
+   combinations. Slowing the acceleration may improve line
+   quality if you are using heavier than recommended media.
+   SYNTAX: AS pen acceleration (, pen number); or AS;
    '''
    def __init__(self, accel=None, pen=None):   
       self.accel = accel
@@ -124,19 +160,19 @@ class AS(_HPGLCommand):
    @property
    def format(self):
       if self.accel and self.pen:
-         return '%s%d,%d%s' % (self._name, self.accel, self.pen, 
+         return '%s%i,%i%s' % (self._name, self.accel, self.pen, 
                               self.terminator)
       elif self.accel:
-         return '%s%d%s' % (self._name, self.accel, self.terminator)  
+         return '%s%i%s' % (self._name, self.accel, self.terminator)  
       else:
          return '%s%s' % (self._name, self.terminator) 
 
 
+### TODO: remove redundancy in rectangles.
 class EA(_Positional):
    '''Edge Rectangle Absolute.'''
    def __init__(self, xy):
-      assert iter(xy)
-      if len(xy) != 2:
+      if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, True)
 
@@ -144,8 +180,7 @@ class EA(_Positional):
 class ER(_Positional):
    '''Edge Rectangle Relative.'''
    def __init__(self, xy):
-      assert iter(xy)
-      if len(xy) != 2:
+      if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, False)
 
@@ -153,8 +188,7 @@ class ER(_Positional):
 class RA(_Positional):
    '''Filled Rectangle Absolute.'''
    def __init__(self, xy):
-      assert iter(xy)
-      if len(xy) != 2:
+      if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, True)
 
@@ -162,8 +196,7 @@ class RA(_Positional):
 class RR(_Positional):
    '''Filled Rectangle Relative.'''
    def __init__(self, xy):
-      assert iter(xy)
-      if len(xy) != 2:
+      if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, False)
 
@@ -182,9 +215,9 @@ class VS(_HPGLCommand):
    @property
    def format(self):
       if self.vel and self.pen:
-         return '%s%d,%d%s' % (self._name, self.vel, self.pen, self.terminator)
+         return '%s%i,%i%s' % (self._name, self.vel, self.pen, self.terminator)
       elif self.vel:
-         return '%s%d%s' % (self._name, self.vel, self.terminator)
+         return '%s%i%s' % (self._name, self.vel, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
 
@@ -202,10 +235,10 @@ class FS(_HPGLCommand):
    @property
    def format(self):
       if self.force and self.pen:
-         return '%s%d,%d%s' % (self._name, self.force, self.pen, 
+         return '%s%i,%i%s' % (self._name, self.force, self.pen, 
                               self.terminator)
       elif self.force:
-         return '%s%d%s' % (self._name, self.force, self.terminator)
+         return '%s%i%s' % (self._name, self.force, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
 
@@ -219,15 +252,37 @@ class BF(_HPGLCommand):
    
 
 class DC(_HPGLCommand):
-   '''Clear Digitizer.'''
+   '''
+   Digitizer Clear
+   Terminates digitize mode. For example, if you are using an interrupt
+   routine in a digitizing program to branch to another plotting function,
+   use DC to clear the digitize mode immediately after branching. 
+   SYNTAX: DC;
+   '''
    
 
 class DF(_HPGLCommand):
-   '''Default Instructions.'''
+   '''
+   Default 
+   Sets certain plotter functions to predefined default conditions.
+   Use this instruction to return the plotter to a known state while 
+   maintaining the current location of P1 and P2. When you use DF at 
+   the beginning of a program, unwanted graphics parameters such as
+   character size, slant, or scaling are not inherited from another
+   program. 
+   SYNTAX: DF;
+   '''
    
 
 class DP(_HPGLCommand):
-   '''Digitize Points.'''
+   '''
+   Digitize Point
+   Returns the X,Y coordinates of a selected point on a plot to the
+   computer for later use. Use this instruction to input data for a
+   graphics program or to obtain the coordinates of a point or points
+   on plot.
+   SYNTAX: DP;
+   '''
    
 
 class FP(_HPGLCommand):
@@ -359,18 +414,22 @@ class PS(_HPGLCommand):
    @property
    def format(self):
       if self.length and self.width:
-         return '%s%d,%d%s' % (self._name, self.length, self.width, 
+         return '%s%i,%i%s' % (self._name, self.length, self.width, 
             self.terminator)
       elif self.length:
-         return '%s%d%s' % (self._name, self.length, self.terminator)
+         return '%s%i%s' % (self._name, self.length, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
 
 
 class BL(_HPGLCommand):
    '''
-      Stores first 150 chars of text in buffer for later printing
-      and label length measurements.
+   Buffer label
+   Stores a label in the label buffer. You can then use the
+   output length (OL) instruction to determine its space requirement 
+   prior to drawing it. Or, you can use the plot buffer (PB)
+   instruction to repeatedly plot this label.
+   SYNTAX: BL c...c CHR$(3) or BL CHR$(3)
    '''
    def __init__(self, label=None):
       self.label = label
@@ -400,52 +459,108 @@ class YT(_HPGLCommand):
    
 
 class CS(_HPGLCommand):
-   '''Character set.'''
-   def __init__(self, set = 0):   
+   '''
+   Standard character set
+   Designates a character set as the standard character set for labeling 
+   instruction. Use this instruction to change the default ANSI ASCII 
+   english set to one with characters appropriate to your application. 
+   This instruction is particularly useful if you plot most of your
+   labels in a language other than english.
+   SYNTAX: CS set; or CS;
+   '''
+   def __init__(self, set=0):   
       self.set = set
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.set, self.terminator)
+      return '%s%i%s' % (self._name, self.set, self.terminator)
 
 
 class CT(_HPGLCommand):
-   '''Chord tolerance.'''
-   def __init__(self, type = 0):   
+   '''
+   Chord tolerance
+   Determines whether the chord tolerance parameter of the CI, AA, AR
+   and WG instructions is interpreted as a chord angle in degrees or as
+   a deviation distance in current units.
+   SYNTAX: CT n; or CT;
+   '''
+   def __init__(self, type=0):   
       self.type = type
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.type, self.terminator)
+      return '%s%i%s' % (self._name, self.type, self.terminator)
 
+
+class CV(_HPGLCommand):
+   '''
+   Curved line generator
+   Collects vectors (line segments) in the vector buffer so that they
+   can be plotted as a group. This allows the plotter to plot in a
+   continuous motion, rather than stopping and starting at each vector 
+   endpoint. As a result, curves appear smoother. 
+   SYNTAX: CV n(,input delay); or CV;
+   '''
+   def __init__(self, n=None, inputdelay=None):
+      self.n = n
+      self.inputdelay = inputdelay
+
+   @property
+   def format(self):
+      if self.n and self.inputdelay:
+         return '%s%i%i%s' % (self._name, self.n, self.inputdelay, 
+         self.terminator)
+      elif self.n:
+         return '%s%i%s' % (self._name, self.n, self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
+         
 
 class CA(_HPGLCommand):
-   '''Alternative(?) character set.'''
-   def __init__(self, n = 0):   
+   '''
+   Alternative character set.
+   Designates a character set as the alternate character set to be used
+   in labeling instructions. Use this instruction to provide an 
+   additional character set that you can easily access in a program.
+   SYNTAX: CA set; or CA;
+   '''
+   def __init__(self, n=0):   
       self.n = n
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, self.terminator)
 
 
 class CM(_HPGLCommand):
-   '''Character select mode.'''
-   def __init__(self, switch=0, fallback=0):   
+   '''
+   Character selection mode
+   Specifies mode of character set selection and usage. Use this 
+   instruction to select the alternate HP 8-bit, ISO 7-bit, or ISO 8-bit
+   character modes.
+   SYNTAX: CM switch mode(, fallback mode); or CM;
+   '''
+   def __init__(self, switch=None, fallback=None):   
       self.switch = switch
       self.fallback = fallback
 
    @property
    def format(self):
-      return '%s%d,%d%s' % (self._name, self.switch, self.fallback, 
-                           self.terminator)
+      if self.switch and self.fallback:
+         return '%s%i,%i%s' % (self._name, self.switch, self.fallback, 
+         self.terminator)
+      elif self.switch:
+         return '%s%i%s' % (self._name, self.switch, self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
 
 
 class CP(_HPGLCommand):
    '''
-      Move the pen the specified number of spaces and lines
-      valid values are -128 to 128
-      CP by itself does CR & LF
+      Character Plot
+      Move the pen the specified number of character plot cells from the
+      current pen location.
+      SYNTAX: CP spaces, lines; or CP;
    '''
    def __init__(self, spaces=None, lines=None):   
       self.spaces = spaces
@@ -454,22 +569,28 @@ class CP(_HPGLCommand):
    @property
    def format(self):
       if self.spaces and self.lines:
-         return '%s%i,%i%s' % (self._name, self.spaces, self.lines, 
-               self.terminator)
+         return '%s%s,%s%s' % (self._name, self.spaces, self.lines, 
+         self.terminator)
       elif self.spaces:
-         return '%s%i%s' % (self._name, self.spaces, self.terminator)
+         return '%s%s%s' % (self._name, self.spaces, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
 
 
 class DT(_HPGLCommand):
-   '''Define Label terminator.'''
-   def __init__(self, terminator = chr(3)):   
-      self.labelTerminator = terminator
+   '''
+   Define Label Terminator
+   Specifies the ASCII character to be used as the label terminator.
+   Use this instruction to define a new label terminator if your computer
+   cannot use the default terminator (ETX, decimal code 3).
+   SYNTAX: DT label terminator; or DT;
+   '''
+   def __init__(self, terminator=chr(3)):   
+      self.labelterminator = terminator
 
    @property
    def format(self):
-      return '%s%c%s' % (self._name, self.labelTerminator, self.terminator)
+      return '%s%c%s' % (self._name, self.labelterminator, self.terminator)
 
 
 class LB(_HPGLCommand):
@@ -490,7 +611,7 @@ class SP(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.pen, self.terminator)
+      return '%s%i%s' % (self._name, self.pen, self.terminator)
 
 
 class LT(_HPGLCommand):
@@ -510,7 +631,7 @@ class LT(_HPGLCommand):
    @property
    def format(self):
       if self.pattern:
-         return '%s%d,%.4f%s' % (self._name, self.pattern, 
+         return '%s%i,%.4f%s' % (self._name, self.pattern, 
          self.length, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
@@ -531,10 +652,10 @@ class FT(_HPGLCommand):
    @property
    def format(self):
       if self.space:
-         return '%s%d,%.4f,%d%s' % (self._name, self.type, self.space,
+         return '%s%i,%.4f,%i%s' % (self._name, self.type, self.space,
          self.angle, self.terminator)
       else:
-         return '%s%d%s' % (self._name, self.type, self.terminator)
+         return '%s%i%s' % (self._name, self.type, self.terminator)
 
 
 class PM(_HPGLCommand):
@@ -544,7 +665,7 @@ class PM(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, self.terminator)
 
 
 class EC(_HPGLCommand):
@@ -554,7 +675,7 @@ class EC(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, self.terminator)
 
 
 class PG(_HPGLCommand):
@@ -565,7 +686,7 @@ class PG(_HPGLCommand):
    @property
    def format(self):
       if self.n:
-         return '%s%d%s' % (self._name, self.n, self.terminator)
+         return '%s%i%s' % (self._name, self.n, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
 
@@ -591,7 +712,7 @@ class RO(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.angle, self.terminator)
+      return '%s%i%s' % (self._name, self.angle, self.terminator)
 
 
 class RP(_HPGLCommand):
@@ -601,7 +722,7 @@ class RP(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%d%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, self.terminator)
 
 
 class SM(_HPGLCommand):
@@ -666,18 +787,74 @@ class SR(_HPGLCommand):
    
       
 class DI(_HPGLCommand):
-   '''Absolute direction of label.'''
-   def __init__(self, run = None, rise = None):
+   '''
+   Absolute direction
+   Specifies the direction in which labels are drawn, independent of
+   P1 and P2 settings. Use this instruction to change labeling direction
+   when you are labeling line charts, schematic drawings, blueprints, 
+   and survey boudaries.
+   run is cos(angle)
+   rise is sin(angle)
+   SYNTAX: DI run, rise; or DI;
+   '''
+   def __init__(self, run=None, rise=None):
       self.run = run
       self.rise = rise
 
    @property
    def format(self):
       if self.run and self.rise:
-         return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, self.terminator)
+         return '%s%s,%s%s' % (self._name, self.run, self.rise, 
+         self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
          
+
+class DR(DI):
+   '''
+   Relative Direction
+   Specifies the direction in which labels are drawn relative to the
+   scaling points P1 and P2. Label direction is adjusted when P1 and P2
+   change so that labels maintain the same relationship to the plotted
+   data. Use DI if you want label direction to be independent or P1 and P2.
+   SYNTAX: DR run, rise; or DR;
+   '''
+
+
+### TODO: figure out how this works and implement.
+#class DL(_HPGLCommand):
+#   '''
+#   Define Downloadable Character
+#   Allows you to design characters and store them in a buffer for 
+#   repeated use by character set -1.
+#   SYNTAX: DL character number (,pen control), X-coordinate, Y-coordinate
+#   (,..., (,pen control(,...,))); or DL character number; or DL;
+#   '''
+#   def __init__(self, charnumber, pencontrol, xy):
+#      self.charnumber = charnumber
+#      self.pencontrol = pencontrol
+#      self.xy = xy
+
+
+class DS(_HPGLCommand):
+   '''
+   Designate Character Set into Slot
+   Designates up to four character sets to be immediately available for 
+   plotting. Used with ISO character sets and modes.
+   SYNTAX: DS slot,set; or DS;
+   '''
+   def __init__(self, slot=None, set=None):
+      self.slot = slot
+      self.set = set
+
+   @property
+   def format(self):
+      if self.slot and self.set:
+         return '%s%i,%i%s' % (self._name, self.slot, self.set, 
+         self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
+
 
 class RD(_HPGLCommand):
    '''Relative direction of label.'''
@@ -695,8 +872,15 @@ class RD(_HPGLCommand):
          
 
 class DV(_HPGLCommand):
-   '''Print label vertically (top down).'''
-   def __init__(self, vertical = 0):
+   '''
+   Direction Vertical
+   Specifies vertical mode as the direction for subsequent labels.
+   Use this instruction to 'stack' horizontal characters in a column.
+   A carriage return and a line feed lace the next 'column' to the left 
+   of the previous one. 
+   SYNTAX: DV n; or DV;
+   '''
+   def __init__(self, vertical=0):
       self.vertical = bool(vertical)
 
    @property
