@@ -48,7 +48,7 @@ def test_positional_05( ):
    assert raises(AssertionError, 'p.xy =(1,2,3,4,5)')
 
 def test_positional_06( ):
-   '''xy can be assigned None'''
+   '''xy can be set to None'''
    p = _Positional((0,0))
    p.xy = None
    assert isinstance(p.xy, Scalable)
