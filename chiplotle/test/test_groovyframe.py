@@ -8,8 +8,8 @@ def test_groovyframe_01( ):
    coordinates for square 2 and line count scalar.
    '''
    t = GroovyFrame((0, 0), (100, 100), (110, 110), 4)
-   assert t.wh1 == (100, 100)
-   assert t.wh2 == (110, 110)
+   assert all(t.wh1 == (100, 100))
+   assert all(t.wh2 == (110, 110))
    assert t.linesPerSide == 4
    assert all(t.xy == (0, 0))
 
