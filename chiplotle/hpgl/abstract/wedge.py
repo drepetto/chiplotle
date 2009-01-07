@@ -3,7 +3,7 @@ from chiplotle.hpgl.scalable import Scalable
 
 class _Wedge(_HPGLCommand):
    '''Abstract wedge.'''
-   def __init__(self, radius, startangle, sweepangle, chordangle = 22.5):
+   def __init__(self, radius, startangle, sweepangle, chordangle=None):
       self.radius = Scalable(radius)
       self.startangle = startangle
       self.sweepangle = sweepangle
@@ -11,6 +11,10 @@ class _Wedge(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f,%.4f,%.4f,%.4f%s' % (self._name, self.radius, self.startangle,
-                                      self.sweepangle, self.chordangle, 
-                                      self.terminator)
+      if self.chordangle:
+         return '%s%s,%s,%s,%s%s' % (self._name, self.radius, 
+         self.startangle, self.sweepangle, self.chordangle, 
+         self.terminator)
+      else:
+         return '%s%s,%s,%s%s' % (self._name, self.radius, 
+         self.startangle, self.sweepangle, self.terminator)
