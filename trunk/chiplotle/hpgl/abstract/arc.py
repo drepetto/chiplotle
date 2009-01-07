@@ -1,14 +1,19 @@
 from chiplotle.hpgl.abstract.positional import _Positional
+from chiplotle.utils.ispair import ispair
 
 class _Arc(_Positional):
-   def __init__(self, xy, a, chordangle=5, transposable=False):
-      self.a = a
-      self.chordangle = chordangle
+   def __init__(self, xy, angle, chordtolerance=None, transposable=False):
+      self.angle = angle
+      self.chordtolerance = chordtolerance
+      assert ispair(xy)
       _Positional.__init__(self, xy, transposable)
 
    @property
    def format(self):
-      result = _Positional.format(self)
-      result = result.rstrip(self.terminator)
-      return result + ',%d,%d%s' %(self.a, self.chordangle, self.terminator)
-
+      coordinates = ['%s' % p for p in self.xy]
+      result = '%s%s,%s' % (self._name, ','.join(coordinates), 
+         self.angle)
+      if self.chordtolerance:
+         result += ',%s' % self.chordtolerance
+      result += self.terminator
+      return result
