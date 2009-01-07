@@ -29,7 +29,7 @@ class PR(_Positional):
 
 class CI(_HPGLCommand):
    '''Circle'''
-   def __init__(self, radius, chordangle=11.25):   
+   def __init__(self, radius, chordangle=None):   
       self.radius = radius
       self.chordangle = chordangle
 
@@ -44,8 +44,11 @@ class CI(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f,%d%s' % (self._name, self.radius, self.chordangle, 
+      if self.chordangle:
+         return '%s%s,%s%s' % (self._name, self.radius, self.chordangle, 
                               self.terminator)
+      else:
+         return '%s%s%s' % (self._name, self.radius, self.terminator)
 
 class CC(_HPGLCommand):
    '''Character chord angle???'''
@@ -91,15 +94,20 @@ class AP(_HPGLCommand):
    def format(self):
       return '%s%s%s' % (self._name, self.p, self.terminator)
 
+class AA(_Arc):
+   '''
+   Arch Absolute
+   Draws an arc, using absolute coordinates, that starts at the
+   current pen location and uses the specified center point.
+   SYNTAX: AA X,Y,arc angle(, chord tolerance);
+   '''
+   def __init__(self, xy, angle, chordtolerance=None):
+      _Arc.__init__(self, xy, angle, chordtolerance, True)
+
 class AR(_Arc):
    '''Arch Relative'''
-   def __init__(self, xy, a, chordangle=5):
-      _Arc.__init__(self, xy, a, chordangle, False)
-
-class AA(_Arc):
-   '''Arch Absolute'''
-   def __init__(self, xy, a, chordangle=5):
-      _Arc.__init__(self, xy, a, chordangle, True)
+   def __init__(self, xy, angle, chordtolerance=None):
+      _Arc.__init__(self, xy, angle, chordtolerance, False)
 
 class AS(_HPGLCommand):
    '''
