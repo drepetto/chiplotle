@@ -891,11 +891,13 @@ class DI(_HPGLCommand):
 
    @property
    def format(self):
-      if self.run and self.rise:
+      if not None in (self.run, self.rise):
          return '%s%s,%s%s' % (self._name, self.run, self.rise, 
          self.terminator)
-      else:
+      elif None == self.run == self.rise:
          return '%s%s' % (self._name, self.terminator)
+      else:
+         raise(Warning("Can't format %s with given parameters." % self._name)) 
          
 
 class DR(DI):
