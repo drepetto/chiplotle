@@ -13,20 +13,24 @@ class PU(_Positional):
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
 
+
 class PD(_Positional):
    '''Pen Down. x,y coordinates are absolute.'''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
+
 
 class PA(_Positional):
    '''Pen Absolute'''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
 
+
 class PR(_Positional):
    '''Pen Relative'''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, False)
+
 
 class CI(_HPGLCommand):
    '''
@@ -56,6 +60,7 @@ class CI(_HPGLCommand):
       else:
          return '%s%s%s' % (self._name, self.radius, self.terminator)
 
+
 class CC(_HPGLCommand):
    '''
    Character chord angle.
@@ -72,6 +77,7 @@ class CC(_HPGLCommand):
          return '%s%i%s' % (self._name, self.angle, self.terminator)
       else:
          return '%s%s' % (self._name, self.terminator)
+
 
 class AF(_HPGLCommand):
    '''
@@ -134,6 +140,7 @@ class AA(_Arc):
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, True)
 
+
 class AR(_Arc):
    '''
    Arch Relative
@@ -143,6 +150,7 @@ class AR(_Arc):
    '''
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, False)
+
 
 class AS(_HPGLCommand):
    '''
@@ -170,7 +178,11 @@ class AS(_HPGLCommand):
 
 ### TODO: remove redundancy in rectangles.
 class EA(_Positional):
-   '''Edge Rectangle Absolute.'''
+   '''
+   Edge Rectangle Absolute
+   Defines and outlines a rectangle using absolute coordinates.
+   SYNTAX: EA X,Y;
+   '''
    def __init__(self, xy):
       if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
@@ -178,7 +190,11 @@ class EA(_Positional):
 
 
 class ER(_Positional):
-   '''Edge Rectangle Relative.'''
+   '''
+   Edge Rectangle Relative
+   Defines and outlines a rectangle using relative coordinates.
+   SYNTAX: ER X,Y;
+   '''
    def __init__(self, xy):
       if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
@@ -223,12 +239,15 @@ class VS(_HPGLCommand):
 
 
 class FS(_HPGLCommand):
-   '''Set tip force for pen. 
-      force range is 1-8
-      pen range is 1-8
-      if pen == None then all pens are set to force
    '''
-   def __init__(self, force = None, pen = None):
+   Force Select
+   Sets pen pressure to the paper for one or all pens. Use this instruction
+   to optimize pen life and line quality for each pen and paper combination.
+   Force range is 1-8
+   Pen range is 1-8
+   If pen is None then all pens are set.
+   '''
+   def __init__(self, force=None, pen=None):
       self.force = force
       self.pen = pen
 
@@ -244,7 +263,13 @@ class FS(_HPGLCommand):
 
 
 class EP(_HPGLCommand):
-   '''Edge Polygon.'''
+   '''
+   Edge Polygon
+   Outlines the polygin currently stored in the polygon buffer. 
+   Use this instruction to edge polygons that you defined in polygon mode 
+   (PM) and with the rectangle and wedge instructions (RA, RR and WG).
+   SYNTAX: EP;
+   '''
 
 
 class BF(_HPGLCommand):
@@ -286,11 +311,23 @@ class DP(_HPGLCommand):
    
 
 class FP(_HPGLCommand):
-   '''Fill Polygon.'''
+   '''
+   Fill Polygon
+   Fills the polygon currently in the polygon buffer. Use FP to fill
+   polygons defined in polygon mode (PM) and defined with the edge 
+   rectangle and wedge instructions (EA, ER, and EW).
+   SYNTAX: FP;
+   '''
    
 
 class FR(_HPGLCommand):
-   '''Advance Frame.'''
+   '''
+   Advance Frame
+   Advances paper to the next plot frame and calculates a relative 
+   coordinate system for that frame. Use FR to do multi-frame long-axis 
+   plotting.
+   SYNTAX: FP;
+   '''
    
 
 class NR(_HPGLCommand):
@@ -443,7 +480,13 @@ class BL(_HPGLCommand):
 
 
 class IN(_HPGLCommand):
-   '''Initialize.'''
+   '''
+   Initialize
+   Resets most plotter functions to their default settings. Use this 
+   instruction to return the plotter to a known state and to cancel settings
+   that may have been changed by a previous program. 
+   SYNTAX: IN; or IN-1 (what is this -1);
+   '''
    
 
 class SS(_HPGLCommand):
@@ -638,24 +681,38 @@ class LT(_HPGLCommand):
 
 
 class FT(_HPGLCommand):
-   ''' Set fill type:
-   1:  Solid (space and angle ignored)
-   2:  Solid too? (space and angle ignored)
+   '''
+   Fill Type
+   Selects the shading pattern used in polygons (FP), rectangles (RA or RR),
+   or wedges (WG). Use this instruction to enhance plots with solid fill,
+   parallel lines (hatching), cross-hatching, or a fill pattern you designed
+   using the user-defined fill type (UF) instruction.
+   1 or 2:  Solid (space and angle ignored)
    3:  Hatching
    4:  Cross hatching
+   SYNTAX: FT type (,spacing(,angle)); or FT;
    '''
-   def __init__(self, type = 1, space=None, angle=0):   
+   def __init__(self, type=None, space=None, angle=None):   
       self.type = type
       self.space = space
       self.angle = angle
 
    @property
    def format(self):
-      if self.space:
-         return '%s%i,%.4f,%i%s' % (self._name, self.type, self.space,
+      if not None in (self.type, self.space, self.angle):
+         return '%s%i,%s,%s%s' % (self._name, self.type, self.space,
          self.angle, self.terminator)
-      else:
+      elif not None in (self.type, self.space):
+         return '%s%i,%s%s' % (self._name, self.type, self.space, 
+         self.terminator)
+      elif not self.type is None:
          return '%s%i%s' % (self._name, self.type, self.terminator)
+      elif None == self.type == self.space == self.angle:
+         return '%s%s' % (self._name, self.terminator)
+      else:
+         ### TODO: raise this type of warning in all other commands where
+         ### this may be necessary.
+         raise(Warning("Can't format %s with given parameters." % self._name)) 
 
 
 class PM(_HPGLCommand):
@@ -669,7 +726,12 @@ class PM(_HPGLCommand):
 
 
 class EC(_HPGLCommand):
-   '''Enable cut line.'''
+   '''
+   Enable Cut Line
+   Draws a dashed cut line between 'pages' on roll paper to indicate where 
+   to cut the paper. Used with AF, AH and PG instructions.
+   SYNTAX: EC; or EC n;
+   '''
    def __init__(self, n = 0):   
       self.n = n
 
@@ -690,6 +752,32 @@ class PG(_HPGLCommand):
       else:
          return '%s%s' % (self._name, self.terminator)
 
+
+class GC(_HPGLCommand):
+   '''
+   Group Count
+   Allows you to assign an arbitrary number that will be output by the OG
+   instruction. Use GC with the OG instruction to monitor the successful
+   transfer of data blocks in spooling applications.
+   SYNTAX; GC count number; or GC;
+   '''
+   def __init__(self, count=None):   
+      self.count = count
+
+   @property
+   def format(self):
+      if not self.count is None:
+         return '%s%i%s' % (self._name, self.count, self.terminator)
+      else:
+         return '%s%s' % (self._name, self.terminator)
+
+
+### TODO implement these:
+#class GM(_HPGLCommand):
+
+#class GP(_HPGLCommand):
+
+#class IM(_HPGLCommand):
 
 class SL(_HPGLCommand):
    ''' Character Slant. Argument is tan of desired angle.  '''
@@ -889,14 +977,19 @@ class DV(_HPGLCommand):
          
 
 class ES(_HPGLCommand):
-   '''Extra space. Defines character space and line space for labels.'''
+   '''
+   Extra space
+   Adjust space between characters and lines of labels without affecting
+   character size.
+   SYNTAX: ES spaces (,lines); or ES;
+   '''
    def __init__(self, charspace = None, linespace = None):
       self.charspace = charspace
       self.linespace = linespace
 
    @property
    def format(self):
-      if (not self.charspace is None) and (not self.linespace is None):
+      if not None in (self.charspace, self.linespace):
          return '%s%.4f,%.4f%s' % (self._name, self.charspace, self.linespace, 
             self.terminator)
       elif not self.charspace is None:
@@ -920,7 +1013,12 @@ class WG(_Wedge):
 
 
 class EW(_Wedge):
-   '''Outlined wedge.'''
+   '''
+   Edge Wedge
+   Outlines any wedge. Use these instructions to produce sectors of a pie
+   chart.
+   SYNTAX: EW radius, start angle, sweep angle (,chord tolerance);
+   '''
 
 
 class TL(_HPGLCommand):
