@@ -9,25 +9,46 @@ from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.ispair import ispair
 
 class PU(_Positional):
-   '''Pen Up. x,y coordinates are absolute.'''
+   '''
+   Pen Up.
+   Raises the pen from the plotting surface. Use this instruction to prevent
+   stray lines from being drawn.
+   SYNTAX: PU X,Y(,...); or PU;
+   '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
 
 
 class PD(_Positional):
-   '''Pen Down. x,y coordinates are absolute.'''
+   '''
+   Pen Down.
+   Lowers the pen onto the writing surface for drawing and moves it to the 
+   coordinates/increments you specified.
+   SYNTAX: PD X,Y (,...); or PD;
+   '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
 
 
 class PA(_Positional):
-   '''Pen Absolute'''
+   '''
+   Plot Absolute.
+   Establishes absolute plotting and moves the pen to specified absolute
+   coordinates using the current pen position.
+   SYNTAX: PA X,Y (,...); or PA;
+   '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
 
 
 class PR(_Positional):
-   '''Pen Relative'''
+   '''
+   Plot Relative.
+   Establishes relative plotting and moves the pen (using the current 
+   position) to the specified points, each successive move relative to the
+   last current pen location.
+   SYNTAX: PR X,Y (,...) or PR;
+   '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, False)
 
@@ -331,119 +352,209 @@ class FR(_HPGLCommand):
    
 
 class NR(_HPGLCommand):
-   '''Not Ready.'''
+   '''
+   Not Ready.
+   Programmatically simulates pressing VIEW.
+   However, you cannot take the plotter out of the view state with NR
+   instruction.
+   SYNTAX: NR;
+   '''
    
 
 class OA(_HPGLCommand):
    '''
-      Returns current actual position of pen.
-      X, Y, P (0 = PU, 1 = PD)
+   Output Actual Pen Status.
+   Outputs the current pen location (in plotter units) and up/down position.
+   Use this information to position a label or figure, to determine the
+   parameters of a window, or to determine the pen's curent location if you 
+   moved it using front-panel cursor buttons.
+   SYNTAX: OA;
    '''
    
 
 class OC(_HPGLCommand):
    '''
-      Returns commanded position of pen.
-      X, Y, P (0 = PU, 1 = PD)
+   Output Commanded Pen Status.
+   Ouput the location and up/down position of the last commanded pen move 
+   instruction. Use OC to position a label or determine the parameters of
+   an instruction that tried to move the pen beyond the limits of some window.
+   You can also use this instruction when you want to know the pen's location
+   in user units.
+   SYNTAX: OC;
    '''
    
 
 class OD(_HPGLCommand):
    '''
-      Returns last digitized point.
-      X, Y, P (0 = PU, 1 = PD)
+   Output Digitized Point and Pen Status.
+   Outputs the X,Y coordinates and up/down pen position associated with the
+   last digitized point. Use this instruction after the DP instruction to
+   return the coordinates of the digitized point to your computer.
+   SYNTAX: OD;
    '''
    
 
 class OE(_HPGLCommand):
    '''
-      Return first HP-GL error.
-      #'s 0-8, excluding 4 and 7
-      
-      bit value   error no   meaning
-      0         0         no error
-      1         1         unrecognized command
-      2         2         wrong num of parameters
-      4         3         out-of-range parameter
-      8         4         unused
-      16        5         unknown character set
-      32        6         position overflow
-      64        7         unused
-      128       8         pinch wheels raised
-      
-      
-      NOTE: some error meanings change depending on the plotter!
+   Output Error.
+   Output a number corresponding to the type of HP-GL error (if any) received
+   by the plotter after the most recent IN or OE instruction. Use this 
+   instruction for debugging programs. 
+   
+   bit value   error no   meaning
+   0         0         no error
+   1         1         unrecognized command
+   2         2         wrong num of parameters
+   4         3         out-of-range parameter
+   8         4         unused
+   16        5         unknown character set
+   32        6         position overflow
+   64        7         unused
+   128       8         pinch wheels raised
+   
+   SYNTAX: OE;
+   
+   NOTE: some error meanings change depending on the plotter!
    '''
    
 
 class OF(_HPGLCommand):
    '''
-      dog ass me.
-      Always outputs '40,40', which means that there are 40 plotter units/mm
+   Output Factors.
+   Outputs the number of plotter units per millimeter in each axis. This
+   lets you use the plotter with sofware that needs to know the size of a
+   plotter unit.
+   SYNTAX: OF;
    '''
    
 
+class OG(_HPGLCommand):
+   '''
+   Output Group Count.
+   Outputs the data block number of the current group count and whether the 
+   escape function has been activated. Use this instruction at the end of a
+   data block in spooling applications, where it is important to know the 
+   current data block number and whether the data block has been transferred.
+   SYNTAX: OG;
+   '''
+
+
 class OH(_HPGLCommand):
-   '''Return hard limits of plotter'''
+   '''
+   Output Hard-Clip Limits.
+   Outputs the X,Y coordinates of the current hard-clip limits. Use this 
+   instruction to determine the plotter unit dimension of the area in which 
+   plotting can occur.
+   SYNTAX: OH;
+   '''
    
 
 class OI(_HPGLCommand):
-   '''Get ID of plotter.'''
-   
+   '''
+   Output Identification.
+   Outputs the plotter's identifying model number. This information is useful
+   in a remote operating configuration to determine which plotter model is
+   on-line, or when software needs the plotter's model number.
+   SYNTAX: OI;
+   ''' 
+
 
 class OK(_HPGLCommand):
-   '''Output key.'''
+   '''
+   Output Key.
+   Outputs a number that indicates which, if any, of the front-panel function
+   keys has been pressed. use this instruction with the WD instruction when
+   designing interactive programs.
+   SYNTAX: OK;
+   '''
    
 
 class OL(_HPGLCommand):
-   '''Output label length.'''
-   
+   '''
+   Output Label Length.
+   Outputs information about the label contained in the label buffer.
+   SYNTAX: OL;
+   '''
+
 
 class OO(_HPGLCommand):
-   '''Output options.'''
+   '''
+   Output Options.
+   Outputs eight option parameters indicating the features implemented on 
+   the plotter. Some software packages use this feature to determine which 
+   plotter capabilities exist.
+   SYNTAX: OO;
+   '''
    
 
 class OP(_HPGLCommand):
-   '''Get P1 & P2.'''
+   '''
+   Output P1 and P2.
+   Outputs the X,Y coordinates (in plotter units) of the current scaling 
+   points P1 and P2. Use this instruction to determine the numberic 
+   coordinates or P1 and P2 when they have been set manually, and to help 
+   compute the number of plotter units per user units when scaling is on.
+   This instruction can also be used with the input window (IW) instruction
+   to programmatically set the window to P1 and P2.
+   SYNTAX: OP;
+   '''
    
 
 class OS(_HPGLCommand):
    '''
-      Return plotter status.
-      
-      bit value   bit position   meaning
-      1         0            pen down
-      2         1            P1 or P2 changed ("OP" clears)
-      4         2            digitized point ready ("OD" clears)
-      8         3            initialized ("OS" clears)
-      16        4            ready to recieve data (always 0)
-      32        5            There is an error ("OE" clears)
-      64        6            unused
-      128       7            unused
-      
-      power-on status == 24 (bits 3 & 4 set)
-      
-      but these may be different on different plotters...
+   Output Status.
+   Outputs the decimal value of the status byte. Use this instruction in 
+   debugging operations and in digitizing applications.
+
+   bit value   bit position   meaning
+   1         0            pen down
+   2         1            P1 or P2 changed ("OP" clears)
+   4         2            digitized point ready ("OD" clears)
+   8         3            initialized ("OS" clears)
+   16        4            ready to recieve data (always 0)
+   32        5            There is an error ("OE" clears)
+   64        6            unused
+   128       7            unused
+   
+   power-on status == 24 (bits 3 & 4 set)
+   
+   SYNTAX: OS; 
    '''
    
 
 class OT(_HPGLCommand):
-   '''Output carousel type.'''
+   '''
+   Output Carousel Type.
+   Outputs information on the type of carousel loaded and the stalls occupied.
+   SYNTAX: OT;
+   '''
    
 
 class OW(_HPGLCommand):
    '''
-     Output window.
-     Return xLL, yLL, xUR, yUR in plotter coords.
+   Output Window.
+   Outputs the X,Y coordinates of the lower-left and upper-right corners of 
+   the window area in which plotting can occur. This instruction is especially
+   useful when the window area (defined by IW) extends beyond the hard-clip
+   limits.
+   SYNTAX: OW;
    '''
    
 
 class PB(_HPGLCommand):
-   '''Print buffered label.'''
+   '''
+   Print Buffer Label.
+   Prints the contents of the label buffer.
+   SYNTAX: PB;
+   '''
    
       
 class PS(_HPGLCommand):
-   '''Change the size of the hard clip limits.'''
+   '''
+   Page Size.
+   Changes the size of the hard clip limits.
+   SYNTAX: PS length(,width); or PS;
+   '''
    def __init__(self, length = None, width = None):
       self.length = length
       self.width = width
@@ -637,14 +748,19 @@ class DT(_HPGLCommand):
 
 
 class LB(_HPGLCommand):
-   '''Print text 'label'.'''
+   '''
+   Label.
+   Plots text using the currently defined character set.
+   SYNTAX: LB c...c CHR$(3)
+   '''
    def __init__(self, text):   
       self.text = text
       self.labelTerminator = chr(3)
 
    @property
    def format(self):
-      return '%s%s%s%s' % (self._name, self.text, self.labelTerminator, self.terminator)
+      return '%s%s%s%s' % (self._name, self.text, self.labelTerminator, 
+         self.terminator)
 
 
 class SP(_HPGLCommand):
@@ -658,7 +774,15 @@ class SP(_HPGLCommand):
 
 
 class LT(_HPGLCommand):
-   '''Define line type:  
+   '''
+   Line Type.
+   Specifies the line pattern to be used when drawing linese and nonsolid
+   fill types. Use LT to emphasize or de-emphasize other plotter lines and
+   shapes.
+   Parameter   Format   Range 
+   pattern     integer  -6 to 6
+   length      real     0 to 100
+
    0:  plot point at given point.
    1:  .   .   .   .   .   .
    2:  __   __   __   __   __
@@ -666,6 +790,8 @@ class LT(_HPGLCommand):
    4:  __.__.__.__.__.__.
    5:  ___ _ ___ _ ___ _ ___ _
    6:  ___ _ _ ___ _ _ ___ _ _ ___
+
+   SYNTAX: LT patter(,length); or LT
    '''
    def __init__(self, pattern=None, length=4):   
       self.pattern = pattern
@@ -716,7 +842,14 @@ class FT(_HPGLCommand):
 
 
 class PM(_HPGLCommand):
-   '''Plot polygon.'''
+   '''
+   Polygon Mode.
+   Enter polygon mode for defining shapes such as block letters, logos, 
+   surface charts, or any unique or intricate area for subsequent filling 
+   and/or edging. Fill polygons using the fill polygon (FP) instruction and/or
+   outline them using the edge polygon (EP) instruction.
+   SYNTAX: PM n; or PM;
+   '''
    def __init__(self, n = 0):   
       self.n = n
 
@@ -741,7 +874,12 @@ class EC(_HPGLCommand):
 
 
 class PG(_HPGLCommand):
-   '''Page feed.'''
+   '''
+   Page Feed.
+   Advances roll paper one page length and establishes the plotter-unit origin
+   at the center of the new page.
+   SYNTAX: PG (n); or PG;
+   '''
    def __init__(self, n = None):   
       self.n = n
 
@@ -838,24 +976,91 @@ class SC(_TwoPoint):
      _TwoPoint.__init__(self, coords) 
 
 
-class IW(_TwoPoint):
-   ''' Set plotting window.  '''
-   def __init__(self, coords=None):
-      _TwoPoint.__init__(self, coords) 
-
-
 class IP(_TwoPoint):
-   '''Set P1 & P2 scaling points'''
+   '''
+   Input P1 and P2.
+   Allows you to establish new or default locations for the scaling points 
+   P1 and P2. P1 and P2 are used by the scale instruction (SC) to establish
+   user-unit scaling. The IP instruction is often used to ensure that a plot
+   is always the same size, regardless of how P1 and P2 might have been set
+   from the front panel or the size of media loaded in the plotter.
+   SYNTAX: IP p1_x, p1_y(, p2_x, p2_y); or IP;
+   '''
    def __init__(self, coords=None):   
       if coords:
          assert len(coords) in (2, 4)
       _TwoPoint.__init__(self, coords) 
 
 
+class IV(_HPGLCommand):
+   '''
+   Invoke Character Slot.
+   Invokes a character set slot into either the right or left half of the
+   in-use code table. Primarily used with ISO modes of character selection.
+   SYNTAX: IV (slot(,left));
+   '''
+   def __init__(self, slot=None, left=None):
+      self.slot = slot
+      self.left = left
+
+   @property
+   def format(self):
+      if not None in (self.slot, self.left):
+         return '%s%i%i%s' % (self._name, self.slot, self.left,
+            self.terminator)
+      elif not self.slot is None:
+         return '%s%i%s' % (self._name, self.slot, self.terminator)
+      elif self.slot == self.left == None:
+         return '%s%s' % (self._name, self.terminator)
+      else:
+         raise(Warning("Can't format %s with given parameters." % self._name)) 
+
+class IW(_TwoPoint):
+   '''
+   Input Window.
+   Defmines a rectangular area, or window, that establishes soft-clip limits.
+   Subsequent programmed pen motion will be restricted to this area. Use this
+   instruction when you want to be sure that your plot falls within a 
+   specified area.
+   SYNTAX: IW X1,Y1,X2,Y2; or IW;
+   '''
+   def __init__(self, coords=None):
+      _TwoPoint.__init__(self, coords) 
+
+
+### TODO this is the exact same pattern as that of all other commands with
+### two parameters. Refactor.
+class KY(_HPGLCommand):
+   '''
+   Define Key.
+   Assigns a predefined function to one of the frontal panel function keys.
+   Use this instruction with the WD instruction when designing interactive
+   programs.
+   SYNTAX: KY key(,function); or KY;
+   '''
+   def __init__(self, key=None, function=None):
+      self.key = key
+      self.function = left
+
+   @property
+   def format(self):
+      if not None in (self.key, self.function):
+         return '%s%i%i%s' % (self._name, self.key, self.function,
+            self.terminator)
+      elif not self.key is None:
+         return '%s%i%s' % (self._name, self.key, self.terminator)
+      elif self.key == self.function == None:
+         return '%s%s' % (self._name, self.terminator)
+      else:
+         raise(Warning("Can't format %s with given parameters." % self._name)) 
+
 class PT(_HPGLCommand):
    '''
-      Pen Thickness
-      0.1mm < thickness < 5.0mm
+   Pen Thickness.
+   Determines the spacing between the parallel lines in solid fill patterns,
+   according to the pen tip thickness.
+   Parameter   Format   Range    Default
+   thickness   real  0.1 to 5mm  0.3mm
    '''
    def __init__(self, thickness = 0.3):
       self.thickness = thickness
@@ -1001,7 +1206,15 @@ class ES(_HPGLCommand):
          
 
 class LO(_HPGLCommand):
-   '''Label origin.'''
+   '''
+   Label Origin.
+   Positions labels relative to current pen location. Use LO to center, 
+   left justify, or right justify label. The label can be drawn above or
+   below the current pen location and can also be offset by an amount equal 
+   to 1/2 the character's width and height.
+   origin = [1-9] or [11-19]
+   SYNTAX: LO origin; or LO;
+   '''
    def __init__(self, origin = 1):
       self.origin = origin
 
