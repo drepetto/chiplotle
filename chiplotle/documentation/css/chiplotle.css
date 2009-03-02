@@ -55,7 +55,6 @@ DIV.toc-section DIV.body {
 /*** HEADER, ANCHOR & CODE STYLING ***/
 
 H1, H2, H3, H4, H5, H6 {
-	font-variant: small-caps;
 	color: #444;
 }
 
