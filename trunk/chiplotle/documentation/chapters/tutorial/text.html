@@ -2,11 +2,15 @@
 
 <h2>Creating simple Chiplotle HP-GL commands</h2>
 <p>
-Each HP-GL command in Chiplotle is implemented as a Class. Chiplotle HP-GL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others dont:
+Each HP-GL command in Chiplotle is implemented as a Class. Chiplotle HP-GL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others don't:
 </p>
 <pre>
    chiplotle> PD( )
    PD(xy=[])
+</pre>
+<pre>
+   chiplotle> CI(10)
+   CI(chordangle=None, radius=10.0)
 </pre>
 <p>
 All Chiplotle HP-GL commands have a <code>format</code> attribute. This attribute returns a string representation of the HP-GL command as sent to the plotter.
@@ -16,4 +20,11 @@ All Chiplotle HP-GL commands have a <code>format</code> attribute. This attribut
    chiplotle> t.format
    'PD;'
 </pre>
+
+
+<h2>Moving commands</h2>
+
+<h2>Drawing commands</h2>
+
+<h2>Plotting</h2>
 

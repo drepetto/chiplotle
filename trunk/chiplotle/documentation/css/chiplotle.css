@@ -18,6 +18,11 @@ padding:3px;
    padding: 10px 20px 20px 20px;
 }
 
+B.question {
+   font-size: 2em;
+	color: #922222;
+}
+
 BODY {
 	margin-left: 20px;
 	margin-top: 10px;
@@ -61,6 +66,11 @@ H1, H2, H3, H4, H5, H6 {
 H1 {
    border-bottom: 2px solid grey;
    padding-bottom: 10px;
+}
+
+H2 {
+   padding-top: 30px;
+   padding-bottom: 0px;
 }
 
 H3 {
