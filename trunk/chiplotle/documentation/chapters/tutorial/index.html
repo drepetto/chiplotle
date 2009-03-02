@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
+<head>
+<link rel="stylesheet" href="../../css/chiplotle.css" type="text/css"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+
+<title>Chiplotle, the HP-GL Python library.</title>
+</head>
+
+
+<DIV id="menuleft">
+
+<p><a href="../../chapters/about/index.html">What is Chiplotle?</a>
+</p>
+<p>
+<a href="../../chapters/authors/index.html">About the authors</a>
+</p>
+<p>
+<a href="../../chapters/tutorial/index.html">Tutorial</a>
+</p>
+<p>
+<a href="../../chapters/hpgl_classes/index.html">HP-GL Classes</a>
+</p>
+
+
+</DIV>
+
+<DIV id="content">
+<h1>Tutorial</h1>
+
+<h2>Creating simple Chiplotle HP-GL commands</h2>
+<p>
+Each HP-GL command in Chiplotle is implemented as a Class. Chiplotle HP-GL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others dont:
+</p>
+<pre>
+   chiplotle> PD( )
+   PD(xy=[])
+</pre>
+<p>
+All Chiplotle HP-GL commands have a <code>format</code> attribute. This attribute returns a string representation of the HP-GL command as sent to the plotter.
+</p>
+<pre>
+   chiplotle> t = PD( )
+   chiplotle> t.format
+   'PD;'
+</pre>
+
+
+</DIV>
