@@ -22,7 +22,7 @@ Yes. The plotters buffer will fill up quickly, so you need to be listenning to t
 Your <code>bird.hpgl</code> file is probably quite large. 
 Since you are sending the file directly to your serial port, you are overflowing.
 
-This is one of the tasks that <b>Chiplote</b> manages for you so you don't have to worry about these low level technicalities.   
+This is one of the tasks that <b>Chiplotle</b> manages for you so you don't have to worry about these low level technicalities.   
 The easiest way to communicate with a plotter is to run <b>Chiplotle</b> by typing <code>chiplotle</code> from your terminal. 
 This will prompt you for a serial port to choose from. Choose the serial port your plotter is connected to. Then choose the plotter type that most closely matches the one you have. If you are not sure, choose the generic 'Plotter'. This will create a <code>plotter</code> instance automatically for you. Once in <b>Chiplotle</b> (you will know by the <code>chiplotle> </code> prompt), send your HP-GL file to the plotter via the <code>write( )</code> method, like so:
 <pre>
@@ -62,7 +62,7 @@ Is there a facility in <b>Chiplotle</b> to send over already existing HPGL comma
 
 <p>
 <b class="question">A:</b>
-HPGL commands are plain text files. To print one simply open it, read it, and send the strings to the plotter, like so: </p>
+HPGL files are plain text files. To print one simply open it, read it, and send the strings to the plotter, like so: </p>
 <pre>
    chiplotle> f = open('my_file.hpgl', 'r')
    chiplotle> my_file = f.read( )
