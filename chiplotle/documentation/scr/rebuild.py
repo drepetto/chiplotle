@@ -11,9 +11,10 @@ os.system('clear')
 CHAPTERSDIR = os.path.join(CHIPLOTLE_DIR, 'documentation', 'chapters')
 chapters = os.listdir(CHAPTERSDIR)
 
-# What's a better, nonmanual way to get rid of special directories
-# from the output of os.listdir( )?
-chapters.remove('.svn')
+#chapters.remove('.svn')
+for ch in chapters:
+   if ch.startswith('.'):
+      chapters.remove(ch)
 
 chapters.sort( )
 print 'Rebuilding %s chapters ...\n' % len(chapters)
