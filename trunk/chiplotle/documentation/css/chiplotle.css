@@ -91,6 +91,11 @@ H4 {
    margin-bottom: 0px;
 }
 
+HR {
+	border: 1px dotted #aaaaaa;
+}
+
+
 A {
 	color: #626202;
 	text-decoration: none;
