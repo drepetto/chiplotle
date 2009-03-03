@@ -1,8 +1,135 @@
 <h1>Tutorial</h1>
 
-<h2>Creating simple Chiplotle HP-GL commands</h2>
+<h2>chiplotle modes</h2>
+
+There are three main ways of using chiplotle:
+
+<ul>
+<li>command line: an interactive mode where you type in commands one at a time and the 
+plotter executes them immediately</li>
+<li>Python script: you create an Python script that generates the desired chiplotle commands and
+sends them to the plotter</li>
+<li>HP-GL pipeline: you send pre-existing HP-GL commands from a file to the plotter using chiplotle 
+as a simple serial interface</li>
+</ul>
+
+<h2>Running chiplotle from the command line</h2>
+An easy way to get a feel for chiplotle is to directly enter some commands via the command line.
 <p>
-Each HP-GL command in Chiplotle is implemented as a Class. Chiplotle HP-GL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others don't:
+Change into the chiplotle directory, and start chiplotle by typing:
+<p>
+<pre>
+./chiplotle
+</pre>
+<p>
+You'll see a listing of the serial ports available on your machine. Choose the one that you
+have your plotter plugged into.
+<p>
+chiplotle will attempt to communicate with your plotter on the selected serial port and the plotter
+ID of the plotter it finds will be printed out. You will then be asked to select a plotter type.
+Select the one that most closely matches the plotter ID. If there is no match, you can use the
+generic Plotter, although you should be aware that some HP-GL commands may not work with your plotter.
+<p>
+After you've selected a plotter type chiplotle will print out some basic information about your 
+plotter, including its drawing area. Now it's time to plot!
+<p>
+Let's pick up a pen. In HP-GL, the command to pick up a pen is "SP", which stands for "select pen".
+To learn what parameters you need to pass to a command, look it up in the "HP-GL Classes" section
+of the chiplotle documentation. Many commands take one or more parameters; if a command takes
+parameters you put them inside a set of () after the command name. SP takes a pen number, and we 
+want to select pen number one, so our command is "SP(1)". To pass the command to the plotter, you 
+use plotter.write(). So:
+<p>
+<pre>
+chiplotle> plotter.write(SP(1))
+</pre>
+<p>
+Your plotter should pick up pen one. Some common commands, like SP, have shortcuts in chiplotle. So
+you can also do:
+<p>
+<pre>
+chiplotle> plotter.selectPen(1)
+</pre>
+<p>
+to select pen number one. 
+<p>
+Now let's move the pen. To move the pen while it is in the up position, you use PU([x,y]), and to move
+the pen while it's down you use PD([x,y]). x and y are the coordinates you want to move the pen to.
+If you want to do a PU or PD without moving, just pass a blank set of coordinates.
+So to draw a square you might do something like:
+<pre>
+chiplotle> plotter.selectPen(1)
+chiplotle> plotter.write(PU([100,100]))
+chiplotle> plotter.write(PD([200,100]))
+chiplotle> plotter.write(PD([200,200]))
+chiplotle> plotter.write(PD([100,200]))
+chiplotle> plotter.write(PD([100,100]))
+chiplotle> plotter.write(PU([]))
+</pre>
+There are shortcuts for PU and PD: 
+<pre>
+chiplotle> plotter.penUp([100,100])
+chiplotle> plotter.penDown([100,100])
+
+</pre>
+To replace the pen and have a look at your magnificent square, you select pen zero:
+<pre>
+chiplotle> plotter.selectPen(0)
+</pre>
+That's it! Have a look at the HP-GL Classes documentation for a complete list of implemented
+HP-GL commands.
+
+<h2>Running chiplotle from a Python script</h2>
+
+Simple drawings can be done by hand from the command line, but you'll quickly find that it's much
+easier to put your commands into a Python script so that you can edit them, rerun them, etc. 
+And of course since you're writing in Python, you can use all the features of the language in 
+addition to the chiplotle commands. 
+<p>
+It's very easy to create a Python script with chiplotle commands. The first thing you usually need 
+to do is import all of the HP-GL commands from chiplotle. So open a new text file and type:
+<pre>
+from chiplotle import *
+</pre>
+Next you want your script to run the chiplotle setup routine and import the plotter definition:
+<pre>
+from chiplotle.utils.run_chiplotle_UNIX import plotter
+</pre>
+This lets you select the appropriate serial port and plotter ID, and imports the plotter object
+so that you can use plotter.write commands as in the command line examples above. Now you can simply
+enter a series of chiplote commands:
+<pre>
+plotter.selectPen(1)
+plotter.write(PU([100,100]))
+plotter.write(PD([200,100]))
+plotter.write(PD([200,200]))
+plotter.write(PD([100,200]))
+plotter.write(PD([100,100]))
+plotter.selectPen(0)
+</pre>
+
+and save your script as a .py file (see examples/square.py for an example). To use your new program
+just run it as you would any Python script:
+<pre>
+python square.py
+</pre>
+Of course this is just a very simple example. See the .py files in the examples folder for some
+more elaborate scripts. 
+
+<h2>HP-GL pipeline</h2>
+If you already have a file containing HP-GL commands (from a CNC design package, old
+design data, etc), you can use chiplotle to send those commands to your plotter. Just do:
+<pre>
+blah blah blah. Victor, how do we do this now???
+</pre>
+
+
+<h2>Creating simple Chiplotle HP-GL commands NOT SURE WHERE THESE GO!!!</h2>
+<p>
+Each HP-GL command in Chiplotle is implemented as a Class. Chiplotle HP-GL commands can be 
+instantiated as you would normally instantiate any other class. Some commands require arguments, 
+others dont:
+
 </p>
 <pre>
    chiplotle> PD( )
@@ -13,7 +140,8 @@ Each HP-GL command in Chiplotle is implemented as a Class. Chiplotle HP-GL comma
    CI(chordangle=None, radius=10.0)
 </pre>
 <p>
-All Chiplotle HP-GL commands have a <code>format</code> attribute. This attribute returns a string representation of the HP-GL command as sent to the plotter.
+All Chiplotle HP-GL commands have a <code>format</code> attribute. This attribute returns a string 
+representation of the HP-GL command as sent to the plotter.
 </p>
 <pre>
    chiplotle> t = PD( )

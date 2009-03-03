@@ -3,7 +3,6 @@ import random
 
 
 def main():
-   #p = run_chiplotle_UNIX.p
 
    width = plotter.marginSoft.width
    height = plotter.marginSoft.height
