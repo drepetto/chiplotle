@@ -23,6 +23,10 @@ B.question {
 	color: #922222;
 }
 
+B {
+	color: #444;
+}
+
 BODY {
 	margin-left: 20px;
 	margin-top: 10px;
@@ -66,16 +70,21 @@ H1, H2, H3, H4, H5, H6 {
 H1 {
    border-bottom: 2px solid grey;
    padding-bottom: 10px;
+   font-size: 2.1em;
 }
 
 H2 {
-   padding-top: 30px;
-   padding-bottom: 0px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-left: 10px;
+   font-size: 1.7em;
+   background: #fbfbfb;
 }
 
 H3 {
    padding-top: 30px;
    padding-bottom: 0px;
+   font-size: 1.3em;
 }
 
 A {
