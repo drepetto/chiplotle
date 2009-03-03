@@ -68,8 +68,8 @@ H1, H2, H3, H4, H5, H6 {
 }
 
 H1 {
-   border-bottom: 2px solid grey;
-   padding-bottom: 10px;
+   border-bottom: 1px solid grey;
+   padding-bottom: 1px;
    font-size: 2.1em;
 }
 
@@ -83,12 +83,16 @@ H2 {
 
 H3 {
    padding-top: 30px;
-   padding-bottom: 0px;
    font-size: 1.3em;
 }
 
+H4 {
+   margin-top: 3px;
+   margin-bottom: 0px;
+}
+
 A {
-	color: #227222;
+	color: #626202;
 	text-decoration: none;
 }
 
