@@ -19,8 +19,6 @@ Yes. The plotters buffer will fill up quickly, so you need to be listenning to t
 <li> Setting up hardware hand-shacking between the plotter and your computer. 
 <li> Querying the plotter for its buffer size before sending data to avoid truncation.
 </ol>
-Your <code>bird.hpgl</code> file is probably quite large. 
-Since you are sending the file directly to your serial port, you are overflowing.
 
 This is one of the tasks that <b>Chiplotle</b> manages for you so you don't have to worry about these low level technicalities.   
 The easiest way to communicate with a plotter is to run <b>Chiplotle</b> by typing <code>chiplotle</code> from your terminal. 
