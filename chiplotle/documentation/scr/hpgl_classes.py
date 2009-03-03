@@ -19,7 +19,7 @@ for name in classes:
          text = '<h3>%s</h3><p>%s</p>' % (name, doc) 
          contents.append(text)
 
-title = '<h1>HP-GL classes</h1>'
+title = '<h1>HPGL Classes</h1>'
 contents.insert(0, title)
 contents_str = '\n'.join(contents)
 commands_output_file.write(contents_str)
