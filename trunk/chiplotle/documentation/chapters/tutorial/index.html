@@ -154,11 +154,29 @@ more elaborate scripts.
 
 <h2>HP-GL pipeline</h2>
 If you already have a file containing HP-GL commands (from a CNC design package, old
-design data, etc), you can use chiplotle to send those commands to your plotter. Just do:
+design data, etc), you can use chiplotle to send those commands to your plotter. Your HP-GL
+file will be a text file with commands like:
 <pre>
-blah blah blah. Victor, how do we do this now???
+SP1;
+PU100,100;
+PD200,100;
+PD200,200;
+PD100,100;
+PD100,100;
+SP0;
 </pre>
 
+To plot the file with chiplotle, first you open the file, then you read its contents, close the file, 
+and send the contents to the plotter via the plotter.write command:
+<pre>
+chiplotle> f = open('square.hpgl', 'r')
+chiplotle> my_file = f.read( )
+chiplotle> f.close( )
+chiplotle> plotter.write(my_file)  
+</pre>
+
+chiplotle will take care of all buffering and timing issues, so even large HP-GL files should plot
+reliably. See examples/square.hpgl for a sample HP-GL file.
 
 <h2>Creating simple Chiplotle HP-GL commands NOT SURE WHERE THESE GO!!!</h2>
 <p>
