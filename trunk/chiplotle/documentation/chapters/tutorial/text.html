@@ -142,35 +142,3 @@ chiplotle> plotter.write(my_file)
 chiplotle will take care of all buffering and timing issues, so even large HPGL files should plot
 reliably. See examples/square.hpgl for a sample HPGL file.
 
-<h2>Creating simple Chiplotle HPGL commands NOT SURE WHERE THESE GO!!!</h2>
-<p>
-Each HPGL command in Chiplotle is implemented as a Class. Chiplotle HPGL commands can be 
-instantiated as you would normally instantiate any other class. Some commands require arguments, 
-others dont:
-
-</p>
-<pre>
-   chiplotle> PD( )
-   PD(xy=[])
-</pre>
-<pre>
-   chiplotle> CI(10)
-   CI(chordangle=None, radius=10.0)
-</pre>
-<p>
-All Chiplotle HPGL commands have a <code>format</code> attribute. This attribute returns a string 
-representation of the HPGL command as sent to the plotter.
-</p>
-<pre>
-   chiplotle> t = PD( )
-   chiplotle> t.format
-   'PD;'
-</pre>
-
-
-<h2>Moving commands</h2>
-
-<h2>Drawing commands</h2>
-
-<h2>Plotting</h2>
-
