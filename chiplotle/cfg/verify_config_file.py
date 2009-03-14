@@ -8,7 +8,7 @@ def verify_config_file( ):
       f.close( )
    except IOError:
       raw_input('Attention: "%s" does not exist in your system.\n\
-      Abjad will now create it to store all configuration settings. \n\
+      Chiplotle will now create it to store all configuration settings. \n\
       Press any key to continue.' % CONFIG_FILE)
       if not os.path.isdir(CONFIG_DIR):
          os.mkdir(CONFIG_DIR)
