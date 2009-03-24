@@ -10,10 +10,12 @@ from chiplotle.utils.ispair import ispair
 
 class PU(_Positional):
    '''
-   Pen Up.
+   Pen Up
+
    Raises the pen from the plotting surface. Use this instruction to prevent
    stray lines from being drawn.
-   SYNTAX: PU X,Y(,...); or PU;
+
+   HPGL syntax: PU X,Y(,...); or PU;
    '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
