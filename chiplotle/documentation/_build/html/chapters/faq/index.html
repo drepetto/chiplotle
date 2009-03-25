@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FAQ &mdash; Chiplotle v1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/chiplotle.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="top" title="Chiplotle v1.0 documentation" href="../../index.html" />
+    <link rel="next" title="Chiplotle hpgl commands" href="../api/chiplotle_api.html" />
+    <link rel="prev" title="Chiplotle fundamentals" href="../fundamentals/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="../api/chiplotle_api.html" title="Chiplotle hpgl commands"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../fundamentals/index.html" title="Chiplotle fundamentals"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Chiplotle v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  
+  <div class="section" id="faq">
+<h1>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h1>
+<p><strong>Q:</strong>
+When I send a text file with HPGL commands to my serial port in the following way:</p>
+<div class="highlight-python"><pre>$ stty /dev/ttyUSB0 9600
+$ cat bird.hpgl &gt; /dev/ttyUSB0</pre>
+</div>
+<p>my plotter starts drawing fine but will eventually just start pausing and drawing random straight lines. What&#8217;s goind on? Do I have to be concerned with overflowing the plotter&#8217;s internal RAM?</p>
+<p><strong>A:</strong>
+Yes. The plotters buffer will fill up quickly, so you need to be listenning to the plotter for any buffer overflow warnings and errors. This is generally done in one of two ways:</p>
+<ol class="arabic simple">
+<li>Setting up hardware hand-shacking between the plotter and your computer.</li>
+<li>Querying the plotter for its buffer size before sending data to avoid truncation.</li>
+</ol>
+<p>This is one of the tasks that Chiplotle manages for you so you don&#8217;t have to worry about these low level technicalities.
+The easiest way to communicate with a plotter is to run Chiplotle by typing <tt class="docutils literal"><span class="pre">chiplotle</span></tt> from your terminal.
+This will prompt you for a serial port to choose from. Choose the serial port your plotter is connected to. Then choose the plotter type that most closely matches the one you have. If you are not sure, choose the generic &#8216;Plotter&#8217;. This will create a <tt class="docutils literal"><span class="pre">plotter</span></tt> instance automatically for you. Once in Chiplotle (you will know by the <tt class="docutils literal"><span class="pre">chiplotle&gt;</span></tt> prompt), send your HPGL file to the plotter via the <tt class="docutils literal"><span class="pre">write(</span> <span class="pre">)</span></tt> method, like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;bird.hpgl&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">my_file</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span> <span class="p">)</span>
+<span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">(</span> <span class="p">)</span>
+<span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">plotter</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">my_file</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">plotter</span></tt> does the buffer managing for you.</p>
+<p>If you don&#8217;t want to work &#8216;on line&#8217; and want to run your Python scripts,
+instead of running the executable <tt class="docutils literal"><span class="pre">chiplotle</span></tt> you can instantiate your own plotter in your scripts with the correct serial port. e.g.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">chiplotle</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">serial</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">s</span> <span class="o">=</span> <span class="n">Serial</span><span class="p">(</span><span class="s">&#39;/dev/ttyUSB0&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Plotter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>then send hpgl commands:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">PA</span><span class="p">(</span> <span class="p">))</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Q:</strong>
+Is there a facility in Chiplotle to send over already existing HPGL command files?</p>
+<p><strong>A:</strong>
+HPGL files are plain text files. To print one simply open it, read it, and send the strings to the plotter, like so:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;my_file.hpgl&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">my_file</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(</span> <span class="p">)</span>
+<span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">(</span> <span class="p">)</span>
+<span class="n">chiplotle</span><span class="o">&gt;</span> <span class="n">plotter</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">my_file</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="../fundamentals/index.html" title="previous chapter">Chiplotle fundamentals</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="../api/chiplotle_api.html" title="next chapter">Chiplotle hpgl commands</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="../../_sources/chapters/faq/index.txt">Show Source</a></li>
+            </ul>
+          <h3>Quick search</h3>
+            <form class="search" action="../../search.html" method="get">
+              <input type="text" name="q" size="18" /> <input type="submit" value="Go" />
+              <input type="hidden" name="check_keywords" value="yes" />
+              <input type="hidden" name="area" value="default" />
+            </form>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../modindex.html" title="Global Module Index"
+             accesskey="M">modules</a> |</li>
+        <li class="right" >
+          <a href="../api/chiplotle_api.html" title="Chiplotle hpgl commands"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../fundamentals/index.html" title="Chiplotle fundamentals"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../../index.html">Chiplotle v1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Víctor Adán, Douglas Repetto.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.5.1.
+    </div>
+  </body>
+</html>
