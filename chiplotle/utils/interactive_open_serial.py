@@ -2,7 +2,7 @@ import os
 import re
 import serial
 
-def open_serial( ):
+def interactive_open_serial( ):
    ### get available ports
    availablePorts = os.listdir("/dev")
    ttyTest = re.compile("tty")
