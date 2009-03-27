@@ -18,7 +18,7 @@ class PU(_Positional):
    HPGL syntax: PU X,Y(,...); or PU;
    '''
    def __init__(self, xy=None):
-      _Positional.__init__(self, xy, True)
+      _Positional.__init__(self, xy, False)
 
 
 class PD(_Positional):
@@ -29,7 +29,7 @@ class PD(_Positional):
    SYNTAX: PD X,Y (,...); or PD;
    '''
    def __init__(self, xy=None):
-      _Positional.__init__(self, xy, True)
+      _Positional.__init__(self, xy, False)
 
 
 class PA(_Positional):
