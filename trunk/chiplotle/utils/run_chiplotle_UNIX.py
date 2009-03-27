@@ -6,7 +6,7 @@
 """
 
 from chiplotle import *
-from chiplotle.utils.open_serial import open_serial
+from chiplotle.utils.interactive_open_serial import interactive_open_serial
 from chiplotle.cfg.get_serial_port import get_serial_port
 from chiplotle.cfg.verify_config_file import verify_config_file
 import serial
@@ -18,7 +18,7 @@ port = get_serial_port( )
 if port:
    ser = serial.Serial(port, 9600, timeout=.1)
 else:
-   ser = open_serial( )
+   ser = interactive_open_serial( )
 #print ser
 
 ### TODO: go to 'offline' mode if plotter is not found?
