@@ -20,16 +20,17 @@ def test_transpose_ER( ):
    assert all(t.xy == [1, 2])
 
 def test_transpose_PU( ):
-   '''Transpose works on a single PU.'''
+   '''Transpose ignores PU because behavior of PU depends on previous 
+   PA or PR.'''
    t = PU((1, 2))
    transpose(t, (1.5, -2.5))
-   assert all(t.xy == [2.5, -0.5])
+   assert all(t.xy == [1, 2])
 
 def test_transpose_PD( ):
-   '''Transpose works on a single PD.'''
+   '''Transpose ignores PD.'''
    t = PD((1, 2))
    transpose(t, (1.5, -2.5))
-   assert all(t.xy == [2.5, -0.5])
+   assert all(t.xy == [1, 2])
 
 def test_transpose_PA( ):
    '''Transpose works on a single PA.'''
