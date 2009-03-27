@@ -60,6 +60,6 @@ while line_num < num_lines:
 	plotter.write(LB("\n\r"))
 	line_num += 1
 
-
+plotter.write(SP(0))
 print("done!")
 
