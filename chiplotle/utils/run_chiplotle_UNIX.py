@@ -18,7 +18,6 @@ print "\n* * * CHIPLOTLE in the house! * * *\n"
 #port = get_serial_port( )
 ## serial port
 port = read_config_value('serial_port')
-print port
 if port:
    ser = serial.Serial(port, 9600, timeout=.1)
 else:
