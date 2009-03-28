@@ -7,9 +7,8 @@ def verify_config_file( ):
       f = open(CONFIG_FILE, 'r')
       f.close( )
    except IOError:
-      raw_input('Attention: "%s" does not exist in your system.\n\
-      Chiplotle will now create it to store all configuration settings. \n\
-      Press any key to continue.' % CONFIG_FILE)
+      print 'ATTENTION: "%s" does not exist in your system.\nChiplotle will now create it to store all configuration settings.\nEdit this file to modify Chiplotle default values.' % CONFIG_FILE
+      raw_input('Press any key to continue...\n')
       if not os.path.isdir(CONFIG_DIR):
          os.mkdir(CONFIG_DIR)
       write_config_file(CONFIG_FILE)
