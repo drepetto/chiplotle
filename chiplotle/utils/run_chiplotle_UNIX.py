@@ -18,6 +18,7 @@ print "\n* * * CHIPLOTLE in the house! * * *\n"
 #port = get_serial_port( )
 ## serial port
 port = read_config_value('serial_port')
+print port
 if port:
    ser = serial.Serial(port, 9600, timeout=.1)
 else:
@@ -34,5 +35,3 @@ print "Plotter 'plotter' with ID %s opened. " % plotter.id
 print "Drawing area: %s" % plotter.marginSoft
 print "Buffer Size: %s" % plotter.bufferSize
 print "\n"
-
-
