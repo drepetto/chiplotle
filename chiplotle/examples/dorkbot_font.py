@@ -39,7 +39,8 @@ for cur_char in text:
 	print ("got char: ")
 	print cur_char
 	print ("looking it up...")
-	character = font.lookup_char(cur_char)
+	#character = font.lookup_char(cur_char)
+	character = font.char_dict[cur_char]
 	print character
 	
 	seg_num = 0
