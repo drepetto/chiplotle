@@ -1,4 +1,3 @@
-
 """
  *  This file is part of chiplotle.
  *
@@ -31,7 +30,7 @@ if plt_name:
 else:
    plotter = interactive_choose_plotter(ser)
 
-print "\nPlotter 'plotter' with ID %s opened. " % plotter.id
+print "Plotter 'plotter' with ID %s opened. " % plotter.id
 print "Drawing area: %s" % plotter.marginSoft
 print "Buffer Size: %s" % plotter.bufferSize
 print "\n"
