@@ -1,5 +1,5 @@
 from chiplotle.cfg.cfg import CONFIG_FILE
-from abjad.cfg.verify_config_file import verify_config_file
+from chiplotle.cfg.verify_config_file import verify_config_file
 
 def read_config_file( ):
    '''Read the content of the config file $HOME/.chiplotle/config.'''
