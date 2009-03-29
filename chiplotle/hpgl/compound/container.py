@@ -2,8 +2,8 @@ from chiplotle.hpgl.compound.compound import _CompoundHPGL
 
 class Container(_CompoundHPGL, list):
    '''Generic container.'''
-   def __init__(self, x, y, shapes=None, pen=None):
-      _CompoundHPGL.__init__(self, (x, y), pen)
+   def __init__(self, xy, shapes=None, pen=None):
+      _CompoundHPGL.__init__(self, xy, pen)
       shapes = shapes or [ ]
       list.__init__(self, shapes)
       self._linkUp( )

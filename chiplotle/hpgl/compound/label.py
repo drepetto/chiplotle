@@ -5,7 +5,7 @@ from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV, SI
 class Label(_CompoundHPGL):
    '''Text label.
    Settable properties:
-   x, y:       coordinates of label location.
+   xy:         coordinates pair of label location.
    text:       the actual text to be printed.
    charsize:   (w, h) pair defining the absolute character size.
    direction:  the inclination / angle of the text. Should be a pair of values: 
@@ -28,8 +28,8 @@ class Label(_CompoundHPGL):
    vertical:   boolean; print text from left to right (False) or top down (True).
    '''
 
-   def __init__(self, x, y, text):
-      _CompoundHPGL.__init__(self, (x, y)) 
+   def __init__(self, xy, text):
+      _CompoundHPGL.__init__(self, xy) 
       self.text = text
       self.charsize = None
       self.direction = None

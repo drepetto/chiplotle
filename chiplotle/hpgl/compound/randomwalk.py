@@ -7,8 +7,8 @@ import random
 
 class RandomWalk(_CompoundHPGL):
    '''Random Walk.'''
-   def __init__(self, x, y, steps, stepSize=500):
-      _CompoundHPGL.__init__(self, (x, y)) 
+   def __init__(self, xy, steps, stepSize=500):
+      _CompoundHPGL.__init__(self, xy) 
       self.steps = steps
       self.stepSize = stepSize
 

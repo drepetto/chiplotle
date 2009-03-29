@@ -5,8 +5,8 @@ from chiplotle.utils.geometry import *
 
 class Rectangle(_CompoundHPGL):
    '''Compound Rectangle. Can be rotated. Cannot be filled'''
-   def __init__(self, x, y, width, height, rotation=0):
-      _CompoundHPGL.__init__(self, (x, y)) 
+   def __init__(self, xy, width, height, rotation=0):
+      _CompoundHPGL.__init__(self, xy) 
       self.width = Scalable(width)
       self.height = Scalable(height)
       self.rotation = rotation
