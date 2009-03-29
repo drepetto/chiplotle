@@ -3,7 +3,6 @@
  *
  *  http://music.columbia.edu/cmc/chiplotle
 '''
-
 from __future__ import division
 from chiplotle.hpgl import commands 
 from chiplotle.plotters import margin
@@ -13,7 +12,7 @@ import time
 import types
 
 
-class Plotter(object):
+class _BasePlotter(object):
    def __init__(self, serialPort):
       self.type = 'Generic'
       self.memory = []
@@ -21,8 +20,7 @@ class Plotter(object):
       self._hpgl = commands
       self.bufferSize = self._bufferSpace
 
-      ### Only these commands will be sent to the plotter. 
-      ### All other will be eaten. Burp.
+      ## Only these commands will be sent to the plotter. 
       self.allowedHPGLCommands = tuple([
       '(', ')', 'AA','AR','CA','CI','CP','CS','DC','DF','DI','DP',
       'DR','DT','EA','ER','EW','FT','IM','IN','IP','IW','LB','LT',
@@ -30,8 +28,6 @@ class Plotter(object):
       'PD','PR','PS','PT','PU','RA','RO','RR','SA','SC','SI','SL',
       'SM','SP', 'SR','SS','TL','UC','VS','WG','XT','YT'])
 
-#      self.marginHard = _PlotterMargin(self, self._hpgl.OH())
-#      self.marginSoft = _PlotterMargin(self, self._hpgl.OW()) 
       self.marginHard = margin._MarginsHard(self)
       self.marginSoft = margin._MarginsSoft(self)
 
@@ -46,29 +42,6 @@ class Plotter(object):
       self.write(self._hpgl.On())
       self.write(self._hpgl.IN())
 
-#   def write(self, data):
-#      ''' Public access for writing to serial port. 
-#         It allows the <data> input to be a list or tuple. 
-#         All elements inside the list must have a <format> attribute'''
-#      commands =  [ ]
-#      if type(data) in (list, tuple, types.GeneratorType):
-#         for c in data:
-#            assert hasattr(c, 'format')
-#            ### TODO how can we check HPGL adecuacy while at the same time 
-#            ### allowing the user to define his own HPGL objects?
-##            if self._isCommandKnown(c):
-##               commands.append(c.format) 
-##            self._isCommandKnown(c)
-#            commands.append(c.format) 
-#         self._writeStringToPort(''.join(commands))
-#      elif isinstance(data, str):
-#         self._writeStringToPort(data)
-#      elif hasattr(data, 'format'):
-##         if self._isCommandKnown(data):
-##            self._writeStringToPort(data.format)
-#         self._writeStringToPort(data.format)
-#      else:
-#         raise ValueError('Invalid value. Must be str or _HPLGCommand.')
 
    def write(self, data):
       '''Public access for writing to serial port. 
@@ -87,45 +60,6 @@ class Plotter(object):
 
    ### PRIVATE METHODS ###
 
-#   def _writeStringToPort(self, data):
-#      ''' Write data to serial port.
-#      -data- is expected to be of type string.'''
-#      assert type(data) is str
-#      self._semaphoreBuffer(data)
-
-#   def _semaphoreBuffer(self, data):
-#      ''' If the data is larger than the available buffer 
-#         space we break it up into chunks!  '''
-#      dataLen = len(data)
-#      bufferSpace = self._bufferSpace
-#      #print "total command length: %d" % dataLen
-#      if dataLen > bufferSpace:      
-#         print "Uh oh, too much data!"
-#         numChunks = (dataLen / 1000) + 1
-#         for i in range(numChunks):
-#            self._sleepWhileBufferFull()
-#            start = i * 1000
-#            end = start + 1000
-#            self._serialPort.write(data[start:end])         
-#      # buffer space is fine, just send it as is!
-#      else:
-#         self._serialPort.write(data)
-#      #print "done writing to port..."
-      
-#   def _sleepWhileBufferFull(self):
-#      '''
-#         sleeps until the buffer has some room in it.
-#      '''
-#      space = self._bufferSpace  
-#      if space < 1000:
-#         print 'Buffer getting full, sleeping...'
-#         while True:
-#            time.sleep(1)
-#            space = self._bufferSpace  
-#            if space >= 1000:
-#               print 'Okay, now buffer has room...'
-#               break
-
    def _sleepWhileBufferFull(self):
       '''
          sleeps until the buffer has some room in it.
@@ -136,12 +70,14 @@ class Plotter(object):
             time.sleep(1)
          #print 'Okay, now buffer has room...'
 
+
    def _sliceStringToBufferSize(self, data):
          result = [ ]
          count = int(math.ceil(len(data) / self.bufferSize))
          for i in range(count):
             result.append(data[i * self.bufferSize: (i+1) * self.bufferSize])
          return result
+
 
    def _writeStringToPort(self, data):
       ''' Write data to serial port.
@@ -155,27 +91,6 @@ class Plotter(object):
 
    ### PRIVATE QUERIES ###
 
-#   def _readByte(self):
-#      byte = self._serialPort.read()
-#      return byte
-
-#   def _readPort(self):
-#      '''Read data from the serial port'''
-#      maxattempts = 16 * 5 # 5 secs.
-#      countAttempts = 0
-#      while self._serialPort.inWaiting( )==0 and countAttempts < maxattempts:
-#         countAttempts += 1
-#         time.sleep(1. / 16)
-#      if countAttempts == maxattempts:
-#         print 'No response from plotter. :('
-#         return None
-#
-#      result = ''
-#      input = 'xxx'
-#      while input != '':
-#         input = self._readByte()
-#         result += input
-#      return result
 
    def _readPort(self):
       '''Read data from serial port.'''
@@ -185,6 +100,7 @@ class Plotter(object):
       #print repr(result)
       return result
    
+
    @property
    def _bufferSpace(self):
       #print "getting _bufferSpace..."
