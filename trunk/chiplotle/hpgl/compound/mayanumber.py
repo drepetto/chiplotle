@@ -6,8 +6,8 @@ import copy
 
 class MayaNumber(_CompoundHPGL):
 
-   def __init__(self, x, y, value, size=500):
-      _CompoundHPGL.__init__(self, (x, y)) 
+   def __init__(self, xy, value, size=500):
+      _CompoundHPGL.__init__(self, xy) 
       self.value = value
       self.size = size
       self.filled = False

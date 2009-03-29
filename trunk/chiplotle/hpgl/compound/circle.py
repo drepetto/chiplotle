@@ -4,8 +4,8 @@ from chiplotle.hpgl.scalable import Scalable
 
 class Circle(_CompoundHPGL):
    '''Circle with absolute position.'''
-   def __init__(self, x, y, radius, chord=None, filled=False, pen=None):
-      _CompoundHPGL.__init__(self, (x, y), pen)
+   def __init__(self, xy, radius, chord=None, filled=False, pen=None):
+      _CompoundHPGL.__init__(self, xy, pen)
       self.radius = Scalable(radius)
       self.chord = chord
       self.filled = filled
