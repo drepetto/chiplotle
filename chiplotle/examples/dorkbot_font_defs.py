@@ -1,67 +1,4 @@
-## TODO: this can be removed. Replaced with a Python dictionary.
-#def lookup_char(character):
-#	if character == 'a':
-#		return a
-#	elif character == 'b':
-#		return b
-#	elif character == 'c':
-#		return c
-#	elif character == 'd':
-#		return d
-#	elif character == 'e':
-#		return e
-#	elif character == 'f':
-#		return f
-#	elif character == 'g':
-#		return g
-#	elif character == 'h':
-#		return h
-#	elif character == 'i':
-#		return i
-#	elif character == 'j':
-#		return j
-#	elif character == 'k':
-#		return k
-#	elif character == 'l':
-#		return l
-#	elif character == 'm':
-#		return m
-#	elif character == 'n':
-#		return n
-#	elif character == 'o':
-#		return o
-#	elif character == 'p':
-#		return p
-#	elif character == 'q':
-#		return q
-#	elif character == 'r':
-#		return r
-#	elif character == 's':
-#		return s
-#	elif character == 't':
-#		return t
-#	elif character == 'u':
-#		return u
-#	elif character == 'v':
-#		return v
-#	elif character == 'w':
-#		return w
-#	elif character == 'x':
-#		return x
-#	elif character == 'y':
-#		return y
-#	elif character == 'z':
-#		return z
-#	elif character == '-':
-#		return dash
-#	elif character == '!':
-#		return bang
 
-
-char_dict = {'a':a, 'b':b, 'c':c, 'd':d, 'e':e, 'f':f, 'g':g, 'h':h,
-   'i':i, 'j':j, 'k':k, 'l':l, 'm':m, 'n':n, 'o':o, 'p':p, 'q':q, 'r':r,
-   's':s, 't':t, 'u':u, 'v':v, 'w':w, 'x':x, 'y':y, 'z':z, '-':dash, 
-   '!':bang}
 
 # a_ b_ etc are backwards characters for iron on transfers 
 
@@ -164,7 +101,37 @@ e_= [
 	1,1,1,
 	0,0,0
 ]
-					
+	
+f = [
+	1,1,1,
+	1,0,0,
+	1,1,0,
+	1,0,0,
+	1,0,0,
+	0,0,0,
+	0,0,0
+]
+
+g = [
+	0,0,0,
+	0,0,0,
+	1,1,1,
+	1,0,1,
+	1,1,1,
+	0,0,1,
+	1,1,1,
+]
+
+h = [
+	1,0,0,
+	1,0,0,
+	1,1,1,
+	1,0,1,
+	1,0,1,
+	0,0,0,
+	0,0,0
+]
+
 i= [
 	0,1,0,
 	0,0,0,
@@ -176,6 +143,16 @@ i= [
 ]
 
 i_= i
+
+j = [
+	0,0,1,
+	0,0,0,
+	0,0,1,
+	0,0,1,
+	0,0,1,
+	1,0,1,
+	1,1,1
+]
 
 k= [
 	1,0,0,
@@ -211,9 +188,9 @@ l_= l
 	
 m= [
 	1,0,1,
+	1,1,1,
 	1,0,1,
-	1,1,1,
-	1,1,1,
+	1,0,1,
 	1,0,1,
 	0,0,0,
 	0,0,0
@@ -245,6 +222,26 @@ o= [
 
 o_= o
 				
+p = [
+	0,0,0,
+	0,0,0,
+	1,1,1,
+	1,0,1,
+	1,1,1,
+	1,0,0,
+	1,0,0,
+]
+
+q = [
+	0,0,0,
+	0,0,0,
+	1,1,1,
+	1,0,1,
+	1,1,1,
+	0,0,1,
+	0,0,1
+]
+			
 r= [
 	0,0,0,
 	0,0,0,
@@ -265,6 +262,16 @@ r_= [
 	0,0,0
 ]
 
+s = [
+	0,0,0,
+	0,0,0,
+	1,1,1,
+	0,1,0,
+	1,1,1,
+	0,0,0,
+	0,0,0
+]
+
 t= [
 	0,1,0,
 	0,1,0,
@@ -276,7 +283,47 @@ t= [
 ]
 
 t_= t
-				
+
+u = [
+	0,0,0,
+	0,0,0,
+	1,0,1,
+	1,0,1,
+	1,1,1,
+	0,0,0,
+	0,0,0
+]
+
+v = [
+	0,0,0,
+	0,0,0,
+	1,0,1,
+	1,0,1,
+	0,1,0,
+	0,0,0,
+	0,0,0
+]
+
+w = [
+	1,0,1,
+	1,0,1,
+	1,0,1,
+	1,1,1,
+	1,0,1,
+	0,0,0,
+	0,0,0
+]
+
+x = [
+	0,0,0,
+	0,0,0,
+	1,0,1,
+	0,1,0,
+	1,0,1,
+	0,0,0,
+	0,0,0
+]
+
 y= [
 	0,0,0,
 	0,0,0,
@@ -296,8 +343,18 @@ y_= [
 	1,0,0,
 	1,1,1
 ]
-		
-dash= dash_
+
+z = [
+	0,0,0,
+	0,0,0,
+	1,1,1,
+	0,1,0,
+	1,1,1,
+	0,0,0,
+	0,0,0
+]
+
+dash= [
 	0,0,0,
 	0,0,0,
 	0,0,0,
@@ -308,7 +365,7 @@ dash= dash_
 ]
 
 
-bang= bang_
+bang= [
 	0,0,0,
 	0,1,0,
 	0,1,0,
@@ -318,3 +375,10 @@ bang= bang_
 	0,0,0
 ]
 
+
+
+char_dict = {'a':a, 'b':b, 'c':c, 'd':d, 'e':e, 'f':f, 'g':g, 'h':h,
+   'i':i, 'j':j, 'k':k, 'l':l, 'm':m, 'n':n, 'o':o, 'p':p, 'q':q, 'r':r,
+   's':s, 't':t, 'u':u, 'v':v, 'w':w, 'x':x, 'y':y, 'z':z, '-':dash, 
+   '!':bang}
+   
