@@ -1,7 +1,7 @@
 
-from chiplotle.plotters.plotter import Plotter
+from chiplotle.plotters.baseplotter import _BasePlotter
 
-class _DrawingPlotter(Plotter):
+class _DrawingPlotter(_BasePlotter):
 
 
    """
