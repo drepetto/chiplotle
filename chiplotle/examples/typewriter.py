@@ -5,9 +5,7 @@ from chiplotle.utils.run_chiplotle_UNIX import plotter
 print("***************************")
 print("* CHIPLOTLE TYPEWRITER!!! *")
 print("***************************")
-
-
-print("enter a blank line for options.\n\r")
+print("")
 
 pen_num = int(raw_input("which pen? "))
 
@@ -20,6 +18,11 @@ if set_size == "y":
 
 plotter.selectPen(pen_num)
 
+print("")
+print("type at the >>> prompt.")
+print("press RETURN after each line to be plotted.")
+print("enter a blank line for options.")
+print("")
 
 finished = False
 
