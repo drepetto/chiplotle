@@ -1,5 +1,4 @@
 from chiplotle.utils.run_chiplotle_UNIX import plotter
-from chiplotle import MayaNumber
 from chiplotle.hpgl.compound.dorkbotfont import DorkbotFont
 
 
@@ -45,7 +44,17 @@ def main():
 			finished = True
 		else:
 			input = raw_input("move to top left corner and hit enter to begin plotting...")
-			font.plot(text)
+			
+			point_string = plotter.actualPosition
+			point_string_parts = point_string.split(',')
+			origin_x = int(point_string_parts[0])
+			# the "- cell_size is there because rects are drawn from the bottom left
+			# corner, but we've put our starting point at the top left
+			origin_y = int(point_string_parts[1]) - cell_size
+		
+			plotter.selectPen(outline_pen)
+			
+			plotter.write(font.plot(origin_x, origin_y, text))
 
 	plotter.penUp()
 
