@@ -15,7 +15,7 @@ def main():
    for i in range(0, 401, 1):
       y = top - (i // numbersPerLine) * lineSpacing
       x = left + (i % numbersPerLine) * numberSize
-      m = MayaNumber(x, y, i, numberSize)
+      m = MayaNumber((x, y), i, numberSize)
       m.filled = False
       r.append(m)
    plotter.write(r)
