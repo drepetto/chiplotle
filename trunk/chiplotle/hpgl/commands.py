@@ -15,7 +15,12 @@ class PU(_Positional):
    Raises the pen from the plotting surface. Use this instruction to prevent
    stray lines from being drawn.
 
-   HPGL syntax: PU X,Y(,...); or PU;
+   Arguments:
+
+      Optional:
+         *xy*:
+            A list or tuple of x, y positions of the form
+            (x1, y2, x2, y2, x3, y3, ..., xn, yn).
    '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, False)
@@ -23,10 +28,16 @@ class PU(_Positional):
 
 class PD(_Positional):
    '''
-   Pen Down.
+   Pen Down
+
    Lowers the pen onto the writing surface for drawing and moves it to the 
    coordinates/increments you specified.
-   SYNTAX: PD X,Y (,...); or PD;
+
+   Arguments:
+
+      Optional:
+         *xy*: A list or tuple of x, y positions of the form 
+         (x1, y2, x2, y2, x3, y3, ..., xn, yn).
    '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, False)
@@ -34,10 +45,10 @@ class PD(_Positional):
 
 class PA(_Positional):
    '''
-   Plot Absolute.
+   Plot Absolute
+
    Establishes absolute plotting and moves the pen to specified absolute
    coordinates using the current pen position.
-   SYNTAX: PA X,Y (,...); or PA;
    '''
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
@@ -155,10 +166,17 @@ class AP(_HPGLCommand):
 
 class AA(_Arc):
    '''
-   Arch Absolute.
-   Draws an arc, using absolute coordinates, that starts at the
-   current pen location and uses the specified center point.
-   SYNTAX: AA X,Y,arc angle(,chord tolerance);
+   :Arch Absolute:
+      Draws an arc, using absolute coordinates, that starts at the
+      current pen location and uses the specified center point.
+
+   Mandatory arguments:
+      | *xy*: an (x, y) position pair.
+      | *angle*: the arch angle in degrees?
+
+   Optional arguments:
+      | *chordtolerance*: 
+
    '''
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, True)
@@ -166,10 +184,16 @@ class AA(_Arc):
 
 class AR(_Arc):
    '''
-   Arch Relative.
-   Draws an arc, using relative coordinates, that starts at the
-   current pen location and uses the specified center point.
-   SYNTAX: AR X,Y,arc angle(,chord tolerance);
+   :Arch Relative:
+      Draws an arc, using relative coordinates, that starts at the
+      current pen location and uses the specified center point.
+
+   Mandatory arguments:
+      | *xy*: an (x, y) position pair.
+      | *angle*: the arch angle in degrees?
+
+   Optional arguments:
+      | *chordtolerance*: 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, False)
