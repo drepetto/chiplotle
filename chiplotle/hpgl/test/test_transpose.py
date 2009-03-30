@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.tools.transpose import transpose
 
 def test_transpose_CI( ):
    '''Transpose correctly ignores CI attributes.'''

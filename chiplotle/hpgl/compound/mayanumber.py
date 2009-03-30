@@ -1,7 +1,9 @@
 from __future__ import division
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, CI, PA, PR, RA, EA, WG
-from chiplotle.hpgl.tools import transpose, scale
+#from chiplotle.hpgl.tools import transpose, scale
+from chiplotle.hpgl.tools.transpose import transpose
+from chiplotle.hpgl.tools.scale import scale
 import copy
 
 class MayaNumber(_CompoundHPGL):
