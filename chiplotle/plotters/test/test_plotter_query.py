@@ -1,11 +1,11 @@
 from chiplotle import *
-from chiplotle.cfg.get_serial_port import get_serial_port
+from chiplotle.cfg.read_config_value import read_config_value
 from serial import Serial
 
 def test_plotter_query_01( ):
    '''
    '''
-   port = get_serial_port( )
+   port = read_config_value('serial_port')
    if port:
       s = Serial(port=port, baudrate=9600, timeout=0.1)
       plotter = Plotter(s)
