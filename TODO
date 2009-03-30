@@ -9,12 +9,6 @@ Write more tests!!
 -----------------------
 The following HPGL commands are pending:
 
-   def curvedLineGenerator(n = None, inputDelay = None):
-      if n:
-         if inputDelay:
-            return 'CV%d,%d%s' % (n, inputDelay, TERMINATOR)
-         else:
-            return 'CV%d%s' % (n, TERMINATOR)         
          
    def inputMask(e = 233, s = 0, p = 0):
       """
