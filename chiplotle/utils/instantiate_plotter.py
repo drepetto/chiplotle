@@ -2,6 +2,7 @@ from chiplotle.cfg.read_config_value import read_config_value
 from chiplotle.utils.interactive_open_serial import interactive_open_serial
 from chiplotle.utils.interactive_choose_plotter import \
    interactive_choose_plotter
+from chiplotle import plotters
 import serial
 
 def instantiate_plotter(port=None):
