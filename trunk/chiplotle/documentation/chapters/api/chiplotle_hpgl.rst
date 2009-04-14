@@ -1,5 +1,5 @@
 =======================
-Chiplotle hpgl commands
+Chiplotle-HPGL commands
 =======================
 
 :mod: `chiplotle.hpgl.commands`
