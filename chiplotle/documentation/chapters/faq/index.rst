@@ -46,7 +46,13 @@ then send hpgl commands::
 Is there a facility in Chiplotle to send over already existing HPGL command files? 
 
 **A:**
-HPGL files are plain text files. To print one simply open it, read it, and send the strings to the plotter, like so::
+Yes. Chiplotle comes with the `plot-hpgl` executable script designed exactly for this purpose. To send HPGL files to your plotter simply run the script from the command prompt with the file as the argument::
+
+   $ plot-hpgl my_file.hpgl
+
+To see the usage instructions run `plot-hpgl` with no arguments. Note that Chiplotle simply pipes the file to the plotter and does not check the syntax of the HPGL file.
+
+You can also send HPGL files to your plotter from within a live Chiplotle session. Simply open the file, read it, and send the strings to the plotter, like so::
 
    chiplotle> f = open('my_file.hpgl', 'r')
    chiplotle> my_file = f.read( )

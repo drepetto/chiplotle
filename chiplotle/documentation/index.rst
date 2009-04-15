@@ -12,8 +12,7 @@ Chiplotle documentation
    chapters/tutorial/index
    chapters/fundamentals/index
    chapters/faq/index
-   chapters/api/chiplotle_hpgl
-   chapters/api/chiplotle_compound
+   chapters/api/index
    chapters/resources/index
 
 
