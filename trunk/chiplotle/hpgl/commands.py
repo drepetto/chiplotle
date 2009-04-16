@@ -175,7 +175,7 @@ class AA(_Arc):
       | *angle*: the arch angle in degrees?
 
    Optional arguments:
-      | *chordtolerance*: 
+      | *chordtolerance*: [0.36 to 180] degress, or None. 
 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
@@ -193,7 +193,7 @@ class AR(_Arc):
       | *angle*: the arch angle in degrees?
 
    Optional arguments:
-      | *chordtolerance*: 
+      | *chordtolerance*: [0.36 to 180] degress, or None. 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, False)
@@ -201,12 +201,15 @@ class AR(_Arc):
 
 class AS(_HPGLCommand):
    '''
-   Acceleration Select.
-   Sets pen acceleration for one or all pens. The default
-   acceleration is suitable for all recommended pen and media
-   combinations. Slowing the acceleration may improve line
-   quality if you are using heavier than recommended media.
-   SYNTAX: AS pen acceleration (, pen number); or AS;
+   :Acceleration Select:
+      Sets pen acceleration for one or all pens. The default
+      acceleration is suitable for all recommended pen and media
+      combinations. Slowing the acceleration may improve line
+      quality if you are using heavier than recommended media.
+
+   Optional arguments:
+      | *accel*: [1 to 4] or None. 
+      | *pen*: [1 to 8] or None. When None, accel is applied to all pens.
    '''
    def __init__(self, accel=None, pen=None):   
       self.accel = accel
@@ -670,11 +673,14 @@ class CS(_HPGLCommand):
 
 class CT(_HPGLCommand):
    '''
-   Chord tolerance.
+   :Chord tolerance:
+
    Determines whether the chord tolerance parameter of the CI, AA, AR
    and WG instructions is interpreted as a chord angle in degrees or as
    a deviation distance in current units.
-   SYNTAX: CT n; or CT;
+
+   Optional Arguments:
+      | type: 0 (degrees) or 1. Default is 0. 
    '''
    def __init__(self, type=0):   
       self.type = type
