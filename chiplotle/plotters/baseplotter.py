@@ -7,6 +7,7 @@ from __future__ import division
 from chiplotle.hpgl import commands 
 from chiplotle.plotters import margin
 import math
+import re
 import serial
 import time
 import types
@@ -68,10 +69,13 @@ class _BasePlotter(object):
    def _filterUnrecognizedCommands(self, commands):
       assert isinstance(commands, str)
       result = [ ] 
-      commands = commands.replace('\n', ';').replace(';', ';*').strip('*')
-      for comm in commands.split('*'):
+      #commands = commands.replace('\n', ';').replace(';', ';*').strip('*')
+      #for comm in commands.split('*'):
+      commands = re.split('[\n;]+', commands)
+      for comm in commands:
          if self._isHPGLCommandKnown(comm):
-            result.append(comm)
+            #result.append(comm)
+            result.append(comm + ';')
          else:
             print 'WARNING: HPGL command "%s" not recognized by plotter %s.' \
             % (comm, self.type),
