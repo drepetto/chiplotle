@@ -42,13 +42,20 @@ class _BasePlotter(object):
    def write(self, data):
       '''Public access for writing to serial port. 
          data can be an iterator, a string or an _HPGLCommand. '''
-      if type(data) in (list, tuple, types.GeneratorType):
-         for c in data:
-            self.write(c) 
-      elif hasattr(data, 'format'):
+      if hasattr(data, 'format'):
          self._writeStringToPort(data.format)
       elif isinstance(data, str):
          self._writeStringToPort(data)
+      elif type(data) in (list, tuple, types.GeneratorType):
+         result = [ ]
+         for c in data:
+            if hasattr(c, 'format'):
+               result.append(c.format)
+            elif isinstance(c, str):
+               result.append(c)
+            else:
+               raise ValueError('Invalid value. Must be str or _HPLGCommand.')
+         self._writeStringToPort(''.join(result))
       else:
          raise ValueError('Invalid value. \
          Must be str, iterator or _HPLGCommand.')

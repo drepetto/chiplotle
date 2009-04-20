@@ -26,9 +26,7 @@ def _remove_modules():
 from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.compound import *
 from chiplotle.hpgl.tools import *
-from chiplotle.hpgl.utils import *
 
 _remove_modules()
 
-# keep plotters module
 from chiplotle.plotters import *
