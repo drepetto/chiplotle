@@ -73,13 +73,14 @@ class _BasePlotter(object):
       #for comm in commands.split('*'):
       commands = re.split('[\n;]+', commands)
       for comm in commands:
-         if self._isHPGLCommandKnown(comm):
-            #result.append(comm)
-            result.append(comm + ';')
-         else:
-            print 'WARNING: HPGL command "%s" not recognized by plotter %s.' \
-            % (comm, self.type),
-            print 'Command not sent.'
+         if comm: ## if not an empty string.
+            if self._isHPGLCommandKnown(comm):
+               #result.append(comm)
+               result.append(comm + ';')
+            else:
+               print 'WARNING: HPGL command "%s" not recognized by %s.'\
+               % (comm, self.type),
+               print 'Command not sent.'
       return ''.join(result)
 
 

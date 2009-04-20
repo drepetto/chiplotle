@@ -6,7 +6,6 @@ def parse_hpgl_file(filename):
    fs = f.read()
    f.close()
    fs = fs.replace('\n',';')
-   fs = fs.replace('\r',';')
    #commands = fs.split(';')
    commands = re.split(';+', fs)
    #print commands
@@ -28,5 +27,4 @@ def parse_hpgl_file(filename):
          result.append(cout)
       except:
          print '*** ERROR: Could not create %s(%s)' % (head, body)
-         print 'Command skipped. File created anyway. '
    return result
