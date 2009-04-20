@@ -21,12 +21,7 @@ class _BasePlotter(object):
       self.bufferSize = self._bufferSpace
 
       ## Only these commands will be sent to the plotter. 
-      self.allowedHPGLCommands = tuple([
-      '(', ')', 'AA','AR','CA','CI','CP','CS','DC','DF','DI','DP',
-      'DR','DT','EA','ER','EW','FT','IM','IN','IP','IW','LB','LT',
-      'OA','OC','OD','OE','OF','OH','OI','OO','OP','OS','OW','PA',
-      'PD','PR','PS','PT','PU','RA','RO','RR','SA','SC','SI','SL',
-      'SM','SP', 'SR','SS','TL','UC','VS','WG','XT','YT'])
+      self.allowedHPGLCommands = tuple( )
 
       self.marginHard = margin._MarginsHard(self)
       self.marginSoft = margin._MarginsSoft(self)
@@ -60,6 +55,30 @@ class _BasePlotter(object):
 
    ### PRIVATE METHODS ###
 
+   def _isHPGLCommandKnown(self, hpglCommand):
+      if isinstance(hpglCommand, str):
+         command_head = hpglCommand[0:2]
+      elif hasattr(hpglCommand, '_name'):
+         command_head = hpglCommand._name
+      else:
+         raise TypeError("Don't know type %s" % hpglCommand)
+      return command_head.upper( ) in self.allowedHPGLCommands
+
+
+   def _filterUnrecognizedCommands(self, commands):
+      assert isinstance(commands, str)
+      result = [ ] 
+      commands = commands.replace('\n', ';').replace(';', ';*').strip('*')
+      for comm in commands.split('*'):
+         if self._isHPGLCommandKnown(comm):
+            result.append(comm)
+         else:
+            print 'WARNING: HPGL command "%s" not recognized by plotter %s.' \
+            % (comm, self.type),
+            print 'Command not sent.'
+      return ''.join(result)
+
+
    def _sleepWhileBufferFull(self):
       '''
          sleeps until the buffer has some room in it.
@@ -80,9 +99,9 @@ class _BasePlotter(object):
 
 
    def _writeStringToPort(self, data):
-      ''' Write data to serial port.
-      -data- is expected to be of type string.'''
+      ''' Write data to serial port. data is expected to be a string.'''
       assert type(data) is str
+      data = self._filterUnrecognizedCommands(data)
       data = self._sliceStringToBufferSize(data)
       for chunk in data:
          self._sleepWhileBufferFull( )
@@ -111,16 +130,6 @@ class _BasePlotter(object):
       return int(bs)
 
 
-   def _isCommandKnown(self, hpglCommand):
-      '''Filter out unknown command and tell us about it.'''
-      if hpglCommand._name in self.allowedHPGLCommands:
-         return True
-      else:
-         print "*** WARNING: Command [%s] not understood by %s plotter." \
-         % (hpglCommand._name, self.type)
-         return False
-
-
    ### PUBLIC QUERIES (PROPERTIES) ###
 
    @property
@@ -141,9 +150,8 @@ class _BasePlotter(object):
    @property
    def carouselType(self):
       command = self._hpgl.OT( )
-      if self._isCommandKnown(command):
-         self.write(command)
-         return self._readPort()
+      self.write(command)
+      return self._readPort()
 
    @property
    def commandedPosition(self):
@@ -169,16 +177,14 @@ class _BasePlotter(object):
    @property
    def outputKey(self):
       command = self._hpgl.OK( )
-      if self._isCommandKnown(command):
-         self.write(command)
-         return self._readPort()
+      self.write(command)
+      return self._readPort()
 
    @property
    def labelLength(self):
       command = self._hpgl.OL( )
-      if self._isCommandKnown(command):
-         self.write(command)
-         return self._readPort()
+      self.write(command)
+      return self._readPort()
 
    @property
    def options(self):
