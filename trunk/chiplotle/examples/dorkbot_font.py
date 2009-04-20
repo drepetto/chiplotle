@@ -5,9 +5,9 @@ from chiplotle.hpgl.compound.dorkbotfont import DorkbotFont
 
 def main():
 	
-	print("*********************")
-	print("* DORKBOT FONT TEST *")
-	print("*********************")
+	print("****************")
+	print("* DORKBOT FONT *")
+	print("****************")
 	
 	input = raw_input("enter font outline pen number:")
 	outline_pen = int(input)
