@@ -15,14 +15,14 @@ import types
 
 class _BasePlotter(object):
    def __init__(self, serialPort):
-      self.type = 'Generic'
+      self.type = '_BasePlotter'
       self.memory = []
       self._serialPort = serialPort
       self._hpgl = commands
       self.bufferSize = self._bufferSpace
 
       ## Only these commands will be sent to the plotter. 
-      self.allowedHPGLCommands = tuple( )
+      #self.allowedHPGLCommands = tuple( )
 
       self.marginHard = margin._MarginsHard(self)
       self.marginSoft = margin._MarginsSoft(self)
