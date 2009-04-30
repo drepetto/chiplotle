@@ -98,24 +98,9 @@ html_theme = 'chiplotle'
 # further.  For a list of options available for each theme, see the
 # documentation.
 html_theme_options = {
-  'bodyfont': 'Verdana,  sans-serif',
+  'bodyfont': 'Arial,  sans-serif',
   'headfont': 'Lucida Sans Unicode, Lucida Sans, Arial,  sans-serif',
 
-  'footerbgcolor': '#222222',
-  'footertextcolor': '#aaaaaa',
-
-  'sidebarbgcolor': '#ffffff', 
-  'sidebartextcolor': '#222222',
-  'sidebarlinkcolor': '#e14200',
-
-  'relbarbgcolor': '#e24200',
-  'relbartextcolor': '#aaaaaa',
-
-  'headbgcolor' : '#fefefe',
-  'headtextcolor': '#212121',
-
-  'linkcolor': '#e12200' ,
-  'headlinkcolor': '#e14200',
 }
 
 # Add any paths that contain custom themes here, relative to this directory.
