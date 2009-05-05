@@ -76,9 +76,8 @@ class _BasePlotter(object):
    def _filterUnrecognizedCommands(self, commands):
       assert isinstance(commands, str)
       result = [ ] 
-      #commands = commands.replace('\n', ';').replace(';', ';*').strip('*')
-      #for comm in commands.split('*'):
-      commands = re.split('[\n;]+', commands)
+      #commands = re.split('[\n;]+', commands)
+      commands = commands.split(';')
       for comm in commands:
          if comm: ## if not an empty string.
             if self._isHPGLCommandKnown(comm):
