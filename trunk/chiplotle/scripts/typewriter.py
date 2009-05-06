@@ -1,51 +1,68 @@
+#!/usr/bin/env python
 from chiplotle import *
 from chiplotle.utils.run_chiplotle_UNIX import plotter
 
+## HELPER FUNCTIONS ##
 
-print("***************************")
-print("* CHIPLOTLE TYPEWRITER!!! *")
-print("***************************")
-print("")
+def _query_font_size( ):
+   char_height = float(raw_input("font height (in cm)? "))
+   char_width = float(raw_input("font width (in cm)? "))
+   return char_width, char_height
+   
+def _query_pen( ):
+   pen_num = int(raw_input("which pen? "))
+   return pen_num
 
-pen_num = int(raw_input("which pen? "))
 
-set_size = raw_input("set font size (y/N)? ")
+## MAIN FUNCTION ##
 
-if set_size == "y":
-	char_height = float(raw_input("font height (in cm)? "))
-	char_width = float(raw_input("font width (in cm)? "))
-	plotter.write(SI(char_width, char_height))
+def typewriter( ):
+   print("***************************")
+   print("* CHIPLOTLE TYPEWRITER!!! *")
+   print("***************************")
+   print("")
 
-plotter.selectPen(pen_num)
+   pen_num = _query_pen( )
 
-print("")
-print("type at the >>> prompt.")
-print("press RETURN after each line to be plotted.")
-print("enter a blank line for options.")
-print("")
+   set_size = raw_input("set font size (y/N)? ")
 
-finished = False
+   if set_size.lower( ) == "y":
+      cw, ch = _query_font_size( )
+      plotter.write(SI(cw, ch))
 
-while finished == False:
-	line = raw_input(">>>")
-	if len(line) == 0:
-		print("(enter): blank line")
-		print("p: select new pen")
-		print("s: set new font size")
-		print("q: quit")
-		response = raw_input("command: ")
-		if response == "p":
-			pen_num = int(raw_input("which pen? "))
-			plotter.selectPen(pen_num)
-		elif response == "s":
-			char_height = float(raw_input("font height (in cm)? "))
-			char_width = float(raw_input("font width (in cm)? "))
-			plotter.write(SI(char_width, char_height))
-		elif response == "q":
-			finished = True
-		else:
-			plotter.write(LB("\n\r"))
-	else:
-		plotter.write(LB(line + "\n\r"))
-	
-print("l8r.")
+   plotter.selectPen(pen_num)
+
+   print("")
+   print("type at the >>> prompt.")
+   print("press RETURN after each line to be plotted.")
+   print("enter a blank line for options.")
+   print("")
+
+   finished = False
+
+   while finished == False:
+      line = raw_input(">>> ")
+      if len(line) == 0:
+         print("(enter): blank line")
+         print("p: select new pen")
+         print("s: set new font size")
+         print("q: quit")
+         response = raw_input("command: ")
+         if response == "p":
+            pen_num = _query_pen( )
+            plotter.selectPen(pen_num)
+         elif response == "s":
+            cw, ch = _query_font_size( )
+            plotter.write(SI(cw, ch))
+         elif response == "q":
+            finished = True
+         else:
+            plotter.write(LB("\n\r"))
+      else:
+         plotter.write(LB(line + "\n\r"))
+      
+   print("l8r.")
+
+
+if __name__ == '__main__':
+   typewriter( )
