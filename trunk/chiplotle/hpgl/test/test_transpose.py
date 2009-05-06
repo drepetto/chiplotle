@@ -4,7 +4,7 @@ from chiplotle.hpgl.tools.transpose import transpose
 def test_transpose_CI( ):
    '''Transpose correctly ignores CI attributes.'''
    t = CI(1, 20)
-   transpose(t, 1.5)
+   transpose(t, (1.5, -2.5))
    assert t.radius == 1
    assert t.chordangle == 20 
 
