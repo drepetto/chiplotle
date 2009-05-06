@@ -5,7 +5,7 @@ import sys
 def plot_hpgl(file):
    '''Send an HPGL file to the plotter found connected to the computer.'''
    f = open(file, 'r')
-   data = f.read( )
+   data = f.read( ).splitlines( )
    f.close( )
 
    plotter = instantiate_plotter( )
