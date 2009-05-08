@@ -90,9 +90,9 @@ class CI(_HPGLCommand):
    def format(self):
       if self.chordangle:
          return '%s%s,%s%s' % (self._name, self.radius, self.chordangle, 
-                              self.terminator)
+                              _HPGLCommand._terminator)
       else:
-         return '%s%s%s' % (self._name, self.radius, self.terminator)
+         return '%s%s%s' % (self._name, self.radius, _HPGLCommand._terminator)
 
 
 class CC(_HPGLCommand):
@@ -108,9 +108,9 @@ class CC(_HPGLCommand):
    @property
    def format(self):
       if self.angle:
-         return '%s%i%s' % (self._name, self.angle, self.terminator)
+         return '%s%i%s' % (self._name, self.angle, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class AF(_HPGLCommand):
@@ -159,9 +159,9 @@ class AP(_HPGLCommand):
    @property
    def format(self):
       if self.n:
-         return '%s%i%s' % (self._name, self.n, self.terminator)
+         return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
          
 
 class AA(_Arc):
@@ -219,11 +219,11 @@ class AS(_HPGLCommand):
    def format(self):
       if self.accel and self.pen:
          return '%s%i,%i%s' % (self._name, self.accel, self.pen, 
-                              self.terminator)
+                              _HPGLCommand._terminator)
       elif self.accel:
-         return '%s%i%s' % (self._name, self.accel, self.terminator)  
+         return '%s%i%s' % (self._name, self.accel, _HPGLCommand._terminator)  
       else:
-         return '%s%s' % (self._name, self.terminator) 
+         return '%s%s' % (self._name, _HPGLCommand._terminator) 
 
 
 ### TODO: remove redundancy in rectangles.
@@ -285,11 +285,11 @@ class VS(_HPGLCommand):
    @property
    def format(self):
       if self.vel and self.pen:
-         return '%s%i,%i%s' % (self._name, self.vel, self.pen, self.terminator)
+         return '%s%i,%i%s' % (self._name, self.vel, self.pen, _HPGLCommand._terminator)
       elif self.vel:
-         return '%s%i%s' % (self._name, self.vel, self.terminator)
+         return '%s%i%s' % (self._name, self.vel, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class FS(_HPGLCommand):
@@ -309,11 +309,11 @@ class FS(_HPGLCommand):
    def format(self):
       if self.force and self.pen:
          return '%s%i,%i%s' % (self._name, self.force, self.pen, 
-                              self.terminator)
+                              _HPGLCommand._terminator)
       elif self.force:
-         return '%s%i%s' % (self._name, self.force, self.terminator)
+         return '%s%i%s' % (self._name, self.force, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class EP(_HPGLCommand):
@@ -598,11 +598,11 @@ class PS(_HPGLCommand):
    def format(self):
       if self.length and self.width:
          return '%s%i,%i%s' % (self._name, self.length, self.width, 
-            self.terminator)
+            _HPGLCommand._terminator)
       elif self.length:
-         return '%s%i%s' % (self._name, self.length, self.terminator)
+         return '%s%i%s' % (self._name, self.length, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class BL(_HPGLCommand):
@@ -620,9 +620,9 @@ class BL(_HPGLCommand):
    @property
    def format(self):
       if self.label:
-         return '%s%s%s' % (self._name, chr(3), self.terminator)
+         return '%s%s%s' % (self._name, chr(3), _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class IN(_HPGLCommand):
@@ -668,7 +668,7 @@ class CS(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.set, self.terminator)
+      return '%s%i%s' % (self._name, self.set, _HPGLCommand._terminator)
 
 
 class CT(_HPGLCommand):
@@ -687,7 +687,7 @@ class CT(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.type, self.terminator)
+      return '%s%i%s' % (self._name, self.type, _HPGLCommand._terminator)
 
 
 class CV(_HPGLCommand):
@@ -707,11 +707,11 @@ class CV(_HPGLCommand):
    def format(self):
       if self.n and self.inputdelay:
          return '%s%i%i%s' % (self._name, self.n, self.inputdelay, 
-         self.terminator)
+         _HPGLCommand._terminator)
       elif self.n:
-         return '%s%i%s' % (self._name, self.n, self.terminator)
+         return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
          
 
 class CA(_HPGLCommand):
@@ -727,7 +727,7 @@ class CA(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
 
 
 class CM(_HPGLCommand):
@@ -746,11 +746,11 @@ class CM(_HPGLCommand):
    def format(self):
       if self.switch and self.fallback:
          return '%s%i,%i%s' % (self._name, self.switch, self.fallback, 
-         self.terminator)
+         _HPGLCommand._terminator)
       elif self.switch:
-         return '%s%i%s' % (self._name, self.switch, self.terminator)
+         return '%s%i%s' % (self._name, self.switch, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class CP(_HPGLCommand):
@@ -768,11 +768,11 @@ class CP(_HPGLCommand):
    def format(self):
       if self.spaces and self.lines:
          return '%s%s,%s%s' % (self._name, self.spaces, self.lines, 
-         self.terminator)
+         _HPGLCommand._terminator)
       elif self.spaces:
-         return '%s%s%s' % (self._name, self.spaces, self.terminator)
+         return '%s%s%s' % (self._name, self.spaces, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class DT(_HPGLCommand):
@@ -788,7 +788,7 @@ class DT(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%c%s' % (self._name, self.labelterminator, self.terminator)
+      return '%s%c%s' % (self._name, self.labelterminator, _HPGLCommand._terminator)
 
 
 class LB(_HPGLCommand):
@@ -804,7 +804,7 @@ class LB(_HPGLCommand):
    @property
    def format(self):
       return '%s%s%s%s' % (self._name, self.text, self.labelTerminator, 
-         self.terminator)
+         _HPGLCommand._terminator)
 
 
 class SP(_HPGLCommand):
@@ -816,7 +816,7 @@ class SP(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.pen, self.terminator)
+      return '%s%i%s' % (self._name, self.pen, _HPGLCommand._terminator)
 
 
 class LT(_HPGLCommand):
@@ -847,9 +847,9 @@ class LT(_HPGLCommand):
    def format(self):
       if self.pattern:
          return '%s%i,%.4f%s' % (self._name, self.pattern, 
-         self.length, self.terminator)
+         self.length, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class FT(_HPGLCommand):
@@ -873,14 +873,14 @@ class FT(_HPGLCommand):
    def format(self):
       if not None in (self.type, self.space, self.angle):
          return '%s%i,%s,%s%s' % (self._name, self.type, self.space,
-         self.angle, self.terminator)
+         self.angle, _HPGLCommand._terminator)
       elif not None in (self.type, self.space):
          return '%s%i,%s%s' % (self._name, self.type, self.space, 
-         self.terminator)
+         _HPGLCommand._terminator)
       elif not self.type is None:
-         return '%s%i%s' % (self._name, self.type, self.terminator)
+         return '%s%i%s' % (self._name, self.type, _HPGLCommand._terminator)
       elif None == self.type == self.space == self.angle:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
       else:
          ### TODO: raise this type of warning in all other commands where
          ### this may be necessary.
@@ -901,7 +901,7 @@ class PM(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
 
 
 class EC(_HPGLCommand):
@@ -916,7 +916,7 @@ class EC(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
 
 
 class PG(_HPGLCommand):
@@ -932,9 +932,9 @@ class PG(_HPGLCommand):
    @property
    def format(self):
       if self.n:
-         return '%s%i%s' % (self._name, self.n, self.terminator)
+         return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class GC(_HPGLCommand):
@@ -951,9 +951,9 @@ class GC(_HPGLCommand):
    @property
    def format(self):
       if not self.count is None:
-         return '%s%i%s' % (self._name, self.count, self.terminator)
+         return '%s%i%s' % (self._name, self.count, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 ### TODO implement these:
@@ -972,7 +972,7 @@ class SL(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f%s' % (self._name, self.tan, self.terminator)
+      return '%s%.4f%s' % (self._name, self.tan, _HPGLCommand._terminator)
 
 
 class SA(_HPGLCommand):
@@ -990,7 +990,7 @@ class RO(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.angle, self.terminator)
+      return '%s%i%s' % (self._name, self.angle, _HPGLCommand._terminator)
 
 
 class RP(_HPGLCommand):
@@ -1002,7 +1002,7 @@ class RP(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, self.terminator)
+      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
 
 
 class SM(_HPGLCommand):
@@ -1018,9 +1018,9 @@ class SM(_HPGLCommand):
    @property
    def format(self):
       if self.char:
-         return '%s%c%s' % (self._name, self.char, self.terminator)
+         return '%s%c%s' % (self._name, self.char, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class SC(_TwoPoint):
@@ -1064,11 +1064,11 @@ class IV(_HPGLCommand):
    def format(self):
       if not None in (self.slot, self.left):
          return '%s%i%i%s' % (self._name, self.slot, self.left,
-            self.terminator)
+            _HPGLCommand._terminator)
       elif not self.slot is None:
-         return '%s%i%s' % (self._name, self.slot, self.terminator)
+         return '%s%i%s' % (self._name, self.slot, _HPGLCommand._terminator)
       elif self.slot == self.left == None:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
       else:
          raise(Warning("Can't format %s with given parameters." % self._name)) 
 
@@ -1103,11 +1103,11 @@ class KY(_HPGLCommand):
    def format(self):
       if not None in (self.key, self.function):
          return '%s%i%i%s' % (self._name, self.key, self.function,
-            self.terminator)
+            _HPGLCommand._terminator)
       elif not self.key is None:
-         return '%s%i%s' % (self._name, self.key, self.terminator)
+         return '%s%i%s' % (self._name, self.key, _HPGLCommand._terminator)
       elif self.key == self.function == None:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
       else:
          raise(Warning("Can't format %s with given parameters." % self._name)) 
 
@@ -1124,7 +1124,7 @@ class PT(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f%s' % (self._name, self.thickness, self.terminator)
+      return '%s%.4f%s' % (self._name, self.thickness, _HPGLCommand._terminator)
       
 
 class SI(_CharSize):
@@ -1159,9 +1159,9 @@ class DI(_HPGLCommand):
    def format(self):
       if not None in (self.run, self.rise):
          return '%s%s,%s%s' % (self._name, self.run, self.rise, 
-         self.terminator)
+         _HPGLCommand._terminator)
       elif None == self.run == self.rise:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
       else:
          raise(Warning("Can't format %s with given parameters." % self._name)) 
          
@@ -1207,9 +1207,9 @@ class DS(_HPGLCommand):
    def format(self):
       if self.slot and self.set:
          return '%s%i,%i%s' % (self._name, self.slot, self.set, 
-         self.terminator)
+         _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
 
 class RD(_HPGLCommand):
@@ -1224,9 +1224,9 @@ class RD(_HPGLCommand):
    def format(self):
       if self.run and self.rise:
          return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, 
-            self.terminator)
+            _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
          
 
 class DV(_HPGLCommand):
@@ -1243,7 +1243,7 @@ class DV(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.vertical, self.terminator)
+      return '%s%i%s' % (self._name, self.vertical, _HPGLCommand._terminator)
          
 
 class ES(_HPGLCommand):
@@ -1261,11 +1261,11 @@ class ES(_HPGLCommand):
    def format(self):
       if not None in (self.charspace, self.linespace):
          return '%s%.4f,%.4f%s' % (self._name, self.charspace, self.linespace, 
-            self.terminator)
+            _HPGLCommand._terminator)
       elif not self.charspace is None:
-         return '%s%.4f%s' % (self._name, self.charspace, self.terminator)
+         return '%s%.4f%s' % (self._name, self.charspace, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
          
 
 class LO(_HPGLCommand):
@@ -1283,7 +1283,7 @@ class LO(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.origin, self.terminator)
+      return '%s%i%s' % (self._name, self.origin, _HPGLCommand._terminator)
 
 
 class WG(_Wedge):
@@ -1320,7 +1320,7 @@ class TL(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f,%.4f%s' % (self._name, self.tp, self.tn, self.terminator)
+      return '%s%.4f,%.4f%s' % (self._name, self.tp, self.tn, _HPGLCommand._terminator)
         
 
 class WD(_HPGLCommand):

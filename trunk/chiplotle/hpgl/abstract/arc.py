@@ -1,4 +1,5 @@
 from chiplotle.hpgl.abstract.positional import _Positional
+from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.utils.ispair import ispair
 
 class _Arc(_Positional):
@@ -15,5 +16,5 @@ class _Arc(_Positional):
          self.angle)
       if self.chordtolerance:
          result += ',%s' % self.chordtolerance
-      result += self.terminator
+      result += _HPGLCommand._terminator
       return result

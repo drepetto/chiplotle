@@ -14,7 +14,7 @@ class _Wedge(_HPGLCommand):
       if self.chordangle:
          return '%s%s,%s,%s,%s%s' % (self._name, self.radius, 
          self.startangle, self.sweepangle, self.chordangle, 
-         self.terminator)
+         _HPGLCommand._terminator)
       else:
          return '%s%s,%s,%s%s' % (self._name, self.radius, 
-         self.startangle, self.sweepangle, self.terminator)
+         self.startangle, self.sweepangle, _HPGLCommand._terminator)
