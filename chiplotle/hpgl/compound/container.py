@@ -19,3 +19,5 @@ class Container(_CompoundHPGL, list):
          result.extend(s._subcommands)
       return result
 
+   def __repr__(self):
+     return '%s(%d)' % (self._name, len(self))

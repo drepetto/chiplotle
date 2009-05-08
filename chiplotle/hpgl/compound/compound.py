@@ -49,5 +49,3 @@ class _CompoundHPGL(_Positional):
          result += c.format
       return result
 
-   def __repr__(self):
-     return '%s(%d)' % (self._name, len(self))
