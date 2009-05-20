@@ -18,7 +18,7 @@ class PU(_Positional):
    Arguments:
 
       Optional:
-         *xy*:
+         `xy`:
             A list or tuple of x, y positions of the form
             (x1, y2, x2, y2, x3, y3, ..., xn, yn).
    '''
@@ -36,7 +36,7 @@ class PD(_Positional):
    Arguments:
 
       Optional:
-         *xy*: A list or tuple of x, y positions of the form 
+         `xy`: A list or tuple of x, y positions of the form 
          (x1, y2, x2, y2, x3, y3, ..., xn, yn).
    '''
    def __init__(self, xy=None):
@@ -170,12 +170,13 @@ class AA(_Arc):
       Draws an arc, using absolute coordinates, that starts at the
       current pen location and uses the specified center point.
 
-   Mandatory arguments:
-      | *xy*: an (x, y) position pair.
-      | *angle*: the arch angle in degrees?
-
-   Optional arguments:
-      | *chordtolerance*: [0.36 to 180] degress, or None. 
+   Arguments:
+      `xy`: 2-tuple
+         an (x, y) position pair.
+      `angle`: float
+         the arch angle in degrees?
+      `chordtolerance`: float, None
+         [0.36 to 180] degress, or None. 
 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
@@ -188,12 +189,13 @@ class AR(_Arc):
       Draws an arc, using relative coordinates, that starts at the
       current pen location and uses the specified center point.
 
-   Mandatory arguments:
-      | *xy*: an (x, y) position pair.
-      | *angle*: the arch angle in degrees?
-
-   Optional arguments:
-      | *chordtolerance*: [0.36 to 180] degress, or None. 
+   Arguments:
+      `xy`: 2-tuple
+         an (x, y) position pair.
+      `angle`: float
+         the arch angle in degrees?
+      `chordtolerance`: float, None
+         [0.36 to 180] degress, or None. 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, False)
@@ -207,9 +209,11 @@ class AS(_HPGLCommand):
       combinations. Slowing the acceleration may improve line
       quality if you are using heavier than recommended media.
 
-   Optional arguments:
-      | *accel*: [1 to 4] or None. 
-      | *pen*: [1 to 8] or None. When None, accel is applied to all pens.
+   Arguments:
+      `accel`: int, None
+         [1 to 4] or None. 
+      `pen`: int, None
+         [1 to 8] or None. When None, accel is applied to all pens.
    '''
    def __init__(self, accel=None, pen=None):   
       self.accel = accel
@@ -229,9 +233,12 @@ class AS(_HPGLCommand):
 ### TODO: remove redundancy in rectangles.
 class EA(_Positional):
    '''
-   Edge Rectangle Absolute.
-   Defines and outlines a rectangle using absolute coordinates.
-   SYNTAX: EA X,Y;
+   :Edge Rectangle Absolute:
+      Defines and outlines a rectangle using absolute coordinates.
+
+   Arguments:
+      `xy`: 2-tuple
+         the absolute coordinates of the remaining corner.
    '''
    def __init__(self, xy):
       if not ispair(xy):
@@ -241,9 +248,12 @@ class EA(_Positional):
 
 class ER(_Positional):
    '''
-   Edge Rectangle Relative.
-   Defines and outlines a rectangle using relative coordinates.
-   SYNTAX: ER X,Y;
+   :Edge Rectangle Relative:
+      Defines and outlines a rectangle using relative coordinates.
+
+   Arguments:
+      `xy`: 2-tuple
+         the relative coordinates of the remaining corner.
    '''
    def __init__(self, xy):
       if not ispair(xy):
@@ -253,7 +263,12 @@ class ER(_Positional):
 
 class RA(_Positional):
    '''
-   Filled Rectangle Absolute.
+   :Filled Rectangle Absolute:
+      Defines and fills a rectangle using absolute coordinates.
+
+   Arguments:
+      `xy`: 2-tuple
+         the absolute coordinates of the remaining corner.
    '''
    def __init__(self, xy):
       if not ispair(xy):
@@ -263,7 +278,12 @@ class RA(_Positional):
 
 class RR(_Positional):
    '''
-   Filled Rectangle Relative.
+   :Filled Rectangle Relative:
+      Defines and fills a rectangle using relative coordinates.
+
+   Arguments:
+      `xy`: 2-tuple
+         the relative coordinates of the remaining corner.
    '''
    def __init__(self, xy):
       if not ispair(xy):
@@ -273,10 +293,15 @@ class RR(_Positional):
 
 class VS(_HPGLCommand):
    ''' 
-   Pen Velocity.
-   v valid range: 0.0-127.9999 (depends on plotter)
-   default depends on plotter and carousel type
-   pen valid range: 1-8
+   :Pen Velocity:
+      Set's pen velocity.
+
+   Arguments:
+      `vel`: float, None
+         range 0.0 - 127.9999 (depends on plotter)
+         default depends on plotter and carousel type
+      `pen`: int
+         range 1 - 8
    '''
    def __init__(self, vel=None, pen=None):
       self.vel = vel
@@ -294,12 +319,15 @@ class VS(_HPGLCommand):
 
 class FS(_HPGLCommand):
    '''
-   Force Select.
-   Sets pen pressure to the paper for one or all pens. Use this instruction
-   to optimize pen life and line quality for each pen and paper combination.
-   Force range is 1-8
-   Pen range is 1-8
-   If pen is None then all pens are set.
+   :Force Select:
+      Sets pen pressure to the paper for one or all pens. Use this instruction
+      to optimize pen life and line quality for each pen and paper combination.
+
+   Arguments:
+      `force`: int
+         range is 1 - 8
+      `pen`: int
+         range is 1 - 8. If pen is None then all pens are set.
    '''
    def __init__(self, force=None, pen=None):
       self.force = force
@@ -318,11 +346,10 @@ class FS(_HPGLCommand):
 
 class EP(_HPGLCommand):
    '''
-   Edge Polygon.
-   Outlines the polygin currently stored in the polygon buffer. 
-   Use this instruction to edge polygons that you defined in polygon mode 
-   (PM) and with the rectangle and wedge instructions (RA, RR and WG).
-   SYNTAX: EP;
+   :Edge Polygon:
+      Outlines the polyg0n currently stored in the polygon buffer. 
+      Use this instruction to edge polygons that you defined in polygon mode 
+      (PM) and with the rectangle and wedge instructions (RA, RR and WG).
    '''
 
 
@@ -334,122 +361,115 @@ class BF(_HPGLCommand):
 
 class DC(_HPGLCommand):
    '''
-   Digitizer Clear.
-   Terminates digitize mode. For example, if you are using an interrupt
-   routine in a digitizing program to branch to another plotting function,
-   use DC to clear the digitize mode immediately after branching. 
-   SYNTAX: DC;
+   :Digitizer Clear:
+      Terminates digitize mode. For example, if you are using an interrupt
+      routine in a digitizing program to branch to another plotting function,
+      use DC to clear the digitize mode immediately after branching. 
    '''
    
 
 class DF(_HPGLCommand):
    '''
-   Default.
-   Sets certain plotter functions to predefined default conditions.
-   Use this instruction to return the plotter to a known state while 
-   maintaining the current location of P1 and P2. When you use DF at 
-   the beginning of a program, unwanted graphics parameters such as
-   character size, slant, or scaling are not inherited from another
-   program. 
-   SYNTAX: DF;
+   :Default:
+      Sets certain plotter functions to predefined default conditions.
+      Use this instruction to return the plotter to a known state while 
+      maintaining the current location of P1 and P2. When you use DF at 
+      the beginning of a program, unwanted graphics parameters such as
+      character size, slant, or scaling are not inherited from another
+      program. 
    '''
    
 
 class DP(_HPGLCommand):
    '''
-   Digitize Point.
-   Returns the X,Y coordinates of a selected point on a plot to the
-   computer for later use. Use this instruction to input data for a
-   graphics program or to obtain the coordinates of a point or points
-   on plot.
-   SYNTAX: DP;
+   :Digitize Point:
+      Returns the X,Y coordinates of a selected point on a plot to the
+      computer for later use. Use this instruction to input data for a
+      graphics program or to obtain the coordinates of a point or points
+      on plot.
    '''
    
 
 class FP(_HPGLCommand):
    '''
-   Fill Polygon.
-   Fills the polygon currently in the polygon buffer. Use FP to fill
-   polygons defined in polygon mode (PM) and defined with the edge 
-   rectangle and wedge instructions (EA, ER, and EW).
-   SYNTAX: FP;
+   :Fill Polygon:
+      Fills the polygon currently in the polygon buffer. Use FP to fill
+      polygons defined in polygon mode (PM) and defined with the edge 
+      rectangle and wedge instructions (EA, ER, and EW).
    '''
    
 
 class FR(_HPGLCommand):
    '''
-   Advance Frame.
-   Advances paper to the next plot frame and calculates a relative 
-   coordinate system for that frame. Use FR to do multi-frame long-axis 
-   plotting.
-   SYNTAX: FP;
+   :Advance Frame:
+      Advances paper to the next plot frame and calculates a relative 
+      coordinate system for that frame. Use FR to do multi-frame long-axis 
+      plotting.
    '''
    
 
 class NR(_HPGLCommand):
    '''
-   Not Ready.
-   Programmatically simulates pressing VIEW.
-   However, you cannot take the plotter out of the view state with NR
-   instruction.
-   SYNTAX: NR;
+   :Not Ready:
+      Programmatically simulates pressing VIEW.
+      However, you cannot take the plotter out of the view state with NR
+      instruction.
    '''
    
 
 class OA(_HPGLCommand):
    '''
-   Output Actual Pen Status.
-   Outputs the current pen location (in plotter units) and up/down position.
-   Use this information to position a label or figure, to determine the
-   parameters of a window, or to determine the pen's curent location if you 
-   moved it using front-panel cursor buttons.
-   SYNTAX: OA;
+   :Output Actual Pen Status:
+      Outputs the current pen location (in plotter units) and up/down position.
+      Use this information to position a label or figure, to determine the
+      parameters of a window, or to determine the pen's curent location if you 
+      moved it using front-panel cursor buttons.
    '''
    
 
 class OC(_HPGLCommand):
    '''
-   Output Commanded Pen Status.
-   Ouput the location and up/down position of the last commanded pen move 
-   instruction. Use OC to position a label or determine the parameters of
-   an instruction that tried to move the pen beyond the limits of some window.
-   You can also use this instruction when you want to know the pen's location
-   in user units.
-   SYNTAX: OC;
+   :Output Commanded Pen Status:
+      Ouput the location and up/down position of the last commanded pen move 
+      instruction. Use OC to position a label or determine the parameters of
+      an instruction that tried to move the pen beyond the limits of some 
+      window. You can also use this instruction when you want to know the 
+      pen's location in user units.
    '''
    
 
 class OD(_HPGLCommand):
    '''
-   Output Digitized Point and Pen Status.
-   Outputs the X,Y coordinates and up/down pen position associated with the
-   last digitized point. Use this instruction after the DP instruction to
-   return the coordinates of the digitized point to your computer.
-   SYNTAX: OD;
+   :Output Digitized Point and Pen Status:
+      Outputs the X,Y coordinates and up/down pen position associated with the
+      last digitized point. Use this instruction after the DP instruction to
+      return the coordinates of the digitized point to your computer.
    '''
    
 
 class OE(_HPGLCommand):
    '''
-   Output Error.
-   Output a number corresponding to the type of HP-GL error (if any) received
-   by the plotter after the most recent IN or OE instruction. Use this 
-   instruction for debugging programs. 
+   :Output Error:
+      Output a number corresponding to the type of HP-GL error (if any) received
+      by the plotter after the most recent IN or OE instruction. Use this 
+      instruction for debugging programs. 
    
-   bit value   error no   meaning
-   0         0         no error
-   1         1         unrecognized command
-   2         2         wrong num of parameters
-   4         3         out-of-range parameter
-   8         4         unused
-   16        5         unknown character set
-   32        6         position overflow
-   64        7         unused
-   128       8         pinch wheels raised
+   =====    =====   ================
+   bit      value   error no meaning
+   =====    =====   ================
+   0         0      no error
+   1         1      unrecognized command
+   2         2      wrong num of parameters
+   4         3      out-of-range parameter
+   8         4      unused
+   16        5      unknown character set
+   32        6      position overflow
+   64        7      unused
+   128       8      pinch wheels raised
+   =====    =====   ================
    
-   SYNTAX: OE;
-   
-   NOTE: some error meanings change depending on the plotter!
+   .. note:: 
+      some error meanings change depending on the plotter!
    '''
    
 
