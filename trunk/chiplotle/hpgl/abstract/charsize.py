@@ -9,7 +9,9 @@ class _CharSize(_HPGLCommand):
    @property
    def format(self):
       if self.w and self.h:
-         return '%s%.4f,%.4f%s' % (self._name, self.w, self.h, self.terminator)
+         #return '%s%.4f,%.4f%s' % (self._name, self.w, self.h, self.terminator)
+         return '%s%.4f,%.4f%s' % (self._name, self.w, self.h, _HPGLCommand._terminator)
       else:
-         return '%s%s' % (self._name, self.terminator)
+         #return '%s%s' % (self._name, self.terminator)
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
 
