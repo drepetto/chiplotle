@@ -10,10 +10,10 @@ To install Chiplotle you must already have Python 2.5 or Python 2.6 installed in
 
 Chiplotle requires NumPy and PySerial for it to work properly. The official release installer will attempt to install these for you. However, if you choose to download Chiplotle using Subversion to obtain the latest development version you will need to install these yourself. You can download NumPy and PySerial from their respective websites.
 
-NumPy
+NumPy:
 http://numpy.scipy.org/
 
-PySerial
+PySerial:
 http://pyserial.wiki.sourceforge.net/pySerial
 
 
@@ -49,17 +49,17 @@ If you'd like to be at the cutting edge of the Chiplotle development use the fol
 
 3. Make the Python interpreter aware of Chiplotle. 
    There are two ways to do this:
-      a. Make a symlink in your Python `site-packages` directory pointing
-         to the chiplotle-trunk directory previously checked out via 
-         Subversion::
-            
-            ln -s 'pwd'/chiplotle-trunk/chiplotle SITE-PACKAGES-DIR/chiplotle
 
-         where SITE-PACKAGES-DIR is the Python `site-packages` directory.
-         In Linux this is usually in /usr/lib/Python2.x/site-packages.
+   a. Make a symlink in your Python `site-packages` directory pointing to 
+   the chiplotle-trunk directory previously checked out via Subversion::
+         
+         ln -s 'pwd'/chiplotle-trunk/chiplotle SITE-PACKAGES-DIR/chiplotle
 
-      b. Alternatively you can include the `chiplotle-trunk` directory in 
-         your PYTHONPATH environment variable.             
+      where SITE-PACKAGES-DIR is the Python `site-packages` directory.
+      In Linux this is usually in /usr/lib/Python2.x/site-packages.
+
+   b. Alternatively you can include the `chiplotle-trunk` directory in 
+   your PYTHONPATH environment variable.             
 
 4. Download and install NumPy and PySerial.
 
