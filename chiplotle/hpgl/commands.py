@@ -174,7 +174,7 @@ class AA(_Arc):
       `xy`: 2-tuple
          an (x, y) position pair.
       `angle`: float
-         the arch angle in degrees?
+         the arch angle in degrees [-360 to 360].
       `chordtolerance`: float, None
          [0.36 to 180] degress, or None. 
 
@@ -193,7 +193,7 @@ class AR(_Arc):
       `xy`: 2-tuple
          an (x, y) position pair.
       `angle`: float
-         the arch angle in degrees?
+         the arch angle in degrees [-360 to 360].
       `chordtolerance`: float, None
          [0.36 to 180] degress, or None. 
    '''
