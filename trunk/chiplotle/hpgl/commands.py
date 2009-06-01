@@ -1268,10 +1268,18 @@ class DV(_HPGLCommand):
 
 class ES(_HPGLCommand):
    '''
-   Extra space.
-   Adjust space between characters and lines of labels without affecting
-   character size.
-   SYNTAX: ES spaces (,lines); or ES;
+   :Extra space:
+      Adjust space between characters and lines of labels without affecting
+      character size.
+
+   Arguments:
+
+      `charspace`: float, None
+         spacing between characters 
+
+      `linespace`: float, None
+         spacing between lines
+
    '''
    def __init__(self, charspace = None, linespace = None):
       self.charspace = charspace
@@ -1280,10 +1288,10 @@ class ES(_HPGLCommand):
    @property
    def format(self):
       if not None in (self.charspace, self.linespace):
-         return '%s%.4f,%.4f%s' % (self._name, self.charspace, self.linespace, 
+         return '%s%.2f,%.2f%s' % (self._name, self.charspace, self.linespace, 
             _HPGLCommand._terminator)
       elif not self.charspace is None:
-         return '%s%.4f%s' % (self._name, self.charspace, _HPGLCommand._terminator)
+         return '%s%.2f%s' % (self._name, self.charspace, _HPGLCommand._terminator)
       else:
          return '%s%s' % (self._name, _HPGLCommand._terminator)
          
