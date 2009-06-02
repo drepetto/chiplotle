@@ -10,69 +10,62 @@ from chiplotle.utils.ispair import ispair
 
 class PU(_Positional):
    '''
-   Pen Up
+   :Pen Up:
+      Raises the pen from the plotting surface. Use this instruction 
+      to prevent stray lines from being drawn.
 
-   Raises the pen from the plotting surface. Use this instruction to prevent
-   stray lines from being drawn.
-
-   Arguments:
-
-      Optional:
-         `xy`:
-            A list or tuple of x, y positions of the form
-            (x1, y2, x2, y2, x3, y3, ..., xn, yn).
+   - *xy* : A ``list`` or ``tuple`` of x, y positions of the form \
+   ``(x1, y2, x2, y2, x3, y3, ..., xn, yn)``.
    '''
+
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, False)
 
 
 class PD(_Positional):
    '''
-   Pen Down
+   :Pen Down:
+      Lowers the pen onto the writing surface for drawing and moves it 
+      to the coordinates/increments you specified.
 
-   Lowers the pen onto the writing surface for drawing and moves it to the 
-   coordinates/increments you specified.
-
-   Arguments:
-
-      Optional:
-         `xy`: A list or tuple of x, y positions of the form 
-         (x1, y2, x2, y2, x3, y3, ..., xn, yn).
+   - *xy* : A ``list`` or ``tuple`` of x, y positions of the form \
+   ``(x1, y2, x2, y2, x3, y3, ..., xn, yn)``.
    '''
+
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, False)
 
 
 class PA(_Positional):
    '''
-   Plot Absolute
-
-   Establishes absolute plotting and moves the pen to specified absolute
-   coordinates using the current pen position.
+   :Plot Absolute:
+      Establishes absolute plotting and moves the pen to specified 
+      absolute coordinates using the current pen position.
    '''
+
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, True)
 
 
 class PR(_Positional):
    '''
-   Plot Relative.
-   Establishes relative plotting and moves the pen (using the current 
-   position) to the specified points, each successive move relative to the
-   last current pen location.
-   SYNTAX: PR X,Y (,...) or PR;
+   :Plot Relative:
+      Establishes relative plotting and moves the pen (using the current 
+      position) to the specified points, each successive move relative 
+      to the last current pen location.
    '''
+
    def __init__(self, xy=None):
       _Positional.__init__(self, xy, False)
 
 
 class CI(_HPGLCommand):
    '''
-   Circle.
-   Draws a circle using the specified radius and chord tolerance. 
-   If you want a filled circle, refer to the WB or PM instruction.
-   SYNTAX: CI radius(, chord tolerance);
+   :Circle:
+      Draws a circle using the specified radius and chord tolerance. 
+      If you want a filled circle, refer to the WB or PM instruction.
    '''
+
    def __init__(self, radius, chordangle=None):   
       self.radius = radius
       self.chordangle = chordangle
@@ -80,6 +73,7 @@ class CI(_HPGLCommand):
    @apply
    def radius( ):
       def fget(self):
+         '''The radius of the circle.'''
          return self._radius
       def fset(self, arg):
          ### TODO: check for type here?
@@ -97,11 +91,11 @@ class CI(_HPGLCommand):
 
 class CC(_HPGLCommand):
    '''
-   Character chord angle.
-   Sets the chord angle that determines the smoothness of characters
-   drawn when you select one of the arc-font character sets for labeling.
-   SYNTAX: CC chord angle; or CC;
+   :Character chord angle:
+      Sets the chord angle that determines the smoothness of characters
+      drawn when you select one of the arc-font character sets for labeling.
    '''
+
    def __init__(self, angle=None):   
       self.angle = angle
 
@@ -115,44 +109,46 @@ class CC(_HPGLCommand):
 
 class AF(_HPGLCommand):
    '''
-   Advance full page.
-   Advances roll paper one full page length and establishes the 
-   origin at the center of the new page.
-   SYNTAX: AF;
+   :Advance full page:
+      Advances roll paper one full page length and establishes the 
+      origin at the center of the new page.
    '''
    
 
 class AH(_HPGLCommand):
    '''
-   Advance half page.
-   Advances roll paper one half page length and establishes the 
-   origin at the center of the new page.
-   SYNTAX: AH;
+   :Advance half page:
+      Advances roll paper one half page length and establishes the 
+      origin at the center of the new page.
    '''
    
 
 class AP(_HPGLCommand):
    '''
-   Automatic Pen operations.
-   Controls automatic pen operations sich as returning a pen
-   to the carousel if it has been in the holder without drawing
-   for a certain time.
-   SYNTAX: AP; or AP n;
+   :Automatic Pen operations:
+      Controls automatic pen operations sich as returning a pen
+      to the carousel if it has been in the holder without drawing
+      for a certain time.
 
    For 7550:
+
+   ====== ======= ===== =========================================
    bit_no dec_val state meaning
-   0     1      1    lift pen if down too long without motion
-   0     0      0    do not lift pen until PU received
-   1     2      1    put pen away if too long without  motion
-   1     0      0    do not put pen away until SP0 received
-   2     4      1    do not get new pen until drawing starts
-   2     0      0    get pen immediately after SP command
-   3     8      1    merge all pen up moves
-   3     0      0    do not merge all pen up moves
+   ====== ======= ===== =========================================
+   0        1      1    lift pen if down too long without motion
+   0        0      0    do not lift pen until PU received
+   1        2      1    put pen away if too long without  motion
+   1        0      0    do not put pen away until SP0 received
+   2        4      1    do not get new pen until drawing starts
+   2        0      0    get pen immediately after SP command
+   3        8      1    merge all pen up moves
+   3        0      0    do not merge all pen up moves
+   ====== ======= ===== =========================================
 
    default is 7 on 7550
    codes are 0 to 255 with default of 95 on the DraftMaster
    '''
+
    def __init__(self, n=None):   
       self.n = n
 
@@ -170,13 +166,9 @@ class AA(_Arc):
       Draws an arc, using absolute coordinates, that starts at the
       current pen location and uses the specified center point.
 
-   Arguments:
-      `xy`: 2-tuple
-         an (x, y) position pair.
-      `angle`: float
-         the arch angle in degrees [-360 to 360].
-      `chordtolerance`: float, None
-         [0.36 to 180] degress, or None. 
+   - *xy* : ``(x, y)`` position pair.
+   - *angle* : ``float`` [-360 to 360]. The arch angle in degrees.
+   - *chordtolerance* : ``float`` [0.36 to 180], ``None``.
 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
@@ -189,14 +181,11 @@ class AR(_Arc):
       Draws an arc, using relative coordinates, that starts at the
       current pen location and uses the specified center point.
 
-   Arguments:
-      `xy`: 2-tuple
-         an (x, y) position pair.
-      `angle`: float
-         the arch angle in degrees [-360 to 360].
-      `chordtolerance`: float, None
-         [0.36 to 180] degress, or None. 
+   - *xy* : ``(x, y)`` position pair.
+   - *angle* : ``float`` [-360 to 360]. The arch angle in degrees.
+   - *chordtolerance* : ``float`` [0.36 to 180], ``None``.
    '''
+
    def __init__(self, xy, angle, chordtolerance=None):
       _Arc.__init__(self, xy, angle, chordtolerance, False)
 
@@ -209,12 +198,11 @@ class AS(_HPGLCommand):
       combinations. Slowing the acceleration may improve line
       quality if you are using heavier than recommended media.
 
-   Arguments:
-      `accel`: int, None
-         [1 to 4] or None. 
-      `pen`: int, None
-         [1 to 8] or None. When None, accel is applied to all pens.
+   - *accel* : ``int`` [1 to 4] , ``None``.  
+   - *pen* : ``int`` [1 to 8], ``None``. When ``None``, accel is \
+      applied to all pens.
    '''
+
    def __init__(self, accel=None, pen=None):   
       self.accel = accel
       self.pen = pen
@@ -230,35 +218,32 @@ class AS(_HPGLCommand):
          return '%s%s' % (self._name, _HPGLCommand._terminator) 
 
 
-### TODO: remove redundancy in rectangles.
 class EA(_Positional):
    '''
    :Edge Rectangle Absolute:
       Defines and outlines a rectangle using absolute coordinates.
 
-   Arguments:
-      `xy`: 2-tuple
-         the absolute coordinates of the remaining corner.
+   - *xy* : ``(x, y)``. The absolute coordinates of the remaining corner.
    '''
+
    def __init__(self, xy):
       if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, True)
 
 
-class ER(_Positional):
+#class ER(_Positional):
+class ER(EA):
    '''
    :Edge Rectangle Relative:
       Defines and outlines a rectangle using relative coordinates.
 
-   Arguments:
-      `xy`: 2-tuple
-         the relative coordinates of the remaining corner.
+   - *xy* : ``(x, y)``. The relative coordinates of the remaining corner.
    '''
-   def __init__(self, xy):
-      if not ispair(xy):
-         raise ValueError('xy position must be of length 2.')
-      _Positional.__init__(self, xy, False)
+#   def __init__(self, xy):
+#      if not ispair(xy):
+#         raise ValueError('xy position must be of length 2.')
+#      _Positional.__init__(self, xy, False)
 
 
 class RA(_Positional):
@@ -266,29 +251,29 @@ class RA(_Positional):
    :Filled Rectangle Absolute:
       Defines and fills a rectangle using absolute coordinates.
 
-   Arguments:
-      `xy`: 2-tuple
-         the absolute coordinates of the remaining corner.
+   - *xy* : ``(x, y)`` tuple. The absolute coordinates of the \
+      remaining corner.
    '''
+
    def __init__(self, xy):
       if not ispair(xy):
          raise ValueError('xy position must be of length 2.')
       _Positional.__init__(self, xy, True)
 
 
-class RR(_Positional):
+#class RR(_Positional):
+class RR(RA):
    '''
    :Filled Rectangle Relative:
       Defines and fills a rectangle using relative coordinates.
 
-   Arguments:
-      `xy`: 2-tuple
-         the relative coordinates of the remaining corner.
+   - *xy* : ``(x, y)`` tuple. The relative coordinates of the \
+      remaining corner.
    '''
-   def __init__(self, xy):
-      if not ispair(xy):
-         raise ValueError('xy position must be of length 2.')
-      _Positional.__init__(self, xy, False)
+#   def __init__(self, xy):
+#      if not ispair(xy):
+#         raise ValueError('xy position must be of length 2.')
+#      _Positional.__init__(self, xy, False)
 
 
 class VS(_HPGLCommand):
@@ -296,13 +281,10 @@ class VS(_HPGLCommand):
    :Pen Velocity:
       Set's pen velocity.
 
-   Arguments:
-      `vel`: float, None
-         range 0.0 - 127.9999 (depends on plotter)
-         default depends on plotter and carousel type
-      `pen`: int
-         range 1 - 8
+   - *vel* : ``float`` [0.0 - 127.9999] (depends on plotter), ``None``. 
+   - *pen* : ``int`` [1 - 8].
    '''
+
    def __init__(self, vel=None, pen=None):
       self.vel = vel
       self.pen = pen
@@ -310,7 +292,8 @@ class VS(_HPGLCommand):
    @property
    def format(self):
       if self.vel and self.pen:
-         return '%s%i,%i%s' % (self._name, self.vel, self.pen, _HPGLCommand._terminator)
+         return '%s%i,%i%s' % (self._name, self.vel, self.pen, 
+            _HPGLCommand._terminator)
       elif self.vel:
          return '%s%i%s' % (self._name, self.vel, _HPGLCommand._terminator)
       else:
@@ -320,15 +303,14 @@ class VS(_HPGLCommand):
 class FS(_HPGLCommand):
    '''
    :Force Select:
-      Sets pen pressure to the paper for one or all pens. Use this instruction
-      to optimize pen life and line quality for each pen and paper combination.
+      Sets pen pressure to the paper for one or all pens. Use this 
+      instruction to optimize pen life and line quality for each pen 
+      and paper combination.
 
-   Arguments:
-      `force`: int
-         range is 1 - 8
-      `pen`: int
-         range is 1 - 8. If pen is None then all pens are set.
+   - *force* : ``int`` [1 - 8]
+   - *pen* : ``int`` [1 - 8]. If pen is ``None`` then all pens are set.
    '''
+
    def __init__(self, force=None, pen=None):
       self.force = force
       self.pen = pen
@@ -454,19 +436,19 @@ class OE(_HPGLCommand):
       by the plotter after the most recent IN or OE instruction. Use this 
       instruction for debugging programs. 
    
-   =====    =====   ================
-   bit      value   error no meaning
-   =====    =====   ================
-   0         0      no error
-   1         1      unrecognized command
-   2         2      wrong num of parameters
-   4         3      out-of-range parameter
-   8         4      unused
-   16        5      unknown character set
-   32        6      position overflow
-   64        7      unused
-   128       8      pinch wheels raised
-   =====    =====   ================
+   =========  ========  ========================
+   bit value  error no  meaning
+   =========  ========  ========================
+   0          0         no error
+   1          1         unrecognized command
+   2          2         wrong num of parameters
+   4          3         out-of-range parameter
+   8          4         unused
+   16         5         unknown character set
+   32         6         position overflow
+   64         7         unused
+   128        8         pinch wheels raised
+   =========  ========  ========================
    
    .. note:: 
       some error meanings change depending on the plotter!
@@ -475,141 +457,133 @@ class OE(_HPGLCommand):
 
 class OF(_HPGLCommand):
    '''
-   Output Factors.
-   Outputs the number of plotter units per millimeter in each axis. This
-   lets you use the plotter with sofware that needs to know the size of a
-   plotter unit.
-   SYNTAX: OF;
+   :Output Factors:
+      Outputs the number of plotter units per millimeter in each axis. 
+      This lets you use the plotter with sofware that needs to know 
+      the size of a plotter unit.
    '''
    
 
 class OG(_HPGLCommand):
    '''
-   Output Group Count.
-   Outputs the data block number of the current group count and whether the 
-   escape function has been activated. Use this instruction at the end of a
-   data block in spooling applications, where it is important to know the 
-   current data block number and whether the data block has been transferred.
-   SYNTAX: OG;
+   :Output Group Count:
+      Outputs the data block number of the current group count and 
+      whether the escape function has been activated. Use this 
+      instruction at the end of a data block in spooling applications, 
+      where it is important to know the current data block number and 
+      whether the data block has been transferred.
    '''
 
 
 class OH(_HPGLCommand):
    '''
-   Output Hard-Clip Limits.
-   Outputs the X,Y coordinates of the current hard-clip limits. Use this 
-   instruction to determine the plotter unit dimension of the area in which 
-   plotting can occur.
-   SYNTAX: OH;
+   :Output Hard-Clip Limits:
+      Outputs the X,Y coordinates of the current hard-clip limits. 
+      Use this instruction to determine the plotter unit dimension of 
+      the area in which plotting can occur.
    '''
    
 
 class OI(_HPGLCommand):
    '''
-   Output Identification.
-   Outputs the plotter's identifying model number. This information is useful
-   in a remote operating configuration to determine which plotter model is
-   on-line, or when software needs the plotter's model number.
-   SYNTAX: OI;
+   :Output Identification:
+      Outputs the plotter's identifying model number. This information is 
+      useful in a remote operating configuration to determine which plotter 
+      model is on-line, or when software needs the plotter's model number.
    ''' 
 
 
 class OK(_HPGLCommand):
    '''
-   Output Key.
-   Outputs a number that indicates which, if any, of the front-panel function
-   keys has been pressed. use this instruction with the WD instruction when
-   designing interactive programs.
-   SYNTAX: OK;
+   :Output Key:
+      Outputs a number that indicates which, if any, of the front-panel 
+      function keys has been pressed. use this instruction with the WD 
+      instruction when designing interactive programs.
    '''
    
 
 class OL(_HPGLCommand):
    '''
-   Output Label Length.
-   Outputs information about the label contained in the label buffer.
-   SYNTAX: OL;
+   :Output Label Length:
+      Outputs information about the label contained in the label buffer.
    '''
 
 
 class OO(_HPGLCommand):
    '''
-   Output Options.
-   Outputs eight option parameters indicating the features implemented on 
-   the plotter. Some software packages use this feature to determine which 
-   plotter capabilities exist.
-   SYNTAX: OO;
+   :Output Options:
+      Outputs eight option parameters indicating the features implemented 
+      on the plotter. Some software packages use this feature to determine 
+      which plotter capabilities exist.
    '''
    
 
 class OP(_HPGLCommand):
    '''
-   Output P1 and P2.
-   Outputs the X,Y coordinates (in plotter units) of the current scaling 
-   points P1 and P2. Use this instruction to determine the numberic 
-   coordinates or P1 and P2 when they have been set manually, and to help 
-   compute the number of plotter units per user units when scaling is on.
-   This instruction can also be used with the input window (IW) instruction
-   to programmatically set the window to P1 and P2.
-   SYNTAX: OP;
+   :Output P1 and P2:
+      Outputs the X,Y coordinates (in plotter units) of the current 
+      scaling points P1 and P2. Use this instruction to determine the 
+      numberic coordinates or P1 and P2 when they have been set manually, 
+      and to help compute the number of plotter units per user units when 
+      scaling is on.  This instruction can also be used with the input 
+      window (IW) instruction to programmatically set the window to P1 and P2.
    '''
    
 
 class OS(_HPGLCommand):
    '''
-   Output Status.
-   Outputs the decimal value of the status byte. Use this instruction in 
-   debugging operations and in digitizing applications.
+   :Output Status:
+      Outputs the decimal value of the status byte. Use this instruction in 
+      debugging operations and in digitizing applications.
 
-   bit value   bit position   meaning
-   1         0            pen down
-   2         1            P1 or P2 changed ("OP" clears)
-   4         2            digitized point ready ("OD" clears)
-   8         3            initialized ("OS" clears)
-   16        4            ready to recieve data (always 0)
-   32        5            There is an error ("OE" clears)
-   64        6            unused
-   128       7            unused
+   =========  ============  =========
+   bit value  bit position  meaning
+   =========  ============  =========
+   1          0             pen down
+   2          1             P1 or P2 changed ("OP" clears)
+   4          2             digitized point ready ("OD" clears)
+   8          3             initialized ("OS" clears)
+   16         4             ready to recieve data (always 0)
+   32         5             There is an error ("OE" clears)
+   64         6             unused
+   128        7             unused
+   =========  ============  =========
    
    power-on status == 24 (bits 3 & 4 set)
-   
-   SYNTAX: OS; 
    '''
    
 
 class OT(_HPGLCommand):
    '''
-   Output Carousel Type.
-   Outputs information on the type of carousel loaded and the stalls occupied.
-   SYNTAX: OT;
+   :Output Carousel Type:
+      Outputs information on the type of carousel loaded and the 
+      stalls occupied.
    '''
    
 
 class OW(_HPGLCommand):
    '''
-   Output Window.
-   Outputs the X,Y coordinates of the lower-left and upper-right corners of 
-   the window area in which plotting can occur. This instruction is especially
-   useful when the window area (defined by IW) extends beyond the hard-clip
-   limits.
-   SYNTAX: OW;
+   :Output Window:
+      Outputs the X,Y coordinates of the lower-left and upper-right 
+      corners of the window area in which plotting can occur. 
+      This instruction is especially useful when the window area 
+      (defined by IW) extends beyond the hard-clip limits.
    '''
    
 
 class PB(_HPGLCommand):
    '''
-   Print Buffer Label.
-   Prints the contents of the label buffer.
-   SYNTAX: PB;
+   :Print Buffer Label:
+      Prints the contents of the label buffer.
    '''
    
       
 class PS(_HPGLCommand):
    '''
-   Page Size.
-   Changes the size of the hard clip limits.
-   SYNTAX: PS length(,width); or PS;
+   :Page Size:
+      Changes the size of the hard clip limits.
    '''
+
    def __init__(self, length = None, width = None):
       self.length = length
       self.width = width
@@ -627,13 +601,13 @@ class PS(_HPGLCommand):
 
 class BL(_HPGLCommand):
    '''
-   Buffer label.
-   Stores a label in the label buffer. You can then use the
-   output length (OL) instruction to determine its space requirement 
-   prior to drawing it. Or, you can use the plot buffer (PB)
-   instruction to repeatedly plot this label.
-   SYNTAX: BL c...c CHR$(3) or BL CHR$(3)
+   :Buffer label:
+      Stores a label in the label buffer. You can then use the
+      output length (OL) instruction to determine its space requirement 
+      prior to drawing it. Or, you can use the plot buffer (PB)
+      instruction to repeatedly plot this label.
    '''
+
    def __init__(self, label=None):
       self.label = label
 
@@ -647,41 +621,39 @@ class BL(_HPGLCommand):
 
 class IN(_HPGLCommand):
    '''
-   Initialize.
-   Resets most plotter functions to their default settings. Use this 
-   instruction to return the plotter to a known state and to cancel settings
-   that may have been changed by a previous program. 
-   SYNTAX: IN; or IN-1 (what is this -1);
+   :Initialize:
+      Resets most plotter functions to their default settings. Use this 
+      instruction to return the plotter to a known state and to cancel 
+      settings that may have been changed by a previous program. 
    '''
    
 
 class SS(_HPGLCommand):
    '''
-   Select standard character set.
+   :Select standard character set:
    '''
    
 
 class XT(_HPGLCommand):
    '''
-   X tick.
+   :X tick:
    '''
    
 
 class YT(_HPGLCommand):
    '''
-   Y tick.
+   :Y tick:
    '''
    
 
 class CS(_HPGLCommand):
    '''
-   Standard character set.
-   Designates a character set as the standard character set for labeling 
-   instruction. Use this instruction to change the default ANSI ASCII 
-   english set to one with characters appropriate to your application. 
-   This instruction is particularly useful if you plot most of your
-   labels in a language other than english.
-   SYNTAX: CS set; or CS;
+   :Standard character set:
+      Designates a character set as the standard character set for labeling 
+      instruction. Use this instruction to change the default ANSI ASCII 
+      english set to one with characters appropriate to your application. 
+      This instruction is particularly useful if you plot most of your
+      labels in a language other than english.
    '''
    def __init__(self, set=0):   
       self.set = set
@@ -694,13 +666,11 @@ class CS(_HPGLCommand):
 class CT(_HPGLCommand):
    '''
    :Chord tolerance:
+      Determines whether the chord tolerance parameter of the CI, AA, AR
+      and WG instructions is interpreted as a chord angle in degrees or as
+      a deviation distance in current units.
 
-   Determines whether the chord tolerance parameter of the CI, AA, AR
-   and WG instructions is interpreted as a chord angle in degrees or as
-   a deviation distance in current units.
-
-   Optional Arguments:
-      | type: 0 (degrees) or 1. Default is 0. 
+   - *type* : ``0`` (degrees) or ``1``. Default is ``0``. 
    '''
    def __init__(self, type=0):   
       self.type = type
@@ -712,13 +682,13 @@ class CT(_HPGLCommand):
 
 class CV(_HPGLCommand):
    '''
-   Curved line generator.
-   Collects vectors (line segments) in the vector buffer so that they
-   can be plotted as a group. This allows the plotter to plot in a
-   continuous motion, rather than stopping and starting at each vector 
-   endpoint. As a result, curves appear smoother. 
-   SYNTAX: CV n(,input delay); or CV;
+   :Curved line generator:
+      Collects vectors (line segments) in the vector buffer so that they
+      can be plotted as a group. This allows the plotter to plot in a
+      continuous motion, rather than stopping and starting at each vector 
+      endpoint. As a result, curves appear smoother. 
    '''
+
    def __init__(self, n=None, inputdelay=None):
       self.n = n
       self.inputdelay = inputdelay
@@ -736,12 +706,12 @@ class CV(_HPGLCommand):
 
 class CA(_HPGLCommand):
    '''
-   Alternative character set.
-   Designates a character set as the alternate character set to be used
-   in labeling instructions. Use this instruction to provide an 
-   additional character set that you can easily access in a program.
-   SYNTAX: CA set; or CA;
+   :Alternative character set:
+      Designates a character set as the alternate character set to be 
+      used in labeling instructions. Use this instruction to provide an 
+      additional character set that you can easily access in a program.
    '''
+
    def __init__(self, n=0):   
       self.n = n
 
@@ -752,12 +722,12 @@ class CA(_HPGLCommand):
 
 class CM(_HPGLCommand):
    '''
-   Character selection mode.
-   Specifies mode of character set selection and usage. Use this 
-   instruction to select the alternate HP 8-bit, ISO 7-bit, or ISO 8-bit
-   character modes.
-   SYNTAX: CM switch mode(, fallback mode); or CM;
+   :Character selection mode:
+      Specifies mode of character set selection and usage. Use this 
+      instruction to select the alternate HP 8-bit, ISO 7-bit, or 
+      ISO 8-bit character modes.
    '''
+
    def __init__(self, switch=None, fallback=None):   
       self.switch = switch
       self.fallback = fallback
@@ -775,11 +745,11 @@ class CM(_HPGLCommand):
 
 class CP(_HPGLCommand):
    '''
-   Character Plot.
-   Move the pen the specified number of character plot cells from the
-   current pen location.
-   SYNTAX: CP spaces, lines; or CP;
+   :Character Plot:
+      Move the pen the specified number of character plot cells from the
+      current pen location.
    '''
+
    def __init__(self, spaces=None, lines=None):   
       self.spaces = spaces
       self.lines = lines
@@ -797,26 +767,27 @@ class CP(_HPGLCommand):
 
 class DT(_HPGLCommand):
    '''
-   Define Label Terminator.
-   Specifies the ASCII character to be used as the label terminator.
-   Use this instruction to define a new label terminator if your computer
-   cannot use the default terminator (ETX, decimal code 3).
-   SYNTAX: DT label terminator; or DT;
+   :Define Label Terminator:
+      Specifies the ASCII character to be used as the label terminator.
+      Use this instruction to define a new label terminator if your 
+      computer cannot use the default terminator (ETX, decimal code 3).
    '''
+
    def __init__(self, terminator=chr(3)):   
       self.labelterminator = terminator
 
    @property
    def format(self):
-      return '%s%c%s' % (self._name, self.labelterminator, _HPGLCommand._terminator)
+      return '%s%c%s' % (self._name, self.labelterminator, 
+      _HPGLCommand._terminator)
 
 
 class LB(_HPGLCommand):
    '''
-   Label.
-   Plots text using the currently defined character set.
-   SYNTAX: LB c...c CHR$(3)
+   :Label:
+      Plots text using the currently defined character set.
    '''
+
    def __init__(self, text):   
       self.text = text
       self.labelTerminator = chr(3)
@@ -829,8 +800,9 @@ class LB(_HPGLCommand):
 
 class SP(_HPGLCommand):
    '''
-   Select Pen.
+   :Select Pen:
    '''
+
    def __init__(self, pen = 0):   
       self.pen = pen
 
@@ -841,24 +813,25 @@ class SP(_HPGLCommand):
 
 class LT(_HPGLCommand):
    '''
-   Line Type.
-   Specifies the line pattern to be used when drawing linese and nonsolid
-   fill types. Use LT to emphasize or de-emphasize other plotter lines and
-   shapes.
-   Parameter   Format   Range 
-   pattern     integer  -6 to 6
-   length      real     0 to 100
+   :Line Type:
+      Specifies the line pattern to be used when drawing linese and nonsolid
+      fill types. Use LT to emphasize or de-emphasize other plotter lines and
+      shapes.
 
-   0:  plot point at given point.
-   1:  .   .   .   .   .   .
-   2:  __   __   __   __   __
-   3:  ___ ___ ___ ___ ___
-   4:  __.__.__.__.__.__.
-   5:  ___ _ ___ _ ___ _ ___ _
-   6:  ___ _ _ ___ _ _ ___ _ _ ___
+   - *pattern* : ``int`` [-6 to 6]
+   - *length* : ``float`` [0 to 100]
 
-   SYNTAX: LT patter(,length); or LT
+   =  ============================
+   0  plot point at given point.
+   1  .   .   .   .   .   .
+   2  __   __   __   __   __
+   3  ___ ___ ___ ___ ___
+   4  __.__.__.__.__.__.
+   5  ___ _ ___ _ ___ _ ___ _
+   6  ___ _ _ ___ _ _ ___ _ _ ___
+   =  ============================
    '''
+
    def __init__(self, pattern=None, length=4):   
       self.pattern = pattern
       self.length = length
@@ -874,16 +847,17 @@ class LT(_HPGLCommand):
 
 class FT(_HPGLCommand):
    '''
-   Fill Type.
-   Selects the shading pattern used in polygons (FP), rectangles (RA or RR),
-   or wedges (WG). Use this instruction to enhance plots with solid fill,
-   parallel lines (hatching), cross-hatching, or a fill pattern you designed
-   using the user-defined fill type (UF) instruction.
-   1 or 2:  Solid (space and angle ignored)
-   3:  Hatching
-   4:  Cross hatching
-   SYNTAX: FT type (,spacing(,angle)); or FT;
+   :Fill Type:
+      Selects the shading pattern used in polygons (FP), rectangles 
+      (RA or RR), or wedges (WG). Use this instruction to enhance 
+      plots with solid fill, parallel lines (hatching), cross-hatching, 
+      or a fill pattern you designed using the user-defined fill type 
+      (UF) instruction.
+   
+   - *type* : ``int``. ``1`` or ``2``:  Solid (space and angle ignored) \
+      ``3``:  Hatching, ``4``:  Cross hatching.
    '''
+
    def __init__(self, type=None, space=None, angle=None):   
       self.type = type
       self.space = space
@@ -909,12 +883,12 @@ class FT(_HPGLCommand):
 
 class PM(_HPGLCommand):
    '''
-   Polygon Mode.
-   Enter polygon mode for defining shapes such as block letters, logos, 
-   surface charts, or any unique or intricate area for subsequent filling 
-   and/or edging. Fill polygons using the fill polygon (FP) instruction and/or
-   outline them using the edge polygon (EP) instruction.
-   SYNTAX: PM n; or PM;
+   :Polygon Mode:
+      Enter polygon mode for defining shapes such as block letters, 
+      logos, surface charts, or any unique or intricate area for 
+      subsequent filling and/or edging. Fill polygons using the fill 
+      polygon (FP) instruction and/or outline them using the edge polygon 
+      (EP) instruction.
    '''
    def __init__(self, n = 0):   
       self.n = n
@@ -926,11 +900,11 @@ class PM(_HPGLCommand):
 
 class EC(_HPGLCommand):
    '''
-   Enable Cut Line.
-   Draws a dashed cut line between 'pages' on roll paper to indicate where 
-   to cut the paper. Used with AF, AH and PG instructions.
-   SYNTAX: EC; or EC n;
+   :Enable Cut Line:
+      Draws a dashed cut line between 'pages' on roll paper to indicate 
+      where to cut the paper. Used with AF, AH and PG instructions.
    '''
+
    def __init__(self, n = 0):   
       self.n = n
 
@@ -941,11 +915,11 @@ class EC(_HPGLCommand):
 
 class PG(_HPGLCommand):
    '''
-   Page Feed.
-   Advances roll paper one page length and establishes the plotter-unit origin
-   at the center of the new page.
-   SYNTAX: PG (n); or PG;
+   :Page Feed:
+      Advances roll paper one page length and establishes the plotter-unit 
+      origin at the center of the new page.
    '''
+
    def __init__(self, n = None):   
       self.n = n
 
@@ -959,12 +933,12 @@ class PG(_HPGLCommand):
 
 class GC(_HPGLCommand):
    '''
-   Group Count.
-   Allows you to assign an arbitrary number that will be output by the OG
-   instruction. Use GC with the OG instruction to monitor the successful
-   transfer of data blocks in spooling applications.
-   SYNTAX; GC count number; or GC;
+   :Group Count:
+      Allows you to assign an arbitrary number that will be output by the 
+      OG instruction. Use GC with the OG instruction to monitor the 
+      successful transfer of data blocks in spooling applications.
    '''
+
    def __init__(self, count=None):   
       self.count = count
 
@@ -985,8 +959,10 @@ class GC(_HPGLCommand):
 
 class SL(_HPGLCommand):
    ''' 
-   Character Slant. Argument is tan of desired angle.
+   :Character Slant: 
+      Argument is tan of desired angle.
    '''
+
    def __init__(self, tan = 0):   
       self.tan = tan
 
@@ -997,14 +973,15 @@ class SL(_HPGLCommand):
 
 class SA(_HPGLCommand):
    '''
-   Select alternate character set.
+   :Select alternate character set:
    '''
    
 
 class RO(_HPGLCommand):
    ''' 
-   Rotate coordinate system.  
+   :Rotate coordinate system:
    '''
+
    def __init__(self, angle = 0):   
       self.angle = angle
 
@@ -1015,8 +992,9 @@ class RO(_HPGLCommand):
 
 class RP(_HPGLCommand):
    ''' 
-   Replot.  
+   :Replot:  
    '''
+
    def __init__(self, n = 1):   
       self.n = n
 
@@ -1027,11 +1005,12 @@ class RP(_HPGLCommand):
 
 class SM(_HPGLCommand):
    ''' 
-   Symbol Mode.  
-   Plots the char at each plotted point. 
-   char can be any printing ascii char, except ';'
-   Calling without an argument cancels symbol mode.
+   :Symbol Mode:  
+      Plots the char at each plotted point. 
+      char can be any printing ascii char, except ';'
+      Calling without an argument cancels symbol mode.
    '''
+
    def __init__(self, char = None):
       self.char = char
 
@@ -1045,24 +1024,27 @@ class SM(_HPGLCommand):
 
 class SC(_TwoPoint):
    '''
-   Scale.
-   NOTE: DraftMaster also has a more complex version 
-   of 'SC' that is not implemented yet...
+   :Scale:
+      
+   .. note:: DraftMaster also has a more complex version of 'SC' that \
+      is not implemented yet.
    '''
+
    def __init__(self, coords=None):
      _TwoPoint.__init__(self, coords) 
 
 
 class IP(_TwoPoint):
    '''
-   Input P1 and P2.
-   Allows you to establish new or default locations for the scaling points 
-   P1 and P2. P1 and P2 are used by the scale instruction (SC) to establish
-   user-unit scaling. The IP instruction is often used to ensure that a plot
-   is always the same size, regardless of how P1 and P2 might have been set
-   from the front panel or the size of media loaded in the plotter.
-   SYNTAX: IP p1_x, p1_y(, p2_x, p2_y); or IP;
+   :Input P1 and P2:
+      Allows you to establish new or default locations for the scaling 
+      points P1 and P2. P1 and P2 are used by the scale instruction (SC) 
+      to establish user-unit scaling. The IP instruction is often used to 
+      ensure that a plot is always the same size, regardless of how P1 
+      and P2 might have been set from the front panel or the size of media 
+      loaded in the plotter.
    '''
+
    def __init__(self, coords=None):   
       if coords:
          assert len(coords) in (2, 4)
@@ -1071,11 +1053,12 @@ class IP(_TwoPoint):
 
 class IV(_HPGLCommand):
    '''
-   Invoke Character Slot.
-   Invokes a character set slot into either the right or left half of the
-   in-use code table. Primarily used with ISO modes of character selection.
-   SYNTAX: IV (slot(,left));
+   :Invoke Character Slot:
+      Invokes a character set slot into either the right or left half of 
+      the in-use code table. Primarily used with ISO modes of character 
+      selection.
    '''
+
    def __init__(self, slot=None, left=None):
       self.slot = slot
       self.left = left
@@ -1092,15 +1075,16 @@ class IV(_HPGLCommand):
       else:
          raise(Warning("Can't format %s with given parameters." % self._name)) 
 
+
 class IW(_TwoPoint):
    '''
-   Input Window.
-   Defmines a rectangular area, or window, that establishes soft-clip limits.
-   Subsequent programmed pen motion will be restricted to this area. Use this
-   instruction when you want to be sure that your plot falls within a 
-   specified area.
-   SYNTAX: IW X1,Y1,X2,Y2; or IW;
+   :Input Window:
+      Defmines a rectangular area, or window, that establishes soft-clip 
+      limits.  Subsequent programmed pen motion will be restricted to this 
+      area. Use this instruction when you want to be sure that your plot 
+      falls within a specified area.
    '''
+
    def __init__(self, coords=None):
       _TwoPoint.__init__(self, coords) 
 
@@ -1109,12 +1093,12 @@ class IW(_TwoPoint):
 ### two parameters. Refactor.
 class KY(_HPGLCommand):
    '''
-   Define Key.
-   Assigns a predefined function to one of the frontal panel function keys.
-   Use this instruction with the WD instruction when designing interactive
-   programs.
-   SYNTAX: KY key(,function); or KY;
+   :Define Key:
+      Assigns a predefined function to one of the frontal panel function 
+      keys.  Use this instruction with the WD instruction when designing 
+      interactive programs.
    '''
+
    def __init__(self, key=None, function=None):
       self.key = key
       self.function = left
@@ -1131,14 +1115,16 @@ class KY(_HPGLCommand):
       else:
          raise(Warning("Can't format %s with given parameters." % self._name)) 
 
+
 class PT(_HPGLCommand):
    '''
-   Pen Thickness.
-   Determines the spacing between the parallel lines in solid fill patterns,
-   according to the pen tip thickness.
-   Parameter   Format   Range    Default
-   thickness   real  0.1 to 5mm  0.3mm
+   :Pen Thickness:
+      Determines the spacing between the parallel lines in solid fill 
+      patterns, according to the pen tip thickness.
+
+   - *thickness* : ``float`` [0.1 to 5] mm, default is 0.3mm.
    '''
+
    def __init__(self, thickness = 0.3):
       self.thickness = thickness
 
@@ -1149,28 +1135,29 @@ class PT(_HPGLCommand):
 
 class SI(_CharSize):
    '''
-   Absolute character size.
-   Default values are width = 0.285cm, height=0.375cm
+   :Absolute character size:
+      Default values are width = 0.285cm, height=0.375cm
    '''
    
 
 class SR(_HPGLCommand):
    '''
-   Relative character size.
+   :Relative character size:
    '''
    
       
 class DI(_HPGLCommand):
    '''
-   Absolute direction.
-   Specifies the direction in which labels are drawn, independent of
-   P1 and P2 settings. Use this instruction to change labeling direction
-   when you are labeling line charts, schematic drawings, blueprints, 
-   and survey boudaries.
-   run is cos(angle)
-   rise is sin(angle)
-   SYNTAX: DI run, rise; or DI;
+   :Absolute direction:
+      Specifies the direction in which labels are drawn, independent of
+      P1 and P2 settings. Use this instruction to change labeling 
+      direction when you are labeling line charts, schematic drawings, 
+      blueprints, and survey boudaries.
+
+   - *run* : ``float``. cos(angle)
+   - *rise* : ``float``. sin(angle)
    '''
+
    def __init__(self, run=None, rise=None):
       self.run = run
       self.rise = rise
@@ -1188,12 +1175,12 @@ class DI(_HPGLCommand):
 
 class DR(DI):
    '''
-   Relative Direction.
-   Specifies the direction in which labels are drawn relative to the
-   scaling points P1 and P2. Label direction is adjusted when P1 and P2
-   change so that labels maintain the same relationship to the plotted
-   data. Use DI if you want label direction to be independent or P1 and P2.
-   SYNTAX: DR run, rise; or DR;
+   :Relative Direction:
+      Specifies the direction in which labels are drawn relative to 
+      the scaling points P1 and P2. Label direction is adjusted when 
+      P1 and P2 change so that labels maintain the same relationship 
+      to the plotted data. Use DI if you want label direction to be 
+      independent or P1 and P2.
    '''
 
 
@@ -1214,11 +1201,11 @@ class DR(DI):
 
 class DS(_HPGLCommand):
    '''
-   Designate Character Set into Slot.
-   Designates up to four character sets to be immediately available for 
-   plotting. Used with ISO character sets and modes.
-   SYNTAX: DS slot,set; or DS;
+   :Designate Character Set into Slot:
+      Designates up to four character sets to be immediately available for 
+      plotting. Used with ISO character sets and modes.
    '''
+
    def __init__(self, slot=None, set=None):
       self.slot = slot
       self.set = set
@@ -1234,8 +1221,9 @@ class DS(_HPGLCommand):
 
 class RD(_HPGLCommand):
    '''
-   Relative direction of label.
+   :Relative direction of label:
    '''
+
    def __init__(self, run = None, rise = None):
       self.run = run
       self.rise = rise
@@ -1251,13 +1239,13 @@ class RD(_HPGLCommand):
 
 class DV(_HPGLCommand):
    '''
-   Direction Vertical.
-   Specifies vertical mode as the direction for subsequent labels.
-   Use this instruction to 'stack' horizontal characters in a column.
-   A carriage return and a line feed lace the next 'column' to the left 
-   of the previous one. 
-   SYNTAX: DV n; or DV;
+   :Direction Vertical:
+      Specifies vertical mode as the direction for subsequent labels.
+      Use this instruction to 'stack' horizontal characters in a column.
+      A carriage return and a line feed lace the next 'column' to the 
+      left of the previous one. 
    '''
+
    def __init__(self, vertical=0):
       self.vertical = bool(vertical)
 
@@ -1272,15 +1260,10 @@ class ES(_HPGLCommand):
       Adjust space between characters and lines of labels without affecting
       character size.
 
-   Arguments:
-
-      `charspace`: float, None
-         spacing between characters 
-
-      `linespace`: float, None
-         spacing between lines
-
+   - *charspace* : ``float``, ``None``. Spacing between characters.
+   - *linespace* : ``float``, ``None``. Spacing between lines.
    '''
+
    def __init__(self, charspace = None, linespace = None):
       self.charspace = charspace
       self.linespace = linespace
@@ -1298,14 +1281,15 @@ class ES(_HPGLCommand):
 
 class LO(_HPGLCommand):
    '''
-   Label Origin.
-   Positions labels relative to current pen location. Use LO to center, 
-   left justify, or right justify label. The label can be drawn above or
-   below the current pen location and can also be offset by an amount equal 
-   to 1/2 the character's width and height.
-   origin = [1-9] or [11-19]
-   SYNTAX: LO origin; or LO;
+   :Label Origin:
+      Positions labels relative to current pen location. Use LO to center, 
+      left justify, or right justify label. The label can be drawn above or
+      below the current pen location and can also be offset by an amount equal 
+      to 1/2 the character's width and height.
+      
+   - *origin* : ``int`` [1-9] or [11-19].
    '''
+
    def __init__(self, origin = 1):
       self.origin = origin
 
@@ -1316,33 +1300,30 @@ class LO(_HPGLCommand):
 
 class WG(_Wedge):
    '''
-   Filled wedge.
+   :Filled wedge:
    '''
 
 
 class EW(_Wedge):
    '''
-   Edge Wedge.
-   Outlines any wedge. Use these instructions to produce sectors of a pie
-   chart.
-   SYNTAX: EW radius, start angle, sweep angle (,chord tolerance);
+   :Edge Wedge:
+      Outlines any wedge. Use these instructions to produce sectors of 
+      a pie chart.
    '''
 
 
 class TL(_HPGLCommand):
    '''
    Length of ticks drawn with the XT and YT instructions.
+
+   - *tp* : percentage of (P2y - P1y) for XT or (P2x - P1x) for YT. \
+      Denotes portion above X-axis or to the right of the Y-axis when
+       difference is positive.
+   - *tn* : same as *tp* except denotes portion below the X-axis and to \
+      the left of the Y-axis. 0.5 is default for both.
    '''
 
    def __init__(self, tp = 0.5, tn = 0.5):
-      '''
-         tp: percentage of (P2y - P1y) for XT or (P2x - P1x) for YT
-             Denotes portion above X-axis or to the right of the Y-axis when
-             difference is positive.
-         tn: same as tp except denotes portion below the X-axis and to the left
-             of the Y-axis
-         0.5 is default for both
-      '''
       self.tp = tp
       self.tn = tn
 
@@ -1353,8 +1334,9 @@ class TL(_HPGLCommand):
 
 class WD(_HPGLCommand):
    '''
-   Write to display.
+   :Write to display:
    '''
+
    def __init__(self, text):
       self.text = text
 
@@ -1368,17 +1350,18 @@ class WD(_HPGLCommand):
 
 class B(_HPGLEscape):
    '''
-   Escape output buffer space.
+   :Escape output buffer space:
    '''
    
 
 class On(_HPGLEscape):
    '''
-   Places the plotter in a programmed on-state.
-   old description (from where?):
-   Instructs the plotter to interpret data as HPGL and DCI instructions, 
-   rather than plotting the data stream as literal text characters.
+   :On:
+      Places the plotter in a programmed on-state.
+      Instructs the plotter to interpret data as HPGL and DCI instructions, 
+      rather than plotting the data stream as literal text characters.
    '''
+
    @property
    def _name(self):
       return '('
@@ -1386,7 +1369,8 @@ class On(_HPGLEscape):
 
 class Off(_HPGLEscape):
    '''
-   Places the plotter in a programmed off-state.
+   :Off: 
+      Places the plotter in a programmed off-state.
    '''
    @property
    def _name(self):
@@ -1395,19 +1379,21 @@ class Off(_HPGLEscape):
 
 class ExtendedError(_HPGLEscape):
    '''
-   Get RS-232-C related error message.
-   0 == no error
-   10-16 == error
-   
-   error num   meaning
-   0         no i/o error
-   10        output request received while still processing previous one
-   11        invalid byte received after escape sequence ("ESC.")
-   12        invalid byte received as part of a device control instruction
-   13        parameter out of range
-   14        too many parameters received
-   15        framing, parity, or overrun error
-   16        input buffer overflow
+   :ExtendedError:
+      Get RS-232-C related error message.
+
+   =========  ========
+   error num  meaning
+   =========  ========
+   0          no i/o error
+   10         output request received while still processing previous one
+   11         invalid byte received after escape sequence ("ESC.")
+   12         invalid byte received as part of a device control instruction
+   13         parameter out of range
+   14         too many parameters received
+   15         framing, parity, or overrun error
+   16         input buffer overflow
+   =========  ========
    
    '''
    @property
@@ -1417,5 +1403,6 @@ class ExtendedError(_HPGLEscape):
 
 class K(_HPGLEscape):
    '''
-   Abort command: Tells the plotter to discard commands in its buffer.
+   :Abort command: 
+      Tells the plotter to discard commands in its buffer.
    '''
