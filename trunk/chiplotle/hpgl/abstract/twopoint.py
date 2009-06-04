@@ -11,9 +11,7 @@ class _TwoPoint(_HPGLCommand):
    def format(self):
       if self.coords:
          return '%s%s%s' % (self._name, ','.join([str(c) 
-            #for c in self.coords]), self.terminator)
             for c in self.coords]), _HPGLCommand._terminator)
       else:
-         #return '%s%s' % (self._name, self.terminator)
          return '%s%s' % (self._name, _HPGLCommand._terminator)
 

@@ -1,10 +1,10 @@
 from chiplotle.hpgl.abstract.arc import _Arc
-from chiplotle.hpgl.abstract.charsize import _CharSize
+#from chiplotle.hpgl.abstract.charsize import _CharSize
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.hpgl.abstract.hpglescape import _HPGLEscape
 from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.abstract.twopoint import _TwoPoint
-from chiplotle.hpgl.abstract.wedge import _Wedge
+#from chiplotle.hpgl.abstract.wedge import _Wedge
 from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.ispair import ispair
 
@@ -1133,16 +1133,46 @@ class PT(_HPGLCommand):
       return '%s%.4f%s' % (self._name, self.thickness, _HPGLCommand._terminator)
       
 
-class SI(_CharSize):
+class SI(_HPGLCommand):
    '''
    :Absolute character size:
-      Default values are width = 0.285cm, height=0.375cm
-   '''
-   
+      Specifies the size of labeling characters in centimeters. 
+      Use this instruction to establish character sizing that is not 
+      dependent on the settings of P1 and P2.
 
-class SR(_HPGLCommand):
+   - *width* : ``float`` [-110 to 110] cm, excluding 0. 
+   - *height* : ``float`` [-110 to 110] cm, excluding 0. 
+   '''
+
+   def __init__(self, width = None, height = None):   
+      assert width != 0
+      assert height != 0
+
+      self.width = width
+      self.height = height
+
+   @property
+   def format(self):
+      if self.width and self.height:
+         return '%s%.2f,%.2f%s' % (self._name, self.width, self.height, 
+            _HPGLCommand._terminator)
+      elif None == self.width == self.height:
+         return '%s%s' % (self._name, _HPGLCommand._terminator)
+      else:
+         raise(Warning("Can't format %s without all parameters." % self._name))
+
+
+class SR(SI):
    '''
    :Relative character size:
+      Specifies the relative size of characters as a percentage of the
+      distance between P1 and P2. Use this instruction to establish
+      relative character sizes so that if the P1/P2 distance changes,
+      the character sizes adjust to occupy the same relative ammount of
+      space.
+
+   - *width* : ``float`` [-100 to 100] percent, excluding 0. 
+   - *height* : ``float`` [-100 to 100] percent, excluding 0. 
    '''
    
       
@@ -1165,12 +1195,12 @@ class DI(_HPGLCommand):
    @property
    def format(self):
       if not None in (self.run, self.rise):
-         return '%s%s,%s%s' % (self._name, self.run, self.rise, 
+         return '%s%.2f,%.2f%s' % (self._name, self.run, self.rise, 
          _HPGLCommand._terminator)
       elif None == self.run == self.rise:
          return '%s%s' % (self._name, _HPGLCommand._terminator)
       else:
-         raise(Warning("Can't format %s with given parameters." % self._name)) 
+         raise(Warning("Can't format %s without all parameters." % self._name))
          
 
 class DR(DI):
@@ -1181,6 +1211,9 @@ class DR(DI):
       P1 and P2 change so that labels maintain the same relationship 
       to the plotted data. Use DI if you want label direction to be 
       independent or P1 and P2.
+
+   - *run* : ``float``. cos(angle)
+   - *rise* : ``float``. sin(angle)
    '''
 
 
@@ -1218,24 +1251,6 @@ class DS(_HPGLCommand):
       else:
          return '%s%s' % (self._name, _HPGLCommand._terminator)
 
-
-class RD(_HPGLCommand):
-   '''
-   :Relative direction of label:
-   '''
-
-   def __init__(self, run = None, rise = None):
-      self.run = run
-      self.rise = rise
-
-   @property
-   def format(self):
-      if self.run and self.rise:
-         return '%s%.4f,%.4f%s' % (self._name, self.run, self.rise, 
-            _HPGLCommand._terminator)
-      else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
-         
 
 class DV(_HPGLCommand):
    '''
@@ -1298,17 +1313,40 @@ class LO(_HPGLCommand):
       return '%s%i%s' % (self._name, self.origin, _HPGLCommand._terminator)
 
 
-class WG(_Wedge):
-   '''
-   :Filled wedge:
-   '''
-
-
-class EW(_Wedge):
+#class EW(_Wedge):
+class EW(_HPGLCommand):
    '''
    :Edge Wedge:
       Outlines any wedge. Use these instructions to produce sectors of 
       a pie chart.
+
+   - *radius* : ``float``. 
+   - *startangle* : ``float`` [0 - 360] degrees.
+   - *sweepangle* : ``float`` [0 - 360] degrees.
+   - *chordangle* : ``float`` [0.36 - 50] degrees.
+   '''
+
+   def __init__(self, radius, startangle, sweepangle, chordangle=None):
+      self.radius = Scalable(radius)
+      self.startangle = startangle
+      self.sweepangle = sweepangle
+      self.chordangle = chordangle
+
+   @property
+   def format(self):
+      if self.chordangle:
+         return '%s%s,%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
+         self.startangle, self.sweepangle, self.chordangle, 
+         _HPGLCommand._terminator)
+      else:
+         return '%s%s,%.2f,%.2f%s' % (self._name, self.radius, 
+         self.startangle, self.sweepangle, _HPGLCommand._terminator)
+
+
+#class WG(_Wedge):
+class WG(EW):
+   '''
+   :Filled wedge:
    '''
 
 
