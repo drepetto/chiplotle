@@ -232,18 +232,18 @@ class EA(_Positional):
       _Positional.__init__(self, xy, True)
 
 
-#class ER(_Positional):
-class ER(EA):
+class ER(_Positional):
    '''
    :Edge Rectangle Relative:
       Defines and outlines a rectangle using relative coordinates.
 
    - *xy* : ``(x, y)``. The relative coordinates of the remaining corner.
    '''
-#   def __init__(self, xy):
-#      if not ispair(xy):
-#         raise ValueError('xy position must be of length 2.')
-#      _Positional.__init__(self, xy, False)
+
+   def __init__(self, xy):
+      if not ispair(xy):
+         raise ValueError('xy position must be of length 2.')
+      _Positional.__init__(self, xy, False)
 
 
 class RA(_Positional):
@@ -261,8 +261,7 @@ class RA(_Positional):
       _Positional.__init__(self, xy, True)
 
 
-#class RR(_Positional):
-class RR(RA):
+class RR(_Positional):
    '''
    :Filled Rectangle Relative:
       Defines and fills a rectangle using relative coordinates.
@@ -270,10 +269,11 @@ class RR(RA):
    - *xy* : ``(x, y)`` tuple. The relative coordinates of the \
       remaining corner.
    '''
-#   def __init__(self, xy):
-#      if not ispair(xy):
-#         raise ValueError('xy position must be of length 2.')
-#      _Positional.__init__(self, xy, False)
+
+   def __init__(self, xy):
+      if not ispair(xy):
+         raise ValueError('xy position must be of length 2.')
+      _Positional.__init__(self, xy, False)
 
 
 class VS(_HPGLCommand):
