@@ -1,6 +1,8 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.utils.get_base_class import get_base_class
 
+## TODO replace .escape object property refering to the _escape
+## class property with just the _escape class property.
 class _HPGLEscape(_HPGL):
    _escape = chr(27)
 
