@@ -2,7 +2,7 @@
 Chiplotle Plotters
 ==================
 
-:mod: `chiplotle.hpgl.plotters`
+:mod:`chiplotle.hpgl.plotters`
 
 .. automodule:: chiplotle.plotters
    :members:

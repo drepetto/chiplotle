@@ -63,7 +63,9 @@ class CI(_HPGLCommand):
    '''
    :Circle:
       Draws a circle using the specified radius and chord tolerance. 
-      If you want a filled circle, refer to the WB or PM instruction.
+      If you want a filled circle, refer to the 
+      :class:`~chiplotle.hpgl.commands.WG` or 
+      :class:`~chiplotle.hpgl.commands.PM` instruction.
    '''
 
    def __init__(self, radius, chordangle=None):   
@@ -331,7 +333,10 @@ class EP(_HPGLCommand):
    :Edge Polygon:
       Outlines the polyg0n currently stored in the polygon buffer. 
       Use this instruction to edge polygons that you defined in polygon mode 
-      (PM) and with the rectangle and wedge instructions (RA, RR and WG).
+      (:class:`~chiplotle.hpgl.commands.PM`) and with the rectangle and 
+      wedge instructions (:class:`~chiplotle.hpgl.commands.RA`, 
+      :class:`~chiplotle.hpgl.commands.RR` and 
+      :class:`~chiplotle.hpgl.commands.WG`).
    '''
 
 
@@ -376,8 +381,12 @@ class FP(_HPGLCommand):
    '''
    :Fill Polygon:
       Fills the polygon currently in the polygon buffer. Use FP to fill
-      polygons defined in polygon mode (PM) and defined with the edge 
-      rectangle and wedge instructions (EA, ER, and EW).
+      polygons defined in polygon mode (
+      :class:`~chiplotle.hpgl.commands.PM`) and defined with the edge 
+      rectangle and wedge instructions (
+      :class:`~chiplotle.hpgl.commands.EA`, 
+      :class:`~chiplotle.hpgl.commands.ER`, and 
+      :class:`~chiplotle.hpgl.commands.EW`).
    '''
    
 
@@ -423,8 +432,9 @@ class OC(_HPGLCommand):
 class OD(_HPGLCommand):
    '''
    :Output Digitized Point and Pen Status:
-      Outputs the X,Y coordinates and up/down pen position associated with the
-      last digitized point. Use this instruction after the DP instruction to
+      Outputs the X,Y coordinates and up/down pen position associated 
+      with the last digitized point. Use this instruction after the 
+      :class:`~chiplotle.hpgl.commands.DP` instruction to
       return the coordinates of the digitized point to your computer.
    '''
    
@@ -432,8 +442,10 @@ class OD(_HPGLCommand):
 class OE(_HPGLCommand):
    '''
    :Output Error:
-      Output a number corresponding to the type of HP-GL error (if any) received
-      by the plotter after the most recent IN or OE instruction. Use this 
+      Output a number corresponding to the type of HP-GL error (if any) 
+      received by the plotter after the most recent 
+      :class:`~chiplotle.hpgl.commands.IN` or 
+      :class:`~chiplotle.hpgl.commands.OE` instruction. Use this 
       instruction for debugging programs. 
    
    =========  ========  ========================
@@ -497,8 +509,9 @@ class OK(_HPGLCommand):
    '''
    :Output Key:
       Outputs a number that indicates which, if any, of the front-panel 
-      function keys has been pressed. use this instruction with the WD 
-      instruction when designing interactive programs.
+      function keys has been pressed. use this instruction with the 
+      :class:`~chiplotle.hpgl.commands.WD` instruction when designing 
+      interactive programs.
    '''
    
 
@@ -526,7 +539,8 @@ class OP(_HPGLCommand):
       numberic coordinates or P1 and P2 when they have been set manually, 
       and to help compute the number of plotter units per user units when 
       scaling is on.  This instruction can also be used with the input 
-      window (IW) instruction to programmatically set the window to P1 and P2.
+      window (:class:`~chiplotle.hpgl.commands.IW`) instruction to 
+      programmatically set the window to P1 and P2.
    '''
    
 
@@ -567,7 +581,8 @@ class OW(_HPGLCommand):
       Outputs the X,Y coordinates of the lower-left and upper-right 
       corners of the window area in which plotting can occur. 
       This instruction is especially useful when the window area 
-      (defined by IW) extends beyond the hard-clip limits.
+      (defined by :class:`~chiplotle.hpgl.commands.IW`) extends beyond 
+      the hard-clip limits.
    '''
    
 
@@ -603,8 +618,9 @@ class BL(_HPGLCommand):
    '''
    :Buffer label:
       Stores a label in the label buffer. You can then use the
-      output length (OL) instruction to determine its space requirement 
-      prior to drawing it. Or, you can use the plot buffer (PB)
+      output length (:class:`~chiplotle.hpgl.commands.OL`) instruction 
+      to determine its space requirement prior to drawing it. Or, you 
+      can use the plot buffer (:class:`~chiplotle.hpgl.commands.PB`)
       instruction to repeatedly plot this label.
    '''
 
@@ -666,9 +682,13 @@ class CS(_HPGLCommand):
 class CT(_HPGLCommand):
    '''
    :Chord tolerance:
-      Determines whether the chord tolerance parameter of the CI, AA, AR
-      and WG instructions is interpreted as a chord angle in degrees or as
-      a deviation distance in current units.
+      Determines whether the chord tolerance parameter of the 
+      :class:`~chiplotle.hpgl.commands.CI`, 
+      :class:`~chiplotle.hpgl.commands.AA`, 
+      :class:`~chiplotle.hpgl.commands.AR`
+      and :class:`~chiplotle.hpgl.commands.WG` instructions is 
+      interpreted as a chord angle in degrees or as a deviation distance 
+      in current units.
 
    - *type* : ``0`` (degrees) or ``1``. Default is ``0``. 
    '''
@@ -848,11 +868,14 @@ class LT(_HPGLCommand):
 class FT(_HPGLCommand):
    '''
    :Fill Type:
-      Selects the shading pattern used in polygons (FP), rectangles 
-      (RA or RR), or wedges (WG). Use this instruction to enhance 
-      plots with solid fill, parallel lines (hatching), cross-hatching, 
-      or a fill pattern you designed using the user-defined fill type 
-      (UF) instruction.
+      Selects the shading pattern used in polygons 
+      (:class:`~chiplotle.hpgl.commands.FP`), rectangles 
+      (:class:`~chiplotle.hpgl.commands.RA` or 
+      :class:`~chiplotle.hpgl.commands.RR`), or wedges 
+      (:class:`~chiplotle.hpgl.commands.WG`). Use this instruction to 
+      enhance plots with solid fill, parallel lines (hatching), 
+      cross-hatching, or a fill pattern you designed using the 
+      user-defined fill type (UF) instruction.
    
    - *type* : ``int``. ``1`` or ``2``:  Solid (space and angle ignored) \
       ``3``:  Hatching, ``4``:  Cross hatching.
@@ -902,7 +925,10 @@ class EC(_HPGLCommand):
    '''
    :Enable Cut Line:
       Draws a dashed cut line between 'pages' on roll paper to indicate 
-      where to cut the paper. Used with AF, AH and PG instructions.
+      where to cut the paper. Used with 
+      :class:`~chiplotle.hpgl.commands.AF`, 
+      :class:`~chiplotle.hpgl.commands.AH` and 
+      :class:`~chiplotle.hpgl.commands.PG` instructions.
    '''
 
    def __init__(self, n = 0):   
@@ -935,7 +961,9 @@ class GC(_HPGLCommand):
    '''
    :Group Count:
       Allows you to assign an arbitrary number that will be output by the 
-      OG instruction. Use GC with the OG instruction to monitor the 
+      :class:`~chiplotle.hpgl.commands.OG` instruction. Use 
+      :class:`~chiplotle.hpgl.commands.GC` with the 
+      :class:`~chiplotle.hpgl.commands.OG` instruction to monitor the 
       successful transfer of data blocks in spooling applications.
    '''
 
@@ -1038,8 +1066,10 @@ class IP(_TwoPoint):
    '''
    :Input P1 and P2:
       Allows you to establish new or default locations for the scaling 
-      points P1 and P2. P1 and P2 are used by the scale instruction (SC) 
-      to establish user-unit scaling. The IP instruction is often used to 
+      points P1 and P2. P1 and P2 are used by the scale instruction 
+      (:class:`~chiplotle.hpgl.commands.SC`) 
+      to establish user-unit scaling. 
+      The :class:`~chiplotle.hpgl.commands.IP` instruction is often used to 
       ensure that a plot is always the same size, regardless of how P1 
       and P2 might have been set from the front panel or the size of media 
       loaded in the plotter.
@@ -1209,8 +1239,8 @@ class DR(DI):
       Specifies the direction in which labels are drawn relative to 
       the scaling points P1 and P2. Label direction is adjusted when 
       P1 and P2 change so that labels maintain the same relationship 
-      to the plotted data. Use DI if you want label direction to be 
-      independent or P1 and P2.
+      to the plotted data. Use :class:`~chiplotle.hpgl.commands.DI` 
+      if you want label direction to be independent or P1 and P2.
 
    - *run* : ``float``. cos(angle)
    - *rise* : ``float``. sin(angle)
