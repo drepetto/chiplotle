@@ -283,8 +283,8 @@ class VS(_HPGLCommand):
    :Pen Velocity:
       Set's pen velocity.
 
-   - *vel* : ``float`` [0.0 - 127.9999] (depends on plotter), ``None``. 
-   - *pen* : ``int`` [1 - 8].
+   - *vel* : ``float`` [0.0 to 127.9999] (depends on plotter), ``None``. 
+   - *pen* : ``int`` [1 to 8].
    '''
 
    def __init__(self, vel=None, pen=None):
@@ -309,8 +309,8 @@ class FS(_HPGLCommand):
       instruction to optimize pen life and line quality for each pen 
       and paper combination.
 
-   - *force* : ``int`` [1 - 8]
-   - *pen* : ``int`` [1 - 8]. If pen is ``None`` then all pens are set.
+   - *force* : ``int`` [1 to 8]
+   - *pen* : ``int`` [1 to 8]. If pen is ``None`` then all pens are set.
    '''
 
    def __init__(self, force=None, pen=None):
@@ -331,7 +331,7 @@ class FS(_HPGLCommand):
 class EP(_HPGLCommand):
    '''
    :Edge Polygon:
-      Outlines the polyg0n currently stored in the polygon buffer. 
+      Outlines the polygon currently stored in the polygon buffer. 
       Use this instruction to edge polygons that you defined in polygon mode 
       (:class:`~chiplotle.hpgl.commands.PM`) and with the rectangle and 
       wedge instructions (:class:`~chiplotle.hpgl.commands.RA`, 
@@ -690,7 +690,8 @@ class CT(_HPGLCommand):
       interpreted as a chord angle in degrees or as a deviation distance 
       in current units.
 
-   - *type* : ``0`` (degrees) or ``1``. Default is ``0``. 
+   - *type* : ``int`` 0 or 1, default 0. 
+
    '''
    def __init__(self, type=0):   
       self.type = type
@@ -707,6 +708,9 @@ class CV(_HPGLCommand):
       can be plotted as a group. This allows the plotter to plot in a
       continuous motion, rather than stopping and starting at each vector 
       endpoint. As a result, curves appear smoother. 
+   
+   - *n* : ``int`` 0 or 1, default 1 (on).
+   - *inputdelay* : ``int`` [0 to 8,388,607] msec, default 100.
    '''
 
    def __init__(self, n=None, inputdelay=None):
@@ -726,18 +730,20 @@ class CV(_HPGLCommand):
 
 class CA(_HPGLCommand):
    '''
-   :Alternative character set:
+   :Designate alternate character set:
       Designates a character set as the alternate character set to be 
       used in labeling instructions. Use this instruction to provide an 
       additional character set that you can easily access in a program.
+   
+   - *set* : ``int`` [-1, 0 to 59, 60, 70, 80, 99, 100, 101], default 0.
    '''
 
-   def __init__(self, n=0):   
-      self.n = n
+   def __init__(self, set=0):   
+      self.set = set
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.set, _HPGLCommand._terminator)
 
 
 class CM(_HPGLCommand):
@@ -746,6 +752,9 @@ class CM(_HPGLCommand):
       Specifies mode of character set selection and usage. Use this 
       instruction to select the alternate HP 8-bit, ISO 7-bit, or 
       ISO 8-bit character modes.
+
+   - *switch* : ``int`` [0 to 3], default 0.
+   - *fallback* : ``int`` 0 or 1, default 0.
    '''
 
    def __init__(self, switch=None, fallback=None):   
@@ -877,8 +886,8 @@ class FT(_HPGLCommand):
       cross-hatching, or a fill pattern you designed using the 
       user-defined fill type (UF) instruction.
    
-   - *type* : ``int``. ``1`` or ``2``:  Solid (space and angle ignored) \
-      ``3``:  Hatching, ``4``:  Cross hatching.
+   - *type* : ``int`` 1 or 2,  Solid (space and angle ignored) \
+      3:  Hatching, 4:  Cross hatching.
    '''
 
    def __init__(self, type=None, space=None, angle=None):   
