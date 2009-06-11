@@ -1,9 +1,13 @@
-from chiplotle.utils.run_chiplotle_UNIX import plotter
+from chiplotle.utils.instantiate_plotter import instantiate_plotter
 from chiplotle import MayaNumber
 
 def main():
    numberSize = 350
    lineSpacing = numberSize * 3.1
+
+   plotter = instantiate_plotter( )
+   if not plotter:
+      return None
 
    width = plotter.marginSoft.width
    height = plotter.marginSoft.height
