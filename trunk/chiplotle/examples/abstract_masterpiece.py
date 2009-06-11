@@ -1,8 +1,10 @@
-from chiplotle.utils.run_chiplotle_UNIX import plotter
+from chiplotle import *
 import random
 
 
 def main():
+
+   plotter = instantiate_plotter( )
 
    width = plotter.marginSoft.width
    height = plotter.marginSoft.height
