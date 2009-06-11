@@ -1,5 +1,6 @@
 from chiplotle import *
-from chiplotle.utils.run_chiplotle_UNIX import plotter
+
+plotter = instantiate_plotter( )
 
 to_address = []
 from_address = []

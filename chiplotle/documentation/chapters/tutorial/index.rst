@@ -87,7 +87,7 @@ to do is import all of the HPGL commands from Chiplotle. So open a new text file
 
 Next you want your script to run the Chiplotle setup routine and import the plotter definition::
 
-   from chiplotle.utils.run_chiplotle_UNIX import plotter
+   plotter = instantiate_plotter( )
 
 This lets you select the appropriate serial port and plotter ID, and imports the plotter object
 so that you can use the ``plotter.write( )`` method as in the command line examples above. Now you can simply

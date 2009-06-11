@@ -27,6 +27,8 @@ from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.compound import *
 from chiplotle.hpgl.tools import *
 
+from chiplotle.utils.instantiate_plotter import instantiate_plotter
+
 _remove_modules()
 
 from chiplotle.plotters import *

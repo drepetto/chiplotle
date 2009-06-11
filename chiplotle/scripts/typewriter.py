@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 from chiplotle import *
-from chiplotle.utils.run_chiplotle_UNIX import plotter
 
 ## HELPER FUNCTIONS ##
 
@@ -21,6 +20,8 @@ def typewriter( ):
    print("* CHIPLOTLE TYPEWRITER!!! *")
    print("***************************")
    print("")
+
+   plotter = instantiate_plotter( )
 
    pen_num = _query_pen( )
 
