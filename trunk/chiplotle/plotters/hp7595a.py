@@ -16,16 +16,7 @@ class HP7595A(_DrawingPlotter):
          'OK','OL','OO','OP','OS','OT','OW','PA','PB','PD','PG','PM','PR',
          'PT','PU','RA','RL','RO','RP','RR','SA','SC','SG','SI','SL','SM',
          'SP','SR','SS','TL','UC','UF','VA','VN','VS','WD','WG','XT','YT'])
+
       _DrawingPlotter.__init__(self, ser, **kwargs)
       self.type = "HP7595A"
-
-
-#      self.allowedHPGL2Commands = tuple(['\x1b.','AA','AC','AD','AR','AT',
-#         'BJ','BP','CF','CI','CP','CT','DC','DF','DI','DL','DP','DR','DT',
-#         'DV','EA','EC','EJ','EP','ER','ES','EW','FP','FR','FT','IN','IP',
-#         'IR','IW','LA','LB','LO','LT','MC','MG','MT','NR','OD','OE','OH',
-#         'OI','OP','OS','PA','PB','PD','PE','PF','PG','PR','PS','PT','PU',
-#         'PW','RA','RF','RO','RP','RR','RT','SA','SC','SD','SI','SL','SM',
-#         'SP','SR','SS','ST','TD','UL','WG','WU'])
-
 
