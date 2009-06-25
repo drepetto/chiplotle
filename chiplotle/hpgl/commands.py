@@ -1161,7 +1161,7 @@ class PT(_HPGLCommand):
       Determines the spacing between the parallel lines in solid fill 
       patterns, according to the pen tip thickness.
 
-   - *thickness* : ``float`` [0.1 to 5] mm, default is 0.3mm.
+   - `thickness` : ``float`` [0.1 to 5] mm, default is 0.3mm.
    '''
 
    def __init__(self, thickness = 0.3):
@@ -1169,7 +1169,7 @@ class PT(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f%s' % (self._name, self.thickness, _HPGLCommand._terminator)
+      return '%s%.2f%s' % (self._name, self.thickness, _HPGLCommand._terminator)
       
 
 class SI(_HPGLCommand):
