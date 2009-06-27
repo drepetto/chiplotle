@@ -68,8 +68,15 @@ There are shortcuts for ``PU`` and ``PD``::
 To replace the pen and have a look at your magnificent square, you select pen zero::
 
    chiplotle> plotter.selectPen(0)
+   
 
-That's it! Have a look at the Chiplotle API documentation for a complete list of implemented HPGL commands.
+You can also use Chiplotle's Compound commands, a set of more complex routines that we've
+added to the basic HPGL command set::
+
+    chiplotle> plotter.write(RandomWalk([500,500], 100))
+
+That's it! Have a look at the Chiplotle API documentation for a complete list of 
+HPGL commands and Chiplotle Compound commands.
 
 
 Running chiplotle from a Python script
@@ -104,10 +111,26 @@ enter a series of chiplote commands::
 and save your script as a .py file (see examples/square.py for an example). To use your new program
 just run it as you would any Python script::
 
-   python square.py
+   $ python square.py
 
-Of course this is just a very simple example. See the .py files in the examples folder for some
-more elaborate scripts. 
+
+A slightly more sophisticated Python script that draws a random zigzag::
+
+   from chiplotle import *
+   import random
+   
+   plotter = instantiate_plotter( )
+   
+   plotter.selectPen(1)
+   
+   for x in range(0, 1000, 10):
+       y = random.randint(0, 1000)
+       plotter.write(PD([x,y]))
+       
+   plotter.selectPen(0)
+   
+
+See the .py files in the examples folder for some more elaborate scripts. 
 
 
 HPGL pipeline
