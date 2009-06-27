@@ -128,9 +128,9 @@ A slightly more sophisticated Python script that draws a random zigzag::
        plotter.write(PD([x,y]))
        
    plotter.selectPen(0)
-   
 
-See the .py files in the examples folder for some more elaborate scripts. 
+
+See the .py files in the examples and scripts folders for some more elaborate examples. 
 
 
 HPGL pipeline
