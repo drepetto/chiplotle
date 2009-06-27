@@ -6,6 +6,7 @@
 from __future__ import division
 from chiplotle.hpgl import commands 
 from chiplotle.plotters import margin
+#from chiplotle.hpgl.tools.import_hpgl_file import import_hpgl_file
 import math
 import re
 import serial
@@ -61,7 +62,7 @@ class _BasePlotter(object):
          Must be str, iterator or _HPLGCommand.')
 
 
-   def writeFile(filename):
+   def writeFile(self, filename):
       '''Sends the HPGL content of the given `filename` to the plotter.'''
 
       if not isinstance(filename, str):
@@ -70,7 +71,9 @@ class _BasePlotter(object):
       f = open(filename, 'r')
       chars = f.read( )
       f.close( )
-      self.write(chars)
+      chars = chars.replace('\n',';')
+      comms = re.split(';+', chars)
+      self.write(comms)
 
 
    ### PRIVATE METHODS ###
