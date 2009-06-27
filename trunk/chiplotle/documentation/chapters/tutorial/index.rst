@@ -1,6 +1,6 @@
-********
-Tutorial
-********
+********************
+Quick Start Tutorial
+********************
 
 Chiplotle modes
 ===============
@@ -124,13 +124,19 @@ If you already have a file containing HPGL commands (from a CNC design package, 
    SP0;
 
 
-To plot the file with Chiplotle, first you open the file, then you read its contents, close the file, 
+To plot the file while running Chiplotle, first you open the file, then you read its contents, close the file, 
 and send the contents to the plotter via the ``plotter.write( )`` method::
 
    chiplotle> f = open('square.hpgl', 'r')
    chiplotle> my_file = f.read( )
    chiplotle> f.close( )
    chiplotle> plotter.write(my_file)  
+
+You can also plot the file from the command line without first running Chiplotle by using the 
+"plot-hpgl" script in the scripts folder::
+
+   $ plot-hpgl my_file.hpgl
+
 
 Chiplotle will take care of all buffering and timing issues, so even large HPGL files should plot
 reliably. See examples/square.hpgl for a sample HPGL file.
