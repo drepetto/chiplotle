@@ -32,8 +32,8 @@ After you've selected a plotter type Chiplotle will print out some basic informa
 plotter, including its drawing area. Now it's time to plot!
 
 Let's pick up a pen. In HPGL, the command to pick up a pen is ``SP``, which stands for "select pen".
-To learn what parameters you need to pass to a command, look it up in the "HPGL Classes" section
-of the Chiplotle documentation. Many commands take one or more parameters; if a command takes
+To learn what parameters you need to pass to a command, look it up in the "Chiplotle-HPGL" section
+of the Chiplotle API documentation. Many commands take one or more parameters; if a command takes
 parameters you put them inside a set of ``()`` after the command name. ``SP`` takes a pen number, and we 
 want to select pen number one, so our command is ``SP(1)``. To pass the command to the plotter, you 
 use ``plotter.write( )``. So::
@@ -69,7 +69,7 @@ To replace the pen and have a look at your magnificent square, you select pen ze
 
    chiplotle> plotter.selectPen(0)
 
-That's it! Have a look at the HPGL Classes documentation for a complete list of implemented HPGL commands.
+That's it! Have a look at the Chiplotle API documentation for a complete list of implemented HPGL commands.
 
 
 Running chiplotle from a Python script
