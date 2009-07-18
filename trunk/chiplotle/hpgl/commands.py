@@ -14,7 +14,7 @@ class PU(_Positional):
       Raises the pen from the plotting surface. Use this instruction 
       to prevent stray lines from being drawn.
 
-   - *xy* : A ``list`` or ``tuple`` of x, y positions of the form \
+   - `xy` : A ``list`` or ``tuple`` of x, y positions of the form \
    ``(x1, y2, x2, y2, x3, y3, ..., xn, yn)``.
    '''
 
@@ -28,7 +28,7 @@ class PD(_Positional):
       Lowers the pen onto the writing surface for drawing and moves it 
       to the coordinates/increments you specified.
 
-   - *xy* : A ``list`` or ``tuple`` of x, y positions of the form \
+   - `xy` : A ``list`` or ``tuple`` of x, y positions of the form \
    ``(x1, y2, x2, y2, x3, y3, ..., xn, yn)``.
    '''
 
@@ -168,9 +168,9 @@ class AA(_Arc):
       Draws an arc, using absolute coordinates, that starts at the
       current pen location and uses the specified center point.
 
-   - *xy* : ``(x, y)`` position pair.
-   - *angle* : ``float`` [-360 to 360]. The arch angle in degrees.
-   - *chordtolerance* : ``float`` [0.36 to 180], ``None``.
+   - `xy` : ``(x, y)`` position pair.
+   - `angle` : ``float`` [-360 to 360]. The arch angle in degrees.
+   - `chordtolerance` : ``float`` [0.36 to 180], ``None``.
 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
@@ -183,9 +183,9 @@ class AR(_Arc):
       Draws an arc, using relative coordinates, that starts at the
       current pen location and uses the specified center point.
 
-   - *xy* : ``(x, y)`` position pair.
-   - *angle* : ``float`` [-360 to 360]. The arch angle in degrees.
-   - *chordtolerance* : ``float`` [0.36 to 180], ``None``.
+   - `xy` : ``(x, y)`` position pair.
+   - `angle` : ``float`` [-360 to 360]. The arch angle in degrees.
+   - `chordtolerance` : ``float`` [0.36 to 180], ``None``.
    '''
 
    def __init__(self, xy, angle, chordtolerance=None):
@@ -200,8 +200,8 @@ class AS(_HPGLCommand):
       combinations. Slowing the acceleration may improve line
       quality if you are using heavier than recommended media.
 
-   - *accel* : ``int`` [1 to 4] , ``None``.  
-   - *pen* : ``int`` [1 to 8], ``None``. When ``None``, accel is \
+   - `accel` : ``int`` [1 to 4] , ``None``.  
+   - `pen` : ``int`` [1 to 8], ``None``. When ``None``, accel is \
       applied to all pens.
    '''
 
@@ -225,7 +225,7 @@ class EA(_Positional):
    :Edge Rectangle Absolute:
       Defines and outlines a rectangle using absolute coordinates.
 
-   - *xy* : ``(x, y)``. The absolute coordinates of the remaining corner.
+   - `xy` : ``(x, y)``. The absolute coordinates of the remaining corner.
    '''
 
    def __init__(self, xy):
@@ -239,7 +239,7 @@ class ER(_Positional):
    :Edge Rectangle Relative:
       Defines and outlines a rectangle using relative coordinates.
 
-   - *xy* : ``(x, y)``. The relative coordinates of the remaining corner.
+   - `xy` : ``(x, y)``. The relative coordinates of the remaining corner.
    '''
 
    def __init__(self, xy):
@@ -253,7 +253,7 @@ class RA(_Positional):
    :Filled Rectangle Absolute:
       Defines and fills a rectangle using absolute coordinates.
 
-   - *xy* : ``(x, y)`` tuple. The absolute coordinates of the \
+   - `xy` : ``(x, y)`` tuple. The absolute coordinates of the \
       remaining corner.
    '''
 
@@ -268,7 +268,7 @@ class RR(_Positional):
    :Filled Rectangle Relative:
       Defines and fills a rectangle using relative coordinates.
 
-   - *xy* : ``(x, y)`` tuple. The relative coordinates of the \
+   - `xy` : ``(x, y)`` tuple. The relative coordinates of the \
       remaining corner.
    '''
 
@@ -283,8 +283,8 @@ class VS(_HPGLCommand):
    :Pen Velocity:
       Set's pen velocity.
 
-   - *vel* : ``float`` [0.0 to 127.9999] (depends on plotter), ``None``. 
-   - *pen* : ``int`` [1 to 8].
+   - `vel` : ``float`` [0.0 to 127.9999] (depends on plotter), ``None``. 
+   - `pen` : ``int`` [1 to 8].
    '''
 
    def __init__(self, vel=None, pen=None):
@@ -309,8 +309,8 @@ class FS(_HPGLCommand):
       instruction to optimize pen life and line quality for each pen 
       and paper combination.
 
-   - *force* : ``int`` [1 to 8]
-   - *pen* : ``int`` [1 to 8]. If pen is ``None`` then all pens are set.
+   - `force` : ``int`` [1 to 8]
+   - `pen` : ``int`` [1 to 8]. If pen is ``None`` then all pens are set.
    '''
 
    def __init__(self, force=None, pen=None):
@@ -690,7 +690,7 @@ class CT(_HPGLCommand):
       interpreted as a chord angle in degrees or as a deviation distance 
       in current units.
 
-   - *type* : ``int`` 0 or 1, default 0. 
+   - `type` : ``int`` 0 or 1, default 0. 
 
    '''
    def __init__(self, type=0):   
@@ -709,8 +709,8 @@ class CV(_HPGLCommand):
       continuous motion, rather than stopping and starting at each vector 
       endpoint. As a result, curves appear smoother. 
    
-   - *n* : ``int`` 0 or 1, default 1 (on).
-   - *inputdelay* : ``int`` [0 to 8,388,607] msec, default 100.
+   - `n` : ``int`` 0 or 1, default 1 (on).
+   - `inputdelay` : ``int`` [0 to 8,388,607] msec, default 100.
    '''
 
    def __init__(self, n=None, inputdelay=None):
@@ -735,7 +735,7 @@ class CA(_HPGLCommand):
       used in labeling instructions. Use this instruction to provide an 
       additional character set that you can easily access in a program.
    
-   - *set* : ``int`` [-1, 0 to 59, 60, 70, 80, 99, 100, 101], default 0.
+   - `set` : ``int`` [-1, 0 to 59, 60, 70, 80, 99, 100, 101], default 0.
    '''
 
    def __init__(self, set=0):   
@@ -753,8 +753,8 @@ class CM(_HPGLCommand):
       instruction to select the alternate HP 8-bit, ISO 7-bit, or 
       ISO 8-bit character modes.
 
-   - *switch* : ``int`` [0 to 3], default 0.
-   - *fallback* : ``int`` 0 or 1, default 0.
+   - `switch` : ``int`` [0 to 3], default 0.
+   - `fallback` : ``int`` 0 or 1, default 0.
    '''
 
    def __init__(self, switch=None, fallback=None):   
@@ -847,8 +847,8 @@ class LT(_HPGLCommand):
       fill types. Use LT to emphasize or de-emphasize other plotter lines and
       shapes.
 
-   - *pattern* : ``int`` [-6 to 6]
-   - *length* : ``float`` [0 to 100]
+   - `pattern` : ``int`` [-6 to 6]
+   - `length` : ``float`` [0 to 100]
 
    =  ============================
    0  plot point at given point.
@@ -886,7 +886,7 @@ class FT(_HPGLCommand):
       cross-hatching, or a fill pattern you designed using the 
       user-defined fill type (UF) instruction.
    
-   - *type* : ``int`` 1 or 2,  Solid (space and angle ignored) \
+   - `type` : ``int`` 1 or 2,  Solid (space and angle ignored) \
       3:  Hatching, 4:  Cross hatching.
    '''
 
@@ -1179,8 +1179,8 @@ class SI(_HPGLCommand):
       Use this instruction to establish character sizing that is not 
       dependent on the settings of P1 and P2.
 
-   - *width* : ``float`` [-110 to 110] cm, excluding 0. 
-   - *height* : ``float`` [-110 to 110] cm, excluding 0. 
+   - `width` : ``float`` [-110 to 110] cm, excluding 0. 
+   - `height` : ``float`` [-110 to 110] cm, excluding 0. 
    '''
 
    def __init__(self, width = None, height = None):   
@@ -1210,8 +1210,8 @@ class SR(SI):
       the character sizes adjust to occupy the same relative ammount of
       space.
 
-   - *width* : ``float`` [-100 to 100] percent, excluding 0. 
-   - *height* : ``float`` [-100 to 100] percent, excluding 0. 
+   - `width` : ``float`` [-100 to 100] percent, excluding 0. 
+   - `height` : ``float`` [-100 to 100] percent, excluding 0. 
    '''
    
       
@@ -1223,8 +1223,8 @@ class DI(_HPGLCommand):
       direction when you are labeling line charts, schematic drawings, 
       blueprints, and survey boudaries.
 
-   - *run* : ``float``. cos(angle)
-   - *rise* : ``float``. sin(angle)
+   - `run` : ``float``. cos(angle)
+   - `rise` : ``float``. sin(angle)
    '''
 
    def __init__(self, run=None, rise=None):
@@ -1251,8 +1251,8 @@ class DR(DI):
       to the plotted data. Use :class:`~chiplotle.hpgl.commands.DI` 
       if you want label direction to be independent or P1 and P2.
 
-   - *run* : ``float``. cos(angle)
-   - *rise* : ``float``. sin(angle)
+   - `run` : ``float``. cos(angle)
+   - `rise` : ``float``. sin(angle)
    '''
 
 
@@ -1314,8 +1314,8 @@ class ES(_HPGLCommand):
       Adjust space between characters and lines of labels without affecting
       character size.
 
-   - *charspace* : ``float``, ``None``. Spacing between characters.
-   - *linespace* : ``float``, ``None``. Spacing between lines.
+   - `charspace` : ``float``, ``None``. Spacing between characters.
+   - `linespace` : ``float``, ``None``. Spacing between lines.
    '''
 
    def __init__(self, charspace = None, linespace = None):
@@ -1341,7 +1341,7 @@ class LO(_HPGLCommand):
       below the current pen location and can also be offset by an amount equal 
       to 1/2 the character's width and height.
       
-   - *origin* : ``int`` [1-9] or [11-19].
+   - `origin` : ``int`` [1-9] or [11-19].
    '''
 
    def __init__(self, origin = 1):
@@ -1359,10 +1359,10 @@ class EW(_HPGLCommand):
       Outlines any wedge. Use these instructions to produce sectors of 
       a pie chart.
 
-   - *radius* : ``float``. 
-   - *startangle* : ``float`` [0 - 360] degrees.
-   - *sweepangle* : ``float`` [0 - 360] degrees.
-   - *chordangle* : ``float`` [0.36 - 50] degrees.
+   - `radius` : ``float``. 
+   - `startangle` : ``float`` [0 - 360] degrees.
+   - `sweepangle` : ``float`` [0 - 360] degrees.
+   - `chordangle` : ``float`` [0.36 - 50] degrees.
    '''
 
    def __init__(self, radius, startangle, sweepangle, chordangle=None):
@@ -1393,10 +1393,10 @@ class TL(_HPGLCommand):
    '''
    Length of ticks drawn with the XT and YT instructions.
 
-   - *tp* : percentage of (P2y - P1y) for XT or (P2x - P1x) for YT. \
+   - `tp` : percentage of (P2y - P1y) for XT or (P2x - P1x) for YT. \
       Denotes portion above X-axis or to the right of the Y-axis when
        difference is positive.
-   - *tn* : same as *tp* except denotes portion below the X-axis and to \
+   - `tn` : same as `tp` except denotes portion below the X-axis and to \
       the left of the Y-axis. 0.5 is default for both.
    '''
 
