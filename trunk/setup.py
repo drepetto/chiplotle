@@ -18,5 +18,11 @@ setup(name = 'Chiplotle',
       packages = find_packages( ),
       install_requires=['pyserial', 'numpy'],
       scripts = ['ez_setup.py'], 
+      entry_points = {'console_scripts':[
+         'chiplotle = chiplotle.scripts.chiplotle:_run_chiplotle',
+         'plot-hpgl = chiplotle.scripts.plot-hpgl:plot_hpgl',
+         'typewriter= chiplotle.scripts.typewriter:typewriter',
+         'envelope  = chiplotle.scripts.envelope:envelope',
+         ]},
       #include_package_data = True,
       )
