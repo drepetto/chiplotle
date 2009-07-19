@@ -2,26 +2,31 @@
 Quick Start Tutorial
 ********************
 
+
 Chiplotle modes
 ===============
 
 There are three main ways of using Chiplotle:
 
-#. Command line: an interactive mode where you type in commands one at a time and the plotter executes them immediately
-#. Python script: you create an Python script that generates the desired Chiplotle commands and sends them to the plotter
-#. HPGL pipeline: you send pre-existing HPGL commands from a file to the plotter using Chiplotle as a simple serial interface
+#. *Command line*: an interactive mode where you type in commands one at a time and the plotter executes them immediately.
+#. *Python script*: you create an Python script that generates the desired Chiplotle commands and sends them to the plotter.
+#. *HPGL pipeline*: you send pre-existing HPGL commands from a file to the plotter using Chiplotle as a simple serial interface.
 
 
 Running Chiplotle from the command line
 ---------------------------------------
 
-An easy way to get a feel for Chiplotle is to directly enter some commands via the command line.
-Change into the Chiplotle directory, and start Chiplotle by typing::
+An easy way to get a feel for Chiplotle is to directly enter some commands 
+via the command line.
+Start Chiplotle by typing ``chiplotle`` from the terminal::
 
-   ./chiplotle
+   $ chiplotle
 
-You'll see a listing of the serial ports available on your machine. Choose the one that you
-have your plotter plugged into.
+.. note::
+   If you've installed Chiplotle using Subversion, make sure the ``chiplotle/scritps`` directory is in your ``PATH`` variable so that your system knows about Chiplotle's scripts.
+
+You'll see a listing of the serial ports available on your machine. 
+Choose the one that you have your plotter plugged into.
 
 Chiplotle will attempt to communicate with your plotter on that serial port, and if successful,
 will print the ID string returned by the plotter. You will then be asked to select a plotter type.
@@ -96,9 +101,10 @@ Next you want your script to run the Chiplotle setup routine and import the plot
 
    plotter = instantiate_plotter( )
 
-This lets you select the appropriate serial port and plotter ID, and imports the plotter object
-so that you can use the ``plotter.write( )`` method as in the command line examples above. Now you can simply
-enter a series of chiplote commands::
+This lets you select the appropriate serial port and plotter ID, and imports 
+the plotter object so that you can use the ``plotter.write( )`` method as 
+in the command line examples above. Now you can simply enter a series of 
+Chiplote commands::
 
    plotter.selectPen(1)
    plotter.write(PU([100,100]))
@@ -108,8 +114,8 @@ enter a series of chiplote commands::
    plotter.write(PD([100,100]))
    plotter.selectPen(0)
 
-and save your script as a .py file (see examples/square.py for an example). To use your new program
-just run it as you would any Python script::
+and save your script as a .py file (see examples/square.py for an example). 
+To use your new program just run it as you would any Python script::
 
    $ python square.py
 
@@ -147,20 +153,18 @@ If you already have a file containing HPGL commands (from a CNC design package, 
    SP0;
 
 
-To plot the file while running Chiplotle, first you open the file, then you read its contents, close the file, 
-and send the contents to the plotter via the ``plotter.write( )`` method::
+To plot the file while running Chiplotle you can use the plotter's own 
+``writeFile(filename)`` method::
 
-   chiplotle> f = open('square.hpgl', 'r')
-   chiplotle> my_file = f.read( )
-   chiplotle> f.close( )
-   chiplotle> plotter.write(my_file)  
+   chiplotle> plotter.writeFile('my_file.hpgl')  
 
-You can also plot the file from the command line without first running Chiplotle by using the 
-"plot-hpgl" script in the scripts folder::
+You can also plot the file from the command line without first running 
+Chiplotle by using the ``plothpgl`` script found in the scripts folder::
 
-   $ plot-hpgl my_file.hpgl
+   $ plothpgl my_file.hpgl
 
 
-Chiplotle will take care of all buffering and timing issues, so even large HPGL files should plot
-reliably. See examples/square.hpgl for a sample HPGL file.
+Chiplotle will take care of all buffering and timing issues, so even large 
+HPGL files should plot reliably. See ``examples/square.hpgl`` for a sample 
+HPGL file.
 
