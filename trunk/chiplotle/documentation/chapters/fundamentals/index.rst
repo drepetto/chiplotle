@@ -104,7 +104,6 @@ Chiplotle transform functions
 All Chiplotle drawing classes --both the base Chiplotle-HPGL and the compound commands-- can be scaled and displaced with the ``scale( )`` and ``transpose( )`` functions, provided their properties are **scalable** and **transposable**, respectively::
 
    chiplotle> c = Circle((1000, 2000), 1000)
-   chiplotle> scale(c)
    chiplotle> c.xy
    [ 1000.  2000.]
    chiplotle> c.radius

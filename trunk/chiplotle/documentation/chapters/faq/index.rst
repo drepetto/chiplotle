@@ -30,14 +30,14 @@ The ``plotter`` does the buffer managing for you.
 If you don't want to work 'on line' and want to run your Python scripts,
 instead of running the executable ``chiplotle`` you can instantiate your own plotter in your scripts with the correct serial port. e.g. ::
 
-   >>> from chiplotle import *
-   >>> from serial import *
-   >>> s = Serial('/dev/ttyUSB0')
-   >>> p = Plotter(s)
+   from chiplotle import *
+   from serial import *
+   s = Serial('/dev/ttyUSB0')
+   p = Plotter(s)
 
 then send hpgl commands::
 
-   >>> p.write(PA( ))
+   p.write(PA( ))
 
 
 ------
@@ -46,15 +46,12 @@ then send hpgl commands::
 Is there a facility in Chiplotle to send over already existing HPGL command files? 
 
 **A:**
-Yes. Chiplotle comes with the `plot-hpgl` executable script designed exactly for this purpose. To send HPGL files to your plotter simply run the script from the command prompt with the file as the argument::
+Yes. Chiplotle comes with the ``plothpgl`` executable script designed exactly for this purpose. To send HPGL files to your plotter simply run the script from the command prompt with the file as the argument::
 
-   $ plot-hpgl my_file.hpgl
+   $ plothpgl my_file.hpgl
 
-To see the usage instructions run `plot-hpgl` with no arguments. Note that Chiplotle simply pipes the file to the plotter and does not check the syntax of the HPGL file.
+To see the usage instructions run ``plothpgl`` with no arguments. Note that Chiplotle simply pipes the file to the plotter and does not check the syntax of the HPGL file.
 
-You can also send HPGL files to your plotter from within a live Chiplotle session. Simply open the file, read it, and send the strings to the plotter, like so::
+You can also send HPGL files to your plotter from within a live Chiplotle session using a Plotter's own ``writeFile(filename)`` method, like so::
 
-   chiplotle> f = open('my_file.hpgl', 'r')
-   chiplotle> my_file = f.read( )
-   chiplotle> f.close( )
-   chiplotle> plotter.write(my_file)  
+   chiplotle> plotter.writeFile('my_file.hpgl')  
