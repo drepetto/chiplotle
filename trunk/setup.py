@@ -18,11 +18,18 @@ setup(name = 'Chiplotle',
       include_package_data = True,
       packages = find_packages( ),
       install_requires=['pyserial', 'numpy'],
-      scripts = ['ez_setup.py'], 
-      entry_points = {'console_scripts':[
-         'chiplotle = chiplotle.scripts.chiplotle:_run_chiplotle',
-         'plothpgl = chiplotle.scripts.plothpgl:plot_hpgl',
-         'typewriter= chiplotle.scripts.typewriter:typewriter',
-         'envelope  = chiplotle.scripts.envelope:envelope',
-         ]},
+      scripts = ['ez_setup.py', 
+         'chiplotle/scripts/chiplotle', 
+         'chiplotle/scripts/envelope.py',
+         'chiplotle/scripts/plothpgl.py',
+         'chiplotle/scripts/typewriter.py',
+         ], 
+## These don't work because the scripts folder is not a package. 
+## scripts must have an __init__.py file for these to be found.
+#      entry_points = {'console_scripts':[
+#         'chiplotle = chiplotle.scripts.chiplotle:_run_chiplotle',
+#         'plothpgl = chiplotle.scripts.plothpgl:plot_hpgl',
+#         'typewriter= chiplotle.scripts.typewriter:typewriter',
+#         'envelope  = chiplotle.scripts.envelope:envelope',
+#         ]},
       )
