@@ -19,12 +19,13 @@ http://pyserial.wiki.sourceforge.net/pySerial
 
 Installing the official release
 ===============================
+
 If you have the Python `setuptools <http://pypi.python.org/pypi/setuptools>`__ utility installed, simply type::
 
-   easy_install -U abjad
+   easy_install -U chiplotle
 
 
-If you don't have  *setuptools*, simply follow these steps:
+If you don't have  *setuptools*, follow these steps:
  
 1. Download the latest release from http://pypi.python.org/pypi/Chiplotle.
 
