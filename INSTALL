@@ -64,10 +64,10 @@ If you'd like to be at the cutting edge of the Chiplotle development use the fol
    a. Make a symlink in your Python `site-packages` directory pointing to 
    the chiplotle-trunk directory previously checked out via Subversion::
          
-         ln -s 'pwd'/chiplotle-trunk/chiplotle SITE-PACKAGES-DIR/chiplotle
+      ln -s 'pwd'/chiplotle-trunk/chiplotle SITE-PACKAGES-DIR/chiplotle
 
-      where SITE-PACKAGES-DIR is the Python `site-packages` directory.
-      In Linux this is usually in /usr/lib/Python2.x/site-packages.
+   where SITE-PACKAGES-DIR is the Python `site-packages` directory.
+   In Linux this is usually in ``/usr/lib/Python2.x/site-packages``.
 
    b. Alternatively you can include the `chiplotle-trunk` directory in 
    your ``PYTHONPATH`` environment variable.             
