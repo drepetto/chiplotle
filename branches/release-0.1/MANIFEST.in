@@ -1,0 +1,2 @@
+recursive-include chiplotle/documentation *
+recursive-include chiplotle/scripts *
