@@ -1,7 +1,7 @@
 .. _contents:
 
-Chiplotle documentation
-=======================
+Chiplotle  (|release|) documentation
+=====================================
 
 
 .. toctree::
