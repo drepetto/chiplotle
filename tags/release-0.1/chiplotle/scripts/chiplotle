@@ -1,0 +1,15 @@
+#!/usr/bin/env python
+import os
+import sys
+
+def _run_chiplotle( ):
+   try:
+      file = sys.argv[1]
+   except IndexError:
+      file = ''
+
+   os.system('''python -i %s -c "import sys; sys.ps1 = 'chiplotle> '; del sys; from chiplotle import *; plotter = instantiate_plotter( )"''' % file)
+
+
+if __name__ == '__main__':
+   _run_chiplotle( )
