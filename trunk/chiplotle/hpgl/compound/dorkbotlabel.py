@@ -1,5 +1,6 @@
 from chiplotle import *
 from chiplotle.fonts import dorkbot
+from chiplotle.utils.ispair import ispair
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.compound.fancylabel import FancyLabel
 
@@ -10,10 +11,15 @@ class DorkbotLabel(_CompoundHPGL):
 
       self.fill_pen = fill_pen
       self.font = dorkbot
-      self.outline_jitter = outline_jitter
-      self.fill_jitter = fill_jitter
       self.text = text
       self.padding = .8
+
+      if not (ispair(outline_jitter) or (fill_jitter is None)):
+         raise ValueError('outline_jitter must be (x, y) pair.')
+      self.outline_jitter = outline_jitter
+      if not (ispair(fill_jitter) or (fill_jitter is None)):
+         raise ValueError('fill_jitter must be (x, y) pair.')
+      self.fill_jitter = fill_jitter
 
       ## handle shape
       if cell_shape not in ('circle', 'square'):
@@ -60,6 +66,4 @@ class DorkbotLabel(_CompoundHPGL):
             self.fill_pen, self.width, self.height, self.fill_jitter)
          result.append(fill)
       return result
-
-
 
