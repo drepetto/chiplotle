@@ -62,7 +62,6 @@ class FancyLabel(_CompoundHPGL):
       random.seed()
       result = [ ]      
       width_margin = self.width / 4.
-      height_margih = self.height / 4.
       x = self.xabsolute
       y = self.yabsolute
       for i, char in enumerate(self.text):
@@ -77,19 +76,19 @@ class FancyLabel(_CompoundHPGL):
       result = [ ]
       character = self.font.char_dict[char]
       shape = [0,0]
-      shape[0] = len(self.font.char_dict['a'])
-      shape[1] = len(self.font.char_dict['a'][0])
+      rows = len(self.font.char_dict['a'])
+      cols = len(self.font.char_dict['a'][0])
    
-      for r in range(shape[0]):
-         for c in range(shape[1]):
+      for r in range(rows):
+         for c in range(cols):
             x = abs_pos[0]
-            x += c * self.width / shape[1]
+            x += c * self.width / cols
             x += random.gauss(0, self.jitter[0])
             y = abs_pos[1]
-            y -= r * self.height / shape[0]
-            y -= random.gauss(0, self.jitter[1])
+            y += r * self.height / rows
+            y += random.gauss(0, self.jitter[1])
 
-            value = character[r][c]
+            value = character[rows - 1 - r][c]
             if value == 1:
                result.extend(self._get_cell(x, y))
                #command = copy.deepcopy(self.cell_shape)

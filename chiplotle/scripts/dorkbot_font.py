@@ -1,6 +1,6 @@
 from chiplotle import *
-from chiplotle.hpgl.compound.dorkbotfont import DorkbotFont
-
+from chiplotle.hpgl.compound.dorkbotlabel import DorkbotLabel
+from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 
 
 def main():
@@ -13,51 +13,47 @@ def main():
 
    input = raw_input("enter font outline pen number:")
    outline_pen = int(input)
-   input = raw_input("enter font fill pen number:")
-   fill_pen = int(input)
-   input = raw_input("enter font outline jitter (0-100):")
-   outline_jitter = int(input) / 100.0
-   input = raw_input("enter font fill jitter (0-100):")
-   fill_jitter = int(input) / 100.0
-   input = raw_input("enter font style (1 = rects, 2 = circles, 3 = Xs):")
-   font_style = int(input)
+
+   fill_pen = None
+   input = raw_input("enter font fill pen number (hit Enter for no outline):")
+   if input:
+      fill_pen = int(input)
+
+   input = raw_input("enter font outline jitter:")
+   outline_jitter = [int(input)] * 2
+
+   fill_jitter = None
+   if fill_pen:
+      input = raw_input("enter font fill jitter:")
+      fill_jitter = [int(input)] * 2 
+
+   input = raw_input("enter font style (1 = square, 2 = circles):")
+   styles = {'1':'square', '2':'circle'}
+   font_style = styles[input]
    
-   x_char = 'x'
+   input = raw_input("enter font width in plotter points:")
+   width = int(input)
    
-   if font_style < 3:
-      fill_style = int(raw_input(
-         "enter fill style (1 = outline + fill, 2 = outline only, 3 = fill only):"))
-   elif font_style == 3:
-      x_char = raw_input("enter character to use for Xs:")
-      fill_style = 4
-   
-   input = raw_input("enter font cell size in plotter points:")
-   cell_size = int(input)
-   
-   font = DorkbotFont(outline_pen,fill_pen,outline_jitter,fill_jitter,font_style,
-      fill_style,x_char,cell_size)
-   
-   finished = False
-   
-   while finished == False:   
+   while True:   
       text = raw_input("enter text to plot (blank line to end):")
+      if not text:
+         break
 
-      if len(text) == 0:
-         finished = True
-      else:
-         input = raw_input("move to top left corner and hit enter to begin plotting...")
-         
-         point_string = plotter.actualPosition
-         point_string_parts = point_string.split(',')
-         origin_x = int(point_string_parts[0])
-         # the "- cell_size is there because rects are drawn from the bottom left
-         # corner, but we've put our starting point at the top left
-         origin_y = int(point_string_parts[1]) - cell_size
+      msg = "move to top left corner and hit enter to begin plotting..."
+      raw_input(msg)
       
-         plotter.selectPen(outline_pen)
-         
-         plotter.write(font.plot(origin_x, origin_y, text))
-
+      point_string = plotter.actualPosition
+      point_string_parts = point_string.split(',')
+      x = int(point_string_parts[0])
+      # the "- cell_size is there because rects are drawn from the 
+      # bottom left
+      # corner, but we've put our starting point at the top left
+      y = int(point_string_parts[1])  
+   
+      text = DorkbotLabel((x, y), text, font_style, outline_pen, fill_pen,
+        width, outline_jitter = outline_jitter, fill_jitter = fill_jitter)
+      plotter.write(text)
+   
    plotter.penUp()
 
 if __name__ == '__main__': main()
