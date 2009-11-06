@@ -45,23 +45,21 @@ class Label(_CompoundHPGL):
       self.slant = None
       self.vertical = False
 
-   ### TODO: replace charsize with two attributes: charwidth and charheight.
-   ### this is broken.
+
    @apply
    def charsize( ):
       def fget(self):
          return self._charsize
       def fset(self, arg):
          if isinstance(arg, (list, tuple, Scalable)):
-            if len(arg) == 1:
-               self._charsize = Scalable((arg[0], None))
-            elif len(arg) == 2:
+            if len(arg) == 2:
                self._charsize = Scalable(arg)
             else:
-               raise ValueError("Character size has two values,\
-                     not 0, not 3, not 4, etc.")
+               raise ValueError("Character size has two values: (w, h).")
+         elif arg is None:
+            self._charsize = None
          else:
-            self._charsize = Scalable((arg, None))
+            raise ValueError("charsize must be None, (x, y) pair, or Scalar.")
       return property(**locals())
             
          
@@ -71,7 +69,8 @@ class Label(_CompoundHPGL):
       result = _CompoundHPGL._subcommands.fget(self)
       ### set commands
       result += [PU( ), PA(self.xyabsolute)]
-      result.append(SI(*self.charsize))
+      if not self.charsize is None:
+         result.append(SI(*self.charsize))
       if self.charspace and self.linespace:
          result.append(ES(self.charspace, self.linespace))
       if self.direction:
@@ -86,7 +85,8 @@ class Label(_CompoundHPGL):
       result.append(LB(self.text))
 
       ### unset commands
-      result.append(SI( ))
+      if not self.charsize is None:
+         result.append(SI( ))
       if self.charspace and self.linespace:
          result.append(ES( ))
       if self.direction:
