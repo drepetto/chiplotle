@@ -1,5 +1,5 @@
 from chiplotle import *
-from chiplotle.hpgl.tools.relativize import relativize
+from chiplotle.tools.hpgltools import relativize
 
 def test_relativize_01( ):
    t = [PA((1, 1)), PA((2, 2)), PA((3, 2))]

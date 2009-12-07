@@ -1,5 +1,5 @@
 from chiplotle import *
-from chiplotle.hpgl.tools.scale import scale
+from chiplotle.tools.hpgltools import scale
 
 def test_scale_CI( ):
    '''Scale works on single CI.'''

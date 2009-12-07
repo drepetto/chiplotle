@@ -6,7 +6,6 @@
 from __future__ import division
 from chiplotle.hpgl import commands 
 from chiplotle.plotters import margin
-#from chiplotle.hpgl.tools.import_hpgl_file import import_hpgl_file
 import math
 import re
 import serial

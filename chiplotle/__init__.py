@@ -23,12 +23,13 @@ def _remove_modules():
       if isinstance(value, ModuleType) and not key.startswith('_'):
          globals().pop(key)
 
-from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.compound import *
-from chiplotle.hpgl.tools import *
+#from chiplotle.hpgl.tools import *
 
 from chiplotle.utils.instantiate_plotter import instantiate_plotter
 
 _remove_modules()
 
+from chiplotle.hpgl.commands import *
+from chiplotle.tools import *
 from chiplotle.plotters import *
