@@ -17,6 +17,6 @@ def interactive_open_serial( ):
    sp = raw_input("\n\nChoose serial port [0 - %d]: " % (i - 1))
 
    print "okay, opening %s..." % ttys[int(sp)]
-   ser = serial.Serial("/dev/" + ttys[int(sp)], 9600, timeout=.1)
+   ser = serial.Serial("/dev/" + ttys[int(sp)], 9600, timeout=1)
    return ser
 
