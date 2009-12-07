@@ -20,7 +20,7 @@ def instantiate_plotter(port=None, wait_time=10):
    if not port:
       port = read_config_value('serial_port')
    if port:
-      ser = serial.Serial(port, 9600, timeout=.1)
+      ser = serial.Serial(port, 9600, timeout=1)
    else:
       ser = interactive_open_serial( )
 
