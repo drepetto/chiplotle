@@ -1,5 +1,7 @@
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.tools.io.save_hpgl import save_hpgl
+from chiplotle.cfg.cfg import CONFIG_DIR
+from chiplotle.cfg._verify_output_directory import _verify_output_directory
 import os
 import shutil
 import subprocess
@@ -22,10 +24,12 @@ def export(expr, filename, format = 'eps'):
 
    '''
 
-   save_hpgl(expr, filename)
+   _verify_output_directory( )
+   temp_file = os.path.join(CONFIG_DIR, 'output', 'tmp')
+   save_hpgl(expr, temp_file)
 
    command = 'hp2xx -p 1 -m %s -f %s.%s %s.hpgl' % \
-      (format, filename, format, filename)
+      (format, filename, format, temp_file)
    p = subprocess.Popen(command, shell = True)
 
    ## remove temporary HPGL file
