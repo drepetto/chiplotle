@@ -1,5 +1,6 @@
 from chiplotle.cfg.read_config_file import read_config_file
 
+## TODO: no longer used. DELETE!
 def read_config_value(key):
    '''
    Read the configuration value for the given key in the config file.
