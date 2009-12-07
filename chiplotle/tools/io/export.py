@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
-from chiplotle.utils.io.save_hpgl import save_hpgl
+from chiplotle.tools.io.save_hpgl import save_hpgl
 import os
 import shutil
 import subprocess

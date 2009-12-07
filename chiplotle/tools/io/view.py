@@ -1,7 +1,8 @@
 import os
 import subprocess
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
-from chiplotle.utils.io.export import export
+from chiplotle.tools.io.export import export
+from chiplotle.tools.io._open_file import _open_file
 
 def view(expr):
    '''Displays Chiplotle-HPGL objects for prevewing.
@@ -17,6 +18,8 @@ def view(expr):
    PDF_VIEWER = 'evince'
 
    export(expr, file_name, 'eps')
+
    ## show!
-   p = subprocess.Popen('%s %s' % (PDF_VIEWER, file_name + '.eps'), 
-      shell = True)
+   _open_file(file_name + '.eps')
+   #p = subprocess.Popen('%s %s' % (PDF_VIEWER, file_name + '.eps'), 
+   #   shell = True)
