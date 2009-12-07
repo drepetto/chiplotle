@@ -1,4 +1,5 @@
-from chiplotle.cfg.read_config_value import read_config_value
+#from chiplotle.cfg.read_config_value import read_config_value
+from chiplotle.cfg.read_config_file import read_config_file
 from chiplotle.utils.interactive_open_serial import interactive_open_serial
 from chiplotle.utils.interactive_choose_plotter import \
    interactive_choose_plotter
@@ -18,7 +19,7 @@ def instantiate_plotter(port=None, wait_time=10):
    '''
    ## serial port
    if not port:
-      port = read_config_value('serial_port')
+      port = read_config_file( )['serial_port']
    if port:
       ser = serial.Serial(port, 9600, timeout=1)
    else:
@@ -29,7 +30,7 @@ def instantiate_plotter(port=None, wait_time=10):
       print '*** ERROR: no plotter found in %s or not powered on.' % ser.port
       return None
 
-   plt_name = read_config_value('plotter_type')
+   plt_name = read_config_file( )['plotter_type']
    if plt_name:
       plotter = getattr(plotters, plt_name)(ser)
    else:
