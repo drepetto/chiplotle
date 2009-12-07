@@ -30,7 +30,7 @@ def export(expr, filename, format = 'eps'):
 
    command = 'hp2xx -p 1 -m %s -f %s.%s %s.hpgl' % \
       (format, filename, format, temp_file)
-   p = subprocess.Popen(command, shell = True)
+   p = subprocess.Popen(command, shell = True, stdout = subprocess.PIPE,
+      stderr = subprocess.PIPE)
+   stdout, stderr = p.communicate( )
 
-   ## remove temporary HPGL file
-   #os.remove(filename + '.hpgl')
