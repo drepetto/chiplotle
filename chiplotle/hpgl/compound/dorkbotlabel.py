@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import *
 from chiplotle.fonts import dorkbot
 from chiplotle.utils.ispair import ispair
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
