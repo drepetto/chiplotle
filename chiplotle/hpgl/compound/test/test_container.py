@@ -28,9 +28,14 @@ def test_container_03( ):
    assert t[0] is circle
 
 
+def test_container_04( ):
+   '''All elements in a Container must be _CompoundHPGL objects.'''
+   py.test.raises(TypeError, 't = Container((1,2), [PD( ), CI(3)])')
+
+
 ## positioning ##
 
-def test_container_04( ):
+def test_container_05( ):
    '''The absolute prosition of CompoundHPGL objects contained in Container
    depend on their container(s).'''
    c = Circle((10, 20), 100)
@@ -45,7 +50,7 @@ def test_container_04( ):
    assert c._parent is t
 
 
-def test_container_05( ):
+def test_container_06( ):
    '''Containers can embed other Containers.'''
    c = Circle((10, 20), 100)
    s = Container((1, 2), [c])
