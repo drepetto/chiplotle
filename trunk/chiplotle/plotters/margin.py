@@ -9,7 +9,8 @@ class _PlotterMargins(object):
       self._plotter._serialPort.flushInput()
       self._plotter._writeStringToPort(self._queryCommand.format)
       m = self._plotter._readPort().split(',')
-      return tuple([int(n) for n in m])
+      return tuple([float(n) for n in m])
+#      return tuple([int(n) for n in m])
       
    @property
    def bottom(self):
