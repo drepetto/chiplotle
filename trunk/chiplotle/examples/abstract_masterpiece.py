@@ -69,7 +69,7 @@ def main():
            yRange = height/5
                    
            for i in range(numPoints):
-               plotter.nudge(random.randint(-xRange, xRange), random.randint(-yRange, yRange))
+               plotter.nudge(random.randint(int(-xRange), int(xRange)), random.randint(int(-yRange), int(yRange)))
            plotter.goto(firstX, firstY)
            plotter.penUp()
            
