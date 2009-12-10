@@ -1,7 +1,5 @@
 import os
-import subprocess
 from chiplotle.cfg.cfg import CONFIG_DIR
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.tools.io.export import export
 from chiplotle.tools.io._open_file import _open_file
 
@@ -15,12 +13,6 @@ def view(expr):
    OUTPUT_DIR = os.path.join(CONFIG_DIR, 'output')
    file_name = os.path.join(OUTPUT_DIR, 'tmp')
 
-   ## get viewer
-   PDF_VIEWER = 'evince'
-
    export(expr, file_name, 'eps')
-
    ## show!
    _open_file(file_name + '.eps')
-   #p = subprocess.Popen('%s %s' % (PDF_VIEWER, file_name + '.eps'), 
-   #   shell = True)

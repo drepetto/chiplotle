@@ -1,4 +1,3 @@
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.tools.io.save_hpgl import save_hpgl
 from chiplotle.cfg.cfg import CONFIG_DIR
 from chiplotle.cfg._verify_output_directory import _verify_output_directory
@@ -28,13 +27,15 @@ def export(expr, filename, format = 'eps'):
    temp_file = os.path.join(CONFIG_DIR, 'output', 'tmp')
    save_hpgl(expr, temp_file)
 
-   try:
-      command = ['hp2xx', '-p 1 -m %s -f %s.%s %s.hpgl' % \
-         (format, filename, format, temp_file)]
-      p = subprocess.Popen(command, stdout = subprocess.PIPE,
-         stderr = subprocess.PIPE)
-      stdout, stderr = p.communicate( )
-   except OSError:
+   command = 'hp2xx -p 1 -m %s -f %s.%s %s.hpgl' % \
+      (format, filename, format, temp_file)
+   p = subprocess.Popen(command, shell = True,
+      stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+   stdout, stderr = p.communicate( )
+   #print 'hp2xx output:'
+   #print 'stdout:', stdout
+   #print 'stderr:', stderr
+   if 'not found' in stderr:
       print 'ATTENTION: hp2xx is not installed in your system.'
       print '\thp2xx must be installed for export( ) and view( )'
       print '\tto work.'
