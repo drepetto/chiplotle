@@ -2,29 +2,29 @@ from serial import Serial
 import sys
 import time
 
-def is_plotter_alive(serial, wait_time=5):
-      '''Check if there's a powered-on plotter in *serial* port.
+def is_plotter_alive(ser, wait_time=5):
+      '''Check if there's a powered-on plotter in *ser* port.
       
-      - *serial* : a Serial object.
+      - *ser* : a Serial object.
       - *wait_time* : ``int`` maximum time in seconds to wait for 
          plotter response.'''
       
       assert isinstance(wait_time, int)
-      assert isinstance(serial, Serial)
+      assert isinstance(ser, Serial)
 
-      serial.flushInput()
-      serial.flushOutput()
+      print 'Waiting for reply from plotter...',
 
-      serial.write('IN;')
-      serial.write('OI;')
-      
-      print 'Waiting for reply from plotter...'
+      ser.flushInput()
+      ser.flushOutput()
+      ser.write('IN;')
+      ser.write('OI;')
 
       for i in range(1, wait_time + 1):
-         if serial.inWaiting( ) > 0:
-            print "Got reply to 'OI' from plotter.\n"
+         if ser.inWaiting( ) > 0:
+            print "got reply from plotter.\n"
             return True
          else:
             time.sleep(1)
-      else:
-         return False
+
+      print 'ERROR: no plotter found in port %s or plotter not on.' % ser.port
+      return False

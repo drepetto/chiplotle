@@ -8,7 +8,7 @@ def _run_chiplotle( ):
    except IndexError:
       file = ''
 
-   os.system('''python -i %s -c "import sys; sys.ps1 = 'chiplotle> '; del sys; from chiplotle import *; plotter = instantiate_plotter( )"''' % file)
+   os.system('''clear; python -i %s -c "import sys; sys.ps1 = 'chiplotle> '; del sys; from chiplotle import *; plotter = instantiate_plotter( )"''' % file)
 
 
 if __name__ == '__main__':
