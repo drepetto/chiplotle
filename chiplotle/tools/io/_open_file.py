@@ -6,9 +6,9 @@ def _open_file(file_name, application = None):
    '''Generic cross-platform file opener.
 
    - `file_name` is the file to open, including path.
-   - `application` is the application to use to open the file.
-      If not given, the function will use a generic OS dependent 
-      file openner.
+   - `application` is the application to use to open the file;
+      must be a string or None. If not given, the function will use a 
+      generic OS dependent file openner.
    '''
 
    if os.name == 'nt':

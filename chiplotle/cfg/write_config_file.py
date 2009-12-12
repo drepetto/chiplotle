@@ -41,12 +41,12 @@ def write_config_file(path):
 #      f.write("plotter_type = None")
 #   f.write("\n\n")
 
-   f.write("# PDF viewer. Set for previewing HPGL commands via the\n")
-   f.write("# ``view( )`` function. If set to `None`, the viewer will\n")
-   f.write("# use the OS dependent generic file opener.\n")
-   f.write("# e.g., `open` in OS X, `xdg-open` in Linux.\n")
-   f.write("pdf_viewer = None")
-   f.write('\n\n')
+#   f.write("# PDF viewer. Set for previewing HPGL commands via the\n")
+#   f.write("# ``view( )`` function. If set to `None`, the viewer will\n")
+#   f.write("# use the OS dependent generic file opener.\n")
+#   f.write("# e.g., `open` in OS X, `xdg-open` in Linux.\n")
+#   f.write("pdf_viewer = None")
+#   f.write('\n\n')
 
    f.close( )
 
