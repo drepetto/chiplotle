@@ -5,7 +5,8 @@
 '''
 from __future__ import division
 from chiplotle.hpgl import commands 
-from chiplotle.plotters import margin
+#from chiplotle.plotters import margin
+from chiplotle.interfaces.margins.interface import MarginsInterface
 import math
 import re
 import serial
@@ -21,16 +22,20 @@ class _BasePlotter(object):
       self._hpgl = commands
       self.bufferSize = self._bufferSpace
 
-      ## Only these commands will be sent to the plotter. 
-      #self.allowedHPGLCommands = tuple( )
-
-      self.marginHard = margin._MarginsHard(self)
-      self.marginSoft = margin._MarginsSoft(self)
+      #self.marginHard = margin._MarginsHard(self)
+      #self.marginSoft = margin._MarginsSoft(self)
+      self._margins = MarginsInterface(self)
 
       self.initializePlotter()
 
 
    ### PUBLIC METHODS ###
+
+   @property
+   def margins(self):
+      '''Read-only reference to MarginsInterface.'''
+      return self._margins
+
 
    def initializePlotter(self):
       self._serialPort.flushInput()
@@ -228,7 +233,7 @@ class _BasePlotter(object):
 
    @property
    def window(self):
-      '''Output window. Same as marginSoft.'''
+      '''Output window. Same as margins.soft.'''
       self.write(self._hpgl.OW())
       return self._readPort()
 

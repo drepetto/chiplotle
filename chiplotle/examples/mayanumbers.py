@@ -9,10 +9,10 @@ def main():
    if not plotter:
       return None
 
-   width = plotter.marginSoft.width
-   height = plotter.marginSoft.height
-   left = plotter.marginSoft.left 
-   top = plotter.marginSoft.top - lineSpacing
+   width = plotter.margins.soft.width
+   height = plotter.margins.soft.height
+   left = plotter.margins.soft.left 
+   top = plotter.margins.soft.top - lineSpacing
 
    numbersPerLine = width // 350
    r = [ ]

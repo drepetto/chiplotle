@@ -6,14 +6,14 @@ def main():
 
    plotter = instantiate_plotter( )
 
-   width = plotter.marginSoft.width
-   height = plotter.marginSoft.height
-   left = plotter.marginSoft.left
-   right = plotter.marginSoft.right
-   bottom = plotter.marginSoft.bottom
-   top = plotter.marginSoft.top
+   width = plotter.margins.soft.width
+   height = plotter.margins.soft.height
+   left = plotter.margins.soft.left
+   right = plotter.margins.soft.right
+   bottom = plotter.margins.soft.bottom
+   top = plotter.margins.soft.top
 
-   print "width: %d height: %d" % (plotter.marginSoft.width, plotter.marginSoft.height)
+   print "width: %d height: %d" % (plotter.margins.soft.width, plotter.margins.soft.height)
    pens = raw_input("\nhow many pens do you want to use? ")
    numPens = int(pens)
 
