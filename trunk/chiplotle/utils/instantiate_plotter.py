@@ -21,7 +21,8 @@ def instantiate_plotter(port=None, wait_time=10):
       return None
 
    plotter = interactive_choose_plotter(ser)
-   print "\nDrawing area: %s" % plotter.marginSoft
+   #print "\nDrawing area: %s" % plotter.marginSoft
+   print "\nDrawing area: %s" % plotter.margins.soft
    print "Buffer Size: %s\n" % plotter.bufferSize
 
    return plotter

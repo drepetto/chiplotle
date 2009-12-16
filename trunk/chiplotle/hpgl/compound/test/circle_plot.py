@@ -20,7 +20,7 @@ if plotter:
       '''Position and fill.'''
       px = range(1, 8)
       py = range(1, 4)
-      margins = plotter.marginSoft
+      margins = plotter.margins.soft
       result =  [ ]
       for x in px:
          x *= 200
