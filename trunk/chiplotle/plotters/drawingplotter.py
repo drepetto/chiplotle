@@ -3,10 +3,20 @@ from chiplotle.plotters.baseplotter import _BasePlotter
 
 class _DrawingPlotter(_BasePlotter):
 
+   def draw_soft_margins(self, pen=1):
+      pen = self._hpgl.SP(pen)
+      pa = self._hpgl.PA(self.margins.soft.bottom_left)
+      rec = self._hpgl.ER(self.margins.soft.top_right)
+      self.write([pen, pa, rec])
 
-   """
-   TEXT OUTPUT & SETTINGS
-   """
+   def draw_hard_margins(self, pen=1):
+      pen = self._hpgl.SP(pen)
+      pa = self._hpgl.PA(self.margins.hard.bottom_left)
+      rec = self._hpgl.ER(self.margins.hard.top_right)
+      self.write([pen, pa, rec])
+
+
+   ## TEXT OUTPUT & SETTINGS ##
 
    def absoluteCharSize(self, w = None, h = None):
       self.write(self._hpgl.SI(w, h))
@@ -77,9 +87,7 @@ class _DrawingPlotter(_BasePlotter):
 
 
 
-   """
-   DRAWING PRIMITIVES & SETTINGS
-   """
+   ## DRAWING PRIMITIVES & SETTINGS
 
    def arcAbsolute(self, x, y, aa, ca = 5):
       self.write(self._hpgl.AA((x, y), aa, ca))
@@ -130,9 +138,7 @@ class _DrawingPlotter(_BasePlotter):
 #   self.write(self._hpgl.shadeWedge(r, sa, swa, ca))
 
 
-   """
-   DIRECT PEN CONTROL & INFO
-   """
+   ## DIRECT PEN CONTROL & INFO
 
    def accelSelect(self, accel = None, pen = None):
       self.write(self._hpgl.AS(accel, pen))
@@ -235,9 +241,7 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.SC((xMin, xMax, yMin, yMax)))
 
 
-   """
-   PAPER CONTROLS
-   """
+   ## PAPER CONTROLS
 
    def advanceFrame(self):
       self.write(self._hpgl.FR())
@@ -255,9 +259,7 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.PG(n))
 
 
-   """
-   DIGITIZER CONTROLS
-   """
+   ## DIGITIZER CONTROLS
 
    def clearDigitizer(self):
       self.write(self._hpgl.DC())
@@ -266,9 +268,7 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.DP())
 
 
-   """
-   MISC I/O, PLOTTER QUERIES, ERRORS, SETUP
-   """
+   ## MISC I/O, PLOTTER QUERIES, ERRORS, SETUP
 
    def abortCommand(self):
       """Tells the plotter to discard commands in its buffer."""
@@ -308,6 +308,3 @@ class _DrawingPlotter(_BasePlotter):
 #   def escapeXoff(self, xoff='19', interchar_speed=0):
 #   self.writeControl(self._hpgl.escapeXoff(xoff, interchar_speed))
 #   self.xoff = str(xoff)
-
-
-
