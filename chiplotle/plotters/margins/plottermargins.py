@@ -41,6 +41,17 @@ class _PlotterMargins(object):
    def center(self):
       return (self.right + self.left) / 2., (self.top + self.bottom) / 2.
 
+   @property
+   def bottom_left(self):
+      coords = self._get( )
+      return coords[0:2]
+
+   @property
+   def top_right(self):
+      coords = self._get( )
+      return coords[2:4]
+
+
    def __repr__(self):
       return str(self._get())
 
