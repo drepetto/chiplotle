@@ -62,11 +62,10 @@ class _BasePlotter(object):
             elif isinstance(c, str):
                result.append(c)
             else:
-               raise ValueError('Invalid value. Must be str or _HPLGCommand.')
+               raise TypeError('Elements must be strings or _HPGL commands.')
          self._writeStringToPort(''.join(result))
       else:
-         raise ValueError('Invalid value. \
-         Must be str, iterator or _HPLGCommand.')
+         raise TypeError('Must be a str, iterator or an _HPGL command.')
 
 
    def writeFile(self, filename):
