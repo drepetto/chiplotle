@@ -36,5 +36,6 @@ from chiplotle.utils.instantiate_plotter import instantiate_plotter
 ## remove unnecessary modules...
 globals().pop('cfg')
 globals().pop('hpgl')
+globals().pop('interfaces')
 globals().pop('tools')
 globals().pop('utils')

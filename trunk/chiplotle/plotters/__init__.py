@@ -1,6 +1,6 @@
 from chiplotle.utils.imports.package_import import _package_import
 
-_package_import(__path__[0], globals( ))
+_package_import(__path__[0], locals( ))
 
 def remove_all_but_types(lst):
    '''Keep only classes.'''
