@@ -21,12 +21,8 @@ class _BasePlotter(object):
       self.memory = []
       self._serialPort = serialPort
       self._hpgl = commands
-      self.bufferSize = self._bufferSpace
-
-      #self.marginHard = margin._MarginsHard(self)
-      #self.marginSoft = margin._MarginsSoft(self)
       self._margins = MarginsInterface(self)
-
+      self.bufferSize = self._bufferSpace
       self.initializePlotter()
 
 
@@ -145,11 +141,17 @@ class _BasePlotter(object):
 
    def _readPort(self):
       '''Read data from serial port.'''
-      while self._serialPort.inWaiting( ) == 0:
-         time.sleep(1.0 / 64)
-      result = self._serialPort.readline(eol='\r')
-      #print repr(result)
-      return result
+      elapsed_time = 0
+      total_time = 4
+      sleep = 1.0 / 8
+      while elapsed_time < total_time:
+         if self._serialPort.inWaiting( ): 
+            return self._serialPort.readline(eol='\r')
+         else:
+            time.sleep(sleep)
+            elapsed_time += sleep
+      print 'Waited for %s secs... No response from plotter.' % total_time
+      return 
    
 
    @property
