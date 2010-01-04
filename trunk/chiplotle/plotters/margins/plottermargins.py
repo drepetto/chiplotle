@@ -53,7 +53,7 @@ class _PlotterMargins(object):
    def draw_outline(self, pen=1):
       pen = self._plotter._hpgl.SP(pen)
       pa = self._plotter._hpgl.PA(self.bottom_left)
-      rec = self._plotter._hpgl.ER(self.top_right)
+      rec = self._plotter._hpgl.EA(self.top_right)
       self._plotter.write([pen, pa, rec])
 
    def _get(self):
