@@ -7,7 +7,10 @@ class MarginsInterface(_Interface):
    def __init__(self, client):
       _Interface.__init__(self, client)
       self._soft = MarginsSoft(client)
-      self._hard = MarginsHard(client)
+      self._hard = None
+      ## check if hard margin (OH) is supported by plotter...
+      if 'OH' in client.allowedHPGLCommands:
+         self._hard = MarginsHard(client)
 
 
    @property
