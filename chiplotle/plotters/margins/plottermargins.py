@@ -4,13 +4,9 @@ class _PlotterMargins(object):
       self._plotter = plotter
       self._queryCommand = queryCommand
 
-   def _get(self):
-      self._plotter._serialPort.flushInput()
-      self._plotter._writeStringToPort(self._queryCommand.format)
-      m = self._plotter._readPort().split(',')
-      return tuple([float(n) for n in m])
-#      return tuple([int(n) for n in m])
-      
+
+   ## PROPERTIES ##
+
    @property
    def bottom(self):
       return self._get()[1]
@@ -52,8 +48,25 @@ class _PlotterMargins(object):
       return coords[2:4]
 
 
+   ## METHODS ##
+
+   def draw_outline(self, pen=1):
+      pen = self._plotter._hpgl.SP(pen)
+      pa = self._plotter._hpgl.PA(self.bottom_left)
+      rec = self._plotter._hpgl.ER(self.top_right)
+      self._plotter.write([pen, pa, rec])
+
+   def _get(self):
+      self._plotter._serialPort.flushInput()
+      self._plotter._writeStringToPort(self._queryCommand.format)
+      m = self._plotter._readPort().split(',')
+      return tuple([float(n) for n in m])
+#      return tuple([int(n) for n in m])
+      
+
+   ## OVERRIDES ##
+
    def __repr__(self):
       return str(self._get())
-
 
 

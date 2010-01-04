@@ -3,17 +3,17 @@ from chiplotle.plotters.baseplotter import _BasePlotter
 
 class _DrawingPlotter(_BasePlotter):
 
-   def draw_soft_margins(self, pen=1):
-      pen = self._hpgl.SP(pen)
-      pa = self._hpgl.PA(self.margins.soft.bottom_left)
-      rec = self._hpgl.ER(self.margins.soft.top_right)
-      self.write([pen, pa, rec])
-
-   def draw_hard_margins(self, pen=1):
-      pen = self._hpgl.SP(pen)
-      pa = self._hpgl.PA(self.margins.hard.bottom_left)
-      rec = self._hpgl.ER(self.margins.hard.top_right)
-      self.write([pen, pa, rec])
+#   def draw_soft_margins(self, pen=1):
+#      pen = self._hpgl.SP(pen)
+#      pa = self._hpgl.PA(self.margins.soft.bottom_left)
+#      rec = self._hpgl.ER(self.margins.soft.top_right)
+#      self.write([pen, pa, rec])
+#
+#   def draw_hard_margins(self, pen=1):
+#      pen = self._hpgl.SP(pen)
+#      pa = self._hpgl.PA(self.margins.hard.bottom_left)
+#      rec = self._hpgl.ER(self.margins.hard.top_right)
+#      self.write([pen, pa, rec])
 
 
    ## TEXT OUTPUT & SETTINGS ##
