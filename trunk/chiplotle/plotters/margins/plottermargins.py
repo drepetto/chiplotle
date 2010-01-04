@@ -56,6 +56,17 @@ class _PlotterMargins(object):
       rec = self._plotter._hpgl.EA(self.top_right)
       self._plotter.write([pen, pa, rec])
 
+   def draw_corners(self, pen=1):
+      from chiplotle.hpgl.compound import Cross
+      coords = self._get( )
+      size = 100
+      corners = [ ]
+      corners.append(Cross(coords[0:2], width = size, height = size, pen = 1))
+      corners.append(Cross((coords[0], coords[3]), size,  size))
+      corners.append(Cross((coords[2], coords[1]), size,  size))
+      corners.append(Cross(coords[2:4], size,  size))
+      self._plotter.write(corners)
+
    def _get(self):
       self._plotter._serialPort.flushInput()
       self._plotter._writeStringToPort(self._queryCommand.format)
