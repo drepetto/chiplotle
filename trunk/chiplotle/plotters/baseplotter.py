@@ -5,6 +5,7 @@
 '''
 from __future__ import division
 from chiplotle.hpgl import commands 
+from chiplotle.hpgl.abstract.hpgl import _HPGL
 #from chiplotle.plotters import margin
 from chiplotle.interfaces.margins.interface import MarginsInterface
 import math
@@ -47,15 +48,17 @@ class _BasePlotter(object):
    def write(self, data):
       '''Public access for writing to serial port. 
          data can be an iterator, a string or an _HPGLCommand. '''
-      if hasattr(data, 'format'):
+      #if hasattr(data, 'format'):
+      if isinstance(data, _HPGL):
          self._writeStringToPort(data.format)
       elif isinstance(data, str):
          self._writeStringToPort(data)
       elif type(data) in (list, tuple, types.GeneratorType):
          result = [ ]
          for c in data:
-            if hasattr(c, 'format'):
-               result.append(c.format())
+            #if hasattr(c, 'format'):
+            if isinstance(c, _HPGL):
+               result.append(c.format)
             elif isinstance(c, str):
                result.append(c)
             else:
