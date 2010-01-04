@@ -10,6 +10,11 @@ def interactive_choose_plotter(serial_port):
          plotter = getattr(plotters, plt_str)(serial_port)
          print "Instantiated plotter %s" % plotter
          return plotter
+   #ack, we're not recognizing the DXY-1300 correctly!
+      elif id == "DXY-1300":
+         plotter = getattr(plotters, "DXY1300")(serial_port)
+         print "Instantiated plotter %s" % plotter
+         return plotter
    ## not found, choose manually...
    else:
       print "ATTENTION: Plotter %s not supported." % id
