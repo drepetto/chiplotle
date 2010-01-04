@@ -55,7 +55,7 @@ class _BasePlotter(object):
          result = [ ]
          for c in data:
             if hasattr(c, 'format'):
-               result.append(c.format)
+               result.append(c.format())
             elif isinstance(c, str):
                result.append(c)
             else:

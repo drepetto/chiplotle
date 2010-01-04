@@ -12,7 +12,7 @@ def interactive_choose_plotter(serial_port):
          return plotter
    ## not found, choose manually...
    else:
-      print "ATTETION: Plotter %s not supported." % id
+      print "ATTENTION: Plotter %s not supported." % id
 
       print "Choose the plotter that best fits your hardware."
       print "If in doubt choose the generic 'Plotter'."
