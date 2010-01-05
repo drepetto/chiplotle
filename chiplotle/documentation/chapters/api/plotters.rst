@@ -1,33 +1,39 @@
-==================
-Chiplotle Plotters
-==================
+Chiplotle Known Plotters
+========================
 
-:mod:`chiplotle.hpgl.plotters`
+.. autoclass:: chiplotle.plotters.DXY1300
+	:members:
+	:undoc-members:
+	:show-inheritance:
 
-.. automodule:: chiplotle.plotters
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autoclass:: chiplotle.plotters.DXY880
+	:members:
+	:undoc-members:
+	:show-inheritance:
 
+.. autoclass:: chiplotle.plotters.HP7475A
+	:members:
+	:undoc-members:
+	:show-inheritance:
 
-.. autoclass:: chiplotle.plotters.plotter.Plotter
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autoclass:: chiplotle.plotters.HP7550A
+	:members:
+	:undoc-members:
+	:show-inheritance:
 
-.. autoclass:: chiplotle.plotters.dxy1300.DXY1300
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autoclass:: chiplotle.plotters.HP7595A
+	:members:
+	:undoc-members:
+	:show-inheritance:
 
-.. autoclass:: chiplotle.plotters.hp7475a.HP7475A
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autoclass:: chiplotle.plotters.HP7596A
+	:members:
+	:undoc-members:
+	:show-inheritance:
 
-
-.. autoclass:: chiplotle.plotters.drawingplotter._DrawingPlotter
-   :members:
-   :undoc-members:
-   :show-inheritance:
+.. autoclass:: chiplotle.plotters.Plotter
+	:members:
+	:undoc-members:
+	:show-inheritance:
+	:inherited-members:
 
