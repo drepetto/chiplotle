@@ -4,13 +4,16 @@ import sys
 
 def plot_hpgl(file):
    '''Send an HPGL file to the plotter found connected to the computer.'''
-   f = open(file, 'r')
-   data = f.read( ).splitlines( )
-   f.close( )
+#   f = open(file, 'r')
+#   data = f.read( )#.splitlines( )
+#   print data
+#   f.close( )
+#
+#   plotter = instantiate_plotter( )
+#   ##plotter.write(data)
 
    plotter = instantiate_plotter( )
-   plotter.write(data)
-
+   plotter.writeFile(file)
 
 if __name__ == '__main__':
 

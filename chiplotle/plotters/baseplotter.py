@@ -75,6 +75,7 @@ class _BasePlotter(object):
       f.close( )
       chars = chars.replace('\n',';')
       comms = re.split(';+', chars)
+      comms = [c + ';' for c in comms if c != '']
       self.write(comms)
 
 
