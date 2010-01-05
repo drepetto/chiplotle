@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 from chiplotle.utils.instantiate_plotter import instantiate_plotter
 import sys
+import time
 
 def plot_hpgl(file):
    '''Send an HPGL file to the plotter found connected to the computer.'''
@@ -14,6 +15,10 @@ def plot_hpgl(file):
 
    plotter = instantiate_plotter( )
    plotter.writeFile(file)
+   
+   plotter._serialPort.flush()
+   #wait for serioal
+   #time.sleep(5)
 
 if __name__ == '__main__':
 
