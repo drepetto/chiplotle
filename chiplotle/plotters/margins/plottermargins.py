@@ -43,10 +43,19 @@ class _PlotterMargins(object):
       return coords[0:2]
 
    @property
+   def bottom_right(self):
+      coords = self._get( )
+      return (coords[2], coords[1])
+
+   @property
    def top_right(self):
       coords = self._get( )
       return coords[2:4]
 
+   @property
+   def top_left(self):
+      coords = self._get( )
+      return (coords[0], coords[3])
 
    ## METHODS ##
 
