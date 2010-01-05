@@ -3,19 +3,6 @@ from chiplotle.plotters.baseplotter import _BasePlotter
 
 class _DrawingPlotter(_BasePlotter):
 
-#   def draw_soft_margins(self, pen=1):
-#      pen = self._hpgl.SP(pen)
-#      pa = self._hpgl.PA(self.margins.soft.bottom_left)
-#      rec = self._hpgl.ER(self.margins.soft.top_right)
-#      self.write([pen, pa, rec])
-#
-#   def draw_hard_margins(self, pen=1):
-#      pen = self._hpgl.SP(pen)
-#      pa = self._hpgl.PA(self.margins.hard.bottom_left)
-#      rec = self._hpgl.ER(self.margins.hard.top_right)
-#      self.write([pen, pa, rec])
-
-
    ## TEXT OUTPUT & SETTINGS ##
 
    def absoluteCharSize(self, w = None, h = None):
@@ -150,35 +137,20 @@ class _DrawingPlotter(_BasePlotter):
       """Alias for PA() with only one point"""
       self.write(self._hpgl.PA((x, y)))
 
-#   def gotoCHard(self):
-#   self.goto(self.centerXHard(), self.centerYHard())
-#
-#   def gotoCSoft(self):
-#   self.goto(self.centerXSoft(), self.centerYSoft())
-#          
-#   def gotoBLHard(self):
-#   self.goto(self.leftHard(), self.bottomHard())
-#
-#   def gotoBLSoft(self):
-#   self.goto(self.leftSoft(), self.bottomSoft())
-#          
-#   def gotoBRHard(self):
-#   self.goto(self.rightHard(), self.bottomHard())
-#
-#   def gotoBRSoft(self):
-#   self.goto(self.rightSoft(), self.bottomSoft())
-#
-#   def gotoTLHard(self):
-#   self.goto(self.leftHard(), self.topHard())   
-#
-#   def gotoTLSoft(self):
-#   self.goto(self.leftSoft(), self.topSoft())
-#          
-#   def gotoTRHard(self):
-#   self.goto(self.rightHard(), self.topHard())
-#
-#   def gotoTRSoft(self):
-#   self.goto(self.rightSoft(), self.topSoft())
+   def goto_center(self):
+      self.write(self._hpgl.PA(self.margins.soft.center))
+
+   def goto_bottom_left(self):
+      self.write(self._hpgl.PA(self.margins.soft.bottom_left))
+
+   def goto_bottom_right(self):
+      self.write(self._hpgl.PA(self.margins.soft.bottom_right))
+
+   def goto_top_left(self):
+      self.write(self._hpgl.PA(self.margins.soft.top_left))
+
+   def goto_top_right(self):
+      self.write(self._hpgl.PA(self.margins.soft.top_right))
 
    def nudge(self, x, y):
       self.write(self._hpgl.PR((x,y)))
