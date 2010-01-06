@@ -232,7 +232,7 @@ pre {
     background-color: {{ theme_codebgcolor }};
     color: {{ theme_codetextcolor }};
     line-height: 120%;
-    border: 1px dotted #800;
+    border: 1px dotted #10a010;
     font-size: 0.85em;
 }
 
