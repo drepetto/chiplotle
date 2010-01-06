@@ -50,6 +50,34 @@ def compile_plotters( ):
    file.close( )
 
 
+def compile_tools( ):
+   from chiplotle import hpgltools
+   from chiplotle import io
+
+   content = 'Chiplotle Tools\n'
+   content += '================\n\n'
+
+   content += 'HPGL Tools\n'
+   content += '-------------\n\n'
+   for cls in dir(hpgltools):
+      if not cls.startswith('_'):
+         content += '.. autofunction:: chiplotle.tools.hpgltools.%s\n' % cls
+         content += '\n'
+   content += 'Input-output tools\n'
+   content += '---------------------\n\n'
+   for cls in dir(io):
+      if not cls.startswith('_'):
+         content += '.. autofunction:: chiplotle.tools.io.%s\n' % cls
+         content += '\n'
+
+
+   file = open('../chapters/api/tools.rst', 'w')
+
+   file.write(content)
+   file.close( )
+
+
 if __name__ == '__main__':
    compile_compound( )
    compile_plotters( )
+   compile_tools( )
