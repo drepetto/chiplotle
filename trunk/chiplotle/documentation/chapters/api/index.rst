@@ -7,3 +7,4 @@ Chiplotle API
    chiplotle_hpgl
    chiplotle_compound
    plotters
+   tools
