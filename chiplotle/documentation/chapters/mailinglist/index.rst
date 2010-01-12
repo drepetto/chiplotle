@@ -1,4 +1,4 @@
-Questions? Wan't to contribute?
+Questions? Want to contribute?
 ================================
 
 If you have questions, found a bug or want to contribute, please join the
