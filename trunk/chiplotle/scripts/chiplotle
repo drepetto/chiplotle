@@ -8,11 +8,15 @@ def _run_chiplotle( ):
    except IndexError:
       file = ''
 
-   python_code  = "import sys; "
-   python_code += "sys.ps1 = 'chiplotle> ';" 
+   python_code  = "print '+--------------+'; "
+   python_code += "print '|  Chiplotle!  |'; "
+   python_code += "print '+--------------+'; "
+   python_code += "import sys; "
+   python_code += "sys.ps1 = 'chiplotle> '; " 
    python_code += "del sys;"
    python_code += "from chiplotle import *; "
-   python_code += "plotter = instantiate_plotter( );"
+   python_code += "plotter = instantiate_plotter( ); "
+
    os.system('''python -i %s -c "%s"''' % (file, python_code))
 
 
