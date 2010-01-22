@@ -13,7 +13,7 @@ def _run_chiplotle( ):
    python_code += "del sys;"
    python_code += "from chiplotle import *; "
    python_code += "plotter = instantiate_plotter( );"
-   os.system('''clear; python -i %s -c "%s"''' % (file, python_code))
+   os.system('''python -i %s -c "%s"''' % (file, python_code))
 
 
 if __name__ == '__main__':
