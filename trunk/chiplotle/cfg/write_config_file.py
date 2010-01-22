@@ -32,6 +32,8 @@ def write_config_file(path):
    f.write("# Configuration Variables ---------------------------------\n\n")
 
    f.write("# Serial port to use for all connections.\n")
+   f.write("# Set it to a string of the path to the port (e.g., '/dev/ttyUSB0'),\n")
+   f.write("# an integer port number or `None` to have Chiplotle query you.'\n")
    if serial_port:
       f.write("serial_port = '%s'" % serial_port)
    else:
