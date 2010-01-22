@@ -15,6 +15,11 @@ def write_config_file(path):
    preamble += '# Chiplotle configuration file.\n'
    preamble += '# Created by Chiplotle on %s.\n' % time.strftime("%d %B %Y %H:%M:%S")
    preamble += '#\n'
+   preamble += '# This file houses all the configuration variables employed\n'
+   preamble += '# by Chiplotle. You can set them manually to suit your needs.\n'
+   preamble += '# Do not delete them! If you want them to have no effect\n'
+   preamble += '# simply set them to "None".\n'
+   preamble += '#\n'
    preamble += '# This file is executed via the ``execfile( )`` function,\n'
    preamble += "# so all its content should adhere to the Python syntax.\n"
    preamble += '\n\n'
