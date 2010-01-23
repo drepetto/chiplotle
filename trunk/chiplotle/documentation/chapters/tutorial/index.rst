@@ -1,10 +1,7 @@
-********************
+====================
 Quick Start Tutorial
-********************
+====================
 
-
-Chiplotle modes
-===============
 
 There are three main ways of using Chiplotle:
 
@@ -25,35 +22,38 @@ Start Chiplotle by typing ``chiplotle`` from the terminal::
 .. note::
    If you've installed Chiplotle using Subversion, make sure the ``chiplotle/scritps`` directory is in your ``PATH`` variable so that your system knows about Chiplotle's scripts.
 
-You'll see a listing of the serial ports available on your machine. 
-Choose the one that you have your plotter plugged into.
+The ``chiplotle`` script is a simple convenience script that does two things:
 
-Chiplotle will attempt to communicate with your plotter on that serial port, and if successful,
-will print the ID string returned by the plotter. You will then be asked to select a plotter type.
-Select the one that most closely matches the plotter ID. If there is no match, you can use the
-generic Plotter, although you should be aware that some HPGL commands may not work with your plotter.
+#. It loads the Python interpreted.
+#. It calls the ``instantiate_plotter( )`` function and assigns a Chiplotle Plotter to the ``plotter`` variable. 
 
-After you've selected a plotter type Chiplotle will print out some basic information about your 
-plotter, including its drawing area. Now it's time to plot!
+The ``instantiate_plotter( )`` function reads the `config.py` file to see if you have a preferred serial port. If you don't, it lists all the serial ports available in your machine for you to pick one to use. Once a serial port is set, the function tries to identify your plotter type. If your plotter type is unrecognized, the function will display a list of plotters that Chiplotle knows about for you to choose from.  Select the one that most closely matches the plotter ID identifying your hardware. If there is no match, you can use the generic Plotter, although you should be aware that some HPGL commands may not work with your hardware.
 
-Let's pick up a pen. In HPGL, the command to pick up a pen is ``SP``, which stands for "select pen".
-To learn what parameters you need to pass to a command, look it up in the "Chiplotle-HPGL" section
-of the Chiplotle API documentation. Many commands take one or more parameters; if a command takes
-parameters you put them inside a set of ``()`` after the command name. ``SP`` takes a pen number, and we 
-want to select pen number one, so our command is ``SP(1)``. To pass the command to the plotter, you 
-use ``plotter.write( )``. So::
+Once a hardware plotter has been identified, Chiplotle creates a software Plotter to interface with your hardware and assigns it to the ``plotter`` variable. 
+Chiplotle will then print out some basic information about your plotter, including its drawing area and memory. Now it's time to plot!
+
+Let's pick up a pen. In HPGL, the command to pick up a pen is ``SP``, which stands for "select pen". In Chiplotle we instantiate an instance of that command like so::
+
+   chiplotle> SP(1)
+
+Many HPGL commands take one or more parameters; if a command takes parameters you put them inside a set of ``()`` after the command name. ``SP`` takes a pen number, so to select pen 1 we pass ``1`` as a parameter as we did above.
+
+.. note::
+   Remember that you can always refer to the :doc:`Chiplotle API </chapters/api/chiplotle_hpgl>` for information on the HPGL commands and its required parameters. You can also use the Python ``help( )`` function to find information about any Python object. Thus, to learn what parameters you need to pass to a command you can type::
+
+      chiplotle> help(SP)
+
+To pass the command to the plotter, you use ``plotter.write( )``. So::
 
    chiplotle> plotter.write(SP(1))
 
-Your plotter should pick up pen one. Some common commands, like SP, have shortcuts in chiplotle. So
-you can also do::
+Your plotter should pick up pen one. Some common commands, like ``SP``, can be directly sent from the plotter. i.e., the plotter has methods equivalent to some of the HPGL commands. Such is the case of ``PS``::
 
    chiplotle> plotter.selectPen(1)
 
-to select pen number one. 
+This effectively instantiates a ``SP`` command instance and send the command to the plotter.
 
-Now let's move the pen. To move the pen while it is in the up position, you use ``PU([x,y])``, and to move
-the pen while it's down you use ``PD([x,y])``. x and y are the coordinates you want to move the pen to.
+Now let's move the pen. To move the pen while it is in the up position, you use ``PU([x,y])``, and to move the pen while it's down you use ``PD([x,y])``. `x` and `y` are the coordinates you want to move the pen to.
 If you want to do a ``PU`` or ``PD`` without moving, just pass a blank set of coordinates.
 So to draw a square you might do something like::
 
@@ -84,7 +84,7 @@ That's it! Have a look at the Chiplotle API documentation for a complete list of
 HPGL commands and Chiplotle Compound commands.
 
 
-Running chiplotle from a Python script
+Running Chiplotle from a Python script
 --------------------------------------
 
 Simple drawings can be done by hand from the command line, but you'll quickly find that it's much
