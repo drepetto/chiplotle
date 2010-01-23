@@ -343,6 +343,7 @@ class EP(_HPGLCommand):
 class BF(_HPGLCommand):
    '''
    Buffer plot.
+
    '''
    
 
@@ -647,18 +648,21 @@ class IN(_HPGLCommand):
 class SS(_HPGLCommand):
    '''
    :Select standard character set:
+
    '''
    
 
 class XT(_HPGLCommand):
    '''
    :X tick:
+
    '''
    
 
 class YT(_HPGLCommand):
    '''
    :Y tick:
+   
    '''
    
 
@@ -830,6 +834,7 @@ class LB(_HPGLCommand):
 class SP(_HPGLCommand):
    '''
    :Select Pen:
+
    '''
 
    def __init__(self, pen = 0):   
@@ -1011,12 +1016,14 @@ class SL(_HPGLCommand):
 class SA(_HPGLCommand):
    '''
    :Select alternate character set:
+   
    '''
    
 
 class RO(_HPGLCommand):
    ''' 
    :Rotate coordinate system:
+   
    '''
 
    def __init__(self, angle = 0):   
@@ -1030,6 +1037,7 @@ class RO(_HPGLCommand):
 class RP(_HPGLCommand):
    ''' 
    :Replot:  
+   
    '''
 
    def __init__(self, n = 1):   
@@ -1386,6 +1394,7 @@ class EW(_HPGLCommand):
 class WG(EW):
    '''
    :Filled wedge:
+   
    '''
 
 
@@ -1412,6 +1421,7 @@ class TL(_HPGLCommand):
 class WD(_HPGLCommand):
    '''
    :Write to display:
+   
    '''
 
    def __init__(self, text):
@@ -1428,6 +1438,7 @@ class WD(_HPGLCommand):
 class B(_HPGLEscape):
    '''
    :Escape output buffer space:
+   
    '''
    
 
