@@ -2,6 +2,15 @@
 FAQ
 ***
 
+**Q:**
+I'm trying to use Chiplotle with Windowz but I'm not sure Chiplotle is finding my hardware. What should I do?
+
+**A:**
+What hardware interface are you using? Are you using a USB to Serial? What kind?
+In Windowz, Chiplotle currently only supports **COM** ports to communicate with your plotter. On computers with real good old RS-232 serial ports Chiplotle has no problem. Modern computers no longer have serial ports, so you need to use a USB to Serial interface to connect your plotter to your computer. Because Chiplotle only supports **COM** ports, what you need is a USB to Serial interface with drivers that supports VCP (Virtual COM Port), so that your USB to Serial interface shows up as a **COM** port. 
+You may want to get USB to Serial interface with the `FTDI Chip <http://www.ftdichip.com>`_. It has VCP drivers and works well on Windowz, Linux and OS X. 
+
+
 **Q:** 
 When I send a text file with HPGL commands to my serial port in the following way::
 
@@ -39,7 +48,6 @@ then send hpgl commands::
    p.write(PA( ))
 
 
-------
 
 **Q:**
 Is there a facility in Chiplotle to send over already existing HPGL command files? 
