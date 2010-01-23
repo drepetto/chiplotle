@@ -12,6 +12,8 @@ def instantiate_serial(port=None, baudrate=9600, bytesize=8,
          parity = parity, stopbits = stopbits, timeout = timeout,
          xonxoff = xonxoff, rtscts = rtscts)
    else:
-      ser = interactive_open_serial( )
+      ser = interactive_open_serial(baudrate = baudrate, bytesize = bytesize,
+         parity = parity, stopbits = stopbits, timeout = timeout, 
+         xonxoff = xonxoff, rtscts = rtscts)
 
    return ser
