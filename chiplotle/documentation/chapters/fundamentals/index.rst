@@ -21,6 +21,7 @@ All Chiplotle HPGL commands have a ``format`` attribute. This attribute returns 
 
 
 All the standard HPGL commands are implemented in Chiplotle, and their class name corresponds to the two letter mnemonic used in the HPGL.
+Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_hpgl>` for a list and documentation of all the HPGL commands.
 
 
 Compound Chiplotle commands
@@ -51,8 +52,8 @@ These generalized basic geometric shapes also allow one to draw shapes that are 
    'PU;PA1618.72,2795.49;PD;PA1795.5,2618.72;PA381.28,1204.51;PA204.504,1381.28;PA1618.72,2795.49;PU;'
 
 
-This may seem like not much of a gain, but for more complex drawing structures, ecapsulating many HPGL subcommands in a single object can simplify things quit a bit. 
-For example, the :class:`MayaNumber <chiplotle.hpgl.compound.mayanumber.MayaNumber>` class is a compound Chiplotle command that makes the creation of Maya numbers trivial by creating higher level greometric objects out of basic Chiplotle-HPGL commands::   
+This may seem like not much of a gain, but for more complex drawing structures, encapsulating many HPGL subcommands in a single object can simplify things quit a bit. 
+For example, the :class:`MayaNumber <chiplotle.hpgl.compound.mayanumber.MayaNumber>` class is a compound Chiplotle command that makes the creation of Maya numbers trivial by creating higher level geometric objects out of basic Chiplotle-HPGL commands::   
 
    chiplotle> mn = MayaNumber((1000, 2000), 563, size = 500)
    chiplotle> mn.format
@@ -71,7 +72,7 @@ This class can hold other Compound classes to later be treated as a single objec
    'PU6000.0,2000.0;CI1000.0;PU;PA6618.72,2795.49;PD;PA6795.5,2618.72;
    PA5381.28,1204.51;PA5204.5,1381.28;PA6618.72,2795.49;PU;'
 
-Notice that, like all Chiplotle Comopound commands, the :class:`Container <chiplotle.hpgl.compound.container.Container>` class also has an `xy` property::
+Notice that, like all Chiplotle Compound commands, the :class:`Container <chiplotle.hpgl.compound.container.Container>` class also has an `xy` property::
 
    chiplotle> cnt.xy
    [ 5000.  0.]
@@ -101,14 +102,14 @@ Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_compound>` for a list 
 Chiplotle transform functions
 -----------------------------
 
-All Chiplotle drawing classes --both the base Chiplotle-HPGL and the compound commands-- can be scaled and displaced with the ``scale( )`` and ``transpose( )`` functions, provided their properties are **scalable** and **transposable**, respectively::
+All Chiplotle drawing classes --both the base Chiplotle-HPGL and the compound commands-- can be scaled and displaced with the ``scale( )`` and ``transpose( )`` functions found in the ``hpgltools`` module, provided their properties are **scalable** and **transposable**, respectively::
 
    chiplotle> c = Circle((1000, 2000), 1000)
    chiplotle> c.xy
    [ 1000.  2000.]
    chiplotle> c.radius
    1000.0
-   chiplotle> scale(c, 2)
+   chiplotle> hpgltools.scale(c, 2)
    chiplotle> c.xy
    [ 2000.  4000.]
    chiplotle> c.radius
@@ -116,7 +117,7 @@ All Chiplotle drawing classes --both the base Chiplotle-HPGL and the compound co
 
 ::
 
-   chiplotle> transpose(c, (-1000, -500))
+   chiplotle> hpgltools.transpose(c, (-1000, -500))
    chiplotle> c.xy
    [ 1000.  3500.]
    chiplotle> c.radius
