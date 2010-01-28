@@ -7,7 +7,7 @@ use_setuptools( ) ### this must come before setup import
 from setuptools import setup, find_packages
 
 setup(name = 'Chiplotle', 
-      version = '0.2', 
+      version = '0.2.2', 
       description = 'Chiplotle is an HPGL (Hewlett-Packard Graphics Language) Python API.',
       long_description = 'Chiplotle is an HPGL (Hewlett-Packard Graphics Language) Python API.',
       author = 'Víctor Adán and Douglas Repetto',
@@ -21,8 +21,10 @@ setup(name = 'Chiplotle',
 ## probably better to have the user figure out how to install it manually.
       #install_requires=['pyserial', 'numpy'],
       install_requires=['pyserial'],
+      entry_points = {'console_scripts':[
+         'chiplotle = chiplotle.cfg._run_chiplotle:_run_chiplotle',
+         ]},
       scripts = [ 
-         'chiplotle/scripts/chiplotle', 
          'chiplotle/scripts/envelope.py',
          'chiplotle/scripts/dorkbot_font.py',
          'chiplotle/scripts/plothpgl.py',
