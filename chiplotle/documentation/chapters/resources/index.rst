@@ -1,6 +1,7 @@
 ==================
-HPGL web resources
+Web Resources
 ==================
+
 
 HPGL references
 ===============
@@ -17,3 +18,10 @@ Tools
 * `pstoedit <http://www.pstoedit.net/>`_: a Post Script to HPGL converter.
 * `autotrace <http://autotrace.sourceforge.net/>`_: transform your bitmaps into vector graphics.
 * `potrace <http://potrace.sourceforge.net/>`_: transform your bitmaps into vector graphics. Works a bit differently than ``autotrace``.
+
+
+Hardware
+========
+
+* `HP pen plotter museum <http://www.hpmuseum.net/exhibit.php?class=4&cat=24>`_
+
