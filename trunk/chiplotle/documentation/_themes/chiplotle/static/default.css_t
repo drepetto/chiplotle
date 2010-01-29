@@ -252,3 +252,11 @@ strong {
 table.docutil {
    border: 0px;
 }
+
+.toctree-l1{
+	font-variant: small-caps;
+}
+
+.toctree-l2{
+	font-variant: normal;
+}
