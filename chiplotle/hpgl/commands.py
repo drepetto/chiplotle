@@ -1070,6 +1070,11 @@ class SM(_HPGLCommand):
 class SC(_TwoPoint):
    '''
    :Scale:
+      Establishes a user-unit coordinate system by mapping user-defined
+      values onto the scaling points P1 and P2. Thus, you can plot in 
+      units convenient to your application. In addition, you can use this
+      instruction to establish automatic isotropic scaling or to relocate
+      the origin and set a specific ratio of plotter units to user units.
       
    .. note:: DraftMaster also has a more complex version of 'SC' that \
       is not implemented yet.
