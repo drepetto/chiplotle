@@ -28,6 +28,7 @@ Chiplotle  (|release|) documentation
 .. toctree::
    :maxdepth: 2
 
+   chapters/contributors/index
    chapters/api/index
 
 Indices and tables
