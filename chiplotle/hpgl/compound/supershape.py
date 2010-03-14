@@ -19,8 +19,8 @@ class Supershape(_CompoundHPGL):
 
 		xy = xy or (0, 0)
 		_CompoundHPGL.__init__(self, xy)
-		self.width = w
-		self.height = h
+		self.width = Scalable(w)
+		self.height = Scalable(h)
 		self.m = m
 		self.n1 = n1
 		self.n2 = n2
