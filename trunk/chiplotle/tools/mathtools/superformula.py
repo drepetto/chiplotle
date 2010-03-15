@@ -11,11 +11,11 @@ def superformula(a, b, m, n1, n2, n3, phi):
    #a = 1.0
    #b = 1.0
 
-   t1 = cos(m * phi / 4) / a
+   t1 = cos(m * phi / 4.0) / a
    t1 = abs(t1)
    t1 = pow(t1, n2)
 
-   t2 = sin(m * phi / 4) / b
+   t2 = sin(m * phi / 4.0) / b
    t2 = abs(t2)
    t2 = pow(t2, n3)
 
