@@ -15,7 +15,7 @@ class Supershape(_CompoundHPGL):
    m, n1, n2, n3
    '''
    def __init__(self, xy, w, h, m, n1, n2, n3, 
-      points=1000, percentage=1.0, range=None):
+      points=1000, percentage=1.0, a=1.0, b=1.0, range=None):
 
       xy = xy or (0, 0)
       _CompoundHPGL.__init__(self, xy)
@@ -25,6 +25,8 @@ class Supershape(_CompoundHPGL):
       self.n1 = n1
       self.n2 = n2
       self.n3 = n3
+      self.a = a
+      self.b = b
       self.points = points
       self.percentage = percentage
       doublepi = pi * 2
@@ -37,7 +39,7 @@ class Supershape(_CompoundHPGL):
       ## compute points...
       phis = [i * self.range / self.points 
          for i in range(int(self.points * self.percentage))]
-      f = lambda x: superformula(self.m, self.n1, self.n2, self.n3, x)
+      f = lambda x: superformula(self.a, self.b, self.m, self.n1, self.n2, self.n3, x)
       points = map(f, phis)
       ## scale and transpose...
       path = [ ]
