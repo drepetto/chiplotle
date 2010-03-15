@@ -61,7 +61,6 @@ class Label(_CompoundHPGL):
          else:
             raise ValueError("charsize must be None, (x, y) pair, or Scalar.")
       return property(**locals())
-            
          
             
    @property

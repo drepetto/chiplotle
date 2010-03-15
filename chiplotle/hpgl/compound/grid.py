@@ -20,33 +20,33 @@ class Grid(_CompoundHPGL):
       _CompoundHPGL.__init__(self, xy, pen = pen) 
       self.width = Scalable(width)
       self.height = Scalable(height)
-      self.heightDivisions = height_divisions
-      self.widthDivisions = width_divisions
-      self.referencePoint = (0, 0) ## range: [0 to 1]
+      self.height_divisions = height_divisions
+      self.width_divisions = width_divisions
+      self.reference_point = (0, 0) ## range: [0 to 1]
 
 
    @property
    def _subcommands(self):
-      ul_x = self.xabsolute - self.referencePoint[0] * self.width
+      ul_x = self.xabsolute - self.reference_point[0] * self.width
       bl_x = ul_x
       ur_x = ul_x + self.width
 
-      ul_y = self.yabsolute + self.referencePoint[1] * self.height
+      ul_y = self.yabsolute + self.reference_point[1] * self.height
       ur_y = ul_y
       bl_y = ul_y - self.height
 
 
       result = _CompoundHPGL._subcommands.fget(self)
       ## add horizontal lines
-      for i in range(self.widthDivisions + 1):
-         step_y = self.height / self.widthDivisions * i
+      for i in range(self.width_divisions + 1):
+         step_y = self.height / self.width_divisions * i
          result.append(PU( ))
          result.append(PA((ul_x, ul_y - step_y)))
          result.append(PD( ))
          result.append(PA((ur_x, ur_y - step_y)))
       ## add vertical lines
-      for i in range(self.heightDivisions + 1):
-         step_x = self.width / self.heightDivisions * i
+      for i in range(self.height_divisions + 1):
+         step_x = self.width / self.height_divisions * i
          result.append(PU( ))
          result.append(PA((ul_x + step_x, ul_y)))
          result.append(PD( ))

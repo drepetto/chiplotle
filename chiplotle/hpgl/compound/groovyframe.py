@@ -4,27 +4,27 @@ from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.ispair import ispair
 
 class GroovyFrame(_CompoundHPGL):
-   def __init__(self, xy, wh1, wh2, linesPerSide, pen=None):
+   def __init__(self, xy, wh1, wh2, lines_per_side, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
       assert ispair(wh1)
       assert ispair(wh2)
       self.wh1 = Scalable(wh1)
       self.wh2 = Scalable(wh2)
-      self.linesPerSide = linesPerSide
+      self.lines_per_side = lines_per_side
 
-   def _computePointLocations(self, line):
+   def _compute_point_locations(self, line):
       result = [ ]
-      for i in range(self.linesPerSide + 1):
-        result.append( line / self.linesPerSide * i)
+      for i in range(self.lines_per_side + 1):
+        result.append( line / self.lines_per_side * i)
       return result 
  
-   def _computeCoordinates(self, expr):
+   def _compute_coordinates(self, expr):
       w = expr[0]
       h = expr[1]
-      xs = self._computePointLocations(w)
+      xs = self._compute_point_locations(w)
       for i in range(len(xs)):
          xs[i] -= w / 2.
-      ys = self._computePointLocations(h)
+      ys = self._compute_point_locations(h)
       for i in range(len(ys)):
          ys[i] -= h / 2.
          
@@ -34,9 +34,9 @@ class GroovyFrame(_CompoundHPGL):
       right_coords = [(ys[-1], y) for y in ys]
       return (top_coords, bottom_coords, left_coords, right_coords)
 
-   def _computeSquares(self):
-      t_1, b_1, l_1, r_1 = self._computeCoordinates(self.wh1)      
-      t_2, b_2, l_2, r_2 = self._computeCoordinates(self.wh2)      
+   def _compute_squares(self):
+      t_1, b_1, l_1, r_1 = self._compute_coordinates(self.wh1)      
+      t_2, b_2, l_2, r_2 = self._compute_coordinates(self.wh2)      
       top = [x + y for x, y in zip(t_1, t_2)] 
       bottom = [x + y for x, y in zip(b_1, b_2)] 
       left = [x + y for x, y in zip(l_1, l_2)] 
@@ -47,7 +47,7 @@ class GroovyFrame(_CompoundHPGL):
    @property
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
-      for element in self._computeSquares( ):
+      for element in self._compute_squares( ):
          for coords in element:
             coords = list(coords)
             coords[0] += self.xabsolute
