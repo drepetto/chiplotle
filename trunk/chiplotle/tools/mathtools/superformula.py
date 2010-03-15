@@ -1,15 +1,15 @@
 from math import sin, cos, pow
 
 
-def superformula(m, n1, n2, n3, phi):
+def superformula(a, b, m, n1, n2, n3, phi):
    ''' Computes the position of the point on a
    superformula curve.
    Superformula has first been proposed by Johan Gielis
    and is a generalization of superellipse.
    see: http://en.wikipedia.org/wiki/Superformula
    '''
-   a = 1.0
-   b = 1.0
+   #a = 1.0
+   #b = 1.0
 
    t1 = cos(m * phi / 4) / a
    t1 = abs(t1)
