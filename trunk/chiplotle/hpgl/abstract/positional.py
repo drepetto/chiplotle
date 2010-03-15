@@ -49,5 +49,6 @@ class _Positional(_HPGLCommand):
 
    @property
    def format(self):
-      coordinates = ['%s' % p for p in self.xy]
-      return '%s%s%s' % (self._name, ','.join(coordinates), _HPGLCommand._terminator)
+      coordinates = ['%.2f' % p for p in self.xy]
+      return '%s%s%s' % (self._name, ','.join(coordinates), 
+         _HPGLCommand._terminator)

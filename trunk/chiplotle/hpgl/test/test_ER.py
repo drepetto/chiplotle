@@ -15,7 +15,4 @@ def test_ER_03( ):
    '''ER can initialize with a list of length 2.'''
    t = ER([1, 2])
    assert all(t.xy == [1, 2])
-   assert t.format == 'ER1.0,2.0;'
-
-
-
+   assert t.format == 'ER1.00,2.00;'

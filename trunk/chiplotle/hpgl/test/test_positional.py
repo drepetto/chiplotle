@@ -1,5 +1,5 @@
-from chiplotle import *
 from chiplotle.hpgl.abstract.positional import _Positional
+from chiplotle.hpgl.scalable import Scalable
 import numpy
 from py.test import raises
 
@@ -47,6 +47,7 @@ def test_positional_05( ):
    assert raises(AssertionError, 'p.xy =(1,2,3)')
    assert raises(AssertionError, 'p.xy =(1,2,3,4,5)')
 
+
 def test_positional_06( ):
    '''xy can be set to None'''
    p = _Positional((0,0))
@@ -57,6 +58,7 @@ def test_positional_06( ):
    assert len(p.xy) == 0
    assert len(p.x) == 0
    assert len(p.y) == 0
+
 
 def test_positional_07( ):
    '''x and y can be assigned numbers or iterables.
@@ -71,5 +73,15 @@ def test_positional_07( ):
    assert raises(ValueError, 'p.x = (1, 2, 3)')
 
 
+## FORMATTING ##
 
+def test_positional_format_01( ):
+   '''Positionals format as floats.'''
+   assert _Positional((1, 2)).format == '_Positional1.00,2.00;'
+
+
+def test_positional_format_02( ):
+   '''Floats that would normally print as Xe-n (e.g., 1e-10 instead of
+   0.0000000001) format without the 'e-n'.'''
+   assert _Positional((1e-12,2)).format == '_Positional0.00,2.00;'
 

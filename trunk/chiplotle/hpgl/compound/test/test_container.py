@@ -24,7 +24,7 @@ def test_container_03( ):
    t = Container((1, 2), [circle])
 
    assert len(t) == 1
-   assert t.format == 'PU11.0,22.0;CI100.0;'
+   assert t.format == 'PU11.00,22.00;CI100.0;'
    assert t[0] is circle
 
 
