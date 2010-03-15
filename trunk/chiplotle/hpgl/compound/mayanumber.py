@@ -16,20 +16,20 @@ class MayaNumber(_CompoundHPGL):
    ### HELPERS ###
    
    @property
-   def _interdigitSpace(self):
+   def _interdigit_space(self):
       return self.size / 8.
 
    @property
-   def _maxExponent(self):
+   def _max_exponent(self):
       for i in xrange(100):
          if self.value // 20**i == 0:
             return i - 1
 
    @property
-   def _digitValues(self):
+   def _digit_values(self):
       digits = [ ]
       value = self.value
-      maxe = self._maxExponent
+      maxe = self._max_exponent
       if maxe == -1: ### if zero
          return [0]
       for e in range(maxe, -1, -1):
@@ -43,11 +43,11 @@ class MayaNumber(_CompoundHPGL):
       result = _CompoundHPGL._subcommands.fget(self)
       x = self.xabsolute
       y = self.yabsolute + \
-         (len(self._digitValues) - 1) * (self.size + self._interdigitSpace)
-      for v in self._digitValues:
+         (len(self._digit_values) - 1) * (self.size + self._interdigit_space)
+      for v in self._digit_values:
          result.extend( _MayaDigit(x, y, v, 
                         self.size, self.filled)._subcommands )
-         y -= (self.size + self._interdigitSpace)
+         y -= (self.size + self._interdigit_space)
       return result
          
 
@@ -64,17 +64,17 @@ class _MayaDigit(object):
    ### PROPERTIES ###
 
    @property
-   def barHeight(self):
+   def bar_height(self):
       return self.size / 4. / 1.75
 
    @property
-   def barWidth(self):
+   def bar_width(self):
       return self.size - self.size / 4.
 
    @property
-   def dotRadius(self):
+   def dot_radius(self):
       #return self.size / 4. / 2. / 2.
-      return self.barHeight / 2.
+      return self.bar_height / 2.
 
    @property
    def _subdigits(self):
@@ -100,10 +100,10 @@ class _MayaDigit(object):
       xref = self.x
       yref = self.y
       for i in range(fives):
-         x1 = xref + self.size / 2. - self.barWidth / 2.
-         y1 = yref + self.size / 4. / 2. - self.barHeight / 2.
-         x2 = x1 + self.barWidth
-         y2 = y1 + self.barHeight
+         x1 = xref + self.size / 2. - self.bar_width / 2.
+         y1 = yref + self.size / 4. / 2. - self.bar_height / 2.
+         x2 = x1 + self.bar_width
+         y2 = y1 + self.bar_height
          result.append( PU( ) )
          result.append( PA((x1, y1)) )
          if self.filled:
@@ -119,9 +119,9 @@ class _MayaDigit(object):
          x = xref + spacing
          result.append( PA((x, y)) )
          if self.filled:
-            result.append( WG(self.dotRadius, 0, 359, 10) )
+            result.append( WG(self.dot_radius, 0, 359, 10) )
          else:
-            result.append( CI(self.dotRadius) )
+            result.append( CI(self.dot_radius) )
          xref += spacing
       return result
 
