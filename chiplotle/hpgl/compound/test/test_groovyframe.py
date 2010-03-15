@@ -10,7 +10,7 @@ def test_groovyframe_01( ):
    t = GroovyFrame((0, 0), (100, 100), (110, 110), 4)
    assert all(t.wh1 == (100, 100))
    assert all(t.wh2 == (110, 110))
-   assert t.linesPerSide == 4
+   assert t.lines_per_side == 4
    assert all(t.xy == (0, 0))
 
 def test_groovyframe_02( ):

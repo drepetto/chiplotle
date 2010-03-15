@@ -63,10 +63,10 @@ def test_pu_format_01( ):
 def test_pu_format_02( ):
    '''Floats are left floats at format.'''
    t = PU([1, 0.])
-   assert t.format == 'PU1.0,0.0;'
+   assert t.format == 'PU1.00,0.00;'
 
 def test_pu_format_03( ):
-   '''Ints are made format at format.'''
+   '''Ints are made floats at format.'''
    t = PU([0, 0])
-   assert t.format == 'PU0.0,0.0;'
+   assert t.format == 'PU0.00,0.00;'
 

@@ -25,7 +25,7 @@ def test_DR_03( ):
 
    assert t.run == 0
    assert t.rise == 25.3
-   assert t.format == 'DR0.00,25.30;';
+   assert t.format == 'DR0.00,25.30;'
 
 
 def test_DR_03( ):
@@ -35,5 +35,5 @@ def test_DR_03( ):
 
    assert t.run == 10
    assert t.rise == 0
-   assert t.format == 'DR10.00,0.00;';
+   assert t.format == 'DR10.00,0.00;'
 
