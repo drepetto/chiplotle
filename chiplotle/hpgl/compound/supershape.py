@@ -39,7 +39,8 @@ class Supershape(_CompoundHPGL):
       ## compute points...
       phis = [i * self.range / self.points 
          for i in range(int(self.points * self.percentage))]
-      f = lambda x: superformula(self.a, self.b, self.m, self.n1, self.n2, self.n3, x)
+      f = lambda x: superformula(self.a, self.b, self.m, 
+         self.n1, self.n2, self.n3, x)
       points = map(f, phis)
       ## scale and transpose...
       path = [ ]
