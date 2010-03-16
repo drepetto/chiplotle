@@ -12,7 +12,7 @@ def catmull_interpolation(control_points, points_to_compute):
 
       def spline(t, p_1, p0, p1, p2):
          point = ((2*t**2 - t**3 - t)*p_1 + (3*t**3 - 5*t**2 + 2)*p0 + 
-         (4*t**2 -3*t**3 + t)*p1 + (t**3 - t**2)*p2)/2
+         (4*t**2 -3*t**3 + t)*p1 + (t**3 - t**2)*p2)*0.5
 
          return point
 
