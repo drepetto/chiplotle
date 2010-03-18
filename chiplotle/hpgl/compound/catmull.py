@@ -7,11 +7,11 @@ from chiplotle.tools.mathtools import catmull_interpolation
 
 class Catmull(_CompoundHPGL):
    '''Catmull-Rom spline interpolation'''
-   def __init__(self, control_points, xy=None, points_to_compute=None):
+   def __init__(self, control_points, xy=None, points_to_compute=None, pen=None):
       self.control_points = Scalable(control_points)
       self.points_to_compute = points_to_compute or 100
       xy = xy or (0, 0)
-      _CompoundHPGL.__init__(self, xy) 
+      _CompoundHPGL.__init__(self, xy, pen) 
 
 
    @property
