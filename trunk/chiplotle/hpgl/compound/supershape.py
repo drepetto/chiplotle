@@ -15,10 +15,10 @@ class Supershape(_CompoundHPGL):
    m, n1, n2, n3
    '''
    def __init__(self, xy, w, h, m, n1, n2, n3, 
-      points=1000, percentage=1.0, a=1.0, b=1.0, range=None):
+      points=1000, percentage=1.0, a=1.0, b=1.0, range=None, pen=None):
 
       xy = xy or (0, 0)
-      _CompoundHPGL.__init__(self, xy)
+      _CompoundHPGL.__init__(self, xy, pen)
       self.width = Scalable(w)
       self.height = Scalable(h)
       self.m = m

@@ -7,7 +7,7 @@ from chiplotle.tools.mathtools import bezier_interpolation
 
 class Bezier(_CompoundHPGL):
    '''Bezier curve interpolation'''
-   def __init__(self, control_points, xy=None, points_to_compute=None, weight=None):
+   def __init__(self, control_points, xy=None, points_to_compute=None, weight=None, pen=None):
       self.control_points = Scalable(control_points)
       self.points_to_compute = points_to_compute or 100
       if weight:
@@ -18,7 +18,7 @@ class Bezier(_CompoundHPGL):
       else:
          self.w = 1
       xy = xy or (0, 0)
-      _CompoundHPGL.__init__(self, xy) 
+      _CompoundHPGL.__init__(self, xy, pen) 
 
 
    @property
