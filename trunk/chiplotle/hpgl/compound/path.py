@@ -7,14 +7,14 @@ from chiplotle.tools.mathtools import bezier_interpolation
 
 class Path(_CompoundHPGL):
    '''draws a path given a list of waypoints'''
-   def __init__(self, points, xy=None, curvature=1.0, points_to_compute=None):
+   def __init__(self, points, xy=None, curvature=1.0, points_to_compute=None, pen=None):
       self.points = Scalable(points)
       ## points_to_compute determines the number of points calculated for 
       ## each step of the curve
       self.points_to_compute = points_to_compute or 50
       self.curvature = max(0, min(1, curvature))
       xy = xy or (0, 0)
-      _CompoundHPGL.__init__(self, xy) 
+      _CompoundHPGL.__init__(self, xy, pen) 
 
 
    ## PRIVATE METHODS ##
