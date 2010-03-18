@@ -10,11 +10,10 @@ class Bezier(_CompoundHPGL):
    def __init__(self, control_points, xy=None, points_to_compute=None, weight=None, pen=None):
       self.control_points = Scalable(control_points)
       self.points_to_compute = points_to_compute or 100
-      if weight:
-         if len(weight) == len(self.control_points):
-            self.w = weight
-         else:
-            raise("weight list must be same length as control_points")
+      if ((type(weight) is list) and len(weight) > 0):      
+            l_w = len(weight)
+            l_p = len(self.control_points)
+            self.w = weight*(l_p//l_w)+weight[:l_p%l_w] 
       else:
          self.w = 1
       xy = xy or (0, 0)
