@@ -7,16 +7,16 @@ from chiplotle.tools.mathtools import bezier_interpolation
 
 class Bezier(_CompoundHPGL):
    '''Bezier curve interpolation'''
-   def __init__(self, control_points, xy=None, points_to_compute=None, weight=None, draw_controls=False, pen=None):
+   def __init__(self, control_points, xy=None, points_to_compute=None, weight=None, control_marks=False, pen=None):
       self.control_points = Scalable(control_points)
       self.points_to_compute = points_to_compute or 100
       if ((type(weight) is list) and len(weight) > 0):      
             l_w = len(weight)
             l_p = len(self.control_points)
-            self.w = weight*(l_p//l_w)+weight[:l_p%l_w] 
+            self.weight = weight*(l_p//l_w)+weight[:l_p%l_w] 
       else:
-         self.w = 1
-      self.draw_controls = draw_controls
+         self.weight = 1
+      self.control_marks = control_marks
       xy = xy or (0, 0)
       _CompoundHPGL.__init__(self, xy, pen) 
 
@@ -25,7 +25,7 @@ class Bezier(_CompoundHPGL):
    def _subcommands(self):
       plot_points = bezier_interpolation(
          self.control_points, 
-         self.points_to_compute, self.w)
+         self.points_to_compute, self.weight)
 
       result = _CompoundHPGL._subcommands.fget(self)
       result.append(PU( ))
@@ -36,8 +36,8 @@ class Bezier(_CompoundHPGL):
          position = self.xyabsolute + point_tuple
          result.append(PA(position))
       result.append(PU( ))
-      if self.draw_controls:
-         if self.draw_controls == 2:
+      if self.control_marks:
+         if (self.control_marks == "lines" or self.control_marks == "line"):
             ## draws the polygon defined by control points with dashed line
             result.append(PA(self.xyabsolute + self.control_points[0]))
             result.append(PD( ))
@@ -47,7 +47,7 @@ class Bezier(_CompoundHPGL):
                result.append(PA(position))
             result.append(LT( ))
             result.append(PU( ))
-         elif self.draw_controls == 1:
+         elif (self.control_marks == "crosses" or self.control_marks == "cross"):
             ## draws crosses at control points
             for point_tuple in self.control_points:
                result.append(PA(self.xyabsolute + point_tuple))
