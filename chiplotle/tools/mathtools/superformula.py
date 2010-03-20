@@ -8,8 +8,6 @@ def superformula(a, b, m, n1, n2, n3, phi):
    and is a generalization of superellipse.
    see: http://en.wikipedia.org/wiki/Superformula
    '''
-   #a = 1.0
-   #b = 1.0
 
    t1 = cos(m * phi / 4.0) / a
    t1 = abs(t1)
