@@ -8,11 +8,10 @@ from math import pi
 class Supershape(_CompoundHPGL):
    '''Supershape, generated using the superformula
    first proposed by Johan Gielis.
-   parameters are:
+   arguments are:
    w - width
    h - height
-   a=b=1.0
-   m, n1, n2, n3
+   a=b=1.0, m, n1, n2, n3 - controls of shape
    '''
    def __init__(self, xy, w, h, m, n1, n2, n3, 
       points=1000, percentage=1.0, a=1.0, b=1.0, range=None, pen=None):
