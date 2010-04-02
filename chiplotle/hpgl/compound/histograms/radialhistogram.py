@@ -5,13 +5,12 @@ from chiplotle.utils.geometry import polar2xy
 import numpy
 
 class _RadialHistogram(_CompoundHPGL):
-   '''Circle with absolute position.'''
-   def __init__(self, xy, min_radius, max_radius, data, 
-      chord=None, fill=False, fillines_spacing=None, pen=None):
+   '''Abstract radial histogram class.'''
+   def __init__(self, xy, min_radius, max_radius, data, fill=False, 
+      fillines_spacing=None, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
       self.min_radius = Scalable(min_radius)
       self.max_radius = Scalable(max_radius)
-      self.chord = chord
       self.fill = fill
       self.fillines_spacing = fillines_spacing
       self.data = data
