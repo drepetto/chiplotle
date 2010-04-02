@@ -3,10 +3,24 @@ from chiplotle.hpgl.commands import PA, PU, AA, PD
 from chiplotle.utils.geometry import polar2xy
 
 class RadialHistogramRF(_RadialHistogram):
-   def __init__(self, xy, min_radius, max_radius, data, 
-      chord=None, fill=False, fillines_spacing=50, pen=None):
+   '''A radial histogram with radial fill. The shape draws a circular
+   histogram for the given list of relative frequencies. The bars of the
+   histogram are filled 'radially', i.e., with arc shapes.
+
+   - `min_radius`: a scalar of the smallest radius of the histogram.
+   - `max_radius`: a scalar of the maximum radius of the histogram.
+   - `data`: a list of relative frequencies [x, y, z, ...]. Values are
+      assumed to be between 0 and 1.
+   - `fill`: a boolean that indicated whether the bars should be filled or not.
+   - `fillines_spacing`: a scalar indicating the spacing between fill lines.
+   - `chord`: the chord tolerance of the arcs drawn.
+   '''
+
+   def __init__(self, xy, min_radius, max_radius, data, fill=False, 
+      fillines_spacing=50, chord=None, pen=None):
       _RadialHistogram.__init__(self, xy, min_radius, max_radius, data,
-      chord, fill, fillines_spacing, pen)
+      fill, fillines_spacing, pen)
+      self.chord = chord
 
 
    ## PRIVATE PROPERTIES ##      
@@ -23,6 +37,6 @@ class RadialHistogramRF(_RadialHistogram):
             xy = polar2xy(v, i * self._bin_angle_width)
             result.append(PU(self.xyabsolute + xy))
             result.append(PD( ))
-            result.append(AA(self.xyabsolute, angle_per_bin_deg))
+            result.append(AA(self.xyabsolute, angle_per_bin_deg, self.chord))
       return result    
 
