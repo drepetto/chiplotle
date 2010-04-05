@@ -1499,3 +1499,37 @@ class K(_HPGLEscape):
    :Abort command: 
       Tells the plotter to discard commands in its buffer.
    '''
+
+class SetHandshakeMode(_HPGLEscape):
+   '''
+   :Set Handshake Mode:
+      Set one of three standard handshakes.
+
+   0 (none)
+   1 (Xon-Xoff)
+   2 (ENQ-ACK)
+   3 (hardwire)
+   '''
+   def __init__(self, mode=None):   
+      self.mode = mode
+
+   @apply
+   def mode( ):
+      def fget(self):
+         return self._mode
+      def fset(self, mode):
+         if not mode in (None, 0,1,2,3):
+            raise ValueError('mode must be in (0,1,2,3).')
+         self._mode = mode
+      return property(**locals( ))
+         
+   @property
+   def _name(self):
+      return 'P'
+
+   @property
+   def format(self):
+      if self.mode is None:
+         return '%s.%s' % (self.escape, self._name)
+      else:
+         return '%s.%s%i' % (self.escape, self._name, self.mode)
