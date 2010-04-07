@@ -8,14 +8,36 @@ from chiplotle.tools.mathtools import bezier_interpolation
 class Path(_CompoundHPGL):
    '''draws a path given a list of waypoints'''
    def __init__(self, points, xy=None, curvature=1.0, points_to_compute=None, pen=None):
-      self.points = Scalable(points)
+      self.points = points
+      self.curvature = curvature
       ## points_to_compute determines the number of points calculated for 
       ## each step of the curve
       self.points_to_compute = points_to_compute or 50
-      self.curvature = max(0, min(1, curvature))
       xy = xy or (0, 0)
       _CompoundHPGL.__init__(self, xy, pen) 
 
+
+   ## PUBLIC PROPERTIES ##
+
+   @apply
+   def curvature( ):
+      def fget(self):
+         return self._curvature
+      def fset(self, arg):
+         if 0 <= arg and arg <= 1:
+            self._curvature = arg
+         else:
+            raise ValueError('curvature must be between 0 and 1 inclusive.')
+      return property(**locals( ))
+
+   @apply
+   def points( ):
+      def fget(self):
+         return self._points
+      def fset(self, arg):
+         ## TODO: check that there are at least three points.
+         self._points = Scalable(arg)
+      return property(**locals( ))
 
    ## PRIVATE METHODS ##
 
@@ -59,8 +81,10 @@ class Path(_CompoundHPGL):
             (self.points[i][0] + dx[i], self.points[i][1] + dy[i]),
             (self.points[i+1][0] - dx[i+1], self.points[i+1][1] - dy[i+1]),
             (self.points[i+1][0], self.points[i+1][1])]
+#         plot_points = bezier_interpolation(control_points, 
+#            self.points_to_compute)
          plot_points = bezier_interpolation(control_points, 
-            self.points_to_compute)
+            self.points_to_compute, 1)
          for point_tuple in plot_points:
             position = self.xyabsolute + point_tuple
             result.append(PA(position))
