@@ -11,10 +11,13 @@ class _Arc(_Positional):
 
    @property
    def format(self):
-      coordinates = ['%s' % p for p in self.xy]
-      result = '%s%s,%s' % (self._name, ','.join(coordinates), 
+      if self._coords.dtype == int:
+         coordinates = ['%i,%i' % tuple(p) for p in self.xy]
+      else:
+         coordinates = ['%.2f,%.2f' % tuple(p) for p in self.xy]
+      result = '%s%s,%.2f' % (self._name, ','.join(coordinates), 
          self.angle)
       if self.chordtolerance:
-         result += ',%s' % self.chordtolerance
+         result += ',%.2f' % self.chordtolerance
       result += _HPGLCommand._terminator
       return result

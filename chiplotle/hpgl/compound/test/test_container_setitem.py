@@ -27,7 +27,7 @@ def test_container_setitem_03( ):
 
    assert isinstance(t[0], Rectangle)
    assert isinstance(t[1], Rectangle)
-   assert t[0].xy.tolist( ) == [0, 0]
-   assert t[1].xy.tolist( ) == [100, 0]
+   assert t[0].xy == [0, 0]
+   assert t[1].xy == [100, 0]
    
    

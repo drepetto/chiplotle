@@ -28,6 +28,8 @@ from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.compound import *
 from chiplotle import plotters
 from chiplotle.tools import *
+from chiplotle.hpgl.scalable import Scalable
+from chiplotle.hpgl.coordinatearray import CoordinateArray
 
 from chiplotle.utils.instantiate_plotter import instantiate_plotter
 

@@ -10,7 +10,8 @@ def test_container_02( ):
    '''Container can be initialized with just position tuple.'''
    t = Container((1, 2))
 
-   assert all(t.xy == [1, 2])
+   #assert all(t.xy == [1, 2])
+   assert t.xy == CoordinateArray([1, 2])
    assert t.x == 1
    assert t.y == 2
    assert t.xabsolute == 1
@@ -24,7 +25,7 @@ def test_container_03( ):
    t = Container((1, 2), [circle])
 
    assert len(t) == 1
-   assert t.format == 'PU11.00,22.00;CI100.0;'
+   assert t.format == 'PU11,22;CI100.00;'
    assert t[0] is circle
 
 
@@ -45,8 +46,8 @@ def test_container_05( ):
    assert c.y == 20
    assert c.xabsolute == 11
    assert c.yabsolute == 22
-   assert all(c.xy == (10, 20))
-   assert all(c.xyabsolute == (11, 22))
+   assert c.xy == (10, 20)
+   assert c.xyabsolute == (11, 22)
    assert c._parent is t
 
 
@@ -59,10 +60,10 @@ def test_container_06( ):
    assert c._parent is s
    assert s._parent is t
    assert t._parent is None
-   assert all(c.xy == (10, 20))
-   assert all(s.xy == (1, 2))
-   assert all(t.xy == (3, 4))
-   assert all(c.xyabsolute == (14, 26))
-   assert all(s.xyabsolute == (4, 6))
-   assert all(t.xyabsolute == (3, 4))
+   assert c.xy == (10, 20)
+   assert s.xy == (1, 2)
+   assert t.xy == (3, 4)
+   assert c.xyabsolute == (14, 26)
+   assert s.xyabsolute == (4, 6)
+   assert t.xyabsolute == (3, 4)
 

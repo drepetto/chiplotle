@@ -7,8 +7,11 @@ def _transpose_command(arg, val):
       raise ValueError('Transposing argument must be a pair (x, y).')
 #   if hasattr(arg, '_xy'):
    if isinstance(arg, _Positional) and arg._transposable:
-      arg._xy[0::2] += val[0]
-      arg._xy[1::2] += val[1]
+#      arg._xy[0::2] += val[0]
+#      arg._xy[1::2] += val[1]
+      #arg.x = arg.x + val[0]
+      #arg.y = arg.y + val[1]
+      arg.xy = arg.xy + val
 
 def transpose(arg, val):
    if isinstance(arg, _HPGLCommand):

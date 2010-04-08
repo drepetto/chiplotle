@@ -35,8 +35,10 @@ def split_long_pen_commands(data):
    result = [ ]
    for com in data:
       if isinstance(com, (PU, PD, PA, PR)):
-         xs = list(com.xy[0::2])
-         ys = list(com.xy[1::2])
+#         xs = list(com.xy[0::2])
+#         ys = list(com.xy[1::2])
+         xs = list(com.x)
+         ys = list(com.x)
          result.extend([eval('%s((%s,%s))' % \
             (com._name,x,y)) for x, y in zip(xs, ys)])
       else: 

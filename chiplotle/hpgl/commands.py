@@ -85,10 +85,10 @@ class CI(_HPGLCommand):
    @property
    def format(self):
       if self.chordangle:
-         return '%s%s,%s%s' % (self._name, self.radius, self.chordangle, 
+         return '%s%.2f,%.2f%s' % (self._name, self.radius, self.chordangle, 
                               _HPGLCommand._terminator)
       else:
-         return '%s%s%s' % (self._name, self.radius, _HPGLCommand._terminator)
+         return '%s%.2f%s' % (self._name, self.radius, _HPGLCommand._terminator)
 
 
 class CC(_HPGLCommand):
@@ -220,6 +220,7 @@ class AS(_HPGLCommand):
          return '%s%s' % (self._name, _HPGLCommand._terminator) 
 
 
+## TODO: make this NOT _Positional?
 class EA(_Positional):
    '''
    :Edge Rectangle Absolute:
@@ -1387,11 +1388,11 @@ class EW(_HPGLCommand):
    @property
    def format(self):
       if self.chordangle:
-         return '%s%s,%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
+         return '%s%.2f,%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
          self.startangle, self.sweepangle, self.chordangle, 
          _HPGLCommand._terminator)
       else:
-         return '%s%s,%.2f,%.2f%s' % (self._name, self.radius, 
+         return '%s%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
          self.startangle, self.sweepangle, _HPGLCommand._terminator)
 
 

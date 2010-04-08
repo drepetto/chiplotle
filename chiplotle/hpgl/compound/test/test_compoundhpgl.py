@@ -5,8 +5,8 @@ def test_compound_hpgl_01( ):
    t = _CompoundHPGL((1, 2))
 
    assert t.pen is None
-   assert t.xy.tolist( ) == [1, 2]
-   assert t.xyabsolute.tolist( ) == [1, 2]
+   assert t.xy == CoordinateArray([(1, 2)])
+   assert t.xyabsolute == CoordinateArray([(1, 2)])
    assert t.x == 1
    assert t.y == 2
    assert t.xabsolute == 1

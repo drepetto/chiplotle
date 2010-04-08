@@ -4,10 +4,11 @@ from chiplotle.hpgl.scalable import Scalable
 
 def _scale_command(arg, val):
    attrs = arg.__dict__.keys()
-   for an in attrs:
-      a = getattr(arg, an)
+   for aname in attrs:
+      a = getattr(arg, aname)
       if isinstance(a, Scalable):
-         a *= val
+         #a *= val
+         setattr(arg, aname, a * val)
 
 def scale(arg, val):
    if isinstance(arg, Container):

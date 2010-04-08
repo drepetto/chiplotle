@@ -7,7 +7,8 @@ class Label(_CompoundHPGL):
 
    * `xy`: 2-tuple of coordinates pair for label location.
    * `text`: The actual text to be printed.
-   * `charsize`:  2-tuple (w, h) pair defining the absolute character size.
+   * `charsize`:  2-tuple (w, h) pair defining the absolute character size
+      in centimiters.
    * `direction`: 2-tuple. The inclination / angle of the text: 
       run (direction on x axis), rise (direction on y axis).
    * `charspace`: Factor to set spacing between characters. 
@@ -34,15 +35,16 @@ class Label(_CompoundHPGL):
    * `vertical`: Print text from left to right (False) or top down (True).
    '''
 
-   def __init__(self, xy, text):
-      _CompoundHPGL.__init__(self, xy) 
+   def __init__(self, xy, text, charsize=None, origin=None, charspace=None, 
+      linespace=None, slant=None, direction=None, vertical=None, pen=None):
+      _CompoundHPGL.__init__(self, xy, pen) 
       self.text = text
-      self.charsize = None
-      self.direction = None
-      self.charspace = None
-      self.linespace = None
-      self.origin = None
-      self.slant = None
+      self.charsize = charsize
+      self.direction = direction
+      self.charspace = charspace
+      self.linespace = linespace
+      self.origin = origin
+      self.slant = slant
       self.vertical = False
 
 
@@ -69,7 +71,8 @@ class Label(_CompoundHPGL):
       ### set commands
       result += [PU( ), PA(self.xyabsolute)]
       if not self.charsize is None:
-         result.append(SI(*self.charsize))
+         #result.append(SI(*self.charsize))
+         result.append(SI(*self.charsize._data))
       if self.charspace and self.linespace:
          result.append(ES(self.charspace, self.linespace))
       if self.direction:

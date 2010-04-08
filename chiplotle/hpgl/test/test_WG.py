@@ -9,7 +9,7 @@ def test_WG_01( ):
    assert t.startangle == 0
    assert t.sweepangle == 90
    assert t.chordangle is None
-   assert t.format == 'WG10.0,0.00,90.00;'
+   assert t.format == 'WG10.00,0.00,90.00;'
 
 
 def test_WG_02( ):
@@ -21,5 +21,5 @@ def test_WG_02( ):
    assert t.startangle == 0
    assert t.sweepangle == 90
    assert t.chordangle == 4
-   assert t.format == 'WG10.0,0.00,90.00,4.00;'
+   assert t.format == 'WG10.00,0.00,90.00,4.00;'
 
