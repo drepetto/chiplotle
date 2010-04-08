@@ -37,20 +37,28 @@ class _CompoundHPGL(_Positional):
 
    @property
    def xabsolute(self):
-      return self._getAbsCoord(0)
+      #return self._getAbsCoord(0)
+      if self._parent:
+         return self._parent.xabsolute + self.x
+      else:
+         return self.x
 
 
    @property
    def yabsolute(self):
-      return self._getAbsCoord(1)
-
-
-   def _getAbsCoord(self, n):
-      result = self.xyabsolute[n::2]
-      if len(result) == 1:
-         return result[0]
+      #return self._getAbsCoord(1)
+      if self._parent:
+         return self._parent.yabsolute + self.y
       else:
-         return result
+         return self.y
+
+
+#   def _getAbsCoord(self, n):
+#      result = self.xyabsolute[n::2]
+#      if len(result) == 1:
+#         return result[0]
+#      else:
+#         return result
 
 
 

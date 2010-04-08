@@ -4,7 +4,7 @@ def test_label_01( ):
 
    t = Label((0, 0), 'Hello')
 
-   assert t.xy.tolist( ) == [0, 0]
+   assert t.xy == [0, 0]
    assert t.text == 'Hello'
    assert t.charsize == None
    assert t.charsize == None
@@ -14,7 +14,7 @@ def test_label_01( ):
    assert t.origin == None
    assert t.slant == None
    assert t.vertical == False
-   assert t.format == 'PU;PA0.00,0.00;LBHello\x03;'
+   assert t.format == 'PU;PA0,0;LBHello\x03;'
 
 
 def test_label_charsize_01( ):
@@ -23,5 +23,5 @@ def test_label_charsize_01( ):
    t.charsize = (2, 3)
 
    assert isinstance(t.charsize, Scalable)
-   assert t.charsize.tolist( ) == [2, 3]
-   assert t.format == 'PU;PA1.00,1.00;SI2.00,3.00;LBHello\x03;SI;'
+   assert t.charsize == (2, 3)
+   assert t.format == 'PU;PA1,1;SI2.00,3.00;LBHello\x03;SI;'
