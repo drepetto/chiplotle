@@ -1,5 +1,4 @@
 from chiplotle.cfg.read_config_file import read_config_file
-from chiplotle.utils.interactive_open_serial import interactive_open_serial
 import serial
 
 def instantiate_serial(port=None, baudrate=9600, bytesize=8, 
@@ -12,6 +11,7 @@ def instantiate_serial(port=None, baudrate=9600, bytesize=8,
          parity = parity, stopbits = stopbits, timeout = timeout,
          xonxoff = xonxoff, rtscts = rtscts)
    else:
+      from chiplotle.utils.serialtools import interactive_open_serial
       ser = interactive_open_serial(baudrate = baudrate, bytesize = bytesize,
          parity = parity, stopbits = stopbits, timeout = timeout, 
          xonxoff = xonxoff, rtscts = rtscts)

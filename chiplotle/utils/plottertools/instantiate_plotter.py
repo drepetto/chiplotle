@@ -1,7 +1,4 @@
-from chiplotle.utils.interactive_choose_plotter import \
-   interactive_choose_plotter
-from chiplotle.utils.instantiate_serial import instantiate_serial
-from chiplotle.utils.is_plotter_alive import is_plotter_alive
+from chiplotle.utils.serialtools import instantiate_serial
 from chiplotle import plotters
 
 def instantiate_plotter(port=None, wait_time=10):
@@ -14,6 +11,8 @@ def instantiate_plotter(port=None, wait_time=10):
       '/def/ttyS0'. 
    - *wait_time* : ``int`` maximum wait time for plotter response. 
    '''
+   from chiplotle.utils.plottertools import interactive_choose_plotter
+   from chiplotle.utils.plottertools import is_plotter_alive
    ## serial port
    ser = instantiate_serial(port)
 

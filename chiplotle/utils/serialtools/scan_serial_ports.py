@@ -1,5 +1,5 @@
-from chiplotle.utils.scan_serial_ports_linux import scan_serial_ports_linux
-from chiplotle.utils.scan_serial_ports_windows import scan_serial_ports_windows
+from chiplotle.utils.serialtools import scan_serial_ports_linux
+from chiplotle.utils.serialtools import scan_serial_ports_windows
 import platform
 
 def scan_serial_ports( ):
