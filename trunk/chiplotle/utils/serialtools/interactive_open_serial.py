@@ -1,8 +1,4 @@
-from chiplotle.utils.scan_serial_ports import scan_serial_ports
-#import os
-#import re
-#import serial
-
+from chiplotle.utils.serialtools.scan_serial_ports import scan_serial_ports
 
 def interactive_open_serial(baudrate, bytesize, parity, stopbits, timeout, 
    xonxoff, rtscts):
