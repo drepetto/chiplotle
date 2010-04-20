@@ -1,11 +1,10 @@
-from chiplotle.utils.instantiate_plotter import instantiate_plotter
-from chiplotle import MayaNumber
+from chiplotle import *
 
 def main():
    numberSize = 350
    lineSpacing = numberSize * 3.1
 
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
    if not plotter:
       return None
 

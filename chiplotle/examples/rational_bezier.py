@@ -1,5 +1,6 @@
 from chiplotle import *
-p = instantiate_plotter()
+
+p = instantiate_plotters()[0]
 p.selectPen(1)
 
 ## base of the equilateral triangle

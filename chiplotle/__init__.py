@@ -32,7 +32,8 @@ from chiplotle.tools import *
 from chiplotle.hpgl.scalable import Scalable
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 
-from chiplotle.utils.plottertools import instantiate_plotter
+#from chiplotle.utils.plottertools import instantiate_plotter
+from chiplotle.utils.plottertools import instantiate_plotters
 
 #_remove_modules()
 

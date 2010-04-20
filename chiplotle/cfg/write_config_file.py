@@ -4,10 +4,7 @@ import time
 
 def write_config_file(path):
    ## get some values from user...
-   serial_port = _ask_serial_port( )
-
-## no longer needed...
-#   plotter_type = _ask_plotter_type( )
+#   serial_port = _ask_serial_port( )
 
    ## set preamble...
    preamble = '# -*- coding: utf-8 -*-\n'
@@ -31,22 +28,25 @@ def write_config_file(path):
 
    f.write("# Configuration Variables ---------------------------------\n\n")
 
-   f.write("# Serial port to use for all connections.\n")
-   f.write("# Set it to a string of the path to the port (e.g., '/dev/ttyUSB0'),\n")
-   f.write("# an integer port number or `None` to have Chiplotle query you.'\n")
-   if serial_port:
-      f.write("serial_port = '%s'" % serial_port)
-   else:
-      f.write("serial_port = None")
-   f.write("\n\n")
-
-## no longer needed...
-#   f.write("# Plotter type.\n")
-#   if plotter_type:
-#      f.write("plotter_type = '%s'" % plotter_type)
+#   f.write("# Serial port to use for all connections.\n")
+#   f.write("# Set it to a string of the path to the port (e.g., '/dev/ttyUSB0'),\n")
+#   f.write("# an integer port number or `None` to have Chiplotle query you.'\n")
+#   if serial_port:
+#      f.write("serial_port = '%s'" % serial_port)
 #   else:
-#      f.write("plotter_type = None")
+#      f.write("serial_port = None")
 #   f.write("\n\n")
+
+   ## default serial parameters...
+   f.write("# Serial connection parameters (default).\n")
+   f.write("baudrate = 9600\n")
+   f.write("bytesize = 8\n")
+   f.write("parity = 'N'\n")
+   f.write("stopbits = 1\n")
+   f.write("timeout = 1\n")
+   f.write("xonxoff = 1\n")
+   f.write("rtscts = 0\n")
+   f.write("\n\n")
 
 #   f.write("# PDF viewer. Set for previewing HPGL commands via the\n")
 #   f.write("# ``view( )`` function. If set to `None`, the viewer will\n")
@@ -58,14 +58,7 @@ def write_config_file(path):
    f.close( )
 
 
-#def write_config_file(path):
-#   f = open(path, 'w')
-#   answer = _ask_serial_port( )
-#   f.write('serial_port=%s\n' % answer)
-#   answer = _ask_plotter_type( )
-#   f.write('plotter_type=%s\n' % answer)
-#   f.close( )
-
+## HELPER FUNCTIONS ##
 
 def _ask_serial_port( ):
    print "* Serial port *"
@@ -76,16 +69,3 @@ def _ask_serial_port( ):
    else:
       return sp
 
-
-#def _ask_plotter_type( ):
-#   plotter_list = ''
-#   for i, plotter in enumerate(dir(plotters)):
-#      plotter_list += '[%d] %s\n' % (i+1,  plotter)
-#   message = '\nSet the default plotter type. Plotter types available are:\n%s\n' % plotter_list
-#   print message
-#   answer = raw_input('Enter the plotter number to set as default or hit Enter [None]:\n')
-#   if answer == '':
-#      return None
-#   else:
-#      plt_name = dir(plotters)[int(answer)-1]
-#      return plt_name

@@ -38,5 +38,5 @@ if __name__ == '__main__':
    ## convert image to HPGL art...!
    retrato = circleize_image(thumb, 150)
    io.view(retrato)
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
    plotter.write(retrato)

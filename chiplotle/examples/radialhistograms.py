@@ -1,6 +1,6 @@
 from chiplotle import *
 
-plotter = instantiate_plotter( )
+plotter = instantiate_plotters( )[0]
 
 data = [0, .25, 1, .5, .7, 1, .2] * 3
 rh_1 = RadialHistogramRF((0,0), 2000, 2500, data)

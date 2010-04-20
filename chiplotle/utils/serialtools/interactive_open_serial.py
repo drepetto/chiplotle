@@ -1,5 +1,6 @@
 from chiplotle.utils.serialtools.scan_serial_ports import scan_serial_ports
 
+## TODO: DELETE. No longer used.
 def interactive_open_serial(baudrate, bytesize, parity, stopbits, timeout, 
    xonxoff, rtscts):
    '''The function scans for all serial ports, lists them and prompts 

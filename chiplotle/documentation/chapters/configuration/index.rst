@@ -5,14 +5,8 @@ Chiplotle has a dedicated folder, ``$HOME/.chiplotle``, which houses the
 ``config.py`` configuration file. This file is for setting various
 preferences and defaults. The file is executed as a Python module, so its syntax must conform with standard Python syntax. 
 
-At present a default *serial port* is supported.
+At present only default serial communication parameters are defined here. Chiplotle sets these to common standard values. Make sure your hardware plotter is set to these values, or change the values in the config.py file to match those of your hardware.
 
-To set your default serial port, set the ``serial_port =`` line in the 
-``config.py`` file to the path of your serial port, in string format.
-
-.. note:: 
-   In POSIX type operating systems these ports are under the /dev directory. Serial ports usually look like ttyS0, ttyS1, etc. If you have a computer with no serial port and you are using a serial to USB converter then these ports might look like ttyUSB0, ttyUSB1, etc. 
-
-
-If this variable is not set, Chiplotle will interactively ask you what port and plotter you want to use when you run it in  *command line* mode via the ``chiplotle`` terminal script.  
+.. note::
+   If you have multiple plotters they must all have the same serial configuration.
 
