@@ -2,7 +2,7 @@ from chiplotle import plotters
 
 def interactive_choose_plotter(serial):
    print "\nChoose the plotter that best fits your hardware."
-   print "If in doubt choose the generic 'Plotter'."
+   print "When in doubt choose the generic 'Plotter'."
    for i, plotter in enumerate(dir(plotters)):
       print '[%d] %s' % (i,  plotter)
    plt_name = dir(plotters)[int(raw_input())]
