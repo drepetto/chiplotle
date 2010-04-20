@@ -1,7 +1,7 @@
 from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.commands import SP
 from chiplotle.hpgl.compound.pen import Pen
-from chiplotle.hpgl.scalable import Scalable
+#from chiplotle.hpgl.scalable import Scalable
 import types
 
 class _CompoundHPGL(_Positional):
