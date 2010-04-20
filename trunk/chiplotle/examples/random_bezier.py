@@ -1,6 +1,6 @@
 import random
 from chiplotle import *
-plotter = instantiate_plotter()
+plotter = instantiate_plotters()[0]
 
 left = plotter.margins.soft.left
 right = plotter.margins.soft.right

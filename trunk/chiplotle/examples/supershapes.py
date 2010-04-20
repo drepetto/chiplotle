@@ -1,7 +1,7 @@
 from __future__ import division
 from chiplotle import *
 
-plotter = instantiate_plotter( )
+plotter = instantiate_plotters( )[0]
 
 width = plotter.margins.soft.width * 3. / 4.
 height = plotter.margins.soft.height * 3. / 4.

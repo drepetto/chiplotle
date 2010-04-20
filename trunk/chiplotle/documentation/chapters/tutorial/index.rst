@@ -25,12 +25,12 @@ Start Chiplotle by typing ``chiplotle`` from the terminal::
 The ``chiplotle`` script is a simple convenience script that does two things:
 
 #. It loads the Python interpreted.
-#. It calls the ``instantiate_plotter( )`` function and assigns a Chiplotle Plotter to the ``plotter`` variable. 
+#. It calls the ``instantiate_plotters( )`` function. This function finds all the plotters connected to your computer, instantiates their corresponding software interfaces and assigns these to the ``plts`` list variable. The first plotter found is also assigned to the ``plotter`` variable. This is just a conveninece. If you only have one plotter you can call ``plotter`` instead of ``plts[0]``.
 
-The ``instantiate_plotter( )`` function reads the `config.py` file to see if you have a preferred serial port. If you don't, it lists all the serial ports available in your machine for you to pick one to use. Once a serial port is set, the function tries to identify your plotter type. If your plotter type is unrecognized, the function will display a list of plotters that Chiplotle knows about for you to choose from.  Select the one that most closely matches the plotter ID identifying your hardware. If there is no match, you can use the generic Plotter, although you should be aware that some HPGL commands may not work with your hardware.
+.. note :: 
+   If your plotter type is unrecognized, the function will display a list of plotters that Chiplotle knows about for you to choose from.  Select the one that most closely matches the plotter ID identifying your hardware. If there is no match, you can use the generic Plotter, although you should be aware that some HPGL commands may not work with your hardware.
 
-Once a hardware plotter has been identified, Chiplotle creates a software Plotter to interface with your hardware and assigns it to the ``plotter`` variable. 
-Chiplotle will then print out some basic information about your plotter, including its drawing area and memory. Now it's time to plot!
+Chiplotle will then print out some basic information about your plotter(s), including drawing area and memory. Now it's time to plot!
 
 Let's pick up a pen. In HPGL, the command to pick up a pen is ``SP``, which stands for "select pen". In Chiplotle we instantiate an instance of that command like so::
 
@@ -92,19 +92,19 @@ easier to put your commands into a Python script so that you can edit them, reru
 And of course since you're writing in Python, you can use all the features of the language in 
 addition to the Chiplotle commands. 
 
-It's very easy to create a Python script with Chiplotle commands. The first thing you usually need 
-to do is import all of the HPGL commands from Chiplotle. So open a new text file and type::
+It's very easy to create a Python script with Chiplotle commands. The first thing you usually need to do is import all of the HPGL commands from Chiplotle. So open a new text file and type::
 
    from chiplotle import *
 
-Next you want your script to run the Chiplotle setup routine and import the plotter definition::
+Next you want your script to run the Chiplotle setup routine and import the plotter definitions::
 
-   plotter = instantiate_plotter( )
+   plts = instantiate_plotters( )
 
-This lets you select the appropriate serial port and plotter ID, and imports 
-the plotter object so that you can use the ``plotter.write( )`` method as 
-in the command line examples above. Now you can simply enter a series of 
-Chiplote commands::
+If you only have one plotter (or only care to use one plotter) you can get the first and only plotter in the list returned by ``instantiate_plotters( )``, like so::
+
+   plotter = instantiate_plotters( )[0]
+
+ Now you can simply enter a series of Chiplote commands::
 
    plotter.selectPen(1)
    plotter.write(PU([100,100]))
@@ -125,7 +125,7 @@ A slightly more sophisticated Python script that draws a random zigzag::
    from chiplotle import *
    import random
    
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
    
    plotter.selectPen(1)
    

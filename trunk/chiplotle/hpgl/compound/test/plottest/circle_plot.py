@@ -1,7 +1,7 @@
 from chiplotle import *
 from chiplotle.utils.instantiate_plotter import instantiate_plotter
 
-plotter = instantiate_plotter(wait_time = 3)
+plotter = instantiate_plotters( )[0]
 if plotter:
 
    def test_circle_plot_01( ):

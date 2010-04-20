@@ -4,7 +4,7 @@ import random
 
 def main():
 
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
 
    width = plotter.margins.soft.width
    height = plotter.margins.soft.height

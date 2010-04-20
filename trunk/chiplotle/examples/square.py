@@ -1,6 +1,6 @@
 from chiplotle import *
 
-plotter = instantiate_plotter( )
+plotter = instantiate_plotters( )[0]
 
 plotter.selectPen(1)
 plotter.write(PU([100,100]))

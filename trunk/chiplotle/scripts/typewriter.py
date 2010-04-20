@@ -21,7 +21,7 @@ def typewriter( ):
    print("***************************")
    print("")
 
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
 
    pen_num = _query_pen( )
 

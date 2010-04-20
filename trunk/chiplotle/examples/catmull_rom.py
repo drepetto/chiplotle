@@ -4,7 +4,7 @@ import random
 number_of_points = 10
 n_points_to_compute = 100
 
-plotter = instantiate_plotter()
+plotter = instantiate_plotters()[0]
 left = plotter.margins.soft.left
 right = plotter.margins.soft.right
 bottom = plotter.margins.soft.bottom

@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-from chiplotle.utils.instantiate_plotter import instantiate_plotter
+from chiplotle.utils.instantiate_plotters import instantiate_plotters
 import sys
 import time
 
 def plot_hpgl(file):
    '''Send an HPGL file to the plotter found connected to the computer.'''
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
    plotter.writeFile(file)
    ## call flush( ) to wait till all data is written before exiting...
    plotter._serialPort.flush( )

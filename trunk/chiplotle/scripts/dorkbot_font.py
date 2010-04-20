@@ -11,7 +11,7 @@ def main():
    print("* DORKBOT FONT *")
    print("****************")
    
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
 
    input = raw_input("enter font outline pen number:")
    outline_pen = int(input)

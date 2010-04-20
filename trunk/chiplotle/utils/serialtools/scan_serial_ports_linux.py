@@ -8,7 +8,8 @@ def scan_serial_ports_linux( ):
    for i, port in enumerate(ports):
       try:
          s = serial.Serial(port)
-         result[i] = s
+         #result[i] = s
+         result[i] = s.portstr
          s.close( )
       except serial.SerialException:
          pass

@@ -267,3 +267,11 @@ class _BasePlotter(object):
    def escapePlotterOn(self):
       self.write( self._hpgl.On() )
 
+   
+   ## OVERRIDES ##
+
+   def __str__(self):
+      return '%s in port %s' % (self.type, self._serialPort.portstr)
+
+   def __repr__(self):
+      return '%s(%s)' % (self.type, self._serialPort.portstr)

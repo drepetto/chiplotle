@@ -2,7 +2,7 @@
 from chiplotle import *
 
 def envelope( ):
-   plotter = instantiate_plotter( )
+   plotter = instantiate_plotters( )[0]
 
    to_address = []
    from_address = []

@@ -1,7 +1,7 @@
 from chiplotle import *
 import random
 
-plotter = instantiate_plotter( )
+plotter = instantiate_plotters( )[0]
 
 plotter.selectPen(1)
 
