@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from chiplotle.utils.instantiate_plotters import instantiate_plotters
+from chiplotle.utils.plottertools import instantiate_plotters
 import sys
 import time
 
