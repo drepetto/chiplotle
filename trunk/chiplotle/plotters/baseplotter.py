@@ -143,7 +143,7 @@ class _BasePlotter(object):
    def _readPort(self):
       '''Read data from serial port.'''
       elapsed_time = 0
-      total_time = 4
+      total_time = 8
       sleep = 1.0 / 8
       while elapsed_time < total_time:
          if self._serialPort.inWaiting( ): 
