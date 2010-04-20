@@ -28,6 +28,9 @@ def instantiate_plotters( ):
       print 'Found no plotter connected to any of the serial ports.'''
       print 'Is your plotter on?'''
       return None
+   else:
+      for serial_address, pln in plotters_found.items( ):
+         print '   Found plotter %s in port %s' % (pln, serial_address)
    ## instantiate a plotter for every port with a plotter... 
    for serial_address, pln in plotters_found.items( ): 
       plotter = _instantiate_plotter(serial_address, pln)
