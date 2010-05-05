@@ -67,7 +67,7 @@ class FancyLabel(_CompoundHPGL):
       for i, char in enumerate(self.text):
          abs_position = (x, y)
          result.extend(self._get_character(char, abs_position))     
-         x += self.width + width_margin
+         x = x + self.width + width_margin
 
       return result
 
@@ -82,18 +82,15 @@ class FancyLabel(_CompoundHPGL):
       for r in range(rows):
          for c in range(cols):
             x = abs_pos[0]
-            x += c * self.width / cols
-            x += random.gauss(0, self.jitter[0])
+            x = x + c * self.width / cols
+            x = x + random.gauss(0, self.jitter[0])
             y = abs_pos[1]
-            y += r * self.height / rows
-            y += random.gauss(0, self.jitter[1])
+            y = y + r * self.height / rows
+            y = y + random.gauss(0, self.jitter[1])
 
             value = character[rows - 1 - r][c]
             if value == 1:
                result.extend(self._get_cell(x, y))
-               #command = copy.deepcopy(self.cell_shape)
-               #result.append(PA((x, y)))
-               #result.append(command)
 
       return result         
       

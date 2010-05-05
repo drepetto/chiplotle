@@ -110,7 +110,7 @@ class _MayaDigit(object):
             result.append( RA((x2, y2)) )
          else:
             result.append( EA((x2, y2)) )
-         yref += self.size / 4.
+         yref = yref + self.size / 4.
       ### draw circles
       spacing = self.size / (ones + 1)
       xref = self.x
@@ -122,7 +122,7 @@ class _MayaDigit(object):
             result.append( WG(self.dot_radius, 0, 359, 10) )
          else:
             result.append( CI(self.dot_radius) )
-         xref += spacing
+         xref = xref + spacing
       return result
 
    @property
