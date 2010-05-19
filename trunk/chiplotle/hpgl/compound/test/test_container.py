@@ -10,7 +10,6 @@ def test_container_02( ):
    '''Container can be initialized with just position tuple.'''
    t = Container((1, 2))
 
-   #assert all(t.xy == [1, 2])
    assert t.xy == CoordinateArray([1, 2])
    assert t.x == 1
    assert t.y == 2
@@ -18,6 +17,7 @@ def test_container_02( ):
    assert t.yabsolute == 2
    assert len(t) == 0
    assert t.format == ''
+
 
 def test_container_03( ):
    '''Container can carry _CompoundHPGL objects.'''
@@ -48,7 +48,7 @@ def test_container_05( ):
    assert c.yabsolute == 22
    assert c.xy == (10, 20)
    assert c.xyabsolute == (11, 22)
-   assert c._parent is t
+   assert c.parentage.parent is t
 
 
 def test_container_06( ):
@@ -57,9 +57,9 @@ def test_container_06( ):
    s = Container((1, 2), [c])
    t = Container((3, 4), [s])
 
-   assert c._parent is s
-   assert s._parent is t
-   assert t._parent is None
+   assert c.parentage.parent is s
+   assert s.parentage.parent is t
+   assert t.parentage.parent is None
    assert c.xy == (10, 20)
    assert s.xy == (1, 2)
    assert t.xy == (3, 4)
@@ -67,3 +67,49 @@ def test_container_06( ):
    assert s.xyabsolute == (4, 6)
    assert t.xyabsolute == (3, 4)
 
+
+## append ##
+
+def test_container_append_01( ):
+   t = Container((0, 0), [ ])
+   c = Circle((1, 2), 100)
+   t.append(c)
+
+   assert c.parentage.parent is t
+   assert len(t) == 1
+
+
+## pop ##
+
+def test_container_pop_01( ):
+   '''Children of Container have no parentage.parent after poped.'''
+   c = Circle((1, 2), 100)
+   t = Container((0, 0), [c])
+   
+   assert c.parentage.parent is t
+   assert len(t) == 1
+   c = t.pop( )
+   assert c.parentage.parent is None
+   assert len(t) == 0
+
+
+def test_container_pop_02( ):
+   '''Children of Container have no parentage.parent after poped.'''
+   t = Container((0, 0), [Circle((1, 2), 100), Circle((3, 4), 200)])
+   c = t.pop(0)
+
+   assert c.parentage.parent is None
+   assert len(t) == 1
+
+
+## __setitem__ ##
+
+def test_container_setitem_01( ):
+   '''Items can be set. Parenthood is set correctly.'''
+   t = Container((0, 0), [Circle((1, 2), 100)])
+   r = Rectangle((3, 4), 100, 200)
+   t[0] = r
+
+   assert len(t) == 1
+   assert t[0] is r
+   assert r.parentage.parent is t

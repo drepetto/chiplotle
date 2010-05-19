@@ -1,8 +1,12 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
+from chiplotle.hpgl.commands import PA
+from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute
 
-class Container(_CompoundHPGL):
-   '''Generic container for CompoundHPGL commands. 
-   Only _CompoundHPGL commands can be contained by this Container.'''
+class HPGLContainer(_CompoundHPGL):
+   '''Primitive HPGL commands can be contained in this container.
+   The position of primitive absolute HPGL commands (e.g., PA, RA) 
+   is relative to the position of this container.'''
    def __init__(self, xy, shapes=None, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
       self._shapes = [ ]
@@ -13,26 +17,26 @@ class Container(_CompoundHPGL):
    ## PRIVATE METHODS ##
 
    def _check_init_shape(self, shape):
-      if not isinstance(shape, _CompoundHPGL):
-         raise TypeError('shape must be an _CompoundHPGL object.')
+      if not isinstance(shape, _HPGLCommand):
+         raise TypeError('All elements must be _HPGLCommand objects.')
+      if isinstance(shape, _CompoundHPGL):
+         raise TypeError('Elements cannot be _CompoundHPGL commands.')
 
    def _check_init_shapes(self, shapes):
       for s in shapes:
-         if not isinstance(s, _CompoundHPGL):
-            raise TypeError('All elements must be _CompoundHPGL objects.')
-
-   ## TODO: move this to ParentageInterface?
-   def _link_subshapes_to_self(self, arg):
-      if not isinstance(arg, (list, tuple)):
-         arg = [arg]
-      for s in arg:
-         s.parentage._switch(self)
+         self._check_init_shape(s)
 
    @property
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
+      result.append(PA(self.xyabsolute))
       for s in self:
-         result.extend(s._subcommands)
+         if is_primitive_absolute(s):
+            result.append(s.__class__(s.xy + self.xyabsolute))
+         else:
+            result.append(s)
+      return result
+      result.extend(self)
       return result
 
 
@@ -57,30 +61,25 @@ class Container(_CompoundHPGL):
       else:
          self._check_init_shapes(arg)
          self._shapes[i.start : i.stop] = arg
-      self._link_subshapes_to_self(arg)
 
 
 ## PUBLIC METHODS ##
 
    def append(self, arg):
       self._check_init_shape(arg)
-      self._link_subshapes_to_self(arg)
       self._shapes.append(arg)
 
    def extend(self, arg):
       self._check_init_shapes(arg)
-      self._link_subshapes_to_self(arg)
       self._shapes.extend(arg)
 
    def insert(self, i, arg):
       self._check_init_shape(arg)
-      self._link_subshapes_to_self(arg)
       self._shapes.insert(i, arg)
 
    def remove(self, arg):
-      arg.parentage._cut( )
+      self._shapes.remove(arg)
 
    def pop(self, indx=-1):
-      result = self._shapes[indx]
-      result.parentage._cut( )
-      return result
+      return self._shapes.pop(indx)
+
