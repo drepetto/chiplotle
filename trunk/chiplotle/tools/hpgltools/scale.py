@@ -1,5 +1,6 @@
 from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.hpgl.compound.container import Container
+from chiplotle.hpgl.compound.hpglcontainer import HPGLContainer
 from chiplotle.hpgl.scalable import Scalable
 
 def _scale_command(arg, val):
@@ -11,12 +12,8 @@ def _scale_command(arg, val):
          setattr(arg, aname, a * val)
 
 def scale(arg, val):
-   if isinstance(arg, Container):
+   if isinstance(arg, _HPGLCommand):
       _scale_command(arg, val)
-      for c in arg:
-         _scale_command(c, val)
-   elif isinstance(arg, _HPGLCommand):
-      _scale_command(arg, val)
-   elif isinstance(arg, (list, tuple)):
+   if isinstance(arg, (list, tuple, Container, HPGLContainer)):
       for c in arg:
          _scale_command(c, val)
