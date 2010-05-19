@@ -14,7 +14,7 @@ def import_hpgl_file(filename):
       PD(xy=[ 100.  100.]), SP(pen=0)]
    '''
 
-   _knownUnsupportedCommands = ('PW','PC')
+   _knownUnsupportedCommands = ('PW','PC', 'LA')
    f = open(filename)
    fs = f.read()
    f.close()
