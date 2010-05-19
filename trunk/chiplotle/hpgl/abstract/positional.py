@@ -16,10 +16,8 @@ class _Positional(_HPGLCommand):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         if arg is None:
-            arg = [ ]
-         #assert len(arg) % 2 == 0
-         #self._xy = Scalable(arg).ravel( )
+         #if arg is None:
+         #   arg = [ ]
          self._coords = CoordinateArray(arg)
       return property(**locals())
 
@@ -39,13 +37,6 @@ class _Positional(_HPGLCommand):
          self.xy.y = arg
       return property(**locals())
 
-#   def _getCoord(self, n):
-#      '''Helper function for x( ) and y( ).'''
-#      result = self.xy[n::2]
-#      if len(result) == 1:
-#         return result[0]
-#      else:
-#         return result
 
    ### FORMATTING ###
 
