@@ -57,3 +57,23 @@ def test_transpose_RR( ):
    transpose(t, (1.5, -2.5))
    assert t.xy == [1, 2]
 
+
+def test_transpose_container_01( ):
+   t = Container((1, 2), [Circle((10, 10), 100)])
+   transpose(t, (1.5, -2.5))
+   
+   assert t.xy == [2.5, -0.5]
+   assert t[0].xy == [10, 10]
+   assert t[0].xyabsolute == [12.5, 9.5]
+   assert t[0].radius == 100
+
+
+def test_transpose_hpglcontainer_01( ):
+   t = HPGLContainer((1, 2), [PA((10, 10)), PR((10, 10))])
+   transpose(t, (1.5, -2.5))
+   
+   assert t.xy == [2.5, -0.5]
+   assert t[0].xy == [10, 10]
+   assert t[1].xy == [10, 10]
+   assert t.format == 'PA2.50,-0.50;PA12.50,9.50;PR10,10;'
+
