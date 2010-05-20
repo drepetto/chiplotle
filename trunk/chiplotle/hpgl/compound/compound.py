@@ -4,6 +4,7 @@ from chiplotle.hpgl.compound.pen import Pen
 from chiplotle.interfaces.parentage.interface import ParentageInterface
 import types
 
+## TODO: check that xy is a pair *always*?
 class _CompoundHPGL(_Positional):
    def __init__(self, xy, pen=None):
       _Positional.__init__(self, xy, True) 
