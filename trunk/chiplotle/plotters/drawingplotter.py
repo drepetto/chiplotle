@@ -1,3 +1,8 @@
+'''
+ *  This file is part of chiplotle.
+ *
+ *  http://music.columbia.edu/cmc/chiplotle
+'''
 
 from chiplotle.plotters.baseplotter import _BasePlotter
 
