@@ -192,16 +192,33 @@ class _DrawingPlotter(_BasePlotter):
    def selectPen(self, penNum = 0):
       self.write(self._hpgl.SP(penNum))
 
-   def setOriginLowerLeft(self):
+   def setOriginBottomLeft(self):
       """
          Set origin to lower, left
       """   
-      self.write(PI([self.margins.soft.left,
+      self.write(self._hpgl.SC()) #reset scaling first!
+      self.write(self._hpgl.IP([self.margins.soft.left,
          self.margins.soft.bottom,
          self.margins.soft.right,
          self.margins.soft.top]))
-      self.write(SC([0, self.margins.soft.width, 0, self.margins.soft.height])
+      self.write(self._hpgl.SC([0, self.margins.soft.width, 0, self.margins.soft.height]))
+ 
+   def setOriginCenter(self):
+      """
+         Set origin to center, center
+      """   
+      self.write(self._hpgl.SC()) #reset scaling first!
+      self.write(self._hpgl.IP([self.margins.soft.left,
+         self.margins.soft.bottom,
+         self.margins.soft.right,
+         self.margins.soft.top]))
       
+      w_div_2 = self.margins.soft.width/2
+      h_div_2 = self.margins.soft.height/2
+      
+      self.write(self._hpgl.SC([-w_div_2, w_div_2, 
+         -h_div_2, h_div_2]))
+ 
    def tickLength(self, tp = 0.5, tn = 0.5):
       self.write(self._hpgl.TL(tp, tn))
 
