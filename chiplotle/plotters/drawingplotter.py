@@ -193,16 +193,15 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.SP(penNum))
 
    def setOriginLowerLeft(self):
-      """Set origin to lower, left"""
-
-      PIstring = "IP%d,%d,%d,%d;" % (self.margins.soft.left,
+      """
+         Set origin to lower, left
+      """   
+      self.write(PI([self.margins.soft.left,
          self.margins.soft.bottom,
          self.margins.soft.right,
-         self.margins.soft.top)
-      SCstring = "SC%d,%d,%d,%d;" % (0, self.width, 0, self.height) 
-      self.write(PIstring)
-      self.write(SCstring)
-
+         self.margins.soft.top]))
+      self.write(SC([0, self.margins.soft.width, 0, self.margins.soft.height])
+      
    def tickLength(self, tp = 0.5, tn = 0.5):
       self.write(self._hpgl.TL(tp, tn))
 
