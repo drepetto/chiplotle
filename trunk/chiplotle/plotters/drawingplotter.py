@@ -203,6 +203,40 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.top]))
       self.write(self._hpgl.SC([0, self.margins.soft.width, 0, self.margins.soft.height]))
  
+   def setOriginTopLeft(self):
+      """
+         Set origin to upper, left
+      """   
+      self.write(self._hpgl.SC()) #reset scaling first!
+      self.write(self._hpgl.IP([self.margins.soft.left,
+         self.margins.soft.top,
+         self.margins.soft.right,
+         self.margins.soft.bottom]))
+      self.write(self._hpgl.SC([0, self.margins.soft.width, 0, -self.margins.soft.height]))
+
+
+   def setOriginBottomRight(self):
+      """
+         Set origin to bottom, right
+      """   
+      self.write(self._hpgl.SC()) #reset scaling first!
+      self.write(self._hpgl.IP([self.margins.soft.left,
+         self.margins.soft.top,
+         self.margins.soft.right,
+         self.margins.soft.bottom]))
+      self.write(self._hpgl.SC([-self.margins.soft.width,0,self.margins.soft.height,0]))
+
+   def setOriginTopRight(self):
+      """
+         Set origin to top, right
+      """   
+      self.write(self._hpgl.SC()) #reset scaling first!
+      self.write(self._hpgl.IP([self.margins.soft.left,
+         self.margins.soft.bottom,
+         self.margins.soft.right,
+         self.margins.soft.top]))
+      self.write(self._hpgl.SC([-self.margins.soft.width,0,-self.margins.soft.height,0]))
+      
    def setOriginCenter(self):
       """
          Set origin to center, center
@@ -218,6 +252,25 @@ class _DrawingPlotter(_BasePlotter):
       
       self.write(self._hpgl.SC([-w_div_2, w_div_2, 
          -h_div_2, h_div_2]))
+
+   def setOriginCurrentPoint(self):
+      """
+         Set origin to current location
+      """   
+      self.write(self._hpgl.SC()) #reset scaling first!
+      self.write(self._hpgl.IP([self.margins.soft.left,
+         self.margins.soft.bottom,
+         self.margins.soft.right,
+         self.margins.soft.top]))
+         
+      posx = float(self.actualPosition.rsplit(',')[0])
+      posy = float(self.actualPosition.rsplit(',')[1])
+      p1x = self.margins.hard.left - posx
+      p1y = self.margins.hard.bottom - posy
+      p2x = p1x + self.margins.hard.width
+      p2y = p1y + self.margins.hard.height
+      
+      self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))
  
    def tickLength(self, tp = 0.5, tn = 0.5):
       self.write(self._hpgl.TL(tp, tn))
