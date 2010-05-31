@@ -78,7 +78,7 @@ class _PlotterMargins(object):
 
    def _get(self):
       self._plotter._serialPort.flushInput()
-      self._plotter._writeStringToPort(self._queryCommand.format)
+      self._plotter._write_string_to_port(self._queryCommand.format)
       m = self._plotter._readPort().split(',')
       return tuple([float(n) for n in m])
 #      return tuple([int(n) for n in m])
