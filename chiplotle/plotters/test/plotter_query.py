@@ -5,7 +5,7 @@ plotter = instantiate_plotters( )[0]
 
 assert plotter._buffer_space
 assert plotter.id
-assert plotter.actualPosition
+assert plotter.actual_position
 assert plotter.commandedPosition
 assert plotter.digitizedPoint
 assert plotter.outputError

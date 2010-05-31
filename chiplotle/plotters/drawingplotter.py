@@ -263,8 +263,8 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.right,
          self.margins.soft.top]))
          
-      posx = float(self.actualPosition.rsplit(',')[0])
-      posy = float(self.actualPosition.rsplit(',')[1])
+      posx = float(self.actual_position.rsplit(',')[0])
+      posy = float(self.actual_position.rsplit(',')[1])
       p1x = self.margins.hard.left - posx
       p1y = self.margins.hard.bottom - posy
       p2x = p1x + self.margins.hard.width

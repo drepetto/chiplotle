@@ -43,7 +43,7 @@ def main():
       msg = "move to top left corner and hit enter to begin plotting..."
       raw_input(msg)
       
-      point_string = plotter.actualPosition
+      point_string = plotter.actual_position
       point_string_parts = point_string.split(',')
       x = int(point_string_parts[0])
       # the "- cell_size is there because rects are drawn from the 

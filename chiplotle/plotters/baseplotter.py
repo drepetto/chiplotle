@@ -186,7 +186,7 @@ class _BasePlotter(object):
       return id.strip('\r')
 
    @property
-   def actualPosition(self):
+   def actual_position(self):
       '''Output the actual position of the plotter pen.'''
       #self.write(self._hpgl.OA())
       #return self._read_port()
