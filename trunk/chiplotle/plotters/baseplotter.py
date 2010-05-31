@@ -81,7 +81,7 @@ class _BasePlotter(object):
 
    ### PRIVATE METHODS ###
 
-   def _isHPGLCommandKnown(self, hpglCommand):
+   def _is_HPGL_command_known(self, hpglCommand):
       if isinstance(hpglCommand, str):
          command_head = hpglCommand[0:2]
       elif hasattr(hpglCommand, '_name'):
@@ -91,14 +91,14 @@ class _BasePlotter(object):
       return command_head.upper( ) in self.allowedHPGLCommands
 
 
-   def _filterUnrecognizedCommands(self, commands):
+   def _filter_unrecognized_commands(self, commands):
       assert isinstance(commands, str)
       result = [ ] 
       #commands = re.split('[\n;]+', commands)
       commands = commands.split(';')
       for comm in commands:
          if comm: ## if not an empty string.
-            if self._isHPGLCommandKnown(comm):
+            if self._is_HPGL_command_known(comm):
                #result.append(comm)
                result.append(comm + ';')
             else:
@@ -108,7 +108,7 @@ class _BasePlotter(object):
       return ''.join(result)
 
 
-   def _sleepWhileBufferFull(self):
+   def _sleep_while_buffer_full(self):
       '''
          sleeps until the buffer has some room in it.
       '''
@@ -119,7 +119,7 @@ class _BasePlotter(object):
          #print 'Okay, now buffer has room...'
 
 
-   def _sliceStringToBufferSize(self, data):
+   def _slice_string_to_buffer_size(self, data):
          result = [ ]
          count = int(math.ceil(len(data) / self.buffer_size))
          for i in range(count):
@@ -130,10 +130,10 @@ class _BasePlotter(object):
    def _write_string_to_port(self, data):
       ''' Write data to serial port. data is expected to be a string.'''
       assert type(data) is str
-      data = self._filterUnrecognizedCommands(data)
-      data = self._sliceStringToBufferSize(data)
+      data = self._filter_unrecognized_commands(data)
+      data = self._slice_string_to_buffer_size(data)
       for chunk in data:
-         self._sleepWhileBufferFull( )
+         self._sleep_while_buffer_full( )
          self._serialPort.write(chunk)
       
 
@@ -166,7 +166,7 @@ class _BasePlotter(object):
 
    def _send_query(self, query):
       '''Private method to manage plotter queries.'''
-      if self._isHPGLCommandKnown(query):
+      if self._is_HPGL_command_known(query):
          self._serialPort.flushInput( )
          self.write(query)
          return self._readPort( )
