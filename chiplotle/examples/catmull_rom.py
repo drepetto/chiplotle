@@ -10,7 +10,7 @@ right = plotter.margins.soft.right
 bottom = plotter.margins.soft.bottom
 top = plotter.margins.soft.top
 
-plotter.selectPen(1)
+plotter.select_pen(1)
 
 points = []
 
@@ -28,4 +28,4 @@ for point in points:
 catmull_curve = Catmull(points, points_to_compute = n_points_to_compute)
 plotter.write(catmull_curve.format)
 
-plotter.selectPen(0)
+plotter.select_pen(0)

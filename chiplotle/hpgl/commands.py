@@ -126,7 +126,7 @@ class AH(_HPGLPrimitive):
 class AP(_HPGLPrimitive):
    '''
    :Automatic Pen operations:
-      Controls automatic pen operations sich as returning a pen
+      Controls automatic pen operations such as returning a pen
       to the carousel if it has been in the holder without drawing
       for a certain time.
 

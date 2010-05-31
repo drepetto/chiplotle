@@ -7,7 +7,7 @@ right = plotter.margins.soft.right
 top = plotter.margins.soft.top
 bottom = plotter.margins.soft.bottom
 
-plotter.selectPen(1)
+plotter.select_pen(1)
 
 # this draws 20 curves with 10 random control points each
 n_curves = 20
@@ -22,4 +22,4 @@ for i in range(n_curves):
 	b = Bezier(bez)
 	plotter.write(b.format)
 
-plotter.selectPen(0)
+plotter.select_pen(0)

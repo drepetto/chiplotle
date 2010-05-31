@@ -216,7 +216,7 @@ class _BasePlotter(object):
       return self._send_query(self._hpgl.OO( ))
 
    @property
-   def output_P1P2(self):
+   def output_p1p2(self):
       return self._send_query(self._hpgl.OP( ))
 
    @property

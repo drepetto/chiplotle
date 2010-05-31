@@ -55,7 +55,7 @@ def main():
         width, outline_jitter = outline_jitter, fill_jitter = fill_jitter)
       plotter.write(text)
    
-   plotter.penUp()
+   plotter.pen_up()
 
 if __name__ == '__main__': main()
 

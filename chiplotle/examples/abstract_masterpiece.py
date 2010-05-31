@@ -22,7 +22,7 @@ def main():
    penNum = 1
 
    while True:
-       plotter.selectPen(penNum)
+       plotter.select_pen(penNum)
 
        whichGesture = random.randint(0,5)
        
@@ -47,15 +47,15 @@ def main():
            space = random.randint(10,100)
            angle = random.randint(0,3) * 45
            
-           print "fillType: %d space: %d angle: %d" % (ft, space, angle)
-           plotter.fillType(ft, space, angle)
+           print "fill type: %d space: %d angle: %d" % (ft, space, angle)
+           plotter.fill_type(ft, space, angle)
            plotter.shadeRectRelative(random.randint(10,2000), random.randint(10,2000))
 
        elif whichGesture == 3:
            print "draw a crazy line!"
-           plotter.penDown()
+           plotter.pen_down()
            plotter.goto(random.randint(left, right), random.randint(bottom, top))
-           plotter.penUp()
+           plotter.pen_up()
            
        elif whichGesture == 4:
            print "draw an abstract shape!"
@@ -64,14 +64,14 @@ def main():
            firstX = random.randint(left, right)
            firstY = random.randint(bottom, top)
            plotter.goto(firstX, firstY)
-           plotter.penDown()
+           plotter.pen_down()
            xRange = width/5
            yRange = height/5
                    
            for i in range(numPoints):
                plotter.nudge(random.randint(int(-xRange), int(xRange)), random.randint(int(-yRange), int(yRange)))
            plotter.goto(firstX, firstY)
-           plotter.penUp()
+           plotter.pen_up()
            
        elif whichGesture == 5:
            print "just jump around!"
@@ -85,7 +85,7 @@ def main():
        if penNum == numPens + 1:
            break
            
-   plotter.selectPen(0)
+   plotter.select_pen(0)
 
 ### run main if called from command line like so: 
 ### $> python abstract_masterpiece.py

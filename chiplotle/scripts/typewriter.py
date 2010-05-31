@@ -31,7 +31,7 @@ def typewriter( ):
       cw, ch = _query_font_size( )
       plotter.write(SI(cw, ch))
 
-   plotter.selectPen(pen_num)
+   plotter.select_pen(pen_num)
 
    print("")
    print("type at the >>> prompt.")
@@ -51,7 +51,7 @@ def typewriter( ):
          response = raw_input("command: ")
          if response == "p":
             pen_num = _query_pen( )
-            plotter.selectPen(pen_num)
+            plotter.select_pen(pen_num)
          elif response == "s":
             cw, ch = _query_font_size( )
             plotter.write(SI(cw, ch))
