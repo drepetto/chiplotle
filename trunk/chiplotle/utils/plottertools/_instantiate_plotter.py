@@ -19,5 +19,5 @@ def _instantiate_plotter(port, id):
       plotter = interactive_choose_plotter(ser)
    print "\nInstantiated plotter %s:" % plotter
    print "\tDrawing area: %s" % plotter.margins.soft
-   print "\tBuffer Size: %s" % plotter.bufferSize
+   print "\tBuffer Size: %s" % plotter.buffer_size
    return plotter
