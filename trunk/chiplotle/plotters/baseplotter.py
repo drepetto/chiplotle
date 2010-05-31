@@ -23,7 +23,7 @@ class _BasePlotter(object):
       self._hpgl = commands
       self._margins = MarginsInterface(self)
       self.buffer_size = self._buffer_space
-      self.initializePlotter()
+      self.initialize_plotter( )
 
 
    ### PUBLIC METHODS ###
@@ -34,11 +34,11 @@ class _BasePlotter(object):
       return self._margins
 
 
-   def initializePlotter(self):
-      self._serialPort.flushInput()
-      self._serialPort.flushOutput()
-      self.write(self._hpgl.On())
-      self.write(self._hpgl.IN())
+   def initialize_plotter(self):
+      self._serialPort.flushInput( )
+      self._serialPort.flushOutput( )
+      self.write(self._hpgl.On( ))
+      self.write(self._hpgl.IN( ))
 
 
    def write(self, data):
@@ -46,9 +46,9 @@ class _BasePlotter(object):
          data can be an iterator, a string or an _HPGL. '''
       #if hasattr(data, 'format'):
       if isinstance(data, _HPGL):
-         self._writeStringToPort(data.format)
+         self._write_string_to_port(data.format)
       elif isinstance(data, str):
-         self._writeStringToPort(data)
+         self._write_string_to_port(data)
       elif type(data) in (list, tuple, types.GeneratorType):
          result = [ ]
          for c in data:
@@ -59,7 +59,7 @@ class _BasePlotter(object):
                result.append(c)
             else:
                raise TypeError('Elements must be strings or _HPGL commands.')
-         self._writeStringToPort(''.join(result))
+         self._write_string_to_port(''.join(result))
       else:
          raise TypeError('Must be a str, iterator or an _HPGL command.')
 
@@ -127,7 +127,7 @@ class _BasePlotter(object):
          return result
 
 
-   def _writeStringToPort(self, data):
+   def _write_string_to_port(self, data):
       ''' Write data to serial port. data is expected to be a string.'''
       assert type(data) is str
       data = self._filterUnrecognizedCommands(data)
