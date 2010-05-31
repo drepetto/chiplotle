@@ -186,7 +186,7 @@ class _DrawingPlotter(_BasePlotter):
 
    def set_origin_bottom_left(self):
       """
-         Set origin to lower, left
+         Set origin to bottom, left
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
       self.write(self._hpgl.IP([self.margins.soft.left,
@@ -245,9 +245,33 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.SC([-w_div_2, w_div_2, 
          -h_div_2, h_div_2]))
 
-   def set_origin_current_point(self):
+   def set_origin_current_location(self):
       """
          Set origin to current location
+      
+      self.write(self._hpgl.SC()) #reset scaling first!
+      self.write(self._hpgl.IP([self.margins.soft.left,
+         self.margins.soft.bottom,
+         self.margins.soft.right,
+         self.margins.soft.top]))
+         
+      posx = float(self.actualPosition.rsplit(',')[0])
+      posy = float(self.actualPosition.rsplit(',')[1])
+      p1x = self.margins.hard.left - posx
+      p1y = self.margins.hard.bottom - posy
+      p2x = p1x + self.margins.hard.width
+      p2y = p1y + self.margins.hard.height
+      
+      self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))
+      """
+      posx = float(self.actualPosition.rsplit(',')[0])
+      posy = float(self.actualPosition.rsplit(',')[1])
+      
+      set_origin_to_point([posx, posy])
+      
+   def set_origin_to_point(self, point):
+      """
+         Set origin to given point [x, y]
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
       self.write(self._hpgl.IP([self.margins.soft.left,
@@ -255,14 +279,14 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.right,
          self.margins.soft.top]))
          
-      posx = float(self.actual_position.rsplit(',')[0])
-      posy = float(self.actual_position.rsplit(',')[1])
+      posx = point[0]
+      posy = point[1]
       p1x = self.margins.hard.left - posx
       p1y = self.margins.hard.bottom - posy
       p2x = p1x + self.margins.hard.width
       p2y = p1y + self.margins.hard.height
       
-      self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))
+      self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))   
  
    def tick_length(self, tp = 0.5, tn = 0.5):
       self.write(self._hpgl.TL(tp, tn))
