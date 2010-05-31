@@ -64,7 +64,7 @@ class _BasePlotter(object):
          raise TypeError('Must be a str, iterator or an _HPGL command.')
 
 
-   def writeFile(self, filename):
+   def write_file(self, filename):
       '''Sends the HPGL content of the given `filename` to the plotter.'''
 
       if not isinstance(filename, str):
