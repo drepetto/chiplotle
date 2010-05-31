@@ -10,132 +10,124 @@ class _DrawingPlotter(_BasePlotter):
 
    ## TEXT OUTPUT & SETTINGS ##
 
-   def absoluteCharSize(self, w = None, h = None):
+   def absolute_char_size(self, w = None, h = None):
       self.write(self._hpgl.SI(w, h))
 
-   def absoluteDirection(self, run = 1, rise = 0):
+   def absolute_direction(self, run = 1, rise = 0):
       print 'not implemented yet.'
 
-   def altCharSet(self, n = 0):
-      self.write(self._hpgl.CA(n))
-
-   def charChordAngle(self, angle = 5):
+   def character_chord_angle(self, angle = 5):
       self.write(self._hpgl.CC(angle))
 
-   def bufferLabel(self, text = None):
+   def buffer_label(self, text = None):
       self.write(self._hpgl.BL(text))
 
-   def charPlot(self, spaces = None, lines = None):
+   def character_plot(self, spaces = None, lines = None):
       self.write(self._hpgl.CP(spaces, lines))
 
-   def charSelectionMode(self, switch = 0, fallback = 0):
+   def character_selection_mode(self, switch = 0, fallback = 0):
       self.write(self._hpgl.CM(switch, fallback))
 
-   def charSet(self, set = 0):
+   def character_set(self, set = 0):
       self.write(self._hpgl.CS(set))        
 
-   def charSlant(self, tan = 0):
+   def character_slant(self, tan = 0):
       self.write(self._hpgl.SL(tan))
 
-   def defineLabelTerminator(self, t = chr(3)):
+   def define_label_terminator(self, t = chr(3)):
       self.write(self._hpgl.DT(t))
 
-#   def directionVertical(self, dir = 0):
-#   self.write(self._hpgl.directionVertical(dir))
+   def designate_alternate_character_set(self, n = 0):
+      self.write(self._hpgl.CA(n))
 
-#   def extraSpace(self, spaces = 0, lines = 0):
-#   self.write(self._hpgl.extraSpace(spaces, lines))
+#   def direction_vertical(self, dir = 0):
 
-#   def invokeCharSlant(self, slot = 0, left = None):
-#   self.write(self._hpgl.invokeCharSlant(slote, left))
+#   def extra_space(self, spaces = 0, lines = 0):
+
+#   def invoke_character_slant(self, slot = 0, left = None):
 
    def label(self, text):
       self.write(self._hpgl.LB(text))
 
-#   def labelOrigin(self, positionNum = 1):
-#   self.write(self._hpgl.labelOrigin(positionNum))
+#   def label_origin(self, positionNum = 1):
 
-#   def newLine(self):
-#   self.write(self._hpgl.newLine())
+#   def new_line(self):
 
 
-   def printBufferedLabel(self):
+   def print_buffered_label(self):
       self.write(self._hpgl.PB())
 
-   def relCharSize(self, w = None, h = None):
+   def relative_character_size(self, w = None, h = None):
       self.write(self._hpgl.SR(w, h))
 
-#   def relativeDirection(self, run = 1, rise = 0):
-#   self.write(self._hpgl.relativeDirection(run, rise))
+#   def relative_direction(self, run = 1, rise = 0):
           
-   def selectAltCharSet(self):
+   def select_alternate_character_set(self):
       self.write(self._hpgl.SA())
 
-   def symbolMode(self, char = None):
+   def symbol_mode(self, char = None):
       self.write(self._hpgl.SM(char))
 
-   def selectStandardCharSet(self):
+   def select_standard_character_set(self):
       self.write(self._hpgl.SS())
 
 
 
    ## DRAWING PRIMITIVES & SETTINGS
 
-   def arcAbsolute(self, x, y, aa, ca = 5):
+   def arch_absolute(self, x, y, aa, ca = 5):
       self.write(self._hpgl.AA((x, y), aa, ca))
 
-   def arcRelative(self, x, y, aa, ca = 5):
+   def arch_relative(self, x, y, aa, ca = 5):
       self.write(self._hpgl.AR((x, y), aa, ca))
 
-   def chordTolerance(self, type = 0):
+   def chord_tolerance(self, type = 0):
       self.write(self._hpgl.CT(type))
 
    def circle(self, rad, ca = 5):
       self.write(self._hpgl.CI(rad, ca))
 
-#   def curvedLineGenerator(self, n = None, inputDelay = None):
-#   self.write(self._hpgl.curvedLineGenerator(n, inputDelay))
+#   def curved_line_generator(self, n = None, inputDelay = None):
 
-   def edgePolygon(self):
+   def edge_polygon(self):
       self.write(self._hpgl.EP())
 
-   def edgeRectRelative(self, x, y):
+   def edge_rectangle_relative(self, x, y):
       self.write(self._hpgl.ER((x,y)))
 
-   def edgeRectAbsolute(self, x, y):
+   def edge_rectangle_absolute(self, x, y):
       self.write(self._hpgl.EA((x,y)))
 
-#   def edgeWedge(self, r, sa, swa, ca=5):
-#   self.write(self._hpgl.edgeWedge(r, sa, swa, ca))
+#   def edge_wedge(self, r, sa, swa, ca=5):
 
-   def fillPolygon(self):
+   def fill_polygon(self):
       self.write(self._hpgl.FP())
 
-   def fillType(self, type=1, space=None,  angle=0):
-      self.write(self._hpgl.FT(type, space, angle))
-
-   def lineType(self, pattern, length = 4):
-      self.write(self._hpgl.LT(pattern, length))
-
-   def plotPolygon(self, n = 0):
-      self.write(self._hpgl.PM(n))
-
-   def shadeRectAbsolute(self, x, y):        
+   def filled_rectangle_absolute(self, x, y):        
       self.write(self._hpgl.RA((x, y)))
 
-   def shadeRectRelative(self, x, y):
+   def filled_rectangle_relative(self, x, y):
       self.write(self._hpgl.RR((x, y)))
 
-#   def shadeWedge(self, r, sa, swa, ca = 5):
-#   self.write(self._hpgl.shadeWedge(r, sa, swa, ca))
+#   def filled_wedge(self, r, sa, swa, ca = 5):
+
+   def fill_type(self, type=1, space=None,  angle=0):
+      self.write(self._hpgl.FT(type, space, angle))
+
+   def line_type(self, pattern, length = 4):
+      self.write(self._hpgl.LT(pattern, length))
+
+   def plot_polygon(self, n = 0):
+      self.write(self._hpgl.PM(n))
+
 
 
    ## DIRECT PEN CONTROL & INFO
 
-   def accelSelect(self, accel = None, pen = None):
+   def acceleration_select(self, accel = None, pen = None):
       self.write(self._hpgl.AS(accel, pen))
 
-   def forceSelect(self, force = None, pen = None):
+   def force_select(self, force = None, pen = None):
       self.write(self._hpgl.FS(force, pen))
 
    def goto(self, x, y):
@@ -160,7 +152,7 @@ class _DrawingPlotter(_BasePlotter):
    def nudge(self, x, y):
       self.write(self._hpgl.PR((x,y)))
 
-   def plotAbsolute(self, coords = None):
+   def plot_absolute(self, coords = None):
       """
          Plot Absolute.
          Takes a tuple of any number of sets of points:
@@ -169,7 +161,7 @@ class _DrawingPlotter(_BasePlotter):
       """
       self.write(self._hpgl.PA(coords))
 
-   def plotRelative(self, coords = None):
+   def plot_relative(self, coords = None):
       """
          Plot Relative.
          Takes a tuple of any number of sets of points:
@@ -178,21 +170,21 @@ class _DrawingPlotter(_BasePlotter):
       """
       self.write(self._hpgl.PR(coords))
 
-   def penDown(self, coords = None):
+   def pen_down(self, coords = None):
       """Pen Down."""
       self.write(self._hpgl.PD(coords))
 
-   def penThickness(self, thickness = 0.3):
+   def pen_thickness(self, thickness = 0.3):
       self.write(self._hpgl.PT(thickness))
 
-   def penUp(self, coords = None):
+   def pen_up(self, coords = None):
       """Pen Up."""
       self.write(self._hpgl.PU(coords))
 
-   def selectPen(self, penNum = 0):
+   def select_pen(self, penNum = 0):
       self.write(self._hpgl.SP(penNum))
 
-   def setOriginBottomLeft(self):
+   def set_origin_bottom_left(self):
       """
          Set origin to lower, left
       """   
@@ -203,7 +195,7 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.top]))
       self.write(self._hpgl.SC([0, self.margins.soft.width, 0, self.margins.soft.height]))
  
-   def setOriginTopLeft(self):
+   def set_origin_top_left(self):
       """
          Set origin to upper, left
       """   
@@ -215,7 +207,7 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.SC([0, self.margins.soft.width, 0, -self.margins.soft.height]))
 
 
-   def setOriginBottomRight(self):
+   def set_origin_bottom_right(self):
       """
          Set origin to bottom, right
       """   
@@ -226,7 +218,7 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.bottom]))
       self.write(self._hpgl.SC([-self.margins.soft.width,0,self.margins.soft.height,0]))
 
-   def setOriginTopRight(self):
+   def set_origin_top_right(self):
       """
          Set origin to top, right
       """   
@@ -237,7 +229,7 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.top]))
       self.write(self._hpgl.SC([-self.margins.soft.width,0,-self.margins.soft.height,0]))
       
-   def setOriginCenter(self):
+   def set_origin_center(self):
       """
          Set origin to center, center
       """   
@@ -253,7 +245,7 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.SC([-w_div_2, w_div_2, 
          -h_div_2, h_div_2]))
 
-   def setOriginCurrentPoint(self):
+   def set_origin_current_point(self):
       """
          Set origin to current location
       """   
@@ -272,23 +264,23 @@ class _DrawingPlotter(_BasePlotter):
       
       self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))
  
-   def tickLength(self, tp = 0.5, tn = 0.5):
+   def tick_length(self, tp = 0.5, tn = 0.5):
       self.write(self._hpgl.TL(tp, tn))
 
-   def xTick(self):
+   def x_tick(self):
       self.write(self._hpgl.XT())
 
-   def yTick(self):
+   def y_tick(self):
       self.write(self._hpgl.YT())        
               
-   def velocitySelect(self, v = None, pen = None):
+   def velocity_select(self, v = None, pen = None):
       """ Set pen's velocity."""
       self.write(self._hpgl.VS(v, pen))
 
-   def inputWindow(self, xLL = None, yLL = None, xUR = None, yUR = None):
+   def input_window(self, xLL = None, yLL = None, xUR = None, yUR = None):
       self.write(self._hpgl.IW((xLL, yLL, xUR, yUR)))
 
-   def paperSize(self, size = None):
+   def paper_size(self, size = None):
       self.write(self._hpgl.PS(size))
 
    def rotate(self, angle = 0):
@@ -300,68 +292,56 @@ class _DrawingPlotter(_BasePlotter):
 
    ## PAPER CONTROLS
 
-   def advanceFrame(self):
+   def advance_frame(self):
       self.write(self._hpgl.FR())
 
-   def advanceFullPage(self):
+   def advance_full_page(self):
       self.write(self._hpgl.AF())
 
-   def advanceHalfPage(self):
+   def advance_half_page(self):
       self.write(self._hpgl.AH())   
 
-   def enableCutLine(self, n):
+   def enable_cut_line(self, n):
       self.write(self._hpgl.EC(n))
 
-   def pageFeed(self, n = None):
+   def page_feed(self, n = None):
       self.write(self._hpgl.PG(n))
 
 
    ## DIGITIZER CONTROLS
 
-   def clearDigitizer(self):
+   def clear_digitizer(self):
       self.write(self._hpgl.DC())
 
-   def digitizePoint(self):
+   def digitize_point(self):
       self.write(self._hpgl.DP())
 
 
    ## MISC I/O, PLOTTER QUERIES, ERRORS, SETUP
 
-   def abortCommand(self):
+   def abort_command(self):
       """Tells the plotter to discard commands in its buffer."""
       self.write(self._hpgl.K())
 
-   def automaticPen(self, p = None):
+   def automatic_pen(self, p = None):
       self.write(self._hpgl.AP(p))
 
-   def bufferPlot(self):
+   def buffer_plot(self):
       self.write(self._hpgl.BF())
 
-   def defaultInstruction(self):
+   def default_instruction(self):
       self.write(self._hpgl.DF())
 
-#   def defineKey(self, key = None, function = None):
-#      self.write(self._hpgl.defineKey())
+#   def define_key(self, key = None, function = None):
 
+#   def input_mask(self, e = 233, s = 0, p = 0):
 
-#   def inputMask(self, e = 233, s = 0, p = 0):
-#   self.write(self._hpgl.inputMask(e, s, p))
-
-   def notReady(self):
-      '''what's this for?'''
+   def not_ready(self):
       self.write(self._hpgl.NR())
 
    def replot(self, n = 1):
       self.write(self._hpgl.RP(n))
 
-   def writeToDisplay(self, text):
+   def write_to_display(self, text):
       self.write(self._hpgl.WD(text))
 
-
-#   def escapeHS2(self, minbytes=81, xon='17'):
-#   self.writeControl(self._hpgl.escapeHS2(minbytes, xon))
-#   self.xon = str(xon) 
-#
-#   def escapeXoff(self, xoff='19', interchar_speed=0):
-#   self.writeControl(self._hpgl.escapeXoff(xoff, interchar_speed))
-#   self.xoff = str(xoff)

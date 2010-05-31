@@ -23,6 +23,6 @@ for i in range(1, cols + 1):
 
 
 #io.view(result)
-plotter.selectPen(1)
+plotter.select_pen(1)
 plotter.write(result)
-plotter.selectPen(0)
+plotter.select_pen(0)

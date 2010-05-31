@@ -10,5 +10,5 @@ assert plotter.commanded_position
 assert plotter.digitized_point
 assert plotter.output_error
 assert plotter.options
-assert plotter.output_P1P2
+assert plotter.output_p1p2
 assert plotter.status

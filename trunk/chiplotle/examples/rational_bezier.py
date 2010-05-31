@@ -1,7 +1,7 @@
 from chiplotle import *
 
 p = instantiate_plotters()[0]
-p.selectPen(1)
+p.select_pen(1)
 
 ## base of the equilateral triangle
 t_base = 4000
@@ -26,4 +26,4 @@ for w in weights:
 #io.view(c, format='png')
 
 p.write(c.format)
-p.selectPen(0)
+p.select_pen(0)
