@@ -179,92 +179,54 @@ class _BasePlotter(object):
    @property
    def id(self):
       '''Get id of plotter.'''
-      #self._serialPort.flushInput()
-      #self.write(self._hpgl.OI())
-      #id = self._read_port()
       id = self._send_query(self._hpgl.OI( ))
       return id.strip('\r')
 
    @property
    def actual_position(self):
       '''Output the actual position of the plotter pen.'''
-      #self.write(self._hpgl.OA())
-      #return self._read_port()
       return self._send_query(self._hpgl.OA( ))
 
    @property
-   def carouselType(self):
-#      command = self._hpgl.OT( )
-#      self.write(command)
-#      return self._read_port()
+   def carousel_type(self):
       return self._send_query(self._hpgl.OT( ))
 
    @property
-   def commandedPosition(self):
-      #self.write(self._hpgl.OC())
-      #return self._read_port()
+   def commanded_position(self):
       return self._send_query(self._hpgl.OC( ))
           
    @property
-   def digitizedPoint(self):
-      #self.write(self._hpgl.OD())
-      #return self._read_port()
+   def digitized_point(self):
       return self._send_query(self._hpgl.OD( ))
 
    @property
-   def outputError(self):
-      #self.write(self._hpgl.OE())
-      #return self._read_port()
+   def output_error(self):
       return self._send_query(self._hpgl.OE( ))
 
-#   @property
-#   def hardClipLimits(self):
-#      '''Output hard clip limits. Same as marginHard.'''
-#      self.write(self._hpgl.OH())
-#      return self._read_port()
-
    @property
-   def outputKey(self):
-      #command = self._hpgl.OK( )
-      #self.write(command)
-      #return self._read_port()
+   def output_key(self):
       return self._send_query(self._hpgl.OK( ))
 
    @property
-   def labelLength(self):
-      #command = self._hpgl.OL( )
-      #self.write(command)
-      #return self._read_port()
+   def label_length(self):
       return self._send_query(self._hpgl.OL( ))
 
    @property
    def options(self):
-      #self.write(self._hpgl.OO())
-      #return self._read_port()
       return self._send_query(self._hpgl.OO( ))
 
    @property
-   def outputP1P2(self):
-      #self.write(self._hpgl.OP())
-      #return self._read_port()
+   def output_P1P2(self):
       return self._send_query(self._hpgl.OP( ))
 
    @property
    def status(self):
-      #self.write(self._hpgl.OS())
-      #return self._read_port()
       return self._send_query(self._hpgl.OS( ))
-
-#   @property
-#   def window(self):
-#      '''Output window. Same as margins.soft.'''
-#      self.write(self._hpgl.OW())
-#      return self._read_port()
 
 
    ### DCI (Device Control Instructions) Escape commands ###
 
-   def escapePlotterOn(self):
+   def escape_plotter_on(self):
       self.write( self._hpgl.On() )
 
    
