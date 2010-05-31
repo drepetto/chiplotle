@@ -1,7 +1,8 @@
-from chiplotle.hpgl.scalable import Scalable
+from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.utils.ispair import ispair
 import numpy
 
-class CoordinateArray(Scalable):
+class CoordinateArray(object):
    def __init__(self, xy=None):
       self.xy = xy
 
@@ -19,14 +20,18 @@ class CoordinateArray(Scalable):
       def fset(self, arg):
          if isinstance(arg, self.__class__):
             self._data = arg._data
+            #self._data = arg._data[:] ## copy
+         elif isinstance(arg, CoordinatePair):
+            self._data = numpy.array([arg.xy]).reshape((-1, 2))
          elif arg is None:
-            #arg = numpy.array([ ], dtype = 'float32').reshape((-1, 2))
             arg = numpy.array([ ]).reshape((-1, 2))
             self._data = arg
-         else:
-            #arg = numpy.array(arg, dtype = 'float32').reshape((-1, 2))
+         elif isinstance(arg, (tuple, list, numpy.ndarray)):
             arg = numpy.array(arg).reshape((-1, 2))
             self._data = arg
+         else:
+            arg = numpy.array([ ]).reshape((-1, 2))
+            raise TypeError('unknown type for coordinates xy.')
       return property(**locals( ))
 
    @apply
@@ -65,6 +70,40 @@ class CoordinateArray(Scalable):
       return self._data[arg]
 
    def __eq__(self, arg):
-      arg = self._binary_operand_massage(arg)
-      return numpy.all(self._data == arg)
+      arg = CoordinateArray(arg)
+      return numpy.all(self._data == arg._data)
+
+   def __ne__(self, arg):
+      return not (self == arg)
+
+   def __add__(self, arg):
+      if isinstance(arg, CoordinateArray):
+         return CoordinateArray(self.xy + arg.xy)
+      elif isinstance(arg, CoordinatePair):
+         return CoordinateArray(self.xy + arg.xy)
+      elif isinstance(arg, (int, long, float)) or ispair(arg):
+         return CoordinateArray(self.xy + arg) 
+      else:
+         raise TypeError
+      
+   def __radd__(self, arg):
+      return self + arg
+
+   def __div__(self, arg):
+      if arg == 0:
+         raise ZeroDivisionError
+      return CoordinateArray(self.xy / arg)
+
+   def __truediv__(self, arg):
+      return self / arg
+
+   def __mul__(self, arg):
+      if isinstance(arg, (int, long, float)):
+         return CoordinateArray(self.xy * arg)
+      else:
+         raise TypeError
+         
+
+   def __repr__(self):
+      return 'CoordinateArray(%s)' % self.xy
 

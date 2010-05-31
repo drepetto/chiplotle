@@ -4,7 +4,6 @@ def test_WG_01( ):
 
    t = WG(10, 0, 90)
 
-   assert isinstance(t.radius, Scalable)
    assert t.radius == 10
    assert t.startangle == 0
    assert t.sweepangle == 90
@@ -16,7 +15,6 @@ def test_WG_02( ):
 
    t = WG(10, 0, 90, 4)
 
-   assert isinstance(t.radius, Scalable)
    assert t.radius == 10
    assert t.startangle == 0
    assert t.sweepangle == 90

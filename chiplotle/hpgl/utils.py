@@ -1,6 +1,5 @@
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
+from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 from chiplotle.hpgl.abstract.positional import _Positional
-from chiplotle.hpgl.scalable import Scalable
 from chiplotle.hpgl.commands import PU, PD, PA, PR 
 import copy
 from numpy import concatenate

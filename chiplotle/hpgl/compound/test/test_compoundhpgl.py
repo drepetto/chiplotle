@@ -5,8 +5,8 @@ def test_compound_hpgl_01( ):
    t = _CompoundHPGL((1, 2))
 
    assert t.pen is None
-   assert t.xy == CoordinateArray([(1, 2)])
-   assert t.xyabsolute == CoordinateArray([(1, 2)])
+   assert t.xy == CoordinatePair(1, 2)
+   assert t.xyabsolute == CoordinatePair(1, 2)
    assert t.x == 1
    assert t.y == 2
    assert t.xabsolute == 1
@@ -15,6 +15,8 @@ def test_compound_hpgl_01( ):
    assert t._subcommands == [ ]
    assert t.format == ''
 
+
+## pen ##
 
 def test_compound_hpgl_pen_01( ):
    '''pen can be int.'''

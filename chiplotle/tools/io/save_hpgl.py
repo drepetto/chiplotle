@@ -1,6 +1,6 @@
 import os
 import subprocess
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
+from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 
 def save_hpgl(expr, filename):
    '''Save text HPGL from Chiplotle-HPGL.
@@ -12,7 +12,7 @@ def save_hpgl(expr, filename):
    hpgl = [ ]
    if isinstance(expr, (list, tuple)):
       for o in expr:
-         assert isinstance(o, _HPGLCommand)
+         assert isinstance(o, _HPGLPrimitive)
          hpgl.append(o.format)
    else:
       hpgl.append(expr.format)

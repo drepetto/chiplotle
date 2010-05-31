@@ -25,8 +25,8 @@ def test_pu_init_02( ):
    assert len(t.y) == 0
 
 def test_pu_init_03( ):
-   '''PU argument must be list-like (list, tuple, Scalable, Ndarray,...).'''
-   assert raises(ValueError, 'PU(4)')
+   '''PU argument must be list-like (list, tuple, Ndarray,...).'''
+   assert raises(TypeError, 'PU(4)')
 
 def test_pu_init_04( ):
    '''PU argument must be a list or tuple of length == 2*n'''

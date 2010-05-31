@@ -1,7 +1,8 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
-from chiplotle.hpgl.scalable import Scalable
 from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV, SI
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 
+## TODO: change charsize for two attributes: charwidth, charheight?
 class Label(_CompoundHPGL):
    '''Text label.
 
@@ -35,7 +36,9 @@ class Label(_CompoundHPGL):
    * `vertical`: Print text from left to right (False) or top down (True).
    '''
 
-   def __init__(self, xy, text, charsize=None, origin=None, charspace=None, 
+   _scalable = _CompoundHPGL._scalable + ['charsize'] ## TODO: add charspace, linespace?
+
+   def __init__(self, xy, text, charsize=(10, 10), origin=None, charspace=None, 
       linespace=None, slant=None, direction=None, vertical=None, pen=None):
       _CompoundHPGL.__init__(self, xy, pen) 
       self.text = text
@@ -53,13 +56,15 @@ class Label(_CompoundHPGL):
       def fget(self):
          return self._charsize
       def fset(self, arg):
-         if isinstance(arg, (list, tuple, Scalable)):
+         if isinstance(arg, (list, tuple)):
             if len(arg) == 2:
-               self._charsize = Scalable(arg)
+               self._charsize = CoordinatePair(arg)
             else:
                raise ValueError("Character size has two values: (w, h).")
-         elif arg is None:
-            self._charsize = None
+         elif isinstance(arg, CoordinatePair):
+            self._charsize = arg
+#         elif arg is None:
+#            self._charsize = None
          else:
             raise ValueError("charsize must be None, (x, y) pair, or Scalar.")
       return property(**locals())
@@ -71,8 +76,7 @@ class Label(_CompoundHPGL):
       ### set commands
       result += [PU( ), PA(self.xyabsolute)]
       if not self.charsize is None:
-         #result.append(SI(*self.charsize))
-         result.append(SI(*self.charsize._data))
+         result.append(SI(*self.charsize.xy))
       if self.charspace and self.linespace:
          result.append(ES(self.charspace, self.linespace))
       if self.direction:

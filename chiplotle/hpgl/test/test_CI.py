@@ -10,7 +10,6 @@ def test_CI_02( ):
    '''CI can take only radius argument.'''
    t = CI(1)
    assert t.radius == 1
-   assert isinstance(t.radius, Scalable)
 
 def test_CI_03( ):
    '''CI takes at most 2 arguments: radius and chord angle.'''
@@ -19,16 +18,14 @@ def test_CI_03( ):
    assert t.chordangle == 90
    assert t.format == 'CI1.00,90.00;'
 
-### RADIUS ###
 
-def test_CI_radius_01( ):
-   '''Radius is always a Scalable.'''
-   t = CI(1)
-   assert isinstance(t.radius, Scalable)
-   t.radius = 1
-   assert isinstance(t.radius, Scalable)
-   t.radius = 1.
-   assert isinstance(t.radius, Scalable)
+## _scalable ##
+
+def test_CI_scalable_01( ):
+   assert CI._scalable == ['radius']
+
+
+### RADIUS ###
 
 #def test_CI_radius_02( ):
 #   '''Radius must be scalar.'''

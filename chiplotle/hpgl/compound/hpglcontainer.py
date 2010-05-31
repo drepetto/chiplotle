@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
+from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 from chiplotle.hpgl.commands import PA
 from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute
 
@@ -17,8 +17,8 @@ class HPGLContainer(_CompoundHPGL):
    ## PRIVATE METHODS ##
 
    def _check_init_shape(self, shape):
-      if not isinstance(shape, _HPGLCommand):
-         raise TypeError('All elements must be _HPGLCommand objects.')
+      if not isinstance(shape, _HPGLPrimitive):
+         raise TypeError('All elements must be _HPGLPrimitive objects.')
       if isinstance(shape, _CompoundHPGL):
          raise TypeError('Elements cannot be _CompoundHPGL commands.')
 

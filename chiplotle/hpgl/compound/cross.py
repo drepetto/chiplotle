@@ -1,14 +1,16 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA, PR
-from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.geometry import *
 
 class Cross(_CompoundHPGL):
    '''Cross. Can be rotated.'''
+
+   _scalable = ['width', 'height']
+
    def __init__(self, xy, width, height, rotation=0, pen=None):
       _CompoundHPGL.__init__(self, xy, pen) 
-      self.width = Scalable(width)
-      self.height = Scalable(height)
+      self.width = width
+      self.height = height
       self.rotation = rotation
 
    @property

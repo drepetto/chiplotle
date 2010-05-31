@@ -1,11 +1,15 @@
 from chiplotle import *
 from py.test import raises
 
+## append ##
+
 def test_container_append_01( ):
    t = Container((0, 0), [ ])
-   t.append(Circle((0, 0), 100))
+   c = Circle((1, 2), 100)
+   t.append(c)
 
-   assert isinstance(t[0], Circle)
+   assert c.parentage.parent is t
+   assert t[0] is c
    assert len(t) == 1
 
 

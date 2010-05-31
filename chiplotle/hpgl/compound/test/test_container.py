@@ -10,7 +10,7 @@ def test_container_02( ):
    '''Container can be initialized with just position tuple.'''
    t = Container((1, 2))
 
-   assert t.xy == CoordinateArray([1, 2])
+   assert t.xy == (1, 2)
    assert t.x == 1
    assert t.y == 2
    assert t.xabsolute == 1
@@ -68,16 +68,6 @@ def test_container_06( ):
    assert t.xyabsolute == (3, 4)
 
 
-## append ##
-
-def test_container_append_01( ):
-   t = Container((0, 0), [ ])
-   c = Circle((1, 2), 100)
-   t.append(c)
-
-   assert c.parentage.parent is t
-   assert len(t) == 1
-
 
 ## pop ##
 
@@ -113,3 +103,13 @@ def test_container_setitem_01( ):
    assert len(t) == 1
    assert t[0] is r
    assert r.parentage.parent is t
+
+
+## scale ##
+
+def test_container_scale_01( ):
+   t = Container((1, 2), [ ])
+   hpgltools.scale(t, 1.5)
+
+   assert Container._scalable == ['xy']
+   assert t.xy == (1.5, 3)

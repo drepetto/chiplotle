@@ -43,7 +43,7 @@ class _BasePlotter(object):
 
    def write(self, data):
       '''Public access for writing to serial port. 
-         data can be an iterator, a string or an _HPGLCommand. '''
+         data can be an iterator, a string or an _HPGL. '''
       #if hasattr(data, 'format'):
       if isinstance(data, _HPGL):
          self._writeStringToPort(data.format)

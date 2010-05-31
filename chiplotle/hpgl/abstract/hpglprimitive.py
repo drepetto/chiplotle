@@ -1,23 +1,14 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.utils.get_base_class import get_base_class
 
-class _HPGLCommand(_HPGL):
+class _HPGLPrimitive(_HPGL):
+
    _terminator = ';'
-   
-#   @apply
-#   def terminator( ):
-#      def fget(self):
-#         baseclass = get_base_class(self, '_HPGLCommand')
-#         return baseclass._terminator
-#      def fset(self, val):
-#         baseclass = get_base_class(self, '_HPGLCommand')
-#         baseclass._terminator = val
-#      return property(**locals())
 
 
    @property
    def format(self):
-      return '%s%s' % (self._name, _HPGLCommand._terminator)
+      return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
    ### OVERRIDES ###
 

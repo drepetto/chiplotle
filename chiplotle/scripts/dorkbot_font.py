@@ -2,7 +2,6 @@
 
 from chiplotle import *
 from chiplotle.hpgl.compound.dorkbotlabel import DorkbotLabel
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 
 
 def main():
