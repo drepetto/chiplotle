@@ -22,7 +22,7 @@ class _BasePlotter(object):
       self._serialPort = serialPort
       self._hpgl = commands
       self._margins = MarginsInterface(self)
-      self.bufferSize = self._bufferSpace
+      self.buffer_size = self._buffer_space
       self.initializePlotter()
 
 
@@ -112,18 +112,18 @@ class _BasePlotter(object):
       '''
          sleeps until the buffer has some room in it.
       '''
-      if self._bufferSpace < self.bufferSize:
+      if self._buffer_space < self.buffer_size:
          #print 'Buffer getting full, sleeping...'
-         while self._bufferSpace < self.bufferSize:
+         while self._buffer_space < self.buffer_size:
             time.sleep(1)
          #print 'Okay, now buffer has room...'
 
 
    def _sliceStringToBufferSize(self, data):
          result = [ ]
-         count = int(math.ceil(len(data) / self.bufferSize))
+         count = int(math.ceil(len(data) / self.buffer_size))
          for i in range(count):
-            result.append(data[i * self.bufferSize: (i+1) * self.bufferSize])
+            result.append(data[i * self.buffer_size: (i+1) * self.buffer_size])
          return result
 
 
@@ -156,8 +156,8 @@ class _BasePlotter(object):
    
 
    @property
-   def _bufferSpace(self):
-      #print "getting _bufferSpace..."
+   def _buffer_space(self):
+      #print "getting _buffer_space..."
       self._serialPort.flushInput()
       self._serialPort.write(self._hpgl.B().format)
       bs = self._readPort()

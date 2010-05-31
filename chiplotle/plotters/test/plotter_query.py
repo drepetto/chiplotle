@@ -3,7 +3,7 @@ from chiplotle.utils.plottertools import instantiate_plotters
 
 plotter = instantiate_plotters( )[0]
 
-assert plotter._bufferSpace
+assert plotter._buffer_space
 assert plotter.id
 assert plotter.actualPosition
 assert plotter.commandedPosition
