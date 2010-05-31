@@ -1,15 +1,17 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.geometry import *
 
 class Cube(_CompoundHPGL):
    '''A 3D Cube. Can be rotated on x, y, and z.'''
+
+   _scalable = ['width', 'height', 'depth']
+
    def __init__(self, xy, width, height, depth, rotation=(0,0,0), pen=None):
       _CompoundHPGL.__init__(self, xy, pen) 
-      self.width = Scalable(width)
-      self.height = Scalable(height)
-      self.depth = Scalable(depth)
+      self.width = width
+      self.height = height
+      self.depth = depth
       if not len(rotation) == 3:
          raise ValueError('`roration` must be a triple (xr, yr, zr)')
       self.rotation = rotation

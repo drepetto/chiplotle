@@ -1,14 +1,11 @@
 from chiplotle.hpgl.abstract.arc import _Arc
-#from chiplotle.hpgl.abstract.charsize import _CharSize
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
 from chiplotle.hpgl.abstract.hpglescape import _HPGLEscape
+from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
+from chiplotle.hpgl.abstract.penplot import _PenPlot
 from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.abstract.twopoint import _TwoPoint
-#from chiplotle.hpgl.abstract.wedge import _Wedge
-from chiplotle.hpgl.scalable import Scalable
-from chiplotle.utils.ispair import ispair
 
-class PU(_Positional):
+class PU(_PenPlot):
    '''
    :Pen Up:
       Raises the pen from the plotting surface. Use this instruction 
@@ -19,10 +16,10 @@ class PU(_Positional):
    '''
 
    def __init__(self, xy=None):
-      _Positional.__init__(self, xy, False)
+      _PenPlot.__init__(self, xy)
 
 
-class PD(_Positional):
+class PD(_PenPlot):
    '''
    :Pen Down:
       Lowers the pen onto the writing surface for drawing and moves it 
@@ -33,10 +30,10 @@ class PD(_Positional):
    '''
 
    def __init__(self, xy=None):
-      _Positional.__init__(self, xy, False)
+      _PenPlot.__init__(self, xy)
 
 
-class PA(_Positional):
+class PA(_PenPlot):
    '''
    :Plot Absolute:
       Establishes absolute plotting and moves the pen to specified 
@@ -44,10 +41,10 @@ class PA(_Positional):
    '''
 
    def __init__(self, xy=None):
-      _Positional.__init__(self, xy, True)
+      _PenPlot.__init__(self, xy)
 
 
-class PR(_Positional):
+class PR(_PenPlot):
    '''
    :Plot Relative:
       Establishes relative plotting and moves the pen (using the current 
@@ -56,10 +53,10 @@ class PR(_Positional):
    '''
 
    def __init__(self, xy=None):
-      _Positional.__init__(self, xy, False)
+      _PenPlot.__init__(self, xy)
 
 
-class CI(_HPGLCommand):
+class CI(_HPGLPrimitive):
    '''
    :Circle:
       Draws a circle using the specified radius and chord tolerance. 
@@ -67,6 +64,7 @@ class CI(_HPGLCommand):
       :class:`~chiplotle.hpgl.commands.WG` or 
       :class:`~chiplotle.hpgl.commands.PM` instruction.
    '''
+   _scalable = ['radius']
 
    def __init__(self, radius, chordangle=None):   
       self.radius = radius
@@ -79,19 +77,19 @@ class CI(_HPGLCommand):
          return self._radius
       def fset(self, arg):
          ### TODO: check for type here?
-         self._radius = Scalable(arg)
+         self._radius = arg
       return property(**locals( ))
 
    @property
    def format(self):
       if self.chordangle:
          return '%s%.2f,%.2f%s' % (self._name, self.radius, self.chordangle, 
-                              _HPGLCommand._terminator)
+                              _HPGLPrimitive._terminator)
       else:
-         return '%s%.2f%s' % (self._name, self.radius, _HPGLCommand._terminator)
+         return '%s%.2f%s' % (self._name, self.radius, _HPGLPrimitive._terminator)
 
 
-class CC(_HPGLCommand):
+class CC(_HPGLPrimitive):
    '''
    :Character chord angle:
       Sets the chord angle that determines the smoothness of characters
@@ -104,12 +102,12 @@ class CC(_HPGLCommand):
    @property
    def format(self):
       if self.angle:
-         return '%s%i%s' % (self._name, self.angle, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.angle, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class AF(_HPGLCommand):
+class AF(_HPGLPrimitive):
    '''
    :Advance full page:
       Advances roll paper one full page length and establishes the 
@@ -117,7 +115,7 @@ class AF(_HPGLCommand):
    '''
    
 
-class AH(_HPGLCommand):
+class AH(_HPGLPrimitive):
    '''
    :Advance half page:
       Advances roll paper one half page length and establishes the 
@@ -125,7 +123,7 @@ class AH(_HPGLCommand):
    '''
    
 
-class AP(_HPGLCommand):
+class AP(_HPGLPrimitive):
    '''
    :Automatic Pen operations:
       Controls automatic pen operations sich as returning a pen
@@ -157,9 +155,9 @@ class AP(_HPGLCommand):
    @property
    def format(self):
       if self.n:
-         return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
          
 
 class AA(_Arc):
@@ -174,7 +172,7 @@ class AA(_Arc):
 
    '''
    def __init__(self, xy, angle, chordtolerance=None):
-      _Arc.__init__(self, xy, angle, chordtolerance, True)
+      _Arc.__init__(self, xy, angle, chordtolerance)
 
 
 class AR(_Arc):
@@ -189,10 +187,10 @@ class AR(_Arc):
    '''
 
    def __init__(self, xy, angle, chordtolerance=None):
-      _Arc.__init__(self, xy, angle, chordtolerance, False)
+      _Arc.__init__(self, xy, angle, chordtolerance)
 
 
-class AS(_HPGLCommand):
+class AS(_HPGLPrimitive):
    '''
    :Acceleration Select:
       Sets pen acceleration for one or all pens. The default
@@ -213,14 +211,13 @@ class AS(_HPGLCommand):
    def format(self):
       if self.accel and self.pen:
          return '%s%i,%i%s' % (self._name, self.accel, self.pen, 
-                              _HPGLCommand._terminator)
+                              _HPGLPrimitive._terminator)
       elif self.accel:
-         return '%s%i%s' % (self._name, self.accel, _HPGLCommand._terminator)  
+         return '%s%i%s' % (self._name, self.accel, _HPGLPrimitive._terminator)  
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator) 
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator) 
 
 
-## TODO: make this NOT _Positional?
 class EA(_Positional):
    '''
    :Edge Rectangle Absolute:
@@ -230,9 +227,7 @@ class EA(_Positional):
    '''
 
    def __init__(self, xy):
-      if not ispair(xy):
-         raise ValueError('xy position must be of length 2.')
-      _Positional.__init__(self, xy, True)
+      _Positional.__init__(self, xy)
 
 
 class ER(_Positional):
@@ -244,9 +239,7 @@ class ER(_Positional):
    '''
 
    def __init__(self, xy):
-      if not ispair(xy):
-         raise ValueError('xy position must be of length 2.')
-      _Positional.__init__(self, xy, False)
+      _Positional.__init__(self, xy)
 
 
 class RA(_Positional):
@@ -259,9 +252,7 @@ class RA(_Positional):
    '''
 
    def __init__(self, xy):
-      if not ispair(xy):
-         raise ValueError('xy position must be of length 2.')
-      _Positional.__init__(self, xy, True)
+      _Positional.__init__(self, xy)
 
 
 class RR(_Positional):
@@ -274,12 +265,10 @@ class RR(_Positional):
    '''
 
    def __init__(self, xy):
-      if not ispair(xy):
-         raise ValueError('xy position must be of length 2.')
-      _Positional.__init__(self, xy, False)
+      _Positional.__init__(self, xy)
 
 
-class VS(_HPGLCommand):
+class VS(_HPGLPrimitive):
    ''' 
    :Pen Velocity:
       Set's pen velocity.
@@ -296,14 +285,14 @@ class VS(_HPGLCommand):
    def format(self):
       if self.vel and self.pen:
          return '%s%i,%i%s' % (self._name, self.vel, self.pen, 
-            _HPGLCommand._terminator)
+            _HPGLPrimitive._terminator)
       elif self.vel:
-         return '%s%i%s' % (self._name, self.vel, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.vel, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class FS(_HPGLCommand):
+class FS(_HPGLPrimitive):
    '''
    :Force Select:
       Sets pen pressure to the paper for one or all pens. Use this 
@@ -322,14 +311,14 @@ class FS(_HPGLCommand):
    def format(self):
       if self.force and self.pen:
          return '%s%i,%i%s' % (self._name, self.force, self.pen, 
-                              _HPGLCommand._terminator)
+                              _HPGLPrimitive._terminator)
       elif self.force:
-         return '%s%i%s' % (self._name, self.force, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.force, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class EP(_HPGLCommand):
+class EP(_HPGLPrimitive):
    '''
    :Edge Polygon:
       Outlines the polygon currently stored in the polygon buffer. 
@@ -341,14 +330,14 @@ class EP(_HPGLCommand):
    '''
 
 
-class BF(_HPGLCommand):
+class BF(_HPGLPrimitive):
    '''
    Buffer plot.
 
    '''
    
 
-class DC(_HPGLCommand):
+class DC(_HPGLPrimitive):
    '''
    :Digitizer Clear:
       Terminates digitize mode. For example, if you are using an interrupt
@@ -357,7 +346,7 @@ class DC(_HPGLCommand):
    '''
    
 
-class DF(_HPGLCommand):
+class DF(_HPGLPrimitive):
    '''
    :Default:
       Sets certain plotter functions to predefined default conditions.
@@ -369,7 +358,7 @@ class DF(_HPGLCommand):
    '''
    
 
-class DP(_HPGLCommand):
+class DP(_HPGLPrimitive):
    '''
    :Digitize Point:
       Returns the X,Y coordinates of a selected point on a plot to the
@@ -379,7 +368,7 @@ class DP(_HPGLCommand):
    '''
    
 
-class FP(_HPGLCommand):
+class FP(_HPGLPrimitive):
    '''
    :Fill Polygon:
       Fills the polygon currently in the polygon buffer. Use FP to fill
@@ -392,7 +381,7 @@ class FP(_HPGLCommand):
    '''
    
 
-class FR(_HPGLCommand):
+class FR(_HPGLPrimitive):
    '''
    :Advance Frame:
       Advances paper to the next plot frame and calculates a relative 
@@ -401,7 +390,7 @@ class FR(_HPGLCommand):
    '''
    
 
-class NR(_HPGLCommand):
+class NR(_HPGLPrimitive):
    '''
    :Not Ready:
       Programmatically simulates pressing VIEW.
@@ -410,7 +399,7 @@ class NR(_HPGLCommand):
    '''
    
 
-class OA(_HPGLCommand):
+class OA(_HPGLPrimitive):
    '''
    :Output Actual Pen Status:
       Outputs the current pen location (in plotter units) and up/down position.
@@ -420,7 +409,7 @@ class OA(_HPGLCommand):
    '''
    
 
-class OC(_HPGLCommand):
+class OC(_HPGLPrimitive):
    '''
    :Output Commanded Pen Status:
       Ouput the location and up/down position of the last commanded pen move 
@@ -431,7 +420,7 @@ class OC(_HPGLCommand):
    '''
    
 
-class OD(_HPGLCommand):
+class OD(_HPGLPrimitive):
    '''
    :Output Digitized Point and Pen Status:
       Outputs the X,Y coordinates and up/down pen position associated 
@@ -441,7 +430,7 @@ class OD(_HPGLCommand):
    '''
    
 
-class OE(_HPGLCommand):
+class OE(_HPGLPrimitive):
    '''
    :Output Error:
       Output a number corresponding to the type of HP-GL error (if any) 
@@ -469,7 +458,7 @@ class OE(_HPGLCommand):
    '''
    
 
-class OF(_HPGLCommand):
+class OF(_HPGLPrimitive):
    '''
    :Output Factors:
       Outputs the number of plotter units per millimeter in each axis. 
@@ -478,7 +467,7 @@ class OF(_HPGLCommand):
    '''
    
 
-class OG(_HPGLCommand):
+class OG(_HPGLPrimitive):
    '''
    :Output Group Count:
       Outputs the data block number of the current group count and 
@@ -489,7 +478,7 @@ class OG(_HPGLCommand):
    '''
 
 
-class OH(_HPGLCommand):
+class OH(_HPGLPrimitive):
    '''
    :Output Hard-Clip Limits:
       Outputs the X,Y coordinates of the current hard-clip limits. 
@@ -498,7 +487,7 @@ class OH(_HPGLCommand):
    '''
    
 
-class OI(_HPGLCommand):
+class OI(_HPGLPrimitive):
    '''
    :Output Identification:
       Outputs the plotter's identifying model number. This information is 
@@ -507,7 +496,7 @@ class OI(_HPGLCommand):
    ''' 
 
 
-class OK(_HPGLCommand):
+class OK(_HPGLPrimitive):
    '''
    :Output Key:
       Outputs a number that indicates which, if any, of the front-panel 
@@ -517,14 +506,14 @@ class OK(_HPGLCommand):
    '''
    
 
-class OL(_HPGLCommand):
+class OL(_HPGLPrimitive):
    '''
    :Output Label Length:
       Outputs information about the label contained in the label buffer.
    '''
 
 
-class OO(_HPGLCommand):
+class OO(_HPGLPrimitive):
    '''
    :Output Options:
       Outputs eight option parameters indicating the features implemented 
@@ -533,7 +522,7 @@ class OO(_HPGLCommand):
    '''
    
 
-class OP(_HPGLCommand):
+class OP(_HPGLPrimitive):
    '''
    :Output P1 and P2:
       Outputs the X,Y coordinates (in plotter units) of the current 
@@ -546,7 +535,7 @@ class OP(_HPGLCommand):
    '''
    
 
-class OS(_HPGLCommand):
+class OS(_HPGLPrimitive):
    '''
    :Output Status:
       Outputs the decimal value of the status byte. Use this instruction in 
@@ -569,7 +558,7 @@ class OS(_HPGLCommand):
    '''
    
 
-class OT(_HPGLCommand):
+class OT(_HPGLPrimitive):
    '''
    :Output Carousel Type:
       Outputs information on the type of carousel loaded and the 
@@ -577,7 +566,7 @@ class OT(_HPGLCommand):
    '''
    
 
-class OW(_HPGLCommand):
+class OW(_HPGLPrimitive):
    '''
    :Output Window:
       Outputs the X,Y coordinates of the lower-left and upper-right 
@@ -588,14 +577,14 @@ class OW(_HPGLCommand):
    '''
    
 
-class PB(_HPGLCommand):
+class PB(_HPGLPrimitive):
    '''
    :Print Buffer Label:
       Prints the contents of the label buffer.
    '''
    
       
-class PS(_HPGLCommand):
+class PS(_HPGLPrimitive):
    '''
    :Page Size:
       Changes the size of the hard clip limits.
@@ -609,14 +598,14 @@ class PS(_HPGLCommand):
    def format(self):
       if self.length and self.width:
          return '%s%i,%i%s' % (self._name, self.length, self.width, 
-            _HPGLCommand._terminator)
+            _HPGLPrimitive._terminator)
       elif self.length:
-         return '%s%i%s' % (self._name, self.length, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.length, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class BL(_HPGLCommand):
+class BL(_HPGLPrimitive):
    '''
    :Buffer label:
       Stores a label in the label buffer. You can then use the
@@ -632,12 +621,12 @@ class BL(_HPGLCommand):
    @property
    def format(self):
       if self.label:
-         return '%s%s%s' % (self._name, chr(3), _HPGLCommand._terminator)
+         return '%s%s%s' % (self._name, chr(3), _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class IN(_HPGLCommand):
+class IN(_HPGLPrimitive):
    '''
    :Initialize:
       Resets most plotter functions to their default settings. Use this 
@@ -646,28 +635,28 @@ class IN(_HPGLCommand):
    '''
    
 
-class SS(_HPGLCommand):
+class SS(_HPGLPrimitive):
    '''
    :Select standard character set:
 
    '''
    
 
-class XT(_HPGLCommand):
+class XT(_HPGLPrimitive):
    '''
    :X tick:
 
    '''
    
 
-class YT(_HPGLCommand):
+class YT(_HPGLPrimitive):
    '''
    :Y tick:
    
    '''
    
 
-class CS(_HPGLCommand):
+class CS(_HPGLPrimitive):
    '''
    :Standard character set:
       Designates a character set as the standard character set for labeling 
@@ -681,10 +670,10 @@ class CS(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.set, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.set, _HPGLPrimitive._terminator)
 
 
-class CT(_HPGLCommand):
+class CT(_HPGLPrimitive):
    '''
    :Chord tolerance:
       Determines whether the chord tolerance parameter of the 
@@ -703,10 +692,10 @@ class CT(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.type, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.type, _HPGLPrimitive._terminator)
 
 
-class CV(_HPGLCommand):
+class CV(_HPGLPrimitive):
    '''
    :Curved line generator:
       Collects vectors (line segments) in the vector buffer so that they
@@ -726,14 +715,14 @@ class CV(_HPGLCommand):
    def format(self):
       if self.n and self.inputdelay:
          return '%s%i%i%s' % (self._name, self.n, self.inputdelay, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
       elif self.n:
-         return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
          
 
-class CA(_HPGLCommand):
+class CA(_HPGLPrimitive):
    '''
    :Designate alternate character set:
       Designates a character set as the alternate character set to be 
@@ -748,10 +737,10 @@ class CA(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.set, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.set, _HPGLPrimitive._terminator)
 
 
-class CM(_HPGLCommand):
+class CM(_HPGLPrimitive):
    '''
    :Character selection mode:
       Specifies mode of character set selection and usage. Use this 
@@ -770,14 +759,14 @@ class CM(_HPGLCommand):
    def format(self):
       if self.switch and self.fallback:
          return '%s%i,%i%s' % (self._name, self.switch, self.fallback, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
       elif self.switch:
-         return '%s%i%s' % (self._name, self.switch, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.switch, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class CP(_HPGLCommand):
+class CP(_HPGLPrimitive):
    '''
    :Character Plot:
       Move the pen the specified number of character plot cells from the
@@ -792,14 +781,14 @@ class CP(_HPGLCommand):
    def format(self):
       if self.spaces and self.lines:
          return '%s%s,%s%s' % (self._name, self.spaces, self.lines, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
       elif self.spaces:
-         return '%s%s%s' % (self._name, self.spaces, _HPGLCommand._terminator)
+         return '%s%s%s' % (self._name, self.spaces, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class DT(_HPGLCommand):
+class DT(_HPGLPrimitive):
    '''
    :Define Label Terminator:
       Specifies the ASCII character to be used as the label terminator.
@@ -813,10 +802,10 @@ class DT(_HPGLCommand):
    @property
    def format(self):
       return '%s%c%s' % (self._name, self.labelterminator, 
-      _HPGLCommand._terminator)
+      _HPGLPrimitive._terminator)
 
 
-class LB(_HPGLCommand):
+class LB(_HPGLPrimitive):
    '''
    :Label:
       Plots text using the currently defined character set.
@@ -829,10 +818,10 @@ class LB(_HPGLCommand):
    @property
    def format(self):
       return '%s%s%s%s' % (self._name, self.text, self.labelTerminator, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
 
 
-class SP(_HPGLCommand):
+class SP(_HPGLPrimitive):
    '''
    :Select Pen:
 
@@ -843,10 +832,10 @@ class SP(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.pen, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.pen, _HPGLPrimitive._terminator)
 
 
-class LT(_HPGLCommand):
+class LT(_HPGLPrimitive):
    '''
    :Line Type:
       Specifies the line pattern to be used when drawing linese and nonsolid
@@ -875,12 +864,12 @@ class LT(_HPGLCommand):
    def format(self):
       if self.pattern:
          return '%s%i,%.4f%s' % (self._name, self.pattern, 
-         self.length, _HPGLCommand._terminator)
+         self.length, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class FT(_HPGLCommand):
+class FT(_HPGLPrimitive):
    '''
    :Fill Type:
       Selects the shading pattern used in polygons 
@@ -905,21 +894,21 @@ class FT(_HPGLCommand):
    def format(self):
       if not None in (self.type, self.space, self.angle):
          return '%s%i,%s,%s%s' % (self._name, self.type, self.space,
-         self.angle, _HPGLCommand._terminator)
+         self.angle, _HPGLPrimitive._terminator)
       elif not None in (self.type, self.space):
          return '%s%i,%s%s' % (self._name, self.type, self.space, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
       elif not self.type is None:
-         return '%s%i%s' % (self._name, self.type, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.type, _HPGLPrimitive._terminator)
       elif None == self.type == self.space == self.angle:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
          ### TODO: raise this type of warning in all other commands where
          ### this may be necessary.
          raise(Warning("Can't format %s with given parameters." % self._name)) 
 
 
-class PM(_HPGLCommand):
+class PM(_HPGLPrimitive):
    '''
    :Polygon Mode:
       Enter polygon mode for defining shapes such as block letters, 
@@ -933,10 +922,10 @@ class PM(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
 
 
-class EC(_HPGLCommand):
+class EC(_HPGLPrimitive):
    '''
    :Enable Cut Line:
       Draws a dashed cut line between 'pages' on roll paper to indicate 
@@ -951,10 +940,10 @@ class EC(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
 
 
-class PG(_HPGLCommand):
+class PG(_HPGLPrimitive):
    '''
    :Page Feed:
       Advances roll paper one page length and establishes the plotter-unit 
@@ -967,12 +956,12 @@ class PG(_HPGLCommand):
    @property
    def format(self):
       if self.n:
-         return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class GC(_HPGLCommand):
+class GC(_HPGLPrimitive):
    '''
    :Group Count:
       Allows you to assign an arbitrary number that will be output by the 
@@ -988,19 +977,19 @@ class GC(_HPGLCommand):
    @property
    def format(self):
       if not self.count is None:
-         return '%s%i%s' % (self._name, self.count, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.count, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
 ### TODO implement these:
-#class GM(_HPGLCommand):
+#class GM(_HPGLPrimitive):
 
-#class GP(_HPGLCommand):
+#class GP(_HPGLPrimitive):
 
-#class IM(_HPGLCommand):
+#class IM(_HPGLPrimitive):
 
-class SL(_HPGLCommand):
+class SL(_HPGLPrimitive):
    ''' 
    :Character Slant: 
       Argument is tan of desired angle.
@@ -1011,17 +1000,17 @@ class SL(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f%s' % (self._name, self.tan, _HPGLCommand._terminator)
+      return '%s%.4f%s' % (self._name, self.tan, _HPGLPrimitive._terminator)
 
 
-class SA(_HPGLCommand):
+class SA(_HPGLPrimitive):
    '''
    :Select alternate character set:
    
    '''
    
 
-class RO(_HPGLCommand):
+class RO(_HPGLPrimitive):
    ''' 
    :Rotate coordinate system:
    
@@ -1032,10 +1021,10 @@ class RO(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.angle, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.angle, _HPGLPrimitive._terminator)
 
 
-class RP(_HPGLCommand):
+class RP(_HPGLPrimitive):
    ''' 
    :Replot:  
    
@@ -1046,10 +1035,10 @@ class RP(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.n, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
 
 
-class SM(_HPGLCommand):
+class SM(_HPGLPrimitive):
    ''' 
    :Symbol Mode:  
       Plots the char at each plotted point. 
@@ -1063,9 +1052,9 @@ class SM(_HPGLCommand):
    @property
    def format(self):
       if self.char:
-         return '%s%c%s' % (self._name, self.char, _HPGLCommand._terminator)
+         return '%s%c%s' % (self._name, self.char, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
 class SC(_TwoPoint):
@@ -1104,7 +1093,7 @@ class IP(_TwoPoint):
       _TwoPoint.__init__(self, coords) 
 
 
-class IV(_HPGLCommand):
+class IV(_HPGLPrimitive):
    '''
    :Invoke Character Slot:
       Invokes a character set slot into either the right or left half of 
@@ -1120,11 +1109,11 @@ class IV(_HPGLCommand):
    def format(self):
       if not None in (self.slot, self.left):
          return '%s%i%i%s' % (self._name, self.slot, self.left,
-            _HPGLCommand._terminator)
+            _HPGLPrimitive._terminator)
       elif not self.slot is None:
-         return '%s%i%s' % (self._name, self.slot, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.slot, _HPGLPrimitive._terminator)
       elif self.slot == self.left == None:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
          raise(Warning("Can't format %s with given parameters." % self._name)) 
 
@@ -1144,7 +1133,7 @@ class IW(_TwoPoint):
 
 ### TODO this is the exact same pattern as that of all other commands with
 ### two parameters. Refactor.
-class KY(_HPGLCommand):
+class KY(_HPGLPrimitive):
    '''
    :Define Key:
       Assigns a predefined function to one of the frontal panel function 
@@ -1160,16 +1149,16 @@ class KY(_HPGLCommand):
    def format(self):
       if not None in (self.key, self.function):
          return '%s%i%i%s' % (self._name, self.key, self.function,
-            _HPGLCommand._terminator)
+            _HPGLPrimitive._terminator)
       elif not self.key is None:
-         return '%s%i%s' % (self._name, self.key, _HPGLCommand._terminator)
+         return '%s%i%s' % (self._name, self.key, _HPGLPrimitive._terminator)
       elif self.key == self.function == None:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
          raise(Warning("Can't format %s with given parameters." % self._name)) 
 
 
-class PT(_HPGLCommand):
+class PT(_HPGLPrimitive):
    '''
    :Pen Thickness:
       Determines the spacing between the parallel lines in solid fill 
@@ -1183,10 +1172,10 @@ class PT(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.2f%s' % (self._name, self.thickness, _HPGLCommand._terminator)
+      return '%s%.2f%s' % (self._name, self.thickness, _HPGLPrimitive._terminator)
       
 
-class SI(_HPGLCommand):
+class SI(_HPGLPrimitive):
    '''
    :Absolute character size:
       Specifies the size of labeling characters in centimeters. 
@@ -1208,9 +1197,9 @@ class SI(_HPGLCommand):
    def format(self):
       if self.width and self.height:
          return '%s%.2f,%.2f%s' % (self._name, self.width, self.height, 
-            _HPGLCommand._terminator)
+            _HPGLPrimitive._terminator)
       elif None == self.width == self.height:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
          raise(Warning("Can't format %s without all parameters." % self._name))
 
@@ -1229,7 +1218,7 @@ class SR(SI):
    '''
    
       
-class DI(_HPGLCommand):
+class DI(_HPGLPrimitive):
    '''
    :Absolute direction:
       Specifies the direction in which labels are drawn, independent of
@@ -1249,9 +1238,9 @@ class DI(_HPGLCommand):
    def format(self):
       if not None in (self.run, self.rise):
          return '%s%.2f,%.2f%s' % (self._name, self.run, self.rise, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
       elif None == self.run == self.rise:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
          raise(Warning("Can't format %s without all parameters." % self._name))
          
@@ -1271,7 +1260,7 @@ class DR(DI):
 
 
 ### TODO: figure out how this works and implement.
-#class DL(_HPGLCommand):
+#class DL(_HPGLPrimitive):
 #   '''
 #   Define Downloadable Character
 #   Allows you to design characters and store them in a buffer for 
@@ -1285,7 +1274,7 @@ class DR(DI):
 #      self.xy = xy
 
 
-class DS(_HPGLCommand):
+class DS(_HPGLPrimitive):
    '''
    :Designate Character Set into Slot:
       Designates up to four character sets to be immediately available for 
@@ -1300,12 +1289,12 @@ class DS(_HPGLCommand):
    def format(self):
       if self.slot and self.set:
          return '%s%i,%i%s' % (self._name, self.slot, self.set, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
-class DV(_HPGLCommand):
+class DV(_HPGLPrimitive):
    '''
    :Direction Vertical:
       Specifies vertical mode as the direction for subsequent labels.
@@ -1319,10 +1308,10 @@ class DV(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.vertical, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.vertical, _HPGLPrimitive._terminator)
          
 
-class ES(_HPGLCommand):
+class ES(_HPGLPrimitive):
    '''
    :Extra space:
       Adjust space between characters and lines of labels without affecting
@@ -1340,14 +1329,14 @@ class ES(_HPGLCommand):
    def format(self):
       if not None in (self.charspace, self.linespace):
          return '%s%.2f,%.2f%s' % (self._name, self.charspace, self.linespace, 
-            _HPGLCommand._terminator)
+            _HPGLPrimitive._terminator)
       elif not self.charspace is None:
-         return '%s%.2f%s' % (self._name, self.charspace, _HPGLCommand._terminator)
+         return '%s%.2f%s' % (self._name, self.charspace, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLCommand._terminator)
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
          
 
-class LO(_HPGLCommand):
+class LO(_HPGLPrimitive):
    '''
    :Label Origin:
       Positions labels relative to current pen location. Use LO to center, 
@@ -1363,11 +1352,10 @@ class LO(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%i%s' % (self._name, self.origin, _HPGLCommand._terminator)
+      return '%s%i%s' % (self._name, self.origin, _HPGLPrimitive._terminator)
 
 
-#class EW(_Wedge):
-class EW(_HPGLCommand):
+class EW(_HPGLPrimitive):
    '''
    :Edge Wedge:
       Outlines any wedge. Use these instructions to produce sectors of 
@@ -1379,8 +1367,10 @@ class EW(_HPGLCommand):
    - `chordangle` : ``float`` [0.36 - 50] degrees.
    '''
 
+   _scalable = ['radius']
+
    def __init__(self, radius, startangle, sweepangle, chordangle=None):
-      self.radius = Scalable(radius)
+      self.radius = radius
       self.startangle = startangle
       self.sweepangle = sweepangle
       self.chordangle = chordangle
@@ -1390,13 +1380,12 @@ class EW(_HPGLCommand):
       if self.chordangle:
          return '%s%.2f,%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
          self.startangle, self.sweepangle, self.chordangle, 
-         _HPGLCommand._terminator)
+         _HPGLPrimitive._terminator)
       else:
          return '%s%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
-         self.startangle, self.sweepangle, _HPGLCommand._terminator)
+         self.startangle, self.sweepangle, _HPGLPrimitive._terminator)
 
 
-#class WG(_Wedge):
 class WG(EW):
    '''
    :Filled wedge:
@@ -1404,7 +1393,7 @@ class WG(EW):
    '''
 
 
-class TL(_HPGLCommand):
+class TL(_HPGLPrimitive):
    '''
    Length of ticks drawn with the XT and YT instructions.
 
@@ -1421,10 +1410,10 @@ class TL(_HPGLCommand):
 
    @property
    def format(self):
-      return '%s%.4f,%.4f%s' % (self._name, self.tp, self.tn, _HPGLCommand._terminator)
+      return '%s%.4f,%.4f%s' % (self._name, self.tp, self.tn, _HPGLPrimitive._terminator)
         
 
-class WD(_HPGLCommand):
+class WD(_HPGLPrimitive):
    '''
    :Write to display:
    

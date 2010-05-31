@@ -1,6 +1,5 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
-#from chiplotle.hpgl.scalable import Scalable
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 from chiplotle.utils.geometry import *
 from chiplotle.tools.mathtools import bezier_interpolation
@@ -8,6 +7,9 @@ from chiplotle.tools.mathtools import bezier_interpolation
 
 class Path(_CompoundHPGL):
    '''draws a path given a list of waypoints'''
+
+   _scalable = ['points']
+
    def __init__(self, points, xy=None, curvature=1.0, points_to_compute=None, pen=None):
       self.points = points
       self.curvature = curvature
@@ -37,7 +39,6 @@ class Path(_CompoundHPGL):
          return self._points
       def fset(self, arg):
          ## TODO: check that there are at least three points.
-         #self._points = Scalable(arg)
          self._points = CoordinateArray(arg)
       return property(**locals( ))
 

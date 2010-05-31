@@ -1,16 +1,18 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PA, PU, PD, AA, CI
-from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.geometry import polar2xy
 import numpy
 
 class _RadialHistogram(_CompoundHPGL):
    '''Abstract radial histogram class.'''
+
+   _scalable = ['min_radius', 'max_radius']
+
    def __init__(self, xy, min_radius, max_radius, data, fill=False, 
       fillines_spacing=None, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
-      self.min_radius = Scalable(min_radius)
-      self.max_radius = Scalable(max_radius)
+      self.min_radius = min_radius
+      self.max_radius = max_radius
       self.fill = fill
       self.fillines_spacing = fillines_spacing
       self.data = data

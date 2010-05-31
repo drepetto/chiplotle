@@ -1,6 +1,5 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.hpgl.scalable import Scalable
 from chiplotle.tools.mathtools import superformula
 from math import pi
 
@@ -13,13 +12,16 @@ class Supershape(_CompoundHPGL):
    h - height
    a=b=1.0, m, n1, n2, n3 - controls of shape
    '''
+
+   _scalable = ['width', 'height']
+
    def __init__(self, xy, w, h, m, n1, n2, n3, 
       points=1000, percentage=1.0, a=1.0, b=1.0, range=None, pen=None):
 
       xy = xy or (0, 0)
       _CompoundHPGL.__init__(self, xy, pen)
-      self.width = Scalable(w)
-      self.height = Scalable(h)
+      self.width = w
+      self.height = h
       self.m = m
       self.n1 = n1
       self.n2 = n2

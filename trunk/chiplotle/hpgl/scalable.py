@@ -1,3 +1,7 @@
+#######################################
+#### TODO: Trash! this is deprecated.
+#######################################
+
 #import numpy
 #
 #class Scalable(numpy.ndarray):

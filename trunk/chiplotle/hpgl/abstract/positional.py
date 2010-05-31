@@ -1,24 +1,22 @@
-from chiplotle.hpgl.abstract.hpglcommand import _HPGLCommand
-#from chiplotle.hpgl.scalable import Scalable
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
+from chiplotle.hpgl.coordinatearray import CoordinatePair
 
 
-class _Positional(_HPGLCommand):
-   def __init__(self, xy, transposable=True):
-      assert isinstance(transposable, bool)
-      self._transposable = transposable
+class _Positional(_HPGLPrimitive):
+   '''For those primitive HPGL commands that have an (x, y) position pair.'''   
+   _scalable = ['xy']
+
+   def __init__(self, xy):
       self.xy = xy
 
-   ### MANAGED ATTRIBUTES ###  
+   ## PUBLIC ATTRIBUTES ##  
 
    @apply
    def xy( ):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         #if arg is None:
-         #   arg = [ ]
-         self._coords = CoordinateArray(arg)
+         self._coords = CoordinatePair(arg)
       return property(**locals())
 
    @apply
@@ -26,7 +24,7 @@ class _Positional(_HPGLCommand):
       def fget(self):
          return self._coords.x
       def fset(self, arg):
-         self.xy.x = arg
+         self.xy = CoordinatePair(arg, self.y)
       return property(**locals())
 
    @apply
@@ -34,17 +32,17 @@ class _Positional(_HPGLCommand):
       def fget(self):
          return self._coords.y
       def fset(self, arg):
-         self.xy.y = arg
+         self.xy = CoordinatePair(self.x, arg)
       return property(**locals())
+
 
 
    ### FORMATTING ###
 
    @property
    def format(self):
-      if self._coords.dtype == int:
-         coordinates = ['%i,%i' % tuple(p) for p in self.xy]
+      if isinstance(self.x, int) and isinstance(self.y, int):
+         coordinates = '%i,%i' % (self.x, self.y)
       else:
-         coordinates = ['%.2f,%.2f' % tuple(p) for p in self.xy]
-      return '%s%s%s' % (self._name, ','.join(coordinates), 
-         _HPGLCommand._terminator)
+         coordinates = '%.2f,%.2f' % (self.x, self.y)
+      return '%s%s%s' % (self._name, coordinates, _HPGLPrimitive._terminator)

@@ -1,17 +1,46 @@
-from chiplotle.hpgl.abstract.positional import _Positional
+#from chiplotle.hpgl.abstract.positional import _Positional
+from chiplotle.hpgl.abstract.hpgl import _HPGL
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.commands import SP
 from chiplotle.hpgl.compound.pen import Pen
 from chiplotle.interfaces.parentage.interface import ParentageInterface
 import types
 
-## TODO: check that xy is a pair *always*?
-class _CompoundHPGL(_Positional):
+#class _CompoundHPGL(_Positional):
+class _CompoundHPGL(_HPGL):
+   
+   _scalable = ['xy']
+
    def __init__(self, xy, pen=None):
-      _Positional.__init__(self, xy, True) 
-      self.pen = pen
       self._parentage = ParentageInterface(self)
+      self.pen = pen
+      self.xy = xy
 
    ## PUBLIC ATTRIBUTES ##
+
+   @apply
+   def xy( ):
+      def fget(self):
+         return self._coords
+      def fset(self, arg):
+         self._coords = CoordinatePair(arg)
+      return property(**locals())
+
+   @apply
+   def x( ):
+      def fget(self):
+         return self._coords.x
+      def fset(self, arg):
+         self.xy = CoordinatePair(arg, self.y)
+      return property(**locals())
+
+   @apply
+   def y( ):
+      def fget(self):
+         return self._coords.y
+      def fset(self, arg):
+         self.xy = CoordinatePair(self.x, arg)
+      return property(**locals())
 
    @property
    def format(self):

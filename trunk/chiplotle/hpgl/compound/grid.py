@@ -1,7 +1,6 @@
 from __future__ import division
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA, PR
-from chiplotle.hpgl.scalable import Scalable
 
 class Grid(_CompoundHPGL):
    '''Rectangular grid. 
@@ -15,11 +14,14 @@ class Grid(_CompoundHPGL):
    - `pen` : ``int``, pen number.
    
    '''
+
+   _scalable = ['width', 'height']
+
    def __init__(self, xy, width, height, height_divisions, 
       width_divisions, pen=None):
       _CompoundHPGL.__init__(self, xy, pen = pen) 
-      self.width = Scalable(width)
-      self.height = Scalable(height)
+      self.width = width
+      self.height = height
       self.height_divisions = height_divisions
       self.width_divisions = width_divisions
       self.reference_point = (0, 0) ## range: [0 to 1]

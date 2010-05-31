@@ -1,14 +1,16 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.hpgl.scalable import Scalable
 from chiplotle.utils.geometry import *
 
 class Rectangle(_CompoundHPGL):
    '''Compound Rectangle. Can be rotated. Cannot be filled'''
+
+   _scalable = _CompoundHPGL._scalable + ['width', 'height']
+
    def __init__(self, xy, width, height, rotation=0):
       _CompoundHPGL.__init__(self, xy) 
-      self.width = Scalable(width)
-      self.height = Scalable(height)
+      self.width = width
+      self.height = height
       self.rotation = rotation
 
    @property

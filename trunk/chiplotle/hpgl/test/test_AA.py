@@ -34,3 +34,9 @@ def test_AA_format_02( ):
    t = AA((0,0.0), 180)
 
    assert t.format == 'AA0.00,0.00,180.00;'
+   
+
+## eq ##
+
+def test_AA__eq__01( ):
+   assert AA((1, 2), 120) == AA((1, 2), 120)

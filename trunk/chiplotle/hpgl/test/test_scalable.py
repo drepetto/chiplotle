@@ -1,6 +1,10 @@
 from chiplotle import *
 from py.test import raises
 
+import py.test
+py.test.skip( 'Scalable is deprecated.')
+
+
 #def test_scalable_01( ):
 #   '''Empty Scalable defaults to type 'float32'.'''
 #   t = Scalable([ ])
@@ -120,10 +124,3 @@ def test_scalable_int_01( ):
    t = int(a)
 
    assert isinstance(t, int)
-
-
-
-
-
-
-
