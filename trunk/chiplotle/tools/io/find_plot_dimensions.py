@@ -1,5 +1,5 @@
 
-def find_file_dimensions(filename):
+def find_plot_dimensions(filename):
    '''
    returns [[minX, minY], [maxX, maxY]] found in hpgl file
    '''
