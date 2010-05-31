@@ -6,12 +6,9 @@ plotter = instantiate_plotters( )[0]
 assert plotter._buffer_space
 assert plotter.id
 assert plotter.actual_position
-assert plotter.commandedPosition
-assert plotter.digitizedPoint
-assert plotter.outputError
-#assert plotter.hardClipLimits
+assert plotter.commanded_position
+assert plotter.digitized_point
+assert plotter.output_error
 assert plotter.options
-assert plotter.outputP1P2
+assert plotter.output_P1P2
 assert plotter.status
-#assert plotter.window
-
