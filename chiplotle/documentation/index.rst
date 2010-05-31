@@ -20,6 +20,11 @@ Chiplotle  (|release|) documentation
    chapters/mailinglist/index
 
 .. toctree::
+   :maxdepth: 2
+
+   chapters/api/index
+
+.. toctree::
    :maxdepth: 1
 
    chapters/hardware/index
@@ -29,7 +34,7 @@ Chiplotle  (|release|) documentation
    :maxdepth: 2
 
    chapters/contributors/index
-   chapters/api/index
+
 
 Indices and tables
 ==================

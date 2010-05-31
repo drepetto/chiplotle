@@ -49,7 +49,7 @@ To pass the command to the plotter, you use ``plotter.write( )``. So::
 
 Your plotter should pick up pen one. Some common commands, like ``SP``, can be directly sent from the plotter. i.e., the plotter has methods equivalent to some of the HPGL commands. Such is the case of ``PS``::
 
-   chiplotle> plotter.selectPen(1)
+   chiplotle> plotter.select_pen(1)
 
 This effectively instantiates a ``SP`` command instance and send the command to the plotter.
 
@@ -57,7 +57,7 @@ Now let's move the pen. To move the pen while it is in the up position, you use 
 If you want to do a ``PU`` or ``PD`` without moving, just pass a blank set of coordinates.
 So to draw a square you might do something like::
 
-   chiplotle> plotter.selectPen(1)
+   chiplotle> plotter.select_pen(1)
    chiplotle> plotter.write(PU([100,100]))
    chiplotle> plotter.write(PD([200,100]))
    chiplotle> plotter.write(PD([200,200]))
@@ -67,12 +67,12 @@ So to draw a square you might do something like::
 
 There are shortcuts for ``PU`` and ``PD``::
 
-   chiplotle> plotter.penUp([100,100])
-   chiplotle> plotter.penDown([100,100])
+   chiplotle> plotter.pen_up([100,100])
+   chiplotle> plotter.pen_down([100,100])
 
 To replace the pen and have a look at your magnificent square, you select pen zero::
 
-   chiplotle> plotter.selectPen(0)
+   chiplotle> plotter.select_pen(0)
    
 
 You can also use Chiplotle's Compound commands, a set of more complex routines that we've
@@ -106,13 +106,13 @@ If you only have one plotter (or only care to use one plotter) you can get the f
 
  Now you can simply enter a series of Chiplote commands::
 
-   plotter.selectPen(1)
+   plotter.select_pen(1)
    plotter.write(PU([100,100]))
    plotter.write(PD([200,100]))
    plotter.write(PD([200,200]))
    plotter.write(PD([100,200]))
    plotter.write(PD([100,100]))
-   plotter.selectPen(0)
+   plotter.select_pen(0)
 
 and save your script as a .py file (see examples/square.py for an example). 
 To use your new program just run it as you would any Python script::
@@ -127,13 +127,13 @@ A slightly more sophisticated Python script that draws a random zigzag::
    
    plotter = instantiate_plotters( )[0]
    
-   plotter.selectPen(1)
+   plotter.select_pen(1)
    
    for x in range(0, 1000, 10):
        y = random.randint(0, 1000)
        plotter.write(PD([x,y]))
        
-   plotter.selectPen(0)
+   plotter.select_pen(0)
 
 
 See the .py files in the examples and scripts folders for some more elaborate examples. 
@@ -154,9 +154,9 @@ If you already have a file containing HPGL commands (from a CNC design package, 
 
 
 To plot the file while running Chiplotle you can use the plotter's own 
-``writeFile(filename)`` method::
+``write_file(filename)`` method::
 
-   chiplotle> plotter.writeFile('my_file.hpgl')  
+   chiplotle> plotter.write_file('my_file.hpgl')  
 
 You can also plot the file from the command line without first running 
 Chiplotle by using the ``plothpgl.py`` script found in the scripts folder::
