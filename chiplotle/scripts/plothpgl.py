@@ -8,7 +8,7 @@ def plot_hpgl(file):
    plotter = instantiate_plotters( )[0]
    plotter.writeFile(file)
    ## call flush( ) to wait till all data is written before exiting...
-   plotter._serialPort.flush( )
+   plotter._serial_port.flush( )
 
 
 if __name__ == '__main__':

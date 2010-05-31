@@ -16,10 +16,10 @@ import types
 
 
 class _BasePlotter(object):
-   def __init__(self, serialPort):
+   def __init__(self, serial_port):
       self.type = '_BasePlotter'
       self.memory = []
-      self._serialPort = serialPort
+      self._serial_port = serial_port
       self._hpgl = commands
       self._margins = MarginsInterface(self)
       self.buffer_size = self._buffer_space
@@ -35,8 +35,8 @@ class _BasePlotter(object):
 
 
    def initialize_plotter(self):
-      self._serialPort.flushInput( )
-      self._serialPort.flushOutput( )
+      self._serial_port.flushInput( )
+      self._serial_port.flushOutput( )
       self.write(self._hpgl.On( ))
       self.write(self._hpgl.IN( ))
 
@@ -134,7 +134,7 @@ class _BasePlotter(object):
       data = self._slice_string_to_buffer_size(data)
       for chunk in data:
          self._sleep_while_buffer_full( )
-         self._serialPort.write(chunk)
+         self._serial_port.write(chunk)
       
 
    ### PRIVATE QUERIES ###
@@ -146,8 +146,8 @@ class _BasePlotter(object):
       total_time = 8
       sleep = 1.0 / 8
       while elapsed_time < total_time:
-         if self._serialPort.inWaiting( ): 
-            return self._serialPort.readline(eol='\r')
+         if self._serial_port.inWaiting( ): 
+            return self._serial_port.readline(eol='\r')
          else:
             time.sleep(sleep)
             elapsed_time += sleep
@@ -158,8 +158,8 @@ class _BasePlotter(object):
    @property
    def _buffer_space(self):
       #print "getting _buffer_space..."
-      self._serialPort.flushInput()
-      self._serialPort.write(self._hpgl.B().format)
+      self._serial_port.flushInput()
+      self._serial_port.write(self._hpgl.B().format)
       bs = self._read_port()
       #print "buffer space: ", bs
       return int(bs)
@@ -167,7 +167,7 @@ class _BasePlotter(object):
    def _send_query(self, query):
       '''Private method to manage plotter queries.'''
       if self._is_HPGL_command_known(query):
-         self._serialPort.flushInput( )
+         self._serial_port.flushInput( )
          self.write(query)
          return self._read_port( )
       else:
@@ -233,7 +233,7 @@ class _BasePlotter(object):
    ## OVERRIDES ##
 
    def __str__(self):
-      return '%s in port %s' % (self.type, self._serialPort.portstr)
+      return '%s in port %s' % (self.type, self._serial_port.portstr)
 
    def __repr__(self):
-      return '%s(%s)' % (self.type, self._serialPort.portstr)
+      return '%s(%s)' % (self.type, self._serial_port.portstr)
