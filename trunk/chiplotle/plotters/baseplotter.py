@@ -140,7 +140,7 @@ class _BasePlotter(object):
    ### PRIVATE QUERIES ###
 
 
-   def _readPort(self):
+   def _read_port(self):
       '''Read data from serial port.'''
       elapsed_time = 0
       total_time = 8
@@ -160,7 +160,7 @@ class _BasePlotter(object):
       #print "getting _buffer_space..."
       self._serialPort.flushInput()
       self._serialPort.write(self._hpgl.B().format)
-      bs = self._readPort()
+      bs = self._read_port()
       #print "buffer space: ", bs
       return int(bs)
 
@@ -169,7 +169,7 @@ class _BasePlotter(object):
       if self._is_HPGL_command_known(query):
          self._serialPort.flushInput( )
          self.write(query)
-         return self._readPort( )
+         return self._read_port( )
       else:
          print '%s not supported by %s.' % (query, self.id)
 
@@ -181,7 +181,7 @@ class _BasePlotter(object):
       '''Get id of plotter.'''
       #self._serialPort.flushInput()
       #self.write(self._hpgl.OI())
-      #id = self._readPort()
+      #id = self._read_port()
       id = self._send_query(self._hpgl.OI( ))
       return id.strip('\r')
 
@@ -189,77 +189,77 @@ class _BasePlotter(object):
    def actualPosition(self):
       '''Output the actual position of the plotter pen.'''
       #self.write(self._hpgl.OA())
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OA( ))
 
    @property
    def carouselType(self):
 #      command = self._hpgl.OT( )
 #      self.write(command)
-#      return self._readPort()
+#      return self._read_port()
       return self._send_query(self._hpgl.OT( ))
 
    @property
    def commandedPosition(self):
       #self.write(self._hpgl.OC())
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OC( ))
           
    @property
    def digitizedPoint(self):
       #self.write(self._hpgl.OD())
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OD( ))
 
    @property
    def outputError(self):
       #self.write(self._hpgl.OE())
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OE( ))
 
 #   @property
 #   def hardClipLimits(self):
 #      '''Output hard clip limits. Same as marginHard.'''
 #      self.write(self._hpgl.OH())
-#      return self._readPort()
+#      return self._read_port()
 
    @property
    def outputKey(self):
       #command = self._hpgl.OK( )
       #self.write(command)
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OK( ))
 
    @property
    def labelLength(self):
       #command = self._hpgl.OL( )
       #self.write(command)
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OL( ))
 
    @property
    def options(self):
       #self.write(self._hpgl.OO())
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OO( ))
 
    @property
    def outputP1P2(self):
       #self.write(self._hpgl.OP())
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OP( ))
 
    @property
    def status(self):
       #self.write(self._hpgl.OS())
-      #return self._readPort()
+      #return self._read_port()
       return self._send_query(self._hpgl.OS( ))
 
 #   @property
 #   def window(self):
 #      '''Output window. Same as margins.soft.'''
 #      self.write(self._hpgl.OW())
-#      return self._readPort()
+#      return self._read_port()
 
 
    ### DCI (Device Control Instructions) Escape commands ###
