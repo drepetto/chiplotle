@@ -25,9 +25,9 @@ Yes. The plotters buffer will fill up quickly, so you need to be listenning to t
 
 This is one of the tasks that Chiplotle manages for you so you don't have to worry about these low level technicalities.   
 The easiest way to communicate with a plotter is to run Chiplotle by typing ``chiplotle`` from your terminal. 
-This will prompt you for a serial port to choose from. Choose the serial port your plotter is connected to. Then choose the plotter type that most closely matches the one you have. If you are not sure, choose the generic 'Plotter'. This will create a ``plotter`` instance automatically for you. Once in Chiplotle (you will know by the ``chiplotle>`` prompt), send your HPGL file with the ``writeFile(filename)`` method or HPGL commands via the ``write( )`` method, like so::
+This will prompt you for a serial port to choose from. Choose the serial port your plotter is connected to. Then choose the plotter type that most closely matches the one you have. If you are not sure, choose the generic 'Plotter'. This will create a ``plotter`` instance automatically for you. Once in Chiplotle (you will know by the ``chiplotle>`` prompt), send your HPGL file with the ``write_file(filename)`` method or HPGL commands via the ``write( )`` method, like so::
 
-   chiplotle> plotter.writeFile('my_file.hpgl')  
+   chiplotle> plotter.write_file('my_file.hpgl')  
    chiplotle> plotter.write(PA( ))
 
 
@@ -57,6 +57,6 @@ Yes. Chiplotle comes with the ``plothpgl.py`` executable script designed exactly
 
 To see the usage instructions run ``plothpgl.py`` with no arguments. Note that Chiplotle simply pipes the file to the plotter and does not check the syntax of the HPGL file.
 
-You can also send HPGL files to your plotter from within a live Chiplotle session using a Plotter's own ``writeFile(filename)`` method, like so::
+You can also send HPGL files to your plotter from within a live Chiplotle session using a Plotter's own ``write_file(filename)`` method, like so::
 
-   chiplotle> plotter.writeFile('my_file.hpgl')  
+   chiplotle> plotter.write_file('my_file.hpgl')  
