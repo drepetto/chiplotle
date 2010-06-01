@@ -1,6 +1,5 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
-from chiplotle.hpgl.compound.line import Line
-from chiplotle.utils.ispair import ispair
+from chiplotle.hpgl.commands import PA, PD, PU
 
 class GroovyFrame(_CompoundHPGL):
    
@@ -15,7 +14,7 @@ class GroovyFrame(_CompoundHPGL):
       self.lines_per_side = lines_per_side
 
 
-   ## PROPERTIES ##
+   ## PRIVATE PROPERTIES ##
 
    @property
    def _subcommands(self):
@@ -27,7 +26,10 @@ class GroovyFrame(_CompoundHPGL):
             coords[2] += self.xabsolute
             coords[1] += self.yabsolute
             coords[3] += self.yabsolute
-            result.append(Line(*coords))
+            ## draw straight line...
+            r = [PU( ), PA(coords[:2]), PD( ), PA(coords[2:])]
+            result += r
+      result.append(PU( ))
       return result
 
 
