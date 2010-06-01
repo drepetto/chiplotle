@@ -1,19 +1,20 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 
 class Line(_CompoundHPGL):
    '''Line at absolute position.'''
-   ## TODO: make interface consistent with the rest. 
-   ## positional argument should be 1.
-   def __init__(self, x1, y1, x2, y2):
-      _CompoundHPGL.__init__(self, (x1, y1, x2, y2))
+   def __init__(self, xy1, xy2, pen=None):
+      _CompoundHPGL.__init__(self, xy1, pen)
+      self.xy2 = CoordinatePair(xy2)
       
    @property
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
       result+=[PU( ), 
-               PA(self.xyabsolute[0:2]),
-               PD(self.xyabsolute[2:4]),
-               PU()]
+               PA(self.xyabsolute),
+               PD( ),
+               PA(self.xyabsolute - self.xy + self.xy2),
+               PU( )]
       return result
 
