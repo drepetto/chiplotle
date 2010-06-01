@@ -1,7 +1,8 @@
 
-def find_plot_dimensions(filename):
+def find_plotfile_dimensions(filename):
    '''
    returns [[minX, minY], [maxX, maxY]] found in hpgl file
+   file is opened and closed, no data is retained
    '''
 
    f = open(filename, 'r')
