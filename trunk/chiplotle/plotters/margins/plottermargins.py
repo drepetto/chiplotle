@@ -1,3 +1,4 @@
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 
 class _PlotterMargins(object):
    def __init__(self, plotter, queryCommand):  
@@ -9,53 +10,60 @@ class _PlotterMargins(object):
 
    @property
    def bottom(self):
-      return self._get()[1]
+      return self._get_all_coordinates( )[1]
 
    @property
    def top(self):
-      return self._get()[3]
+      return self._get_all_coordinates( )[3]
 
    @property
    def right(self):
-      return self._get()[2]
+      return self._get_all_coordinates( )[2]
 
    @property
    def left(self):
-      return self._get()[0]
+      return self._get_all_coordinates( )[0]
 
    @property
    def width(self):
-      x1, y1, x2, y2 = self._get()
+      x1, y1, x2, y2 = self._get_all_coordinates( )
       return x2 - x1
 
    @property
    def height(self):
-      x1, y1, x2, y2 = self._get()
+      x1, y1, x2, y2 = self._get_all_coordinates( )
       return y2 - y1
    
    @property
    def center(self):
-      return (self.right + self.left) / 2., (self.top + self.bottom) / 2.
+      #return (self.right + self.left) / 2., (self.top + self.bottom) / 2.
+      x = (self.right + self.left) / 2.
+      y = (self.top + self.bottom) / 2.
+      return CoordinatePair(x, y)
 
    @property
    def bottom_left(self):
-      coords = self._get( )
-      return coords[0:2]
+      coords = self._get_all_coordinates( )
+      #return coords[0:2]
+      return CoordinatePair(coords[0:2])
 
    @property
    def bottom_right(self):
-      coords = self._get( )
-      return (coords[2], coords[1])
+      coords = self._get_all_coordinates( )
+      #return (coords[2], coords[1])
+      return CoordinatePair(coords[2], coords[1])
 
    @property
    def top_right(self):
-      coords = self._get( )
-      return coords[2:4]
+      coords = self._get_all_coordinates( )
+      #return coords[2:4]
+      return CoordinatePair(coords[2:4])
 
    @property
    def top_left(self):
-      coords = self._get( )
-      return (coords[0], coords[3])
+      coords = self._get_all_coordinates( )
+      #return (coords[0], coords[3])
+      return CoordinatePair(coords[0], coords[3])
 
    ## METHODS ##
 
@@ -67,7 +75,7 @@ class _PlotterMargins(object):
 
    def draw_corners(self, pen=1):
       from chiplotle.hpgl.compound import Cross
-      coords = self._get( )
+      coords = self._get_all_coordinates( )
       size = 100
       corners = [ ]
       corners.append(Cross(coords[0:2], width = size, height = size, pen = 1))
@@ -76,10 +84,10 @@ class _PlotterMargins(object):
       corners.append(Cross(coords[2:4], size,  size))
       self._plotter.write(corners)
 
-   def _get(self):
-      self._plotter._serial_port.flushInput()
+   def _get_all_coordinates(self):
+      self._plotter._serial_port.flushInput( )
       self._plotter._write_string_to_port(self._queryCommand.format)
-      m = self._plotter._read_port().split(',')
+      m = self._plotter._read_port( ).split(',')
       return tuple([float(n) for n in m])
 #      return tuple([int(n) for n in m])
       
@@ -87,6 +95,5 @@ class _PlotterMargins(object):
    ## OVERRIDES ##
 
    def __repr__(self):
-      return str(self._get())
-
+      return str(self._get_all_coordinates( ))
 
