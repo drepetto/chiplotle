@@ -1,8 +1,5 @@
-from chiplotle.cfg.verify_config_file import verify_config_file
-from chiplotle.utils.serialtools import sniff_ports_for_plotters
-from chiplotle.utils.serialtools import instantiate_serial_from_config_file
+from chiplotle.cfg.read_config_file import read_config_file
 from chiplotle.utils.plottertools._instantiate_plotter import _instantiate_plotter
-from chiplotle.utils.serialtools import scan_serial_ports
 
 def instantiate_plotters( ):
    '''Instantiates all found and available plotters.
@@ -10,29 +7,15 @@ def instantiate_plotters( ):
    instantiates all plotters found. If a plotter is not recognized,
    the function interactively queries user for plotter type.'''
 
-   from chiplotle.utils.plottertools import instantiate_plotter_from_id
-   from chiplotle.utils.plottertools import interactive_choose_plotter
-
-   verify_config_file( )
+   from chiplotle.utils.plottertools import search_and_instantiate_plotters
    
-   result = [ ]
-   print 'Scanning serial ports...'
-   ports = scan_serial_ports( ).values( )
-   print 'Found ports:' 
-   print '  ' + '\n  '.join(ports)
-   
-   ## get serial ports that have a plotter connected...
-   print '\nSniffing for plotters in all serial ports...'
-   plotters_found = sniff_ports_for_plotters(ports)
-   if len(plotters_found) == 0:
-      print 'Found no plotter connected to any of the serial ports.'''
-      print 'Is your plotter on?'''
-      return None
+   map = read_config_file( )['serial_port_to_plotter_map']
+   ## if user has set fixed port to plotter mapping...
+   if map is not None:
+      result = [ ]
+      for k, v in map.items( ):
+         p = _instantiate_plotter(k, v)
+         result.append(p)
    else:
-      for serial_address, pln in plotters_found.items( ):
-         print '   Found plotter %s in port %s' % (pln, serial_address)
-   ## instantiate a plotter for every port with a plotter... 
-   for serial_address, pln in plotters_found.items( ): 
-      plotter = _instantiate_plotter(serial_address, pln)
-      result.append(plotter)
-   return result 
+      result = search_and_instantiate_plotters( )
+   return result

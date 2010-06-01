@@ -6,7 +6,7 @@ def _instantiate_plotter(port, id):
    
    - `port` a ``str`` address or number of serial port. 
       Usually something like '/def/ttyS0' in posix systems or 'COM1' Windowz.
-   - `id` is the string ID of the plotter we wish to instantiate.
+   - `id` is the string ID of the plotter to be instantiated. e.g., 'DXY-1300'
    '''
    ser = instantiate_serial_from_config_file(port)
 
