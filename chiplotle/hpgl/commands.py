@@ -1121,7 +1121,7 @@ class IV(_HPGLPrimitive):
 class IW(_TwoPoint):
    '''
    :Input Window:
-      Defmines a rectangular area, or window, that establishes soft-clip 
+      Defines a rectangular area, or window, that establishes soft-clip 
       limits.  Subsequent programmed pen motion will be restricted to this 
       area. Use this instruction when you want to be sure that your plot 
       falls within a specified area.
