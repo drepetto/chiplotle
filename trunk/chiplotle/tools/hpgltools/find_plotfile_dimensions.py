@@ -10,6 +10,8 @@ def find_plot_dimensions(filename):
 
    for line in f:
       allData.append(line.strip())
+      
+   f.close()
 
    papd = []
    
