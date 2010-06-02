@@ -15,10 +15,10 @@ def abstract_masterpiece_file(file):
 
       io.view(plot)
 
-
       saveit = raw_input("\nsave this one (y/n)? ")
       if 'y' in saveit:
          io.save_hpgl(plot, file)
+         print "saved " + file
          saved = True
 
    print "bye!"

@@ -1,6 +1,7 @@
+#!/usr/bin/env python
+
 from chiplotle import *
 import random
-
 
 def main():
 
