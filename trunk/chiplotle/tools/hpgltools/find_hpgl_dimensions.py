@@ -13,6 +13,10 @@ def find_hpgl_dimensions(hpgl):
    maxY = -100000.0
    minY = 100000.0
 
+   ## TODO: on Container and HPGLContainer, this function should 
+   ## also check the xy position of the shapes contained by the containers.
+   ## This function will fail to give the correct min/max on Container
+   ## and HPGLContainer objects.
    if isinstance(hpgl, (list, tuple, Container, HPGLContainer)):
       for command in hpgl:
          if hasattr(command, 'xy') and len(command.xy) > 0:
