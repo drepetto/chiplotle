@@ -17,7 +17,6 @@ def find_hpgl_dimensions(hpgl):
       for command in hpgl:
          if hasattr(command, 'xy') and len(command.xy) > 0:
             for coord in command.xy:
-            #xy = command.xy
         
                x = coord[0]
                y = coord[1]
