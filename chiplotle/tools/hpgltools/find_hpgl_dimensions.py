@@ -15,23 +15,23 @@ def find_hpgl_dimensions(hpgl):
 
    if isinstance(hpgl, (list, tuple, Container, HPGLContainer)):
       for command in hpgl:
-         if '_coords' in command.__dict__.keys():
+         if hasattr(command, 'xy') and len(command.xy) > 0: 
             xy = command.xy
-            if len(xy) > 0:
-               x = xy[0][0]
-               y = xy[0][1]
-            
-               if x > maxX:
-                  maxX = x
-            
-               if x < minX:
-                  minX = x
-            
-               if y > maxY:
-                  maxY = y
-            
-               if y < minY:
-                  minY = y
+        
+            x = xy[0][0]
+            y = xy[0][1]
+        
+            if x > maxX:
+               maxX = x
+         
+            if x < minX:
+               minX = x
+        
+            if y > maxY:
+               maxY = y
+        
+            if y < minY:
+               minY = y
       return [[minX, minY], [maxX, maxY]]
    else:
       return None
