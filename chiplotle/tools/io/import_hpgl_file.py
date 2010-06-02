@@ -14,7 +14,7 @@ def import_hpgl_file(filename):
       PD(xy=[ 100.  100.]), SP(pen=0)]
    '''
 
-   _knownUnsupportedCommands = ('PW','PC', 'LA')
+   _unsupported_commands = ('PW','PC', 'LA', 'WU', 'BP')
    f = open(filename)
    fs = f.read()
    f.close()
@@ -24,9 +24,9 @@ def import_hpgl_file(filename):
    for c in comms:
       if c: ## not an empty string: ''
          head = c[0:2]
-         if head in _knownUnsupportedCommands:
+         if head in _unsupported_commands:
             continue
-         if head in ('PU','PD','PA','PR', 'RA','RR', 'ER','EA'):
+         if head in ('PU','PD','PA','PR', 'RA','RR', 'ER','EA',  'IP', 'SC'):
             body = '(%s)' % c[2:]
          elif head in ('AR', 'AA'):
             body = '(%s),%s' % (c[2:4], c[4:])
@@ -36,5 +36,6 @@ def import_hpgl_file(filename):
             cout = eval('hpgl.%s(%s)' % (head, body))
             result.append(cout)
          except:
-            print 'WARNING: Could not create %s(%s)' % (head, body)
+            print 'WARNING: Could not create %s(%s)...' % (head, body)
+            print '         The command is either malformed or unrecognized.'
    return result
