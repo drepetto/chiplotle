@@ -4,6 +4,10 @@ Chiplotle Tools
 HPGL Tools
 -------------
 
+.. autofunction:: chiplotle.tools.hpgltools.find_hpgl_dimensions
+
+.. autofunction:: chiplotle.tools.hpgltools.is_primitive_absolute
+
 .. autofunction:: chiplotle.tools.hpgltools.relativize
 
 .. autofunction:: chiplotle.tools.hpgltools.scale
