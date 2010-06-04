@@ -6,14 +6,14 @@ def test_label_01( ):
 
    assert t.xy == [0, 0]
    assert t.text == 'Hello'
-   assert t.charsize == (10, 10)
+   assert t.charsize == (1, 1)
    assert t.direction == None
    assert t.charspace == None
    assert t.linespace == None
    assert t.origin == None
    assert t.slant == None
    assert t.vertical == False
-   assert t.format == 'PU;PA0,0;SI10.00,10.00;LBHello\x03;SI;'
+   assert t.format == 'PU;PA0,0;SI1.00,1.00;LBHello\x03;SI;'
 
 
 def test_label_charsize_01( ):
