@@ -8,6 +8,16 @@ class _Arc(_Positional):
       self.chordtolerance = chordtolerance
       _Positional.__init__(self, xy)
 
+   @apply
+   def angle( ):
+      def fget(self):
+         return self._angle
+      def fset(self, arg):
+         if abs(arg) > 360:
+            raise ValueError('angle must be between -360 and 360.')
+         self._angle = arg
+      return property(**locals( ))
+
    @property
    def format(self):
       if isinstance(self.x, int) and isinstance(self.y, int):

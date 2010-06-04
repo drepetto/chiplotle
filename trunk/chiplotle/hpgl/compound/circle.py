@@ -2,10 +2,10 @@ from chiplotle.hpgl.commands import PU, CI, WG
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 
 class Circle(_CompoundHPGL):
+   '''Circle with absolute position.'''
    
    _scalable = ['xy', 'radius']
 
-   '''Circle with absolute position.'''
    def __init__(self, xy, radius, chord=None, filled=False, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
       self.radius = radius
