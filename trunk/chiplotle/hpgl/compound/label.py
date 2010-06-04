@@ -38,7 +38,7 @@ class Label(_CompoundHPGL):
 
    _scalable = _CompoundHPGL._scalable + ['charsize'] ## TODO: add charspace, linespace?
 
-   def __init__(self, xy, text, charsize=(10, 10), origin=None, charspace=None, 
+   def __init__(self, xy, text, charsize=(1, 1), origin=None, charspace=None, 
       linespace=None, slant=None, direction=None, vertical=None, pen=None):
       _CompoundHPGL.__init__(self, xy, pen) 
       self.text = text
@@ -63,10 +63,8 @@ class Label(_CompoundHPGL):
                raise ValueError("Character size has two values: (w, h).")
          elif isinstance(arg, CoordinatePair):
             self._charsize = arg
-#         elif arg is None:
-#            self._charsize = None
          else:
-            raise ValueError("charsize must be None, (x, y) pair, or Scalar.")
+            raise ValueError("charsize must be None, or (x, y) pair.")
       return property(**locals())
          
             
