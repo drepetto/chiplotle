@@ -2,7 +2,7 @@ from __future__ import division
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA, AA
 from chiplotle.utils.geometry import polar2xy
-from chiplotle.tools.measuretools import rad_to_deg
+import math
 
 class Fan(_CompoundHPGL):
    '''A Fan is a slice of a donut seen from above (the hole in the middle).
@@ -50,7 +50,7 @@ class Fan(_CompoundHPGL):
       result += [PU( ), PA(lr), PD( ), PA(ur)]
       result += [PU( ), PA(ll), PD( ), PA(ul)]
       ## arches...
-      a = rad_to_deg(self.width_angle)
+      a = math.degrees(self.width_angle)
       result += [PU( ), PA(lr), PD( ), AA(self.xyabsolute, a)]
       result += [PU( ), PA(ur), PD( ), AA(self.xyabsolute, a)]
 
