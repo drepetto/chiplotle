@@ -33,17 +33,17 @@ class Fan(_CompoundHPGL):
       ## lower_right (viewing from pole outward)
       r = self.radius - self.height / 2 ## assumes the fan is centered on (r, a)
       a = self.angle - self.width_angle / 2
-      lr = polar2xy(r, a)
+      lr = polar2xy(r, a) + self.xyabsolute
 
       a = self.angle + self.width_angle / 2
-      ll = polar2xy(r, a)
+      ll = polar2xy(r, a) + self.xyabsolute
 
       r = self.radius + self.height / 2 
       a = self.angle - self.width_angle / 2
-      ur = polar2xy(r, a)
+      ur = polar2xy(r, a) + self.xyabsolute
 
       a = self.angle + self.width_angle / 2
-      ul = polar2xy(r, a)
+      ul = polar2xy(r, a) + self.xyabsolute
 
       result = [ ]
       ## outward lines...
