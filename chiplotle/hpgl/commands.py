@@ -1319,6 +1319,12 @@ class ES(_HPGLPrimitive):
 
    - `charspace` : ``float``, ``None``. Spacing between characters.
    - `linespace` : ``float``, ``None``. Spacing between lines.
+
+   Character and line spacing values add (or substract) a fraction of the 
+   standard spacing. 0 is the standard, positive values increase
+   space and negative values reduce space. 1 doubles the standard space,
+   0.5 adds half the standard space, and -1 substracts the standar space,
+   causing the characters to draw on top of each other.
    '''
 
    def __init__(self, charspace = None, linespace = None):

@@ -50,6 +50,7 @@ def compile_plotters( ):
    file.close( )
 
 
+## TODO: change this so that the tool modules are automatically discovered.
 def compile_tools( ):
    from chiplotle import hpgltools
    from chiplotle import io

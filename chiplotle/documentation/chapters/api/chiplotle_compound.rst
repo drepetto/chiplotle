@@ -1,6 +1,21 @@
 Chiplotle Compound Commands
 ===========================
 
+.. autoclass:: chiplotle.hpgl.compound.Bezier
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.BusinessCard
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.Catmull
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
 .. autoclass:: chiplotle.hpgl.compound.Circle
 	:members:
 	:undoc-members:
@@ -26,6 +41,11 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
+.. autoclass:: chiplotle.hpgl.compound.Fan
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
 .. autoclass:: chiplotle.hpgl.compound.FancyLabel
 	:members:
 	:undoc-members:
@@ -37,6 +57,11 @@ Chiplotle Compound Commands
 	:show-inheritance:
 
 .. autoclass:: chiplotle.hpgl.compound.GroovyFrame
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.HPGLContainer
 	:members:
 	:undoc-members:
 	:show-inheritance:
@@ -56,7 +81,27 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
+.. autoclass:: chiplotle.hpgl.compound.Path
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
 .. autoclass:: chiplotle.hpgl.compound.Pen
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.Polygon
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.RadialHistogramLF
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.RadialHistogramRF
 	:members:
 	:undoc-members:
 	:show-inheritance:
@@ -67,6 +112,11 @@ Chiplotle Compound Commands
 	:show-inheritance:
 
 .. autoclass:: chiplotle.hpgl.compound.Rectangle
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.Supershape
 	:members:
 	:undoc-members:
 	:show-inheritance:
