@@ -36,6 +36,10 @@ def test_AA_format_02( ):
    assert t.format == 'AA0.00,0.00,180.00;'
    
 
+def test_AA_angle_01( ):
+   '''Angle must be between -360 and 360.'''
+   assert py.test.raises(ValueError, 'AA((0, 0), 1200)')
+
 ## eq ##
 
 def test_AA__eq__01( ):
