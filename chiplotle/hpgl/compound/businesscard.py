@@ -1,6 +1,7 @@
 from chiplotle.hpgl.commands import PA, PU, PD
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.compound.label import Label
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 
 class BusinessCard(_CompoundHPGL):
    '''A class for making simple presentation/business cards.
@@ -54,32 +55,32 @@ class BusinessCard(_CompoundHPGL):
 
    @property
    def upper_left(self):
-      return (-self.width / 2.0, self.height / 2.0)
+      return CoordinatePair(-self.width / 2.0, self.height / 2.0)
 
    @property
    def upper_right(self):
-      return (self.width / 2.0, self.height / 2.0)
+      return CoordinatePair(self.width / 2.0, self.height / 2.0)
 
    @property
    def lower_left(self):
-      return (-self.width / 2.0, -self.height / 2.0)
+      return CoordinatePair(-self.width / 2.0, -self.height / 2.0)
 
    @property
    def lower_right(self):
-      return (self.width / 2.0, -self.height / 2.0)
+      return CoordinatePair(self.width / 2.0, -self.height / 2.0)
 
    ## PRIVATE PROPERTIES ##
 
    @property
    def _subcommands_corner_dots(self):
       result = [PU( )]
-      result.append(PA(self.upper_left))
+      result.append(PA(self.xyabsolute + self.upper_left))
       result += [PD( ), PU( )]
-      result.append(PA(self.upper_right))
+      result.append(PA(self.xyabsolute + self.upper_right))
       result += [PD( ), PU( )]
-      result.append(PA(self.lower_left))
+      result.append(PA(self.xyabsolute + self.lower_left))
       result += [PD( ), PU( )]
-      result.append(PA(self.lower_right))
+      result.append(PA(self.xyabsolute + self.lower_right))
       result += [PD( ), PU( )]
       return result
 
