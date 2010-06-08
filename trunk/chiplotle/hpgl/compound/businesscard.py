@@ -9,7 +9,7 @@ class BusinessCard(_CompoundHPGL):
       - `texts`: is a list of Label instances containing text for the card.
    '''
 
-   _scalable = ['width', 'height']
+   _scalable = _CompoundHPGL._scalable + ['width', 'height']
 
    def __init__(self, xy, logo, texts, width=None, height=None, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
