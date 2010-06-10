@@ -6,7 +6,10 @@ def scan_serial_ports( ):
    '''
    from chiplotle.utils.serialtools import scan_serial_ports_linux
    from chiplotle.utils.serialtools import scan_serial_ports_windows
-   if platform.system( ).lower( ) == 'windows': 
+   print platform.system( ).lower( )
+   #if platform.system( ).lower( ) == 'windows': 
+   if platform.system( ).lower( ).startswith('windows') or \
+      platform.system( ).lower( ).startswith('cygwin'): 
       return scan_serial_ports_windows( )
    else:
       return scan_serial_ports_linux( )
