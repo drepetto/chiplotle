@@ -50,7 +50,7 @@ def main():
            
            print "fill type: %d space: %d angle: %d" % (ft, space, angle)
            plotter.fill_type(ft, space, angle)
-           plotter.shade_rect_relative(random.randint(10,2000), random.randint(10,2000))
+           plotter.shade_rectangle_relative(random.randint(10,2000), random.randint(10,2000))
 
        elif whichGesture == 3:
            print "draw a crazy line!"
