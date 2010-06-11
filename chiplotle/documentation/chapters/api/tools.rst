@@ -25,3 +25,14 @@ Input-output tools
 
 .. autofunction:: chiplotle.tools.io.view
 
+Math tools
+--------------
+
+.. autofunction:: chiplotle.tools.mathtools.bezier_interpolation
+
+.. autofunction:: chiplotle.tools.mathtools.catmull_interpolation
+
+.. autofunction:: chiplotle.tools.mathtools.pascal_row
+
+.. autofunction:: chiplotle.tools.mathtools.superformula
+
