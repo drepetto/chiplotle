@@ -33,7 +33,7 @@ def main():
        
        elif whichGesture == 1:
            print "rect!"
-           plotter.edge_rect_relative(random.randint(10,5000), random.randint(10,5000))        
+           plotter.write(ER(random.randint(10,5000), random.randint(10,5000)))        
 
        elif whichGesture == 2:
            print "filled rect!"
