@@ -54,6 +54,7 @@ def compile_plotters( ):
 def compile_tools( ):
    from chiplotle import hpgltools
    from chiplotle import io
+   from chiplotle import mathtools
 
    content = 'Chiplotle Tools\n'
    content += '================\n\n'
@@ -70,6 +71,13 @@ def compile_tools( ):
       if not cls.startswith('_'):
          content += '.. autofunction:: chiplotle.tools.io.%s\n' % cls
          content += '\n'
+   content += 'Math tools\n'
+   content += '--------------\n\n'
+   for cls in dir(mathtools):
+      if not cls.startswith('_'):
+         content += '.. autofunction:: chiplotle.tools.mathtools.%s\n' % cls
+         content += '\n'
+
 
 
    file = open('../chapters/api/tools.rst', 'w')
