@@ -33,7 +33,7 @@ def main():
        
        elif whichGesture == 1:
            print "rect!"
-           plotter.write(ER(random.randint(10,5000), random.randint(10,5000)))        
+           plotter.write(ER((random.randint(10,5000), random.randint(10,5000))))        
 
        elif whichGesture == 2:
            print "filled rect!"
@@ -50,7 +50,8 @@ def main():
            
            print "fill type: %d space: %d angle: %d" % (ft, space, angle)
            plotter.fill_type(ft, space, angle)
-           plotter.shade_rectangle_relative(random.randint(10,2000), random.randint(10,2000))
+           #plotter.shade_rectangle_relative(random.randint(10,2000), random.randint(10,2000))
+           plotter.filled_rectangle_relative(random.randint(10,2000), random.randint(10,2000))
 
        elif whichGesture == 3:
            print "draw a crazy line!"
