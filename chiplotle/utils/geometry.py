@@ -8,7 +8,7 @@ import math
 
 # utility functions
 
-def polar2xy(r, A):
+def polar_to_xy(r, A):
    x = r * math.cos(A)
    y = r * math.sin(A)
    return (x, y)
