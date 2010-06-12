@@ -13,9 +13,9 @@ def _run_chiplotle( ):
    python_code.append("sys.ps1 = 'chiplotle> '")
    python_code.append("del sys")
    python_code.append("from chiplotle import *")
-   #python_code.append("plotter = instantiate_plotter( )")
    python_code.append("plts = instantiate_plotters( )")
-   python_code.append("if plts: plotter = plts[0]")
+   python_code.append("plotter = plts[0]")
 
-   os.system('''python -i -c "%s"''' % '\n'.join(python_code))
+   ##                                 '\n' does now work on Windowz!
+   os.system('''python -i -c "%s"''' % ';'.join(python_code))
 

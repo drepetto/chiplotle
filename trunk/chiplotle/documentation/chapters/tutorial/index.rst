@@ -159,9 +159,9 @@ To plot the file while running Chiplotle you can use the plotter's own
    chiplotle> plotter.write_file('my_file.hpgl')  
 
 You can also plot the file from the command line without first running 
-Chiplotle by using the ``plothpgl.py`` script found in the scripts folder::
+Chiplotle by using the ``plot_hpgl_file.py`` script found in the scripts folder::
 
-   $ plothpgl.py my_file.hpgl
+   $ plot_hpgl_file.py my_file.hpgl
 
 
 Chiplotle will take care of all buffering and timing issues, so even large 
