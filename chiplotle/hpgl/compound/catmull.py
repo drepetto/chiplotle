@@ -8,7 +8,7 @@ from chiplotle.tools.mathtools import catmull_interpolation
 class Catmull(_CompoundHPGL):
    '''Catmull-Rom spline interpolation'''
 
-   _scalable = ['control_points']
+   _scalable = _CompoundHPGL._scalable + ['control_points']
 
    def __init__(self, control_points, xy=None, points_to_compute=None, pen=None):
       self.control_points = CoordinateArray(control_points)
