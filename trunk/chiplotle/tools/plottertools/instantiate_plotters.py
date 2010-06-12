@@ -1,5 +1,5 @@
 from chiplotle.cfg.read_config_file import read_config_file
-from chiplotle.utils.plottertools._instantiate_plotter import _instantiate_plotter
+from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
 
 def instantiate_plotters( ):
    '''Instantiates all found and available plotters.
@@ -7,7 +7,7 @@ def instantiate_plotters( ):
    instantiates all plotters found. If a plotter is not recognized,
    the function interactively queries user for plotter type.'''
 
-   from chiplotle.utils.plottertools import search_and_instantiate_plotters
+   from chiplotle.tools.plottertools import search_and_instantiate_plotters
    
    map = read_config_file( )['serial_port_to_plotter_map']
    ## if user has set fixed port to plotter mapping...

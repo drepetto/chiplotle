@@ -33,7 +33,7 @@ from chiplotle.hpgl.coordinatearray import CoordinateArray
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 
 #from chiplotle.utils.plottertools import instantiate_plotter
-from chiplotle.utils.plottertools import instantiate_plotters
+from chiplotle.tools.plottertools import instantiate_plotters
 
 #_remove_modules()
 

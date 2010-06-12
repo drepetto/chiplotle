@@ -3,7 +3,7 @@ def sniff_ports_for_plotters(ports):
    '''Sniffs all given serial `ports` in search for pen plotters.
    The function returns a dictionary of plotter names found, with keys
    being the port name or address and values the plotter names.'''
-   from chiplotle.utils.serialtools import what_plotter_in_port
+   from chiplotle.tools.serialtools import what_plotter_in_port
 
    plotters_found = { }
    #for k, port in scan_serial_ports( ).items( ): 
