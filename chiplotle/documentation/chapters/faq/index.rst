@@ -51,11 +51,11 @@ then send hpgl commands::
 Is there a facility in Chiplotle to send over already existing HPGL command files? 
 
 **A:**
-Yes. Chiplotle comes with the ``plothpgl.py`` executable script designed exactly for this purpose. To send HPGL files to your plotter simply run the script from the command prompt with the file as the argument::
+Yes. Chiplotle comes with the ``plot_hpgl_file.py`` executable script designed exactly for this purpose. To send HPGL files to your plotter simply run the script from the command prompt with the file as the argument::
 
-   $ plothpgl.py my_file.hpgl
+   $ plot_hpgl_file.py my_file.hpgl
 
-To see the usage instructions run ``plothpgl.py`` with no arguments. Note that Chiplotle simply pipes the file to the plotter and does not check the syntax of the HPGL file.
+To see the usage instructions run ``plot_hpgl_file.py`` with no arguments. Note that Chiplotle simply pipes the file to the plotter and does not check the syntax of the HPGL file.
 
 You can also send HPGL files to your plotter from within a live Chiplotle session using a Plotter's own ``write_file(filename)`` method, like so::
 
