@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PA, PD, PR
-from chiplotle.utils.geometry import polar2xy
+from chiplotle.tools.mathtools import polar_to_xy
 import math
 import random
 
@@ -19,7 +19,7 @@ class RandomWalk(_CompoundHPGL):
       for i in range(self.steps):
         A = random.random() * math.pi * 2
         r = self.step_size
-        xy = polar2xy(r,A)
+        xy = polar_to_xy(r,A)
         result.append( PR(xy) )
       result.append( PU() )
       return result
