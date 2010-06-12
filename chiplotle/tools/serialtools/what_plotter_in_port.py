@@ -15,7 +15,7 @@ def what_plotter_in_port(port, wait_time=10):
    if not isinstance(port, basestring):
       raise TypeError('`port` must be a string.')
 
-   from chiplotle.utils.serialtools import instantiate_serial_from_config_file
+   from chiplotle.tools.serialtools import instantiate_serial_from_config_file
    ser = instantiate_serial_from_config_file(port)
    try:
       ser.flushInput()

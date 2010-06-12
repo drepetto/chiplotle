@@ -1,5 +1,5 @@
 from chiplotle import *
-from chiplotle.utils.plottertools import instantiate_plotters
+from chiplotle.tools.plottertools import instantiate_plotters
 
 
 def test_plotter_write_01( ):

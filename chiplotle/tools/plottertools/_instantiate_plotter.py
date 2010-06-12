@@ -1,4 +1,4 @@
-from chiplotle.utils.serialtools import instantiate_serial_from_config_file
+from chiplotle.tools.serialtools import instantiate_serial_from_config_file
 from chiplotle import plotters
 
 def _instantiate_plotter(port, id):
@@ -10,8 +10,8 @@ def _instantiate_plotter(port, id):
    '''
    ser = instantiate_serial_from_config_file(port)
 
-   from chiplotle.utils.plottertools import instantiate_plotter_from_id
-   from chiplotle.utils.plottertools import interactive_choose_plotter
+   from chiplotle.tools.plottertools import instantiate_plotter_from_id
+   from chiplotle.tools.plottertools import interactive_choose_plotter
    plotter = instantiate_plotter_from_id(ser, id)
    if not plotter:
       print "\nChiplotle does not have a software Plotter type that"
