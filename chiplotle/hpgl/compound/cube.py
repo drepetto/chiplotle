@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.utils.geometry import *
+from chiplotle.tools.mathtools import rotate_3d
 
 class Cube(_CompoundHPGL):
    '''A 3D Cube. Can be rotated on x, y, and z.'''
@@ -28,14 +28,14 @@ class Cube(_CompoundHPGL):
       tll = (-self.width / 2., self.height / 2., -self.depth / 2)
       trl = (self.width / 2., self.height / 2., -self.depth / 2)
       ## rotate ...
-      blh = rotate3d(blh, self.rotation)[0:2]
-      brh = rotate3d(brh, self.rotation)[0:2]
-      tlh = rotate3d(tlh, self.rotation)[0:2]
-      trh = rotate3d(trh, self.rotation)[0:2]
-      bll = rotate3d(bll, self.rotation)[0:2]
-      brl = rotate3d(brl, self.rotation)[0:2]
-      tll = rotate3d(tll, self.rotation)[0:2]
-      trl = rotate3d(trl, self.rotation)[0:2]
+      blh = rotate_3d(blh, self.rotation)[0:2]
+      brh = rotate_3d(brh, self.rotation)[0:2]
+      tlh = rotate_3d(tlh, self.rotation)[0:2]
+      trh = rotate_3d(trh, self.rotation)[0:2]
+      bll = rotate_3d(bll, self.rotation)[0:2]
+      brl = rotate_3d(brl, self.rotation)[0:2]
+      tll = rotate_3d(tll, self.rotation)[0:2]
+      trl = rotate_3d(trl, self.rotation)[0:2]
 
       result = _CompoundHPGL._subcommands.fget(self)
       result.append(PA( ))

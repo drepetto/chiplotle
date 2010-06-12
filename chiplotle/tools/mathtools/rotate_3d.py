@@ -1,31 +1,7 @@
-
-"""
- *  This file is part of chiplotle.
- *
- *  http://music.columbia.edu/cmc/chiplotle
-"""
 import math
 
-# utility functions
 
-def polar_to_xy(r, A):
-   x = r * math.cos(A)
-   y = r * math.sin(A)
-   return (x, y)
-
-
-def rotate2d(xy, angle):
-   '''2D rotation.
-
-   - `xy` is a list or tuple with (x, y) coordinates.
-   - `angle` is the angle or rotation in radians.
-   '''
-   xn = xy[0] * math.cos(angle) + xy[1] * math.sin(angle) 
-   yn = - xy[0] * math.sin(angle) + xy[1] * math.cos(angle) 
-   return (xn, yn)
-
-
-def rotate3d(xyz, xyzrot):
+def rotate_3d(xyz, xyzrot):
    '''3D rotation. 
 
    - `xyz` is a triple (x, y, z) of coordinates.

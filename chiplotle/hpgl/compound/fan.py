@@ -1,7 +1,7 @@
 from __future__ import division
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA, AA
-from chiplotle.utils.geometry import polar2xy
+from chiplotle.tools.mathtools import polar_to_xy
 import math
 
 class Fan(_CompoundHPGL):
@@ -33,17 +33,17 @@ class Fan(_CompoundHPGL):
       ## lower_right (viewing from pole outward)
       r = self.radius - self.height / 2 ## assumes the fan is centered on (r, a)
       a = self.angle - self.width_angle / 2
-      lr = polar2xy(r, a) + self.xyabsolute
+      lr = polar_to_xy(r, a) + self.xyabsolute
 
       a = self.angle + self.width_angle / 2
-      ll = polar2xy(r, a) + self.xyabsolute
+      ll = polar_to_xy(r, a) + self.xyabsolute
 
       r = self.radius + self.height / 2 
       a = self.angle - self.width_angle / 2
-      ur = polar2xy(r, a) + self.xyabsolute
+      ur = polar_to_xy(r, a) + self.xyabsolute
 
       a = self.angle + self.width_angle / 2
-      ul = polar2xy(r, a) + self.xyabsolute
+      ul = polar_to_xy(r, a) + self.xyabsolute
 
       result = [ ]
       ## outward lines...

@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PA, PU, PD, AA, CI
-from chiplotle.utils.geometry import polar2xy
+from chiplotle.tools.mathtools import polar_to_xy
 import numpy
 
 class _RadialHistogram(_CompoundHPGL):
@@ -21,9 +21,9 @@ class _RadialHistogram(_CompoundHPGL):
    ## PRIVATE METHODS ##
    def _endpoints_from_angle(self, angle, data_value):
       '''given an angle, get the start and end points of a radial line.'''
-      xy1 = numpy.array(polar2xy(self.min_radius, angle))
+      xy1 = numpy.array(polar_to_xy(self.min_radius, angle))
       v = data_value * (self.max_radius - self.min_radius) + self.min_radius
-      xy2 = numpy.array(polar2xy(v, angle)) 
+      xy2 = numpy.array(polar_to_xy(v, angle)) 
       return xy1, xy2
 
    ## PRIVATE PROPERTIES ##

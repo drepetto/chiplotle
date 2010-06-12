@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.histograms.radialhistogram import _RadialHistogram
 from chiplotle.hpgl.commands import PA, PU, AA, PD
-from chiplotle.utils.geometry import polar2xy
+from chiplotle.tools.mathtools import polar_to_xy
 
 class RadialHistogramRF(_RadialHistogram):
    '''A radial histogram with radial fill. The shape draws a circular
@@ -34,7 +34,7 @@ class RadialHistogramRF(_RadialHistogram):
          length = d * (self.max_radius - self.min_radius) 
          for j in range(int(length / self.fillines_spacing) + 1):
             v = self.min_radius + j * self.fillines_spacing
-            xy = polar2xy(v, i * self._bin_angle_width)
+            xy = polar_to_xy(v, i * self._bin_angle_width)
             result.append(PU(self.xyabsolute + xy))
             result.append(PD( ))
             result.append(AA(self.xyabsolute, angle_per_bin_deg, self.chord))
