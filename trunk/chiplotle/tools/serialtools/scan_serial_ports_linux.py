@@ -3,23 +3,10 @@ import glob
 
 def scan_serial_ports_linux( ):
    from chiplotle.tools.serialtools import scan_serial_ports_from_list
+   ## NOTE: there are also /dev/tty.PL2303-xxxx ports. Should we assume
+   ## all /dev/tty.* devices are valid? or should we just add
+   ## /dev/tty.PL* to the list? will do the former and see what happens.
    ports = glob.glob('/dev/ttyS*') + glob.glob('/dev/ttyUSB*') +\
-      glob.glob('/dev/tty.USA*') + glob.glob('/dev/tty.KeySerial*')
+      glob.glob('/dev/tty.*')
+      #glob.glob('/dev/tty.USA*') + glob.glob('/dev/tty.KeySerial*')
    return scan_serial_ports_from_list(ports)
-#   result = { }
-#   ## keep track of previously opened ports to avoid including aliases
-#   ## in our list...
-#   ports_opened = [ ]
-#   for i, port in enumerate(ports):
-#      try:
-#         s = serial.Serial(port)
-#         ports_opened.append(s)
-#         result[i] = s.portstr
-#         #result[i] = s
-#         #s.close( )
-#      except serial.SerialException:
-#         pass
-#   ## gracefully close all open ports...
-#   for port in ports_opened:
-#      port.close( )
-#   return result
