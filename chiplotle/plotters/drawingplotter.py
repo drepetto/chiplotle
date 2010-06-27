@@ -143,6 +143,9 @@ class _DrawingPlotter(_BasePlotter):
    def goto_bottom_right(self):
       self.write(self._hpgl.PA(self.margins.soft.bottom_right))
 
+   def goto_origin(self):
+      self.write(self._hpgl.PA([0,0]))
+
    def goto_top_left(self):
       self.write(self._hpgl.PA(self.margins.soft.top_left))
 
