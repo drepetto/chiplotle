@@ -41,14 +41,16 @@ class Grid(_CompoundHPGL):
       result = _CompoundHPGL._subcommands.fget(self)
       ## add horizontal lines
       for i in range(self.width_divisions + 1):
-         step_y = self.height / self.width_divisions * i
+         #step_y = self.height / self.width_divisions * i
+         step_y = self.height / self.height_divisions * i
          result.append(PU( ))
          result.append(PA((ul_x, ul_y - step_y)))
          result.append(PD( ))
          result.append(PA((ur_x, ur_y - step_y)))
       ## add vertical lines
       for i in range(self.height_divisions + 1):
-         step_x = self.width / self.height_divisions * i
+         #step_x = self.width / self.height_divisions * i
+         step_x = self.width / self.width_divisions * i
          result.append(PU( ))
          result.append(PA((ul_x + step_x, ul_y)))
          result.append(PD( ))
