@@ -9,7 +9,7 @@ class Grid(_CompoundHPGL):
    - `width` : ``int`` or ``float``, width of the rectangle.
    - `height` : ``int`` or ``float``, height of the rectangle.
    - `width_divisions` : ``int``, number of horizontal equidistant partitions.
-   - `horizontal_divisions` : ``int``, number of vertical equidistant 
+   - `height_divisions` : ``int``, number of vertical equidistant 
       partitions.
    - `pen` : ``int``, pen number.
    
