@@ -12,7 +12,7 @@ class Panels(_CompoundHPGL):
    - `vert_panels` : ``int``, number of panels vertical.
    - `horiz_buffer` : ``float``, percentage (0.0 - 1.0) of width dedicated to buffer space
    - `vert_buffer` : ``float``, percentage (0.0 - 1.0) of height dedicated to buffer space
-   - `big_border` : ``boolean``, draw big border around all panels
+   - `big_border` : ``boolean``, draw big border around panel array
    - `pen` : ``int``, pen number.
       
       
