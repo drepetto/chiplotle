@@ -19,7 +19,7 @@ def plot_hpgl_file_max_size(file):
    
    f = io.import_hpgl_file(file)
    
-   print f
+#   print f
    
    dimensions = hpgltools.find_hpgl_dimensions(f)
    
