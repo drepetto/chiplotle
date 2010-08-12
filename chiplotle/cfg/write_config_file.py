@@ -1,4 +1,3 @@
-from chiplotle import plotters
 import time
 
 
@@ -48,6 +47,13 @@ def write_config_file(path):
    f.write("timeout = 1\n")
    f.write("xonxoff = 1\n")
    f.write("rtscts = 0\n")
+   f.write("\n\n")
+
+   ## maximum wait time for response from plotter.
+   f.write("## Maximum wait time for response from plotter.\n")
+   f.write("## Every time the plotter is queried, Chiplotle will wait for\n")
+   f.write("## a maximum of `maximum_response_wait_time` seconds.\n")
+   f.write("maximum_response_wait_time = 8\n")
    f.write("\n\n")
 
 #   f.write("## PDF viewer. Set for previewing HPGL commands via the\n")
