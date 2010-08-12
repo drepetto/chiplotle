@@ -6,7 +6,6 @@
 from __future__ import division
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
-#from chiplotle.plotters import margin
 from chiplotle.interfaces.margins.interface import MarginsInterface
 import math
 import re
@@ -14,25 +13,29 @@ import serial
 import time
 import types
 
+from chiplotle.cfg.read_config_file import read_config_file 
 
 class _BasePlotter(object):
    def __init__(self, serial_port):
       self.type = '_BasePlotter'
+      ## TODO: should we get rid of this memory thing? Do we use it?
       self.memory = []
       self._serial_port = serial_port
       self._hpgl = commands
       self._margins = MarginsInterface(self)
+      self.maximum_response_wait_time = read_config_file( )['maximum_response_wait_time']
+
       self.buffer_size = self._buffer_space
       self.initialize_plotter( )
-
-
-   ### PUBLIC METHODS ###
+      
 
    @property
    def margins(self):
       '''Read-only reference to MarginsInterface.'''
       return self._margins
 
+
+   ### PUBLIC METHODS ###
 
    def initialize_plotter(self):
       self._serial_port.flushInput( )
@@ -143,7 +146,7 @@ class _BasePlotter(object):
    def _read_port(self):
       '''Read data from serial port.'''
       elapsed_time = 0
-      total_time = 8
+      total_time = self.maximum_response_wait_time
       sleep = 1.0 / 8
       while elapsed_time < total_time:
          if self._serial_port.inWaiting( ): 
