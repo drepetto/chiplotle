@@ -6,6 +6,9 @@ import time
 def plot_hpgl_file(file):
    '''Send an HPGL file to the plotter found connected to the computer.'''
    plotter = instantiate_plotters( )[0]
+
+   plotter.set_origin_bottom_left()
+
    plotter.write_file(file)
    ## call flush( ) to wait till all data is written before exiting...
    plotter._serial_port.flush( )

@@ -181,14 +181,15 @@ class _BasePlotter(object):
 
    @property
    def id(self):
-      '''Get id of plotter.'''
+      '''Get id of plotter. Returns a string.'''
       id = self._send_query(self._hpgl.OI( ))
       return id.strip('\r')
 
    @property
    def actual_position(self):
-      '''Output the actual position of the plotter pen.'''
-      return self._send_query(self._hpgl.OA( ))
+      '''Output the actual position of the plotter pen. Returns a tuple [x,y]'''
+      response = self._send_query(self._hpgl.OA( )).split(',')
+      return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
 
    @property
    def carousel_type(self):
@@ -196,11 +197,15 @@ class _BasePlotter(object):
 
    @property
    def commanded_position(self):
-      return self._send_query(self._hpgl.OC( ))
+      '''Output the commanded position of the plotter pen. Returns a tuple [x,y]'''
+      response = self._send_query(self._hpgl.OC( )).split(',')      
+      return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
           
    @property
    def digitized_point(self):
-      return self._send_query(self._hpgl.OD( ))
+      '''Returns last digitized point. Returns a tuple [x, y, penStatus]'''
+      response = self._send_query(self._hpgl.OD( )).split(',')
+      return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
 
    @property
    def output_error(self):
@@ -220,7 +225,9 @@ class _BasePlotter(object):
 
    @property
    def output_p1p2(self):
-      return self._send_query(self._hpgl.OP( ))
+      '''Returns the current settings for P1 & P2. Returns a tuple [[p1x,p1y],[p2x,p2y]]'''
+      response = self._send_query(self._hpgl.OP( )).split(',')
+      return [[eval(response[0]), eval(response[1])], [eval(response[2]), eval(response[3].strip('\r'))]]      
 
    @property
    def status(self):

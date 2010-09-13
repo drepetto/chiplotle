@@ -16,7 +16,7 @@ def plot_hpgl_file_max_size(file):
    to be as large as possible without distorting either axis.
    '''
    plotter = instantiate_plotters( )[0]
-   
+
    f = io.import_hpgl_file(file)
    
 #   print f
