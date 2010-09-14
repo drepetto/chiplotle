@@ -12,19 +12,20 @@ class VirtualPlotter():
    First try at a virtual plotter.
    Does not yet keep track of commanded position, which is the whole point...
    
-   from chiplotle import *
-   from chiplotle.plotters.virtualplotter import VirtualPlotter   
-   vp = VirtualPlotter()
-   vp.write(SP(3))
-   vp.write(PA([0,0]))
-   vp.write(PD())
-   vp.write(PA([0,1000]))
-   vp.write(PA([1000,1000]))
-   vp.write(PA([1000,0]))
-   vp.write(PA([0,0]))
-   vp.write(PU())
-   vp.get_hpgl()
-   io.view(vp.get_hpgl())
+from chiplotle import *
+from chiplotle.plotters.virtualplotter import VirtualPlotter   
+vp = VirtualPlotter()
+vp.write(SP(3))
+vp.write(PA([0,0]))
+vp.write(PD())
+vp.write(PA([0,1000]))
+vp.write(PA([1000,1000]))
+vp.write(PA([1000,0]))
+vp.write(PA([0,0]))
+vp.write(PU())
+vp.write(Rectangle([111,222], 333, 444))
+vp.get_hpgl()
+io.view(vp.get_hpgl())
 """
    def __init__(self, **kwargs):
       ## allowedHPGLCommands must be set prior to base class init.
@@ -65,12 +66,43 @@ class VirtualPlotter():
    def _write_string_to_port(self, data):
       ''' Write data to serial port. data is expected to be a string.'''
       assert type(data) is str
+      
+      splitData = data.split(';')
+      
+      for point in splitData:
+         if point.startswith("PA"):
+            #print "got: " + point
+            pointParts = point.strip("PA").split(',')
+            #print pointParts
+            #print len(pointParts)
+            self.commandedX = eval(pointParts[len(pointParts) - 2])
+            self.commandedY = eval(pointParts[len(pointParts) - 1])
+         elif point.startswith("PD"):
+            #print "got: " + point
+            if ',' in point:
+               pointParts = point.strip("PD").split(',')
+               #print pointParts
+               #print len(pointParts)
+               self.commandedX = eval(pointParts[len(pointParts) - 2])
+               self.commandedY = eval(pointParts[len(pointParts) - 1])
+         if point.startswith("PR"):
+            #print "got: " + point
+            pointParts = point.strip("PR").split(',')
+            #print pointParts
+            #print len(pointParts)
+            self.commandedX += eval(pointParts[len(pointParts) - 2])
+            self.commandedY += eval(pointParts[len(pointParts) - 1])
+            
+            
       self.megaString += data
       
    def get_hpgl(self):
       return inflate_hpgl_string(self.megaString)
    
-   
+   @property
+   def format(self):
+      '''This lets us pass the VirtualPlotter directly to io.view()'''
+      return self.megaString
    
    ### PUBLIC QUERIES (PROPERTIES) ###
 
@@ -83,12 +115,12 @@ class VirtualPlotter():
    @property
    def actual_position(self):
       '''Output the actual position of the plotter pen. Returns a tuple [x,y]'''
-      return [0,0]
+      return [self.commandedX, self.commandedY]
 
    @property
    def commanded_position(self):
       '''Output the commanded position of the plotter pen. Returns a tuple [x,y]'''
-      return [0,0]
+      return [self.commandedX, self.commandedY]
           
    @property
    def digitized_point(self):
