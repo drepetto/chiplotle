@@ -1,13 +1,25 @@
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 
-class _PlotterMargins(object):
-   def __init__(self, plotter, queryCommand):  
+class PlotterMarginsVirtual():
+   '''Pass me a virtual plotter and a tuple with LRTB coordinates.'''
+   def __init__(self, plotter, leftRightTopBottom):  
       self._plotter = plotter
-      self._queryCommand = queryCommand
-
+      self.l = leftRightTopBottom[0]
+      self.r = leftRightTopBottom[1]
+      self.t = leftRightTopBottom[2]
+      self.b = leftRightTopBottom[3]
 
    ## PROPERTIES ##
 
+   @property
+   def hard(self):
+      '''Simulated hard margins'''
+      return self
+      
+   @property
+   def soft(self):
+      '''Simulated soft margins'''
+      return self
 
    @property
    def left(self):
@@ -86,15 +98,5 @@ class _PlotterMargins(object):
       self._plotter.write(corners)
 
    def _get_all_coordinates(self):
-      self._plotter._serial_port.flushInput( )
-      self._plotter._write_string_to_port(self._queryCommand.format)
-      m = self._plotter._read_port( ).split(',')
-      return tuple([float(n) for n in m])
-#      return tuple([int(n) for n in m])
+      return tuple([self.l, self.b, self.r, self.t])
       
-
-   ## OVERRIDES ##
-
-   def __repr__(self):
-      return str(self._get_all_coordinates( ))
-
