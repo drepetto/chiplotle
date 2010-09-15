@@ -2,12 +2,12 @@ from chiplotle.hpgl.coordinatepair import CoordinatePair
 
 class PlotterMarginsVirtual():
    '''Pass me a virtual plotter and a tuple with LRTB coordinates.'''
-   def __init__(self, plotter, leftRightTopBottom):  
+   def __init__(self, plotter, leftRightBottomTop):  
       self._plotter = plotter
-      self.l = leftRightTopBottom[0]
-      self.r = leftRightTopBottom[1]
-      self.t = leftRightTopBottom[2]
-      self.b = leftRightTopBottom[3]
+      self.l = leftRightBottomTop[0]
+      self.r = leftRightBottomTop[1]
+      self.b = leftRightBottomTop[2]
+      self.t = leftRightBottomTop[3]
 
    ## PROPERTIES ##
 
