@@ -32,7 +32,7 @@ vp.get_hpgl()
 io.view(vp)
 """
 
-   def __init__(self, leftRightTopBottom):
+   def __init__(self, leftRightBottomTop):
       ## allowedHPGLCommands must be set prior to base class init.
       self.allowedHPGLCommands = tuple(['\x1b.','AA','AR','CA','CI','CP',
          'CS','DC','DF','DI','DP','DR','DT','EA','ER','EW','FT','IM','IN',
@@ -47,15 +47,17 @@ io.view(vp)
       self.commandedX = 0
       self.commandedY = 0
       
-      # args are [left, right, top, bottom]
+      # args are [left, right, bottom, top]
       self._margins = PlotterMarginsVirtual(self, 
-         [leftRightTopBottom[0], leftRightTopBottom[1],
-         leftRightTopBottom[2], leftRightTopBottom[3]])
+         [leftRightBottomTop[0], leftRightBottomTop[1],
+         leftRightBottomTop[2], leftRightBottomTop[3]])
          
       print "Opened VirtualPlotter with margins:"
       print "left: %d right: %d top: %d bottom: %d" % \
          (self.margins.hard.left, self.margins.hard.right, 
-         self.margins.hard.top, self.margins.hard.bottom)
+         self.margins.hard.bottom, self.margins.hard.top)
+      print "width: %d height: %d" % \
+         (self.margins.hard.width, self.margins.hard.height)
 
    @property
    def margins(self):
