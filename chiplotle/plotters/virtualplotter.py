@@ -42,6 +42,8 @@ io.view(vp)
 
       self.type = "Virtual"
 
+      self._hpgl = commands
+      
       self.megaString = ""
       
       self.commandedX = 0
@@ -115,8 +117,7 @@ io.view(vp)
             #print len(pointParts)
             self.commandedX += eval(pointParts[len(pointParts) - 2])
             self.commandedY += eval(pointParts[len(pointParts) - 1])
-            
-            
+
       self.megaString += data
       
    def get_hpgl(self):
@@ -150,3 +151,45 @@ io.view(vp)
       '''Returns last digitized point. Returns a tuple [x, y, penStatus]'''
       return [0,0]
 
+
+   ## motion ##
+
+   def goto(self, x, y):
+      """Alias for PA() with only one point"""
+      self.write(self._hpgl.PA((x, y)))
+
+   def goto_center(self):
+      self.write(self._hpgl.PA(self.margins.soft.center))
+
+   def goto_bottom_left(self):
+      self.write(self._hpgl.PA(self.margins.soft.bottom_left))
+
+   def goto_bottom_right(self):
+      self.write(self._hpgl.PA(self.margins.soft.bottom_right))
+
+   def goto_origin(self):
+      self.write(self._hpgl.PA([0,0]))
+
+   def goto_top_left(self):
+      self.write(self._hpgl.PA(self.margins.soft.top_left))
+
+   def goto_top_right(self):
+      self.write(self._hpgl.PA(self.margins.soft.top_right))
+
+   def nudge(self, x, y):
+      self.write(self._hpgl.PR((x,y)))
+
+
+   ## pen control ##
+
+   def pen_down(self, coords = None):
+      """Pen Down."""
+      self.write(self._hpgl.PD(coords))
+
+   def pen_up(self, coords = None):
+      """Pen Up."""
+      self.write(self._hpgl.PU(coords))
+
+   def select_pen(self, penNum = 0):
+      self.write(self._hpgl.SP(penNum))
+      
