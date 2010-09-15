@@ -99,4 +99,4 @@ class PlotterMarginsVirtual():
 
    def _get_all_coordinates(self):
       return tuple([self.l, self.b, self.r, self.t])
-      
+
