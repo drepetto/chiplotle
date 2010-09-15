@@ -29,7 +29,7 @@ vp.write(PA([0,0]))
 vp.write(PU())
 vp.write(Rectangle([111,222], 333, 444))
 vp.get_hpgl()
-io.view(vp.get_hpgl())
+io.view(vp)
 """
 
    def __init__(self, leftRightTopBottom):
