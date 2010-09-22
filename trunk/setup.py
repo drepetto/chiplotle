@@ -7,7 +7,7 @@ use_setuptools( ) ### this must come before setup import
 from setuptools import setup, find_packages
 
 setup(name = 'Chiplotle', 
-      version = '0.2.2', 
+      version = '0.2.3', 
       description = 'Chiplotle is an HPGL (Hewlett-Packard Graphics Language) Python API.',
       long_description = 'Chiplotle is an HPGL (Hewlett-Packard Graphics Language) Python API.',
       author = 'Víctor Adán and Douglas Repetto',
@@ -27,7 +27,9 @@ setup(name = 'Chiplotle',
       scripts = [ 
          'chiplotle/scripts/envelope.py',
          'chiplotle/scripts/dorkbot_font.py',
-         'chiplotle/scripts/plothpgl.py',
+         'chiplotle/scripts/plot_hpgl_file.py',
+         'chiplotle/scripts/plot_hpgl_file_max_size.py',
          'chiplotle/scripts/typewriter.py',
+         'chiplotle/scripts/view_hpgl_file.py',
          ], 
       )
