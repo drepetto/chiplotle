@@ -1,0 +1,81 @@
+==========
+Installing
+==========
+
+
+Dependencies 
+============
+
+To install Chiplotle you must already have Python 2.5 or Python 2.6 installed in your computer. 
+
+Chiplotle requires NumPy and PySerial to be installed in you machine for it to work properly. The official release installer will attempt to install these for you. However, if you choose to download Chiplotle using Subversion to obtain the latest development version you will need to install these yourself. You can download NumPy and PySerial from their respective websites.
+
+NumPy:
+http://numpy.scipy.org/
+
+PySerial:
+http://pyserial.wiki.sourceforge.net/pySerial
+
+
+Installing the official release
+===============================
+
+If you have the Python `setuptools <http://pypi.python.org/pypi/setuptools>`__ utility installed, simply type::
+
+   easy_install -U chiplotle
+
+
+If you don't have  *setuptools*, follow these steps:
+ 
+1. Download the latest release from http://pypi.python.org/pypi/Chiplotle.
+
+2. Untar the downloaded file (e.g. `tar xzvf Chiplotle-NNN.tar.gz`,
+   where `NNN` is the version number of the latest release).
+
+3. Change into the directory created in step 2 (e.g. `cd Chiplotle-NNN`).
+
+4. If you're using Linux, Mac OS X or some other flavor of Unix, enter
+   the command:: 
+      
+      sudo python setup.py install
+
+   at the shell prompt.
+   If you're using Windows, start up a command shell with administrator
+   privileges and run the command ``setup.py install``.
+
+
+These commands will install Chiplotle, as well as its dependencies, in your Python installation's `site-packages` directory. Note that this requires a working internet connection. 
+
+
+Installing the development version
+==================================
+
+If you'd like to be at the cutting edge of the Chiplotle development use the following alternative:
+
+1. Install Subversion if you don't have it already installed 
+   (enter ``svn help`` to verify this).
+
+2. Check out Chiplotle's `trunck` development like so::
+
+      svn co svn://music.columbia.edu/chiplotle/trunk/ chiplotle-trunk
+
+3. Make the Python interpreter aware of Chiplotle. 
+   There are two ways to do this:
+
+   a. Make a symlink in your Python `site-packages` directory pointing to 
+   the chiplotle-trunk directory previously checked out via Subversion::
+         
+      ln -s 'pwd'/chiplotle-trunk/chiplotle SITE-PACKAGES-DIR/chiplotle
+
+   where SITE-PACKAGES-DIR is the Python `site-packages` directory.
+   In Linux this is usually in ``/usr/lib/Python2.x/site-packages``.
+
+   b. Alternatively you can include the `chiplotle-trunk` directory in 
+   your ``PYTHONPATH`` environment variable.             
+
+4. Have your ``PATH`` environment variable point to the `scripts` folder. 
+   This will allow you to run Chiplotle and all its accompanying scripts from 
+   anywhere in your system.
+
+5. Download and install NumPy and PySerial.
+

@@ -1,0 +1,7 @@
+include INSTALL
+include README
+include COPYING
+include ez_setup.py
+include setup.py
+recursive-include chiplotle/documentation *
+recursive-include chiplotle/scripts *
