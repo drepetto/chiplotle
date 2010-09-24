@@ -13,7 +13,7 @@ import serial
 import time
 import types
 
-from chiplotle.cfg.read_config_file import read_config_file 
+from chiplotle.cfg.get_config_value import get_config_value 
 
 class _BasePlotter(object):
    def __init__(self, serial_port):
@@ -23,7 +23,7 @@ class _BasePlotter(object):
       self._serial_port = serial_port
       self._hpgl = commands
       self._margins = MarginsInterface(self)
-      self.maximum_response_wait_time = read_config_file( )['maximum_response_wait_time']
+      self.maximum_response_wait_time = get_config_value('maximum_response_wait_time')
 
       self.buffer_size = self._buffer_space
       self.initialize_plotter( )

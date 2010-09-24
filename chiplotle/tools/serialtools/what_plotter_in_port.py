@@ -1,4 +1,3 @@
-from chiplotle.cfg.read_config_file import read_config_file
 import serial
 import time
 
