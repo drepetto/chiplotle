@@ -1,3 +1,4 @@
+NOTE: the methods below should all be in input_mask() form, right? We're moving away from camelCaps. 
 
 -----------------------
 Implement __eq__ on _HPGL
