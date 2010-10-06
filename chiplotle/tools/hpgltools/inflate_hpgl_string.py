@@ -1,7 +1,7 @@
 from chiplotle.hpgl import commands as hpgl
 import re
 
-def inflate_hpgl_string(string):
+def inflate_hpgl_string(string, filter_commands=None):
    '''Reads a text string and "inflates" it by creating
    Chiplotle-HPGL class instances of the found HPGL commands.
 
@@ -10,18 +10,30 @@ def inflate_hpgl_string(string):
       chiplotle> square = inflate_hpgl_string('SP1;')
       chiplotle> square
       [SP(1)]
+
+   Example::
+
+      chiplotle> square = inflate_hpgl_string('IN;SP1;PA10,10;', ['IN'])
+      chiplotle> square
+      [SP(1), PA((10, 10))]
    '''
+   filter_commands = filter_commands or [ ]
+
+   if not isinstance(string, type('abc')):
+      raise TypeError('`string` must be a string')
+   if not isinstance(filter_commands, list):
+      msg = '`filter_commands` must be a list of string HPGL commands.'
+      raise TypeError(msg)
 
    _unsupported_commands = ('PW','PC', 'LA', 'WU', 'BP')
-   #f = open(filename)
-   #fs = f.read()
-   #f.close()
    string = string.replace('\n',';')
    comms = re.split(';+', string)
    result = []
    for c in comms:
       if c: ## not an empty string: ''
          head = c[0:2]
+         if head in filter_commands:
+            continue
          if head in _unsupported_commands:
             continue
          if head in ('PU','PD','PA','PR', 'RA','RR', 'ER','EA',  'IP', 'SC'):
