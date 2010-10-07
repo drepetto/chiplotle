@@ -35,8 +35,8 @@ class RadialHistogramRF(_RadialHistogram):
          for j in range(int(length / self.fillines_spacing) + 1):
             v = self.min_radius + j * self.fillines_spacing
             xy = polar_to_xy(v, i * self._bin_angle_width)
-            result.append(PU(self.xyabsolute + xy))
+            result.append(PU(self.xy + xy))
             result.append(PD( ))
-            result.append(AA(self.xyabsolute, angle_per_bin_deg, self.chord))
+            result.append(AA(self.xy, angle_per_bin_deg, self.chord))
       return result    
 

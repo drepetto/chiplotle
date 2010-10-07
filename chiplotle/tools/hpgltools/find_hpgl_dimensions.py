@@ -1,7 +1,7 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
-from chiplotle.hpgl.compound.container import Container
-from chiplotle.hpgl.compound.hpglcontainer import HPGLContainer
-
+#from chiplotle.hpgl.compound.container import Container
+#from chiplotle.hpgl.compound.hpglcontainer import HPGLContainer
+from chiplotle.hpgl.compound.group import Group
 
 def find_hpgl_dimensions(hpgl):
    '''
@@ -17,7 +17,8 @@ def find_hpgl_dimensions(hpgl):
    ## also check the xy position of the shapes contained by the containers.
    ## This function will fail to give the correct min/max on Container
    ## and HPGLContainer objects.
-   if isinstance(hpgl, (list, tuple, Container, HPGLContainer)):
+   #if isinstance(hpgl, (list, tuple, Container, HPGLContainer)):
+   if isinstance(hpgl, (list, tuple, Group)):
       for command in hpgl:
          if hasattr(command, 'xy') and len(command.xy) > 0:
             for coord in command.xy:

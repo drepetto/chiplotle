@@ -6,7 +6,7 @@ import numpy
 class _RadialHistogram(_CompoundHPGL):
    '''Abstract radial histogram class.'''
 
-   _scalable = ['min_radius', 'max_radius']
+   _scalable = _CompoundHPGL._scalable + ['min_radius', 'max_radius']
 
    def __init__(self, xy, min_radius, max_radius, data, fill=False, 
       fillines_spacing=None, pen=None):
@@ -40,13 +40,13 @@ class _RadialHistogram(_CompoundHPGL):
          ## edge 1...
          xy1a, xy2a = self._endpoints_from_angle(i * self._bin_angle_width, d)
          xy1b, xy2b = self._endpoints_from_angle((i+1) * self._bin_angle_width, d)
-         result.append(PU(self.xyabsolute + xy1a))
-         result.append(PD(self.xyabsolute + xy2a))
+         result.append(PU(self.xy + xy1a))
+         result.append(PD(self.xy + xy2a))
          ## edge 2...
-         result.append(PU(self.xyabsolute + xy1b))
-         result.append(PD(self.xyabsolute + xy2b))
+         result.append(PU(self.xy + xy1b))
+         result.append(PD(self.xy + xy2b))
          ## connecting arch...
-         result.append(AA(self.xyabsolute, -angle_per_bin_deg))
+         result.append(AA(self.xy, -angle_per_bin_deg))
       return result 
 
    @property
@@ -58,7 +58,7 @@ class _RadialHistogram(_CompoundHPGL):
    @property
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
-      result.append(PU(self.xyabsolute))
+      #result.append(PU(self.xy))
       ## draw min_radius circle...
       result.append(CI(self.min_radius))
       ## draw histogram outlines...

@@ -1,33 +1,37 @@
 from chiplotle import *
-import numpy
+#import numpy
 from py.test import raises
 
 def test_coordinatearray_01( ):
    '''CoordinateArray can be empty.'''
    t = CoordinateArray( )
-
-   assert isinstance(t.xy, numpy.ndarray)
-   assert isinstance(t.x, numpy.ndarray)
-   assert isinstance(t.y, numpy.ndarray)
+   assert isinstance(t.xy, list)
+   for e in t:
+      assert isinstance(e, CoordinatePair)
+   assert isinstance(t.x, tuple)
+   assert isinstance(t.y, tuple)
+#   assert isinstance(t.xy, numpy.ndarray)
+#   assert isinstance(t.x, numpy.ndarray)
+#   assert isinstance(t.y, numpy.ndarray)
 
 
 def test_coordinatearray_02( ):
    '''CoordinateArray can take a flat list of numbers.'''
    t = CoordinateArray([1, 2, 3, 4])
 
-   assert isinstance(t.xy, numpy.ndarray)
-   assert t.xy.shape == (2, 2)
-   assert numpy.all(t.xy == [(1, 2), (3, 4)])
-   assert numpy.all(t.xy == numpy.array([(1, 2), (3, 4)]))
+   #assert isinstance(t.xy, numpy.ndarray)
+   assert isinstance(t.xy, list)
+   #assert t.xy.shape == (2, 2)
+   assert t.xy == [(1, 2), (3, 4)]
+   assert t.xy == [(1, 2), (3, 4)]
 
 
 def test_coordinatearray_03( ):
    '''CoordinateArray can take a list of tuple pairs.'''
    t = CoordinateArray([(1, 2), (3, 4), (5, 6)])
 
-   assert isinstance(t.xy, numpy.ndarray)
-   assert t.xy.shape == (3, 2)
-   assert numpy.all(t.xy == [(1, 2), (3, 4), (5, 6)])
+   #assert t.xy.shape == (3, 2)
+   assert t.xy == [(1, 2), (3, 4), (5, 6)]
 
 
 def test_coordinatearray_04( ):
@@ -64,12 +68,7 @@ def test_coordinatearray__add__03( ):
    a = CoordinateArray([(1, 2), (3, 4)])
    b = CoordinateArray([(1, 1)])
 
-   t = a + b
-
-   assert isinstance(t, CoordinateArray)
-   assert t is not a
-   assert t is not b
-   assert t == [(2, 3), (4, 5)]
+   assert raises(ValueError, 't = a + b')
 
 
 def test_coordinatearray__add__04( ):

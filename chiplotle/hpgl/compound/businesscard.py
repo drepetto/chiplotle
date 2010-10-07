@@ -31,7 +31,7 @@ class BusinessCard(_CompoundHPGL):
       def fset(self, logo):
          if isinstance(logo, _CompoundHPGL):
             self._logo = logo
-            logo.parentage._switch(self)
+            #logo.parentage._switch(self)
          elif logo is None:
             self._logo = None
          else:
@@ -48,8 +48,8 @@ class BusinessCard(_CompoundHPGL):
          for e in texts:
             if not isinstance(e, Label):
                raise TypeError('The text elements must be Label instances.')
-         for e in texts:
-            e.parentage._switch(self)
+#         for e in texts:
+#            e.parentage._switch(self)
          self._texts = texts
       return property(**locals( ))
 
@@ -74,13 +74,13 @@ class BusinessCard(_CompoundHPGL):
    @property
    def _subcommands_corner_dots(self):
       result = [PU( )]
-      result.append(PA(self.xyabsolute + self.upper_left))
+      result.append(PA(self.xy + self.upper_left))
       result += [PD( ), PU( )]
-      result.append(PA(self.xyabsolute + self.upper_right))
+      result.append(PA(self.xy + self.upper_right))
       result += [PD( ), PU( )]
-      result.append(PA(self.xyabsolute + self.lower_left))
+      result.append(PA(self.xy + self.lower_left))
       result += [PD( ), PU( )]
-      result.append(PA(self.xyabsolute + self.lower_right))
+      result.append(PA(self.xy + self.lower_right))
       result += [PD( ), PU( )]
       return result
 

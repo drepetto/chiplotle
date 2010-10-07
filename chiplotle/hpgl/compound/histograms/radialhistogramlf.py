@@ -31,7 +31,7 @@ class RadialHistogramLF(_RadialHistogram):
          for j in range(int(self._bin_angle_width / self.fillines_spacing)+1):
             xy1, xy2 = self._endpoints_from_angle(
                i * self._bin_angle_width + j * self.fillines_spacing, d)
-            result.append(PU(self.xyabsolute + xy1))
-            result.append(PD(self.xyabsolute + xy2))
+            result.append(PU(self.xy + xy1))
+            result.append(PD(self.xy + xy2))
       return result    
 

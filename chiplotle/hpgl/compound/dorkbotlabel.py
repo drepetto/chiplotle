@@ -44,7 +44,7 @@ class DorkbotLabel(_CompoundHPGL):
    @property
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
-      result += [PU( ), PA(self.xyabsolute)]
+#      result += [PU( ), PA(self.xy)]
 
       ## outline
       if self.cell_shape == 'circle':

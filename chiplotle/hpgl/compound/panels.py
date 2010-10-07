@@ -16,19 +16,19 @@ class Panels(_CompoundHPGL):
    - `pen` : ``int``, pen number.
       
       
-from chiplotle import *
-width = 10000
-height = 10000
-panel = Panels([0,height], width, height, 5, 5, .1, .1, True, 3)
-io.view(panel)      
+   Example::
+
+      from chiplotle import *
+      width = 10000
+      height = 10000
+      panel = Panels([0,height], width, height, 5, 5, .1, .1, True, 3)
+      io.view(panel)      
    
-   ____________
    | x x x x x |
    | x x x x x |
    | x x x x x |
    | x x x x x |
    | x x x x x |
-   -------------
    
    '''
 
@@ -66,18 +66,18 @@ io.view(panel)
 
       if self.big_border:
          # draw big rect
-         result.append(PA((self.xabsolute, self.yabsolute)))
+         result.append(PA((self.x, self.y)))
          result.append(PD())
-         result.append(PA((self.xabsolute + self.width, self.yabsolute)))
-         result.append(PA((self.xabsolute + self.width, self.yabsolute - self.height)))
-         result.append(PA((self.xabsolute, self.yabsolute - self.height)))
-         result.append(PA((self.xabsolute, self.yabsolute)))
+         result.append(PA((self.x+ self.width, self.y)))
+         result.append(PA((self.x+ self.width, self.y- self.height)))
+         result.append(PA((self.x, self.y- self.height)))
+         result.append(PA((self.x, self.y)))
          result.append(PU())
       
       for i in range(self.horiz_panels):
          for j in range(self.vert_panels):
-            x_start = self.xabsolute + (horiz_buff_each * (i + 1)) + (width_each * i)
-            y_start = self.yabsolute - (vert_buff_each * (j + 1)) - (height_each * j)
+            x_start = self.x+ (horiz_buff_each * (i + 1)) + (width_each * i)
+            y_start = self.y- (vert_buff_each * (j + 1)) - (height_each * j)
             #print "x_start: %d y_start: %d" % (x_start, y_start)
             result.append(PA((x_start, y_start)))
             result.append(PD())

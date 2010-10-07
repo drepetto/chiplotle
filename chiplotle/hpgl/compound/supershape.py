@@ -13,7 +13,7 @@ class Supershape(_CompoundHPGL):
    a=b=1.0, m, n1, n2, n3 - controls of shape
    '''
 
-   _scalable = ['width', 'height']
+   _scalable = _CompoundHPGL._scalable + ['width', 'height']
 
    def __init__(self, xy, w, h, m, n1, n2, n3, 
       points=1000, percentage=1.0, a=1.0, b=1.0, range=None, pen=None):
@@ -46,8 +46,8 @@ class Supershape(_CompoundHPGL):
       ## scale and transpose...
       path = [ ]
       for x, y in points:
-         x = x * self.width + self.xabsolute
-         y = y * self.height + self.yabsolute
+         x = x * self.width + self.x
+         y = y * self.height + self.y
          path.append((x, y))
       ## generate HPGL commands...
       result = _CompoundHPGL._subcommands.fget(self)

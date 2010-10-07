@@ -23,14 +23,13 @@ class Catmull(_CompoundHPGL):
          self.points_to_compute)
 
       result = _CompoundHPGL._subcommands.fget(self)
-      result.append(PU( ))
-      result.append(PA(self.xyabsolute + tuple(plot_points[0])))
+      result.append(PA(self.xy + tuple(plot_points[0])))
       result.append(PD( ))
 
       for point_tuple in tuple(plot_points[1:]):
-         position = self.xyabsolute + point_tuple
+         position = self.xy + point_tuple
          result.append(PA(position))
-      position = self.xyabsolute + self.control_points[-2]
+      position = self.xy + self.control_points[-2]
       result.append(PA(position))
       result.append(PU( ))
 

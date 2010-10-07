@@ -14,7 +14,7 @@ class Grid(_CompoundHPGL):
    
    '''
 
-   _scalable = ['width', 'height']
+   _scalable = _CompoundHPGL._scalable + ['width', 'height']
 
    def __init__(self, xy, width, height, width_divisions,
       height_divisions, pen=None):
@@ -28,11 +28,11 @@ class Grid(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      ul_x = self.xabsolute - self.reference_point[0] * self.width
+      ul_x = self.x - self.reference_point[0] * self.width
       bl_x = ul_x
       ur_x = ul_x + self.width
 
-      ul_y = self.yabsolute + self.reference_point[1] * self.height
+      ul_y = self.y + self.reference_point[1] * self.height
       ur_y = ul_y
       bl_y = ul_y - self.height
       
