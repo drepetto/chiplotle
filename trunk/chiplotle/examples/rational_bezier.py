@@ -11,7 +11,7 @@ points = [(-t_base/2,0),(0,t_base*0.8660),(t_base/2,0)]
 ## a list containing different sets of weights for the middle point
 weights = [[1,1,1],[1,2,1],[1,0.5,1],[1,0,1],[1,-0.5,1]]
 
-c = Container((0,0))
+c = Group((0,0))
 
 ## draws a cross at each control point
 for i in points:

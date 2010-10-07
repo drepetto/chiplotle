@@ -99,6 +99,6 @@ class FancyLabel(_CompoundHPGL):
    @property
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
-      result += [PU( ), PA(self.xyabsolute)]
+      #result += [PU( ), PA(self.xy)]
       result += self._get_text( )
       return result

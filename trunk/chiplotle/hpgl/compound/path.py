@@ -7,7 +7,7 @@ from chiplotle.tools.mathtools import bezier_interpolation
 class Path(_CompoundHPGL):
    '''draws a path given a list of waypoints'''
 
-   _scalable = ['points']
+   _scalable = _CompoundHPGL._scalable + ['points']
 
    def __init__(self, points, xy=None, curvature=1.0, points_to_compute=None, pen=None):
       self.points = points
@@ -47,10 +47,10 @@ class Path(_CompoundHPGL):
       result = [ ]
       plot_points = self.points
       result.append(PU( ))
-      result.append(PA(self.xyabsolute + plot_points[0]))
+      result.append(PA(self.xy + plot_points[0]))
       result.append(PD( ))
       for point_tuple in plot_points[1:]:
-         position = self.xyabsolute + point_tuple
+         position = self.xy + point_tuple
          result.append(PA(position))
       result.append(PU( ))
       return result
@@ -76,7 +76,7 @@ class Path(_CompoundHPGL):
 
       result = [ ]
       result.append(PU( ))
-      result.append(PA(self.xyabsolute + self.points[0]))
+      result.append(PA(self.xy + self.points[0]))
       result.append(PD( ))
       for i in range(len(self.points) - 1):
          control_points = [(self.points[i][0], self.points[i][1]),
@@ -88,7 +88,7 @@ class Path(_CompoundHPGL):
          plot_points = bezier_interpolation(control_points, 
             self.points_to_compute, 1)
          for point_tuple in plot_points:
-            position = self.xyabsolute + point_tuple
+            position = self.xy + point_tuple
             result.append(PA(position))
       result.append(PU( ))
       return result

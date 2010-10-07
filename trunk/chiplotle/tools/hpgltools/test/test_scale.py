@@ -57,30 +57,17 @@ def test_scale_RR( ):
    assert t.xy == [1.5, 3.0]
    
 
-def test_scale_container_01( ):
-   t = Container((1, 2), [Circle((10, 10), 100)])
+def test_scale_group_01( ):
+   t = Group((1, 2), [Circle((10, 10), 100)])
    scale(t, 1.5)
-   
    assert t.xy == [1.5, 3]
    assert t[0].xy == [15, 15]
-   assert t[0].xyabsolute == [16.5, 18]
    assert t[0].radius == 150
-   
-
-def test_scale_hpglcontainer_01( ):
-   t = HPGLContainer((1, 2), [PA((1, 2)), PR((2, 3))])
-   scale(t, 1.5)
-
-   assert t.xy == [1.5, 3]
-   assert t[0].xy == [1.5, 3]
-   assert t[1].xy == [3, 4.5]
-   assert t.format == 'PA1.50,3.00;PA3.00,6.00;PR3.00,4.50;'
    
 
 def test_scale_list_01( ):
    t = [PA((1, 2)), PU((3, 4))]
    scale(t, 1.5)
-
    assert t[0].xy == [1.5, 3]
    assert t[1].xy == [4.5, 6]
 

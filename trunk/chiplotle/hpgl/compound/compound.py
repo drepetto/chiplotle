@@ -1,18 +1,14 @@
-#from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.hpgl.coordinatepair import CoordinatePair
-from chiplotle.hpgl.commands import SP
+from chiplotle.hpgl.commands import PA, PU, SP
 from chiplotle.hpgl.compound.pen import Pen
-from chiplotle.interfaces.parentage.interface import ParentageInterface
 import types
 
-#class _CompoundHPGL(_Positional):
 class _CompoundHPGL(_HPGL):
    
    _scalable = ['xy']
 
    def __init__(self, xy, pen=None):
-      self._parentage = ParentageInterface(self)
       self.pen = pen
       self.xy = xy
 
@@ -49,10 +45,6 @@ class _CompoundHPGL(_HPGL):
          result += c.format
       return result
 
-   @property
-   def parentage(self):
-      return self._parentage
-
    @apply
    def pen( ):
       def fget(self):
@@ -66,29 +58,6 @@ class _CompoundHPGL(_HPGL):
             raise TypeError('pen must be a Pen( ) instance, int or None.')
       return property(**locals( ))
 
-   @property
-   def xyabsolute(self):
-      if self.parentage.parent:
-         return self.parentage.parent.xyabsolute + self.xy
-      else:
-         return self.xy
-
-   @property
-   def xabsolute(self):
-      #return self._getAbsCoord(0)
-      if self.parentage.parent:
-         return self.parentage.parent.xabsolute + self.x
-      else:
-         return self.x
-
-   @property
-   def yabsolute(self):
-      #return self._getAbsCoord(1)
-      if self.parentage.parent:
-         return self.parentage.parent.yabsolute + self.y
-      else:
-         return self.y
-
 
    ## PRIVATE ATTRIBUTES ##
 
@@ -97,8 +66,7 @@ class _CompoundHPGL(_HPGL):
    def _subcommands(self):
       result = [ ]
       if self.pen:
-         #result.append(SP(self.pen))
          result.append(self.pen)
+      result.extend([PU( ), PA(self.xy)])
       return result
-
 

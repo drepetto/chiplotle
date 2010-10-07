@@ -46,7 +46,7 @@ def _return_relative_from_absolute(command, delta):
    if isinstance(command, hpgl.PA):
       if delta is not None:
          result.append(hpgl.PR(delta))
-      diff = numpy.diff(command.xy, axis=0)
+      diff = numpy.diff(command.xy, axis=0).tolist( )
       if len(diff) > 0:
          result.append(hpgl.PR(diff))
    elif isinstance(command, hpgl.RA) and delta is not None:

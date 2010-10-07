@@ -59,43 +59,31 @@ For example, the :class:`MayaNumber <chiplotle.hpgl.compound.mayanumber.MayaNumb
    chiplotle> mn.format
    'PA1250.0,3187.5;CI35.7142868042;PU;PA1062.5,2589.29;EA1437.5,2660.71;PA1125.0,2750.0;CI35.7142868042;PA1250.0,2750.0;CI35.7142868042;PA1375.0,2750.0;CI35.7142868042;PA1125.0,2062.5;CI35.7142868042;PA1250.0,2062.5;CI35.7142868042;PA1375.0,2062.5;CI35.7142868042;'
 
-PUT PICTURE HERE
 
-Compound Chiplotle commands have another special property that plain Chiplotle-HPGL commands don't have. Compound commands can be hierarchically grouped via the :class:`Container <chiplotle.hpgl.compound.container.Container>` class.  
 
-This class can hold other Compound classes to later be treated as a single object:: 
+Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_compound>` for a list of the compound Chiplotle commands currently available.
+
+Groups
+------
+
+Both Primitive HPGL and Compound HPGL commands can be grouped to create an agglomerate of shapes. Groups work very much as they do in drawing packages like Adobe Illustrator, InkScape, etc. 
+
+The :class:`Group <chiplotle.hpgl.compound.group.Group>` class can hold other Group classes to later be treated as a single object:: 
 
    chiplotle> c = Circle((1000, 2000), 1000)
    chiplotle> r = Rectangle((1000, 2000), 250, 2000, 3.1416 / 4.)
-   chiplotle> cnt = Container((5000, 0), [c, r])
-   chiplotle> cnt.format
-   'PU6000.0,2000.0;CI1000.0;PU;PA6618.72,2795.49;PD;PA6795.5,2618.72;
-   PA5381.28,1204.51;PA5204.5,1381.28;PA6618.72,2795.49;PU;'
+   chiplotle> grp = Group((5000, 0), [c, r])
+   chiplotle> len(grp) == 2
+   chiplotle> grp[0] is c
+   chiplotle> grp[1] is r
 
-Notice that, like all Chiplotle Compound commands, the :class:`Container <chiplotle.hpgl.compound.container.Container>` class also has an `xy` property::
+Notice that, like all Chiplotle Compound commands, the :class:`Group <chiplotle.hpgl.compound.group.Group>` class also has an `xy` property::
 
-   chiplotle> cnt.xy
+   chiplotle> grp.xy
    [ 5000.  0.]
 
-Unlike the standard Chiplotle-HPGL commands, these  compound commands also have **absolute** positional properties. The settable `xy` positional property defines the position of the object relative to the container it lives in, if any. The absolute `xyabsolute` property defines the object's absolute location in the page. These absolute position attributes are not settable. So, in the example above, because the circle and the rectangle are contained in the `cnt` :class:`Container <chiplotle.hpgl.compound.container.Container>`  object, they will move with the container whenever we change it's position::
+The settable `xy` positional property defines the position of the object relative to the Group it lives in, if any.
 
-   chiplotle> cnt.xy = (-2000, -10000)
-   chiplotle> c.xy
-   [ 1000.  2000.]
-   chiplotle> c.xyabsolute
-   [-1000. -8000.]
-   chiplotle> r.xyabsolute
-   [-1000. -8000.]
-   chiplotle> c.xy
-   [ 1000.  2000.]
-   chiplotle> r.xy
-   [ 1000.  2000.]
-   chiplotle> cnt.format
-   'PU-1000.0,-8000.0;CI1000.0;PU;PA-381.28,-7204.51;PD;PA-204.504,-7381.28;
-   PA-1618.72,-8795.49;PA-1795.5,-8618.72;PA-381.28,-7204.51;PU;
-
-
-Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_compound>` for a list of the compound Chiplolte commands currently available.
    
 
 

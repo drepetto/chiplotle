@@ -6,6 +6,8 @@ HPGL Tools
 
 .. autofunction:: chiplotle.tools.hpgltools.find_hpgl_dimensions
 
+.. autofunction:: chiplotle.tools.hpgltools.inflate_hpgl_string
+
 .. autofunction:: chiplotle.tools.hpgltools.is_primitive_absolute
 
 .. autofunction:: chiplotle.tools.hpgltools.relativize
@@ -33,6 +35,12 @@ Math tools
 .. autofunction:: chiplotle.tools.mathtools.catmull_interpolation
 
 .. autofunction:: chiplotle.tools.mathtools.pascal_row
+
+.. autofunction:: chiplotle.tools.mathtools.polar_to_xy
+
+.. autofunction:: chiplotle.tools.mathtools.rotate_2d
+
+.. autofunction:: chiplotle.tools.mathtools.rotate_3d
 
 .. autofunction:: chiplotle.tools.mathtools.superformula
 

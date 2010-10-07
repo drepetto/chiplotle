@@ -6,14 +6,11 @@ def test_compound_hpgl_01( ):
 
    assert t.pen is None
    assert t.xy == CoordinatePair(1, 2)
-   assert t.xyabsolute == CoordinatePair(1, 2)
    assert t.x == 1
    assert t.y == 2
-   assert t.xabsolute == 1
-   assert t.yabsolute == 2
 
-   assert t._subcommands == [ ]
-   assert t.format == ''
+   assert t._subcommands == [PU( ), PA((1, 2))]
+   assert t.format == 'PU;PA1,2;'
 
 
 ## pen ##
@@ -24,9 +21,9 @@ def test_compound_hpgl_pen_01( ):
 
    assert isinstance(t.pen, Pen)
    assert t.pen.number == 1
-   assert len(t._subcommands) == 1
+   assert len(t._subcommands) == 3
    assert t.pen is t._subcommands[0]
-   assert t.format == 'SP1;'
+   assert t.format == 'SP1;PU;PA1,2;'
    
 
 def test_compound_hpgl_pen_02( ):
@@ -36,7 +33,6 @@ def test_compound_hpgl_pen_02( ):
 
    assert isinstance(t.pen, Pen)
    assert t.pen.number == 2
-   assert t.format == 'SP2;'
    
 
 def test_compound_hpgl_pen_03( ):
@@ -46,5 +42,4 @@ def test_compound_hpgl_pen_03( ):
 
    assert isinstance(t.pen, Pen)
    assert t.pen.number == 2
-   assert t.format == 'SP2;'
    

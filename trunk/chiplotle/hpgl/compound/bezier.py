@@ -26,33 +26,32 @@ class Bezier(_CompoundHPGL):
    @property
    def _subcommands(self):
       plot_points = bezier_interpolation(
-         self.control_points, 
+         self.control_points.as_list_of_pairs( ), 
          self.points_to_compute, self.weight)
 
       result = _CompoundHPGL._subcommands.fget(self)
-      result.append(PU( ))
-      result.append(PA(self.xyabsolute + plot_points[0]))
+      result.append(PA(self.xy + plot_points[0]))
       result.append(PD( ))
 
       for point_tuple in plot_points[1:]:
-         position = self.xyabsolute + point_tuple
+         position = self.xy + point_tuple
          result.append(PA(position))
       result.append(PU( ))
       if self.control_marks:
          if (self.control_marks == "lines" or self.control_marks == "line"):
             ## draws the polygon defined by control points with dashed line
-            result.append(PA(self.xyabsolute + self.control_points[0]))
+            result.append(PA(self.xy + self.control_points[0]))
             result.append(PD( ))
             result.append(LT(2))
             for point_tuple in self.control_points[1:]:
-               position = self.xyabsolute + point_tuple
+               position = self.xy + point_tuple
                result.append(PA(position))
             result.append(LT( ))
             result.append(PU( ))
          elif (self.control_marks == "crosses" or self.control_marks == "cross"):
             ## draws crosses at control points
             for point_tuple in self.control_points:
-               result.append(PA(self.xyabsolute + point_tuple))
+               result.append(PA(self.xy + point_tuple))
                result.append(PR((-50,0)))
                result.append(PD( ))
                result.append(PR((100,0)))

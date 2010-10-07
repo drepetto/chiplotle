@@ -3,7 +3,7 @@ from chiplotle.hpgl.commands import PA, PD, PU
 
 class GroovyFrame(_CompoundHPGL):
    
-   _scalable = ['xy', 'w1', 'h1', 'w2', 'h2']
+   _scalable = _CompoundHPGL._scalable + ['w1', 'h1', 'w2', 'h2']
 
    def __init__(self, xy, w1, h1, w2, h2, lines_per_side, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
@@ -22,10 +22,10 @@ class GroovyFrame(_CompoundHPGL):
       for element in self._compute_squares( ):
          for coords in element:
             coords = list(coords)
-            coords[0] += self.xabsolute
-            coords[2] += self.xabsolute
-            coords[1] += self.yabsolute
-            coords[3] += self.yabsolute
+            coords[0] += self.x
+            coords[2] += self.x
+            coords[1] += self.y
+            coords[3] += self.y
             ## draw straight line...
             r = [PU( ), PA(coords[:2]), PD( ), PA(coords[2:])]
             result += r

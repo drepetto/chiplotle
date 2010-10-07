@@ -45,7 +45,7 @@ class _PenPlot(_HPGLPrimitive):
 
    @property
    def format(self):
-      if self._coords.dtype == int:
+      if self.xy.dtype == int:
          coordinates = ['%i,%i' % tuple(p) for p in self.xy]
       else:
          coordinates = ['%.2f,%.2f' % tuple(p) for p in self.xy]

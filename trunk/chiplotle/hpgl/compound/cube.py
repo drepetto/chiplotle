@@ -5,7 +5,7 @@ from chiplotle.tools.mathtools import rotate_3d
 class Cube(_CompoundHPGL):
    '''A 3D Cube. Can be rotated on x, y, and z.'''
 
-   _scalable = ['width', 'height', 'depth']
+   _scalable = _CompoundHPGL._scalable + ['width', 'height', 'depth']
 
    def __init__(self, xy, width, height, depth, rotation=(0,0,0), pen=None):
       _CompoundHPGL.__init__(self, xy, pen) 
@@ -40,26 +40,26 @@ class Cube(_CompoundHPGL):
       result = _CompoundHPGL._subcommands.fget(self)
       result.append(PA( ))
       ## high square...
-      result.append(PU(self.xyabsolute + blh))
-      result.append(PD(self.xyabsolute + brh))
-      result.append(PD(self.xyabsolute + trh))
-      result.append(PD(self.xyabsolute + tlh))
-      result.append(PD(self.xyabsolute + blh))
+      result.append(PU(self.xy + blh))
+      result.append(PD(self.xy + brh))
+      result.append(PD(self.xy + trh))
+      result.append(PD(self.xy + tlh))
+      result.append(PD(self.xy + blh))
       ## low square...
-      result.append(PU(self.xyabsolute + bll))
-      result.append(PD(self.xyabsolute + brl))
-      result.append(PD(self.xyabsolute + trl))
-      result.append(PD(self.xyabsolute + tll))
-      result.append(PD(self.xyabsolute + bll))
+      result.append(PU(self.xy + bll))
+      result.append(PD(self.xy + brl))
+      result.append(PD(self.xy + trl))
+      result.append(PD(self.xy + tll))
+      result.append(PD(self.xy + bll))
       ## connect squares...
-      result.append(PU(self.xyabsolute + blh))
-      result.append(PD(self.xyabsolute + bll))
-      result.append(PU(self.xyabsolute + brh))
-      result.append(PD(self.xyabsolute + brl))
-      result.append(PU(self.xyabsolute + tlh))
-      result.append(PD(self.xyabsolute + tll))
-      result.append(PU(self.xyabsolute + trh))
-      result.append(PD(self.xyabsolute + trl))
+      result.append(PU(self.xy + blh))
+      result.append(PD(self.xy + bll))
+      result.append(PU(self.xy + brh))
+      result.append(PD(self.xy + brl))
+      result.append(PU(self.xy + tlh))
+      result.append(PD(self.xy + tll))
+      result.append(PU(self.xy + trh))
+      result.append(PD(self.xy + trl))
       result.append(PU( ))
       return result
 

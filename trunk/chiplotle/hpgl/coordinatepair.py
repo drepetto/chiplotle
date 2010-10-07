@@ -46,6 +46,10 @@ class CoordinatePair(object):
 
    ## OVERRIDES ##
 
+   def __iter__(self):
+      for e in self.xy:
+         yield e
+
    def __len__(self):
       return 2
 

@@ -72,7 +72,7 @@ class Label(_CompoundHPGL):
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
       ### set commands
-      result += [PU( ), PA(self.xyabsolute)]
+      #result += [PU( ), PA(self.xyabsolute)]
       if not self.charsize is None:
          result.append(SI(*self.charsize.xy))
       if self.charspace and self.linespace:

@@ -26,10 +26,12 @@ class Cross(_CompoundHPGL):
       bottom = rotate_2d(bottom, self.rotation)
 
       result = _CompoundHPGL._subcommands.fget(self)
-      result.append(PA( ))
-      result.append(PU(self.xyabsolute + left))
-      result.append(PD(self.xyabsolute + right))
-      result.append(PU(self.xyabsolute + top))
-      result.append(PD(self.xyabsolute + bottom))
+      result.append(PA(self.xy + left))
+      result.append(PD( ))
+      result.append(PA(self.xy + right))
+      result.append(PU( ))
+      result.append(PA(self.xy + top))
+      result.append(PD( ))
+      result.append(PA(self.xy + bottom))
       result.append(PU( ))
       return result

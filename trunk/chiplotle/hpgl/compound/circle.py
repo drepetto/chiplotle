@@ -4,7 +4,7 @@ from chiplotle.hpgl.compound.compound import _CompoundHPGL
 class Circle(_CompoundHPGL):
    '''Circle with absolute position.'''
    
-   _scalable = ['xy', 'radius']
+   _scalable = _CompoundHPGL._scalable + ['radius']
 
    def __init__(self, xy, radius, chord=None, filled=False, pen=None):
       _CompoundHPGL.__init__(self, xy, pen)
@@ -15,7 +15,6 @@ class Circle(_CompoundHPGL):
    @property
    def _subcommands(self):
       result = _CompoundHPGL._subcommands.fget(self)
-      result.append(PU(self.xyabsolute))
       if self.filled:
          result.append(WG(self.radius, 0, 359))
       else:

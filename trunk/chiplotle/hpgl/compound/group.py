@@ -1,17 +1,16 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.hpgl.compound.newcompound import _NewCompoundHPGL
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.tools.hpgltools import is_primitive_absolute 
 import copy
 
-class Group(_NewCompoundHPGL):
+class Group(_CompoundHPGL):
    '''A group collects together multiple Chiplotle HPGL commands, so they
    can be treated as a single object. 
    Group has a position (xy) attribute. 
    '''
    def __init__(self, xy, shapes=None, pen=None):
-      _NewCompoundHPGL.__init__(self, xy, pen)
+      _CompoundHPGL.__init__(self, xy, pen)
       self._shapes = [ ]
       shapes = shapes or [ ]
       self.extend(shapes)
@@ -29,15 +28,15 @@ class Group(_NewCompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _NewCompoundHPGL._subcommands.fget(self)
+      result = _CompoundHPGL._subcommands.fget(self)
+      ## TODO: replace all this with a single call to transpose..?
       for s in self:
          if isinstance(s, _HPGLPrimitive):
             if is_primitive_absolute(s):
                s = copy.copy(s)
                s.xy += self.xy
             result.append(s)
-         ## TODO: remove `isinstance(s, _CompoundHPGL)` once these are deprecated.
-         elif isinstance(s, _NewCompoundHPGL) or isinstance(s, _CompoundHPGL):
+         elif isinstance(s, _CompoundHPGL):
             s = copy.copy(s)
             s.xy += self.xy
             result.extend(s._subcommands)
@@ -82,9 +81,8 @@ class Group(_NewCompoundHPGL):
       self._shapes.insert(i, arg)
 
    def remove(self, arg):
-      arg.parentage._cut( )
+      self._shapes.remove(arg)
 
    def pop(self, indx=-1):
-      result = self._shapes[indx]
-      result.parentage._cut( )
+      result = self._shapes.pop(indx)
       return result

@@ -21,11 +21,6 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
-.. autoclass:: chiplotle.hpgl.compound.Container
-	:members:
-	:undoc-members:
-	:show-inheritance:
-
 .. autoclass:: chiplotle.hpgl.compound.Cross
 	:members:
 	:undoc-members:
@@ -61,7 +56,7 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
-.. autoclass:: chiplotle.hpgl.compound.HPGLContainer
+.. autoclass:: chiplotle.hpgl.compound.Group
 	:members:
 	:undoc-members:
 	:show-inheritance:
@@ -71,12 +66,17 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
-.. autoclass:: chiplotle.hpgl.compound.Line
+.. autoclass:: chiplotle.hpgl.compound.MayaNumber
 	:members:
 	:undoc-members:
 	:show-inheritance:
 
-.. autoclass:: chiplotle.hpgl.compound.MayaNumber
+.. autoclass:: chiplotle.hpgl.compound.Panels
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.Parent
 	:members:
 	:undoc-members:
 	:show-inheritance:
