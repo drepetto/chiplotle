@@ -134,6 +134,10 @@ class CoordinateArray(object):
       return 'CA(%s)' % self.xy
 
 
+
+## TODO: add list-like methods (append, extend, etc)
+
+
 ##################################
 
 #class CoordinateArray(object):
