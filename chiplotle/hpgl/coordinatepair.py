@@ -1,9 +1,10 @@
 from __future__ import division
-from chiplotle.utils.ispair import ispair
-from chiplotle.utils.isiterable import isiterable
 import numpy
 
 class CoordinatePair(object):
+
+   __slots__ = ('_x', '_y')
+
    def __init__(self, *args):
       if len(args) == 1 and isinstance(args[0], CoordinatePair):
          cp = args[0]
@@ -12,6 +13,7 @@ class CoordinatePair(object):
       elif len(args) == 1 and isinstance(args[0], (list, tuple)):
          self.__init__(*args[0])
       elif len(args) == 2:
+         from chiplotle.tools.iterabletools.isiterable import isiterable
          if isiterable(args[0]) or isiterable(args[1]):
             raise TypeError('Each element in the pair must be a scalar')
          self._x = args[0]
@@ -23,10 +25,10 @@ class CoordinatePair(object):
    ## OVERRIDES ##
 
    def __repr__(self):
-      return 'CoordinatePair(%s, %s)' % (self.x, self.y)
+      return 'CP(%s, %s)' % (self.x, self.y)
 
    def __str__(self):
-      return 'CoordinatePair(%s, %s)' % (self.x, self.y)
+      return 'CP(%s, %s)' % (self.x, self.y)
 
 
    ## PUBLIC PROPERTIES ##
@@ -69,6 +71,7 @@ class CoordinatePair(object):
       return CoordinatePair(abs(self.x), abs(self.y))
 
    def __add__(self, arg):
+      from chiplotle.tools.iterabletools.ispair import ispair
       if isinstance(arg, CoordinatePair):
          return CoordinatePair(self.x + arg.x, self.y + arg.y)
       elif ispair(arg):
