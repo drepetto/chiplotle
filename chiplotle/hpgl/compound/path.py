@@ -1,22 +1,17 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.abstractpath import _AbstractPath
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.hpgl.coordinatearray import CoordinateArray
 from chiplotle.tools.mathtools import bezier_interpolation
 
 
-class Path(_CompoundHPGL):
+class Path(_AbstractPath):
    '''draws a path given a list of waypoints'''
 
-   _scalable = _CompoundHPGL._scalable + ['points']
+   _scalable = _AbstractPath._scalable 
 
-   def __init__(self, points, xy=None, curvature=1.0, points_to_compute=None, pen=None):
-      self.points = points
-      self.curvature = curvature
-      ## points_to_compute determines the number of points calculated for 
-      ## each step of the curve
-      self.points_to_compute = points_to_compute or 50
+   def __init__(self, points, interpolation_count=None, curvature=1.0, xy=None):
       xy = xy or (0, 0)
-      _CompoundHPGL.__init__(self, xy, pen) 
+      _AbstractPath.__init__(self, points, interpolation_count, xy) 
+      self.curvature = curvature
 
 
    ## PUBLIC PROPERTIES ##
@@ -30,15 +25,6 @@ class Path(_CompoundHPGL):
             self._curvature = arg
          else:
             raise ValueError('curvature must be between 0 and 1 inclusive.')
-      return property(**locals( ))
-
-   @apply
-   def points( ):
-      def fget(self):
-         return self._points
-      def fset(self, arg):
-         ## TODO: check that there are at least three points.
-         self._points = CoordinateArray(arg)
       return property(**locals( ))
 
    ## PRIVATE METHODS ##
@@ -60,13 +46,13 @@ class Path(_CompoundHPGL):
       dx = {0: 0, len(self.points)-1: 0}
       dy = {0: 0, len(self.points)-1: 0}
       bi = {1: -0.25}
-      ax = {1: (self.points[2][0]-self.points[0][0]-dx[0]) / 4}
-      ay = {1: (self.points[2][1]-self.points[0][1]-dy[0]) / 4}
+      ax = {1: (self.points[2].x - self.points[0].x - dx[0]) / 4}
+      ay = {1: (self.points[2].y - self.points[0].y - dy[0]) / 4}
 
       for i in range(2, len(self.points)-1):
          bi[i] = -1 / (curvature + bi[i-1])
-         ax[i] = -(self.points[i+1][0] - self.points[i-1][0] - ax[i-1]) * bi[i]
-         ay[i] = -(self.points[i+1][1] - self.points[i-1][1] - ay[i-1]) * bi[i]
+         ax[i] = -(self.points[i+1].x - self.points[i-1].x - ax[i-1]) * bi[i]
+         ay[i] = -(self.points[i+1].y - self.points[i-1].y - ay[i-1]) * bi[i]
 
       r = range(1, len(self.points)-1)
       r.reverse( )
@@ -79,14 +65,12 @@ class Path(_CompoundHPGL):
       result.append(PA(self.xy + self.points[0]))
       result.append(PD( ))
       for i in range(len(self.points) - 1):
-         control_points = [(self.points[i][0], self.points[i][1]),
-            (self.points[i][0] + dx[i], self.points[i][1] + dy[i]),
-            (self.points[i+1][0] - dx[i+1], self.points[i+1][1] - dy[i+1]),
-            (self.points[i+1][0], self.points[i+1][1])]
-#         plot_points = bezier_interpolation(control_points, 
-#            self.points_to_compute)
+         control_points = [(self.points[i].x, self.points[i].y),
+            (self.points[i].x + dx[i], self.points[i].y + dy[i]),
+            (self.points[i+1].x - dx[i+1], self.points[i+1].y - dy[i+1]),
+            (self.points[i+1].x, self.points[i+1].y)]
          plot_points = bezier_interpolation(control_points, 
-            self.points_to_compute, 1)
+            self.interpolation_count, 1)
          for point_tuple in plot_points:
             position = self.xy + point_tuple
             result.append(PA(position))
@@ -96,7 +80,7 @@ class Path(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _AbstractPath._subcommands.fget(self)
       if self.curvature == 0:
          result.extend(self._get_straight_line_hpgl( ))
       else:
