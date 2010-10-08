@@ -2,6 +2,9 @@ from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.utils.ispair import ispair
 
 class CoordinateArray(object):
+
+   __slots__ = ('_data', )
+
    def __init__(self, xy=None):
       self.xy = xy
 
@@ -124,9 +127,11 @@ class CoordinateArray(object):
       else:
          raise TypeError
          
-
    def __repr__(self):
-      return 'CoordinateArray(%s)' % self.xy
+      return 'CA(%s)' % self.xy
+
+   def __str__(self):
+      return 'CA(%s)' % self.xy
 
 
 ##################################
