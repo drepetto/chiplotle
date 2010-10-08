@@ -1,8 +1,8 @@
 from chiplotle.hpgl.commands import *
 from chiplotle.fonts import dorkbot
-from chiplotle.utils.ispair import ispair
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.compound.fancylabel import FancyLabel
+from chiplotle.tools.iterabletools.ispair import ispair
 
 class DorkbotLabel(_CompoundHPGL):
    def __init__(self, xy, text, cell_shape='square', pen=None, fill_pen=None, 

@@ -1,7 +1,7 @@
 from __future__ import division
-from chiplotle.utils.ispair import ispair
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PA, PR, PU, SP
+from chiplotle.tools.iterabletools.ispair import ispair
 import copy
 import random
 

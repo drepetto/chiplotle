@@ -1,6 +1,5 @@
 from chiplotle.hpgl.abstract.positional import _Positional
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.utils.ispair import ispair
 
 class _Arc(_Positional):
    def __init__(self, xy, angle, chordtolerance=None):
