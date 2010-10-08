@@ -1,5 +1,4 @@
 from chiplotle.hpgl.coordinatepair import CoordinatePair
-from chiplotle.utils.ispair import ispair
 
 class CoordinateArray(object):
 
@@ -110,6 +109,7 @@ class CoordinateArray(object):
       return CoordinateArray([a / arg for a in self.xy])
 
    def __sub__(self, arg):
+      from chiplotle.tools.iterabletools.ispair import ispair
       if isinstance(arg, CoordinateArray):
          return CoordinateArray([a - b for a, b in zip(self.xy, arg.xy)])
       elif isinstance(arg, (int, long, float, CoordinatePair)) or ispair(arg):
