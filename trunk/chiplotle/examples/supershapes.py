@@ -18,7 +18,7 @@ for i in range(1, cols + 1):
       y = -j * height / rows
       y += top
       b = Supershape((x, y), width / cols / 4, width / cols / 4, 5, 
-         3.3, i, j, b=.75, range=4*3.1416, points=200)
+         3.3, i, j, b=.75, range=4*3.1416, point_count=200)
       result.append(b)      
 
 

@@ -25,7 +25,7 @@ for point in points:
 	c_1 = Cross(point,150,150)
 	plotter.write(c_1.format)
 
-catmull_curve = Catmull(points, points_to_compute = n_points_to_compute)
+catmull_curve = Catmull(points, interpolation_count = n_points_to_compute)
 plotter.write(catmull_curve.format)
 
 plotter.select_pen(0)
