@@ -16,7 +16,7 @@ class Supershape(_CompoundHPGL):
    _scalable = _CompoundHPGL._scalable + ['width', 'height']
 
    def __init__(self, xy, w, h, m, n1, n2, n3, 
-      points=1000, percentage=1.0, a=1.0, b=1.0, range=None, pen=None):
+      point_count=1000, percentage=1.0, a=1.0, b=1.0, range=None, pen=None):
 
       xy = xy or (0, 0)
       _CompoundHPGL.__init__(self, xy, pen)
@@ -28,18 +28,16 @@ class Supershape(_CompoundHPGL):
       self.n3 = n3
       self.a = a
       self.b = b
-      self.points = points
+      self.point_count = point_count
       self.percentage = percentage
-      doublepi = pi * 2
-      self.range = range or doublepi
+      self.range = range or (pi * 2)
       self.x, self.y = xy
        
 
-   @property
-   def _subcommands(self):
+   def _get_point_coordinates(self):
       ## compute points...
-      phis = [i * self.range / self.points 
-         for i in range(int(self.points * self.percentage))]
+      phis = [i * self.range / self.point_count 
+         for i in range(int(self.point_count * self.percentage))]
       f = lambda x: superformula(self.a, self.b, self.m, 
          self.n1, self.n2, self.n3, x)
       points = map(f, phis)
@@ -49,6 +47,11 @@ class Supershape(_CompoundHPGL):
          x = x * self.width + self.x
          y = y * self.height + self.y
          path.append((x, y))
+      return path
+      
+   @property
+   def _subcommands(self):
+      path = self._get_point_coordinates( )
       ## generate HPGL commands...
       result = _CompoundHPGL._subcommands.fget(self)
       result.append(PU( ))
