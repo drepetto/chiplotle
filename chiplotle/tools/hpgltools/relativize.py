@@ -29,9 +29,9 @@ def relativize(data):
       elif isinstance(e, (hpgl.PR, hpgl.RR, hpgl.ER, hpgl.AR)):
          if isinstance(e, hpgl.PR):
             if not last_position is None:
-               last_position += numpy.sum(e.xy, axis = 0)
+               last_position += numpy.sum(e.xy.as_list_of_pairs( ), axis = 0)
             else:
-               last_position = numpy.sum(e.xy, axis = 0)
+               last_position = numpy.sum(e.xy.as_list_of_pairs( ), axis = 0)
             result.append(e)
          else:
             last_position = (last_position or 0) + e.xy
@@ -46,7 +46,7 @@ def _return_relative_from_absolute(command, delta):
    if isinstance(command, hpgl.PA):
       if delta is not None:
          result.append(hpgl.PR(delta))
-      diff = numpy.diff(command.xy, axis=0).tolist( )
+      diff = numpy.diff(command.xy.as_list_of_pairs( ), axis=0).tolist( )
       if len(diff) > 0:
          result.append(hpgl.PR(diff))
    elif isinstance(command, hpgl.RA) and delta is not None:

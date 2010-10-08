@@ -52,6 +52,9 @@ class CoordinatePair(object):
       for e in self.xy:
          yield e
 
+   def __getitem__(self, arg):
+      return self.xy[arg]
+
    def __len__(self):
       return 2
 
