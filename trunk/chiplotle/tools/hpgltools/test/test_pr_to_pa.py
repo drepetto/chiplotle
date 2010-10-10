@@ -22,3 +22,11 @@ def test_pr_to_pa_03( ):
    t = hpgltools.pr_to_pa(pr)
    assert isinstance(t, PA) 
    assert t.xy == [ ]
+
+
+def test_pr_to_pa_04( ):
+   '''The function takes the optional argument `starting_position`.'''
+   pr = PR([(1, 1), (1, 1)])
+   t = hpgltools.pr_to_pa(pr, (10, 20))
+   assert isinstance(t, PA) 
+   assert t.xy == [(10, 20), (11, 21), (12, 22)]
