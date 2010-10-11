@@ -14,6 +14,11 @@ def get_all_coordinates(arg):
       >>> print c
       [CP(1, 2), CP(2, 3), CP(3, 4)]
    '''
+   if isinstance(arg, _CompoundHPGL):
+      arg = arg._subcommands
+   elif not isinstance(arg, (list, tuple)):
+      raise TypeError('`arg` must be list, tuple or _CompoundHPGL')
+
    arg = convert_relatives_to_absolutes(arg)
 
    result = [ ]

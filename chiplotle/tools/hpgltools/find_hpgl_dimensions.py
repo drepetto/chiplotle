@@ -1,3 +1,4 @@
+## TODO: delete. DEPRECATED. use get_bounding_box( ) instead.
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 #from chiplotle.hpgl.compound.container import Container
 #from chiplotle.hpgl.compound.hpglcontainer import HPGLContainer
