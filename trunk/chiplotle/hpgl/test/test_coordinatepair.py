@@ -125,3 +125,6 @@ def test_coordinatepair__mul__01( ):
    assert t == (2.5, 5)
 
 
+def test_coordinatepair__hash__01( ):
+   t = set([CoordinatePair(1, 2), CoordinatePair(1, 2)])
+   assert len(t) == 1
