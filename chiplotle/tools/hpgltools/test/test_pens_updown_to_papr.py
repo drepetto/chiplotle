@@ -27,3 +27,13 @@ def test_pens_updown_to_papr_03( ):
    assert t[2] == PD( )
    assert t[3] == PA([(1, 1), (2, 2)])
    assert t[4] == ER((10, 10))
+
+
+def test_pens_updown_to_papr_04( ):
+   '''The function returns fresh new instances of PA and or PR.'''
+   g = [PA(), PD((1, 1)), PD((2, 2)), PD((3, 3))]
+   t = hpgltools.pens_updown_to_papr(g)
+   assert len(t) == 7
+   assert t[2] is not t[4]
+   assert t[4] is not t[6]
+   
