@@ -1,7 +1,8 @@
 from chiplotle.hpgl.commands import PA, PR, PU, PD
 
 def pens_updown_to_papr(lst):
-   '''Converts all PU and PD found in `lst` into (PA, PU) pair sequences.
+   '''Converts all PU((x1, y1, x2, y2) and PD(x1, y1, x2, y2) found in `lst` 
+   into (PU( ), PA(x1, y1, x2, y2)) pair sequences.
    The function removes the coordinates from PU and PD and places them in
    PR or PA, whatever was last found in lst.'''
 
