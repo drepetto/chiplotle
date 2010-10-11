@@ -22,15 +22,6 @@ class CoordinatePair(object):
          raise TypeError('args not recognized for CoordinatePair.')
 
 
-   ## OVERRIDES ##
-
-   def __repr__(self):
-      return 'CP(%s, %s)' % (self.x, self.y)
-
-   def __str__(self):
-      return 'CP(%s, %s)' % (self.x, self.y)
-
-
    ## PUBLIC PROPERTIES ##
 
    @property
@@ -66,6 +57,10 @@ class CoordinatePair(object):
          return self.xy == arg.xy
       else:
          return self.xy == tuple(arg)
+
+   def __hash__(self):
+      ## TODO: what is the best way to hash this pair?
+      return hash(('CP', self.x, self.y))
 
    def __ne__(self, arg):
       return not (self == arg)
@@ -106,4 +101,10 @@ class CoordinatePair(object):
 
    def __truediv__(self, arg):
       return self / arg
+
+   def __repr__(self):
+      return 'CP(%s, %s)' % (self.x, self.y)
+
+   def __str__(self):
+      return 'CP(%s, %s)' % (self.x, self.y)
 
