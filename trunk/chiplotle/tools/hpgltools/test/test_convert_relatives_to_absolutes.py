@@ -5,7 +5,7 @@ def test_convert_relatives_to_absolutes_01( ):
    t = hpgltools.convert_relatives_to_absolutes(g)
    assert len(t) == 2
    assert t[0] == PA((1, 2))
-   assert t[1] == PA([(1, 2), (2, 3), (3, 4)])
+   assert t[1] == PA([(2, 3), (3, 4)])
 
 
 def test_convert_relatives_to_absolutes_02( ):
@@ -13,7 +13,7 @@ def test_convert_relatives_to_absolutes_02( ):
    g = [PR([(1, 1), (1, 1)])]
    t = hpgltools.convert_relatives_to_absolutes(g)
    assert len(t) == 1
-   assert t[0] == PA([(0, 0), (1, 1), (2, 2)])
+   assert t[0] == PA([(1, 1), (2, 2)])
 
 
 def test_convert_relatives_to_absolutes_03( ):

@@ -3,9 +3,9 @@ from chiplotle import *
 def test_pr_to_pa_01( ):
    '''PR with one coordinate works.'''
    pr = PR((1, 2))
-   t = hpgltools.pr_to_pa(pr)
+   t = hpgltools.pr_to_pa(pr, (0, 0))
    assert isinstance(t, PA) 
-   assert t.xy == [(0, 0), (1, 2)]
+   assert t.xy == [(1, 2)]
    
 
 def test_pr_to_pa_02( ):
@@ -13,7 +13,7 @@ def test_pr_to_pa_02( ):
    pr = PR([(1, 2), (1, 1), (-2, 1)])
    t = hpgltools.pr_to_pa(pr)
    assert isinstance(t, PA) 
-   assert t.xy == [(0, 0), (1, 2), (2, 3), (0, 4)]
+   assert t.xy == [(1, 2), (2, 3), (0, 4)]
    
 
 def test_pr_to_pa_03( ):
@@ -29,4 +29,4 @@ def test_pr_to_pa_04( ):
    pr = PR([(1, 1), (1, 1)])
    t = hpgltools.pr_to_pa(pr, (10, 20))
    assert isinstance(t, PA) 
-   assert t.xy == [(10, 20), (11, 21), (12, 22)]
+   assert t.xy == [(11, 21), (12, 22)]
