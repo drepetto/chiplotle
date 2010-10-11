@@ -9,7 +9,8 @@ def pr_to_pa(arg, starting_position=None):
       return PA( )
 
    last_abs = starting_position or (0, 0)
-   abs_coords = [last_abs]
+   #abs_coords = [last_abs]
+   abs_coords = [ ]
    for p in arg.xy:
       last_abs = last_abs + p
       abs_coords.append(last_abs)
