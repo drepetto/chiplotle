@@ -20,3 +20,9 @@ class Circle(_CompoundHPGL):
       else:
          result.append(CI(self.radius, self.chord))
       return result
+
+
+   ## OVERRIDES ##
+   
+   def __repr__(self):
+      return "Circle(%s, %s)" % (self.xy, self.radius)

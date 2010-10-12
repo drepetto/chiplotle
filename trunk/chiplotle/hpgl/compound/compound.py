@@ -70,3 +70,8 @@ class _CompoundHPGL(_HPGL):
       result.extend([PU( ), PA(self.xy)])
       return result
 
+
+   ## OVERRIDES ##
+   
+   def __repr__(self):
+      return self.__class__.__name__ + "( )"
