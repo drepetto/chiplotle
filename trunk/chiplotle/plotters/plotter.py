@@ -11,4 +11,3 @@ class Plotter(_DrawingPlotter):
 
       _DrawingPlotter.__init__(self, ser, **kwargs)
       self.type = "Generic"
-
