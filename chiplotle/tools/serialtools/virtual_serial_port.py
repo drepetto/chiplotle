@@ -5,7 +5,7 @@ from chiplotle.tools.hpgltools import inflate_hpgl_string
 
 class VirtualSerialPort():
    def __init__(self):
-      print "I am a virtual serial port!"
+      #print "I am a virtual serial port!"
       self._received_commands_string = ""
       self._next_query_value = ''
       
@@ -23,22 +23,26 @@ class VirtualSerialPort():
       if command == commands.B().format:
          self._next_query_value = "4000"
       elif command == commands.On().format + ";":
-         print "vsp: ignoring On() command."
+         #print "vsp: ignoring On() command."
+         pass
       else:
          self._received_commands_string += command
          
    def flushInput(self):
-      print "vsp: flushed input."
+      #print "vsp: flushed input."
+      pass
       
    def flushOutput(self):
-      print "vsp: flushed output."
+      #print "vsp: flushed output."
+      pass
       
+   #what's a reasonable value here?
    def inWaiting(self):
       return 10
       
       
    def readline(self, eol):
-      print "returning: " + self._next_query_value
+      #print "returning: " + self._next_query_value
       return self._next_query_value
       
    def get_received_commands(self):
