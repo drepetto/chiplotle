@@ -164,7 +164,7 @@ class _BasePlotter(object):
       self._serial_port.flushInput()
       self._serial_port.write(self._hpgl.B().format)
       bs = self._read_port()
-      print "buffer space: ", bs
+      #print "buffer space: ", bs
       return int(bs)
 
    def _send_query(self, query):
