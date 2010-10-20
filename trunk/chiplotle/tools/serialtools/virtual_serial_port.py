@@ -1,13 +1,21 @@
-
+from chiplotle import *
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.tools.hpgltools import inflate_hpgl_string
 
 class VirtualSerialPort():
-   def __init__(self):
+   def __init__(self, left=0, bottom=0, right=15000, top=10000):
       #print "I am a virtual serial port!"
       self._received_commands_string = ""
       self._next_query_value = ''
+      self.commandedX = 0
+      self.commandedY = 0
+      #penStatus: 0 == up, 1 == down
+      self.penStatus = 0
+      self.left = left
+      self.right = right
+      self.bottom = bottom
+      self.top = top
       
    def write(self, command):
       '''
@@ -18,16 +26,89 @@ class VirtualSerialPort():
       if an escape command is somehow inserted into a string of text commands
       we will not catch it! but that shouldn't happen...
       
-     '''
+      '''
+      #print "vsp got command: " + command
      
+      '''this seems dumb, but don't know how else to do it.
+         gotta iterate through all possible weirdo commands.
+      '''
+      
+      #make sure we received a string, not a tuple or something
+      assert type(command) is str
+            
       if command == commands.B().format:
-         self._next_query_value = "4000"
+         #let's say we have 1MB of memory to avoid buffered writes
+         self._next_query_value = "1000000"
+         return
       elif command == commands.On().format + ";":
          #print "vsp: ignoring On() command."
-         pass
-      else:
-         self._received_commands_string += command
+         return
+      elif command == commands.OH().format:
+         #hard margins
+         out_string = "%d, %d, %d, %d\r" % (self.left, self.bottom, self.right, self.top)
+         self._next_query_value = out_string
+         return
+      elif command == commands.OW().format:
+         #soft margins
+         out_string = "%d, %d, %d, %d\r" % (self.left, self.bottom, self.right, self.top)
+         self._next_query_value = out_string
+         return
+      elif command == commands.OI().format:
+         self._next_query_value = "VirtualPlotter\r"
+         return
+      elif command == commands.OA().format:
+         #actual position
+         out_string = "%i, %i, %i\r" % (self.commandedX, self.commandedY, self.penStatus)
+         self._next_query_value = out_string
+         return
+      elif command == commands.OC().format:
+         #commanded position
+         out_string = "%i, %i, %i\r" % (self.commandedX, self.commandedY, self.penStatus)
+         self._next_query_value = out_string
+         return
+      elif command == commands.OP().format:
+         #output P1P2
+         out_string = "%d, %d, %d, %d\r" % (self.left, self.bottom, self.right, self.top)
+         self._next_query_value = out_string
+         return
+
+      #if we made it here then we're normal HPGL
+      
+      self._received_commands_string += command
          
+      #store commanded position data
+      #this breaks for buffered writes since we don't always
+      #receive a full PA1000,1000 type command
+      
+      splitData = command.split(';')
+      
+      for point in splitData:
+         if point.startswith("PA"):
+            pointParts = point.strip("PA").split(',')
+            self.commandedX = eval(pointParts[len(pointParts) - 2])
+            self.commandedY = eval(pointParts[len(pointParts) - 1])
+         elif point.startswith("PD"):
+            if ',' in point:
+               pointParts = point.strip("PD").split(',')
+               self.commandedX = eval(pointParts[len(pointParts) - 2])
+               self.commandedY = eval(pointParts[len(pointParts) - 1])
+            self.penStatus = 1
+         elif point.startswith("PU"):
+            if ',' in point:
+               pointParts = point.strip("PU").split(',')
+               self.commandedX = eval(pointParts[len(pointParts) - 2])
+               self.commandedY = eval(pointParts[len(pointParts) - 1])
+            self.penStatus = 0
+         if point.startswith("PR"):
+            pointParts = point.strip("PR").split(',')
+            self.commandedX += eval(pointParts[len(pointParts) - 2])
+            self.commandedY += eval(pointParts[len(pointParts) - 1])   
+
+      #print "commandedX: %i commandedY: %i" % (self.commandedX, self.commandedY)
+         
+   def flush(self):
+      pass
+      
    def flushInput(self):
       #print "vsp: flushed input."
       pass
@@ -43,7 +124,10 @@ class VirtualSerialPort():
       
    def readline(self, eol):
       #print "returning: " + self._next_query_value
-      return self._next_query_value
+      return_value = self._next_query_value
+      self._next_query_value = None
+      return return_value
+      
       
    def get_received_commands(self):
       return inflate_hpgl_string(self._received_commands_string)

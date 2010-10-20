@@ -16,9 +16,9 @@ class VirtualPlotter(_DrawingPlotter):
          'SI','SL','SM','SP','SR','SS','TL','UC','VS','WG','XT','YT'])
       _DrawingPlotter.__init__(self, ser, **kwargs)
       self.type = "Virtual"
-      self.serial_port = ser
+      self._serial_port = ser
 
    @property
    def format(self):
       '''This lets us pass the VirtualPlotter directly to io.view()'''
-      return self.serial_port.format
+      return self._serial_port.format
