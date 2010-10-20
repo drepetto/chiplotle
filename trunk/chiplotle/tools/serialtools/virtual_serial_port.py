@@ -16,6 +16,7 @@ class VirtualSerialPort():
       self.right = right
       self.bottom = bottom
       self.top = top
+      self.buffer_size = "4000000"
       
    def write(self, command):
       '''
@@ -37,8 +38,8 @@ class VirtualSerialPort():
       assert type(command) is str
             
       if command == commands.B().format:
-         #let's say we have 1MB of memory to avoid buffered writes
-         self._next_query_value = "1000000"
+         #let's say we have 4MB of memory to avoid buffered writes
+         self._next_query_value = self.buffer_size
          return
       elif command == commands.On().format + ";":
          #print "vsp: ignoring On() command."
