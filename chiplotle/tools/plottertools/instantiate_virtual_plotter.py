@@ -1,8 +1,11 @@
-from chiplotle.cfg.get_config_value import get_config_value
-from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
+from chiplotle.tools.serialtools.virtual_serial_port import VirtualSerialPort
+from chiplotle import plotters
 
-def instantiate_virtual_plotter( ):
+def instantiate_virtual_plotter(left=0, bottom=0, right=15000, top=10000):
    '''Instantiates a virtual plotter'''
 
-   return _instantiate_plotter(port=None, id="VirtualPlotter")
+   ser = VirtualSerialPort(left, bottom, right, top)
+   plotter = getattr(plotters, "VirtualPlotter")(ser)
+
+   return plotter
 
