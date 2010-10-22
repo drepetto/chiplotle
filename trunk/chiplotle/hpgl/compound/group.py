@@ -1,7 +1,7 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
-from chiplotle.tools.hpgltools import is_primitive_absolute 
+from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute 
 import copy
 
 class Group(_CompoundHPGL):
