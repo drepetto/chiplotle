@@ -5,7 +5,7 @@
 """
 from chiplotle.plotters.drawingplotter import _DrawingPlotter
 
-class DPX3300(_DrawingPlotter):
+class DPX2000(_DrawingPlotter):
    def __init__(self, ser, **kwargs):
       self.allowedHPGLCommands = tuple(['\x1b.', 'AA','AR','BL','CA','CC',
          'CI','CP','CS','CT','DC','DF','DI','DL','DP','DR','DT','EA','EP',
@@ -14,5 +14,7 @@ class DPX3300(_DrawingPlotter):
          'PA','PB','PD','PM','PU','PR','PT','RA','RO','RR','SA','SC','SI',
          'SL','SM','SP','SR','SS','TL','UC','UF','VS','WG','XT','YT'])
       _DrawingPlotter.__init__(self, ser, **kwargs)
-      self.type = "DPX-3300"
+      self.type = "DPX-2000"
+
+
 
