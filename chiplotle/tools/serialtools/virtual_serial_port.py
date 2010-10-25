@@ -1,3 +1,4 @@
+from sys import maxint
 from chiplotle import *
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
@@ -16,7 +17,7 @@ class VirtualSerialPort():
       self.right = right
       self.bottom = bottom
       self.top = top
-      self.buffer_size = "4000000"
+      self.buffer_size = maxint
       
    def write(self, command):
       '''
