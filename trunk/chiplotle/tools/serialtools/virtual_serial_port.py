@@ -37,37 +37,37 @@ class VirtualSerialPort():
       #make sure we received a string, not a tuple or something
       assert type(command) is str
             
-      if command == commands.B().format:
+      if command.startswith(commands.B().format):
          #let's say we have 4MB of memory to avoid buffered writes
          self._next_query_value = self.buffer_size
          return
-      elif command == commands.On().format + ";":
+      elif command.startswith(commands.On().format):
          #print "vsp: ignoring On() command."
          return
-      elif command == commands.OH().format:
+      elif command.startswith(commands.OH().format):
          #hard margins
          out_string = "%d, %d, %d, %d\r" % (self.left, self.bottom, self.right, self.top)
          self._next_query_value = out_string
          return
-      elif command == commands.OW().format:
+      elif command.startswith(commands.OW().format):
          #soft margins
          out_string = "%d, %d, %d, %d\r" % (self.left, self.bottom, self.right, self.top)
          self._next_query_value = out_string
          return
-      elif command == commands.OI().format:
+      elif command.startswith(commands.OI().format):
          self._next_query_value = "VirtualPlotter\r"
          return
-      elif command == commands.OA().format:
+      elif command.startswith(commands.OA().format):
          #actual position
          out_string = "%i, %i, %i\r" % (self.commandedX, self.commandedY, self.penStatus)
          self._next_query_value = out_string
          return
-      elif command == commands.OC().format:
+      elif command.startswith(commands.OC().format):
          #commanded position
          out_string = "%i, %i, %i\r" % (self.commandedX, self.commandedY, self.penStatus)
          self._next_query_value = out_string
          return
-      elif command == commands.OP().format:
+      elif command.startswith(commands.OP().format):
          #output P1P2
          out_string = "%d, %d, %d, %d\r" % (self.left, self.bottom, self.right, self.top)
          self._next_query_value = out_string
@@ -138,7 +138,7 @@ class VirtualSerialPort():
       
    @property
    def format(self):
-      '''This is so that a VirtualPlotter can all serial_port.format to retrieve
+      '''This is so that a VirtualPlotter can call serial_port.format to retrieve
       stored commands and send them to io.view()
       '''
       return self._received_commands_string
