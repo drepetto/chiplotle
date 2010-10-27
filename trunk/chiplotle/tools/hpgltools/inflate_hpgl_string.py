@@ -1,5 +1,6 @@
 from chiplotle.hpgl import commands as hpgl
-import re
+from chiplotle.tools.hpgltools.parse_hpgl_string import parse_hpgl_string
+#import re
 
 def inflate_hpgl_string(string, filter_commands=None):
    '''Reads a text string and "inflates" it by creating
@@ -26,8 +27,9 @@ def inflate_hpgl_string(string, filter_commands=None):
       raise TypeError(msg)
 
    _unsupported_commands = ('PW','PC', 'LA', 'WU', 'BP')
-   string = string.replace('\n',';')
-   comms = re.split(';+', string)
+   #string = string.replace('\n',';')
+   #comms = re.split(';+', string)
+   comms = parse_hpgl_string(string)
    result = []
    for c in comms:
       if c: ## not an empty string: ''
@@ -38,6 +40,7 @@ def inflate_hpgl_string(string, filter_commands=None):
             continue
          if head in ('PU','PD','PA','PR', 'RA','RR', 'ER','EA',  'IP', 'SC'):
             body = '(%s)' % c[2:]
+         ## TODO: this can't be right... check and reimplement.
          elif head in ('AR', 'AA'):
             body = '(%s),%s' % (c[2:4], c[4:])
          else:
