@@ -1,7 +1,11 @@
 from chiplotle.hpgl.commands import PA, PR
 
 def pr_to_pa(arg, starting_position=None):
-   '''Converts a given PR into PA starting at coordinate (0,0).'''
+   '''Converts a given PR into PA starting at `starting_position.
+   
+   - `arg` is a PR object.
+   - `starting_position` is a coordinate pair. Default is (0, 0).
+   '''
    if not isinstance(arg, PR):
       raise TypeError('`arg` must be of type PR');
    
