@@ -1,0 +1,37 @@
+import re
+
+def parse_hpgl_string(arg):
+   '''The function takes a string `arg` of HPGL commands, parses them
+   (separates them) and returns them in a list.
+   '''
+   if not isinstance(arg, str):
+      raise TypeError('`arg` must be of type string.')
+
+   hpgl_commands = ['AA','AR',
+      'CA','CI','CP','CS','DC',
+      'DF','DI','DP','DR','DT',
+      'EA','ER','EW',
+      'FT',
+      'IM','IN','IP','IW',
+      'LB','LT',
+      'OA','OC','OD','OE','OF','OH','OI','OO','OP','OS','OW',
+      'PA','PD','PR','PS','PT','PU',
+      'RA','RO','RR',
+      'SA','SC','SI','SL','SM','SP','SR','SS',
+      'TL',
+      'UC',
+      'VS',
+      'WG',
+      'XT',
+      'YT']
+   ## TODO: Add all the supported escape (DCI) commands.
+   dci_commands = ['\x1b\.\(', '\x1b\.Y']
+
+   hpgl_pattern = '[0-9.,]*|'.join(hpgl_commands)
+   dci_pattern = '[0-9.;]*|'.join(dci_commands)
+   pattern = hpgl_pattern + "|" + dci_pattern
+   ## this assumes that the re will find each and every hpgl command
+   ## with the pattern. Any command not matched will effectively be
+   ## romoved... we don't want that. 
+   result = re.findall(pattern, arg) 
+   return result
