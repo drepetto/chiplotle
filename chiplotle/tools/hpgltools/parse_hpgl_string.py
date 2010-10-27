@@ -7,21 +7,25 @@ def parse_hpgl_string(arg):
    if not isinstance(arg, str):
       raise TypeError('`arg` must be of type string.')
 
-   hpgl_commands = ['AA','AR',
-      'CA','CI','CP','CS','DC',
-      'DF','DI','DP','DR','DT',
-      'EA','ER','EW',
-      'FT',
-      'IM','IN','IP','IW',
-      'LB','LT',
-      'OA','OC','OD','OE','OF','OH','OI','OO','OP','OS','OW',
-      'PA','PD','PR','PS','PT','PU',
+   hpgl_commands = ['AA','AF','AH','AP','AR','AS',
+      'BF','BL',
+      'CA','CC','CI','CM','CP','CS','CT','CV',
+      'DC','DF','DI','DP','DR','DS','DT','DV', #DL
+      'EA','EC','EP','ER','ES','EW',
+      'FP','FR','FS','FT',
+      'GC', #GM GP
+      'IM','IN','IP','IV','IW',
+      'KY',
+      'LB','LO','LT',
+      'NR',
+      'OA','OC','OD','OE','OF','OG','OH','OI','OK','OL','OO','OP','OS','OT','OW',
+      'PA','PB','PD','PG','PM','PR','PS','PT','PU',
       'RA','RO','RR',
-      'SA','SC','SI','SL','SM','SP','SR','SS',
+      'SA','SC','SI','SL','SM','SP','SR','SS', #SG
       'TL',
-      'UC',
+      #'UC', UF
       'VS',
-      'WG',
+      'WD','WG',
       'XT',
       'YT']
    ## TODO: Add all the supported escape (DCI) commands.
