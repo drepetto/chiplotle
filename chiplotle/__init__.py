@@ -1,5 +1,4 @@
-
-__version__ = "v0.1 "
+from chiplotle.cfg.cfg import __version__
 __authors__ = "Victor Adan, Douglas Repetto"
 __license__ = "GPL"
 __url__     = "http://music.columbia.edu/cmc/chiplotle"

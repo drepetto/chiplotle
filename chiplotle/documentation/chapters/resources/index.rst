@@ -8,6 +8,7 @@ HPGL references
 
 * `http://local.wasp.uwa.edu.au/~pbourke/dataformats/hpgl/ <http://local.wasp.uwa.edu.au/~pbourke/dataformats/hpgl/>`_
 
+* `http://cstep.luberth.com/hpgl.htm <http://cstep.luberth.com/hpgl.htm>`_
 
 Tools
 =====
