@@ -1,3 +1,4 @@
+from chiplotle.cfg.cfg import __version__
 import os
 
 def _run_chiplotle( ):
@@ -6,9 +7,9 @@ def _run_chiplotle( ):
    '''
    python_code = [ ]
    python_code.append("print ' '")
-   python_code.append("print ' +--------------+'")
-   python_code.append("print ' |  Chiplotle!  |'")
-   python_code.append("print ' +--------------+'")
+   python_code.append("print ' +-----------------------+'")
+   python_code.append("print ' |   Chiplotle! v%s   |'" % __version__)
+   python_code.append("print ' +-----------------------+'")
    python_code.append("import sys")
    python_code.append("sys.ps1 = 'chiplotle> '")
    python_code.append("del sys")
