@@ -42,7 +42,10 @@ def inflate_hpgl_string(string, filter_commands=None):
             body = '(%s)' % c[2:]
          ## TODO: this can't be right... check and reimplement.
          elif head in ('AR', 'AA'):
-            body = '(%s),%s' % (c[2:4], c[4:])
+            parameters = c[2:].split(',')
+            x = parameters.pop(0)
+            y = parameters.pop(0)
+            body = '(%s,%s),%s' % (x, y, ','.join(parameters))
          else:
             body = c[2:]
          try:
