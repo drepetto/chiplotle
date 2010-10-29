@@ -1088,8 +1088,6 @@ class IP(_TwoPoint):
    '''
 
    def __init__(self, coords=None):   
-      if coords:
-         assert len(coords) in (2, 4)
       _TwoPoint.__init__(self, coords) 
 
 

@@ -19,8 +19,6 @@ class _PenPlot(_HPGLPrimitive):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         #if arg is None:
-         #   arg = [ ]
          self._coords = CoordinateArray(arg)
       return property(**locals())
 
