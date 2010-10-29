@@ -24,6 +24,39 @@ def test_inflate_hpgl_string_03( ):
    assert t[3] == CI(100)
 
 
+def test_inflate_hpgl_string_04( ):
+   '''HPGL commands need not be separated by ;.'''
+   s = 'INPA10,10PDCI100'
+   t = hpgltools.inflate_hpgl_string(s)
+   assert len(t) == 4
+   assert t[0] == IN( )
+   assert t[1] == PA((10, 10))
+   assert t[2] == PD( )
+   assert t[3] == CI(100)
+
+
+## AR AA ##
+
+def test_inflate_hpgl_string_05( ):
+   '''AA and AR are with only coordinates and angle are imported correctly.'''
+   s = 'IN;AA10,10,90;'
+   t = hpgltools.inflate_hpgl_string(s)
+   assert len(t) == 2
+   assert t[0] == IN( )
+   assert t[1] == AA((10, 10), 90)
+
+
+def test_inflate_hpgl_string_06( ):
+   '''AA and AR are with all parameters are imported correctly.'''
+   s = 'IN;AA10,10,90,10.2;'
+   t = hpgltools.inflate_hpgl_string(s)
+   assert len(t) == 2
+   assert t[0] == IN( )
+   assert t[1] == AA((10, 10), 90, 10.2)
+
+
+## FILTERING ##
+
 def test_inflate_hpgl_string__filter_01( ):
    '''The function can take a list of HPGL commands to filter out from the result.'''
    t = hpgltools.inflate_hpgl_string('IN;PU;PA10,10;CI100;', ['IN', 'PA'])
