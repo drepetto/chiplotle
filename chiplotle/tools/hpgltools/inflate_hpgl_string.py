@@ -40,7 +40,6 @@ def inflate_hpgl_string(string, filter_commands=None):
             continue
          if head in ('PU','PD','PA','PR', 'RA','RR', 'ER','EA',  'IP', 'SC'):
             body = '(%s)' % c[2:]
-         ## TODO: this can't be right... check and reimplement.
          elif head in ('AR', 'AA'):
             parameters = c[2:].split(',')
             x = parameters.pop(0)
