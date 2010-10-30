@@ -6,6 +6,11 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
+.. autoclass:: chiplotle.hpgl.compound.BooleanCycle
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
 .. autoclass:: chiplotle.hpgl.compound.BusinessCard
 	:members:
 	:undoc-members:
@@ -112,6 +117,11 @@ Chiplotle Compound Commands
 	:show-inheritance:
 
 .. autoclass:: chiplotle.hpgl.compound.Rectangle
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
+.. autoclass:: chiplotle.hpgl.compound.RoundRectangle
 	:members:
 	:undoc-members:
 	:show-inheritance:

@@ -25,26 +25,14 @@ Yes. The plotters buffer will fill up quickly, so you need to be listenning to t
 
 This is one of the tasks that Chiplotle manages for you so you don't have to worry about these low level technicalities.   
 The easiest way to communicate with a plotter is to run Chiplotle by typing ``chiplotle`` from your terminal. 
-This will prompt you for a serial port to choose from. Choose the serial port your plotter is connected to. Then choose the plotter type that most closely matches the one you have. If you are not sure, choose the generic 'Plotter'. This will create a ``plotter`` instance automatically for you. Once in Chiplotle (you will know by the ``chiplotle>`` prompt), send your HPGL file with the ``write_file(filename)`` method or HPGL commands via the ``write( )`` method, like so::
+This will run python and load, Chiplotle library, and instantiate soft-plotters for your hardware plotters found. Once in Chiplotle, send your HPGL file with the ``write_file(filename)`` method of the instantiated plotter(s), or send newly createdHPGL commands via the ``write( )`` method, like so::
 
    chiplotle> plotter.write_file('my_file.hpgl')  
    chiplotle> plotter.write(PA( ))
 
 
 The ``plotter`` does the buffer managing for you.
-
-If you don't want to work *on line* and want to run your Python scripts,
-instead of running the executable ``chiplotle`` you can instantiate your own plotter in your scripts with the correct serial port. e.g. ::
-
-   from chiplotle import *
-   from serial import *
-   s = Serial('/dev/ttyUSB0')
-   p = Plotter(s)
-
-then send hpgl commands::
-
-   p.write(PA( ))
-
+See the :doc:`Tutorial </chapters/tutorial/index>` for more details.
 
 
 **Q:**

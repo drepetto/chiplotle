@@ -4,13 +4,27 @@ Chiplotle Tools
 HPGL Tools
 -------------
 
-.. autofunction:: chiplotle.tools.hpgltools.find_hpgl_dimensions
+.. autofunction:: chiplotle.tools.hpgltools.convert_relatives_to_absolutes
+
+.. autofunction:: chiplotle.tools.hpgltools.get_all_coordinates
+
+.. autofunction:: chiplotle.tools.hpgltools.get_bounding_box
+
+.. autofunction:: chiplotle.tools.hpgltools.get_centroid
 
 .. autofunction:: chiplotle.tools.hpgltools.inflate_hpgl_string
 
 .. autofunction:: chiplotle.tools.hpgltools.is_primitive_absolute
 
+.. autofunction:: chiplotle.tools.hpgltools.parse_hpgl_string
+
+.. autofunction:: chiplotle.tools.hpgltools.pens_updown_to_papr
+
+.. autofunction:: chiplotle.tools.hpgltools.pr_to_pa
+
 .. autofunction:: chiplotle.tools.hpgltools.relativize
+
+.. autofunction:: chiplotle.tools.hpgltools.rotate_hpglprimitives
 
 .. autofunction:: chiplotle.tools.hpgltools.scale
 
@@ -43,4 +57,6 @@ Math tools
 .. autofunction:: chiplotle.tools.mathtools.rotate_3d
 
 .. autofunction:: chiplotle.tools.mathtools.superformula
+
+.. autofunction:: chiplotle.tools.mathtools.xy_to_polar
 
