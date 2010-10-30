@@ -20,7 +20,7 @@ All Chiplotle HPGL commands have a ``format`` attribute. This attribute returns 
    'PD;'
 
 
-All the standard HPGL commands are implemented in Chiplotle, and their class name corresponds to the two letter mnemonic used in the HPGL.
+All the standard HPGL commands are implemented in Chiplotle, and their class names corresponds to the two letter mnemonic used in the HPGL.
 Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_hpgl>` for a list and documentation of all the HPGL commands.
 
 
@@ -61,14 +61,12 @@ For example, the :class:`MayaNumber <chiplotle.hpgl.compound.mayanumber.MayaNumb
 
 
 
-Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_compound>` for a list of the compound Chiplotle commands currently available.
+Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_compound>` for a list of the Chiplotle compound commands currently available.
 
 Groups
 ------
 
-Both Primitive HPGL and Compound HPGL commands can be grouped to create an agglomerate of shapes. Groups work very much as they do in drawing packages like Adobe Illustrator, InkScape, etc. 
-
-The :class:`Group <chiplotle.hpgl.compound.group.Group>` class can hold other Group classes to later be treated as a single object:: 
+Both Primitive HPGL and Compound HPGL commands can be grouped to create an agglomerate of shapes. Groups in Chiplotle work very much as they do in drawing packages like Adobe Illustrator, InkScape, etc. ::
 
    chiplotle> c = Circle((1000, 2000), 1000)
    chiplotle> r = Rectangle((1000, 2000), 250, 2000, 3.1416 / 4.)
@@ -82,9 +80,10 @@ Notice that, like all Chiplotle Compound commands, the :class:`Group <chiplotle.
    chiplotle> grp.xy
    [ 5000.  0.]
 
-The settable `xy` positional property defines the position of the object relative to the Group it lives in, if any.
-
+The settable `xy` positional property of any Compound HPGL command defines the position of the object relative to the Group it lives in, if any. Otherwise, the `xy` coordinate corresponds to the coordinate of the whole drawing area.
    
+Note that Groups can be nested. i.e., a :class:`Group <chiplotle.hpgl.compound.group.Group>` class can contain other Group classes. 
+
 
 
 Chiplotle transform functions

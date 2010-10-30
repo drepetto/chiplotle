@@ -65,7 +65,7 @@ So to draw a square you might do something like::
    chiplotle> plotter.write(PD([100,100]))
    chiplotle> plotter.write(PU([]))
 
-There are shortcuts for ``PU`` and ``PD``::
+There are plotter shortcuts for ``PU`` and ``PD``::
 
    chiplotle> plotter.pen_up([100,100])
    chiplotle> plotter.pen_down([100,100])
@@ -78,7 +78,7 @@ To replace the pen and have a look at your magnificent square, you select pen ze
 You can also use Chiplotle's Compound commands, a set of more complex routines that we've
 added to the basic HPGL command set::
 
-    chiplotle> plotter.write(RandomWalk([500,500], 100))
+    chiplotle> plotter.write(Rectangle([500,500], 100, 100))
 
 That's it! Have a look at the Chiplotle API documentation for a complete list of 
 HPGL commands and Chiplotle Compound commands.
@@ -92,7 +92,7 @@ easier to put your commands into a Python script so that you can edit them, reru
 And of course since you're writing in Python, you can use all the features of the language in 
 addition to the Chiplotle commands. 
 
-It's very easy to create a Python script with Chiplotle commands. The first thing you usually need to do is import all of the HPGL commands from Chiplotle. So open a new text file and type::
+It's very easy to create a Python script with Chiplotle commands. The first thing to do is to import the Chiplotle library. So open a new text file and type::
 
    from chiplotle import *
 

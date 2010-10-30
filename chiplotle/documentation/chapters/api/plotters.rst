@@ -1,6 +1,11 @@
 Chiplotle Known Plotters
 ========================
 
+.. autoclass:: chiplotle.plotters.DPX2000
+	:members:
+	:undoc-members:
+	:show-inheritance:
+
 .. autoclass:: chiplotle.plotters.DPX3300
 	:members:
 	:undoc-members:
@@ -56,4 +61,9 @@ Chiplotle Known Plotters
 	:undoc-members:
 	:show-inheritance:
 	:inherited-members:
+
+.. autoclass:: chiplotle.plotters.VirtualPlotter
+	:members:
+	:undoc-members:
+	:show-inheritance:
 
