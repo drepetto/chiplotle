@@ -7,6 +7,7 @@ from __future__ import division
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.interfaces.margins.interface import MarginsInterface
+from chiplotle.tools.logtools.get_logger import get_logger
 import math
 import re
 import serial
@@ -27,6 +28,8 @@ class _BasePlotter(object):
 
       self.buffer_size = self._buffer_space
       self.initialize_plotter( )
+
+      self._logger = get_logger(self.__class__.__name__)
       
 
    @property
@@ -105,9 +108,12 @@ class _BasePlotter(object):
                #result.append(comm)
                result.append(comm + ';')
             else:
-               print 'WARNING: HPGL command "%s" not recognized by %s.'\
-               % (comm, self.type),
-               print 'Command not sent.'
+               msg = 'HPGL command `%s` not recognized by %s. Command not sent.'
+               msg = msg % (comm, self.type)
+               self._logger.warning(msg)
+#               print 'WARNING: HPGL command "%s" not recognized by %s.'\
+#               % (comm, self.type),
+#               print 'Command not sent.'
       return ''.join(result)
 
 
@@ -154,7 +160,9 @@ class _BasePlotter(object):
          else:
             time.sleep(sleep)
             elapsed_time += sleep
-      print 'Waited for %s secs... No response from plotter.' % total_time
+      #print 'Waited for %s secs... No response from plotter.' % total_time
+      msg = 'Waited for %s secs... No response from plotter.' % total_time
+      self._logger.error(msg)
       return 
    
 
@@ -174,7 +182,9 @@ class _BasePlotter(object):
          self.write(query)
          return self._read_port( )
       else:
-         print '%s not supported by %s.' % (query, self.id)
+         #print '%s not supported by %s.' % (query, self.id)
+         msg = 'Command %s not supported by %s.' % (query, self.id)
+         self._logger.warning(msg)
 
 
    ### PUBLIC QUERIES (PROPERTIES) ###

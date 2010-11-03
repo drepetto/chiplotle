@@ -59,7 +59,7 @@ def write_config_file(path):
    ## verbose.
    f.write("## Set to True if you want information (such as warnings)\n")
    f.write("## displayed on the console. Set to False if you don't.\n")
-   f.write("verbose = False\n")
+   f.write("verbose = True\n")
    f.write("\n\n")
 
 #   f.write("## PDF viewer. Set for previewing HPGL commands via the\n")
