@@ -56,6 +56,12 @@ def write_config_file(path):
    f.write("maximum_response_wait_time = 8\n")
    f.write("\n\n")
 
+   ## verbose.
+   f.write("## Set to True if you want information (such as warnings)\n")
+   f.write("## displayed on the console. Set to False if you don't.\n")
+   f.write("verbose = False\n")
+   f.write("\n\n")
+
 #   f.write("## PDF viewer. Set for previewing HPGL commands via the\n")
 #   f.write("## ``view( )`` function. If set to `None`, the viewer will\n")
 #   f.write("## use the OS dependent generic file opener.\n")
