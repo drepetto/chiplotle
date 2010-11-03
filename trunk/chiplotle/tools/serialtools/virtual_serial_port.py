@@ -1,8 +1,8 @@
-from sys import maxint
-from chiplotle import *
+#from chiplotle import *
+#from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.hpgl import commands 
-from chiplotle.hpgl.abstract.hpgl import _HPGL
-from chiplotle.tools.hpgltools import inflate_hpgl_string
+from chiplotle.tools.hpgltools.inflate_hpgl_string import inflate_hpgl_string
+from sys import maxint
 
 class VirtualSerialPort():
    def __init__(self, left=0, bottom=0, right=15000, top=10000):

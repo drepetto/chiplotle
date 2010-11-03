@@ -1,7 +1,9 @@
 from chiplotle.hpgl import commands as hpgl
 from chiplotle.tools.hpgltools.parse_hpgl_string import parse_hpgl_string
-#import re
+from chiplotle.tools.logtools.applylogger import applyLogger
+#from chiplotle.tools.logtools.get_logger import get_logger
 
+@applyLogger
 def inflate_hpgl_string(string, filter_commands=None):
    '''Reads a text string and "inflates" it by creating
    Chiplotle-HPGL class instances of the found HPGL commands.
@@ -18,6 +20,9 @@ def inflate_hpgl_string(string, filter_commands=None):
       chiplotle> square
       [SP(1), PA((10, 10))]
    '''
+   ## TODO delete this.
+   #logger = get_logger('inflate_hpgl_string')
+
    filter_commands = filter_commands or [ ]
 
    if not isinstance(string, type('abc')):
@@ -51,6 +56,7 @@ def inflate_hpgl_string(string, filter_commands=None):
             cout = eval('hpgl.%s(%s)' % (head, body))
             result.append(cout)
          except:
-            print 'WARNING: Could not create %s(%s)...' % (head, body)
-            print '         The command is either malformed or unrecognized.'
+            msg = 'Could not create %s(%s)...' % (head, body)
+            msg += ' The command is either malformed or unrecognized.'
+            inflate_hpgl_string.logger.warning(msg)
    return result
