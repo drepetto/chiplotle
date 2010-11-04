@@ -1,9 +1,9 @@
 from chiplotle.hpgl import commands as hpgl
 from chiplotle.tools.hpgltools.parse_hpgl_string import parse_hpgl_string
-from chiplotle.tools.logtools.applylogger import applyLogger
+from chiplotle.tools.logtools.apply_logger import apply_logger
 #from chiplotle.tools.logtools.get_logger import get_logger
 
-@applyLogger
+@apply_logger
 def inflate_hpgl_string(string, filter_commands=None):
    '''Reads a text string and "inflates" it by creating
    Chiplotle-HPGL class instances of the found HPGL commands.
