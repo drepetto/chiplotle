@@ -263,6 +263,7 @@ class _BasePlotter(object):
    def format(self):
       '''This lets us pass the VirtualPlotter directly to io.view()
          Returns None if called on a plotter with a real serial port.
+         
       '''
       if isinstance(self._serial_port, VirtualSerialPort):
          return self._serial_port.format
