@@ -8,6 +8,7 @@ from chiplotle.hpgl import commands
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.interfaces.margins.interface import MarginsInterface
 from chiplotle.tools.logtools.get_logger import get_logger
+from chiplotle.tools.serialtools import VirtualSerialPort
 import math
 import re
 import serial
@@ -256,3 +257,16 @@ class _BasePlotter(object):
 
    def __repr__(self):
       return '%s(%s)' % (self.type, self._serial_port.portstr)
+
+   ## WEIRD STUFF FOR VIRTUAL PLOTTERS ##
+   @property
+   def format(self):
+      '''This lets us pass the VirtualPlotter directly to io.view()
+         Returns None if called on a plotter with a real serial port.
+      '''
+      if isinstance(self._serial_port, VirtualSerialPort):
+         return self._serial_port.format
+      else:
+         return None
+ 
+ 
