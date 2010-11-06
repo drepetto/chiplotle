@@ -16,7 +16,6 @@ class VirtualPlotter(_DrawingPlotter):
          'SI','SL','SM','SP','SR','SS','TL','UC','VS','WG','XT','YT'])
       _DrawingPlotter.__init__(self, ser, **kwargs)
       self.type = "Virtual"
-      self._serial_port = ser
 
    @property
    def format(self):
