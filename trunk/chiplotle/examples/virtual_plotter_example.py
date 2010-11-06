@@ -7,7 +7,10 @@ demonstrates the use of a virtual plotter
 you must have pstoedit installed for io.view() to work!
 '''
 
-plotter = instantiate_virtual_plotter()
+plotter = instantiate_virtual_plotter(type="HP7550A")
+print "plotter.type: " + plotter.type
+print "plotter dimensions: "
+print plotter.margins.hard
 plotter.select_pen(1)
 plotter.goto(0,0)
 plotter.pen_down()
