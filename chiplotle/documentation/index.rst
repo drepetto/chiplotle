@@ -16,6 +16,7 @@ Chiplotle  (|release|) documentation
 
    chapters/tutorial/index
    chapters/fundamentals/index
+   chapters/plotters/index
    chapters/faq/index
    chapters/mailinglist/index
 
