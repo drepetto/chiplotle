@@ -8,7 +8,7 @@ Dependencies
 
 To install Chiplotle you must already have Python 2.5 or Python 2.6 installed in your computer. 
 
-Chiplotle also requires NumPy and PySerial 2.4 to be installed in you machine for it to work properly. You can download NumPy and PySerial 2.4 from their respective websites.
+Chiplotle also requires NumPy and PySerial to work. You can download NumPy and PySerial from their respective websites.
 
 NumPy:
 http://numpy.scipy.org/
@@ -44,7 +44,7 @@ If you don't have  *setuptools*, follow these steps:
    privileges and run the command ``setup.py install``.
 
 
-These commands will install Chiplotle, as well as its dependencies, in your Python installation's `site-packages` directory. Note that this requires a working internet connection. 
+These commands will install Chiplotle in your Python installation's `site-packages` directory. Note that this requires a working internet connection. 
 
 
 Installing the development version
