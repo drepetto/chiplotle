@@ -5,6 +5,7 @@
 '''
 
 from chiplotle.plotters.baseplotter import _BasePlotter
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 
 class _DrawingPlotter(_BasePlotter):
 
@@ -191,8 +192,11 @@ class _DrawingPlotter(_BasePlotter):
    def set_plot_window(self, left_bottom, right_top):
       # takes two CoordinatePairs
       
-      print "Setting plot window."
-      print ""
+      if not isinstance(left_bottom, CoordinatePair):
+         print "Please pass in two CoordinatePairs."
+         return
+         
+      print "Setting plot window..."
       x1 = left_bottom.x
       y1 = left_bottom.y
       print "left: %d bottom: %d" % (x1, y1)
@@ -202,8 +206,7 @@ class _DrawingPlotter(_BasePlotter):
       
       self.write(self._hpgl.IP([x1, y1, x2, y2]))
       self.write(self._hpgl.IW([x1, y1, x2, y2]))
-      
-      print ""
+
       print "Plot window set to:"
       print self.output_p1p2     
 

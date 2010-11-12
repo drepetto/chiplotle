@@ -201,7 +201,7 @@ class _BasePlotter(object):
    def actual_position(self):
       '''Output the actual position of the plotter pen. Returns a tuple [x, y, pen status]'''
       response = self._send_query(self._hpgl.OA( )).split(',')
-      return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
+      #return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
 
    @property
    def carousel_type(self):
