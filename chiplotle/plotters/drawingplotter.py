@@ -171,15 +171,15 @@ class _DrawingPlotter(_BasePlotter):
       print ""
       print "Move pen to lower left and press enter."
       raw_input()
-      x1 = self.actual_position[0]
-      y1 = self.actual_position[1]
+      x1 = self.actual_position[0].x
+      y1 = self.actual_position[0].y
       print "left: %d bottom: %d" % (x1, y1)
 
       print ""
       print "Move pen to upper right and press enter."
       raw_input()
-      x2 = self.actual_position[0]
-      y2 = self.actual_position[1]
+      x2 = self.actual_position[0].x
+      y2 = self.actual_position[0].y
       print "right: %d top: %d" % (x2, y2)
       
       self.write(self._hpgl.IP([x1, y1, x2, y2]))
