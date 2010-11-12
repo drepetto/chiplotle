@@ -189,11 +189,15 @@ class _DrawingPlotter(_BasePlotter):
       print "Plot window set to:"
       print self.output_p1p2
 
+
    def set_plot_window(self, left_bottom, right_top):
-      # takes two CoordinatePairs
-      
-      if not isinstance(left_bottom, CoordinatePair):
-         print "Please pass in two CoordinatePairs."
+      '''The function sets new margins for the plotting window.
+      Arguments must be two tuple pairs (x, y) or two CoordinatePairs.'''
+      try:
+         left_bottom = CoordinatePair(left_bottom)
+         right_top = CoordinatePair(right_top)
+      except TypeError:
+         print "Please pass in two coordinate pairs."
          return
          
       print "Setting plot window..."
@@ -209,6 +213,7 @@ class _DrawingPlotter(_BasePlotter):
 
       print "Plot window set to:"
       print self.output_p1p2     
+
 
    ## paper control ##
 
