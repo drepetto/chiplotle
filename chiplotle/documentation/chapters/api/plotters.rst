@@ -62,8 +62,3 @@ Chiplotle Known Plotters
 	:show-inheritance:
 	:inherited-members:
 
-.. autoclass:: chiplotle.plotters.VirtualPlotter
-	:members:
-	:undoc-members:
-	:show-inheritance:
-

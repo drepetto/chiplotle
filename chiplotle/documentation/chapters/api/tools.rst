@@ -58,5 +58,3 @@ Math tools
 
 .. autofunction:: chiplotle.tools.mathtools.superformula
 
-.. autofunction:: chiplotle.tools.mathtools.xy_to_polar
-

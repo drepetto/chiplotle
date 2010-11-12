@@ -125,16 +125,16 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.right,
          self.margins.soft.top]))
          
-      posx = float(self.actual_position.rsplit(',')[0])
-      posy = float(self.actual_position.rsplit(',')[1])
+      posx = float(self.actual_position[0])
+      posy = float(self.actual_position[1])
       p1x = self.margins.hard.left - posx
       p1y = self.margins.hard.bottom - posy
       p2x = p1x + self.margins.hard.width
       p2y = p1y + self.margins.hard.height
       
       self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))
-      posx = float(self.actual_position.rsplit(',')[0])
-      posy = float(self.actual_position.rsplit(',')[1])
+      posx = float(self.actual_position[0])
+      posy = float(self.actual_position[1])
       
       self.set_origin_to_point([posx, posy])
       
@@ -163,6 +163,32 @@ class _DrawingPlotter(_BasePlotter):
    def scale(self, xMin, xMax, yMin, yMax):
       self.write(self._hpgl.SC((xMin, xMax, yMin, yMax)))
 
+   ## window setting ##
+   
+   def interactive_set_plot_window(self):
+      print "Setting plot window."
+      print ""
+      print "Move pen to lower left and press enter."
+      raw_input()
+      x1 = self.actual_position[0]
+      y1 = self.actual_position[1]
+      print "left: %d bottom: %d" % (x1, y1)
+
+      print ""
+      print "Move pen to upper right and press enter."
+      raw_input()
+      x2 = self.actual_position[0]
+      y2 = self.actual_position[1]
+      print "right: %d top: %d" % (x2, y2)
+      
+      self.write(self._hpgl.IP([x1, y1, x2, y2]))
+      self.write(self._hpgl.IW([x1, y1, x2, y2]))
+      
+      print ""
+      print "Plot window set to:"
+      print self.output_p1p2
+
+      
 
    ## paper control ##
 
