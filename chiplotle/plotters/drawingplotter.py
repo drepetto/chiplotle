@@ -12,9 +12,15 @@ class _DrawingPlotter(_BasePlotter):
 
    ## motion ##
 
-   def goto(self, x, y):
+   def goto(self, *args):
       """Alias for PA() with only one point"""
-      self.write(self._hpgl.PA((x, y)))
+      
+      if isinstance(args[0], CoordinatePair):
+         self.write(self._hpgl.PA((args[0].x, args[0].y)))
+      elif len(args) == 2:
+         self.write(self._hpgl.PA((args[0], args[1])))
+      else:
+         print "Please use either: goto(x, y) or goto(CoordinatePair(x, y))"
 
    def goto_center(self):
       self.write(self._hpgl.PA(self.margins.soft.center))
