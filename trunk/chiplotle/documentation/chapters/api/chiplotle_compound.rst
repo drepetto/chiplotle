@@ -6,11 +6,6 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
-.. autoclass:: chiplotle.hpgl.compound.BooleanCycle
-	:members:
-	:undoc-members:
-	:show-inheritance:
-
 .. autoclass:: chiplotle.hpgl.compound.BusinessCard
 	:members:
 	:undoc-members:
@@ -81,22 +76,12 @@ Chiplotle Compound Commands
 	:undoc-members:
 	:show-inheritance:
 
-.. autoclass:: chiplotle.hpgl.compound.Parent
-	:members:
-	:undoc-members:
-	:show-inheritance:
-
 .. autoclass:: chiplotle.hpgl.compound.Path
 	:members:
 	:undoc-members:
 	:show-inheritance:
 
 .. autoclass:: chiplotle.hpgl.compound.Pen
-	:members:
-	:undoc-members:
-	:show-inheritance:
-
-.. autoclass:: chiplotle.hpgl.compound.Polygon
 	:members:
 	:undoc-members:
 	:show-inheritance:
