@@ -9,6 +9,7 @@ from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.interfaces.margins.interface import MarginsInterface
 from chiplotle.tools.logtools.get_logger import get_logger
 from chiplotle.tools.serialtools import VirtualSerialPort
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 import math
 import re
 import serial
@@ -198,7 +199,7 @@ class _BasePlotter(object):
 
    @property
    def actual_position(self):
-      '''Output the actual position of the plotter pen. Returns a tuple [x,y]'''
+      '''Output the actual position of the plotter pen. Returns a tuple [x, y, pen status]'''
       response = self._send_query(self._hpgl.OA( )).split(',')
       return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
 
@@ -208,13 +209,13 @@ class _BasePlotter(object):
 
    @property
    def commanded_position(self):
-      '''Output the commanded position of the plotter pen. Returns a tuple [x,y]'''
+      '''Output the commanded position of the plotter pen. Returns a tuple [x, y, pen status]'''
       response = self._send_query(self._hpgl.OC( )).split(',')      
       return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
           
    @property
    def digitized_point(self):
-      '''Returns last digitized point. Returns a tuple [x, y, penStatus]'''
+      '''Returns last digitized point. Returns a tuple [x, y, pen status]'''
       response = self._send_query(self._hpgl.OD( )).split(',')
       return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
 
@@ -236,9 +237,12 @@ class _BasePlotter(object):
 
    @property
    def output_p1p2(self):
-      '''Returns the current settings for P1 & P2. Returns a tuple [[p1x,p1y],[p2x,p2y]]'''
+      '''Returns the current settings for P1 & P2. Returns two CoordinatePairs'''
       response = self._send_query(self._hpgl.OP( )).split(',')
-      return [[eval(response[0]), eval(response[1])], [eval(response[2]), eval(response[3].strip('\r'))]]      
+      cp1 = CoordinatePair(eval(response[0]), eval(response[1]))
+      cp2 = CoordinatePair(eval(response[2]), eval(response[3].strip('\r')))
+      return (cp1, cp2)
+      #return [[eval(response[0]), eval(response[1])], [eval(response[2]), eval(response[3].strip('\r'))]]      
 
    @property
    def status(self):
