@@ -22,6 +22,7 @@ def _instantiate_plotter(port, id):
       print "matches your hardware plotter %s." % id
       plotter = interactive_choose_plotter(ser)
    print "\nInstantiated plotter %s:" % plotter
-   print "\tDrawing area: %s" % plotter.margins.soft
-   print "\tBuffer Size: %s" % plotter.buffer_size
+   coords = plotter.margins.soft.all_coordinates
+   print "   Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords
+   print "   Buffer Size: %s" % plotter.buffer_size
    return plotter

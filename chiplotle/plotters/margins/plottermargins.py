@@ -11,28 +11,28 @@ class _PlotterMargins(object):
 
    @property
    def left(self):
-      return self._get_all_coordinates( )[0]
+      return self.all_coordinates[0]
       
    @property
    def bottom(self):
-      return self._get_all_coordinates( )[1]
+      return self.all_coordinates[1]
 
    @property
    def right(self):
-      return self._get_all_coordinates( )[2]
+      return self.all_coordinates[2]
       
    @property
    def top(self):
-      return self._get_all_coordinates( )[3]
+      return self.all_coordinates[3]
 
    @property
    def width(self):
-      x1, y1, x2, y2 = self._get_all_coordinates( )
+      x1, y1, x2, y2 = self.all_coordinates
       return x2 - x1
 
    @property
    def height(self):
-      x1, y1, x2, y2 = self._get_all_coordinates( )
+      x1, y1, x2, y2 = self.all_coordinates
       return y2 - y1
    
    @property
@@ -44,27 +44,35 @@ class _PlotterMargins(object):
 
    @property
    def bottom_left(self):
-      coords = self._get_all_coordinates( )
+      coords = self.all_coordinates
       #return coords[0:2]
       return CoordinatePair(coords[0:2])
 
    @property
    def bottom_right(self):
-      coords = self._get_all_coordinates( )
+      coords = self.all_coordinates
       #return (coords[2], coords[1])
       return CoordinatePair(coords[2], coords[1])
 
    @property
    def top_right(self):
-      coords = self._get_all_coordinates( )
+      coords = self.all_coordinates
       #return coords[2:4]
       return CoordinatePair(coords[2:4])
 
    @property
    def top_left(self):
-      coords = self._get_all_coordinates( )
+      coords = self.all_coordinates
       #return (coords[0], coords[3])
       return CoordinatePair(coords[0], coords[3])
+
+   @property
+   def all_coordinates(self):
+      self._plotter._serial_port.flushInput( )
+      self._plotter._write_string_to_port(self._queryCommand.format)
+      m = self._plotter._read_port( ).rstrip('\r').split(',')
+      return tuple([eval(n) for n in m])
+      
 
    ## METHODS ##
 
@@ -76,7 +84,7 @@ class _PlotterMargins(object):
 
    def draw_corners(self, pen=1):
       from chiplotle.hpgl.compound import Cross
-      coords = self._get_all_coordinates( )
+      coords = self.all_coordinates
       size = 100
       corners = [ ]
       corners.append(Cross(coords[0:2], width = size, height = size, pen = 1))
@@ -85,16 +93,9 @@ class _PlotterMargins(object):
       corners.append(Cross(coords[2:4], size,  size))
       self._plotter.write(corners)
 
-   def _get_all_coordinates(self):
-      self._plotter._serial_port.flushInput( )
-      self._plotter._write_string_to_port(self._queryCommand.format)
-      m = self._plotter._read_port( ).split(',')
-      return tuple([float(n) for n in m])
-#      return tuple([int(n) for n in m])
-      
 
    ## OVERRIDES ##
 
    def __repr__(self):
-      return str(self._get_all_coordinates( ))
+      return '%s%s' % (self.__class__.__name__, self.all_coordinates)
 
