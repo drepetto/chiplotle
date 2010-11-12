@@ -13,7 +13,11 @@ class _DrawingPlotter(_BasePlotter):
    ## motion ##
 
    def goto(self, *args):
-      """Alias for PA() with only one point"""
+      """
+      Alias for PA() with only one point.
+      Pass in either an x, y pair: goto(100, 100)
+      or a CoordinatePair: goto(CoordinatePair(100,100))
+      """
       
       if isinstance(args[0], CoordinatePair):
          self.write(self._hpgl.PA((args[0].x, args[0].y)))
