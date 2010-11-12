@@ -188,7 +188,24 @@ class _DrawingPlotter(_BasePlotter):
       print "Plot window set to:"
       print self.output_p1p2
 
+   def set_plot_window(self, left_bottom, right_top):
+      # takes two CoordinatePairs
       
+      print "Setting plot window."
+      print ""
+      x1 = left_bottom.x
+      y1 = left_bottom.y
+      print "left: %d bottom: %d" % (x1, y1)
+      x2 = right_top.x
+      y2 = right_top.y
+      print "right: %d top: %d" % (x2, y2)
+      
+      self.write(self._hpgl.IP([x1, y1, x2, y2]))
+      self.write(self._hpgl.IW([x1, y1, x2, y2]))
+      
+      print ""
+      print "Plot window set to:"
+      print self.output_p1p2     
 
    ## paper control ##
 
