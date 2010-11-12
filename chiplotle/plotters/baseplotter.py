@@ -199,8 +199,9 @@ class _BasePlotter(object):
 
    @property
    def actual_position(self):
-      '''Output the actual position of the plotter pen. Returns a tuple [x, y, pen status]'''
+      '''Output the actual position of the plotter pen. Returns a tuple [CoordinatePair(x, y), pen status]'''
       response = self._send_query(self._hpgl.OA( )).split(',')
+      return [CoordinatePair(eval(response[0]), eval(response[1])), eval(response[2].strip('\r'))]
       #return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
 
    @property
@@ -209,15 +210,17 @@ class _BasePlotter(object):
 
    @property
    def commanded_position(self):
-      '''Output the commanded position of the plotter pen. Returns a tuple [x, y, pen status]'''
+      '''Output the commanded position of the plotter pen. Returns a tuple [CoordinatePair(x, y), pen status]'''
       response = self._send_query(self._hpgl.OC( )).split(',')      
-      return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
+      return [CoordinatePair(eval(response[0]), eval(response[1])), eval(response[2].strip('\r'))]
+      #return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
           
    @property
    def digitized_point(self):
-      '''Returns last digitized point. Returns a tuple [x, y, pen status]'''
+      '''Returns last digitized point. Returns a tuple [CoordinatePair(x, y), pen status]'''
       response = self._send_query(self._hpgl.OD( )).split(',')
-      return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
+      return [CoordinatePair(eval(response[0]), eval(response[1])), eval(response[2].strip('\r'))]
+      #return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
 
    @property
    def output_error(self):
