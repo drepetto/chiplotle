@@ -135,17 +135,20 @@ class _DrawingPlotter(_BasePlotter):
          self.margins.soft.bottom,
          self.margins.soft.right,
          self.margins.soft.top]))
-         
-      posx = float(self.actual_position[0])
-      posy = float(self.actual_position[1])
+      
+      position = self.actual_position[0]
+      posx = float(position.x)
+      posy = float(position.y)
       p1x = self.margins.hard.left - posx
       p1y = self.margins.hard.bottom - posy
       p2x = p1x + self.margins.hard.width
       p2y = p1y + self.margins.hard.height
       
       self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))
-      posx = float(self.actual_position[0])
-      posy = float(self.actual_position[1])
+      
+      position = self.actual_position[0]
+      posx = float(position.x)
+      posy = float(position.y)
       
       self.set_origin_to_point([posx, posy])
       
@@ -181,15 +184,17 @@ class _DrawingPlotter(_BasePlotter):
       print ""
       print "Move pen to lower left and press enter."
       raw_input()
-      x1 = self.actual_position[0].x
-      y1 = self.actual_position[0].y
+      position = self.actual_position[0]
+      x1 = position.x
+      y1 = position.y
       print "left: %d bottom: %d" % (x1, y1)
 
       print ""
       print "Move pen to upper right and press enter."
       raw_input()
-      x2 = self.actual_position[0].x
-      y2 = self.actual_position[0].y
+      position = self.actual_position[0]
+      x2 = position.x
+      y2 = position.y
       print "right: %d top: %d" % (x2, y2)
       
       self.write(self._hpgl.IP([x1, y1, x2, y2]))
