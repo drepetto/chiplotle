@@ -43,13 +43,15 @@ def main():
       msg = "move to top left corner and hit enter to begin plotting..."
       raw_input(msg)
       
-      point_string = plotter.actual_position
-      point_string_parts = point_string.split(',')
-      x = int(point_string_parts[0])
+      #point_string = plotter.actual_position
+      #point_string_parts = point_string.split(',')
+      #x = int(point_string_parts[0])
+      x = plotter.actual_position[0].x
       # the "- cell_size is there because rects are drawn from the 
       # bottom left
       # corner, but we've put our starting point at the top left
-      y = int(point_string_parts[1])  
+      #y = int(point_string_parts[1])  
+      y = plotter.actual_position[0].y
    
       text = DorkbotLabel((x, y), text, font_style, outline_pen, fill_pen,
         width, outline_jitter = outline_jitter, fill_jitter = fill_jitter)
