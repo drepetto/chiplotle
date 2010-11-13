@@ -52,4 +52,4 @@ Sometimes you may want to work on your plotter code without having to actually c
    >>> plotter.select_pen(0)
    >>> io.view(plotter)
    
-.. note:: ``io.view()`` requires `pstoedit <http://www.pstoedit.net>`_ to be installed on your system in order to convert the hpgl files into postscript for viewing by your OS's native ps viewer application.
+.. note:: ``io.view()`` requires `hp2xx <http://www.gnu.org/software/hp2xx>`_ to be installed on your system in order to convert the hpgl files into postscript for viewing by your OS's native ps viewer application.
