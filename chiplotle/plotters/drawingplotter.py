@@ -180,6 +180,8 @@ class _DrawingPlotter(_BasePlotter):
    ## window setting ##
    
    def interactive_set_plot_window(self):
+      '''Interactive routine to manually move the pen to set the margins of the plotting window.'''
+      
       print "Setting plot window."
       print ""
       print "Move pen to lower left and press enter."
@@ -206,7 +208,7 @@ class _DrawingPlotter(_BasePlotter):
 
 
    def set_plot_window(self, left_bottom, right_top):
-      '''The function sets new margins for the plotting window.
+      '''Programatically set new margins for the plotting window.
       Arguments must be two tuple pairs (x, y) or two CoordinatePairs.'''
       try:
          left_bottom = CoordinatePair(left_bottom)
