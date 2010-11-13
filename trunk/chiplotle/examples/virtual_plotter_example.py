@@ -4,7 +4,7 @@ from chiplotle.tools.plottertools import instantiate_virtual_plotter
 '''
 demonstrates the use of a virtual plotter
 
-you must have pstoedit installed for io.view() to work!
+you must have hp2xx installed for io.view() to work!
 '''
 
 plotter = instantiate_virtual_plotter(type="HP7550A")
