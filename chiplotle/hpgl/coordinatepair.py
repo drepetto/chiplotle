@@ -103,8 +103,8 @@ class CoordinatePair(object):
       return self / arg
 
    def __repr__(self):
-      return 'CP(%s, %s)' % (self.x, self.y)
+      return 'CoordinatePair(%s, %s)' % (self.x, self.y)
 
    def __str__(self):
-      return 'CP(%s, %s)' % (self.x, self.y)
+      return '<%s,%s>' % (self.x, self.y)
 
