@@ -22,7 +22,7 @@ Offline Plotting
 Sometimes you may want to work on your plotter code without having to actually connect your plotter and physically plot every command. There are several ways to use Chiplotle offline:
 
 
-* Run python (not the chiplotle script!) and collect your commands into a Container, tuple or string, and when you want to see the results send the collected commands to ``io.view( )``. This method works well when you're generating commands algorithmically and don't need any interaction with the plotter::
+* Run python (not the chiplotle script!) and collect your commands into a Group, tuple or string, and when you want to see the results send the collected commands to ``io.view( )``. This method works well when you're generating commands algorithmically and don't need any interaction with the plotter::
 
    >>> from chiplotle import *
    >>> commands = []
