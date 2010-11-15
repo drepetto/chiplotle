@@ -1,8 +1,8 @@
 from chiplotle.cfg.verify_config_file import verify_config_file
 from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
 from chiplotle.tools.serialtools import sniff_ports_for_plotters
-from chiplotle.tools.serialtools import instantiate_serial_from_config_file
 from chiplotle.tools.serialtools import scan_serial_ports
+#from chiplotle.tools.serialtools import instantiate_serial_from_config_file
 
 def search_and_instantiate_plotters( ):
    '''Dynamically searches and instantiates all found plotters.
@@ -24,9 +24,11 @@ def search_and_instantiate_plotters( ):
    print '\nSniffing for plotters in all serial ports...'
    plotters_found = sniff_ports_for_plotters(ports)
    if len(plotters_found) == 0:
-      print 'Found no plotter connected to any of the serial ports.'''
-      print 'Is your plotter on?'''
-      return None
+      print 'Found no plotter connected to any of the serial ports.'
+      print 'Is your plotter on?\n'
+      ## return a list so we don't get a python error when trying 
+      ## to index the result.
+      return [None]
    else:
       for serial_address, pln in plotters_found.items( ):
          print '   Found plotter %s in port %s' % (pln, serial_address)
