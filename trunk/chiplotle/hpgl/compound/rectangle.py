@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.compound import _CompoundHPGL
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.tools.mathtools import rotate_2d
+from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
 class Rectangle(_CompoundHPGL):
    '''Compound Rectangle. Can be rotated. Cannot be filled'''

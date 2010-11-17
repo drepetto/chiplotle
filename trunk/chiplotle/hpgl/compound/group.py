@@ -7,6 +7,9 @@ import copy
 class Group(_CompoundHPGL):
    '''A group collects together multiple Chiplotle HPGL commands, so they
    can be treated as a single object. 
+   The elements in a group are stored in order, like a list, so that
+   order-specific operation can be performed on groups. i.e., Groups
+   are lists, not sets.
    Group has a position (xy) attribute. 
    '''
    def __init__(self, xy, shapes=None, pen=None):
