@@ -55,7 +55,7 @@ If you'd like to be at the cutting edge of the Chiplotle development use the fol
 1. Install Subversion if you don't have it already installed 
    (enter ``svn help`` to verify this).
 
-2. Check out Chiplotle's `trunck` development like so::
+2. Check out Chiplotle's `trunk` development like so::
 
       svn co svn://music.columbia.edu/chiplotle/trunk/ chiplotle-trunk
 
