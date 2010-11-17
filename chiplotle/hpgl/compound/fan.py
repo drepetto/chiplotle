@@ -1,10 +1,10 @@
 from __future__ import division
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA, AA
 from chiplotle.tools.mathtools import polar_to_xy
 import math
 
-class Fan(_CompoundHPGL):
+class Fan(_HPGLCompoundShape):
    '''A Fan is a slice of a donut seen from above (the hole in the middle).
    Or think of it as bent rectangle.
    
@@ -13,12 +13,12 @@ class Fan(_CompoundHPGL):
    
    All angles are assumed to be in radians.'''
    
-   _scalable = _CompoundHPGL._scalable + \
+   _scalable = _HPGLCompoundShape._scalable + \
       ['radius', 'angle', 'width_angle', 'height']
 
    def __init__(self, xy, radius, angle, width_angle, height, chord=None, 
-      filled=False, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen)
+      filled=False):
+      _HPGLCompoundShape.__init__(self, xy)
       self.radius = radius
       self.angle = angle
       self.width_angle = width_angle
@@ -58,7 +58,7 @@ class Fan(_CompoundHPGL):
    
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       ## TODO: implement FILLED...
       result += self._get_hpgl_fan( )
       return result

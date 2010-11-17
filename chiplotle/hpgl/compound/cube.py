@@ -1,14 +1,14 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.tools.mathtools import rotate_3d
 
-class Cube(_CompoundHPGL):
+class Cube(_HPGLCompoundShape):
    '''A 3D Cube. Can be rotated on x, y, and z.'''
 
-   _scalable = _CompoundHPGL._scalable + ['width', 'height', 'depth']
+   _scalable = _HPGLCompoundShape._scalable + ['width', 'height', 'depth']
 
-   def __init__(self, xy, width, height, depth, rotation=(0,0,0), pen=None):
-      _CompoundHPGL.__init__(self, xy, pen) 
+   def __init__(self, xy, width, height, depth, rotation=(0,0,0)):
+      _HPGLCompoundShape.__init__(self, xy) 
       self.width = width
       self.height = height
       self.depth = depth
@@ -37,7 +37,7 @@ class Cube(_CompoundHPGL):
       tll = rotate_3d(tll, self.rotation)[0:2]
       trl = rotate_3d(trl, self.rotation)[0:2]
 
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       result.append(PA( ))
       ## high square...
       result.append(PU(self.xy + blh))

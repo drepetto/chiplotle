@@ -1,9 +1,10 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.hpgl.coordinatearray import CoordinateArray
-from chiplotle.tools.hpgltools.convert_relatives_to_absolutes import convert_relatives_to_absolutes
+from chiplotle.tools.hpgltools.convert_relatives_to_absolutes import \
+   convert_relatives_to_absolutes
 
-## TODO Finish.
+
 def get_all_coordinates(arg):
    '''Returns all absolute coordinates for a given list of Chiplotle-HPGL commands.
    
@@ -14,10 +15,10 @@ def get_all_coordinates(arg):
       >>> print c
       [CP(1, 2), CP(2, 3), CP(3, 4)]
    '''
-   if isinstance(arg, _CompoundHPGL):
+   if isinstance(arg, _HPGLCompound):
       arg = arg._subcommands
    elif not isinstance(arg, (list, tuple)):
-      raise TypeError('`arg` must be list, tuple or _CompoundHPGL')
+      raise TypeError('`arg` must be list, tuple or _HPGLCompound')
 
    arg = convert_relatives_to_absolutes(arg)
 
@@ -28,6 +29,6 @@ def get_all_coordinates(arg):
             result.extend(e.xy)
          else:
             result.append(e.xy)
-      elif isinstance(e, _CompoundHPGL):
+      elif isinstance(e, _HPGLCompound):
          result += get_all_coordinates(e._subcommands)
    return result

@@ -1,14 +1,14 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA, PR
 from chiplotle.tools.mathtools import rotate_2d
 
-class Cross(_CompoundHPGL):
+class Cross(_HPGLCompoundShape):
    '''Cross. Can be rotated.'''
 
    _scalable = ['width', 'height']
 
-   def __init__(self, xy, width, height, rotation=0, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen) 
+   def __init__(self, xy, width, height, rotation=0):
+      _HPGLCompoundShape.__init__(self, xy) 
       self.width = width
       self.height = height
       self.rotation = rotation
@@ -25,7 +25,7 @@ class Cross(_CompoundHPGL):
       top = rotate_2d(top, self.rotation)
       bottom = rotate_2d(bottom, self.rotation)
 
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       result.append(PA(self.xy + left))
       result.append(PD( ))
       result.append(PA(self.xy + right))

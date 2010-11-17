@@ -1,13 +1,13 @@
 from chiplotle.hpgl.commands import *
 from chiplotle.fonts import dorkbot
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.compound.fancylabel import FancyLabel
 from chiplotle.tools.iterabletools.ispair import ispair
 
-class DorkbotLabel(_CompoundHPGL):
-   def __init__(self, xy, text, cell_shape='square', pen=None, fill_pen=None, 
+class DorkbotLabel(_HPGLCompoundShape):
+   def __init__(self, xy, text, cell_shape='square', fill_pen=None, 
       width=None, height=None, outline_jitter=None, fill_jitter=None):
-      _CompoundHPGL.__init__(self, xy, pen) 
+      _HPGLCompoundShape.__init__(self, xy) 
 
       self.fill_pen = fill_pen
       self.font = dorkbot
@@ -43,7 +43,7 @@ class DorkbotLabel(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
 #      result += [PU( ), PA(self.xy)]
 
       ## outline
@@ -53,7 +53,7 @@ class DorkbotLabel(_CompoundHPGL):
          cell_shape = ER((self.width / 3. * self.padding, 
             self.height / 7. * self.padding))
       outline = FancyLabel(self.xy, self.text, self.font, cell_shape, 
-         self.pen, self.width, self.height, self.outline_jitter)
+         self.width, self.height, self.outline_jitter)
       result.append(outline)
       ## fill
       if self.fill_pen:
@@ -63,7 +63,7 @@ class DorkbotLabel(_CompoundHPGL):
             cell_shape = RR((self.width / 3. * self.padding, 
                self.height / 7. * self.padding))
          fill = FancyLabel(self.xy, self.text, self.font, cell_shape, 
-            self.fill_pen, self.width, self.height, self.fill_jitter)
+            self.width, self.height, self.fill_jitter)
          result.append(fill)
       return result
 

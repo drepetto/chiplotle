@@ -6,6 +6,8 @@ text = 'your title here'
 l2 = Label((0, -300), text, charsize=(.1, .1), origin=4)
 log = Cube((0, 200), width = 500, height = 500, depth = 500,  
    rotation=(1.1, 2.9, 2.3))
-p = BusinessCard((0,0), log, [l1, l2], pen=1)
+p = BusinessCard((0,0), log, [l1, l2])
 
-io.view(p)
+
+plotter = instantiate_plotters( )[0]
+plotter.write(p)

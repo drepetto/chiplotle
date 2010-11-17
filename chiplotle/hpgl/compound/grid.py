@@ -1,8 +1,8 @@
 from __future__ import division
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA, PR
 
-class Grid(_CompoundHPGL):
+class Grid(_HPGLCompoundShape):
    '''Rectangular grid. 
 
    - `xy` : ``tuple``, (x, y) position.
@@ -10,15 +10,14 @@ class Grid(_CompoundHPGL):
    - `height` : ``int`` or ``float``, height of the rectangle.
    - `width_divisions` : ``int``, number of horizontal equidistant partitions.
    - `height_divisions` : ``int``, number of vertical equidistant partitions.
-   - `pen` : ``int``, pen number.
    
    '''
 
-   _scalable = _CompoundHPGL._scalable + ['width', 'height']
+   _scalable = _HPGLCompoundShape._scalable + ['width', 'height']
 
    def __init__(self, xy, width, height, width_divisions,
-      height_divisions, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen = pen) 
+      height_divisions):
+      _HPGLCompoundShape.__init__(self, xy) 
       self.width = width
       self.height = height
       self.width_divisions = width_divisions
@@ -39,7 +38,7 @@ class Grid(_CompoundHPGL):
       x_step_size = self.width / self.width_divisions
       y_step_size = self.height / self.height_divisions
 
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       ## add horizontal lines
       for i in range(self.height_divisions + 1):
          step_y = y_step_size * i

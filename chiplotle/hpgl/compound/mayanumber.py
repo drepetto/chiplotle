@@ -1,13 +1,13 @@
 from __future__ import division
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, CI, PA, PR, RA, EA, WG
 from chiplotle.tools import hpgltools
 import copy
 
-class MayaNumber(_CompoundHPGL):
+class MayaNumber(_HPGLCompoundShape):
 
    def __init__(self, xy, value, size=500):
-      _CompoundHPGL.__init__(self, xy) 
+      _HPGLCompoundShape.__init__(self, xy) 
       self.value = value
       self.size = size
       self.filled = False
@@ -40,7 +40,7 @@ class MayaNumber(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       x = self.x
       y = self.y + \
          (len(self._digit_values) - 1) * (self.size + self._interdigit_space)

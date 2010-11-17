@@ -25,13 +25,13 @@ Homepage %s
 
 from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.compound import *
+from chiplotle.hpgl.compound.decorators import *
 from chiplotle import plotters
 from chiplotle.tools import *
 
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 
-#from chiplotle.utils.plottertools import instantiate_plotter
 from chiplotle.tools.plottertools import instantiate_plotters
 
 #_remove_modules()

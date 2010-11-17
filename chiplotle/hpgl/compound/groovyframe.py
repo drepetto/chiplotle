@@ -1,12 +1,12 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PA, PD, PU
 
-class GroovyFrame(_CompoundHPGL):
+class GroovyFrame(_HPGLCompoundShape):
    
-   _scalable = _CompoundHPGL._scalable + ['w1', 'h1', 'w2', 'h2']
+   _scalable = _HPGLCompoundShape._scalable + ['w1', 'h1', 'w2', 'h2']
 
-   def __init__(self, xy, w1, h1, w2, h2, lines_per_side, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen)
+   def __init__(self, xy, w1, h1, w2, h2, lines_per_side):
+      _HPGLCompoundShape.__init__(self, xy)
       self.w1 = w1
       self.h1 = h1
       self.w2 = w2
@@ -18,7 +18,7 @@ class GroovyFrame(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       for element in self._compute_squares( ):
          for coords in element:
             coords = list(coords)

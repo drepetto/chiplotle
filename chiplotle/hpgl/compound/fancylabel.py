@@ -1,12 +1,13 @@
 from __future__ import division
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
+from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.hpgl.commands import PA, PR, PU, SP
 from chiplotle.tools.iterabletools.ispair import ispair
 import copy
 import random
 
 
-class FancyLabel(_CompoundHPGL):
+class FancyLabel(_HPGLCompoundShape):
    '''FancyLabel.
    
    Write text with arbitrary Chiplotle-font and arbitrary cell shape.
@@ -17,15 +18,14 @@ class FancyLabel(_CompoundHPGL):
       Chiplotle-fonts live in chiplotle/fonts.
    * `cell_shape` : the Chiplotle-HPGL shape to use to draw each cell.
       These can be simple Chiplotle-HPGL commands or Compound commands.
-   * `pen`: the pen to use [1 to 8].
    * `width`: the width of each character. May be a number or None.
    * `height`: the height of each character. May be a number or None.
    * `jitter` : an (x, y) tuple indicating the ammount of randomness added
       to each of the cells making up each character. 
    '''
-   def __init__(self, xy, text, font, cell_shape, pen=None, 
-      width=None, height=None, jitter = None):
-      _CompoundHPGL.__init__(self, xy, pen)
+   def __init__(self, xy, text, font, cell_shape, width=None, height=None, 
+      jitter = None):
+      _HPGLCompoundShape.__init__(self, xy)
       self.cell_shape = cell_shape
       self.text = text
       ## handle font
@@ -51,7 +51,7 @@ class FancyLabel(_CompoundHPGL):
    
    def _get_cell(self, x, y):
       command = copy.deepcopy(self.cell_shape)
-      if isinstance(command, _CompoundHPGL):
+      if isinstance(command, _HPGLCompound):
          command.xy = (x, y)
          return [command]
       else:
@@ -98,7 +98,7 @@ class FancyLabel(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       #result += [PU( ), PA(self.xy)]
       result += self._get_text( )
       return result

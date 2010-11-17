@@ -11,7 +11,7 @@ def test_get_all_coordinates_01( ):
  
 
 def test_get_all_coordinates_02( ):
-   '''get_all_coordinates( ) works with _CompoundHPGL.'''
+   '''get_all_coordinates( ) works with _HPGLCompound.'''
    t =  [Rectangle((5, 5), 10, 10)]
    c = hpgltools.get_all_coordinates(t)
    assert len(c) == 6
