@@ -1,12 +1,12 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.tools.hpgltools.get_all_coordinates import get_all_coordinates
 
 def get_bounding_box(arg):
    '''Returns the pair of coordinate pairs outlining the bounding box of
    the given HPGL drawing.'''
-   if not isinstance(arg, (list, tuple, _CompoundHPGL)):
-      raise TypeError('arg must be list, tuple or _CompoundHPGL')
+   if not isinstance(arg, (list, tuple, _HPGLCompound)):
+      raise TypeError('arg must be list, tuple or _HPGLCompound')
 
    min_x = min_y = 1000000.0
    max_x = max_y = -1000000.0

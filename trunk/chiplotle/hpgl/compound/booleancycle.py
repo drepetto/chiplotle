@@ -1,14 +1,14 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.compound.circle import Circle
 from chiplotle.tools.mathtools.polar_to_xy import polar_to_xy
 import math
 
-class BooleanCycle(_CompoundHPGL):
+class BooleanCycle(_HPGLCompoundShape):
 
-   _scalable = _CompoundHPGL._scalable + ['radius', 'booleans_radius']
+   _scalable = _HPGLCompoundShape._scalable + ['radius', 'booleans_radius']
 
    def __init__(self, xy, radius, booleans, booleans_radius, draw_main_circle=True):
-      _CompoundHPGL.__init__(self, xy)
+      _HPGLCompoundShape.__init__(self, xy)
       self.radius = radius
       self.booleans = booleans
       self.booleans_radius = booleans_radius
@@ -56,7 +56,7 @@ class BooleanCycle(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       result += self._get_main_circle( )
       result += self._get_boolean_beads( )
       return result

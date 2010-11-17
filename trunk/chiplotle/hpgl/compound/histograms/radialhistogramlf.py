@@ -16,9 +16,9 @@ class RadialHistogramLF(_RadialHistogram):
       in radians.
    '''
    def __init__(self, xy, min_radius, max_radius, data, fill=False, 
-      fillines_spacing=0.01, pen=None):
+      fillines_spacing=0.01):
       _RadialHistogram.__init__(self, xy, min_radius, max_radius, data,
-      fill, fillines_spacing, pen)
+      fill, fillines_spacing)
 
 
    ## PRIVATE PROPERTIES ##      

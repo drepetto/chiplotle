@@ -20,7 +20,7 @@ def circleize_image(image, cell_size=390):
          for n in range(1, circle_count + 1):
             #radius = (point / n) ** 1.5 * cell_size / 1.5
             radius = (point / circle_count * n) ** 2.2 * cell_size / 1.26
-            hpgl.append(Circle((y, x), radius, chord = 22, pen=1))
+            hpgl.append(Circle((y, x), radius, chord = 22))
 
    return Group((200, 200), hpgl)
 

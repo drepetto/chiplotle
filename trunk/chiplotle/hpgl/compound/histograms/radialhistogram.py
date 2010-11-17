@@ -1,16 +1,16 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PA, PU, PD, AA, CI
 from chiplotle.tools.mathtools import polar_to_xy
 import numpy
 
-class _RadialHistogram(_CompoundHPGL):
+class _RadialHistogram(_HPGLCompoundShape):
    '''Abstract radial histogram class.'''
 
-   _scalable = _CompoundHPGL._scalable + ['min_radius', 'max_radius']
+   _scalable = _HPGLCompoundShape._scalable + ['min_radius', 'max_radius']
 
    def __init__(self, xy, min_radius, max_radius, data, fill=False, 
-      fillines_spacing=None, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen)
+      fillines_spacing=None):
+      _HPGLCompoundShape.__init__(self, xy)
       self.min_radius = min_radius
       self.max_radius = max_radius
       self.fill = fill
@@ -57,7 +57,7 @@ class _RadialHistogram(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       #result.append(PU(self.xy))
       ## draw min_radius circle...
       result.append(CI(self.min_radius))

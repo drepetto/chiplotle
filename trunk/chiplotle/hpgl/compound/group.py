@@ -1,10 +1,11 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute 
 import copy
 
-class Group(_CompoundHPGL):
+class Group(_HPGLCompoundShape):
    '''A group collects together multiple Chiplotle HPGL commands, so they
    can be treated as a single object. 
    The elements in a group are stored in order, like a list, so that
@@ -12,8 +13,8 @@ class Group(_CompoundHPGL):
    are lists, not sets.
    Group has a position (xy) attribute. 
    '''
-   def __init__(self, xy, shapes=None, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen)
+   def __init__(self, xy, shapes=None):
+      _HPGLCompoundShape.__init__(self, xy)
       self._shapes = [ ]
       shapes = shapes or [ ]
       self.extend(shapes)
@@ -31,7 +32,7 @@ class Group(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       ## TODO: replace all this with a single call to transpose..?
       for s in self:
          if isinstance(s, _HPGLPrimitive):
@@ -39,7 +40,7 @@ class Group(_CompoundHPGL):
                s = copy.copy(s)
                s.xy += self.xy
             result.append(s)
-         elif isinstance(s, _CompoundHPGL):
+         elif isinstance(s, _HPGLCompound):
             s = copy.copy(s)
             s.xy += self.xy
             result.extend(s._subcommands)

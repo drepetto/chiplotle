@@ -1,9 +1,9 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV, SI
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 
 ## TODO: change charsize for two attributes: charwidth, charheight?
-class Label(_CompoundHPGL):
+class Label(_HPGLCompoundShape):
    '''Text label.
 
    * `xy`: 2-tuple of coordinates pair for label location.
@@ -36,11 +36,12 @@ class Label(_CompoundHPGL):
    * `vertical`: Print text from left to right (False) or top down (True).
    '''
 
-   _scalable = _CompoundHPGL._scalable + ['charsize'] ## TODO: add charspace, linespace?
+   ## TODO: add charspace, linespace?
+   _scalable = _HPGLCompoundShape._scalable + ['charsize'] 
 
    def __init__(self, xy, text, charsize=(1, 1), origin=None, charspace=None, 
-      linespace=None, slant=None, direction=None, vertical=None, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen) 
+      linespace=None, slant=None, direction=None, vertical=None):
+      _HPGLCompoundShape.__init__(self, xy) 
       self.text = text
       self.charsize = charsize
       self.direction = direction
@@ -70,7 +71,7 @@ class Label(_CompoundHPGL):
             
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       ### set commands
       #result += [PU( ), PA(self.xyabsolute)]
       if not self.charsize is None:

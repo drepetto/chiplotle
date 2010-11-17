@@ -1,10 +1,10 @@
 from chiplotle.hpgl.coordinatepair import CoordinatePair
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.tools.hpgltools.get_all_coordinates import get_all_coordinates
 
 def get_centroid(arg):
    '''Returns the centroid of the given Chiplotle-HPGL shapes.'''
-   if isinstance(arg, _CompoundHPGL):
+   if isinstance(arg, _HPGLCompound):
       arg = arg._subcommands
 
    arg = get_all_coordinates(arg)

@@ -1,14 +1,14 @@
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
-class Isosceles(_CompoundHPGL):
+class Isosceles(_HPGLCompoundShape):
    '''An isosceles trinagle.'''
    
-   _scalable = _CompoundHPGL._scalable + ['height', 'width']
+   _scalable = _HPGLCompoundShape._scalable + ['height', 'width']
 
-   def __init__(self, xy, width, height, rotation=0, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen)
+   def __init__(self, xy, width, height, rotation=0):
+      _HPGLCompoundShape.__init__(self, xy)
       self.height = height
       self.width = width
       self.rotation = rotation
@@ -25,7 +25,7 @@ class Isosceles(_CompoundHPGL):
       right = rotate_2d(right, self.rotation)
 
       
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       result += [PU( ), PA(self.xy + tip), PD( ), 
          PA(self.xy + right), PA(self.xy + left), PA(self.xy + tip),
          PU( )]

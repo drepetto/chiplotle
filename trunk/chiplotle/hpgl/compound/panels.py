@@ -1,8 +1,8 @@
 from __future__ import division
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA, PR
 
-class Panels(_CompoundHPGL):
+class Panels(_HPGLCompoundShape):
    '''Rectangular grid of panels with space between them. 
 
    - `xy` : ``tuple``, (x, y) top, left starting position.
@@ -13,7 +13,6 @@ class Panels(_CompoundHPGL):
    - `horiz_buffer` : ``float``, percentage (0.0 - 1.0) of width dedicated to buffer space
    - `vert_buffer` : ``float``, percentage (0.0 - 1.0) of height dedicated to buffer space
    - `big_border` : ``boolean``, draw big border around panel array
-   - `pen` : ``int``, pen number.
       
       
    Example::
@@ -35,8 +34,8 @@ class Panels(_CompoundHPGL):
    _scalable = ['width', 'height']
 
    def __init__(self, xy, width, height, horiz_panels, 
-      vert_panels, horiz_buffer, vert_buffer, big_border=False, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen = pen) 
+      vert_panels, horiz_buffer, vert_buffer, big_border=False):
+      _HPGLCompoundShape.__init__(self, xy) 
       self.width = width
       self.height = height
       self.horiz_panels = horiz_panels
@@ -60,7 +59,7 @@ class Panels(_CompoundHPGL):
       #print "width_each: %d height_each: %d horiz_buff_each: %d vert_buff_each %d" % \
       #   (width_each, height_each, horiz_buff_each, vert_buff_each)
          
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       
       result.append(PU())
 

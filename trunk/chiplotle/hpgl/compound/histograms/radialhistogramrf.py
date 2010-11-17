@@ -17,9 +17,9 @@ class RadialHistogramRF(_RadialHistogram):
    '''
 
    def __init__(self, xy, min_radius, max_radius, data, fill=False, 
-      fillines_spacing=50, chord=None, pen=None):
+      fillines_spacing=50, chord=None):
       _RadialHistogram.__init__(self, xy, min_radius, max_radius, data,
-      fill, fillines_spacing, pen)
+      fill, fillines_spacing)
       self.chord = chord
 
 

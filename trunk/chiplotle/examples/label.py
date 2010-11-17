@@ -7,7 +7,7 @@ spacing = 500
 for i in range(1, 10):
    r = Cross((0, spacing * i), width = 100, height = 100)
    rects.append(r)
-   l = Label((0, spacing * i), 'Label with origin %s.' %i, pen=1)
+   l = Label((0, spacing * i), 'Label with origin %s.' %i)
    l.origin = i
    l.charsize = (0.5, .5)
    labels.append(l)

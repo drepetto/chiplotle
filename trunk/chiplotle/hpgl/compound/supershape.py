@@ -1,10 +1,10 @@
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.tools.mathtools import superformula
 from math import pi
 
 
-class Supershape(_CompoundHPGL):
+class Supershape(_HPGLCompoundShape):
    '''Supershape, generated using the superformula
    first proposed by Johan Gielis.
    arguments are:
@@ -13,13 +13,13 @@ class Supershape(_CompoundHPGL):
    a=b=1.0, m, n1, n2, n3 - controls of shape
    '''
 
-   _scalable = _CompoundHPGL._scalable + ['width', 'height']
+   _scalable = _HPGLCompoundShape._scalable + ['width', 'height']
 
    def __init__(self, xy, w, h, m, n1, n2, n3, 
-      point_count=1000, percentage=1.0, a=1.0, b=1.0, range=None, pen=None):
+      point_count=1000, percentage=1.0, a=1.0, b=1.0, range=None):
 
       xy = xy or (0, 0)
-      _CompoundHPGL.__init__(self, xy, pen)
+      _HPGLCompoundShape.__init__(self, xy)
       self.width = w
       self.height = h
       self.m = m
@@ -53,7 +53,7 @@ class Supershape(_CompoundHPGL):
    def _subcommands(self):
       path = self._get_point_coordinates( )
       ## generate HPGL commands...
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       result.append(PU( ))
       result.append(PA(path[0]))
       result.append(PD( ))

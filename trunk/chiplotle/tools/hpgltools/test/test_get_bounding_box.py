@@ -14,7 +14,7 @@ def test_get_bounding_box_02( ):
 
 
 def test_get_bounding_box_03( ):
-   '''The function can take a _CompoundHPGL.'''
+   '''The function can take a _HPGLCompound.'''
    a = Rectangle((100, 200), 10, 10)
    t = hpgltools.get_bounding_box(a)
    assert t == ((95, 195), (105, 205))

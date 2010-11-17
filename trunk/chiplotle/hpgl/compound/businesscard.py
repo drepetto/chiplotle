@@ -1,19 +1,20 @@
 from chiplotle.hpgl.commands import PA, PU, PD
-from chiplotle.hpgl.compound.compound import _CompoundHPGL
+from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
+from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.hpgl.compound.label import Label
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 
-class BusinessCard(_CompoundHPGL):
+class BusinessCard(_HPGLCompoundShape):
    '''A class for making simple presentation/business cards.
       
-      - `logo`: is a single _CompoundHPGL instance to be placed in the card.
+      - `logo`: is a single _HPGLCompound instance to be placed in the card.
       - `texts`: is a list of Label instances containing text for the card.
    '''
 
-   _scalable = _CompoundHPGL._scalable + ['width', 'height']
+   _scalable = _HPGLCompoundShape._scalable + ['width', 'height']
 
-   def __init__(self, xy, logo, texts, width=None, height=None, pen=None):
-      _CompoundHPGL.__init__(self, xy, pen)
+   def __init__(self, xy, logo, texts, width=None, height=None):
+      _HPGLCompoundShape.__init__(self, xy)
       self.logo = logo
       self.texts = texts
       width = width or 3500 # int(round((3.5 - 1/16.) * 1016))
@@ -29,13 +30,13 @@ class BusinessCard(_CompoundHPGL):
       def fget(self):
          return self._logo
       def fset(self, logo):
-         if isinstance(logo, _CompoundHPGL):
+         if isinstance(logo, _HPGLCompound):
             self._logo = logo
             #logo.parentage._switch(self)
          elif logo is None:
             self._logo = None
          else:
-            raise TypeError('`logo` must be of type _CompoundHPGL or None.')
+            raise TypeError('`logo` must be of type _HPGLCompound or None.')
       return property(**locals( ))
 
    @apply
@@ -86,7 +87,7 @@ class BusinessCard(_CompoundHPGL):
 
    @property
    def _subcommands(self):
-      result = _CompoundHPGL._subcommands.fget(self)
+      result = _HPGLCompoundShape._subcommands.fget(self)
       result += self._subcommands_corner_dots
       result.extend(self.texts)
       result.append(self.logo)
