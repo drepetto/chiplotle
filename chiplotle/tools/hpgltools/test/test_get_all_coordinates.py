@@ -16,11 +16,11 @@ def test_get_all_coordinates_02( ):
    c = hpgltools.get_all_coordinates(t)
    assert len(c) == 6
    assert c[0] == (5, 5)
-   assert c[1] == (0, 10)
-   assert c[2] == (10, 10)
-   assert c[3] == (10, 0)
-   assert c[4] == (0, 0)
-   assert c[5] == (0, 10)
+   assert c[1] == (0, 0)
+   assert c[2] == (10, 0)
+   assert c[3] == (10, 10)
+   assert c[4] == (0, 10)
+   assert c[5] == (0, 0)
  
 
 
