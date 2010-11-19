@@ -16,9 +16,9 @@ class Isosceles(_HPGLCompoundShape):
 
    @property
    def _subcommands(self):
-      tip = (0, self.height)
-      left = (- self.width / 2.0, 0)
-      right = (self.width / 2.0 , 0)
+      tip = (self.height, 0)
+      left = (0, - self.width / 2.0)
+      right = (0, self.width / 2.0)
 
       tip = rotate_2d(tip, self.rotation)
       left = rotate_2d(left, self.rotation)
