@@ -1,0 +1,28 @@
+from __future__ import division
+from chiplotle.hpgl.coordinatepair import CoordinatePair
+import math
+
+
+def xy_to_polar(*args):
+   '''Converts cartesian to polar coordinates.
+   Argument may be two coordinates x, y, a tuple (x, y),
+   or a CoordinatePair(x, y).
+   '''
+   x, y = tuple(CoordinatePair(args))
+
+   r = math.sqrt(x**2 + y**2)
+   x = x or 1E-10
+   a = math.atan(y / x) 
+
+   if x >= 0:
+      if y >= 0:
+         pass
+      else:
+         a = 2 * math.pi + a
+   else:
+      if y >= 0:
+         a = math.pi + a
+      else:
+         a = math.pi / 2 * 3 - a
+
+   return r, a
