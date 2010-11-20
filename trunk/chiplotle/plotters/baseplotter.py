@@ -278,3 +278,14 @@ class _BasePlotter(object):
          return None
  
  
+   def clear(self):
+      '''
+      this method tells the virtual serial port to forget the stored commands
+      so that we can start again with a blank sheet in the virtual plotter     
+      '''
+      if isinstance(self._serial_port, VirtualSerialPort):
+         self._serial_port.clear()
+      else:
+         pass
+         
+         
