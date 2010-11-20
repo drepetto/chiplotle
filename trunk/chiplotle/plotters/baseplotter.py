@@ -268,9 +268,9 @@ class _BasePlotter(object):
    ## WEIRD STUFF FOR VIRTUAL PLOTTERS ##
    @property
    def format(self):
-      '''This lets us pass the VirtualPlotter directly to io.view()
+      '''
+         This lets us pass the VirtualPlotter directly to io.view()
          Returns None if called on a plotter with a real serial port.
-         
       '''
       if isinstance(self._serial_port, VirtualSerialPort):
          return self._serial_port.format
@@ -280,8 +280,8 @@ class _BasePlotter(object):
  
    def clear(self):
       '''
-      this method tells the virtual serial port to forget the stored commands
-      so that we can start again with a blank sheet in the virtual plotter     
+      Tells the virtual serial port to forget its stored commands.
+      Used to "erase" the drawing on the virtual plotter.
       '''
       if isinstance(self._serial_port, VirtualSerialPort):
          self._serial_port.clear()
