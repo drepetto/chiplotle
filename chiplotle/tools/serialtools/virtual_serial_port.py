@@ -118,6 +118,13 @@ class VirtualSerialPort():
    def flushOutput(self):
       #print "vsp: flushed output."
       pass
+   
+   def clear(self):
+      #this method doesn't exist for real serial ports
+      #we use it to erase the stored commands so that you can reset
+      #a virtual plotter to a blank state
+      
+      self._received_commands_string = ""
       
    #what's a reasonable value here?
    def inWaiting(self):
