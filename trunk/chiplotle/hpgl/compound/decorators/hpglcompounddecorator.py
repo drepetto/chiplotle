@@ -15,38 +15,30 @@ class _HPGLCompoundDecorator(_HPGLCompound):
    @apply
    def xy( ):
       def fget(self):
-         return self.hpglcompound._coords
+         return self.hpglcompound.xy
       def fset(self, arg):
-         self.hpglcompound._coords = CoordinatePair(arg)
+         self.hpglcompound.xy = arg
       return property(**locals())
 
    @apply
    def x( ):
       def fget(self):
-         return self.hpglcompound._coords.x
+         return self.hpglcompound.x
       def fset(self, arg):
-         self.xy = CoordinatePair(arg, self.y)
+         self.hpglcompound.x = arg
       return property(**locals())
 
    @apply
    def y( ):
       def fget(self):
-         return self.hpglcompound._coords.y
+         return self.hpglcompound.y
       def fset(self, arg):
-         self.xy = CoordinatePair(self.x, arg)
+         self.hpglcompound.y = arg
       return property(**locals())
 
 
    ## PRIVATE PROPERTIES ##
 
-
-#   @property
-#   def _decorated_chain(self):
-#      if isinstance(self.hpglcompound, _HPGLCompoundDecorator):
-#         result = [self] + self._decorated_chain
-#      else:
-#         result = [self, self.hpglcompound]
-#      return result
 
 
    ## OVERRIDES ##
