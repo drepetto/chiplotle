@@ -18,11 +18,12 @@ def xy_to_polar(*args):
       if y >= 0:
          pass
       else:
-         a = 2 * math.pi + a
+         a += 2 * math.pi
    else:
-      if y >= 0:
-         a = math.pi + a
-      else:
-         a = math.pi / 2 * 3 - a
+      a += math.pi
+#      if y >= 0:
+#         a += math.pi
+#      else:
+#         a = math.pi / 2 * 3 - a
 
    return r, a
