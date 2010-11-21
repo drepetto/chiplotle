@@ -6,7 +6,6 @@ from py.test import raises
 def test_coordinatepair__init__01( ):
    '''CoordinatePair can be initialized with two values.'''
    t = CoordinatePair(1, 2)
-
    assert t == (1, 2)
    assert t.x == 1
    assert t.y == 2
@@ -15,7 +14,6 @@ def test_coordinatepair__init__01( ):
 def test_coordinatepair__init__02( ):
    '''CoordinatePair can be initialized with a duple.'''
    t = CoordinatePair((1, 2))
-
    assert t == (1, 2)
    assert t.x == 1
    assert t.y == 2
@@ -24,7 +22,6 @@ def test_coordinatepair__init__02( ):
 def test_coordinatepair__init__03( ):
    '''CoordinatePair can be initialized with a CoordinatePair.'''
    t = CoordinatePair(CoordinatePair(1, 2))
-
    assert t == (1, 2)
    assert t.x == 1
    assert t.y == 2
@@ -38,25 +35,35 @@ def test_coordinatepair__init__04( ):
 ## __eq__ ##
 
 def test_coordinatepair__eq__01( ):
-   '''CoordinatePair equaties with another CoordinatePair, a tuple, 
+   '''CoordinatePair equates with another CoordinatePair, a tuple, 
    or a list.'''
-   t = CoordinatePair(CoordinatePair(1, 2))
-
+   t = CoordinatePair(1, 2)
    assert t == CoordinatePair(1, 2)
    assert t == (1, 2)
    assert t == [1, 2]
 
 
+def test_coordinatepair__eq__02( ):
+   '''CoordinatePair __eq__ works with None.'''
+   t = CoordinatePair(1, 2)
+   assert not (t == None)
+
+
 ## __ne__ ##
 
 def test_coordinatepair__ne__01( ):
-   '''CoordinatePair non-equaties with another CoordinatePair, a tuple, 
+   '''CoordinatePair non-equates with another CoordinatePair, a tuple, 
    or a list.'''
    t = CoordinatePair(CoordinatePair(1, 2))
-
    assert t != CoordinatePair(1, 3)
    assert t != (1, 3)
    assert t != [1, 3]
+
+
+def test_coordinatepair__ne__02( ):
+   '''CoordinatePair __ne__ works with None.'''
+   t = CoordinatePair(1, 2)
+   assert t != None
 
 
 

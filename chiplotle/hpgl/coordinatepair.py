@@ -53,10 +53,15 @@ class CoordinatePair(object):
       return CoordinatePair(-self.x, -self.y)
 
    def __eq__(self, arg):
-      if isinstance(arg, CoordinatePair):
-         return self.xy == arg.xy
-      else:
-         return self.xy == tuple(arg)
+      try:
+         arg = CoordinatePair(arg)
+         return (self.x == arg.x) and (self.y == arg.y)
+      except:
+         return False
+#      if isinstance(arg, CoordinatePair):
+#         return self.xy == arg.xy
+#      else:
+#         return self.xy == tuple(arg)
 
    def __hash__(self):
       ## TODO: what is the best way to hash this pair?
