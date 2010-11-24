@@ -128,10 +128,10 @@ class _BasePlotter(object):
          sleeps until the buffer has some room in it.
       '''
       if self._buffer_space < self.buffer_size:
-         print 'Buffer getting full, sleeping...'
+         #print 'Buffer getting full, sleeping...'
          while self._buffer_space < self.buffer_size:
             time.sleep(0.01)
-         print 'Okay, now buffer has room...'
+         #print 'Okay, now buffer has room...'
 
 
    def _slice_string_to_buffer_size(self, data):
