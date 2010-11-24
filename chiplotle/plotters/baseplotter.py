@@ -28,7 +28,7 @@ class _BasePlotter(object):
       self._margins = MarginsInterface(self)
       self.maximum_response_wait_time = get_config_value('maximum_response_wait_time')
 
-      self.buffer_size = self._buffer_space
+      self.buffer_size = int(self._buffer_space / 2)
       self.initialize_plotter( )
 
       self._logger = get_logger(self.__class__.__name__)
@@ -124,10 +124,10 @@ class _BasePlotter(object):
          sleeps until the buffer has some room in it.
       '''
       if self._buffer_space < self.buffer_size:
-         #print 'Buffer getting full, sleeping...'
+         print 'Buffer getting full, sleeping...'
          while self._buffer_space < self.buffer_size:
-            time.sleep(1)
-         #print 'Okay, now buffer has room...'
+            time.sleep(0.01)
+         print 'Okay, now buffer has room...'
 
 
    def _slice_string_to_buffer_size(self, data):
