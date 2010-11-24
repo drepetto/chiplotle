@@ -28,6 +28,10 @@ class _BasePlotter(object):
       self._margins = MarginsInterface(self)
       self.maximum_response_wait_time = get_config_value('maximum_response_wait_time')
 
+      #this is so that we don't pause while preparing and sending
+      #full buffers to the plotter. By sending 1/2 buffers we assure
+      #that the plotter will still have some data to plot while
+      #receiving the new data
       self.buffer_size = int(self._buffer_space / 2)
       self.initialize_plotter( )
 
