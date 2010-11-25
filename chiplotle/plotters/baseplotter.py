@@ -21,8 +21,6 @@ from chiplotle.cfg.get_config_value import get_config_value
 class _BasePlotter(object):
    def __init__(self, serial_port):
       self.type = '_BasePlotter'
-      ## TODO: should we get rid of this memory thing? Do we use it?
-      self.memory = []
       self._serial_port = serial_port
       self._hpgl = commands
       self._margins = MarginsInterface(self)
