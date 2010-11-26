@@ -1,5 +1,4 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
-from chiplotle.utils.get_base_class import get_base_class
 
 class _HPGLPrimitive(_HPGL):
 
