@@ -4,19 +4,19 @@
  *  http://music.columbia.edu/cmc/chiplotle
 '''
 from __future__ import division
+from chiplotle.cfg.get_config_value import get_config_value 
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.interfaces.margins.interface import MarginsInterface
 from chiplotle.tools.logtools.get_logger import get_logger
 from chiplotle.tools.serialtools import VirtualSerialPort
-from chiplotle.hpgl.coordinatepair import CoordinatePair
 import math
 import re
 import serial
 import time
 import types
 
-from chiplotle.cfg.get_config_value import get_config_value 
 
 class _BasePlotter(object):
    def __init__(self, serial_port):
@@ -76,10 +76,8 @@ class _BasePlotter(object):
 
    def write_file(self, filename):
       '''Sends the HPGL content of the given `filename` to the plotter.'''
-
       if not isinstance(filename, str):
          raise TypeError('Argument must be a string with the file name.')
-
       f = open(filename, 'r')
       chars = f.read( )
       f.close( )
@@ -115,9 +113,6 @@ class _BasePlotter(object):
                msg = 'HPGL command `%s` not recognized by %s. Command not sent.'
                msg = msg % (comm, self.type)
                self._logger.warning(msg)
-#               print 'WARNING: HPGL command "%s" not recognized by %s.'\
-#               % (comm, self.type),
-#               print 'Command not sent.'
       return ''.join(result)
 
 
@@ -126,10 +121,8 @@ class _BasePlotter(object):
          sleeps until the buffer has some room in it.
       '''
       if self._buffer_space < self.buffer_size:
-         #print 'Buffer getting full, sleeping...'
          while self._buffer_space < self.buffer_size:
             time.sleep(0.01)
-         #print 'Okay, now buffer has room...'
 
 
    def _slice_string_to_buffer_size(self, data):
@@ -151,7 +144,6 @@ class _BasePlotter(object):
       
 
    ### PRIVATE QUERIES ###
-
 
    def _read_port(self):
       '''Read data from serial port.'''
@@ -201,10 +193,11 @@ class _BasePlotter(object):
 
    @property
    def actual_position(self):
-      '''Output the actual position of the plotter pen. Returns a tuple [CoordinatePair(x, y), pen status]'''
+      '''Output the actual position of the plotter pen. Returns a tuple 
+      (CoordinatePair(x, y), pen status)'''
       response = self._send_query(self._hpgl.OA( )).split(',')
-      return [CoordinatePair(eval(response[0]), eval(response[1])), eval(response[2].strip('\r'))]
-      #return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
+      return [CoordinatePair(eval(response[0]), eval(response[1])), 
+         eval(response[2].strip('\r'))]
 
    @property
    def carousel_type(self):
@@ -212,17 +205,19 @@ class _BasePlotter(object):
 
    @property
    def commanded_position(self):
-      '''Output the commanded position of the plotter pen. Returns a tuple [CoordinatePair(x, y), pen status]'''
+      '''Output the commanded position of the plotter pen. Returns a tuple 
+      [CoordinatePair(x, y), pen status]'''
       response = self._send_query(self._hpgl.OC( )).split(',')      
-      return [CoordinatePair(eval(response[0]), eval(response[1])), eval(response[2].strip('\r'))]
-      #return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
+      return [CoordinatePair(eval(response[0]), eval(response[1])), 
+         eval(response[2].strip('\r'))]
           
    @property
    def digitized_point(self):
-      '''Returns last digitized point. Returns a tuple [CoordinatePair(x, y), pen status]'''
+      '''Returns last digitized point. Returns a tuple 
+      [CoordinatePair(x, y), pen status]'''
       response = self._send_query(self._hpgl.OD( )).split(',')
-      return [CoordinatePair(eval(response[0]), eval(response[1])), eval(response[2].strip('\r'))]
-      #return [eval(response[0]), eval(response[1]), eval(response[2].strip('\r'))]
+      return [CoordinatePair(eval(response[0]), eval(response[1])), 
+         eval(response[2].strip('\r'))]
 
    @property
    def output_error(self):
@@ -242,16 +237,16 @@ class _BasePlotter(object):
 
    @property
    def output_p1p2(self):
-      '''Returns the current settings for P1 & P2. Returns two CoordinatePairs'''
+      '''Returns the current settings for P1, P2. Returns two CoordinatePairs'''
       response = self._send_query(self._hpgl.OP( )).split(',')
       cp1 = CoordinatePair(eval(response[0]), eval(response[1]))
       cp2 = CoordinatePair(eval(response[2]), eval(response[3].strip('\r')))
       return (cp1, cp2)
-      #return [[eval(response[0]), eval(response[1])], [eval(response[2]), eval(response[3].strip('\r'))]]      
 
    @property
    def status(self):
       return self._send_query(self._hpgl.OS( ))
+
 
    ### DCI (Device Control Instructions) Escape commands ###
 
@@ -267,7 +262,9 @@ class _BasePlotter(object):
    def __repr__(self):
       return '%s(%s)' % (self.type, self._serial_port.portstr)
 
+
    ## WEIRD STUFF FOR VIRTUAL PLOTTERS ##
+
    @property
    def format(self):
       '''
