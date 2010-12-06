@@ -5,6 +5,7 @@ from chiplotle.tools import *
 import random
 import sys
 
+
 def abstract_masterpiece_file(file):
 
    saved = False
