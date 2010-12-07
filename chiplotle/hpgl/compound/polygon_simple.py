@@ -1,6 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
 class PolygonSimple(_HPGLCompoundShape):
    '''A simple polygon, e.g. one that is simply a closed path.
