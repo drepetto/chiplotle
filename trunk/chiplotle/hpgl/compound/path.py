@@ -8,7 +8,7 @@ class Path(_AbstractPath):
 
    _scalable = _AbstractPath._scalable 
 
-   def __init__(self, points, interpolation_count=None, curvature=1.0, xy=None):
+   def __init__(self, points, curvature, interpolation_count=None, xy=None):
       xy = xy or (0, 0)
       _AbstractPath.__init__(self, points, interpolation_count, xy) 
       self.curvature = curvature
