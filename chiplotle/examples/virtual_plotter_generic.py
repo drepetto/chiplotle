@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_virtual_plotter
 
