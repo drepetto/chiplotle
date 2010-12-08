@@ -1,4 +1,5 @@
 from chiplotle.tools.serialtools.virtual_serial_port import VirtualSerialPort
+from chiplotle.tools.plottertools import instantiate_plotter_from_id
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.cfg.get_config_value import get_config_value
 from chiplotle import plotters
@@ -22,9 +23,12 @@ def instantiate_virtual_plotter(left_bottom = CoordinatePair(0,0),
       if map is not None:
          for k, v in map.items( ):
             which_plotter = v
-   
+      else:
+         which_plotter = "Plotter"
+         
    ser = VirtualSerialPort(left_bottom, right_top)
-   plotter = getattr(plotters, which_plotter)(ser)
+   plotter = instantiate_plotter_from_id(ser, which_plotter)
+   #plotter = getattr(plotters, which_plotter)(ser)
    print "\nInstantiated plotter %s:" % plotter
    coords = plotter.margins.soft.all_coordinates
    print "   Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords
