@@ -6,5 +6,9 @@ def instantiate_virtual_plotter(left=0, bottom=0, right=15000, top=10000, type="
 
    ser = VirtualSerialPort(left, bottom, right, top)
    plotter = getattr(plotters, type)(ser)
+   print "\nInstantiated plotter %s:" % plotter
+   coords = plotter.margins.soft.all_coordinates
+   print "   Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords
+   print "   Buffer Size: %s" % plotter.buffer_size
    return plotter
 
