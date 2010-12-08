@@ -1,17 +1,36 @@
 from chiplotle.tools.serialtools.virtual_serial_port import VirtualSerialPort
 from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.cfg.get_config_value import get_config_value
 from chiplotle import plotters
 
 def instantiate_virtual_plotter(left_bottom = CoordinatePair(0,0), 
     right_top = CoordinatePair(10320, 7920), 
-    type="Plotter"):
-   '''Instantiates a virtual plotter with 8.5x11" (ANSI A) paper.'''
+    type=None):
+   '''
+   Instantiates a virtual plotter with 8.5x11" (ANSI A) paper.
+   If you have a default plotter defined in your config.py file
+   we will use that plotter definition file (ignoring the serial
+   port setting).
+   '''
 
+   which_plotter = type
+   
+   if type is None:
+      map = get_config_value('serial_port_to_plotter_map')
+      ## if user has set fixed port to plotter mapping...
+
+      if map is not None:
+         for k, v in map.items( ):
+            which_plotter = v
+   
    ser = VirtualSerialPort(left_bottom, right_top)
-   plotter = getattr(plotters, type)(ser)
+   plotter = getattr(plotters, which_plotter)(ser)
    print "\nInstantiated plotter %s:" % plotter
    coords = plotter.margins.soft.all_coordinates
    print "   Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords
    print "   Buffer Size: %s" % plotter.buffer_size
+
+         
    return plotter
+
 
