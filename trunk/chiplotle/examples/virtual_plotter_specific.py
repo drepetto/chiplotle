@@ -2,9 +2,9 @@ from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_virtual_plotter
 
 '''
-demonstrates the use of a virtual plotter with a specific plotter definition
+Demonstrates the use of a virtual plotter with a specific plotter definition.
 
-you must have hp2xx installed for io.view() to work!
+You must have hp2xx installed for io.view() to work!
 '''
 
 '''
