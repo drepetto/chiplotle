@@ -10,16 +10,16 @@ class VirtualSerialPort():
       #print "I am a virtual serial port!"
       self._received_commands_string = ""
       self._next_query_value = ''
-      self.commandedX = 0
-      self.commandedY = 0
-      #penStatus: 0 == up, 1 == down
-      self.penStatus = 0
+      self.commanded_x = 0
+      self.commanded_y = 0
+      #pen_status: 0 == up, 1 == down
+      self.pen_status = 0
       self.left = left_bottom.x
       self.right = right_top.x
       self.bottom = left_bottom.y
       self.top = right_top.y
       self.buffer_size = maxint
-      self.portstr = "virtual_serial_port"
+      self.portstr = "VirtualSerialPort"
       
    def write(self, command):
       '''
@@ -62,12 +62,12 @@ class VirtualSerialPort():
          return
       elif command.startswith(commands.OA().format):
          #actual position
-         out_string = "%i, %i, %i\r" % (self.commandedX, self.commandedY, self.penStatus)
+         out_string = "%i, %i, %i\r" % (self.commanded_x, self.commanded_y, self.pen_status)
          self._next_query_value = out_string
          return
       elif command.startswith(commands.OC().format):
          #commanded position
-         out_string = "%i, %i, %i\r" % (self.commandedX, self.commandedY, self.penStatus)
+         out_string = "%i, %i, %i\r" % (self.commanded_x, self.commanded_y, self.pen_status)
          self._next_query_value = out_string
          return
       elif command.startswith(commands.OP().format):
@@ -84,31 +84,31 @@ class VirtualSerialPort():
       #this breaks for buffered writes since we don't always
       #receive a full PA1000,1000 type command
       
-      splitData = command.split(';')
+      split_data = command.split(';')
       
-      for point in splitData:
+      for point in split_data:
          if point.startswith("PA"):
-            pointParts = point.strip("PA").split(',')
-            self.commandedX = eval(pointParts[len(pointParts) - 2])
-            self.commandedY = eval(pointParts[len(pointParts) - 1])
+            point_parts = point.strip("PA").split(',')
+            self.commanded_x = eval(point_parts[len(point_parts) - 2])
+            self.commanded_y = eval(point_parts[len(point_parts) - 1])
          elif point.startswith("PD"):
             if ',' in point:
-               pointParts = point.strip("PD").split(',')
-               self.commandedX = eval(pointParts[len(pointParts) - 2])
-               self.commandedY = eval(pointParts[len(pointParts) - 1])
-            self.penStatus = 1
+               point_parts = point.strip("PD").split(',')
+               self.commanded_x = eval(point_parts[len(point_parts) - 2])
+               self.commanded_y = eval(point_parts[len(point_parts) - 1])
+            self.pen_status = 1
          elif point.startswith("PU"):
             if ',' in point:
-               pointParts = point.strip("PU").split(',')
-               self.commandedX = eval(pointParts[len(pointParts) - 2])
-               self.commandedY = eval(pointParts[len(pointParts) - 1])
-            self.penStatus = 0
+               point_parts = point.strip("PU").split(',')
+               self.commanded_x = eval(point_parts[len(point_parts) - 2])
+               self.commanded_y = eval(point_parts[len(point_parts) - 1])
+            self.pen_status = 0
          if point.startswith("PR"):
-            pointParts = point.strip("PR").split(',')
-            self.commandedX += eval(pointParts[len(pointParts) - 2])
-            self.commandedY += eval(pointParts[len(pointParts) - 1])   
+            point_parts = point.strip("PR").split(',')
+            self.commanded_x += eval(point_parts[len(point_parts) - 2])
+            self.commanded_y += eval(point_parts[len(point_parts) - 1])   
 
-      #print "commandedX: %i commandedY: %i" % (self.commandedX, self.commandedY)
+      #print "commanded_x: %i commanded_y: %i" % (self.commanded_x, self.commanded_y)
          
    def flush(self):
       pass
