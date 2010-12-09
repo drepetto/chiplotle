@@ -5,6 +5,8 @@ from sys import maxint
 
 class VirtualSerialPort():
    def __init__(self, left_bottom, right_top):
+      left_bottom = CoordinatePair(left_bottom)
+      right_top = CoordinatePair(right_top)
       #print "I am a virtual serial port!"
       self._received_commands_string = ""
       self._next_query_value = ''
