@@ -1,34 +1,26 @@
-from chiplotle import plotters
+from chiplotle.tools.serialtools.virtual_serial_port import VirtualSerialPort
 
 def interactive_choose_plotter(serial):
    print "\nChoose the plotter that best fits your hardware."
    print "When in doubt choose the generic 'Plotter'."
-   for i, plotter in enumerate(dir(plotters)):
-      print '[%d] %s' % (i,  plotter)
-   plt_name = dir(plotters)[int(raw_input())]
-   plotter = getattr(plotters, plt_name)(serial)
-   return plotter
+   from chiplotle import plotters
+   plotters = _get_instantiated_plotters_from_module(plotters)
+   for i, plotter in enumerate(plotters):
+      print '[%d] %s' % (i,  plotter.__class__.__name__)
+   return plotters[int(raw_input())].__class__(serial)
    
-#def interactive_choose_plotter(serial_port):
-#   tmp_plotter = plotters.Plotter(serial_port)
-#   id = tmp_plotter.id
-#   print "Found plotter with ID: %s" % id
-#   ## massage id...
-#   id = id.replace('-', '')
-#   ## try to instantiate a plotter that matches found ID...
-#   for plt_str in dir(plotters):
-#      if id in plt_str:
-#         plotter = getattr(plotters, plt_str)(serial_port)
-#         print "Instantiated plotter %s" % plotter
-#         return plotter
-#   ## not found, choose manually...
-#   else:
-#      print "ATTENTION: Plotter %s not supported." % id
-#      print "Choose the plotter that best fits your hardware."
-#      print "If in doubt choose the generic 'Plotter'."
-#      for i, plotter in enumerate(dir(plotters)):
-#         print '[%d] %s' % (i,  plotter)
-#      plt_name = dir(plotters)[int(raw_input())]
-#      plotter = getattr(plotters, plt_name)(serial_port)
-#      return plotter
-   
+
+def _get_instantiated_plotters_from_module(module):
+   '''The function returns a list of instantiated plotters 
+   --one per plotter type-- found in the given module. The plotters are
+   instantiated with a VirtualSerialPort, for convenience and speed.
+   Anything in the module that is not a plotter is removed.
+   '''
+   result = [ ]
+   for e in dir(module):
+      try:
+         plotter = getattr(module, e)(VirtualSerialPort((0,0), (1, 1)))
+         result.append(plotter)
+      except TypeError:
+         pass 
+   return result
