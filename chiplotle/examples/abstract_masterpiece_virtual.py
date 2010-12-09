@@ -9,7 +9,7 @@ import random
 
 def main():
 
-   plotter = instantiate_virtual_plotter(0, 0, 30000, 20000)
+   plotter = instantiate_virtual_plotter((0, 0), (30000, 20000))
 
    width = plotter.margins.soft.width
    height = plotter.margins.soft.height
