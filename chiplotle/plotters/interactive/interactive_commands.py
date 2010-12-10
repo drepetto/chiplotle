@@ -120,7 +120,10 @@ def interactive_set_plot_window_auto_units(plotter):
    plotter.write(IP([left, bottom,right,top]))
    plotter.write(SC([0,1,0,1]))
    #plotter.write(IP([left, bottom, orig_right, orig_top]))
-      
+   
+   
+   #These margins will be WRONG!!! They'll be the floor integer margins,
+   #not the margins set via the set_plot_window() above. ARRRRG!
    print "new soft margins:"
    print plotter.margins.soft
 
