@@ -108,7 +108,7 @@ def interactive_set_plot_window_auto_units(plotter):
       top = bottom + 1016
       plotter.write(IP([left, bottom,right,top]))
       plotter.write(SC([0,1,0,1]))
-      plotter.write(IP([left, bottom, orig_right, orig_top]))
+      #plotter.write(IP([left, bottom, orig_right, orig_top]))
    elif units == 2:
       right = cm_w
       top = cm_h
@@ -123,7 +123,7 @@ def interactive_set_plot_window_auto_units(plotter):
    print plotter.margins.soft
 
    '''
-from chiplotle.interactive.interactive_commands import *
+from chiplotle.plotters.interactive.interactive_commands import *
 interactive_set_plot_window_auto_units(plotter)
    '''
    
