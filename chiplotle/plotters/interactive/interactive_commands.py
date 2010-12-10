@@ -100,25 +100,27 @@ def interactive_set_plot_window_auto_units(plotter):
    print "3) mm"
    
    units = int(raw_input())
+
+   left = plotter.margins.soft.left
+   bottom = plotter.margins.soft.bottom
    
    if units == 1:
-      left = plotter.margins.soft.left
       right = left + 1016
-      bottom = plotter.margins.soft.bottom
       top = bottom + 1016
-      plotter.write(IP([left, bottom,right,top]))
-      plotter.write(SC([0,1,0,1]))
-      #plotter.write(IP([left, bottom, orig_right, orig_top]))
    elif units == 2:
-      right = cm_w
-      top = cm_h
+      right = left + 400
+      top = bottom + 400
    elif units == 3:
-      right = mm_w
-      top = mm_h
+      right = left + 40
+      top = righ + 40
    else:
       print "That wasn't one of the choices!"
       return
 
+   plotter.write(IP([left, bottom,right,top]))
+   plotter.write(SC([0,1,0,1]))
+   #plotter.write(IP([left, bottom, orig_right, orig_top]))
+      
    print "new soft margins:"
    print plotter.margins.soft
 
