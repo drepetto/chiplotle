@@ -10,6 +10,9 @@ HPGL references
 
 * `http://cstep.luberth.com/hpgl.htm <http://cstep.luberth.com/hpgl.htm>`_
 
+* `http://www.isoplotec.co.jp/HPGL/eHPGL.htm <http://www.isoplotec.co.jp/HPGL/eHPGL.htm>`_
+
+
 Tools
 =====
 
