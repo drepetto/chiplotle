@@ -30,19 +30,31 @@ class _DrawingPlotter(_BasePlotter):
       self.write(self._hpgl.PA(self.margins.soft.center))
 
    def goto_bottom_left(self):
-      self.write(self._hpgl.PA(self.margins.soft.bottom_left))
+      coord = self.margins.soft.bottom_left
+      ## pad with 1 to guarantee plotter motion...
+      coord = coord.x + 1, coord.y + 1
+      self.write(self._hpgl.PA(coord))
 
    def goto_bottom_right(self):
-      self.write(self._hpgl.PA(self.margins.soft.bottom_right))
+      coord = self.margins.soft.bottom_right
+      ## pad with 1 to guarantee plotter motion...
+      coord = coord.x - 1, coord.y + 1
+      self.write(self._hpgl.PA(coord))
 
    def goto_origin(self):
       self.write(self._hpgl.PA([0,0]))
 
    def goto_top_left(self):
-      self.write(self._hpgl.PA(self.margins.soft.top_left))
+      coord = self.margins.soft.top_left
+      ## pad with 1 to guarantee plotter motion...
+      coord = coord.x + 1, coord.y - 1
+      self.write(self._hpgl.PA(coord))
 
    def goto_top_right(self):
-      self.write(self._hpgl.PA(self.margins.soft.top_right))
+      coord = self.margins.soft.top_right
+      ## pad with 1 to guarantee plotter motion...
+      coord = coord.x - 1, coord.y - 1
+      self.write(self._hpgl.PA(coord))
 
    def nudge(self, x, y):
       self.write(self._hpgl.PR((x,y)))
