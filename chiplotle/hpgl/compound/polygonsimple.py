@@ -18,8 +18,8 @@ class PolygonSimple(_HPGLCompoundShape):
       first_point = self.points[0]
       last_point = self.points[len(points) - 1]
       
-      if first_point.x != last_point.x or first_point.y != last_point.y:
-          new_last_point = CoordinatePair(first_point.x, first_point.y)
+      if first_point != last_point:
+          new_last_point = CoordinatePair(first_point)
           self.points.append(new_last_point)
       
 
@@ -29,10 +29,10 @@ class PolygonSimple(_HPGLCompoundShape):
       result = _HPGLCompoundShape._subcommands.fget(self)
       result.append( PU( ) )
       
-      result.append( PA((self.x + first_point.x, self.y + first_point.y)) )
+      result.append( PA(self.xy + first_point) )
       result.append( PD() )
       for point in self.points:
-          result.append( PA((self.x + point.x, self.y + point.y)) )
+          result.append( PA(self.xy + point) )
       result.append( PU() )
       return result
 
