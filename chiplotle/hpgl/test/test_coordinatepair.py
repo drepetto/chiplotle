@@ -132,6 +132,24 @@ def test_coordinatepair__mul__01( ):
    assert t == (2.5, 5)
 
 
+## div ##
+
+def test_coordinatepair__div__01( ):
+   '''True division works without __future__.division imported.'''
+   a = CoordinatePair(1, 2)
+   t = a / 2
+   assert t == CoordinatePair(.5, 1)
+
+
+def test_coordinatepair__floordiv__01( ):
+   '''Floor division works.'''
+   a = CoordinatePair(1, 2)
+   t = a // 2
+   assert t == CoordinatePair(0, 1)
+
+
+## hash ##
+
 def test_coordinatepair__hash__01( ):
    t = set([CoordinatePair(1, 2), CoordinatePair(1, 2)])
    assert len(t) == 1

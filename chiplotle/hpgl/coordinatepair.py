@@ -99,13 +99,20 @@ class CoordinatePair(object):
    def __rmul__(self, arg):
       return self * arg
 
+   def __floordiv__(self, arg):
+      if arg == 0:
+         raise ZeroDivisionError
+      return CoordinatePair(self.x // arg, self.y // arg)
+
    def __div__(self, arg):
       if arg == 0:
          raise ZeroDivisionError
       return CoordinatePair(self.x / arg, self.y / arg)
 
    def __truediv__(self, arg):
-      return self / arg
+      if arg == 0:
+         raise ZeroDivisionError
+      return CoordinatePair(self.x / arg, self.y / arg)
 
    def __repr__(self):
       return 'CoordinatePair(%s, %s)' % (self.x, self.y)
