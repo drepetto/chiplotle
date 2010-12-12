@@ -134,11 +134,14 @@ interactive_set_plot_window_auto_units(plotter)
    
 
 def interactive_define_polygon_simple(plotter):
+   '''
+   Interactive routine to define points in a PolygonSimple object.
+   '''
    from chiplotle.hpgl.compound.polygon_simple import PolygonSimple
    
    points = []
 
-   print "Interactive define polygon simple:"
+   print "Interactive define PolygonSimple:"
    print "Move pen to each point and press enter. Press x when finished adding points."
    print "The final point (a duplicate of first point) will be added automatically."
    while True:
@@ -156,3 +159,33 @@ def interactive_define_polygon_simple(plotter):
    return poly
 
 
+def interactive_define_rectangle(plotter):
+   '''
+   Interactive routine to define points in a Rectangle object.
+   '''
+   from chiplotle.hpgl.compound.rectangle import Rectangle
+   
+   points = []
+
+   print "Interactive define Rectangle:"
+   print "Move pen to lower, left corner and press enter."
+
+   input = raw_input()
+   lower_left = CoordinatePair(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   print "lower_left:"
+   print lower_left
+   
+   print "Move pen to upper, right corner and press enter."
+   input = raw_input()
+   upper_right = CoordinatePair(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   print "upper_right:"
+   print upper_right   
+      
+   rectangle = Rectangle([lower_left], upper_right.x, upper_right.y)
+      
+   return rectangle
+
+'''
+from chiplotle.plotters.interactive.interactive_commands import *
+interactive_define_rectangle(plotter)
+'''
