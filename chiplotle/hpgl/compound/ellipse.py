@@ -25,9 +25,9 @@ class Ellipse(_HPGLCompoundShape):
       self.rotation = rotation
       self.segments = segments
 
+   #I think this should go into all HPGLCompoundShapes1
    @property
-   def _subcommands(self):
-
+   def points(self):
       pi_div_180 = math.pi / 180.0
       
       #(Math.PI/180) converts Degree Value into Radians
@@ -53,8 +53,26 @@ class Ellipse(_HPGLCompoundShape):
          points.append(CoordinatePair(point_x, point_y))
          
          rads += rads_incr
+    
+      #close the ellipse
+      rads = 0.0
+      alpha = rads * pi_div_180
+      sin_alpha = math.sin(alpha);
+      cos_alpha = math.cos(alpha);
+ 
+      point_x = (self.width * cos_alpha * cos_beta - self.height * sin_alpha * sin_beta);
+      point_y = (self.width * cos_alpha * sin_beta + self.height * sin_alpha * cos_beta);
+ 
+      points.append(CoordinatePair(point_x, point_y))
+      
+      return points
 
-
+      
+   @property
+   def _subcommands(self):
+      
+      points = self.points
+      
       result = _HPGLCompoundShape._subcommands.fget(self)
       result.append( PU( ) )
       result.append( PA((self.xy + points[0])) )
@@ -62,10 +80,9 @@ class Ellipse(_HPGLCompoundShape):
       for point in points:
          result.append( PA((self.xy + point)) )
 
-      # close the ellipse
-      result.append( PA((self.xy + points[0])) )
       result.append( PU() )
 
       return result
 
 
+   
