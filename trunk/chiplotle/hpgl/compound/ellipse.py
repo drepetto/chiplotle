@@ -25,7 +25,7 @@ class Ellipse(_HPGLCompoundShape):
       self.rotation = rotation
       self.segments = segments
 
-   #I think this should go into all HPGLCompoundShapes1
+   #I think this should go into all HPGLCompoundShapes!
    @property
    def points(self):
       pi_div_180 = math.pi / 180.0
