@@ -7,6 +7,7 @@ class _HPGLCompoundShape(_HPGLCompound):
    '''
    Interface (must implement):
       - `_subcommands`
+      - `points`
    '''
    
    _scalable = ['xy']
@@ -47,3 +48,7 @@ class _HPGLCompoundShape(_HPGLCompound):
    @property
    def _subcommands(self):
       return [PU( ), PA(self.xy)]
+
+   def points(self):
+      pass
+      

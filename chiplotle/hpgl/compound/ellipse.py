@@ -11,6 +11,8 @@ class Ellipse(_HPGLCompoundShape):
    
    Rotation is in degrees.
    
+   Points returns a list of lists of points, in this case it's just
+   one list.
    
    Ellipse code adapted from: http://en.wikipedia.org/wiki/Ellipse
    
@@ -65,19 +67,19 @@ class Ellipse(_HPGLCompoundShape):
  
       points.append(CoordinatePair(point_x, point_y))
       
-      return points
+      return [points]
 
       
    @property
    def _subcommands(self):
       
-      points = self.points
+      the_points = self.points[0]
       
       result = _HPGLCompoundShape._subcommands.fget(self)
       result.append( PU( ) )
-      result.append( PA((self.xy + points[0])) )
+      result.append( PA((self.xy + the_points[0])) )
       result.append( PD() )
-      for point in points:
+      for point in the_points:
          result.append( PA((self.xy + point)) )
 
       result.append( PU() )
