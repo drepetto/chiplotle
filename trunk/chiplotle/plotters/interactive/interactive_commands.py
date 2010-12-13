@@ -1,7 +1,17 @@
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.commands import SC, IP, IW
 
-'''Interactive plotter routines.'''
+'''
+Interactive plotter routines.
+
+Note that these routines may not work on your plotter. They are
+known to work on most HP and Roland plotters, but they do NOT
+work on the Houston Instruments DMP-60 (and probably other Houston
+Instruments plotters). This is because the DMP-60 interprets manual 
+pen moves as attempts to reset the origin, which interferes with 
+these routines.
+
+'''
 
 def interactive_set_plot_window(plotter):
    '''
@@ -189,3 +199,36 @@ def interactive_define_rectangle(plotter):
 from chiplotle.plotters.interactive.interactive_commands import *
 interactive_define_rectangle(plotter)
 '''
+
+
+def interactive_define_ellipse(plotter):
+   '''
+   Interactive routine to define center and radii of an ellipse.
+   '''
+   from chiplotle.hpgl.compound.rectangle import Ellipse
+   
+   points = []
+
+   print "Interactive define Rectangle:"
+   print "Move pen to lower, left corner and press enter."
+
+   input = raw_input()
+   lower_left = CoordinatePair(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   print "lower_left:"
+   print lower_left
+   
+   print "Move pen to upper, right corner and press enter."
+   input = raw_input()
+   upper_right = CoordinatePair(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   print "upper_right:"
+   print upper_right   
+      
+   rectangle = Rectangle([lower_left], upper_right.x, upper_right.y)
+      
+   return rectangle
+
+'''
+from chiplotle.plotters.interactive.interactive_commands import *
+interactive_define_rectangle(plotter)
+'''
+
