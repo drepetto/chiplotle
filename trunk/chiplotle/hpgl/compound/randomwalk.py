@@ -11,16 +11,29 @@ class RandomWalk(_HPGLCompoundShape):
       _HPGLCompoundShape.__init__(self, xy) 
       self.steps = steps
       self.step_size = step_size
+      self.the_points = []
+      self.two_pi = math.pi * 2
 
    @property
+   def points(self):
+      if len(self.the_points) == 0:
+        for i in range(self.steps):
+           A = random.random() * self.two_pi
+           r = self.step_size
+           xy = polar_to_xy(r,A)
+           self.the_points.append(xy)
+      
+      return [self.the_points]
+   
+   @property
    def _subcommands(self):
+      
+      rand_points = self.points[0]
+      
       result = _HPGLCompoundShape._subcommands.fget(self)
-      result += [PD( )]
-      for i in range(self.steps):
-        A = random.random() * math.pi * 2
-        r = self.step_size
-        xy = polar_to_xy(r,A)
-        result.append( PR(xy) )
+      result.append(PD( ))
+      for point in rand_points:
+        result.append( PR(point) )
       result.append( PU() )
       return result
 

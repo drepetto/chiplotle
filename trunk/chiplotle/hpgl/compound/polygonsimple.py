@@ -9,7 +9,7 @@ class PolygonSimple(_HPGLCompoundShape):
       (a duplicate of the first point) will be added to close the polygon.   
    '''
 
-   _scalable = _HPGLCompoundShape._scalable + ['width', 'height', 'points']
+   _scalable = _HPGLCompoundShape._scalable + ['poly_points']
 
    def __init__(self, xy, poly_points):
       _HPGLCompoundShape.__init__(self, xy)           
