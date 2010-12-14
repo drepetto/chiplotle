@@ -54,4 +54,7 @@ class Rectangle(_HPGLCompoundShape):
       result.append( PA(self.xy + tl) )
       result.append( PU() )
       return result
+      
+      
+      
 
