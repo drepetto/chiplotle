@@ -13,16 +13,25 @@ class Isosceles(_HPGLCompoundShape):
       self.width = width
       self.rotation = rotation
       
+      if rotation != 0:
+         print "Sorry, rotation is ignored in this version!"
+         rotation = 0
+
+   @property
+   def points(self):
+      tip = (0, self.height)
+      left = (- self.width / 2.0, 0)
+      right = (self.width / 2.0, 0)
+      
+      return [[tip, left, right]]
 
    @property
    def _subcommands(self):
-      tip = (self.height, 0)
-      left = (0, - self.width / 2.0)
-      right = (0, self.width / 2.0)
 
-      tip = rotate_2d(tip, self.rotation)
-      left = rotate_2d(left, self.rotation)
-      right = rotate_2d(right, self.rotation)
+      the_points = self.points[0]
+      tip = the_points[0]
+      left = the_points[1]
+      right = the_points[2]
 
       
       result = _HPGLCompoundShape._subcommands.fget(self)
@@ -30,7 +39,4 @@ class Isosceles(_HPGLCompoundShape):
          PA(self.xy + right), PA(self.xy + left), PA(self.xy + tip),
          PU( )]
       return result
-
-   ## OVERRIDES ##
-   
 

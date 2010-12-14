@@ -27,6 +27,10 @@ class Ellipse(_HPGLCompoundShape):
       self.rotation = rotation
       self.segments = segments
 
+      if rotation != 0:
+         print "Sorry, rotation is ignored in this version!"
+         rotation = 0
+
    #I think this should go into all HPGLCompoundShapes!
    @property
    def points(self):

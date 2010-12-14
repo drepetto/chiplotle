@@ -1,4 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
+from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.tools.mathtools import superformula
 from math import pi
@@ -33,25 +34,25 @@ class Supershape(_HPGLCompoundShape):
       self.range = range or (pi * 2)
       self.x, self.y = xy
        
-
-   def _get_point_coordinates(self):
+   @property
+   def points(self):
       ## compute points...
       phis = [i * self.range / self.point_count 
          for i in range(int(self.point_count * self.percentage))]
       f = lambda x: superformula(self.a, self.b, self.m, 
          self.n1, self.n2, self.n3, x)
-      points = map(f, phis)
+      the_points = map(f, phis)
       ## scale and transpose...
       path = [ ]
-      for x, y in points:
+      for x, y in the_points:
          x = x * self.width + self.x
          y = y * self.height + self.y
-         path.append((x, y))
-      return path
+         path.append(CoordinatePair(x, y))
+      return [path]
       
    @property
    def _subcommands(self):
-      path = self._get_point_coordinates( )
+      path = self.points[0]
       ## generate HPGL commands...
       result = _HPGLCompoundShape._subcommands.fget(self)
       result.append(PU( ))

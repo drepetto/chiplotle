@@ -19,6 +19,7 @@ class Rectangle(_HPGLCompoundShape):
 
       if rotation != 0:
          print "Sorry, rotation is ignored in this version!"
+         rotation = 0
 
    @property
    def points(self):
