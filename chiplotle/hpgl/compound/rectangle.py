@@ -46,12 +46,12 @@ class Rectangle(_HPGLCompoundShape):
       
       result = _HPGLCompoundShape._subcommands.fget(self)
       result.append( PU( ) )
-      result.append( PA((self.x + tl[0], self.y + tl[1])) )
+      result.append( PA(self.xy + tl) )
       result.append( PD() )
-      result.append( PA((self.x + tr[0], self.y + tr[1])) )
-      result.append( PA((self.x + br[0], self.y + br[1])) )
-      result.append( PA((self.x + bl[0], self.y + bl[1])) )
-      result.append( PA((self.x + tl[0], self.y + tl[1])) )
+      result.append( PA(self.xy + tr) )
+      result.append( PA(self.xy + br) )
+      result.append( PA(self.xy + bl) )
+      result.append( PA(self.xy + tl) )
       result.append( PU() )
       return result
 
