@@ -8,7 +8,9 @@ class Polygon(_Shape):
       A polygon, i.e. a series of points that will be connected by
       straight lines. 
       
-      offset is a CoordinatePair for moving the polygon around on the page
+      offset is a CoordinatePair for moving the shape around in 2D space
+      rotation is an angle expressed in radians
+      pivot is a CoordinatePair indicating the point around which to rotate
       
       If first_point != last_point then one final point 
       (a duplicate of the first point) will be added to close the polygon.   
@@ -26,10 +28,6 @@ class Polygon(_Shape):
    @property
    def points(self):
       return [self.coords]
-
-
-
-
 
 
 ## RUN CODE

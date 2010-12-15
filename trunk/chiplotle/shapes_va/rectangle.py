@@ -7,8 +7,10 @@ from chiplotle.hpgl.commands import PU, PD, PA
 class Rectangle(_Shape):
    '''
       A rectangle with a width, height, and offset.
-      
-      offset is a CoordinatePair for moving the Rectangle around on the page.
+
+      offset is a CoordinatePair for moving the shape around in 2D space
+      rotation is an angle expressed in radians
+      pivot is a CoordinatePair indicating the point around which to rotate
       
       The Rectangle is drawn with the current pen location as the center.
       offset may be used to shift this around, for example, to draw from

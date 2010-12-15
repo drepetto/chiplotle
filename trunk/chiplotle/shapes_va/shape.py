@@ -4,7 +4,14 @@ from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
 class _Shape(object):
-   '''Abstract class from which all geometric shapes inherit.'''
+   '''
+      Abstract class from which all geometric shapes inherit.
+   
+      offset is a CoordinatePair for moving the shape around in 2D space
+      rotation is an angle expressed in radians
+      pivot is a CoordinatePair indicating the point around which to rotate
+   
+   '''
 
    language = 'HPGL'
 
