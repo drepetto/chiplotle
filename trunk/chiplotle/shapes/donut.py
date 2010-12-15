@@ -1,4 +1,5 @@
 from chiplotle.shapes.shape import _Shape
+from chiplotle.shapes.ellipse import Ellipse
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 #from chiplotle.hpgl.commands import PU, PD, PA
@@ -44,7 +45,7 @@ class Donut(_Shape):
 
 ## RUN DEMO CODE
 if __name__ == '__main__':
-   from chiplotle.shapes.ellipse import Ellipse
+   from chiplotle.shapes.donut import Donut
    from chiplotle.tools import io
    import math
    d1 = Donut(100, 50, inset = 5)
