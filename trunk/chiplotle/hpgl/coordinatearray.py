@@ -128,10 +128,10 @@ class CoordinateArray(object):
          raise TypeError
          
    def __repr__(self):
-      return 'CA(%s)' % self.xy
+      return 'CoordinateArray(%s)' % self.xy
 
    def __str__(self):
-      return 'CA(%s)' % self.xy
+      return 'CoordinateArray(%s)' % self.xy
 
 
 
