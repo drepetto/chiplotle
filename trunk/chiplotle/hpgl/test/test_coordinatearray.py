@@ -10,18 +10,13 @@ def test_coordinatearray_01( ):
       assert isinstance(e, CoordinatePair)
    assert isinstance(t.x, tuple)
    assert isinstance(t.y, tuple)
-#   assert isinstance(t.xy, numpy.ndarray)
-#   assert isinstance(t.x, numpy.ndarray)
-#   assert isinstance(t.y, numpy.ndarray)
 
 
 def test_coordinatearray_02( ):
    '''CoordinateArray can take a flat list of numbers.'''
    t = CoordinateArray([1, 2, 3, 4])
 
-   #assert isinstance(t.xy, numpy.ndarray)
    assert isinstance(t.xy, list)
-   #assert t.xy.shape == (2, 2)
    assert t.xy == [(1, 2), (3, 4)]
    assert t.xy == [(1, 2), (3, 4)]
 
@@ -30,7 +25,6 @@ def test_coordinatearray_03( ):
    '''CoordinateArray can take a list of tuple pairs.'''
    t = CoordinateArray([(1, 2), (3, 4), (5, 6)])
 
-   #assert t.xy.shape == (3, 2)
    assert t.xy == [(1, 2), (3, 4), (5, 6)]
 
 
