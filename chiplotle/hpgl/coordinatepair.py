@@ -88,10 +88,18 @@ class CoordinatePair(object):
       return self + arg
 
    def __sub__(self, arg):
-      return self + -arg
+      from chiplotle.tools.iterabletools.ispair import ispair
+      if isinstance(arg, CoordinatePair):
+         return CoordinatePair(self.x - arg.x, self.y - arg.y)
+      elif ispair(arg):
+         return CoordinatePair(self.x - arg[0], self.y - arg[1])
+      elif isinstance(arg, (int, float)):
+         return CoordinatePair(self.x - arg, self.y - arg)
+      else:
+         raise TypeError
 
    def __rsub__(self, arg):
-      return arg + -self
+      return -(self - arg)
 
    def __mul__(self, arg):
       return CoordinatePair(self.x * arg, self.y * arg)
