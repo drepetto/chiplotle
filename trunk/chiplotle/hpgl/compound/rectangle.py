@@ -4,9 +4,10 @@ from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
 class Rectangle(_HPGLCompoundShape):
    '''
-   Compound Rectangle. Can be rotated. Cannot be filled
+   Compound Rectangle. Can be rotated. Cannot be filled.
    
-   points are returned as [[tl, tr, br, bl]]
+   points are returned as [[tl, tr, br, bl]], implying clockwise
+   drawing from the upper left.
    '''
 
    _scalable = _HPGLCompoundShape._scalable + ['width', 'height']
