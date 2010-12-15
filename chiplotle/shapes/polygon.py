@@ -3,8 +3,11 @@ from chiplotle.hpgl.commands import PU, PD, PA
 
 class Polygon():
    '''
-      A polygon, e.g. a series of points that will be connected by
-      straight lines. There may be multiple shapes in one Polygon.
+      The base class for all closed shapes.
+      
+      A polygon, i.e. a series of points that will be connected by
+      straight lines. There may be multiple closed shapes in one Polygon,
+      e.g. a donut, a frame, etc.
       
       points is an [[],[],[],...] of CoordinatePairs.
       
