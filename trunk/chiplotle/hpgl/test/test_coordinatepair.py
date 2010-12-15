@@ -115,6 +115,16 @@ def test_coordinatepair__add__04( ):
 
 
 def test_coordinatepair__add__05( ):
+   '''A CoordinatePair and a CoordinateArray can be added.'''
+   a = CoordinatePair(1, 2)
+   b = CoordinateArray([(3, 4), (5, 6)])
+   t = a + b
+   assert isinstance(t, CoordinateArray)
+   assert t[0] == (4, 6)
+   assert t[1] == (6, 8)
+
+
+def test_coordinatepair__add__06( ):
    '''A CoordinatePair and a triple cannot be added.'''
    a = CoordinatePair(1, 2)
    b = (3, 4, 5)
