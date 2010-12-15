@@ -1,8 +1,8 @@
-from chiplotle.shapes_va.shape import _Shape
+from chiplotle.shapes.shape import _Shape
 from chiplotle.shapes.polygon import Polygon
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.coordinatearray import CoordinateArray
-from chiplotle.hpgl.commands import PU, PD, PA
+#from chiplotle.hpgl.commands import PU, PD, PA
 
 class Rectangle(_Shape):
    '''
@@ -39,7 +39,7 @@ class Rectangle(_Shape):
 
 ## RUN DEMO CODE
 if __name__ == '__main__':
-   from chiplotle.shapes_va.rectangle import Rectangle
+   from chiplotle.shapes.rectangle import Rectangle
    from chiplotle.tools import io
    import math
    p1 = Rectangle(100, 50)

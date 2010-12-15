@@ -1,4 +1,4 @@
-from chiplotle.shapes_va.shape import _Shape
+from chiplotle.shapes.shape import _Shape
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.commands import PU, PD, PA
@@ -32,7 +32,7 @@ class Polygon(_Shape):
 
 ## RUN CODE
 if __name__ == '__main__':
-   from chiplotle.shapes_va.polygon import Polygon
+   from chiplotle.shapes.polygon import Polygon
    from chiplotle.tools import io
    import math
    ## Polygon
