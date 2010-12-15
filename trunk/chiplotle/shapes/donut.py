@@ -48,32 +48,23 @@ if __name__ == '__main__':
    from chiplotle.shapes.donut import Donut
    from chiplotle.tools import io
    import math
-   d1 = Donut(100, 50, inset = 5)
-   print '\Donut(100, 50)'
+   d1 = Donut(1000, 500, inset = 20)
+   print '\Donut(1000, 500, inset = 20)'
    print d1.format
 
    ## displaced
-   d2 = Donut(100, 50, inset = 5, offset = (100, 100)) 
-   print '\Donut(100, 50, (100, 100))'
+   d2 = Donut(1000, 500, inset = 20, offset = (100, 100)) 
+   print '\Donut(1000, 500, inset = 20, offset = (100, 100)) '
    print d2.format
 
    ## displaced and rotated around (0, 0)
-   d3 = Donut(100, 50, inset = 5, offset = (100, 100), rotation = math.pi / 3) 
-   print '\Donut(100, 50, (100, 100), math.pi / 3)'
+   d3 = Donut(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3) 
+   print '\Donut(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3) '
    print d3.format
 
    ## displaced and rotated around (100, 100)
-   d4 = Donut(100, 50, inset = 5, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100)) 
-   print '\Donut(100, 50, (100, 100), math.pi / 3, (100, 100))'
+   d4 = Donut(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100)) 
+   print '\Donut(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100))'
    print d4.format
 
-   io.view(d1)
-   raw_input()
-   io.view(d2)
-   raw_input()
-   io.view(d3)
-   raw_input()
-   io.view(d4)
-   raw_input()
-   
    
