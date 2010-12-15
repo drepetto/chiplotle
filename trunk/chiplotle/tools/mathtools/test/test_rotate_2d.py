@@ -2,27 +2,46 @@ from chiplotle import *
 import math
 
 
-def test_rotate_2d_01( ):
+def test_rotate_2d_args_01( ):
    '''Rotate 2d can take a tuple.'''
    xy = (1, 2)
    t = mathtools.rotate_2d(xy, 0)
    assert t == xy
 
 
-
-def test_rotate_2d_02( ):
+def test_rotate_2d_args_02( ):
    '''Rotate 2d can take a CoordinatePair.'''
    xy = CoordinatePair(1, 2)
    t = mathtools.rotate_2d(xy, 0)
    assert t == xy
 
 
-def test_rotate_2d_03( ):
-   '''Rotate 2d returns a CoordinatePair.'''
+def test_rotate_2d_args_03( ):
+   '''Rotate 2d can take a list of tuples.'''
+   xy = [(1, 2), (2, 3)]
+   t = mathtools.rotate_2d(xy, 0)
+   assert t == xy
+
+
+def test_rotate_2d_args_04( ):
+   '''Rotate 2d can take a CoordinateArray.'''
+   xy = CoordinateArray([(1, 2), (2, 3)])
+   t = mathtools.rotate_2d(xy, 0)
+   assert t == xy
+
+
+def test_rotate_2d_args_05( ):
+   '''Rotate 2d returns a CoordinatePair if it gets a pair.'''
    xy = CoordinatePair(1, 2)
    t = mathtools.rotate_2d(xy, 0)
    assert isinstance(t, CoordinatePair)
 
+
+def test_rotate_2d_args_05( ):
+   '''Rotate 2d returns a CoordinateArray if it gets a list of coordinates.'''
+   xy = [(1, 2), (3, 4)]
+   t = mathtools.rotate_2d(xy, 0)
+   assert isinstance(t, CoordinateArray)
 
 
 ## values ##
