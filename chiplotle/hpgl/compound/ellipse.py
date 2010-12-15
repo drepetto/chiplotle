@@ -16,6 +16,9 @@ class Ellipse(_HPGLCompoundShape):
    
    Ellipse code adapted from: http://en.wikipedia.org/wiki/Ellipse
    
+   
+   ERROR!!! I think this draws the Ellipse at 2 x height and width!
+   
    '''
 
    _scalable = _HPGLCompoundShape._scalable + ['width', 'height']
