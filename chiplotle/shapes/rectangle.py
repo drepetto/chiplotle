@@ -25,11 +25,20 @@ class Rectangle(Polygon):
       Polygon.__init__(self, [corners], offset)  
       
    
-'''
-from shapes.rectangle import Rectangle
-r1 = Rectangle(1000,2000, [0,0])
-r1.points
-r1.format
-io.view(r1)
 
-'''
+
+if __name__ == '__main__':
+   from chiplotle.shapes.rectangle import Rectangle
+   from chiplotle import io
+   r1 = Rectangle(1000,2000, [0,0])
+   print r1.points
+   print r1.format
+   #io.view(r1)
+
+
+   ## [VA] this is a weird artefact of Rectangle inheriting from Polygon...
+   r1.point_lists.append([CoordinatePair(0, 0), CoordinatePair(300, 400)])
+   print '\nNo longer a square!'
+   print r1.points
+   print r1.format
+
