@@ -33,12 +33,15 @@ if __name__ == '__main__':
    r1 = Rectangle(1000,2000, [0,0])
    print r1.points
    print r1.format
-   #io.view(r1)
-
+   io.view(r1)
+   
+   raw_input()
 
    ## [VA] this is a weird artefact of Rectangle inheriting from Polygon...
    r1.point_lists.append([CoordinatePair(0, 0), CoordinatePair(300, 400)])
    print '\nNo longer a square!'
    print r1.points
    print r1.format
+   io.view(r1)
 
+   raw_input()
