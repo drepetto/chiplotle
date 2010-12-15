@@ -148,6 +148,55 @@ def test_coordinatepair__floordiv__01( ):
    assert t == CoordinatePair(0, 1)
 
 
+## __sub__ ##
+
+def test_coordinatepair__sub__01( ):
+   '''Coordinate pair can substract with other coordinate pairs.'''
+   a = CoordinatePair(1, 2)
+   b = CoordinatePair(0.5, 0.5)
+   t = a - b
+   assert t == CoordinatePair(0.5, 1.5)
+
+
+def test_coordinatepair__sub__02( ):
+   '''Coordinate pair can substract a tuple.'''
+   a = CoordinatePair(1, 2)
+   b = (0.5, 0.5)
+   t = a - b
+   assert t == CoordinatePair(0.5, 1.5)
+
+
+def test_coordinatepair__sub__03( ):
+   '''An int can be substracted from a CoordinatePair.'''
+   a = CoordinatePair(1, 2)
+   t = a - 1
+   assert t == CoordinatePair(0, 1)
+
+
+def test_coordinatepair__sub__04( ):
+   '''An float can be substracted from a CoordinatePair.'''
+   a = CoordinatePair(1, 2)
+   t = a - 1.5
+   assert t == CoordinatePair(-0.5, 0.5)
+
+
+## __rsub__ ##
+
+def test_coordinatepair__rsub__01( ):
+   '''A tuple can substract a CoordinatePair.'''
+   a = CoordinatePair(1, 2)
+   b = (0.5, 0.5)
+   t = b - a
+   assert t == CoordinatePair(-0.5, -1.5)
+
+
+def test_coordinatepair__rsub__02( ):
+   '''A CoordinatePair can be substracted from an int.'''
+   a = CoordinatePair(1, 2)
+   t = 1 - a
+   assert t == CoordinatePair(0, -1)
+
+
 ## hash ##
 
 def test_coordinatepair__hash__01( ):
