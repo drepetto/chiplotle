@@ -1,5 +1,5 @@
 from __future__ import division
-import numpy
+#import numpy
 
 class CoordinatePair(object):
 
@@ -74,29 +74,33 @@ class CoordinatePair(object):
       return CoordinatePair(abs(self.x), abs(self.y))
 
    def __add__(self, arg):
-      from chiplotle.tools.iterabletools.ispair import ispair
-      if isinstance(arg, CoordinatePair):
+      from chiplotle.hpgl.coordinatearray import CoordinateArray
+      try:
+         arg = CoordinatePair(arg)
          return CoordinatePair(self.x + arg.x, self.y + arg.y)
-      elif ispair(arg):
-         return CoordinatePair(self.x + arg[0], self.y + arg[1])
-      elif isinstance(arg, (int, float)):
-         return CoordinatePair(self.x + arg, self.y + arg)
-      else:
-         raise TypeError
+      except TypeError:
+         if isinstance(arg, CoordinateArray):
+            return arg + self
+         elif isinstance(arg, (int, float)):
+            return CoordinatePair(self.x + arg, self.y + arg)
+         else:
+            raise TypeError('arg not supported.')
 
    def __radd__(self, arg):
       return self + arg
 
    def __sub__(self, arg):
-      from chiplotle.tools.iterabletools.ispair import ispair
-      if isinstance(arg, CoordinatePair):
+      from chiplotle.hpgl.coordinatearray import CoordinateArray
+      try:
+         arg = CoordinatePair(arg)
          return CoordinatePair(self.x - arg.x, self.y - arg.y)
-      elif ispair(arg):
-         return CoordinatePair(self.x - arg[0], self.y - arg[1])
-      elif isinstance(arg, (int, float)):
-         return CoordinatePair(self.x - arg, self.y - arg)
-      else:
-         raise TypeError
+      except TypeError:
+         if isinstance(arg, CoordinateArray):
+            return -(arg - self)
+         elif isinstance(arg, (int, float)):
+            return CoordinatePair(self.x - arg, self.y - arg)
+         else:
+            raise TypeError('arg not supported.')
 
    def __rsub__(self, arg):
       return -(self - arg)
