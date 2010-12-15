@@ -29,9 +29,9 @@ def relativize(data):
       elif isinstance(e, (hpgl.PR, hpgl.RR, hpgl.ER, hpgl.AR)):
          if isinstance(e, hpgl.PR):
             if not last_position is None:
-               last_position += numpy.sum(e.xy.as_list_of_pairs( ), axis = 0)
+               last_position += tuple(numpy.sum(e.xy.as_list_of_pairs( ), axis = 0))
             else:
-               last_position = numpy.sum(e.xy.as_list_of_pairs( ), axis = 0)
+               last_position = tuple(numpy.sum(e.xy.as_list_of_pairs( ), axis = 0))
             result.append(e)
          else:
             last_position = (last_position or 0) + e.xy
