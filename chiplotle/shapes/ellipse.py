@@ -29,16 +29,16 @@ class Ellipse(_Shape):
    @property
    def points(self):
       pi_div_180 = math.pi / 180.0
-      rads_incr = 360.0/float(self.segments)
+      degrees_incr = 360.0/float(self.segments)
       half_width = self.width * 0.5
       half_height = self.height * 0.5
       
-      rads = 0.0
+      degrees = 0.0
       
       ellipse_points = []
       
-      while rads < 360.0: 
-         alpha = rads * pi_div_180
+      while degrees < 360.0: 
+         alpha = degrees * pi_div_180
          sin_alpha = math.sin(alpha);
          cos_alpha = math.cos(alpha);
 
@@ -47,11 +47,11 @@ class Ellipse(_Shape):
  
          ellipse_points.append(CoordinatePair(point_x, point_y))
          
-         rads += rads_incr
+         degrees += degrees_incr
     
       #close the ellipse
-      rads = 0.0
-      alpha = rads * pi_div_180
+      degrees = 0.0
+      alpha = degrees * pi_div_180
       sin_alpha = math.sin(alpha);
       cos_alpha = math.cos(alpha);
 
