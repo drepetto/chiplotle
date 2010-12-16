@@ -33,24 +33,30 @@ class Polygon(_Shape):
 ## RUN CODE
 if __name__ == '__main__':
    from chiplotle.shapes.polygon import Polygon
+   from chiplotle.shapes.group import Group
    from chiplotle.tools import io
    import math
    ## Polygon
-   p = Polygon([(0, 0), (100, 100), (0, 100)])
+   p1 = Polygon([(0, 0), (100, 100), (0, 100)])
    print '\nPolygon([(0, 0), (100, 100), (0, 100)])'
-   print p.format
+   print p1.format
 
    ## Polygon with offset
-   p = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100))
+   p2 = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100))
    print '\nPolygon([(0, 0), (100, 100), (0, 100)], (100, 100))'
-   print p.format
+   print p2.format
 
    ## Polygon with offset and rotation around (0, 0)
-   p = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3)
+   p3 = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3)
    print '\nPolygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3)'
-   print p.format
+   print p3.format
 
    ## Polygon with offset and rotation around (100, 100)
-   p = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3, (100, 100))
+   p4 = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3, (100, 100))
    print '\nPolygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3, (100, 100))'
-   print p.format
+   print p4.format
+
+
+   g1 = Group([p1,p2,p3,p4])
+   io.view(g1)
+   
