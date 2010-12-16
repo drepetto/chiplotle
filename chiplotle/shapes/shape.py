@@ -26,6 +26,7 @@ class _Shape(object):
 
    @property
    def format(self):
+      '''Returns the final drawing commands in string format.'''
       result = ''
       for c in self._subcommands:
          result += c.format
@@ -34,6 +35,9 @@ class _Shape(object):
 
    @property
    def points(self):
+      '''Returns a list of CoordinateArrays, each of which represents
+      a path (uninterrupted line) in a drawing.'''
+      ## must be implemented in concrete sublcasses.
       pass
 
 
