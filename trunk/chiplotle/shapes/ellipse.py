@@ -1,7 +1,6 @@
 from chiplotle.shapes.shape import _Shape
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.coordinatearray import CoordinateArray
-#from chiplotle.hpgl.commands import PU, PD, PA
 import math
 
 class Ellipse(_Shape):

@@ -2,7 +2,6 @@ from chiplotle.shapes.shape import _Shape
 from chiplotle.shapes.ellipse import Ellipse
 from chiplotle.hpgl.coordinatepair import CoordinatePair
 from chiplotle.hpgl.coordinatearray import CoordinateArray
-#from chiplotle.hpgl.commands import PU, PD, PA
 import math
 
 class Donut(_Shape):
