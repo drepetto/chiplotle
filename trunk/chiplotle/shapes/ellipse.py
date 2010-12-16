@@ -67,6 +67,7 @@ class Ellipse(_Shape):
 ## RUN DEMO CODE
 if __name__ == '__main__':
    from chiplotle.shapes.ellipse import Ellipse
+   from chiplotle.shapes.group import Group
    from chiplotle.tools import io
    import math
    e1 = Ellipse(100, 50)
@@ -87,6 +88,8 @@ if __name__ == '__main__':
    e4 = Ellipse(100, 50, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100)) 
    print '\nEllipse(100, 50, (100, 100), math.pi / 3, (100, 100))'
    print e4.format
-
+   
+   g1 = Group([e1, e2, e3, e4])
+   io.view(g1)
    
    

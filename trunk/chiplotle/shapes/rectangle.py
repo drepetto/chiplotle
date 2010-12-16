@@ -40,6 +40,7 @@ class Rectangle(_Shape):
 ## RUN DEMO CODE
 if __name__ == '__main__':
    from chiplotle.shapes.rectangle import Rectangle
+   from chiplotle.shapes.group import Group
    from chiplotle.tools import io
    import math
    p1 = Rectangle(100, 50)
@@ -60,3 +61,7 @@ if __name__ == '__main__':
    p4 = Rectangle(100, 50, (100, 100), math.pi / 3, (100, 100)) 
    print '\nRectangle(100, 50, (100, 100), math.pi / 3, (100, 100))'
    print p4.format
+
+   g1 = Group([p1, p2, p3, p4])
+   io.view(g1)
+   

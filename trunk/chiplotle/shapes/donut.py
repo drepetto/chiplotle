@@ -8,7 +8,7 @@ import math
 class Donut(_Shape):
    '''
       A donut (ellipse within ellipse) with a width, height, inset, segments,
-      and offset.
+      offset, rotation, and pivot.
       
       offset is a CoordinatePair for moving the shape around in 2D space
       rotation is an angle expressed in radians
@@ -46,6 +46,7 @@ class Donut(_Shape):
 ## RUN DEMO CODE
 if __name__ == '__main__':
    from chiplotle.shapes.donut import Donut
+   from chiplotle.shapes.group import Group
    from chiplotle.tools import io
    import math
    d1 = Donut(1000, 500, inset = 20)
@@ -67,4 +68,7 @@ if __name__ == '__main__':
    print '\Donut(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100))'
    print d4.format
 
+   g1 = Group([d1, d2, d3, d4])
+   io.view(g1)
+   
    
