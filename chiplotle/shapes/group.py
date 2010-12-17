@@ -24,7 +24,7 @@ class Group(_Shape):
       return result
 
 
-## PUBLIC METHODS ##
+   ## PUBLIC METHODS ##
 
    def append(self, arg):
       self._check_init_shape(arg)

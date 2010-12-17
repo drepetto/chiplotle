@@ -1524,6 +1524,6 @@ class SetHandshakeMode(_HPGLEscape):
    @property
    def format(self):
       if self.mode is None:
-         return '%s.%s' % (self.escape, self._name)
+         return '%s.%s' % (self._escape, self._name)
       else:
-         return '%s.%s%i' % (self.escape, self._name, self.mode)
+         return '%s.%s%i' % (self._escape, self._name, self.mode)
