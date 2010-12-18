@@ -18,12 +18,12 @@ class Ellipse(_Shape):
       offset may be used to shift this around, for example, to draw from
       the lower, left corner.
    '''
-   def __init__(self, width, height, segments = 100, offset=(0, 0), rotation=0, pivot=(0, 0)):  
+   def __init__(self, width, height, segments = 100):  
       self.width = width
       self.height = height
       self.segments = segments
 
-      _Shape.__init__(self, offset, rotation, pivot)
+      _Shape.__init__(self)
       
 
    @property
@@ -69,23 +69,30 @@ if __name__ == '__main__':
    from chiplotle.shapes.group import Group
    from chiplotle.tools import io
    import math
+   
    e1 = Ellipse(100, 50)
    print '\nEllipse(100, 50)'
    print e1.format
 
    ## displaced
-   e2 = Ellipse(100, 50, offset = (100, 100)) 
-   print '\nEllipse(100, 50, (100, 100))'
+   e2 = Ellipse(100, 50)
+   e2.offset = (100, 100)
+   print '\nEllipse(100, 50)\noffset = (100, 100)'
    print e2.format
 
    ## displaced and rotated around (0, 0)
-   e3 = Ellipse(100, 50, offset = (100, 100), rotation = math.pi / 3) 
-   print '\nEllipse(100, 50, (100, 100), math.pi / 3)'
+   e3 = Ellipse(100, 50)
+   e3.offset = (100, 100)
+   e3.rotation = math.pi / 3.0
+   print '\nEllipse(100, 50)\noffset = (100, 100)\n rotation = math.pi / 3.0'
    print e3.format
 
    ## displaced and rotated around (100, 100)
-   e4 = Ellipse(100, 50, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100)) 
-   print '\nEllipse(100, 50, (100, 100), math.pi / 3, (100, 100))'
+   e4 = Ellipse(100, 50)
+   e4.offset = (100, 100)
+   e4.rotation = math.pi / 3.0
+   e4.pivot = (100, 100)
+   print '\nEllipse(100, 50)\noffset = (100, 100)\nrotation = math.pi / 3.0\npivot = (100, 100)'
    print e4.format
    
    g1 = Group([e1, e2, e3, e4])

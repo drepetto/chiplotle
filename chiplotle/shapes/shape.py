@@ -15,11 +15,11 @@ class _Shape(object):
 
    language = 'HPGL'
 
-   def __init__(self, offset, rotation, pivot):
-      self.offset = Coordinate(offset)
-      self.rotation = rotation
+   def __init__(self):
+      self.offset = Coordinate(0,0)
+      self.rotation = 0
       ## pivot point for rotation.
-      self.pivot = Coordinate(pivot)
+      self.pivot = Coordinate(0,0)
 
 
    ## PUBLIC PROPERTIES ##

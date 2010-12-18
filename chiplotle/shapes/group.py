@@ -8,7 +8,7 @@ class Group(_Shape):
    i.e., Groups are lists, not sets.
    '''
    def __init__(self, shapes=None):
-      _Shape.__init__(self, offset=(0, 0), rotation=0, pivot=(0,0))
+      _Shape.__init__(self)
       self._shapes = [ ]
       shapes = shapes or [ ]
       self.extend(shapes)
@@ -85,8 +85,10 @@ if __name__ == '__main__':
    from chiplotle.shapes.rectangle import Rectangle
    from chiplotle.tools import io
    import math
-   r1 = Rectangle(100, 200, (0, 0))
-   r2 = Rectangle(200, 100, (0, 100))
+   r1 = Rectangle(100, 200)
+   r1.offset = (0, 0)
+   r2 = Rectangle(200, 100)
+   r2.offset = (0, 100)
    g1 = Group([r1, r2])
    g1.rotation = math.pi / 3
    g1.offset = (100, 100)

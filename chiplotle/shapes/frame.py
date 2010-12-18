@@ -9,10 +9,6 @@ class Frame(_Shape):
       A frame (rectangle within a rectangle) with a width, height, inset,
       offset, rotation, and pivot.
       
-      offset is a Coordinate for moving the shape around in 2D space
-      rotation is an angle expressed in radians
-      pivot is a Coordinate indicating the point around which to rotate
-      
       inset is the distance to inset the inner ellipse from the outer.
       
       The Frame is drawn with the current pen location as the center.
@@ -20,21 +16,28 @@ class Frame(_Shape):
       the lower, left corner.
    '''
 
-   def __init__(self, width, height, inset, offset=(0, 0), rotation=0, pivot=(0, 0)):  
+   def __init__(self, width, height, inset):  
       self.width = width
       self.height = height
       self.inset = inset
 
-      _Shape.__init__(self, offset, rotation, pivot)
+      _Shape.__init__(self)
       
 
    @property
    def points(self):
+      r1 = Rectangle(self.width, self.height)
+      r1.offset = self.offset
+      r1.rotation = self.rotation
+      r1.pivot = self.pivot
       
-      
-      r1 = Rectangle(self.width, self.height, self.offset)
       r1_points = r1.points[0]
-      r2 = Rectangle(self.width - (self.inset * 2), self.height - (self.inset * 2), self.offset)
+      
+      r2 = Rectangle(self.width - (self.inset * 2), self.height - (self.inset * 2))
+      r2.offset = self.offset
+      r2.rotation = self.rotation
+      r2.pivot = self.pivot
+      
       r2_points = r2.points[0]
       
       return [CoordinateArray(r1_points), CoordinateArray(r2_points)]
@@ -51,18 +54,24 @@ if __name__ == '__main__':
    print d1.format
 
    ## displaced
-   d2 = Frame(1000, 500, inset = 20, offset = (100, 100)) 
-   print '\Frame(1000, 500, inset = 20, offset = (100, 100)) '
+   d2 = Frame(1000, 500, inset = 20)
+   d2.offset = (100, 100)
+   print '\Frame(1000, 500, inset = 20)\noffset = (100, 100)'
    print d2.format
 
    ## displaced and rotated around (0, 0)
-   d3 = Frame(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3) 
-   print '\Frame(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3) '
+   d3 = Frame(1000, 500, inset = 20)
+   d3.offset = (100, 100)
+   d3.rotation = math.pi / 3.0
+   print '\Frame(1000, 500, inset = 20)\noffset = (100, 100)\nrotation = math.pi / 3.0'
    print d3.format
 
    ## displaced and rotated around (100, 100)
-   d4 = Frame(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100)) 
-   print '\Frame(1000, 500, inset = 20, offset = (100, 100), rotation = math.pi / 3, pivot = (100, 100))'
+   d4 = Frame(1000, 500, inset = 20)
+   d4.offset = (100, 100)
+   d4.rotation = math.pi / 3.0
+   d4.pivot = (100, 100)
+   print '\Frame(1000, 500, inset = 20)\noffset = (100, 100)\nrotation = math.pi / 3.0\npivot = (100, 100)'
    print d4.format
 
    g1 = Group([d1, d2, d3, d4])

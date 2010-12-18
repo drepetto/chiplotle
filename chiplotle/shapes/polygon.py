@@ -7,21 +7,17 @@ class Polygon(_Shape):
       A polygon, i.e. a series of points that will be connected by
       straight lines. 
       
-      offset is a Coordinate for moving the shape around in 2D space
-      rotation is an angle expressed in radians
-      pivot is a Coordinate indicating the point around which to rotate
-      
       If first_point != last_point then one final point 
       (a duplicate of the first point) will be added to close the polygon.   
    '''
 
-   def __init__(self, points, offset=(0, 0), rotation=0, pivot=(0, 0)):
+   def __init__(self, points):
       ## TODO: find better name instead of coords?
       self.coords = CoordinateArray(points)
       if points[0] != points[-1]:
           self.coords.append(Coordinate(points[0]))
       
-      _Shape.__init__(self, offset, rotation, pivot)
+      _Shape.__init__(self)
 
       
    @property
@@ -41,18 +37,24 @@ if __name__ == '__main__':
    print p1.format
 
    ## Polygon with offset
-   p2 = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100))
-   print '\nPolygon([(0, 0), (100, 100), (0, 100)], (100, 100))'
+   p2 = Polygon([(0, 0), (100, 100), (0, 100)])
+   p2.offset = (100, 100)
+   print '\nPolygon([(0, 0), (100, 100), (0, 100)]\noffset = (100, 100)'
    print p2.format
 
    ## Polygon with offset and rotation around (0, 0)
-   p3 = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3)
-   print '\nPolygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3)'
+   p3 = Polygon([(0, 0), (100, 100), (0, 100)])
+   p3.offset = (100, 100)
+   p3.rotation = math.pi / 3.0
+   print '\nPolygon([(0, 0), (100, 100), (0, 100)])\noffset = (100, 100)\nrotation = math.pi / 3.0'
    print p3.format
 
    ## Polygon with offset and rotation around (100, 100)
-   p4 = Polygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3, (100, 100))
-   print '\nPolygon([(0, 0), (100, 100), (0, 100)], (100, 100), math.pi / 3, (100, 100))'
+   p4 = Polygon([(0, 0), (100, 100), (0, 100)])
+   p4.offset = (100, 100)
+   p4.rotation = math.pi / 3.0
+   p4.pivot = (100, 100)
+   print '\nPolygon([(0, 0), (100, 100), (0, 100)])\noffset = (100, 100)\nrotation = math.pi / 3.0\npivot = (100, 100))'
    print p4.format
 
 
