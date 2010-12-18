@@ -93,3 +93,5 @@ if __name__ == '__main__':
    g2 = Group([g1, Rectangle(50, 400)])
    print g2.format
    io.view(g2)
+
+   
