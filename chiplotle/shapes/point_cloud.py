@@ -37,16 +37,15 @@ if __name__ == '__main__':
    
    g1 = Group()
    
-   print '\n1000 x Point((0,0))'
+   print '\n10000 points!'
 
    cloud_points = []
-   for i in range(0,1000):
-      p = [random.randrange(0,100), random.randrange(0, 100)]
+   for i in range(0,10000):
+      p = [random.randrange(0,500), random.randrange(0, 500)]
       cloud_points.append(p)
-      #print "point: %s" % p
 
    point_cloud = PointCloud(cloud_points)
-
+   
    io.view(point_cloud)
    
    
