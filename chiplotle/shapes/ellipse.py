@@ -5,11 +5,7 @@ import math
 
 class Ellipse(_Shape):
    '''
-      An ellipse with a width, height, segments, and offset.
-      
-      offset is a Coordinate for moving the shape around in 2D space
-      rotation is an angle expressed in radians
-      pivot is a Coordinate indicating the point around which to rotate
+      An ellipse with a width, height, segments.
       
       segments is how many lines should be used to draw ellipse. More
       segments create a smoother ellipse, but will take longer to draw.

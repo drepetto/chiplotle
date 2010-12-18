@@ -6,8 +6,7 @@ import math
 
 class Frame(_Shape):
    '''
-      A frame (rectangle within a rectangle) with a width, height, inset,
-      offset, rotation, and pivot.
+      A frame (rectangle within a rectangle) with a width, height, and inset.
       
       inset is the distance to inset the inner ellipse from the outer.
       
