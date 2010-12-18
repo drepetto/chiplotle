@@ -1,14 +1,14 @@
 from __future__ import division
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 import math
 
 
 def xy_to_polar(*args):
    '''Converts cartesian to polar coordinates.
    Argument may be two coordinates x, y, a tuple (x, y),
-   or a CoordinatePair(x, y).
+   or a Coordinate(x, y).
    '''
-   x, y = tuple(CoordinatePair(args))
+   x, y = tuple(Coordinate(args))
 
    r = math.sqrt(x**2 + y**2)
    x = x or 1E-10

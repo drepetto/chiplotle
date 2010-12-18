@@ -7,7 +7,7 @@ def test_coordinatearray_01( ):
    t = CoordinateArray( )
    assert isinstance(t.xy, list)
    for e in t:
-      assert isinstance(e, CoordinatePair)
+      assert isinstance(e, Coordinate)
    assert isinstance(t.x, tuple)
    assert isinstance(t.y, tuple)
 

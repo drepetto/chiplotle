@@ -1,6 +1,6 @@
 ## TODO: delete. deprecated in favor of _HPGLCompound
 #from chiplotle.hpgl.abstract.hpgl import _HPGL
-#from chiplotle.hpgl.coordinatepair import CoordinatePair
+#from chiplotle.hpgl.coordinate import Coordinate
 #from chiplotle.hpgl.commands import PA, PU, SP
 #from chiplotle.hpgl.compound.pen import Pen
 #import types
@@ -20,7 +20,7 @@
 #      def fget(self):
 #         return self._coords
 #      def fset(self, arg):
-#         self._coords = CoordinatePair(arg)
+#         self._coords = Coordinate(arg)
 #      return property(**locals())
 #
 #   @apply
@@ -28,7 +28,7 @@
 #      def fget(self):
 #         return self._coords.x
 #      def fset(self, arg):
-#         self.xy = CoordinatePair(arg, self.y)
+#         self.xy = Coordinate(arg, self.y)
 #      return property(**locals())
 #
 #   @apply
@@ -36,7 +36,7 @@
 #      def fget(self):
 #         return self._coords.y
 #      def fset(self, arg):
-#         self.xy = CoordinatePair(self.x, arg)
+#         self.xy = Coordinate(self.x, arg)
 #      return property(**locals())
 #
 #   @property

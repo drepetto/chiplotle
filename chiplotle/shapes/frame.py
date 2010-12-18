@@ -1,6 +1,6 @@
 from chiplotle.shapes.shape import _Shape
 from chiplotle.shapes.rectangle import Rectangle
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 import math
 
@@ -9,9 +9,9 @@ class Frame(_Shape):
       A frame (rectangle within a rectangle) with a width, height, inset,
       offset, rotation, and pivot.
       
-      offset is a CoordinatePair for moving the shape around in 2D space
+      offset is a Coordinate for moving the shape around in 2D space
       rotation is an angle expressed in radians
-      pivot is a CoordinatePair indicating the point around which to rotate
+      pivot is a Coordinate indicating the point around which to rotate
       
       inset is the distance to inset the inner ellipse from the outer.
       

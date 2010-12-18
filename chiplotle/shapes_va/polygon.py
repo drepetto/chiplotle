@@ -1,6 +1,6 @@
 from chiplotle.shapes_va.shape import _Shape
 from chiplotle.hpgl.coordinatearray import CoordinateArray
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.commands import PU, PD, PA
 
 class Polygon(_Shape):
@@ -8,9 +8,9 @@ class Polygon(_Shape):
       A polygon, i.e. a series of points that will be connected by
       straight lines. 
       
-      offset is a CoordinatePair for moving the shape around in 2D space
+      offset is a Coordinate for moving the shape around in 2D space
       rotation is an angle expressed in radians
-      pivot is a CoordinatePair indicating the point around which to rotate
+      pivot is a Coordinate indicating the point around which to rotate
       
       If first_point != last_point then one final point 
       (a duplicate of the first point) will be added to close the polygon.   
@@ -20,7 +20,7 @@ class Polygon(_Shape):
       ## TODO: find better name instead of coords?
       self.coords = CoordinateArray(points)
       if points[0] != points[-1]:
-          self.coords.append(CoordinatePair(points[0]))
+          self.coords.append(Coordinate(points[0]))
       
       _Shape.__init__(self, offset, rotation, pivot)
 

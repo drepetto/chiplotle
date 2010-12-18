@@ -1,5 +1,5 @@
 from chiplotle.shapes.polygon import Polygon
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.commands import PU, PD, PA
 import math
 
@@ -10,7 +10,7 @@ class Ellipse(Polygon):
       segments is how many lines should be used to draw ellipse. More
       segments create a smoother ellipse, but will take longer to draw.
       
-      offset is a CoordinatePair for moving the Ellipse around on the page.
+      offset is a Coordinate for moving the Ellipse around on the page.
       
       The Ellipse is drawn with the current pen location as the center.
       offset may be used to shift this around, for example, to draw from
@@ -39,7 +39,7 @@ class Ellipse(Polygon):
          point_x = (half_width * cos_alpha);
          point_y = (half_height * sin_alpha);
  
-         ellipse_points.append(CoordinatePair(point_x, point_y))
+         ellipse_points.append(Coordinate(point_x, point_y))
          
          rads += rads_incr
     
@@ -52,7 +52,7 @@ class Ellipse(Polygon):
       point_x = (half_width * cos_alpha);
       point_y = (half_height * sin_alpha);
  
-      ellipse_points.append(CoordinatePair(point_x, point_y))
+      ellipse_points.append(Coordinate(point_x, point_y))
       
       Polygon.__init__(self, [ellipse_points], offset)  
 

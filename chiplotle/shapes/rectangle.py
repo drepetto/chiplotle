@@ -1,14 +1,14 @@
 from chiplotle.shapes.shape import _Shape
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 
 class Rectangle(_Shape):
    '''
       A rectangle with a width, height, and offset.
 
-      offset is a CoordinatePair for moving the shape around in 2D space
+      offset is a Coordinate for moving the shape around in 2D space
       rotation is an angle expressed in radians
-      pivot is a CoordinatePair indicating the point around which to rotate
+      pivot is a Coordinate indicating the point around which to rotate
       
       The Rectangle is drawn with the current pen location as the center.
       offset may be used to shift this around, for example, to draw from
@@ -25,11 +25,11 @@ class Rectangle(_Shape):
    @property
    def points(self):
       corners = []
-      corners.append(CoordinatePair(-self.width/2, -self.height/2))
-      corners.append(CoordinatePair(-self.width/2, self.height/2))
-      corners.append(CoordinatePair(self.width/2, self.height/2))
-      corners.append(CoordinatePair(self.width/2, -self.height/2))
-      corners.append(CoordinatePair(-self.width/2, -self.height/2))
+      corners.append(Coordinate(-self.width/2, -self.height/2))
+      corners.append(Coordinate(-self.width/2, self.height/2))
+      corners.append(Coordinate(self.width/2, self.height/2))
+      corners.append(Coordinate(self.width/2, -self.height/2))
+      corners.append(Coordinate(-self.width/2, -self.height/2))
       return [CoordinateArray(corners)]
 
 
