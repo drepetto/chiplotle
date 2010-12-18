@@ -30,32 +30,32 @@ if __name__ == '__main__':
    from chiplotle.tools import io
    import math
    
-   p1 = Line((0,0), (1000,1000))
+   l1 = Line((0,0), (1000,1000))
    print '\nLine((0,0), (1000,1000))'
-   print p1.format
+   print l1.format
 
    ## displaced
-   p2 = Line((0,0), (1000,1000))
-   p2.offset = (200,100)
+   l2 = Line((0,0), (1000,1000))
+   l2.offset = (200,100)
    print '\nLine((0,0), (1000,1000))\noffset = (200,100)'
-   print p2.format
+   print l2.format
 
    ## displaced and rotated around (0, 0)
-   p3 = Line((0,0), (1000,1000))
-   p3.offset = (100, 100)
-   p3.rotation = math.pi / 3.0
+   l3 = Line((0,0), (1000,1000))
+   l3.offset = (100, 100)
+   l3.rotation = math.pi / 3.0
    print '\nLine((0,0), (1000,1000))\noffset = (100, 100)\nrotation = math.pi / 3'
-   print p3.format
+   print l3.format
 
    ## displaced and rotated around (100, 100)
-   p4 = Line((0,0), (1000,1000))
-   p4.offset = (100, 100)
-   p4.rotation = math.pi / 3.0
-   p4.pivot = (100, 100)
+   l4 = Line((0,0), (1000,1000))
+   l4.offset = (100, 100)
+   l4.rotation = math.pi / 3.0
+   l4.pivot = (100, 100)
    print '\nLine((0,0), (1000,1000))\noffset = (100, 100)\nrotation = math.pi / 3\npivot = (100, 100)'
-   print p4.format
+   print l4.format
 
-   g1 = Group([p1, p2, p3, p4])
+   g1 = Group([l1, l2, l3, l4])
    io.view(g1)
    
    
