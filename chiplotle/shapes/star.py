@@ -2,6 +2,7 @@ from chiplotle.shapes.shape import _Shape
 from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 import math
+import fractions
 
 class Star(_Shape):
    '''
@@ -145,12 +146,6 @@ class Star(_Shape):
             return [CoordinateArray(corners)]
       
 
-   '''
-from chiplotle.shapes.star import Star
-s1 = Star(1000,1000, star_type = "crisscross")
-io.view(s1)
-
-   '''
 
    def lcm(self, a, b):      
       if (b > a):
@@ -158,13 +153,7 @@ io.view(s1)
          b=a;
          a=c;
 
-      return (a * b) / self.gcd(a,b)
-
-   def gcd (self, a, b):
-      if (a % b == 0):
-         return b
-      else:
-         return self.gcd(b, a % b)
+      return (a * b) / fractions.gcd(a,b)
 
 
 ## RUN DEMO CODE
