@@ -6,10 +6,6 @@ import math
 class Star(_Shape):
    '''
       A star with a width, height, star_type, num_points, and offset.
-
-      offset is a Coordinate for moving the shape around in 2D space
-      rotation is an angle expressed in radians
-      pivot is a Coordinate indicating the point around which to rotate
       
       star_type is either "outline" or "crisscross". "outline" draws
       the outline of the star. "crisscross" connects points across the
@@ -24,7 +20,7 @@ class Star(_Shape):
       the lower, left corner.
    '''
 
-   def __init__(self, width, height, star_type = "outline", num_points = 5, offset=(0, 0), rotation=0, pivot=(0, 0)):  
+   def __init__(self, width, height, star_type = "outline", num_points = 5):  
       self.width = width
       self.height = height
       self.star_type = star_type
@@ -34,7 +30,7 @@ class Star(_Shape):
          print "num_points must be >= 5!"
          self.num_points = 5
       
-      _Shape.__init__(self, offset, rotation, pivot)
+      _Shape.__init__(self)
 
    
    @property
@@ -183,18 +179,24 @@ if __name__ == '__main__':
    print s1.format
 
    ## displaced
-   s2 = Star(1000, 1000, num_points = 7, offset = (1000, 0)) 
-   print '\nStar(1000, 1000, num_points = 7, offset = (1000, 1000))'
+   s2 = Star(1000, 1000, num_points = 7)
+   s2.offset = (1000, 0)
+   print '\nStar(1000, 1000, num_points = 7)\noffset = (1000, 1000)'
    print s2.format
 
    ## displaced and rotated 
-   s3 = Star(1000, 1000, star_type = "crisscross", offset = (2000, 0), rotation = math.pi / 3) 
-   print '\nStar(1000, 1000, star_type = "crisscross", offset = (2000, 2000), rotation = math.pi / 3)'
+   s3 = Star(1000, 1000, star_type = "crisscross")
+   s3.offset = (2000, 0)
+   s3.rotation = math.pi / 3.0
+   print '\nStar(1000, 1000, star_type = "crisscross")\noffset = (2000, 2000)\nrotation = math.pi / 3.0'
    print s3.format
 
    ## displaced and rotated around pivot
-   s4 = Star(1000, 1000, num_points = 9, star_type = "crisscross", offset = (3000, 0), rotation = math.pi / 3, pivot = (100, 100)) 
-   print '\nStar(1000, 1000, num_points = 9, star_type = "crisscross", offset = (3000, 3000), rotation = math.pi / 3, pivot = (100, 100))'
+   s4 = Star(1000, 1000, num_points = 9, star_type = "crisscross")
+   s4.offset = (3000, 0)
+   s4.rotation = math.pi / 3.0
+   s4.pivot = (100, 100)
+   print '\nStar(1000, 1000, num_points = 9, star_type = "crisscross")\noffset = (3000, 3000)\nrotation = math.pi / 3.0\npivot = (100, 100)'
    print s4.format
 
    g1 = Group([s1, s2, s3, s4])
@@ -206,7 +208,9 @@ if __name__ == '__main__':
    gr2 = Group()
    
    for i in range(5, 10):
-      st = st = Star(1000,1000, num_points = i, star_type = "crisscross", rotation = (i - 5) * ((math.pi * 2)/5.0), pivot = [500,500])
+      st = st = Star(1000,1000, num_points = i, star_type = "crisscross")
+      st.rotation = (i - 5) * ((math.pi * 2)/5.0)
+      st.pivot = [500,500]
       gr2.append(st)
    
    io.view(gr2)
