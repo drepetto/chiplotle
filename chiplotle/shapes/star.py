@@ -92,11 +92,11 @@ class Star(_Shape):
             point_x = (half_width * cos_alpha);
             point_y = (half_height * sin_alpha);
     
-            corners.append(CoordinatePair(point_x, point_y))
+            corners.append(Coordinate(point_x, point_y))
             
             degrees += degrees_incr
    
-         last_point = CoordinatePair(corners[0])
+         last_point = Coordinate(corners[0])
          corners.append(last_point)
             
          if self.num_points == 6:            
