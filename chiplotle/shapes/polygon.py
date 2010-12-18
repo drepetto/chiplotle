@@ -13,16 +13,16 @@ class Polygon(_Shape):
 
    def __init__(self, points):
       ## TODO: find better name instead of coords?
-      self.coords = CoordinateArray(points)
+      self.poly_points = CoordinateArray(points)
       if points[0] != points[-1]:
-          self.coords.append(Coordinate(points[0]))
+          self.poly_points.append(Coordinate(points[0]))
       
       _Shape.__init__(self)
 
       
    @property
    def points(self):
-      return [self.coords]
+      return [self.poly_points]
 
 
 ## RUN CODE
