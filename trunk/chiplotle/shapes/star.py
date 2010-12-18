@@ -5,7 +5,7 @@ import math
 
 class Star(_Shape):
    '''
-      A star with a width, height, star_type, num_points, and offset.
+      A star with a width, height, star_type, num_points.
       
       star_type is either "outline" or "crisscross". "outline" draws
       the outline of the star. "crisscross" connects points across the
