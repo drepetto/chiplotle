@@ -10,8 +10,8 @@ def test_rotate_2d_args_01( ):
 
 
 def test_rotate_2d_args_02( ):
-   '''Rotate 2d can take a CoordinatePair.'''
-   xy = CoordinatePair(1, 2)
+   '''Rotate 2d can take a Coordinate.'''
+   xy = Coordinate(1, 2)
    t = mathtools.rotate_2d(xy, 0)
    assert t == xy
 
@@ -31,10 +31,10 @@ def test_rotate_2d_args_04( ):
 
 
 def test_rotate_2d_args_05( ):
-   '''Rotate 2d returns a CoordinatePair if it gets a pair.'''
-   xy = CoordinatePair(1, 2)
+   '''Rotate 2d returns a Coordinate if it gets a pair.'''
+   xy = Coordinate(1, 2)
    t = mathtools.rotate_2d(xy, 0)
-   assert isinstance(t, CoordinatePair)
+   assert isinstance(t, Coordinate)
 
 
 def test_rotate_2d_args_05( ):
@@ -109,7 +109,7 @@ def test_rotate_2d_pivot_02( ):
    assert round(t[0], 6) == 2
    assert round(t[1], 6) == 1
    t = mathtools.rotate_2d(xy, math.pi / 4, (1, 1))
-   r = CoordinatePair(0.707, -0.707) + (1, 1)
+   r = Coordinate(0.707, -0.707) + (1, 1)
    assert round(t[0], 3) == round(r[0], 3)
    assert round(t[1], 3) == round(r[1], 3)
 

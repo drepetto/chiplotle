@@ -30,7 +30,7 @@ from chiplotle import plotters
 from chiplotle.tools import *
 
 from chiplotle.hpgl.coordinatearray import CoordinateArray
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 
 from chiplotle.tools.plottertools import instantiate_plotters
 

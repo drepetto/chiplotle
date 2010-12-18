@@ -2,7 +2,7 @@ from chiplotle.hpgl.commands import PA, PU, PD
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.hpgl.compound.label import Label
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 
 class BusinessCard(_HPGLCompoundShape):
    '''A class for making simple presentation/business cards.
@@ -56,19 +56,19 @@ class BusinessCard(_HPGLCompoundShape):
 
    @property
    def upper_left(self):
-      return CoordinatePair(-self.width / 2.0, self.height / 2.0)
+      return Coordinate(-self.width / 2.0, self.height / 2.0)
 
    @property
    def upper_right(self):
-      return CoordinatePair(self.width / 2.0, self.height / 2.0)
+      return Coordinate(self.width / 2.0, self.height / 2.0)
 
    @property
    def lower_left(self):
-      return CoordinatePair(-self.width / 2.0, -self.height / 2.0)
+      return Coordinate(-self.width / 2.0, -self.height / 2.0)
 
    @property
    def lower_right(self):
-      return CoordinatePair(self.width / 2.0, -self.height / 2.0)
+      return Coordinate(self.width / 2.0, -self.height / 2.0)
 
    ## PRIVATE PROPERTIES ##
 

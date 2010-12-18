@@ -1,12 +1,12 @@
 from __future__ import division
 #import numpy
 
-class CoordinatePair(object):
+class Coordinate(object):
 
    __slots__ = ('_x', '_y')
 
    def __init__(self, *args):
-      if len(args) == 1 and isinstance(args[0], CoordinatePair):
+      if len(args) == 1 and isinstance(args[0], Coordinate):
          cp = args[0]
          self._x = cp.x
          self._y = cp.y
@@ -19,7 +19,7 @@ class CoordinatePair(object):
          self._x = args[0]
          self._y = args[1]
       else:
-         raise TypeError('args not recognized for CoordinatePair.')
+         raise TypeError('args not recognized for Coordinate.')
 
 
    ## PUBLIC PROPERTIES ##
@@ -50,15 +50,15 @@ class CoordinatePair(object):
       return 2
 
    def __neg__(self):
-      return CoordinatePair(-self.x, -self.y)
+      return Coordinate(-self.x, -self.y)
 
    def __eq__(self, arg):
       try:
-         arg = CoordinatePair(arg)
+         arg = Coordinate(arg)
          return (self.x == arg.x) and (self.y == arg.y)
       except:
          return False
-#      if isinstance(arg, CoordinatePair):
+#      if isinstance(arg, Coordinate):
 #         return self.xy == arg.xy
 #      else:
 #         return self.xy == tuple(arg)
@@ -71,18 +71,18 @@ class CoordinatePair(object):
       return not (self == arg)
 
    def __abs__(self):
-      return CoordinatePair(abs(self.x), abs(self.y))
+      return Coordinate(abs(self.x), abs(self.y))
 
    def __add__(self, arg):
       from chiplotle.hpgl.coordinatearray import CoordinateArray
       try:
-         arg = CoordinatePair(arg)
-         return CoordinatePair(self.x + arg.x, self.y + arg.y)
+         arg = Coordinate(arg)
+         return Coordinate(self.x + arg.x, self.y + arg.y)
       except TypeError:
          if isinstance(arg, CoordinateArray):
             return arg + self
          elif isinstance(arg, (int, float)):
-            return CoordinatePair(self.x + arg, self.y + arg)
+            return Coordinate(self.x + arg, self.y + arg)
          else:
             raise TypeError('arg not supported.')
 
@@ -92,13 +92,13 @@ class CoordinatePair(object):
    def __sub__(self, arg):
       from chiplotle.hpgl.coordinatearray import CoordinateArray
       try:
-         arg = CoordinatePair(arg)
-         return CoordinatePair(self.x - arg.x, self.y - arg.y)
+         arg = Coordinate(arg)
+         return Coordinate(self.x - arg.x, self.y - arg.y)
       except TypeError:
          if isinstance(arg, CoordinateArray):
             return -(arg - self)
          elif isinstance(arg, (int, float)):
-            return CoordinatePair(self.x - arg, self.y - arg)
+            return Coordinate(self.x - arg, self.y - arg)
          else:
             raise TypeError('arg not supported.')
 
@@ -106,7 +106,7 @@ class CoordinatePair(object):
       return -(self - arg)
 
    def __mul__(self, arg):
-      return CoordinatePair(self.x * arg, self.y * arg)
+      return Coordinate(self.x * arg, self.y * arg)
 
    def __rmul__(self, arg):
       return self * arg
@@ -114,20 +114,20 @@ class CoordinatePair(object):
    def __floordiv__(self, arg):
       if arg == 0:
          raise ZeroDivisionError
-      return CoordinatePair(self.x // arg, self.y // arg)
+      return Coordinate(self.x // arg, self.y // arg)
 
    def __div__(self, arg):
       if arg == 0:
          raise ZeroDivisionError
-      return CoordinatePair(self.x / arg, self.y / arg)
+      return Coordinate(self.x / arg, self.y / arg)
 
    def __truediv__(self, arg):
       if arg == 0:
          raise ZeroDivisionError
-      return CoordinatePair(self.x / arg, self.y / arg)
+      return Coordinate(self.x / arg, self.y / arg)
 
    def __repr__(self):
-      return 'CoordinatePair(%s, %s)' % (self.x, self.y)
+      return 'Coordinate(%s, %s)' % (self.x, self.y)
 
    def __str__(self):
       return '<%s,%s>' % (self.x, self.y)

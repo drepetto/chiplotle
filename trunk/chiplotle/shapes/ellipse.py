@@ -1,5 +1,5 @@
 from chiplotle.shapes.shape import _Shape
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 import math
 
@@ -7,9 +7,9 @@ class Ellipse(_Shape):
    '''
       An ellipse with a width, height, segments, and offset.
       
-      offset is a CoordinatePair for moving the shape around in 2D space
+      offset is a Coordinate for moving the shape around in 2D space
       rotation is an angle expressed in radians
-      pivot is a CoordinatePair indicating the point around which to rotate
+      pivot is a Coordinate indicating the point around which to rotate
       
       segments is how many lines should be used to draw ellipse. More
       segments create a smoother ellipse, but will take longer to draw.
@@ -45,7 +45,7 @@ class Ellipse(_Shape):
          point_x = (half_width * cos_alpha);
          point_y = (half_height * sin_alpha);
  
-         ellipse_points.append(CoordinatePair(point_x, point_y))
+         ellipse_points.append(Coordinate(point_x, point_y))
          
          degrees += degrees_incr
     
@@ -58,7 +58,7 @@ class Ellipse(_Shape):
       point_x = (half_width * cos_alpha);
       point_y = (half_height * sin_alpha);
  
-      ellipse_points.append(CoordinatePair(point_x, point_y))
+      ellipse_points.append(Coordinate(point_x, point_y))
       
       return [CoordinateArray(ellipse_points)]
 

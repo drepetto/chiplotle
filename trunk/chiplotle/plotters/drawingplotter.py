@@ -5,7 +5,7 @@
 '''
 
 from chiplotle.plotters.baseplotter import _BasePlotter
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 
 class _DrawingPlotter(_BasePlotter):
 
@@ -17,14 +17,14 @@ class _DrawingPlotter(_BasePlotter):
       Alias for PA( ) with only one point.
       Pass in either an x, y pair: goto(100, 100) 
       or a tuple pair: goto((x, y))
-      or a CoordinatePair: goto(CoordinatePair(100,100))
+      or a Coordinate: goto(Coordinate(100,100))
       '''
       if len(args) == 1:
          self.write(self._hpgl.PA(args))
       elif len(args) == 2:
          self.write(self._hpgl.PA((args[0], args[1])))
       else:
-         print "Please use either: goto(x, y) or goto(CoordinatePair(x, y))"
+         print "Please use either: goto(x, y) or goto(Coordinate(x, y))"
 
    def goto_center(self):
       self.write(self._hpgl.PA(self.margins.soft.center))
@@ -193,10 +193,10 @@ class _DrawingPlotter(_BasePlotter):
 
    def set_plot_window(self, left_bottom, right_top):
       '''Programatically set new margins for the plotting window.
-      Arguments must be two tuple pairs (x, y) or two CoordinatePairs.'''
+      Arguments must be two tuple pairs (x, y) or two Coordinates.'''
       try:
-         left_bottom = CoordinatePair(left_bottom)
-         right_top = CoordinatePair(right_top)
+         left_bottom = Coordinate(left_bottom)
+         right_top = Coordinate(right_top)
       except TypeError:
          print "Please pass in two coordinate pairs."
          return

@@ -12,8 +12,8 @@ def test_convert_coordinates_to_absolute_hpgl_path_01( ):
 
 
 def test_convert_coordinates_to_absolute_hpgl_path_02( ):
-   '''Coordinates can be CoordinatePairs.'''
-   c = [CoordinatePair(1, 2), CoordinatePair(3, 4), CoordinatePair(5, 6)]
+   '''Coordinates can be Coordinates.'''
+   c = [Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)]
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
    assert t[1] == PA(c[0])
@@ -23,7 +23,7 @@ def test_convert_coordinates_to_absolute_hpgl_path_02( ):
 
 def test_convert_coordinates_to_absolute_hpgl_path_03( ):
    '''The argument can be a CoordinateArray'''
-   c = CoordinateArray([CoordinatePair(1, 2), CoordinatePair(3, 4), CoordinatePair(5, 6)])
+   c = CoordinateArray([Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)])
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
    assert t[1] == PA(c[0])

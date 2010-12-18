@@ -1,5 +1,5 @@
 from chiplotle.shapes.shape import _Shape
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 import math
 
@@ -7,9 +7,9 @@ class Star(_Shape):
    '''
       A star with a width, height, star_type, num_points, and offset.
 
-      offset is a CoordinatePair for moving the shape around in 2D space
+      offset is a Coordinate for moving the shape around in 2D space
       rotation is an angle expressed in radians
-      pivot is a CoordinatePair indicating the point around which to rotate
+      pivot is a Coordinate indicating the point around which to rotate
       
       star_type is either "outline" or "crisscross". "outline" draws
       the outline of the star. "crisscross" connects points across the
@@ -67,11 +67,11 @@ class Star(_Shape):
             point_x = (w_multi * cos_alpha);
             point_y = (h_multi * sin_alpha);
     
-            corners.append(CoordinatePair(point_x, point_y))
+            corners.append(Coordinate(point_x, point_y))
             
             degrees += degrees_incr
    
-         last_point = CoordinatePair(corners[0])
+         last_point = Coordinate(corners[0])
          corners.append(last_point)
       else:
          if self.num_points % 2 == 0:
@@ -106,11 +106,11 @@ class Star(_Shape):
                point_x = (w_multi * cos_alpha);
                point_y = (h_multi * sin_alpha);
        
-               corners.append(CoordinatePair(point_x, point_y))
+               corners.append(Coordinate(point_x, point_y))
                
                degrees += degrees_incr
       
-            last_point = CoordinatePair(corners[0])
+            last_point = Coordinate(corners[0])
             corners.append(last_point)
          else:
             #odd number of points, just connect them!
@@ -130,11 +130,11 @@ class Star(_Shape):
                point_x = (half_width * cos_alpha);
                point_y = (half_height * sin_alpha);
        
-               corners.append(CoordinatePair(point_x, point_y))
+               corners.append(Coordinate(point_x, point_y))
                
                degrees += degrees_incr
       
-            last_point = CoordinatePair(corners[0])
+            last_point = Coordinate(corners[0])
             corners.append(last_point)
             
             #rearrange points to draw crisscross

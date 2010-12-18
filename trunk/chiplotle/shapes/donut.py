@@ -1,6 +1,6 @@
 from chiplotle.shapes.shape import _Shape
 from chiplotle.shapes.ellipse import Ellipse
-from chiplotle.hpgl.coordinatepair import CoordinatePair
+from chiplotle.hpgl.coordinate import Coordinate
 from chiplotle.hpgl.coordinatearray import CoordinateArray
 import math
 
@@ -9,9 +9,9 @@ class Donut(_Shape):
       A donut (ellipse within ellipse) with a width, height, inset, segments,
       offset, rotation, and pivot.
       
-      offset is a CoordinatePair for moving the shape around in 2D space
+      offset is a Coordinate for moving the shape around in 2D space
       rotation is an angle expressed in radians
-      pivot is a CoordinatePair indicating the point around which to rotate
+      pivot is a Coordinate indicating the point around which to rotate
       
       segments is how many lines should be used to draw ellipse. More
       segments create a smoother ellipse, but will take longer to draw.
