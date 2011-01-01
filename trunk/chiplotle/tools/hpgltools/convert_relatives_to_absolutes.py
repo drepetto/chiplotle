@@ -1,7 +1,7 @@
 from chiplotle.tools.hpgltools.pens_updown_to_papr import pens_updown_to_papr
 from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute
 from chiplotle.tools.hpgltools.pr_to_pa import pr_to_pa
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.hpgl.commands import PR, PA, ER, EA, RA, RR, AR, AA
 
 def convert_relatives_to_absolutes(lst):

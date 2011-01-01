@@ -29,8 +29,8 @@ from chiplotle.hpgl.compound.decorators import *
 from chiplotle import plotters
 from chiplotle.tools import *
 
-from chiplotle.hpgl.coordinatearray import CoordinateArray
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinate import Coordinate
 
 from chiplotle.tools.plottertools import instantiate_plotters
 

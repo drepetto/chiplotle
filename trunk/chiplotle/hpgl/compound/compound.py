@@ -1,6 +1,6 @@
 ## TODO: delete. deprecated in favor of _HPGLCompound
 #from chiplotle.hpgl.abstract.hpgl import _HPGL
-#from chiplotle.hpgl.coordinate import Coordinate
+#from chiplotle.geometry.coordinate import Coordinate
 #from chiplotle.hpgl.commands import PA, PU, SP
 #from chiplotle.hpgl.compound.pen import Pen
 #import types

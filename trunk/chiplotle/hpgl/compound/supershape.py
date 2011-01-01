@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.tools.mathtools import superformula
 from math import pi

@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.abstractpath import _AbstractPath
 from chiplotle.hpgl.commands import PU, PD, PA, PR, LT
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.tools.mathtools import bezier_interpolation
 
 

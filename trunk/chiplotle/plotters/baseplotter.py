@@ -7,7 +7,7 @@ from __future__ import division
 from chiplotle.cfg.get_config_value import get_config_value 
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.interfaces.margins.interface import MarginsInterface
 from chiplotle.tools.logtools.get_logger import get_logger
 from chiplotle.tools.serialtools import VirtualSerialPort

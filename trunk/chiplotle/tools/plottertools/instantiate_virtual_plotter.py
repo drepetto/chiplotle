@@ -1,6 +1,6 @@
 from chiplotle.tools.serialtools.virtual_serial_port import VirtualSerialPort
 from chiplotle.tools.plottertools import instantiate_plotter_from_id
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.cfg.get_config_value import get_config_value
 from chiplotle import plotters
 

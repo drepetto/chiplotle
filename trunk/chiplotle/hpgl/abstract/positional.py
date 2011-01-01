@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.hpgl.coordinatearray import Coordinate
+from chiplotle.geometry.coordinatearray import Coordinate
 
 
 class _Positional(_HPGLPrimitive):

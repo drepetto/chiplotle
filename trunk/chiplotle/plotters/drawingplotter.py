@@ -5,7 +5,7 @@
 '''
 
 from chiplotle.plotters.baseplotter import _BasePlotter
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 
 class _DrawingPlotter(_BasePlotter):
 

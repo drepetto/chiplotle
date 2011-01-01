@@ -1,5 +1,5 @@
 from chiplotle.hpgl import commands 
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.tools.hpgltools.inflate_hpgl_string import inflate_hpgl_string
 from sys import maxint
 

@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 
 
 class _AbstractPath(_HPGLCompoundShape):
