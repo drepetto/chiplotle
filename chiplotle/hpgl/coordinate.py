@@ -39,42 +39,30 @@ class Coordinate(object):
 
    ## OVERRIDES ##
 
-   def __iter__(self):
-      for e in self.xy:
-         yield e
-
    def __getitem__(self, arg):
       return self.xy[arg]
 
-   def __len__(self):
-      return 2
-
-   def __neg__(self):
-      return Coordinate(-self.x, -self.y)
-
-   def __eq__(self, arg):
-      try:
-         arg = Coordinate(arg)
-         return (self.x == arg.x) and (self.y == arg.y)
-      except:
-         return False
-#      if isinstance(arg, Coordinate):
-#         return self.xy == arg.xy
-#      else:
-#         return self.xy == tuple(arg)
+   def __iter__(self):
+      for e in self.xy:
+         yield e
 
    def __hash__(self):
       ## TODO: what is the best way to hash this pair?
       return hash(('CP', self.x, self.y))
 
-   def __invert__(self):
-      '''Returns the perpendicular of self.
-      http://mathworld.wolfram.com/PerpendicularVector.html
-      '''
-      return Coordinate(-self.y, self.x)
+   def __len__(self):
+      return 2
 
-   def __ne__(self, arg):
-      return not (self == arg)
+   def __repr__(self):
+      return 'Coordinate(%s, %s)' % (self.x, self.y)
+
+   def __str__(self):
+      return '<%s,%s>' % (self.x, self.y)
+
+
+   ## math operators ##
+
+   ## addition ##
 
    def __abs__(self):
       return Coordinate(abs(self.x), abs(self.y))
@@ -95,6 +83,33 @@ class Coordinate(object):
    def __radd__(self, arg):
       return self + arg
 
+   ## division ##
+
+   def __div__(self, arg):
+      if arg == 0:
+         raise ZeroDivisionError
+      return Coordinate(self.x / arg, self.y / arg)
+
+   def __floordiv__(self, arg):
+      if arg == 0:
+         raise ZeroDivisionError
+      return Coordinate(self.x // arg, self.y // arg)
+
+   def __truediv__(self, arg):
+      if arg == 0:
+         raise ZeroDivisionError
+      return Coordinate(self.x / arg, self.y / arg)
+
+   ## mul ##
+
+   def __mul__(self, arg):
+      return Coordinate(self.x * arg, self.y * arg)
+
+   def __rmul__(self, arg):
+      return self * arg
+
+   ## substraction ##
+
    def __sub__(self, arg):
       from chiplotle.hpgl.coordinatearray import CoordinateArray
       try:
@@ -111,30 +126,24 @@ class Coordinate(object):
    def __rsub__(self, arg):
       return -(self - arg)
 
-   def __mul__(self, arg):
-      return Coordinate(self.x * arg, self.y * arg)
+   ## ## 
 
-   def __rmul__(self, arg):
-      return self * arg
+   def __eq__(self, arg):
+      try:
+         arg = Coordinate(arg)
+         return (self.x == arg.x) and (self.y == arg.y)
+      except:
+         return False
 
-   def __floordiv__(self, arg):
-      if arg == 0:
-         raise ZeroDivisionError
-      return Coordinate(self.x // arg, self.y // arg)
+   def __invert__(self):
+      '''Returns the perpendicular of self.
+      http://mathworld.wolfram.com/PerpendicularVector.html
+      '''
+      return Coordinate(-self.y, self.x)
 
-   def __div__(self, arg):
-      if arg == 0:
-         raise ZeroDivisionError
-      return Coordinate(self.x / arg, self.y / arg)
+   def __ne__(self, arg):
+      return not (self == arg)
 
-   def __truediv__(self, arg):
-      if arg == 0:
-         raise ZeroDivisionError
-      return Coordinate(self.x / arg, self.y / arg)
-
-   def __repr__(self):
-      return 'Coordinate(%s, %s)' % (self.x, self.y)
-
-   def __str__(self):
-      return '<%s,%s>' % (self.x, self.y)
+   def __neg__(self):
+      return Coordinate(-self.x, -self.y)
 
