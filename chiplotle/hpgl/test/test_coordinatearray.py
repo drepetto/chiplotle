@@ -213,6 +213,14 @@ def test_coordinatearray__eq__03( ):
    assert b == a
    assert c != a
 
+
+## __invert__ ##
+
+def test_coordinatearray__invert__01( ):
+   t = CoordinateArray([(1, 2), (3, 4)])
+   assert ~t == CoordinateArray([(-2, 1), (-4, 3)])
+
+
 ## TODO: pending
 ## sub ##
 ## mul ##

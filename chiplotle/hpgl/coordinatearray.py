@@ -120,6 +120,13 @@ class CoordinateArray(object):
       else:
          raise TypeError
       
+   def __invert__(self):
+      '''Returns the perpendiculars of the Coordinates contained in self.'''
+      result = [ ]
+      for v in self:
+         result.append(~v)
+      return CoordinateArray(result)
+
    def __radd__(self, arg):
       return self + arg
 
