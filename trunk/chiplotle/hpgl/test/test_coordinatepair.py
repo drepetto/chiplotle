@@ -212,3 +212,15 @@ def test_coordinate__rsub__02( ):
 def test_coordinate__hash__01( ):
    t = set([Coordinate(1, 2), Coordinate(1, 2)])
    assert len(t) == 1
+
+## __invert__ ##
+
+def test_coordinate__invert__01( ):
+   t = Coordinate(1, 2)
+   assert ~t == Coordinate(-2, 1)
+   t = Coordinate(0, 0)
+   assert ~t == Coordinate(0, 0)
+   
+
+
+

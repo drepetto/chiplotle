@@ -67,6 +67,12 @@ class Coordinate(object):
       ## TODO: what is the best way to hash this pair?
       return hash(('CP', self.x, self.y))
 
+   def __invert__(self):
+      '''Returns the perpendicular of self.
+      http://mathworld.wolfram.com/PerpendicularVector.html
+      '''
+      return Coordinate(-self.y, self.x)
+
    def __ne__(self, arg):
       return not (self == arg)
 
