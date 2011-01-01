@@ -2,7 +2,7 @@ from chiplotle.hpgl.commands import PA, PU, PD
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.hpgl.compound.label import Label
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 
 class BusinessCard(_HPGLCompoundShape):
    '''A class for making simple presentation/business cards.

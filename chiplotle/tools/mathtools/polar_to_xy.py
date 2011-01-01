@@ -1,4 +1,4 @@
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 import math
 
 

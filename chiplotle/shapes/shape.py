@@ -1,4 +1,4 @@
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
    import convert_coordinates_to_hpgl_absolute_path
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d

@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 
 
 class _PenPlot(_HPGLPrimitive):

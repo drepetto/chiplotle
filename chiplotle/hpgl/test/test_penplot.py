@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.penplot import _PenPlot
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from py.test import raises
 
 def test_penplot_01( ):

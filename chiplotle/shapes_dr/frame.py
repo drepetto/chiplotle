@@ -1,6 +1,6 @@
 from chiplotle.shapes.polygon import Polygon
 from chiplotle.shapes.rectangle import Rectangle
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.hpgl.commands import PU, PD, PA
 
 class Frame(Polygon):

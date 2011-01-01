@@ -68,7 +68,7 @@ class Coordinate(object):
       return Coordinate(abs(self.x), abs(self.y))
 
    def __add__(self, arg):
-      from chiplotle.hpgl.coordinatearray import CoordinateArray
+      from chiplotle.geometry.coordinatearray import CoordinateArray
       try:
          arg = Coordinate(arg)
          return Coordinate(self.x + arg.x, self.y + arg.y)
@@ -111,7 +111,7 @@ class Coordinate(object):
    ## substraction ##
 
    def __sub__(self, arg):
-      from chiplotle.hpgl.coordinatearray import CoordinateArray
+      from chiplotle.geometry.coordinatearray import CoordinateArray
       try:
          arg = Coordinate(arg)
          return Coordinate(self.x - arg.x, self.y - arg.y)

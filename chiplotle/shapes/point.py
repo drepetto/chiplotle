@@ -1,6 +1,6 @@
 from chiplotle.shapes.shape import _Shape
-from chiplotle.hpgl.coordinate import Coordinate
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.coordinatearray import CoordinateArray
 
 class Point(_Shape):
    '''

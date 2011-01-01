@@ -1,7 +1,7 @@
 from chiplotle.shapes.shape import _Shape
 from chiplotle.shapes.rectangle import Rectangle
-from chiplotle.hpgl.coordinate import Coordinate
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.coordinatearray import CoordinateArray
 import math
 
 class Frame(_Shape):

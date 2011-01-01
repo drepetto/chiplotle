@@ -1,4 +1,4 @@
-from chiplotle.hpgl.coordinate import Coordinate
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.tools.hpgltools.get_all_coordinates import get_all_coordinates
 

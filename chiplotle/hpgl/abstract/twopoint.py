@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.hpgl.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 
 class _TwoPoint(_HPGLPrimitive):
    '''Abstract class for commands with 2 coordinate pairs: x1, y1, x2, y2.'''
