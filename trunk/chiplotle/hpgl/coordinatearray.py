@@ -85,6 +85,15 @@ class CoordinateArray(object):
    def __len__(self):
       return len(self._data)
 
+   def __repr__(self):
+      return 'CoordinateArray(%s)' % self.xy
+
+   def __str__(self):
+      return 'CoordinateArray(%s)' % self.xy
+
+
+   ## accessors / modifiers ##
+
    def __setitem__(self, i, arg):
       ## TODO: check type?
       if isinstance(i, int):
@@ -99,12 +108,9 @@ class CoordinateArray(object):
    def __getitem__(self, arg):
       return self._data[arg]
 
-   def __eq__(self, arg):
-      arg = CoordinateArray(arg)
-      return self._data == arg._data
+   ## math ##
 
-   def __ne__(self, arg):
-      return not (self == arg)
+   ## addition ##
 
    def __add__(self, arg):
       if isinstance(arg, (int, long, float, Coordinate)):
@@ -120,20 +126,28 @@ class CoordinateArray(object):
       else:
          raise TypeError
       
-   def __invert__(self):
-      '''Returns the perpendiculars of the Coordinates contained in self.'''
-      result = [ ]
-      for v in self:
-         result.append(~v)
-      return CoordinateArray(result)
-
    def __radd__(self, arg):
       return self + arg
+
+   ## division ##
 
    def __div__(self, arg):
       if arg == 0:
          raise ZeroDivisionError
       return CoordinateArray([a / arg for a in self.xy])
+
+   def __truediv__(self, arg):
+      return self / arg
+
+   ## multiplication ##
+
+   def __mul__(self, arg):
+      if isinstance(arg, (int, long, float)):
+         return CoordinateArray([a * arg for a in self.xy])
+      else:
+         raise TypeError
+         
+   ## substraction ##
 
    def __sub__(self, arg):
       from chiplotle.tools.iterabletools.ispair import ispair
@@ -144,21 +158,19 @@ class CoordinateArray(object):
       else:
          raise TypeError
       
+   ## ## 
 
-   def __truediv__(self, arg):
-      return self / arg
+   def __eq__(self, arg):
+      arg = CoordinateArray(arg)
+      return self._data == arg._data
 
-   def __mul__(self, arg):
-      if isinstance(arg, (int, long, float)):
-         return CoordinateArray([a * arg for a in self.xy])
-      else:
-         raise TypeError
-         
-   def __repr__(self):
-      return 'CoordinateArray(%s)' % self.xy
+   def __ne__(self, arg):
+      return not (self == arg)
 
-   def __str__(self):
-      return 'CoordinateArray(%s)' % self.xy
-
-
+   def __invert__(self):
+      '''Returns the perpendiculars of the Coordinates contained in self.'''
+      result = [ ]
+      for v in self:
+         result.append(~v)
+      return CoordinateArray(result)
 
