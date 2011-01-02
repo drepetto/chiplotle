@@ -21,6 +21,7 @@ class _Shape(object):
       ## pivot point for rotation.
       self.pivot = Coordinate(0,0)
 
+      self.transforms = [ ]
 
    ## PUBLIC PROPERTIES ##
 
@@ -63,11 +64,24 @@ class _Shape(object):
    ## PRIVATE PROPERTIES ##
 
    @property
+   def _transformed_points(self):
+      points = self.offset_rotated_points
+      for trans in self.transforms:
+         points = trans.transform(points)
+      return points
+
+   @property
+   def _preformat_points(self):
+      '''Points (coordinates) ready for formatting (conversion to HPGL).'''
+      return self._transformed_points
+
+   @property
    def _subcommands(self):
       result = [ ]
       if _Shape.language == 'HPGL':
          ## create hpgl commands
-         for path in self.offset_rotated_points:
+         #for path in self.offset_rotated_points:
+         for path in self._preformat_points:
             result += convert_coordinates_to_hpgl_absolute_path(path)
       elif _Shape.language == 'gcode':
          ## create gcode
