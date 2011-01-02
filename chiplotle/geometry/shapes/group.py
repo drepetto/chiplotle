@@ -20,7 +20,8 @@ class Group(_Shape):
    def points(self):
       result = [ ]
       for shape in self:
-         result.extend(shape.offset_rotated_points)
+         #result.extend(shape.offset_rotated_points)
+         result.extend(shape._preformat_points)
       return result
 
 
