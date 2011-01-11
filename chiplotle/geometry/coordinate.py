@@ -103,7 +103,11 @@ class Coordinate(object):
    ## mul ##
 
    def __mul__(self, arg):
-      return Coordinate(self.x * arg, self.y * arg)
+      try:
+         return Coordinate(self.x * arg, self.y * arg)
+      except TypeError:
+         coord = Coordinate(arg)
+         return Coordinate(self.x * coord.x, self.y * coord.y)
 
    def __rmul__(self, arg):
       return self * arg

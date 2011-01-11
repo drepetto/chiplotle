@@ -131,8 +131,10 @@ def test_coordinate__add__06( ):
    assert raises(TypeError, 'a+b')
 
 
+## __mul__ ##
+
 def test_coordinate__mul__01( ):
-   '''A coordinatePair can be multiplied with a scalar.'''
+   '''A Coordinate can be multiplied with a scalar.'''
    a = Coordinate(1, 2)
    b = 2.5
    t = a * b
@@ -140,6 +142,21 @@ def test_coordinate__mul__01( ):
    assert isinstance(t, Coordinate)
    assert t is not a
    assert t == (2.5, 5)
+
+
+def test_coordinate__mul__02( ):
+   '''A Coordinate can be multiplied with a pair.'''
+   a = Coordinate(2, 3)
+   t = a * (2, 3)
+   assert t == (4, 9)
+
+
+def test_coordinate__mul__03( ):
+   '''A Coordinate can be multiplied with another Coordinate.'''
+   a = Coordinate(2, 3)
+   t = a * Coordinate(2, 3)
+   assert t == (4, 9)
+
 
 
 ## div ##
