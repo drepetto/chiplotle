@@ -24,6 +24,9 @@ class Path(_Shape):
 
    ## OVERRIDES ##
 
+   def __getitem__(self, arg):  
+      return self.points[0][arg]
+
    def __len__(self):
       return len(self.points[0])
 
