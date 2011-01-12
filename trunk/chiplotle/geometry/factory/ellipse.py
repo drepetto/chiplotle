@@ -1,4 +1,3 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.shapes.path import Path
 import math
 
