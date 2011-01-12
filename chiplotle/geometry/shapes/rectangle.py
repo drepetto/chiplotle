@@ -25,11 +25,11 @@ class Rectangle(_Shape):
    @property
    def points(self):
       corners = []
-      corners.append(Coordinate(-self.width/2, -self.height/2))
-      corners.append(Coordinate(-self.width/2, self.height/2))
-      corners.append(Coordinate(self.width/2, self.height/2))
-      corners.append(Coordinate(self.width/2, -self.height/2))
-      corners.append(Coordinate(-self.width/2, -self.height/2))
+      corners.append(Coordinate(-self.width / 2.0, -self.height / 2.0))
+      corners.append(Coordinate(-self.width / 2.0, self.height / 2.0))
+      corners.append(Coordinate(self.width / 2.0, self.height / 2.0))
+      corners.append(Coordinate(self.width / 2.0, -self.height / 2.0))
+      corners.append(Coordinate(-self.width / 2.0, -self.height / 2.0))
       return [CoordinateArray(corners)]
 
 
