@@ -13,14 +13,6 @@ class Path(_Shape):
 
    ## PUBLIC PROPERTIES ##
 
-#   @apply
-#   def coords( ):
-#      def fget(self):  
-#         return self._coords
-#      def fset(self, arg):
-#         self._coords = CoordinateArray(arg)
-#      return property(**locals( ))
-
    @property
    def points(self):
       return [self._points]
@@ -29,6 +21,56 @@ class Path(_Shape):
    def points(self, arg):
       self._points = CoordinateArray(arg)
 
+
+   ## OVERRIDES ##
+
+   def __len__(self):
+      return len(self.points[0])
+
+   def __repr__(self):
+      return '%s(%s)' % (self.__class__.__name__, self.points[0])
+
+   def __str__(self):
+      return '%s(%d)' % (self.__class__.__name__, len(self))
+
+
+   ## operators ##
+
+   ## TODO: implement path op path, 
+   ## in addition to path op int or path op (x, y)?
+   def __add__(self, arg):
+      return Path(self.points[0] + arg)
+
+   def __iadd__(self, arg):
+      self.points = self.points[0] + arg
+      return self
+
+   def __radd__(self, arg):
+      return self + arg
+
+   def __mul__(self, arg):
+      return Path(self.points[0] * arg)
+
+   def __imul__(self, arg):
+      self.points = self.points[0] * arg
+      return self
+
+   def __rmul__(self, arg):
+      return self * arg
+
+   def __sub__(self, arg):
+      return self + (-arg)
+   
+   def __isub__(self, arg):
+      self.points = self.points[0] - arg
+      return self
+
+   def __rsub__(self, arg):
+      return (-self) + arg
+
+
+   def __neg__(self):
+      return Path(-self.points[0])
 
 ## RUN DEMO CODE
 
