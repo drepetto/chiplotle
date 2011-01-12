@@ -221,6 +221,12 @@ def test_coordinatearray__invert__01( ):
    assert ~t == CoordinateArray([(-2, 1), (-4, 3)])
 
 
+## __neg__ ##
+
+def test_coordinatearray__neg__01( ):
+   t = CoordinateArray([(1, 2), (-3, 4)])
+   assert -t == CoordinateArray([(-1, -2), (3, -4)])
+ 
 ## TODO: pending
 ## sub ##
 ## mul ##

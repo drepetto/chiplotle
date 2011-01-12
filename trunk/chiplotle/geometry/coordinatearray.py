@@ -89,7 +89,7 @@ class CoordinateArray(object):
       return 'CoordinateArray(%s)' % self.xy
 
    def __str__(self):
-      return 'CoordinateArray(%s)' % self.xy
+      return 'CoordinateArray(%s)' % ', '.join([str(xy) for xy in self.xy])
 
 
    ## accessors / modifiers ##
@@ -166,6 +166,12 @@ class CoordinateArray(object):
 
    def __ne__(self, arg):
       return not (self == arg)
+
+   def __neg__(self):
+      result = [ ]
+      for coord in self:
+         result.append(-coord)
+      return CoordinateArray(result)
 
    def __invert__(self):
       '''Returns the perpendiculars of the Coordinates contained in self.'''
