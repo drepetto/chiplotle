@@ -6,7 +6,13 @@ class CoordinateArray(object):
    __slots__ = ('_data', )
 
    def __init__(self, xy=None):
-      self.xy = xy
+      xy = xy or [ ]
+      try:
+         self._data = [Coordinate(p) for p in xy]
+      except TypeError:
+         from chiplotle.tools.iterabletools.flat_list_to_pairs \
+            import flat_list_to_pairs
+         self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
 
 
    ## PUBLIC PROPERTIES ##
@@ -19,35 +25,37 @@ class CoordinateArray(object):
       return float
 
 
-   ## TODO: very messy. fix.
-   @apply
-   def xy( ):
-      def fget(self):
-         return self._data
-      def fset(self, arg):
-         if isinstance(arg, self.__class__):
-            self._data = arg._data[:]
-         elif isinstance(arg, Coordinate):
-            self._data = [arg]
-         elif arg is None:
-            self._data = [ ]
-         elif isinstance(arg, (tuple, list)):
-            self._data = [ ]
-            from chiplotle.tools.iterabletools.is_flat_list import is_flat_list
-            from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
-            if len(arg) > 0 and is_flat_list(arg):
-               if isinstance(arg[0], Coordinate):
-                  self._data.extend(arg)
-               else:
-                  arg = flat_list_to_pairs(arg)
-                  self._data.extend([Coordinate(e) for e in arg])
-            else:
-               for e in arg:
-                  self._data.append(Coordinate(e))
-         else:
-            raise TypeError('unknown type for coordinates xy.')
-      return property(**locals( ))
+#   @apply
+#   def xy( ):
+#      def fget(self):
+#         return self._data
+#      def fset(self, arg):
+#         if isinstance(arg, self.__class__):
+#            self._data = arg[:]
+#         elif isinstance(arg, Coordinate):
+#            self._data = [arg]
+#         elif arg is None:
+#            self._data = [ ]
+#         elif isinstance(arg, (tuple, list)):
+#            self._data = [ ]
+#            from chiplotle.tools.iterabletools.is_flat_list import is_flat_list
+#            from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
+#            if len(arg) > 0 and is_flat_list(arg):
+#               if isinstance(arg[0], Coordinate):
+#                  self._data.extend(arg)
+#               else:
+#                  arg = flat_list_to_pairs(arg)
+#                  self._data.extend([Coordinate(e) for e in arg])
+#            else:
+#               for e in arg:
+#                  self._data.append(Coordinate(e))
+#         else:
+#            raise TypeError('unknown type for coordinates xy.')
+#      return property(**locals( ))
 
+   @property
+   def xy(self):
+      return self._data
 
    @property
    def x(self):
@@ -94,37 +102,33 @@ class CoordinateArray(object):
 
    ## accessors / modifiers ##
 
-   def __setitem__(self, i, arg):
-      ## TODO: check type?
-      if isinstance(i, int):
-         self._data[i] = arg
-      else:
-         assert isinstance(arg, (list, tuple))
-         self._data[i.start : i.stop] = arg
-
+   #def __iter__(self):
+      
    def __delitem__(self, i):
       del(self._data[i])
 
    def __getitem__(self, arg):
       return self._data[arg]
 
+   def __setitem__(self, i, arg):
+      if isinstance(i, int):
+         self._data[i] = Coordinate(arg)
+      else:
+         arg = [Coordinate(xy) for xy in arg]
+         self._data[i.start : i.stop] = arg
+
    ## math ##
 
    ## addition ##
 
    def __add__(self, arg):
-      if isinstance(arg, (int, long, float, Coordinate)):
-         return CoordinateArray([a + arg for a in self.xy]) 
-      elif isinstance(arg, CoordinateArray):
+      if isinstance(arg, CoordinateArray):
          if len(self) == len(arg):
             return CoordinateArray([a + b for a, b in zip(self.xy, arg.xy)])
          else:
             raise ValueError("Both CoordinateArrays must be of the same length.")
-      elif isinstance(arg, (list, tuple)) and len(arg) == 2:
-         arg = Coordinate(arg)
-         return CoordinateArray([a + arg for a in self.xy])
       else:
-         raise TypeError
+         return CoordinateArray([val + arg for val in self.xy])
       
    def __radd__(self, arg):
       return self + arg
@@ -142,21 +146,21 @@ class CoordinateArray(object):
    ## multiplication ##
 
    def __mul__(self, arg):
-      if isinstance(arg, (int, long, float)):
-         return CoordinateArray([a * arg for a in self.xy])
-      else:
-         raise TypeError
+      return CoordinateArray([a * arg for a in self.xy])
+   
+   def __rmul__(self, arg):
+      return self * arg
          
    ## substraction ##
 
    def __sub__(self, arg):
-      from chiplotle.tools.iterabletools.ispair import ispair
       if isinstance(arg, CoordinateArray):
-         return CoordinateArray([a - b for a, b in zip(self.xy, arg.xy)])
-      elif isinstance(arg, (int, long, float, Coordinate)) or ispair(arg):
-         return CoordinateArray([a - arg for a in self.xy]) 
+         if len(self) == len(arg):
+            return CoordinateArray([a + b for a, b in zip(self.xy, arg.xy)])
+         else:
+            raise ValueError("Both CoordinateArrays must be of the same length.")
       else:
-         raise TypeError
+         return CoordinateArray([val - arg for val in self.xy])
       
    ## ## 
 

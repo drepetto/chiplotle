@@ -27,6 +27,9 @@ class Path(_Shape):
    def __getitem__(self, arg):  
       return self.points[0][arg]
 
+   def __setitem__(self, key, arg):
+      self._points[key] = arg
+
    def __len__(self):
       return len(self.points[0])
 
