@@ -75,6 +75,8 @@ class Path(_Shape):
    def __neg__(self):
       return Path(-self.points[0])
 
+
+
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
