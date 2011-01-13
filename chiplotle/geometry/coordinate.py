@@ -1,5 +1,5 @@
 from __future__ import division
-#import numpy
+import math
 
 class Coordinate(object):
 
@@ -35,6 +35,10 @@ class Coordinate(object):
    @property
    def y(self):
       return self._y
+
+   @property
+   def magnitude(self):
+      return math.sqrt(self.x ** 2 + self.y ** 2)
 
 
    ## OVERRIDES ##
