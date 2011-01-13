@@ -1,80 +1,36 @@
 from chiplotle import *
-#import numpy
 from py.test import raises
 
-def test_coordinatearray_01( ):
+def test_coordinatearray__init__01( ):
    '''CoordinateArray can be empty.'''
    t = CoordinateArray( )
    assert isinstance(t.xy, list)
-   for e in t:
-      assert isinstance(e, Coordinate)
    assert isinstance(t.x, tuple)
    assert isinstance(t.y, tuple)
+   for e in t:
+      assert isinstance(e, Coordinate)
 
 
-def test_coordinatearray_02( ):
-   '''CoordinateArray can take a flat list of numbers.'''
+def test_coordinatearray__init__02( ):
+   '''CoordinateArray can initialize with a flat list of numbers.'''
    t = CoordinateArray([1, 2, 3, 4])
-
    assert isinstance(t.xy, list)
-   assert t.xy == [(1, 2), (3, 4)]
+   for e in t:
+      assert isinstance(e, Coordinate)
    assert t.xy == [(1, 2), (3, 4)]
 
 
-def test_coordinatearray_03( ):
+def test_coordinatearray__init__03( ):
    '''CoordinateArray can take a list of tuple pairs.'''
    t = CoordinateArray([(1, 2), (3, 4), (5, 6)])
-
    assert t.xy == [(1, 2), (3, 4), (5, 6)]
+   for e in t:
+      assert isinstance(e, Coordinate)
 
 
-def test_coordinatearray_04( ):
+def test_coordinatearray__init__04( ):
    '''A flat list must have an even number of elements.'''
    assert raises(ValueError, 't = CoordinateArray([1, 2, 3, 4, 5])')
-
-
-## ADD ##
-
-def test_coordinatearray__add__01( ):
-   '''Two CoordinateArrays of the same size can be added.'''
-   a = CoordinateArray([(1, 2), (3, 4)])
-   b = CoordinateArray([(1, 1), (2, 2)])
-
-   t = a + b
-
-   assert isinstance(t, CoordinateArray)
-   assert t is not a
-   assert t is not b
-   assert t == [(2, 3), (5, 6)]
-
-
-def test_coordinatearray__add__02( ):
-   '''Two CoordinateArrays of different length other than 1 cannot be added.'''
-   a = CoordinateArray([(1, 2), (3, 4)])
-   b = CoordinateArray([(1, 1), (2, 2), (3, 3)])
-
-   assert raises(ValueError, 't = a + b')
-
-
-def test_coordinatearray__add__03( ):
-   '''Two CoordinateArrays, one of length > 1, the other of 
-   length == 1 can be added.'''
-   a = CoordinateArray([(1, 2), (3, 4)])
-   b = CoordinateArray([(1, 1)])
-
-   assert raises(ValueError, 't = a + b')
-
-
-def test_coordinatearray__add__04( ):
-   '''A CoordinateArray and a scalar can be added.'''
-   a = CoordinateArray([(1, 2), (3, 4)])
-   b = 2
-
-   t = a + b
-
-   assert isinstance(t, CoordinateArray)
-   assert t is not a
-   assert t == [(3, 4), (5, 6)]
 
 
 ## iadd ##
