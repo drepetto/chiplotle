@@ -19,15 +19,15 @@ def test_coordinate__init__02( ):
    assert t.y == 2
 
 
-def test_coordinate__init__03( ):
-   '''Coordinate can be initialized with a Coordinate.
-   In this case, the constructor returns the existing coordinate.'''
-   a = Coordinate(1, 2)
-   t = Coordinate(a)
-   assert t is a
-   assert t == (1, 2)
-   assert t.x == 1
-   assert t.y == 2
+#def test_coordinate__init__03( ):
+#   '''Coordinate can be initialized with a Coordinate.
+#   In this case, the constructor returns the existing coordinate.'''
+#   a = Coordinate(1, 2)
+#   t = Coordinate(a)
+#   assert t is a
+#   assert t == (1, 2)
+#   assert t.x == 1
+#   assert t.y == 2
 
 
 def test_coordinate__init__04( ):
