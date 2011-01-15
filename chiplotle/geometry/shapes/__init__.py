@@ -1,10 +1,5 @@
-from donut import Donut
-from ellipse import Ellipse
-from frame import Frame
 from group import Group
-from line import Line
+from path import Path
+
 from pointcloud import PointCloud
 from point import Point
-from polygon import Polygon
-from rectangle import Rectangle
-from star import Star

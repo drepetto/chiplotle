@@ -4,6 +4,8 @@ from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.geometry.coordinatearray import CoordinateArray
 
 
+## TODO: implement as a factory function!
+
 class PointCloud(_Shape):
    '''
       A cloud of points.

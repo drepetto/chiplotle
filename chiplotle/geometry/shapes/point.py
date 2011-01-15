@@ -2,6 +2,9 @@ from chiplotle.geometry.shapes.shape import _Shape
 from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.geometry.coordinatearray import CoordinateArray
 
+## TODO: reimplement or find a way of generally defining different line type,
+## including points only (like HPGL LT command).
+
 class Point(_Shape):
    '''
       A single point.
