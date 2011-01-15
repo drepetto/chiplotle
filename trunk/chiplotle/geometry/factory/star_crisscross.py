@@ -1,6 +1,7 @@
 from chiplotle.geometry.shapes.path import Path
 from chiplotle.geometry.shapes.group import Group
 from chiplotle.tools.mathtools.lcm import lcm
+import math
 
 def star_crisscross(width, height, num_points = 5):  
    '''Draws a star with criscrossing lines.'''
