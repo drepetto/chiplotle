@@ -8,7 +8,7 @@ def test_EA_01( ):
 
 def test_EA_02( ):
    '''EA cannot initialize with a list of length > 2.'''
-   assert raises(TypeError, 't = EA([1, 2, 3, 4])')
+   assert raises(ValueError, 't = EA([1, 2, 3, 4])')
 
 
 def test_EA_03( ):

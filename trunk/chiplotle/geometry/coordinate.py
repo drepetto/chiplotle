@@ -5,13 +5,24 @@ class Coordinate(object):
 
    __slots__ = ('_x', '_y')
 
-   def __init__(self, *args):
+   def __new__(cls, *args):
       if len(args) == 1 and isinstance(args[0], Coordinate):
-         cp = args[0]
-         self._x = cp.x
-         self._y = cp.y
-      elif len(args) == 1 and isinstance(args[0], (list, tuple)):
-         self.__init__(*args[0])
+         return args[0]
+      else:
+         ## NOTE: Python 2.6.6... DeprecationWarning: object.__new__() takes no parameters
+         #return super(Coordinate, cls).__new__(cls, *args)
+         return super(Coordinate, cls).__new__(cls)
+
+   def __init__(self, *args):
+      if len(args) == 1:
+         if isinstance(args[0], Coordinate):
+            pass ## handled in __new__
+#         if isinstance(args[0], Coordinate):
+#            self._x, self._y = args[0].x, args[0].y
+         elif isinstance(args[0], (list, tuple)):
+            self.__init__(*args[0])
+         else:
+            raise TypeError('argument not recognized by Coordinate.')
       elif len(args) == 2:
          from chiplotle.tools.iterabletools.isiterable import isiterable
          if isiterable(args[0]) or isiterable(args[1]):
@@ -19,7 +30,7 @@ class Coordinate(object):
          self._x = args[0]
          self._y = args[1]
       else:
-         raise TypeError('args not recognized for Coordinate.')
+         raise ValueError('too many arguments Coordinate.')
 
 
    ## PUBLIC PROPERTIES ##
@@ -79,7 +90,7 @@ class Coordinate(object):
       except TypeError:
          if isinstance(arg, CoordinateArray):
             return arg + self
-         elif isinstance(arg, (int, float)):
+         elif isinstance(arg, (int, long, float)):
             return Coordinate(self.x + arg, self.y + arg)
          else:
             raise TypeError('arg not supported.')
@@ -90,18 +101,12 @@ class Coordinate(object):
    ## division ##
 
    def __div__(self, arg):
-      if arg == 0:
-         raise ZeroDivisionError
       return Coordinate(self.x / arg, self.y / arg)
 
    def __floordiv__(self, arg):
-      if arg == 0:
-         raise ZeroDivisionError
       return Coordinate(self.x // arg, self.y // arg)
 
    def __truediv__(self, arg):
-      if arg == 0:
-         raise ZeroDivisionError
       return Coordinate(self.x / arg, self.y / arg)
 
    ## mul ##
