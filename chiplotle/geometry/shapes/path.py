@@ -45,6 +45,9 @@ class Path(_Shape):
       else:
          return self._offset_rotated_points
 
+   ## TODO: add a LineFormatter (or Formatter) class that can be pluged-in to 
+   ## change the formatting of the line? e.g., dotted, solid, points, etc.
+
    @property
    def _subcommands(self):
       if _Shape.language == 'HPGL':
