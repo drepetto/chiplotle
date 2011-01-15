@@ -5,20 +5,20 @@ class Coordinate(object):
 
    __slots__ = ('_x', '_y')
 
-   def __new__(cls, *args):
-      if len(args) == 1 and isinstance(args[0], Coordinate):
-         return args[0]
-      else:
-         ## NOTE: Python 2.6.6... DeprecationWarning: object.__new__() takes no parameters
-         #return super(Coordinate, cls).__new__(cls, *args)
-         return super(Coordinate, cls).__new__(cls)
+#   def __new__(cls, *args):
+#      if len(args) == 1 and isinstance(args[0], Coordinate):
+#         return args[0]
+#      else:
+#         ## NOTE: Python 2.6.6... DeprecationWarning: object.__new__() takes no parameters
+#         #return super(Coordinate, cls).__new__(cls, *args)
+#         return super(Coordinate, cls).__new__(cls)
 
    def __init__(self, *args):
       if len(args) == 1:
-         if isinstance(args[0], Coordinate):
-            pass ## handled in __new__
 #         if isinstance(args[0], Coordinate):
-#            self._x, self._y = args[0].x, args[0].y
+#            pass ## handled in __new__
+         if isinstance(args[0], Coordinate):
+            self._x, self._y = args[0].x, args[0].y
          elif isinstance(args[0], (list, tuple)):
             self.__init__(*args[0])
          else:
