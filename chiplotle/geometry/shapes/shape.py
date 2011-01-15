@@ -13,12 +13,15 @@ class _Shape(object):
    language = 'HPGL'
 
    def __init__(self):
+      ## TODO: keep or remove these three attributes in favor of 
+      ## destructive transforms and Path operators?
       self.offset = Coordinate(0,0)
       self.rotation = 0
       ## pivot point for rotation.
       self.pivot = Coordinate(0,0)
 
       self.transforms = [ ]
+
 
    ## PUBLIC PROPERTIES ##
 
