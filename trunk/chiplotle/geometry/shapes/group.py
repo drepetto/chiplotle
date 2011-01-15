@@ -10,20 +10,10 @@ class Group(_Shape):
    def __init__(self, shapes=None):
       _Shape.__init__(self)
       self._shapes = [ ]
-      shapes = shapes or [ ]
-      self.extend(shapes)
+      self.extend(shapes or [ ])
 
 
    ## PUBLIC PROPERTIES ##
-
-   @property
-   def points(self):
-      result = [ ]
-      for shape in self:
-         #result.extend(shape.offset_rotated_points)
-         result.extend(shape._preformat_points)
-      return result
-
 
    ## PUBLIC METHODS ##
 
@@ -44,6 +34,16 @@ class Group(_Shape):
 
    def pop(self, indx=-1):
       result = self._shapes.pop(indx)
+      return result
+
+
+   ## PRIVATE PROPERTIES ##
+
+   @property
+   def _subcommands(self):
+      result = [ ]
+      for x in self:
+         result += x._subcommands
       return result
 
 
@@ -81,6 +81,8 @@ class Group(_Shape):
          self._shapes[i.start : i.stop] = arg
 
 
+
+## DEMO CODE
 if __name__ == '__main__':
    from chiplotle.geometry.shapes.group import Group
    from chiplotle.geometry.shapes.rectangle import Rectangle
