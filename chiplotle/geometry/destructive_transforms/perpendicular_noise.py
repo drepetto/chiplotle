@@ -16,7 +16,7 @@ def perpendicular_noise(shape, value):
          shape[i] = perpendicular_noise(shape[i], value)
    else:
       result = [ ]
-      points = shape.points[0]
+      points = shape.points
       d_points = difference(points)
       for point, d_point in zip(points[:-1], d_points):
          wiggle = random.randrange(-value, value)

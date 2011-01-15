@@ -13,8 +13,8 @@ def rotate(shape, angle, pivot = (0, 0)):
    if isinstance(shape, Group):
       for s in shape:
          rotate(s, angle, pivot)
-   else:
-      shape.points = rotate_2d(shape.points[0], angle, pivot)
+   else: ## it's a Path...
+      shape.points = rotate_2d(shape.points, angle, pivot)
 
 
 
