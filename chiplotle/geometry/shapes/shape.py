@@ -1,7 +1,4 @@
 from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
-   import convert_coordinates_to_hpgl_absolute_path
-from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
 class _Shape(object):
    '''
@@ -35,58 +32,8 @@ class _Shape(object):
 
 
    @property
-   def points(self):
-      '''Returns a list of CoordinateArrays, each of which represents
-      a path (uninterrupted line) in a drawing.'''
-      ## must be implemented in concrete sublcasses.
-      pass
-
-
-   ## NOTE: rotation and offset implementations should be here, 
-   ## in the base class so that one does not have to worry about 
-   ## these transformations at all. They come at the end, once
-   ## points are generated. 
-
-   @property
-   def offset_points(self):
-      return [points + self.offset for points in self.points]
-
-
-   @property
-   def offset_rotated_points(self):
-      result = [ ]
-      for points in self.offset_points:
-         ca = rotate_2d(points, self.rotation, self.pivot)
-         result.append(ca)
-      return result
-
-
-   ## PRIVATE PROPERTIES ##
-
-   @property
-   def _transformed_points(self):
-      points = self.offset_rotated_points
-      for trans in self.transforms:
-         points = trans.transform(points)
-      return points
-
-   @property
-   def _preformat_points(self):
-      '''Points (coordinates) ready for formatting (conversion to HPGL).'''
-      return self._transformed_points
-
-   @property
    def _subcommands(self):
-      result = [ ]
-      if _Shape.language == 'HPGL':
-         ## create hpgl commands
-         #for path in self.offset_rotated_points:
-         for path in self._preformat_points:
-            result += convert_coordinates_to_hpgl_absolute_path(path)
-      elif _Shape.language == 'gcode':
-         ## create gcode
-         print 'Sorry, no g-code support!'
-      return result 
+      raise NotImplementedError
 
 
    ## OVERRIDES ##
