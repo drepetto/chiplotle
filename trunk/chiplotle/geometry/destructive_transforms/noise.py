@@ -17,7 +17,7 @@ def noise(shape, value):
       except TypeError:
          x = y = value
       result = [ ]
-      for point in shape.points[0]:
+      for point in shape.points:
          x_wiggle = random.randrange(-x, x)
          y_wiggle = random.randrange(-y, y)
          xy = point + (x_wiggle, y_wiggle)         

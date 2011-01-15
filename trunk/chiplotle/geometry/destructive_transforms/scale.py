@@ -10,8 +10,8 @@ def scale(shape, value):
    if isinstance(shape, Group):
       for s in shape:
          scale(s, value)
-   else:
-      shape.points = shape.points[0] * value
+   else: ## it's a Path...
+      shape.points = shape.points * value
 
 
 
