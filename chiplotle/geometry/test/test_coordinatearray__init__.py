@@ -30,7 +30,7 @@ def test_coordinatearray__init__03( ):
 
 def test_coordinatearray__init__04( ):
    '''A flat list must have an even number of elements.'''
-   assert raises(ValueError, 't = CoordinateArray([1, 2, 3, 4, 5])')
+   assert raises(errors.InitParameterError, 't = CoordinateArray([1, 2, 3, 4, 5])')
 
 
 ## iadd ##

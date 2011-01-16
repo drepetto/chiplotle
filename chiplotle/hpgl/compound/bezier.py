@@ -33,7 +33,8 @@ class Bezier(_AbstractPath):
       if self.control_marks:
          if (self.control_marks == "lines" or self.control_marks == "line"):
             ## draws the polygon defined by control points with dashed line...
-            result.append(PA(self.xy + self.points[0]))
+            #result.append(PA(self.xy + self.points[0]))
+            result.append(PA([self.xy + self.points[0]]))
             result.append(PD( ))
             result.append(LT(2))
             for point_tuple in self.points[1:]:
@@ -62,12 +63,13 @@ class Bezier(_AbstractPath):
          self.interpolation_count, self.weight)
 
       result = _AbstractPath._subcommands.fget(self)
-      result.append(PA(self.xy + plot_points[0]))
+      result.append(PA([self.xy + plot_points[0]]))
       result.append(PD( ))
 
       for point_tuple in plot_points[1:]:
          position = self.xy + point_tuple
-         result.append(PA(position))
+         #result.append(PA(position))
+         result.append(PA([position]))
       result.append(PU( ))
       ## get control marks...
       result += self._get_control_marks_html( )

@@ -1,5 +1,6 @@
 from chiplotle.hpgl.abstract.penplot import _PenPlot
 from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.core import errors
 from py.test import raises
 
 def test_penplot_01( ):
@@ -15,13 +16,14 @@ def test_penplot_01( ):
 
 def test_penplot_02( ):
    '''_PenPlot complaines with lenghts != 2*n .'''
-   assert raises(ValueError,  '_PenPlot((1,2,3))')
+   assert raises(errors.InitParameterError,  '_PenPlot((1,2,3))')
 
 
 def test_penplot_03( ):
    '''xy cannot be set with an single number.'''
    p = _PenPlot((1,2))
-   assert raises(TypeError, 'p.xy = 3')
+   ## TODO should be TypeError?
+   assert raises(errors.InitParameterError, 'p.xy = 3')
 
 
 def test_penplot_04( ):
@@ -38,9 +40,10 @@ def test_penplot_04( ):
 def test_penplot_05( ):
    '''xy assignment must have lenth == 2*n'''
    p = _PenPlot((0,0))
-   assert raises(ValueError, 'p.xy =(1,)')
-   assert raises(ValueError, 'p.xy =(1,2,3)')
-   assert raises(ValueError, 'p.xy =(1,2,3,4,5)')
+   ## TODO should be TypeError?
+   assert raises(errors.InitParameterError, 'p.xy =(1,)')
+   assert raises(errors.InitParameterError, 'p.xy =(1,2,3)')
+   assert raises(errors.InitParameterError, 'p.xy =(1,2,3,4,5)')
 
 
 def test_penplot_06( ):

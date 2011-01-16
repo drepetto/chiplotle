@@ -7,12 +7,39 @@ class CoordinateArray(object):
 
    def __init__(self, xy=None):
       xy = xy or [ ]
+
+      ## TODO check and clean up.
       try:
-         self._data = [Coordinate(p) for p in xy]
+         xy = Coordinate(xy)
       except errors.InitParameterError:
-         from chiplotle.tools.iterabletools.flat_list_to_pairs \
-            import flat_list_to_pairs
-         self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
+         try:
+            xy = list(xy)
+         except:
+            raise errors.InitParameterError
+      if isinstance(xy, Coordinate):
+         self._data = [xy]
+      else:
+         try:
+            self._data = [Coordinate(p) for p in xy]
+         except errors.InitParameterError:
+            try:
+               from chiplotle.tools.iterabletools.flat_list_to_pairs \
+                  import flat_list_to_pairs
+               self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
+            except:
+               raise errors.InitParameterError( )
+
+#      if not isinstance(xy, (list, tuple, CoordinateArray)):
+#         raise errors.InitParameterError( )
+#      try:
+#         self._data = [Coordinate(p) for p in xy]
+#      except (TypeError, errors.InitParameterError):
+#         try:
+#            from chiplotle.tools.iterabletools.flat_list_to_pairs \
+#               import flat_list_to_pairs
+#            self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
+#         except:
+#            raise errors.InitParameterError( )
 
 
    ## PUBLIC PROPERTIES ##
@@ -122,17 +149,33 @@ class CoordinateArray(object):
    ## addition ##
 
    def __add__(self, arg):
+      if isinstance(arg, (list, tuple)):
+         try:
+            arg = Coordinate(arg)
+         except errors.InitParameterError:
+            try:
+               arg = CoordinateArray(arg)
+            except errors.InitParameterError:
+               raise errors.OperandError( )
+
       if isinstance(arg, CoordinateArray):
          if len(self) == len(arg):
             return CoordinateArray([a + b for a, b in zip(self.xy, arg.xy)])
          else:
-            raise ValueError("Both CoordinateArrays must be of the same length.")
-      else:
+            raise errors.OperandError("CoordinateArrays must have same length.")
+      elif isinstance(arg, (Coordinate, int, long, float)):
          return CoordinateArray([val + arg for val in self.xy])
+      
+      raise errors.OperandError( )
       
    def __radd__(self, arg):
       return self + arg
 
+   ## substraction ##
+
+   def __sub__(self, arg):
+      return self + (-arg)
+      
    ## division ##
 
    def __div__(self, arg):
@@ -151,17 +194,6 @@ class CoordinateArray(object):
    def __rmul__(self, arg):
       return self * arg
          
-   ## substraction ##
-
-   def __sub__(self, arg):
-      if isinstance(arg, CoordinateArray):
-         if len(self) == len(arg):
-            return CoordinateArray([a + b for a, b in zip(self.xy, arg.xy)])
-         else:
-            raise ValueError("Both CoordinateArrays must be of the same length.")
-      else:
-         return CoordinateArray([val - arg for val in self.xy])
-      
    ## ## 
 
    def __eq__(self, arg):

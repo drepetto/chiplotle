@@ -24,10 +24,10 @@ def test_IP_03( ):
 
 def test_IP_04( ):
    '''IP can take two an only two coordinate pairs.'''
-   assert raises(ValueError, 't = IP([1, 2, 3, 4, 5])')
-   assert raises(ValueError, 't = IP([1, 2, 3])')
-   assert raises(ValueError, 't = IP([1])')
-   assert raises(ValueError, 't = IP([(1, 2), (3, 4), (5, 6)])')
+   assert raises(errors.InitParameterError, 't = IP([1, 2, 3, 4, 5])')
+   assert raises(errors.InitParameterError, 't = IP([1, 2, 3])')
+   assert raises(errors.InitParameterError, 't = IP([1])')
+   assert raises(errors.InitParameterError, 't = IP([(1, 2), (3, 4), (5, 6)])')
    
 
 def test_IP_05( ):

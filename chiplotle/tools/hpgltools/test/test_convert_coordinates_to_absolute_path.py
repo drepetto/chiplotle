@@ -6,7 +6,7 @@ def test_convert_coordinates_to_absolute_hpgl_path_01( ):
    c = [(1, 2), (3, 4), (5, 6)]
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
-   assert t[1] == PA(c[0])
+   assert t[1] == PA([c[0]])
    assert t[2] == PD( )
    assert t[3] == PA(c[1:])
 
@@ -16,7 +16,7 @@ def test_convert_coordinates_to_absolute_hpgl_path_02( ):
    c = [Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)]
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
-   assert t[1] == PA(c[0])
+   assert t[1] == PA(c[0].xy)
    assert t[2] == PD( )
    assert t[3] == PA(c[1:])
 
@@ -26,7 +26,7 @@ def test_convert_coordinates_to_absolute_hpgl_path_03( ):
    c = CoordinateArray([Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)])
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
-   assert t[1] == PA(c[0])
+   assert t[1] == PA([c[0]])
    assert t[2] == PD( )
    assert t[3] == PA(c[1:])
 
@@ -34,6 +34,6 @@ def test_convert_coordinates_to_absolute_hpgl_path_03( ):
 def test_convert_coordinates_to_absolute_hpgl_path_04( ):
    '''Argument must be a list of coordinate pairs..'''
    c = [1, 2, 3, 4]
-   assert raises(TypeError, 'hpgltools.convert_coordinates_to_hpgl_absolute_path(c)')
+   assert raises(errors.InitParameterError, 'hpgltools.convert_coordinates_to_hpgl_absolute_path(c)')
 
 

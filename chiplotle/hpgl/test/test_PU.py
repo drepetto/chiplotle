@@ -21,13 +21,13 @@ def test_pu_init_02( ):
 
 def test_pu_init_03( ):
    '''PU argument must be list-like (list, tuple, Ndarray,...).'''
-   assert raises(TypeError, 'PU(4)')
+   assert raises(errors.InitParameterError, 'PU(4)')
 
 def test_pu_init_04( ):
    '''PU argument must be a list or tuple of length == 2*n'''
-   assert raises(ValueError, 'PU([1])')
-   assert raises(ValueError, 'PU([1,2,3])')
-   assert raises(ValueError, 'PU([1,2,3,4,5])')
+   assert raises(errors.InitParameterError, 'PU([1])')
+   assert raises(errors.InitParameterError, 'PU([1,2,3])')
+   assert raises(errors.InitParameterError, 'PU([1,2,3,4,5])')
 
 def test_pu_init_05( ):
    '''PU initialize properly with list or tuple of 2.'''

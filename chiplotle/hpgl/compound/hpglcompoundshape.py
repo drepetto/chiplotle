@@ -47,7 +47,8 @@ class _HPGLCompoundShape(_HPGLCompound):
 
    @property
    def _subcommands(self):
-      return [PU( ), PA(self.xy)]
+      #return [PU( ), PA(self.xy)]
+      return [PU( ), PA([self.xy])]
 
    def points(self):
       pass

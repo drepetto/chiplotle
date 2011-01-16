@@ -17,7 +17,7 @@ def test_coordinatearray__add__02( ):
    '''Two CoordinateArrays of different length cannot be added.'''
    a = CoordinateArray([(1, 2), (3, 4)])
    b = CoordinateArray([(1, 1), (2, 2), (3, 3)])
-   assert raises(ValueError, 't = a + b')
+   assert raises(errors.OperandError, 't = a + b')
 
 
 def test_coordinatearray__add__03( ):
