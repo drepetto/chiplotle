@@ -89,7 +89,7 @@ class Path(_Shape):
 
 
    ## operators ##
-   ## these are destructive transformations ##
+   ## some are destructive transformations ##
 
    def __add__(self, arg):
       return Path(self.points + arg)
@@ -99,7 +99,7 @@ class Path(_Shape):
       return self
 
    def __radd__(self, arg):
-      return self + arg
+      return self.__add__(arg)
 
    def __mul__(self, arg):
       return Path(self.points * arg)
@@ -121,6 +121,15 @@ class Path(_Shape):
    def __rsub__(self, arg):
       return (-self) + arg
 
+
+   def __eq__(self, arg):
+      try:
+         return self.points == arg.points
+      except:
+         return False
+
+   def __ne__(self, arg):
+      return not (self == arg)
 
    def __neg__(self):
       return Path(-self.points)

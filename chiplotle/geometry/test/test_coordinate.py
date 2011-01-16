@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.core import errors
 from py.test import raises
 
 ## __init__ ##
@@ -39,7 +40,7 @@ def test_coordinate__init__04( ):
 
 def test_coordinate__init__05( ):
    '''Coordinate cannot be initialized with a single number.'''
-   assert raises(TypeError, 't = Coordinate(4)')
+   assert raises(errors.InitParameterError, 't = Coordinate(4)')
 
 
 ## attribute assignment ##
@@ -185,13 +186,13 @@ def test_coordinate__add__06( ):
    '''A Coordinate and a triple cannot be added.'''
    a = Coordinate(1, 2)
    b = (3, 4, 5)
-   assert raises(ValueError, 'a + b')
+   assert raises(errors.OperandError, 'a + b')
 
 def test_coordinate__radd__06( ):
    '''A triple and a Coordinate cannot be added.'''
    a = Coordinate(1, 2)
    b = (3, 4, 5)
-   assert raises(ValueError, 'b + a')
+   assert raises(errors.OperandError, 'b + a')
 
 
 ## __mul__ ##
