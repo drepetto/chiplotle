@@ -91,6 +91,8 @@ class Path(_Shape):
    ## operators ##
    ## some are destructive transformations ##
 
+   ## TODO: return a copy of self rather than a fresh new instance?
+   ## i.e., do we want to preserve whatever other attributes self has?
    def __add__(self, arg):
       return Path(self.points + arg)
 

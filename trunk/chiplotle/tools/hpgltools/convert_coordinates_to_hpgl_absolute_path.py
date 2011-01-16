@@ -11,7 +11,7 @@ def convert_coordinates_to_hpgl_absolute_path(coords):
 
    result = [ ]
    result.append(PU( ))
-   result.append(PA(coords[0]))
+   result.append(PA([coords[0]]))
    result.append(PD( ))
    result.append(PA(coords[1:]))
    return result

@@ -96,13 +96,29 @@ class Coordinate(object):
                return arg.__radd__(self)
             except:
                raise errors.OperandError
-#         if isinstance(arg, (int, long, float)):
-#            return Coordinate(self.x + arg, self.y + arg)
-#         else:
-#            return arg.__radd__(self)
 
    def __radd__(self, arg):
       return self + arg
+
+
+   ## substraction ##
+
+   def __sub__(self, arg):
+      try:
+         arg = Coordinate(arg)
+         return Coordinate(self.x - arg.x, self.y - arg.y)
+      except:
+         try:
+            return Coordinate(self.x - arg, self.y - arg)
+         except:
+            try:
+               return arg.__rsub__(self)
+            except:
+               raise errors.OperandError
+
+   def __rsub__(self, arg):
+      return -(self - arg)
+
 
    ## division ##
 
@@ -126,24 +142,6 @@ class Coordinate(object):
 
    def __rmul__(self, arg):
       return self * arg
-
-   ## substraction ##
-
-   def __sub__(self, arg):
-      try:
-         arg = Coordinate(arg)
-         return Coordinate(self.x - arg.x, self.y - arg.y)
-      except:
-         try:
-            return Coordinate(self.x - arg, self.y - arg)
-         except:
-            try:
-               return arg.__rsub__(self)
-            except:
-               raise errors.OperandError
-
-   def __rsub__(self, arg):
-      return -(self - arg)
 
    ## ## 
 
