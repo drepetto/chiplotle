@@ -1,27 +1,30 @@
 from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.transforms._transform import _Transform
-import random
 
-class Noise(_Transform):
+class Offset(_Transform):
 
-   def __init__(self, xnoise, ynoise):
-      self.xnoise = xnoise
-      self.ynoise = ynoise
+   def __init__(self, *arg):
+      if len(arg) == 2:
+         self.xoffset = arg[0]
+         self.yoffset = arg[1]
+      else:
+         try:
+            self.xoffset = arg[0][0]
+            self.yoffset = arg[0][1]
+         except TypeError:
+            self.xoffset = arg[0]
+            self.yoffset = arg[0]
 
 
    ## PUBLIC METHODS ##
    
    def transform(self, points):
       '''Transforms the given points.'''
-      ## This must be implemented in all geometric transformations.
       result = CoordinateArray([ ])
       for coord in points:
-         x_wiggle = random.randrange(-self.xnoise, self.xnoise)
-         y_wiggle = random.randrange(-self.ynoise, self.ynoise)
-         xy = coord + (x_wiggle, y_wiggle)         
+         xy = coord + (self.xoffset, self.yoffset)         
          result.append(xy)
       return result
-
 
 
 ## RUN DEMO CODE
@@ -32,9 +35,12 @@ if __name__ == '__main__':
    from chiplotle.tools import io
       
    e1 = ellipse(1000,1000)
-   r1 = rectangle(1400, 1400)
-   n = Noise(20, 40)
-   n(e1)
-   n(r1)
-   g = Group([e1, r1])
-   io.view(g)
+   e2 = ellipse(1000,1000)
+   r1 = rectangle(1000, 1000)
+   os = Offset(200, 300)
+   os(e1)
+   Offset(800)(r1)
+   g1 = Group([e1, r1])
+   g2 = Group([e1, e2])
+   Offset(1200)(g2)
+   io.view(Group([g1, g2]))
