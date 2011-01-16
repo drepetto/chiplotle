@@ -3,12 +3,12 @@ from py.test import raises
 
 def test_ER_01( ):
    '''ER cannot initialize with a scalar.'''
-   assert raises(TypeError, 't = ER(1)')
+   assert raises(errors.InitParameterError, 't = ER(1)')
 
 
 def test_ER_02( ):
    '''ER cannot initialize with a list of length > 2.'''
-   assert raises(ValueError, 't = ER([1, 2, 3, 4])')
+   assert raises(errors.InitParameterError, 't = ER([1, 2, 3, 4])')
 
 
 def test_ER_03( ):

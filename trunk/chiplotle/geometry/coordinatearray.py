@@ -1,5 +1,5 @@
 from chiplotle.geometry.coordinate import Coordinate
-
+from chiplotle.core import errors
 
 class CoordinateArray(object):
 
@@ -9,7 +9,7 @@ class CoordinateArray(object):
       xy = xy or [ ]
       try:
          self._data = [Coordinate(p) for p in xy]
-      except TypeError:
+      except errors.InitParameterError:
          from chiplotle.tools.iterabletools.flat_list_to_pairs \
             import flat_list_to_pairs
          self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]

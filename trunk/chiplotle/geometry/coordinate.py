@@ -1,4 +1,5 @@
 from __future__ import division
+from chiplotle.core import errors
 import math
 
 class Coordinate(object):
@@ -15,22 +16,23 @@ class Coordinate(object):
 
    def __init__(self, *args):
       if len(args) == 1:
-#         if isinstance(args[0], Coordinate):
-#            pass ## handled in __new__
          if isinstance(args[0], Coordinate):
             self._x, self._y = args[0].x, args[0].y
          elif isinstance(args[0], (list, tuple)):
             self.__init__(*args[0])
          else:
-            raise TypeError('argument not recognized by Coordinate.')
+            #raise TypeError('argument not recognized by Coordinate.')
+            raise errors.InitParameterError( )
       elif len(args) == 2:
          from chiplotle.tools.iterabletools.isiterable import isiterable
          if isiterable(args[0]) or isiterable(args[1]):
-            raise TypeError('Each element in the pair must be a scalar')
+            #raise TypeError('Each element in the pair must be a scalar')
+            raise errors.InitParameterError( )
          self._x = args[0]
          self._y = args[1]
       else:
-         raise ValueError('too many arguments Coordinate.')
+         #raise ValueError('too many arguments Coordinate.')
+         raise errors.InitParameterError( )
 
 
    ## PUBLIC PROPERTIES ##
@@ -83,17 +85,21 @@ class Coordinate(object):
       return Coordinate(abs(self.x), abs(self.y))
 
    def __add__(self, arg):
-      from chiplotle.geometry.coordinatearray import CoordinateArray
       try:
          arg = Coordinate(arg)
          return Coordinate(self.x + arg.x, self.y + arg.y)
-      except TypeError:
-         if isinstance(arg, CoordinateArray):
-            return arg + self
-         elif isinstance(arg, (int, long, float)):
+      except:
+         try:
             return Coordinate(self.x + arg, self.y + arg)
-         else:
-            raise TypeError('arg not supported.')
+         except:
+            try:
+               return arg.__radd__(self)
+            except:
+               raise errors.OperandError
+#         if isinstance(arg, (int, long, float)):
+#            return Coordinate(self.x + arg, self.y + arg)
+#         else:
+#            return arg.__radd__(self)
 
    def __radd__(self, arg):
       return self + arg
@@ -113,10 +119,10 @@ class Coordinate(object):
 
    def __mul__(self, arg):
       try:
-         return Coordinate(self.x * arg, self.y * arg)
-      except TypeError:
          coord = Coordinate(arg)
          return Coordinate(self.x * coord.x, self.y * coord.y)
+      except:
+         return Coordinate(self.x * arg, self.y * arg)
 
    def __rmul__(self, arg):
       return self * arg
@@ -124,17 +130,17 @@ class Coordinate(object):
    ## substraction ##
 
    def __sub__(self, arg):
-      from chiplotle.geometry.coordinatearray import CoordinateArray
       try:
          arg = Coordinate(arg)
          return Coordinate(self.x - arg.x, self.y - arg.y)
-      except TypeError:
-         if isinstance(arg, CoordinateArray):
-            return -(arg - self)
-         elif isinstance(arg, (int, float)):
+      except:
+         try:
             return Coordinate(self.x - arg, self.y - arg)
-         else:
-            raise TypeError('arg not supported.')
+         except:
+            try:
+               return arg.__rsub__(self)
+            except:
+               raise errors.OperandError
 
    def __rsub__(self, arg):
       return -(self - arg)

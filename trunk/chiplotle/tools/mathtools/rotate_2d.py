@@ -13,10 +13,10 @@ def rotate_2d(xy, angle, pivot=(0, 0)):
    Returns a Coordinate or a CoordinateArray.
    '''
    try:
-      xy = Coordinate(xy)
+      #xy = Coordinate(xy)
       result = _rotate_coordinate_2d(xy, angle, pivot)
-   except TypeError:
-      xy = CoordinateArray(xy)
+   except:
+      #xy = CoordinateArray(xy)
       result = _rotate_coordinatearray_2d(xy, angle, pivot)
    return result
 

@@ -34,6 +34,8 @@ from chiplotle.geometry.coordinate import Coordinate
 
 from chiplotle.tools.plottertools import instantiate_plotters
 
+from chiplotle.core import errors
+
 #_remove_modules()
 
 ## remove unnecessary modules...
