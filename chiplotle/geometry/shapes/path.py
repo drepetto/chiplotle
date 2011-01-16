@@ -5,6 +5,13 @@ from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
    import convert_coordinates_to_hpgl_absolute_path
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
+## TODO: add a LineFormatter (or Formatter) class that can be pluged-in to 
+## change the formatting of the line? e.g., dotted, solid, points, etc.
+
+## TODO: if implementing non-destructive transformations, we should have
+## a 'collapse( )' function that applies the transforms destructively to
+## have a time-processing-efficient alternative.
+
 class Path(_Shape):
    '''
       A generic path (connected points). 
@@ -38,15 +45,19 @@ class Path(_Shape):
       return rotate_2d(self._offset_points, self.rotation, self.pivot)
 
    @property
+   def _transformed_points(self):
+      points = self._offset_rotated_points
+      for trans in self.transforms:
+         points = trans.transform(points)
+      return points
+
+   @property
    def _preformat_points(self):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
       if self.closed:
-         return self._offset_rotated_points + [self._offset_rotated_points[0]]
+         return self._transformed_points + [self._transformed_points[0]]
       else:
-         return self._offset_rotated_points
-
-   ## TODO: add a LineFormatter (or Formatter) class that can be pluged-in to 
-   ## change the formatting of the line? e.g., dotted, solid, points, etc.
+         return self._transformed_points
 
    @property
    def _subcommands(self):
@@ -78,9 +89,8 @@ class Path(_Shape):
 
 
    ## operators ##
+   ## these are destructive transformations ##
 
-   ## TODO: implement path op path, 
-   ## in addition to path op int or path op (x, y)?
    def __add__(self, arg):
       return Path(self.points + arg)
 

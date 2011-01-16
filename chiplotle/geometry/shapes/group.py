@@ -1,4 +1,5 @@
 from chiplotle.geometry.shapes.shape import _Shape
+import copy
 
 class Group(_Shape):
    '''A group collects together multiple _Shapes, so they
@@ -42,8 +43,10 @@ class Group(_Shape):
    @property
    def _subcommands(self):
       result = [ ]
-      for x in self:
-         result += x._subcommands
+      for shape in self:
+         shape = copy.copy(shape)
+         shape.transforms.extend(self.transforms)
+         result += shape._subcommands
       return result
 
 
@@ -70,7 +73,7 @@ class Group(_Shape):
       return len(self._shapes)
 
    def __repr__(self):
-     return '%s(%d)' % (self._name, len(self))
+     return '%s(%s)' % (self.__class__.__name__, len(self))
 
    def __setitem__(self, i, arg):
       if isinstance(i, int):
@@ -79,6 +82,44 @@ class Group(_Shape):
       else:
          self._check_init_shapes(arg)
          self._shapes[i.start : i.stop] = arg
+
+   ## operators ##
+   ## these are destructive transformations ##
+
+   def __add__(self, arg):
+      return Group([s.__add__(arg) for s in self])
+
+   def __radd__(self, arg):
+      return self + arg
+
+   def __iadd__(self, arg):
+      self._shapes = [s.__iadd__(arg) for s in self]
+      return self
+
+   def __mul__(self, arg):
+      return Group([s.__mul__(arg) for s in self])
+
+   def __rmul__(self, arg):
+      return self * arg
+
+   def __imul__(self, arg):
+      self._shapes = [s.__imul__(arg) for s in self]
+      return self
+
+   def __sub__(self, arg):
+      return self + (-arg)
+   
+   def __rsub__(self, arg):
+      return (-self) + arg
+
+   def __isub__(self, arg):
+      self._shapes = [s.__isub__(arg) for s in self]
+      return self
+
+   def __neg__(self):
+      self._shapes = [s.__neg__( ) for s in self]
+      return self
+
 
 
 
