@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, LB, PA, ES, LO, SL, DI, DV, SI
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 
 ## TODO: change charsize for two attributes: charwidth, charheight?
 class Label(_HPGLCompoundShape):
@@ -59,10 +59,10 @@ class Label(_HPGLCompoundShape):
       def fset(self, arg):
          if isinstance(arg, (list, tuple)):
             if len(arg) == 2:
-               self._charsize = Coordinate(*arg)
+               self._charsize = Vector(*arg)
             else:
                raise ValueError("Character size has two values: (w, h).")
-         elif isinstance(arg, Coordinate):
+         elif isinstance(arg, Vector):
             self._charsize = arg
          else:
             raise ValueError("charsize must be None, or (x, y) pair.")

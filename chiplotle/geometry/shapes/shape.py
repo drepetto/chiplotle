@@ -1,12 +1,12 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 
 class _Shape(object):
    '''
       Abstract class from which all geometric shapes inherit.
    
-      offset is a Coordinate for moving the shape around in 2D space
+      offset is a Vector for moving the shape around in 2D space
       rotation is an angle expressed in radians
-      pivot is a Coordinate indicating the point around which to rotate
+      pivot is a Vector indicating the point around which to rotate
    
    '''
 
@@ -15,10 +15,10 @@ class _Shape(object):
    def __init__(self):
       ## TODO: keep or remove these three attributes in favor of 
       ## destructive transforms and Path operators?
-      self.offset = Coordinate(0,0)
+      self.offset = Vector(0,0)
       self.rotation = 0
       ## pivot point for rotation.
-      self.pivot = Coordinate(0,0)
+      self.pivot = Vector(0,0)
 
       self.transforms = [ ]
 

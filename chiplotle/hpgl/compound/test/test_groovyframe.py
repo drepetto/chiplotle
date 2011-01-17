@@ -13,7 +13,7 @@ def test_groovyframe_01( ):
    assert t.w2 == 110
    assert t.h2 == 110
    assert t.lines_per_side == 4
-   assert t.xy == Coordinate(0, 0)
+   assert t.xy == Vector(0, 0)
 
 
 ## scale ##
@@ -23,7 +23,7 @@ def test_groovyframe_scale_01( ):
    hpgltools.scale(t, 1.5)
 
    assert GroovyFrame._scalable == ['xy', 'w1', 'h1', 'w2', 'h2']
-   assert t.xy == Coordinate(1.5, 3)
+   assert t.xy == Vector(1.5, 3)
    assert t.w1 == 150
    assert t.h1 == 150
    assert t.w2 == 180

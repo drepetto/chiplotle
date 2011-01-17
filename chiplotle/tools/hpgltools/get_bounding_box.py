@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.tools.hpgltools.get_all_coordinates import get_all_coordinates
 
 def get_bounding_box(arg):
@@ -28,4 +28,4 @@ def get_bounding_box(arg):
       if c.y < min_y:
          min_y = c.y
 
-   return (Coordinate(min_x, min_y), Coordinate(max_x, max_y))
+   return (Vector(min_x, min_y), Vector(max_x, max_y))

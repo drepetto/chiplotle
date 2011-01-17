@@ -1,6 +1,6 @@
 from chiplotle.geometry.shapes.polygon import Polygon
 from chiplotle.geometry.shapes.rectangle import Rectangle
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.hpgl.commands import PU, PD, PA
 
 class Frame(Polygon):
@@ -9,7 +9,7 @@ class Frame(Polygon):
       
       inset is the distance to inset the inner rect from the outer.
       
-      offset is a Coordinate for moving the Rectangle around on the page.
+      offset is a Vector for moving the Rectangle around on the page.
       
       The Frame is drawn with the current pen location as the center.
       offset may be used to shift this around, for example, to draw from

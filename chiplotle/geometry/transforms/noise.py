@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vectorarray import VectorArray
 from chiplotle.geometry.transforms._transform import _Transform
 import random
 
@@ -14,7 +14,7 @@ class Noise(_Transform):
    def transform(self, points):
       '''Transforms the given points.'''
       ## This must be implemented in all geometric transformations.
-      result = CoordinateArray([ ])
+      result = VectorArray([ ])
       for coord in points:
          x_wiggle = random.randrange(-self.xnoise, self.xnoise)
          y_wiggle = random.randrange(-self.ynoise, self.ynoise)

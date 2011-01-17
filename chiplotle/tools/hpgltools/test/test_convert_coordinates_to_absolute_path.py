@@ -2,7 +2,7 @@ from chiplotle import *
 from py.test import raises
 
 def test_convert_coordinates_to_absolute_hpgl_path_01( ):
-   '''Coordinates can be generic tuples.'''
+   '''Vectors can be generic tuples.'''
    c = [(1, 2), (3, 4), (5, 6)]
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
@@ -12,8 +12,8 @@ def test_convert_coordinates_to_absolute_hpgl_path_01( ):
 
 
 def test_convert_coordinates_to_absolute_hpgl_path_02( ):
-   '''Coordinates can be Coordinates.'''
-   c = [Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)]
+   '''Vectors can be Vectors.'''
+   c = [Vector(1, 2), Vector(3, 4), Vector(5, 6)]
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
    assert t[1] == PA(c[0].xy)
@@ -22,8 +22,8 @@ def test_convert_coordinates_to_absolute_hpgl_path_02( ):
 
 
 def test_convert_coordinates_to_absolute_hpgl_path_03( ):
-   '''The argument can be a CoordinateArray'''
-   c = CoordinateArray([Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)])
+   '''The argument can be a VectorArray'''
+   c = VectorArray([Vector(1, 2), Vector(3, 4), Vector(5, 6)])
    t = hpgltools.convert_coordinates_to_hpgl_absolute_path(c)
    assert t[0] == PU( )
    assert t[1] == PA([c[0]])

@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.hpgl.commands import PU, PD, PA
 
 class Polygon():
@@ -9,12 +9,12 @@ class Polygon():
       straight lines. There may be multiple closed shapes in one Polygon,
       e.g. a donut, a frame, etc.
       
-      points is an [[],[],[],...] of Coordinates.
+      points is an [[],[],[],...] of Vectors.
       
       Each [] is considered a separate shape inside the polygon and
       will be drawn without a connection to the other []s. 
       
-      offset is a Coordinate for moving the polygon around on the page
+      offset is a Vector for moving the polygon around on the page
       
       If first_point != last_point then one final point 
       (a duplicate of the first point) will be added to close the polygon.   
@@ -30,7 +30,7 @@ class Polygon():
          last_point = shape[len(shape) - 1]
       
          if first_point != last_point:
-             new_last_point = Coordinate(first_point)
+             new_last_point = Vector(first_point)
              shape.append(new_last_point)
       
    @property
@@ -60,8 +60,8 @@ class Polygon():
    
 '''
 from shapes.polygon import Polygon
-sh1 = [Coordinate(0,0), Coordinate(1000,0),Coordinate(1000,1000),Coordinate(0,1000)]
-sh2 = [Coordinate(100,100), Coordinate(1100,100),Coordinate(1100,1100),Coordinate(100,1100)]
+sh1 = [Vector(0,0), Vector(1000,0),Vector(1000,1000),Vector(0,1000)]
+sh2 = [Vector(100,100), Vector(1100,100),Vector(1100,1100),Vector(100,1100)]
 poly1 = Polygon([sh1,sh2], [0,0])
 poly1.points
 poly1.commands

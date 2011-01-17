@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.tools.hpgltools.get_all_coordinates import get_all_coordinates
 
@@ -11,7 +11,7 @@ def get_centroid(arg):
    ## convert into a set to remove duplicate coordinates and to 
    ## avoid giving more weight to these duplicate points...
    arg = set(arg)
-   result = Coordinate(0, 0)
+   result = Vector(0, 0)
    for c in arg:
       result += c
    return result / len(arg)

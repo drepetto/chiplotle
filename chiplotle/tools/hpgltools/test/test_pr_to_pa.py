@@ -5,7 +5,7 @@ def test_pr_to_pa_01( ):
    pr = PR((1, 2))
    t = hpgltools.pr_to_pa(pr, (0, 0))
    assert isinstance(t, PA) 
-   assert t.xy == CoordinateArray([(1, 2)])
+   assert t.xy == VectorArray([(1, 2)])
    
 
 def test_pr_to_pa_02( ):
@@ -13,7 +13,7 @@ def test_pr_to_pa_02( ):
    pr = PR([(1, 2), (1, 1), (-2, 1)])
    t = hpgltools.pr_to_pa(pr)
    assert isinstance(t, PA) 
-   assert t.xy == CoordinateArray([(1, 2), (2, 3), (0, 4)])
+   assert t.xy == VectorArray([(1, 2), (2, 3), (0, 4)])
    
 
 def test_pr_to_pa_03( ):
@@ -21,7 +21,7 @@ def test_pr_to_pa_03( ):
    pr = PR( )
    t = hpgltools.pr_to_pa(pr)
    assert isinstance(t, PA) 
-   assert t.xy == CoordinateArray([ ])
+   assert t.xy == VectorArray([ ])
 
 
 def test_pr_to_pa_04( ):
@@ -29,4 +29,4 @@ def test_pr_to_pa_04( ):
    pr = PR([(1, 1), (1, 1)])
    t = hpgltools.pr_to_pa(pr, (10, 20))
    assert isinstance(t, PA) 
-   assert t.xy == CoordinateArray([(11, 21), (12, 22)])
+   assert t.xy == VectorArray([(11, 21), (12, 22)])

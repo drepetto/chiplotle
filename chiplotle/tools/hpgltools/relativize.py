@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.hpgl import commands as hpgl
 import numpy
 
@@ -30,9 +30,9 @@ def relativize(data):
       elif isinstance(e, (hpgl.PR, hpgl.RR, hpgl.ER, hpgl.AR)):
          if isinstance(e, hpgl.PR):
             if not last_position is None:
-               last_position += Coordinate(*numpy.sum(e.xy.as_list_of_pairs( ), axis = 0))
+               last_position += Vector(*numpy.sum(e.xy.as_list_of_pairs( ), axis = 0))
             else:
-               last_position = Coordinate(*numpy.sum(e.xy.as_list_of_pairs( ), axis = 0))
+               last_position = Vector(*numpy.sum(e.xy.as_list_of_pairs( ), axis = 0))
             result.append(e)
          else:
             last_position = (last_position or 0) + e.xy

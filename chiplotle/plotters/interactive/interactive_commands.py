@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.hpgl.commands import SC, IP, IW
 
 '''
@@ -35,7 +35,7 @@ def interactive_set_plot_window(plotter):
    x2 = position.x
    y2 = position.y
    
-   plotter.set_plot_window(Coordinate(x1, y1), Coordinate(x2, y2))
+   plotter.set_plot_window(Vector(x1, y1), Vector(x2, y2))
 
    '''
 from chiplotle.interactive.interactive_commands import *
@@ -159,7 +159,7 @@ def interactive_define_polygon_simple(plotter):
       if input is 'x':
          break;
 
-      point = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
+      point = Vector(plotter.actual_position[0].x, plotter.actual_position[0].y)
       points.append(point)
       print "added:"
       print point
@@ -181,13 +181,13 @@ def interactive_define_rectangle(plotter):
    print "Move pen to lower, left corner and press enter."
 
    input = raw_input()
-   lower_left = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   lower_left = Vector(plotter.actual_position[0].x, plotter.actual_position[0].y)
    print "lower_left:"
    print lower_left
    
    print "Move pen to upper, right corner and press enter."
    input = raw_input()
-   upper_right = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   upper_right = Vector(plotter.actual_position[0].x, plotter.actual_position[0].y)
    print "upper_right:"
    print upper_right   
       
@@ -213,13 +213,13 @@ def interactive_define_ellipse(plotter):
    print "Move pen to lower, left corner and press enter."
 
    input = raw_input()
-   lower_left = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   lower_left = Vector(plotter.actual_position[0].x, plotter.actual_position[0].y)
    print "lower_left:"
    print lower_left
    
    print "Move pen to upper, right corner and press enter."
    input = raw_input()
-   upper_right = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
+   upper_right = Vector(plotter.actual_position[0].x, plotter.actual_position[0].y)
    print "upper_right:"
    print upper_right   
       

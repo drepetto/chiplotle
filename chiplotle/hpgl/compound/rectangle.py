@@ -1,7 +1,7 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 
 class Rectangle(_HPGLCompoundShape):
    '''
@@ -25,10 +25,10 @@ class Rectangle(_HPGLCompoundShape):
 
    @property
    def points(self):
-      tl = Coordinate(-self.width / 2., self.height / 2.)
-      tr = Coordinate( self.width / 2., self.height / 2.)
-      bl = Coordinate(-self.width / 2.,-self.height / 2.)
-      br = Coordinate( self.width / 2.,-self.height / 2.)
+      tl = Vector(-self.width / 2., self.height / 2.)
+      tr = Vector( self.width / 2., self.height / 2.)
+      bl = Vector(-self.width / 2.,-self.height / 2.)
+      br = Vector( self.width / 2.,-self.height / 2.)
 
       #tl = rotate_2d(tl, self.rotation)
       #tr = rotate_2d(tr, self.rotation)

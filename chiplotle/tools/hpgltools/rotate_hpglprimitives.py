@@ -1,7 +1,7 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
-from chiplotle.geometry.coordinatearray import CoordinateArray
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vectorarray import VectorArray
+from chiplotle.geometry.vector import Vector
 
 
 ## TODO: implement rotation AXIS! 
@@ -12,14 +12,14 @@ def rotate_hpglprimitives(arg, angle):
       if not isinstance(e, _HPGLPrimitive):
          raise TypeError('Elements must be of type _HPGLPrimitive')
 
-      ## should we check for CoordinateArray and Coordinate instead?
+      ## should we check for VectorArray and Vector instead?
       if hasattr(e, 'xy'): 
-         if isinstance(e.xy, CoordinateArray):
+         if isinstance(e.xy, VectorArray):
             result = [ ]
             for cp in e.xy:
-               result.append(Coordinate(rotate_2d(cp, angle)))
-            e.xy = CoordinateArray(result)
-         elif isinstance(e.xy, Coordinate):
-            e.xy = Coordinate(rotate_2d(e.xy, angle))
+               result.append(Vector(rotate_2d(cp, angle)))
+            e.xy = VectorArray(result)
+         elif isinstance(e.xy, Vector):
+            e.xy = Vector(rotate_2d(e.xy, angle))
          
 

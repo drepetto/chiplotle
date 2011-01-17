@@ -1,5 +1,5 @@
-from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.vectorarray import VectorArray
 import math
 
 
@@ -10,47 +10,47 @@ def rotate_2d(xy, angle, pivot=(0, 0)):
    - `angle` is the angle of rotation in radians.
    - `pivot` the point around which to rotate `xy`.
 
-   Returns a Coordinate or a CoordinateArray.
+   Returns a Vector or a VectorArray.
    '''
    try:
-      xy = Coordinate(*xy)
-      pivot = Coordinate(*pivot)
+      xy = Vector(*xy)
+      pivot = Vector(*pivot)
       result = _rotate_coordinate_2d(xy, angle, pivot)
    except:
-      xy = CoordinateArray(xy)
-      pivot = Coordinate(*pivot)
+      xy = VectorArray(xy)
+      pivot = Vector(*pivot)
       result = _rotate_coordinatearray_2d(xy, angle, pivot)
    return result
 
 
 def _rotate_coordinate_2d(xy, angle, pivot):
-   '''Coordinate 2D rotation.
+   '''Vector 2D rotation.
 
    - `xy` is an (x, y) coordinate pair.
    - `angle` is the angle of rotation in radians.
    - `pivot` the point around which to rotate `xy`.
 
-   Returns a Coordinate.
+   Returns a Vector.
    '''
    ## rotate counter-clockwise...
    angle = -angle
-   #cp = Coordinate(xy)
+   #cp = Vector(xy)
    xy -= pivot
    x = xy.x * math.cos(angle) + xy.y * math.sin(angle) 
    y =  -xy.x * math.sin(angle) + xy.y * math.cos(angle) 
-   result = Coordinate(x, y) + pivot
+   result = Vector(x, y) + pivot
    return result
 
 def _rotate_coordinatearray_2d(xylst, angle, pivot):
-   '''2D rotation of list of coordinate pairs (CoordinateArray).
+   '''2D rotation of list of coordinate pairs (VectorArray).
 
    - `xylst` list of (x, y) coordinate pairs.
    - `angle` is the angle of rotation in radians.
    - `pivot` the point around which to rotate `xy`.
 
-   Returns a CoordinateArray.
+   Returns a VectorArray.
    '''
-   result = CoordinateArray( )
+   result = VectorArray( )
    for xy in xylst:
       r = _rotate_coordinate_2d(xy, angle, pivot)
       result.append(r)

@@ -13,6 +13,6 @@ def test_rotate_hpglprimitives_02( ):
    assert len(t) == 7
    print t[2].xy
    ## NOTE: why is this not working?
-   #assert t[2].xy == CoordinateArray([Coordinate(1, -1), Coordinate(1, 1)])
+   #assert t[2].xy == VectorArray([Vector(1, -1), Vector(1, 1)])
 
    

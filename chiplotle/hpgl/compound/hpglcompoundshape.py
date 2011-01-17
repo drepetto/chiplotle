@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.hpgl.commands import PU, PA
 
 
@@ -23,7 +23,7 @@ class _HPGLCompoundShape(_HPGLCompound):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         self._coords = Coordinate(*arg)
+         self._coords = Vector(*arg)
       return property(**locals())
 
    @apply
@@ -31,7 +31,7 @@ class _HPGLCompoundShape(_HPGLCompound):
       def fget(self):
          return self._coords.x
       def fset(self, arg):
-         self.xy = Coordinate(arg, self.y)
+         self.xy = Vector(arg, self.y)
       return property(**locals())
 
    @apply
@@ -39,7 +39,7 @@ class _HPGLCompoundShape(_HPGLCompound):
       def fget(self):
          return self._coords.y
       def fset(self, arg):
-         self.xy = Coordinate(self.x, arg)
+         self.xy = Vector(self.x, arg)
       return property(**locals())
 
 

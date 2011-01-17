@@ -2,26 +2,26 @@ from __future__ import division
 from chiplotle.core import errors
 import math
 
-class Coordinate(object):
+class Vector(object):
 
    __slots__ = ('_x', '_y')
 
 #   def __new__(cls, *args):
-#      if len(args) == 1 and isinstance(args[0], Coordinate):
+#      if len(args) == 1 and isinstance(args[0], Vector):
 #         return args[0]
 #      else:
 #         ## NOTE: Python 2.6.6... DeprecationWarning: object.__new__() takes no parameters
-#         #return super(Coordinate, cls).__new__(cls, *args)
-#         return super(Coordinate, cls).__new__(cls)
+#         #return super(Vector, cls).__new__(cls, *args)
+#         return super(Vector, cls).__new__(cls)
 
    def __init__(self, *args):
       if len(args) == 1:
-         if isinstance(args[0], Coordinate):
+         if isinstance(args[0], Vector):
             self._x, self._y = args[0].x, args[0].y
 #         elif isinstance(args[0], (list, tuple)):
 #            self.__init__(*args[0])
          else:
-            #raise TypeError('argument not recognized by Coordinate.')
+            #raise TypeError('argument not recognized by Vector.')
             raise errors.InitParameterError( )
       elif len(args) == 2:
          from chiplotle.tools.iterabletools.isiterable import isiterable
@@ -31,7 +31,7 @@ class Coordinate(object):
          self._x = args[0]
          self._y = args[1]
       else:
-         #raise ValueError('too many arguments Coordinate.')
+         #raise ValueError('too many arguments Vector.')
          raise errors.InitParameterError( )
 
 
@@ -71,7 +71,7 @@ class Coordinate(object):
       return 2
 
    def __repr__(self):
-      return 'Coordinate(%s, %s)' % (self.x, self.y)
+      return 'Vector(%s, %s)' % (self.x, self.y)
 
    def __str__(self):
       return '<%s,%s>' % (self.x, self.y)
@@ -82,15 +82,15 @@ class Coordinate(object):
    ## addition ##
 
    def __abs__(self):
-      return Coordinate(abs(self.x), abs(self.y))
+      return Vector(abs(self.x), abs(self.y))
 
    def __add__(self, arg):
       try:
-         #arg = Coordinate(arg)
-         return Coordinate(self.x + arg.x, self.y + arg.y)
+         #arg = Vector(arg)
+         return Vector(self.x + arg.x, self.y + arg.y)
       except:
          try:
-            return Coordinate(self.x + arg, self.y + arg)
+            return Vector(self.x + arg, self.y + arg)
          except:
             try:
                return arg.__radd__(self)
@@ -105,11 +105,11 @@ class Coordinate(object):
 
    def __sub__(self, arg):
       try:
-         #arg = Coordinate(arg)
-         return Coordinate(self.x - arg.x, self.y - arg.y)
+         #arg = Vector(arg)
+         return Vector(self.x - arg.x, self.y - arg.y)
       except:
          try:
-            return Coordinate(self.x - arg, self.y - arg)
+            return Vector(self.x - arg, self.y - arg)
          except:
             try:
                return arg.__rsub__(self)
@@ -127,14 +127,14 @@ class Coordinate(object):
    
    def __floordiv__(self, arg):
       result = self.__div__(arg)
-      return Coordinate(int(math.floor(result.x)), int(math.floor(result.y)))
+      return Vector(int(math.floor(result.x)), int(math.floor(result.y)))
 
    def __truediv__(self, arg):
       try:
-         return Coordinate(self.x / arg.x, self.y / arg.y)
+         return Vector(self.x / arg.x, self.y / arg.y)
       except AttributeError:
          try:
-            return Coordinate(self.x / arg, self.y / arg)
+            return Vector(self.x / arg, self.y / arg)
          except (TypeError, errors.InitParameterError):
             raise errors.OperandError( )
 
@@ -143,11 +143,11 @@ class Coordinate(object):
 
    def __mul__(self, arg):
       try:
-         #coord = Coordinate(arg)
-         return Coordinate(self.x * arg.x, self.y * arg.y)
+         #coord = Vector(arg)
+         return Vector(self.x * arg.x, self.y * arg.y)
       except AttributeError:
          try:
-            return Coordinate(self.x * arg, self.y * arg)
+            return Vector(self.x * arg, self.y * arg)
          except errors.InitParameterError:
             raise errors.OperandError( )
 
@@ -159,7 +159,7 @@ class Coordinate(object):
 
    def __eq__(self, arg):
       try:
-         #arg = Coordinate(arg)
+         #arg = Vector(arg)
          return (self.x == arg.x) and (self.y == arg.y)
       except AttributeError:
          return False
@@ -168,11 +168,11 @@ class Coordinate(object):
       '''Returns the perpendicular of self.
       http://mathworld.wolfram.com/PerpendicularVector.html
       '''
-      return Coordinate(-self.y, self.x)
+      return Vector(-self.y, self.x)
 
    def __ne__(self, arg):
       return not (self == arg)
 
    def __neg__(self):
-      return Coordinate(-self.x, -self.y)
+      return Vector(-self.x, -self.y)
 
