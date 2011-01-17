@@ -6,7 +6,7 @@ class VectorArray(object):
    __slots__ = ('_data', )
 
    def __init__(self, xy=None):
-      xy = xy or [ ]
+      if xy is None: xy = [ ]
 
 #      ## TODO check and clean up.
 #      try:

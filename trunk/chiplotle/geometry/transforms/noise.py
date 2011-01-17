@@ -1,3 +1,4 @@
+from chiplotle.geometry.vector import Vector
 from chiplotle.geometry.vectorarray import VectorArray
 from chiplotle.geometry.transforms._transform import _Transform
 import random
@@ -18,7 +19,7 @@ class Noise(_Transform):
       for coord in points:
          x_wiggle = random.randrange(-self.xnoise, self.xnoise)
          y_wiggle = random.randrange(-self.ynoise, self.ynoise)
-         xy = coord + (x_wiggle, y_wiggle)         
+         xy = coord + Vector(x_wiggle, y_wiggle)         
          result.append(xy)
       return result
 

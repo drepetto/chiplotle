@@ -7,7 +7,7 @@ class Rotate(_Transform):
 
    def __init__(self, angle, pivot = (0, 0)):
       self.angle = angle
-      self.pivot = Vector(pivot)
+      self.pivot = Vector(*pivot)
 
 
    ## PUBLIC METHODS ##
