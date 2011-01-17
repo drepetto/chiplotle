@@ -38,11 +38,11 @@ class Group(_HPGLCompoundShape):
          if isinstance(s, _HPGLPrimitive):
             if is_primitive_absolute(s):
                s = copy.copy(s)
-               s.xy += self.xy
+               s.xy = s.xy + self.xy
             result.append(s)
          elif isinstance(s, _HPGLCompound):
             s = copy.copy(s)
-            s.xy += self.xy
+            s.xy = s.xy + self.xy
             result.extend(s._subcommands)
       return result
 

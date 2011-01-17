@@ -59,7 +59,7 @@ class Label(_HPGLCompoundShape):
       def fset(self, arg):
          if isinstance(arg, (list, tuple)):
             if len(arg) == 2:
-               self._charsize = Coordinate(arg)
+               self._charsize = Coordinate(*arg)
             else:
                raise ValueError("Character size has two values: (w, h).")
          elif isinstance(arg, Coordinate):

@@ -1,11 +1,11 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute
+from chiplotle.geometry.coordinate import *
 
 def _transpose_command(arg, val):
    from chiplotle.tools.iterabletools.ispair import ispair
-   if not ispair(val):
-      raise ValueError('Transposing argument must be a pair (x, y).')
+   val = Coordinate(*val)
    if is_primitive_absolute(arg) or isinstance(arg, _HPGLCompound):
       arg.xy = arg.xy + val
 

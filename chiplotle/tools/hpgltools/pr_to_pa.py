@@ -1,3 +1,4 @@
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.hpgl.commands import PA, PR
 
 def pr_to_pa(arg, starting_position=None):
@@ -12,7 +13,9 @@ def pr_to_pa(arg, starting_position=None):
    if len(arg.xy) == 0:
       return PA( )
 
-   last_abs = starting_position or (0, 0)
+      
+   last_abs = starting_position or Coordinate(0, 0)
+   last_abs = Coordinate(*last_abs)
    #abs_coords = [last_abs]
    abs_coords = [ ]
    for p in arg.xy:

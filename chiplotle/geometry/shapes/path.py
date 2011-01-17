@@ -4,6 +4,7 @@ from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
    import convert_coordinates_to_hpgl_absolute_path
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
+from chiplotle.core import errors
 
 ## TODO: add a LineFormatter (or Formatter) class that can be pluged-in to 
 ## change the formatting of the line? e.g., dotted, solid, points, etc.
@@ -104,7 +105,10 @@ class Path(_Shape):
       return self.__add__(arg)
 
    def __mul__(self, arg):
-      return Path(self.points * arg)
+      try:
+         return Path(self.points * arg)
+      except errors.InitParameterError:
+         raise errors.OperandError( )
 
    def __imul__(self, arg):
       self.points = self.points * arg
@@ -114,20 +118,23 @@ class Path(_Shape):
       return self * arg
 
    def __sub__(self, arg):
-      return self + (-arg)
+      try:
+         return self + (-arg)
+      except:
+         raise errors.OperandError( )
    
    def __isub__(self, arg):
       self.points = self.points - arg
       return self
 
    def __rsub__(self, arg):
-      return (-self) + arg
+      return -(self - arg)
 
 
    def __eq__(self, arg):
       try:
          return self.points == arg.points
-      except:
+      except AttributeError:
          return False
 
    def __ne__(self, arg):

@@ -8,38 +8,38 @@ class CoordinateArray(object):
    def __init__(self, xy=None):
       xy = xy or [ ]
 
-      ## TODO check and clean up.
-      try:
-         xy = Coordinate(xy)
-      except errors.InitParameterError:
-         try:
-            xy = list(xy)
-         except:
-            raise errors.InitParameterError
-      if isinstance(xy, Coordinate):
-         self._data = [xy]
-      else:
-         try:
-            self._data = [Coordinate(p) for p in xy]
-         except errors.InitParameterError:
-            try:
-               from chiplotle.tools.iterabletools.flat_list_to_pairs \
-                  import flat_list_to_pairs
-               self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
-            except:
-               raise errors.InitParameterError( )
+#      ## TODO check and clean up.
+#      try:
+#         xy = Coordinate(xy)
+#      except errors.InitParameterError:
+#         try:
+#            xy = list(xy)
+#         except:
+#            raise errors.InitParameterError
+#      if isinstance(xy, Coordinate):
+#         self._data = [xy]
+#      else:
+#         try:
+#            self._data = [Coordinate(p) for p in xy]
+#         except errors.InitParameterError:
+#            try:
+#               from chiplotle.tools.iterabletools.flat_list_to_pairs \
+#                  import flat_list_to_pairs
+#               self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
+#            except:
+#               raise errors.InitParameterError( )
 
 #      if not isinstance(xy, (list, tuple, CoordinateArray)):
 #         raise errors.InitParameterError( )
-#      try:
-#         self._data = [Coordinate(p) for p in xy]
-#      except (TypeError, errors.InitParameterError):
-#         try:
-#            from chiplotle.tools.iterabletools.flat_list_to_pairs \
-#               import flat_list_to_pairs
-#            self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
-#         except:
-#            raise errors.InitParameterError( )
+      try:
+         self._data = [Coordinate(*p) for p in xy]
+      except (TypeError, errors.InitParameterError):
+         try:
+            from chiplotle.tools.iterabletools.flat_list_to_pairs \
+               import flat_list_to_pairs
+            self._data = [Coordinate(*p) for p in flat_list_to_pairs(xy)]
+         except:
+            raise errors.InitParameterError( )
 
 
    ## PUBLIC PROPERTIES ##
@@ -139,7 +139,9 @@ class CoordinateArray(object):
 
    def __setitem__(self, i, arg):
       if isinstance(i, int):
-         self._data[i] = Coordinate(arg)
+         if not isinstance(arg, Coordinate):
+            raise TypeError
+         self._data[i] = arg
       else:
          arg = [Coordinate(xy) for xy in arg]
          self._data[i.start : i.stop] = arg
@@ -168,8 +170,15 @@ class CoordinateArray(object):
       
       raise errors.OperandError( )
       
+
    def __radd__(self, arg):
       return self + arg
+
+
+   def __iadd__(self, arg):
+      self._data = (self + arg)._data
+      return self
+
 
    ## substraction ##
 
@@ -186,6 +195,10 @@ class CoordinateArray(object):
    def __truediv__(self, arg):
       return self / arg
 
+   def __idiv__(self, arg):
+      self._data = (self / arg)._data
+      return self
+
    ## multiplication ##
 
    def __mul__(self, arg):
@@ -194,11 +207,19 @@ class CoordinateArray(object):
    def __rmul__(self, arg):
       return self * arg
          
+   def __imul__(self, arg):
+      self._data = (self * arg)._data
+      return self
+
    ## ## 
 
    def __eq__(self, arg):
-      arg = CoordinateArray(arg)
-      return self._data == arg._data
+      #arg = CoordinateArray(arg)
+      try:
+         return self._data == arg._data
+      except AttributeError:
+         return False
+
 
    def __ne__(self, arg):
       return not (self == arg)
