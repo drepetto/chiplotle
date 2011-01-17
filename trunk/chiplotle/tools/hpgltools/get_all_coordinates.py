@@ -1,6 +1,6 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vectorarray import VectorArray
 from chiplotle.tools.hpgltools.convert_relatives_to_absolutes import \
    convert_relatives_to_absolutes
 
@@ -25,7 +25,7 @@ def get_all_coordinates(arg):
    result = [ ]
    for e in arg:
       if isinstance(e, _HPGLPrimitive) and hasattr(e, 'xy'):
-         if isinstance(e.xy, CoordinateArray):
+         if isinstance(e.xy, VectorArray):
             result.extend(e.xy)
          else:
             result.append(e.xy)

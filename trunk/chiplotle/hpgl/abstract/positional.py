@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.geometry.coordinatearray import Coordinate
+from chiplotle.geometry.vectorarray import Vector
 
 
 class _Positional(_HPGLPrimitive):
@@ -16,7 +16,7 @@ class _Positional(_HPGLPrimitive):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         self._coords = Coordinate(*arg)
+         self._coords = Vector(*arg)
       return property(**locals())
 
    @apply
@@ -24,7 +24,7 @@ class _Positional(_HPGLPrimitive):
       def fget(self):
          return self._coords.x
       def fset(self, arg):
-         self.xy = Coordinate(arg, self.y)
+         self.xy = Vector(arg, self.y)
       return property(**locals())
 
    @apply
@@ -32,7 +32,7 @@ class _Positional(_HPGLPrimitive):
       def fget(self):
          return self._coords.y
       def fset(self, arg):
-         self.xy = Coordinate(self.x, arg)
+         self.xy = Vector(self.x, arg)
       return property(**locals())
 
 

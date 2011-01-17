@@ -5,7 +5,7 @@ def test_IP_01( ):
    '''IP can be empty.'''
    t = IP( )
    assert t.format == 'IP;'
-   assert isinstance(t.coords, CoordinateArray)
+   assert isinstance(t.coords, VectorArray)
 
 
 def test_IP_02( ):
@@ -31,10 +31,10 @@ def test_IP_04( ):
    
 
 def test_IP_05( ):
-   '''Coordinates of IP can be reset.'''
+   '''Vectors of IP can be reset.'''
    t = IP([1,2,3,4])
    t.coords = (5, 6, 7, 8)
-   assert isinstance(t.coords, CoordinateArray)
-   assert t.coords == CoordinateArray([(5, 6), (7, 8)])
+   assert isinstance(t.coords, VectorArray)
+   assert t.coords == VectorArray([(5, 6), (7, 8)])
    
 

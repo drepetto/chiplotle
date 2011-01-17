@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vectorarray import VectorArray
 from chiplotle.geometry.factory.isosceles import isosceles
 from chiplotle.geometry.shapes.group import Group
 from chiplotle.tools.mathtools.xy_to_polar import xy_to_polar

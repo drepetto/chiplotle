@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 
 class _PlotterMargins(object):
    def __init__(self, plotter, queryCommand):  
@@ -40,31 +40,31 @@ class _PlotterMargins(object):
       #return (self.right + self.left) / 2., (self.top + self.bottom) / 2.
       x = (self.right + self.left) / 2.
       y = (self.top + self.bottom) / 2.
-      return Coordinate(x, y)
+      return Vector(x, y)
 
    @property
    def bottom_left(self):
       coords = self.all_coordinates
       #return coords[0:2]
-      return Coordinate(coords[0:2])
+      return Vector(coords[0:2])
 
    @property
    def bottom_right(self):
       coords = self.all_coordinates
       #return (coords[2], coords[1])
-      return Coordinate(coords[2], coords[1])
+      return Vector(coords[2], coords[1])
 
    @property
    def top_right(self):
       coords = self.all_coordinates
       #return coords[2:4]
-      return Coordinate(coords[2:4])
+      return Vector(coords[2:4])
 
    @property
    def top_left(self):
       coords = self.all_coordinates
       #return (coords[0], coords[3])
-      return Coordinate(coords[0], coords[3])
+      return Vector(coords[0], coords[3])
 
    @property
    def all_coordinates(self):

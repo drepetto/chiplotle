@@ -1,6 +1,6 @@
 from chiplotle.geometry.shapes.shape import _Shape
-from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.vectorarray import VectorArray
 
 ## TODO: reimplement or find a way of generally defining different line type,
 ## including points only (like HPGL LT command).
@@ -22,8 +22,8 @@ class Point(_Shape):
       
       # not sure if we need this, but without it nothing shows up
       # when you do io.view(point)!
-      point2 = self.point + Coordinate(1,1)
-      return [CoordinateArray([point1, point2])]
+      point2 = self.point + Vector(1,1)
+      return [VectorArray([point1, point2])]
 
 
 

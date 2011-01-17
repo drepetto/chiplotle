@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vectorarray import VectorArray
 
 
 class _PenPlot(_HPGLPrimitive):
@@ -19,7 +19,7 @@ class _PenPlot(_HPGLPrimitive):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         self._coords = CoordinateArray(arg)
+         self._coords = VectorArray(arg)
       return property(**locals())
 
    @apply

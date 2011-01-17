@@ -1,7 +1,7 @@
 from chiplotle.geometry.shapes.shape import _Shape
 from chiplotle.geometry.shapes.point import Point
-from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.vectorarray import VectorArray
 
 
 ## TODO: implement as a factory function!

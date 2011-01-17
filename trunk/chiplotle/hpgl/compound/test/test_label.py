@@ -4,9 +4,9 @@ def test_label_01( ):
 
    t = Label((0, 0), 'Hello')
 
-   assert t.xy == Coordinate(0, 0)
+   assert t.xy == Vector(0, 0)
    assert t.text == 'Hello'
-   assert t.charsize == Coordinate(1, 1)
+   assert t.charsize == Vector(1, 1)
    assert t.direction == None
    assert t.charspace == None
    assert t.linespace == None
@@ -21,7 +21,7 @@ def test_label_charsize_01( ):
    t = Label((1, 1), 'Hello')
    t.charsize = (2, 3)
 
-   assert t.charsize == Coordinate(2, 3)
+   assert t.charsize == Vector(2, 3)
    assert t.format == 'PU;PA1,1;SI2.00,3.00;LBHello\x03;SI;'
 
 
@@ -32,5 +32,5 @@ def test_label_scale_01( ):
    hpgltools.scale(t, 1.5)
 
    assert Label._scalable == ['xy', 'charsize']
-   assert t.xy == Coordinate(1.5, 3)
-   assert t.charsize == Coordinate(15, 15)
+   assert t.xy == Vector(1.5, 3)
+   assert t.charsize == Vector(15, 15)

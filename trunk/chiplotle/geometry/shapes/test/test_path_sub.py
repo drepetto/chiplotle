@@ -1,5 +1,5 @@
 from chiplotle.geometry.shapes.path import Path
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.core import errors
 from py.test import raises
 
@@ -32,18 +32,18 @@ def test_path_rsub_02( ):
 
 
 def test_path_sub_03( ):
-   '''A Path can substract a Coordinate.'''
+   '''A Path can substract a Vector.'''
    a = Path([(1, 2), (3, 4)])
-   t = a - Coordinate(1, 2)
+   t = a - Vector(1, 2)
    assert t is not a
    assert isinstance(t, Path)
    assert t == Path([(0, 0), (2, 2)])
 
 
 def test_path_rsub_03( ):
-   '''A Coordinate can substract a Path.'''
+   '''A Vector can substract a Path.'''
    a = Path([(1, 2), (3, 4)])
-   t = Coordinate(1, 2) - a
+   t = Vector(1, 2) - a
    assert t is not a
    assert isinstance(t, Path)
    assert t == Path([(0, 0), (-2, -2)])

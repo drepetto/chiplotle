@@ -3,8 +3,8 @@ from chiplotle import *
 def test_PA_01( ):
    t = PA( )
 
-   assert t.xy == CoordinateArray([ ])
-   assert isinstance(t.xy, CoordinateArray)
+   assert t.xy == VectorArray([ ])
+   assert isinstance(t.xy, VectorArray)
    assert t.format == 'PA;'
 
 

@@ -5,9 +5,9 @@ def test_get_all_coordinates_01( ):
    t = [PA((1, 2)), PR((1, 1)), ER((1, 1)), CI(100)]
    c = hpgltools.get_all_coordinates(t)
    assert len(c) == 3
-   assert c[0] == Coordinate(1, 2)
-   assert c[1] == Coordinate(2, 3)
-   assert c[2] == Coordinate(3, 4)
+   assert c[0] == Vector(1, 2)
+   assert c[1] == Vector(2, 3)
+   assert c[2] == Vector(3, 4)
  
 
 def test_get_all_coordinates_02( ):
@@ -15,10 +15,10 @@ def test_get_all_coordinates_02( ):
    t =  [Rectangle((5, 5), 10, 10)]
    c = hpgltools.get_all_coordinates(t)
    assert len(c) == 6
-   assert c[0] == Coordinate(5, 5)
-   assert c[1] == Coordinate(0, 10)
-   assert c[2] == Coordinate(10, 10)
-   assert c[3] == Coordinate(10, 0)
-   assert c[4] == Coordinate(0, 0)
-   assert c[5] == Coordinate(0, 10)
+   assert c[0] == Vector(5, 5)
+   assert c[1] == Vector(0, 10)
+   assert c[2] == Vector(10, 10)
+   assert c[3] == Vector(10, 0)
+   assert c[4] == Vector(0, 0)
+   assert c[5] == Vector(0, 10)
  

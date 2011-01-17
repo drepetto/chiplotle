@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.tools.mathtools import superformula
 from math import pi
@@ -47,7 +47,7 @@ class Supershape(_HPGLCompoundShape):
       for x, y in the_points:
          x = x * self.width + self.x
          y = y * self.height + self.y
-         path.append(Coordinate(x, y))
+         path.append(Vector(x, y))
       return [path]
       
    @property

@@ -1,6 +1,6 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 import math
 
 class Ellipse(_HPGLCompoundShape):
@@ -59,7 +59,7 @@ class Ellipse(_HPGLCompoundShape):
          point_x = (self.width * cos_alpha * cos_beta - self.height * sin_alpha * sin_beta);
          point_y = (self.width * cos_alpha * sin_beta + self.height * sin_alpha * cos_beta);
  
-         points.append(Coordinate(point_x, point_y))
+         points.append(Vector(point_x, point_y))
          
          rads += rads_incr
     
@@ -72,7 +72,7 @@ class Ellipse(_HPGLCompoundShape):
       point_x = (self.width * cos_alpha * cos_beta - self.height * sin_alpha * sin_beta);
       point_y = (self.width * cos_alpha * sin_beta + self.height * sin_alpha * cos_beta);
  
-      points.append(Coordinate(point_x, point_y))
+      points.append(Vector(point_x, point_y))
       
       return [points]
 

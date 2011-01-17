@@ -1,7 +1,7 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.vector import Vector
 from chiplotle.core import errors
 
-class CoordinateArray(object):
+class VectorArray(object):
 
    __slots__ = ('_data', )
 
@@ -10,34 +10,34 @@ class CoordinateArray(object):
 
 #      ## TODO check and clean up.
 #      try:
-#         xy = Coordinate(xy)
+#         xy = Vector(xy)
 #      except errors.InitParameterError:
 #         try:
 #            xy = list(xy)
 #         except:
 #            raise errors.InitParameterError
-#      if isinstance(xy, Coordinate):
+#      if isinstance(xy, Vector):
 #         self._data = [xy]
 #      else:
 #         try:
-#            self._data = [Coordinate(p) for p in xy]
+#            self._data = [Vector(p) for p in xy]
 #         except errors.InitParameterError:
 #            try:
 #               from chiplotle.tools.iterabletools.flat_list_to_pairs \
 #                  import flat_list_to_pairs
-#               self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
+#               self._data = [Vector(p) for p in flat_list_to_pairs(xy)]
 #            except:
 #               raise errors.InitParameterError( )
 
-#      if not isinstance(xy, (list, tuple, CoordinateArray)):
+#      if not isinstance(xy, (list, tuple, VectorArray)):
 #         raise errors.InitParameterError( )
       try:
-         self._data = [Coordinate(*p) for p in xy]
+         self._data = [Vector(*p) for p in xy]
       except (TypeError, errors.InitParameterError):
          try:
             from chiplotle.tools.iterabletools.flat_list_to_pairs \
                import flat_list_to_pairs
-            self._data = [Coordinate(*p) for p in flat_list_to_pairs(xy)]
+            self._data = [Vector(*p) for p in flat_list_to_pairs(xy)]
          except:
             raise errors.InitParameterError( )
 
@@ -59,7 +59,7 @@ class CoordinateArray(object):
 #      def fset(self, arg):
 #         if isinstance(arg, self.__class__):
 #            self._data = arg[:]
-#         elif isinstance(arg, Coordinate):
+#         elif isinstance(arg, Vector):
 #            self._data = [arg]
 #         elif arg is None:
 #            self._data = [ ]
@@ -68,14 +68,14 @@ class CoordinateArray(object):
 #            from chiplotle.tools.iterabletools.is_flat_list import is_flat_list
 #            from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
 #            if len(arg) > 0 and is_flat_list(arg):
-#               if isinstance(arg[0], Coordinate):
+#               if isinstance(arg[0], Vector):
 #                  self._data.extend(arg)
 #               else:
 #                  arg = flat_list_to_pairs(arg)
-#                  self._data.extend([Coordinate(e) for e in arg])
+#                  self._data.extend([Vector(e) for e in arg])
 #            else:
 #               for e in arg:
-#                  self._data.append(Coordinate(e))
+#                  self._data.append(Vector(e))
 #         else:
 #            raise TypeError('unknown type for coordinates xy.')
 #      return property(**locals( ))
@@ -96,22 +96,22 @@ class CoordinateArray(object):
    ## METHODS ##
 
    def as_list_of_pairs(self):
-      '''Converts CoordinateArray into list of pairs.'''
+      '''Converts VectorArray into list of pairs.'''
       return [tuple(cp) for cp in self]
 
 
    def append(self, arg):
-      self._data.append(Coordinate(arg))
+      self._data.append(Vector(arg))
 
 
    def extend(self, arg):
-      if isinstance(arg, CoordinateArray):
+      if isinstance(arg, VectorArray):
          self._data.extend(arg.xy)
       elif isinstance(arg, (list, tuple)):
          for e in arg:
             self.append(e)
       else:
-         raise TypeError('`arg` must be a list or CoordinateArray.')
+         raise TypeError('`arg` must be a list or VectorArray.')
 
 
 
@@ -121,10 +121,10 @@ class CoordinateArray(object):
       return len(self._data)
 
    def __repr__(self):
-      return 'CoordinateArray(%s)' % self.xy
+      return 'VectorArray(%s)' % self.xy
 
    def __str__(self):
-      return 'CoordinateArray(%s)' % ', '.join([str(xy) for xy in self.xy])
+      return 'VectorArray(%s)' % ', '.join([str(xy) for xy in self.xy])
 
 
    ## accessors / modifiers ##
@@ -139,11 +139,11 @@ class CoordinateArray(object):
 
    def __setitem__(self, i, arg):
       if isinstance(i, int):
-         if not isinstance(arg, Coordinate):
+         if not isinstance(arg, Vector):
             raise TypeError
          self._data[i] = arg
       else:
-         arg = [Coordinate(xy) for xy in arg]
+         arg = [Vector(xy) for xy in arg]
          self._data[i.start : i.stop] = arg
 
    ## math ##
@@ -153,20 +153,20 @@ class CoordinateArray(object):
    def __add__(self, arg):
       if isinstance(arg, (list, tuple)):
          try:
-            arg = Coordinate(arg)
+            arg = Vector(arg)
          except errors.InitParameterError:
             try:
-               arg = CoordinateArray(arg)
+               arg = VectorArray(arg)
             except errors.InitParameterError:
                raise errors.OperandError( )
 
-      if isinstance(arg, CoordinateArray):
+      if isinstance(arg, VectorArray):
          if len(self) == len(arg):
-            return CoordinateArray([a + b for a, b in zip(self.xy, arg.xy)])
+            return VectorArray([a + b for a, b in zip(self.xy, arg.xy)])
          else:
-            raise errors.OperandError("CoordinateArrays must have same length.")
-      elif isinstance(arg, (Coordinate, int, long, float)):
-         return CoordinateArray([val + arg for val in self.xy])
+            raise errors.OperandError("VectorArrays must have same length.")
+      elif isinstance(arg, (Vector, int, long, float)):
+         return VectorArray([val + arg for val in self.xy])
       
       raise errors.OperandError( )
       
@@ -190,7 +190,7 @@ class CoordinateArray(object):
    def __div__(self, arg):
       if arg == 0:
          raise ZeroDivisionError
-      return CoordinateArray([a / arg for a in self.xy])
+      return VectorArray([a / arg for a in self.xy])
 
    def __truediv__(self, arg):
       return self / arg
@@ -202,7 +202,7 @@ class CoordinateArray(object):
    ## multiplication ##
 
    def __mul__(self, arg):
-      return CoordinateArray([a * arg for a in self.xy])
+      return VectorArray([a * arg for a in self.xy])
    
    def __rmul__(self, arg):
       return self * arg
@@ -214,7 +214,7 @@ class CoordinateArray(object):
    ## ## 
 
    def __eq__(self, arg):
-      #arg = CoordinateArray(arg)
+      #arg = VectorArray(arg)
       try:
          return self._data == arg._data
       except AttributeError:
@@ -228,12 +228,12 @@ class CoordinateArray(object):
       result = [ ]
       for coord in self:
          result.append(-coord)
-      return CoordinateArray(result)
+      return VectorArray(result)
 
    def __invert__(self):
-      '''Returns the perpendiculars of the Coordinates contained in self.'''
+      '''Returns the perpendiculars of the Vectors contained in self.'''
       result = [ ]
       for v in self:
          result.append(~v)
-      return CoordinateArray(result)
+      return VectorArray(result)
 

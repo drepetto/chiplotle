@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.vectorarray import VectorArray
 from chiplotle.geometry.transforms._transform import _Transform
 
 class Offset(_Transform):
@@ -20,7 +20,7 @@ class Offset(_Transform):
    
    def transform(self, points):
       '''Transforms the given points.'''
-      result = CoordinateArray([ ])
+      result = VectorArray([ ])
       for coord in points:
          xy = coord + (self.xoffset, self.yoffset)         
          result.append(xy)

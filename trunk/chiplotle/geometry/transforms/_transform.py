@@ -5,7 +5,7 @@ class _Transform(object):
 
    def transform(self, coords):
       '''Transforms the given `coords`.
-      `coords` is a list of CoordinateArrays'''
+      `coords` is a list of VectorArrays'''
       ## This must be implemented by all subclasses of _Transform.
       raise NotImplementedError
 
