@@ -11,28 +11,20 @@ def test_coordinate__init__01( ):
    assert t.y == 2
 
 
-def test_coordinate__init__01( ):
-   '''Coordinate can be initialized with another Coordinate.'''
-   t = Coordinate(1, 2)
-   assert t == Coordinate(1, 2)
-   assert t.x == 1
-   assert t.y == 2
-
-
 def test_coordinate__init__02( ):
    '''Coordinate cannot be initialized with a duple.'''
    assert raises(errors.InitParameterError, 'Coordinate((1, 2))')
 
 
-#def test_coordinate__init__03( ):
-#   '''Coordinate can be initialized with a Coordinate.
-#   In this case, the constructor returns the existing coordinate.'''
-#   a = Coordinate(1, 2)
-#   t = Coordinate(a)
-#   assert t is a
-#   assert t == (1, 2)
-#   assert t.x == 1
-#   assert t.y == 2
+def test_coordinate__init__03( ):
+   '''Coordinate can be initialized with a Coordinate.'''
+   ##In this case, the constructor returns the existing coordinate.'''
+   a = Coordinate(1, 2)
+   t = Coordinate(a)
+   assert t is not a
+   assert t == Coordinate(1, 2)
+   assert t.x == 1
+   assert t.y == 2
 
 
 def test_coordinate__init__04( ):
@@ -46,9 +38,10 @@ def test_coordinate__init__05( ):
    '''Coordinate cannot be initialized with a single number.'''
    assert raises(errors.InitParameterError, 't = Coordinate(4)')
 
+
 def test_coordinate__init__06( ):
-   '''Coordinate cannot be initialized with a duple.'''
-   assert raises(errors.InitParameterError, 'Coordinate((1, 2))')
+   '''Coordinate cannot be initialized with a triple.'''
+   assert raises(errors.InitParameterError, 't = Coordinate((1, 2, 3))')
 
 
 ## attribute assignment ##
@@ -93,7 +86,7 @@ def test_coordinate__eq__03( ):
 def test_coordinate__ne__01( ):
    '''Coordinate non-equates with another Coordinate, a tuple, 
    or a list.'''
-   t = Coordinate(Coordinate(1, 2))
+   t = Coordinate(1, 2)
    assert t != Coordinate(1, 3)
    assert t != (1, 3)
    assert t != [1, 3]
@@ -101,7 +94,7 @@ def test_coordinate__ne__01( ):
 
 def test_coordinate__ne__02( ):
    '''Coordinate non-equates with int, float.'''
-   t = Coordinate(Coordinate(1, 2))
+   t = Coordinate(1, 2)
    assert t != 4.5
    assert t != 2
    assert t != None
