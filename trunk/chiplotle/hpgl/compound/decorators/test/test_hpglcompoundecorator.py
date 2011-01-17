@@ -6,7 +6,7 @@ def test_hpglcompounddecorator_10( ):
    '''The coordinate values of a wrapped shape are acessed correctly.'''
    s = Circle((1, 2), 100)
    t = DPen(s, 1)
-   assert t.xy == (1, 2)
+   assert t.xy == Coordinate(1, 2)
    assert t.x == 1
    assert t.y == 2
 
@@ -16,7 +16,7 @@ def test_hpglcompounddecorator_11( ):
    s = Circle((1, 2), 100)
    t = DPen(s, 1)
    t.xy = (3, 4)
-   assert t.xy == (3, 4)
+   assert t.xy == Coordinate(3, 4)
    assert t.x == 3
    assert t.y == 4
 
@@ -26,7 +26,7 @@ def test_hpglcompounddecorator_12( ):
    s = Circle((1, 2), 100)
    t = DPen(s, 1)
    t.x = 3
-   assert t.xy == (3, 2)
+   assert t.xy == Coordinate(3, 2)
    assert t.x == 3
    assert t.y == 2
 
@@ -36,7 +36,7 @@ def test_hpglcompounddecorator_13( ):
    s = Circle((1, 2), 100)
    t = DPen(s, 1)
    t.y = 3
-   assert t.xy == (1, 3)
+   assert t.xy == Coordinate(1, 3)
    assert t.x == 1
    assert t.y == 3
 

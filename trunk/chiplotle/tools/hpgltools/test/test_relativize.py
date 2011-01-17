@@ -10,8 +10,8 @@ def test_relativize_01( ):
    assert len(r) == len(t) - 1
    assert isinstance(r[0], PR)
    assert isinstance(r[1], PR)
-   assert r[0].xy == (1, 1)
-   assert r[1].xy == (1, 0)
+   assert r[0].xy == CoordinateArray((1, 1))
+   assert r[1].xy == CoordinateArray((1, 0))
 
 
 def test_relativize_02( ):
@@ -22,7 +22,7 @@ def test_relativize_02( ):
    'r = [PR([(1, 2), (1, -1)])]'
    assert len(r) == 1
    assert isinstance(r[0], PR)
-   assert r[0].xy == [(1, 2), (1, -1)]
+   assert r[0].xy == CoordinateArray([(1, 2), (1, -1)])
 
 
 def test_relativize_03( ):
@@ -34,8 +34,8 @@ def test_relativize_03( ):
    assert len(r) == 2
    assert isinstance(r[0], PR)
    assert isinstance(r[1], PR)
-   assert r[0].xy == [(-2, -1)]
-   assert r[1].xy == [(1, 2), (1, -1)]
+   assert r[0].xy == CoordinateArray([(-2, -1)])
+   assert r[1].xy == CoordinateArray([(1, 2), (1, -1)])
 
 
 def test_relativize_04( ):
@@ -47,8 +47,8 @@ def test_relativize_04( ):
    assert len(r) == 2
    assert isinstance(r[0], PU)
    assert isinstance(r[1], PU)
-   assert r[0].xy == (2, 2)
-   assert r[1].xy == (3, 2)
+   assert r[0].xy == CoordinateArray((2, 2))
+   assert r[1].xy == CoordinateArray((3, 2))
 
 
 def test_relativize_05( ):
@@ -61,9 +61,9 @@ def test_relativize_05( ):
    assert isinstance(r[0], PR)
    assert isinstance(r[1], PU)
    assert isinstance(r[2], PU)
-   assert r[0].xy == (2, 1)
-   assert r[1].xy == (2, 2)
-   assert r[2].xy == (3, 2)
+   assert r[0].xy == CoordinateArray((2, 1))
+   assert r[1].xy == CoordinateArray((2, 2))
+   assert r[2].xy == CoordinateArray((3, 2))
 
 
 def test_relativize_06( ):
@@ -75,5 +75,5 @@ def test_relativize_06( ):
    assert len(r) == 2
    assert isinstance(r[0], PR)
    assert isinstance(r[1], RR)
-   assert r[0].xy == (1, 2)
-   assert r[1].xy == (2, 1)
+   assert r[0].xy == CoordinateArray((1, 2))
+   assert r[1].xy == CoordinateArray((2, 1))

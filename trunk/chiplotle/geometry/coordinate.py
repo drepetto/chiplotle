@@ -18,8 +18,8 @@ class Coordinate(object):
       if len(args) == 1:
          if isinstance(args[0], Coordinate):
             self._x, self._y = args[0].x, args[0].y
-         elif isinstance(args[0], (list, tuple)):
-            self.__init__(*args[0])
+#         elif isinstance(args[0], (list, tuple)):
+#            self.__init__(*args[0])
          else:
             #raise TypeError('argument not recognized by Coordinate.')
             raise errors.InitParameterError( )
@@ -86,7 +86,7 @@ class Coordinate(object):
 
    def __add__(self, arg):
       try:
-         arg = Coordinate(arg)
+         #arg = Coordinate(arg)
          return Coordinate(self.x + arg.x, self.y + arg.y)
       except:
          try:
@@ -105,7 +105,7 @@ class Coordinate(object):
 
    def __sub__(self, arg):
       try:
-         arg = Coordinate(arg)
+         #arg = Coordinate(arg)
          return Coordinate(self.x - arg.x, self.y - arg.y)
       except:
          try:
@@ -131,24 +131,26 @@ class Coordinate(object):
 
    def __truediv__(self, arg):
       try:
-         return Coordinate(self.x / arg, self.y / arg)
-      except TypeError:
+         return Coordinate(self.x / arg.x, self.y / arg.y)
+      except AttributeError:
          try:
-            arg = Coordinate(arg)
-         except errors.InitParameterError:
-            raise errors.OperandError
-         else:
-            return Coordinate(self.x / arg.x, self.y / arg.y)
-            
+            return Coordinate(self.x / arg, self.y / arg)
+         except (TypeError, errors.InitParameterError):
+            raise errors.OperandError( )
+
 
    ## mul ##
 
    def __mul__(self, arg):
       try:
-         coord = Coordinate(arg)
-         return Coordinate(self.x * coord.x, self.y * coord.y)
-      except:
-         return Coordinate(self.x * arg, self.y * arg)
+         #coord = Coordinate(arg)
+         return Coordinate(self.x * arg.x, self.y * arg.y)
+      except AttributeError:
+         try:
+            return Coordinate(self.x * arg, self.y * arg)
+         except errors.InitParameterError:
+            raise errors.OperandError( )
+
 
    def __rmul__(self, arg):
       return self * arg
@@ -157,9 +159,9 @@ class Coordinate(object):
 
    def __eq__(self, arg):
       try:
-         arg = Coordinate(arg)
+         #arg = Coordinate(arg)
          return (self.x == arg.x) and (self.y == arg.y)
-      except:
+      except AttributeError:
          return False
 
    def __invert__(self):

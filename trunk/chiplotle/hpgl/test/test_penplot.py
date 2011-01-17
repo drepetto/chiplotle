@@ -7,7 +7,7 @@ def test_penplot_01( ):
    '''_PenPlot can be initialized with a flat iterable (list, tuple, etc. )
    of length 2*n as first argument.'''
    p = _PenPlot((1, 2, 3, 4))
-   assert p.xy == ((1, 2), (3, 4))
+   assert p.xy == CoordinateArray([(1, 2), (3, 4)])
    assert p.x == (1, 3)
    assert p.y == (2, 4)
    assert len(p.xy) == 2
@@ -30,9 +30,9 @@ def test_penplot_04( ):
    '''xy can be set with a list or tuple.'''
    p = _PenPlot((0,0))
    p.xy = (1,2)
-   assert p.xy == [(1,2)]
+   assert p.xy == CoordinateArray([(1,2)])
    p.xy = [1,2,3,4]
-   assert p.xy == [(1,2),(3,4)]
+   assert p.xy == CoordinateArray([(1,2),(3,4)])
    assert p.x == (1, 3)
    assert p.y == (2, 4)
 

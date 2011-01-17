@@ -6,7 +6,7 @@ def test_rotate_2d_args_01( ):
    '''Rotate 2d can take a tuple.'''
    xy = (1, 2)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == xy
+   assert t == Coordinate(*xy)
 
 
 def test_rotate_2d_args_02( ):
@@ -20,7 +20,7 @@ def test_rotate_2d_args_03( ):
    '''Rotate 2d can take a list of tuples.'''
    xy = [(1, 2), (2, 3)]
    t = mathtools.rotate_2d(xy, 0)
-   assert t == xy
+   assert t == CoordinateArray(xy)
 
 
 def test_rotate_2d_args_04( ):
@@ -50,19 +50,19 @@ def test_rotate_2d_04( ):
    '''Rotate 2d leaves (x, y) unchanged on 0 rotation.'''
    xy = (0, 0)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == xy
+   assert t == Coordinate(*xy)
    xy = (1, 0)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == xy
+   assert t == Coordinate(*xy)
    xy = (-1, 0)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == xy
+   assert t == Coordinate(*xy)
    xy = (-1, 1)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == xy
+   assert t == Coordinate(*xy)
    xy = (-1, -2)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == xy
+   assert t == Coordinate(*xy)
 
 
 def test_rotate_2d_05( ):
@@ -109,7 +109,7 @@ def test_rotate_2d_pivot_02( ):
    assert round(t[0], 6) == 2
    assert round(t[1], 6) == 1
    t = mathtools.rotate_2d(xy, math.pi / 4, (1, 1))
-   r = Coordinate(0.707, -0.707) + (1, 1)
+   r = Coordinate(0.707, -0.707) + Coordinate(1, 1)
    assert round(t[0], 3) == round(r[0], 3)
    assert round(t[1], 3) == round(r[1], 3)
 

@@ -10,7 +10,7 @@ def test_coordinatearray__add__01( ):
    assert isinstance(t, CoordinateArray)
    assert t is not a
    assert t is not b
-   assert t == [(2, 3), (5, 6)]
+   assert t == CoordinateArray([(2, 3), (5, 6)])
 
 
 def test_coordinatearray__add__02( ):
@@ -26,7 +26,7 @@ def test_coordinatearray__add__03( ):
    t = a + 2
    assert isinstance(t, CoordinateArray)
    assert t is not a
-   assert t == [(3, 4), (5, 6)]
+   assert t == CoordinateArray([(3, 4), (5, 6)])
 
 
 def test_coordinatearray__radd__04( ):
@@ -35,7 +35,7 @@ def test_coordinatearray__radd__04( ):
    t = 2 + a
    assert isinstance(t, CoordinateArray)
    assert t is not a
-   assert t == [(3, 4), (5, 6)]
+   assert t == CoordinateArray([(3, 4), (5, 6)])
 
 
 def test_coordinatearray__add__05( ):
@@ -44,7 +44,7 @@ def test_coordinatearray__add__05( ):
    t = a + 2.3
    assert isinstance(t, CoordinateArray)
    assert t is not a
-   assert t == [(3.3, 4.3), (5.3, 6.3)]
+   assert t == CoordinateArray([(3.3, 4.3), (5.3, 6.3)])
 
 
 def test_coordinatearray__add__06( ):
@@ -53,7 +53,7 @@ def test_coordinatearray__add__06( ):
    t = 2.3 + a
    assert isinstance(t, CoordinateArray)
    assert t is not a
-   assert t == [(3.3, 4.3), (5.3, 6.3)]
+   assert t == CoordinateArray([(3.3, 4.3), (5.3, 6.3)])
 
 
 def test_coordinatearray__add__07( ):
@@ -62,7 +62,7 @@ def test_coordinatearray__add__07( ):
    t = a + Coordinate(2, 3)
    assert isinstance(t, CoordinateArray)
    assert t is not a
-   assert t == [(3, 5), (5, 7)]
+   assert t == CoordinateArray([(3, 5), (5, 7)])
 
 
 def test_coordinatearray__radd__08( ):
@@ -71,5 +71,5 @@ def test_coordinatearray__radd__08( ):
    t = Coordinate(2, 3) + a
    assert isinstance(t, CoordinateArray)
    assert t is not a
-   assert t == [(3, 5), (5, 7)]
+   assert t == CoordinateArray([(3, 5), (5, 7)])
 

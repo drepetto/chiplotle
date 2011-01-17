@@ -35,6 +35,6 @@ def test_IP_05( ):
    t = IP([1,2,3,4])
    t.coords = (5, 6, 7, 8)
    assert isinstance(t.coords, CoordinateArray)
-   assert t.coords == (5, 6, 7, 8)
+   assert t.coords == CoordinateArray([(5, 6), (7, 8)])
    
 

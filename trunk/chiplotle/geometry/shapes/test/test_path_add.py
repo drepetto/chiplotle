@@ -50,21 +50,15 @@ def test_path_radd_03( ):
 
 
 def test_path_add_04( ):
-   '''A Path and a duple can be added.'''
+   '''A Path and a duple cannot be added.'''
    a = Path([(1, 2), (3, 4)])
-   t = a + (1, 2)
-   assert t is not a
-   assert isinstance(t, Path)
-   assert t == Path([(2, 4), (4, 6)])
+   assert raises(errors.OperandError, 'a + (1, 2)')
 
 
 def test_path_radd_04( ):
-   '''A duple and a Path can be added.'''
+   '''A duple and a Path cannot be added.'''
    a = Path([(1, 2), (3, 4)])
-   t = (1, 2) + a
-   assert t is not a
-   assert isinstance(t, Path)
-   assert t == Path([(2, 4), (4, 6)])
+   assert raises(errors.OperandError, '(1, 2) + a')
 
 
 def test_path_add_05( ):
@@ -88,8 +82,5 @@ def test_path_iadd_01( ):
    t += 2.1
    assert isinstance(t, Path)
    assert t == Path([(3.1, 4.1), (5.1, 6.1)])
-
-
-
 
 

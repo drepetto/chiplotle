@@ -13,10 +13,12 @@ def rotate_2d(xy, angle, pivot=(0, 0)):
    Returns a Coordinate or a CoordinateArray.
    '''
    try:
-      #xy = Coordinate(xy)
+      xy = Coordinate(*xy)
+      pivot = Coordinate(*pivot)
       result = _rotate_coordinate_2d(xy, angle, pivot)
    except:
-      #xy = CoordinateArray(xy)
+      xy = CoordinateArray(xy)
+      pivot = Coordinate(*pivot)
       result = _rotate_coordinatearray_2d(xy, angle, pivot)
    return result
 
@@ -32,10 +34,10 @@ def _rotate_coordinate_2d(xy, angle, pivot):
    '''
    ## rotate counter-clockwise...
    angle = -angle
-   cp = Coordinate(xy)
-   cp -= pivot
-   x = cp.x * math.cos(angle) + cp.y * math.sin(angle) 
-   y =  -cp.x * math.sin(angle) + cp.y * math.cos(angle) 
+   #cp = Coordinate(xy)
+   xy -= pivot
+   x = xy.x * math.cos(angle) + xy.y * math.sin(angle) 
+   y =  -xy.x * math.sin(angle) + xy.y * math.cos(angle) 
    result = Coordinate(x, y) + pivot
    return result
 

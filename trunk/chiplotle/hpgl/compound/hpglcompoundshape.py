@@ -23,7 +23,7 @@ class _HPGLCompoundShape(_HPGLCompound):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         self._coords = Coordinate(arg)
+         self._coords = Coordinate(*arg)
       return property(**locals())
 
    @apply

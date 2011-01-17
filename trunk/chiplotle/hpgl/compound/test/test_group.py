@@ -1,5 +1,6 @@
 from chiplotle import *
 from py.test import raises
+import py.test
 
 def test_group_01( ):
    '''Group must initialize with a position always.'''
@@ -27,7 +28,6 @@ def test_group_04( ):
 
 
 ## HPGLPrimitive handling ##
-
 def test_group_primitive_01( ):
    '''Groups can take HPGL primitives.'''
    g = Group((1, 2), [PD( ), PA((10, 10))])
@@ -35,6 +35,7 @@ def test_group_primitive_01( ):
    ## The subcommands with absolute positional attribute xy are returned
    ## with the attribute adjusted to reflect the Group's position.
    assert g._subcommands == [PU( ), PA((1, 2)), PD( ), PA((11, 12))]
+   print g.format
    assert g.format == 'PU;PA1,2;PD;PA11,12;'
 
 
