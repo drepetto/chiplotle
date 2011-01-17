@@ -1,5 +1,4 @@
 from chiplotle import *
-from chiplotle.core import errors
 from py.test import raises
 
 ## __init__ ##
@@ -239,8 +238,32 @@ def test_coordinate__div__02( ):
    assert raises(ZeroDivisionError, 't = a / 0')
    
 
+def test_coordinate__div__03( ):
+   '''A Coordinate can be divided by a Coordinate.'''
+   a = Coordinate(1, 2)
+   b = Coordinate(2, 4)
+   t = a / b
+   assert isinstance(t, Coordinate)
+   assert t == (0.5, 0.5)
+
+
+def test_coordinate__div__04( ):
+   '''A Coordinate can be divided by a duple.'''
+   a = Coordinate(1, 2)
+   b = (2, 4)
+   t = a / b
+   assert isinstance(t, Coordinate)
+   assert t == (0.5, 0.5)
+
+
+def test_coordinate__div__05( ):
+   '''Division raises an OperandError on wrong type.'''
+   a = Coordinate(1, 2)
+   assert raises(errors.OperandError, 'a / (1, 2, 3)')
+
+
 def test_coordinate__floordiv__01( ):
-   '''Floor division works.'''
+   '''Floor division works with ints.'''
    a = Coordinate(1, 2)
    t = a // 2
    assert isinstance(t, Coordinate)
@@ -248,10 +271,25 @@ def test_coordinate__floordiv__01( ):
 
 
 def test_coordinate__floordiv__02( ):
+   '''Floor division works with two Coordinates.'''
+   a = Coordinate(1, 2)
+   b = Coordinate(2, -4)
+   t = a // b
+   assert isinstance(t, Coordinate)
+   assert t == Coordinate(0, -1)
+
+
+def test_coordinate__floordiv__03( ):
    '''Denominator 0 raises ZeroDivisionError.'''
    a = Coordinate(1, 2)
    assert raises(ZeroDivisionError, 't = a // 0')
    
+
+def test_coordinate__floordiv__04( ):
+   '''Floor Division raises an OperandError on wrong type.'''
+   a = Coordinate(1, 2)
+   assert raises(errors.OperandError, 'a // (1, 2, 3)')
+
 
 ## __sub__, __rsub__ ##
 
