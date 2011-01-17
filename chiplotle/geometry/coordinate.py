@@ -123,13 +123,23 @@ class Coordinate(object):
    ## division ##
 
    def __div__(self, arg):
-      return Coordinate(self.x / arg, self.y / arg)
-
+      return self.__truediv__(arg)
+   
    def __floordiv__(self, arg):
-      return Coordinate(self.x // arg, self.y // arg)
+      result = self.__div__(arg)
+      return Coordinate(int(math.floor(result.x)), int(math.floor(result.y)))
 
    def __truediv__(self, arg):
-      return Coordinate(self.x / arg, self.y / arg)
+      try:
+         return Coordinate(self.x / arg, self.y / arg)
+      except TypeError:
+         try:
+            arg = Coordinate(arg)
+         except errors.InitParameterError:
+            raise errors.OperandError
+         else:
+            return Coordinate(self.x / arg.x, self.y / arg.y)
+            
 
    ## mul ##
 
