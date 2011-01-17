@@ -11,7 +11,8 @@ class Group(_Shape):
    def __init__(self, shapes=None):
       _Shape.__init__(self)
       self._shapes = [ ]
-      self.extend(shapes or [ ])
+      if shapes is None: shapes = [ ]
+      self.extend(shapes)
 
 
    ## PUBLIC PROPERTIES ##
@@ -46,7 +47,9 @@ class Group(_Shape):
       for shape in self:
          shape = copy.copy(shape)
          shape.transforms.extend(self.transforms)
-         result += shape._subcommands
+         ## NOTE: which is best?
+         #result += shape._subcommands
+         result += [shape]
       return result
 
 
@@ -120,6 +123,11 @@ class Group(_Shape):
       self._shapes = [s.__neg__( ) for s in self]
       return self
 
+   def __eq__(self, arg):
+      try:
+         return self._shapes == arg._shapes
+      except AttributeError:
+         return False
 
 
 

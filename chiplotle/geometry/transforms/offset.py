@@ -1,9 +1,12 @@
 from chiplotle.geometry.vectorarray import VectorArray
+from chiplotle.geometry.vector import Vector
 from chiplotle.geometry.transforms._transform import _Transform
 
 class Offset(_Transform):
 
    def __init__(self, *arg):
+      if len(arg) > 2:
+         raise TypeError('at most two arguments are allowed.')
       if len(arg) == 2:
          self.xoffset = arg[0]
          self.yoffset = arg[1]
@@ -22,7 +25,7 @@ class Offset(_Transform):
       '''Transforms the given points.'''
       result = VectorArray([ ])
       for coord in points:
-         xy = coord + (self.xoffset, self.yoffset)         
+         xy = coord + Vector(self.xoffset, self.yoffset)
          result.append(xy)
       return result
 
