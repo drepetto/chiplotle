@@ -1,4 +1,5 @@
 from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.vector import Vector
 
 def offset(shape, value):
    '''In place offsetting.
@@ -11,6 +12,8 @@ def offset(shape, value):
       for s in shape:
          offset(s, value)
    else: ## it's a Path...
+      if isinstance(value, (list, tuple)):
+         value = Vector(*value)
       shape.points = shape.points + value
 
 
