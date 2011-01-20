@@ -2,9 +2,17 @@ from chiplotle.geometry.shapes.path import Path
 from chiplotle.geometry.shapes.group import Group
 from chiplotle.tools.mathtools.lcm import lcm
 import math
+from fractions import gcd
 
-def star_crisscross(width, height, num_points = 5):  
-   '''Draws a star with criscrossing lines.'''
+def star_crisscross(width, height, num_points = 5, jump_size = None):  
+   '''
+      Draws a star with criscrossing lines.
+      
+      jump_size determines how many points to skip between connected points.
+      illegal jump sizes (ones that do not result in valid crisscross stars)
+      are ignored and replaced with valid ones. 
+   
+   '''
    corners = []
    pi_div_180 = math.pi / 180.0
    half_width = width * 0.5
@@ -28,7 +36,8 @@ def star_crisscross(width, height, num_points = 5):
 
    corners.append(corners[0])
       
-   if num_points == 6:            
+   if num_points == 6:
+      #special case, ignore jump_size
       #rearrange points to draw two polygons
       multiplier = int(num_points / 2)
       
@@ -37,47 +46,26 @@ def star_crisscross(width, height, num_points = 5):
       
       return Group([Path(corners1), Path(corners2)])
 
-   else:            
-      multiplier = int(math.ceil((num_points / 4.0) + 1))
+   else:
+      if jump_size is None:
+         jump_size = int(num_points/2)
+         print jump_size
       
-      if multiplier < 2:
-         multiplier = 2
+      while gcd(num_points, jump_size) != 1:
+         jump_size -= 1
+         print jump_size
          
-      while num_points % multiplier < 2:
-         multiplier += 1
+      print jump_size
       
-      the_lcm = lcm(num_points, multiplier)
-      
-      times_through = 0
-      multi_incr = 1
-      
-      while the_lcm / multiplier <= num_points / 2:              
-         if multiplier <= num_points / 3:
-            multiplier += 1
-         else:
-            multiplier -= 1
-         
-         if num_points % multiplier == 0:
-            if multiplier <= num_points / 3:
-               multiplier += multi_incr
-            else:
-               multiplier -= multi_incr
-         the_lcm = lcm(num_points, multiplier)
-         
-         times_through += 1
-         
-         if times_through % 5 == 0:
-            multi_incr += 1
-            
       point_order = []
-      for i in range(num_points + 1):
-         point_order.append((i * multiplier) % num_points)
+      for i in range(0, num_points + 1):
+         point_num =  i * jump_size % num_points
+         point_order.append(point_num)
       
       corners = [corners[i] for i in point_order]
       
       return Path(corners)
-   
-
+      
 
 ## RUN DEMO CODE
 if __name__ == '__main__':
