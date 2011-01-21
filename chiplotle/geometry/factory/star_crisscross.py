@@ -54,7 +54,7 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
             while gcd(num_points, jump_size) != 1:
                jump_size -= 1
          else:
-            invalid_star = [[width/2, height/2], [width/2, height/2]]
+            invalid_star = [[half_width, half_height], [half_width, half_height]]
             return Path(invalid_star)
       
       point_order = []
