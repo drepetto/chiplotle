@@ -36,9 +36,10 @@ def scale(shape, value, pivot = Coordinate(0, 0)):
 if __name__ == "__main__":
    from chiplotle.geometry.factory.rectangle import rectangle
    from chiplotle.tools import io
-   r1 = rectangle(100, 40)
-   r2 = rectangle(100, 40)
-   scale(r1, 10, (50, 50))
+   r0 = rectangle(1000, 500)
+   r1 = rectangle(1000, 500)
+   r2 = rectangle(1000, 500)
+   scale(r1, 5, (500, 250))
    scale(r2, (10, 20))
-   io.view(Group([r1, r2]))
+   io.view(Group([r0, r1, r2]))
 
