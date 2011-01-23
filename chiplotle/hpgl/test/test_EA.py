@@ -14,7 +14,7 @@ def test_EA_02( ):
 def test_EA_03( ):
    '''EA can initialize with a list of length 2.'''
    t = EA([1, 2])
-   assert t.xy == Vector(1, 2)
+   assert t.xy == Coordinate(1, 2)
    assert t.format == 'EA1,2;'
 
 

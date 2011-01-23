@@ -7,7 +7,7 @@ from __future__ import division
 from chiplotle.cfg.get_config_value import get_config_value 
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.interfaces.margins.interface import MarginsInterface
 from chiplotle.tools.logtools.get_logger import get_logger
 from chiplotle.tools.serialtools import VirtualSerialPort
@@ -194,9 +194,9 @@ class _BasePlotter(object):
    @property
    def actual_position(self):
       '''Output the actual position of the plotter pen. Returns a tuple 
-      (Vector(x, y), pen status)'''
+      (Coordinate(x, y), pen status)'''
       response = self._send_query(self._hpgl.OA( )).split(',')
-      return [Vector(eval(response[0]), eval(response[1])), 
+      return [Coordinate(eval(response[0]), eval(response[1])), 
          eval(response[2].strip('\r'))]
 
    @property
@@ -206,17 +206,17 @@ class _BasePlotter(object):
    @property
    def commanded_position(self):
       '''Output the commanded position of the plotter pen. Returns a tuple 
-      [Vector(x, y), pen status]'''
+      [Coordinate(x, y), pen status]'''
       response = self._send_query(self._hpgl.OC( )).split(',')      
-      return [Vector(eval(response[0]), eval(response[1])), 
+      return [Coordinate(eval(response[0]), eval(response[1])), 
          eval(response[2].strip('\r'))]
           
    @property
    def digitized_point(self):
       '''Returns last digitized point. Returns a tuple 
-      [Vector(x, y), pen status]'''
+      [Coordinate(x, y), pen status]'''
       response = self._send_query(self._hpgl.OD( )).split(',')
-      return [Vector(eval(response[0]), eval(response[1])), 
+      return [Coordinate(eval(response[0]), eval(response[1])), 
          eval(response[2].strip('\r'))]
 
    @property
@@ -237,10 +237,10 @@ class _BasePlotter(object):
 
    @property
    def output_p1p2(self):
-      '''Returns the current settings for P1, P2. Returns two Vectors'''
+      '''Returns the current settings for P1, P2. Returns two Coordinates'''
       response = self._send_query(self._hpgl.OP( )).split(',')
-      cp1 = Vector(eval(response[0]), eval(response[1]))
-      cp2 = Vector(eval(response[2]), eval(response[3].strip('\r')))
+      cp1 = Coordinate(eval(response[0]), eval(response[1]))
+      cp2 = Coordinate(eval(response[2]), eval(response[3].strip('\r')))
       return (cp1, cp2)
 
    @property

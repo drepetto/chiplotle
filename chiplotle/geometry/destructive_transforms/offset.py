@@ -1,11 +1,11 @@
 from chiplotle.geometry.shapes.group import Group
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinate import Coordinate
 
 def offset(shape, value):
    '''In place offsetting.
 
    - `shape` is the shape to be rotated.
-   - `value` is the offset value. Can be a scalar or an (x, y) vector.
+   - `value` is the offset value. Can be a scalar or an (x, y) coordinate.
    '''
 
    if isinstance(shape, Group):
@@ -13,7 +13,7 @@ def offset(shape, value):
          offset(s, value)
    else: ## it's a Path...
       if isinstance(value, (list, tuple)):
-         value = Vector(*value)
+         value = Coordinate(*value)
       shape.points = shape.points + value
 
 

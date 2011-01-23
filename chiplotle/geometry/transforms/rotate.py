@@ -1,5 +1,5 @@
-from chiplotle.geometry.vectorarray import VectorArray
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.geometry.transforms._transform import _Transform
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
@@ -7,14 +7,14 @@ class Rotate(_Transform):
 
    def __init__(self, angle, pivot = (0, 0)):
       self.angle = angle
-      self.pivot = Vector(*pivot)
+      self.pivot = Coordinate(*pivot)
 
 
    ## PUBLIC METHODS ##
    
    def transform(self, points):
       '''Transforms the given points.'''
-      result = VectorArray([ ])
+      result = CoordinateArray([ ])
       for coord in points:
          xy = rotate_2d(coord, self.angle, self.pivot)
          result.append(xy)

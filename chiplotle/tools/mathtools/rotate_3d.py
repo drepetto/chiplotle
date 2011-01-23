@@ -8,7 +8,7 @@ def rotate_3d(xyz, xyzrot):
    - `xyzrot` is a triple (xr, yr, zr) of angles of roation.
    '''
    if not len(xyz) == 3:
-      raise ValueError('Vector tuple `xyz` is not a triple.')
+      raise ValueError('Coordinate tuple `xyz` is not a triple.')
    if not len(xyzrot) == 3:
       raise ValueError('Rotation tuple `xyzrot` is not a triple.')
    x, y, z = xyz

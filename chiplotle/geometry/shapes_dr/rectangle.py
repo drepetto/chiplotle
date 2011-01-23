@@ -1,12 +1,12 @@
 from chiplotle.geometry.shapes.polygon import Polygon
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.hpgl.commands import PU, PD, PA
 
 class Rectangle(Polygon):
    '''
       A rectangle with a width, height, and offset.
       
-      offset is a Vector for moving the Rectangle around on the page.
+      offset is a Coordinate for moving the Rectangle around on the page.
       
       The Rectangle is drawn with the current pen location as the center.
       offset may be used to shift this around, for example, to draw from
@@ -18,10 +18,10 @@ class Rectangle(Polygon):
       self.heigth = height
       
       corners = []
-      corners.append(Vector(-width/2, -height/2))
-      corners.append(Vector(-width/2, height/2))
-      corners.append(Vector(width/2, height/2))
-      corners.append(Vector(width/2, -height/2))
+      corners.append(Coordinate(-width/2, -height/2))
+      corners.append(Coordinate(-width/2, height/2))
+      corners.append(Coordinate(width/2, height/2))
+      corners.append(Coordinate(width/2, -height/2))
       Polygon.__init__(self, [corners], offset)  
       
    
@@ -38,7 +38,7 @@ if __name__ == '__main__':
    raw_input()
 
    ## [VA] this is a weird artefact of Rectangle inheriting from Polygon...
-   r1.point_lists.append([Vector(0, 0), Vector(300, 400)])
+   r1.point_lists.append([Coordinate(0, 0), Coordinate(300, 400)])
    print '\nNo longer a square!'
    print r1.points
    print r1.format

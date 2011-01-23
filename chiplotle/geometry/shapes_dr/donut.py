@@ -1,6 +1,6 @@
 from chiplotle.geometry.shapes.polygon import Polygon
 from chiplotle.geometry.shapes.ellipse import Ellipse
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.hpgl.commands import PU, PD, PA
 import math
 
@@ -14,7 +14,7 @@ class Donut(Polygon):
       segments is how many lines should be used to draw ellipse. More
       segments create a smoother ellipse, but will take longer to draw.
       
-      offset is a Vector for moving the Donut around on the page.
+      offset is a Coordinate for moving the Donut around on the page.
       
       The Donut is drawn with the current pen location as the center.
       offset may be used to shift this around, for example, to draw from

@@ -1,5 +1,5 @@
-from chiplotle.geometry.vector import Vector
-from chiplotle.geometry.vectorarray import VectorArray
+from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.transforms._transform import _Transform
 
 class Scale(_Transform):
@@ -21,9 +21,9 @@ class Scale(_Transform):
    
    def transform(self, points):
       '''Transforms the given points.'''
-      result = VectorArray([ ])
+      result = CoordinateArray([ ])
       for coord in points:
-         xy = coord * Vector(self.xscale, self.yscale)         
+         xy = coord * Coordinate(self.xscale, self.yscale)         
          result.append(xy)
       return result
 

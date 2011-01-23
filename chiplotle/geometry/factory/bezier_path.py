@@ -1,5 +1,5 @@
-from chiplotle.geometry.vectorarray import VectorArray
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.geometry.shapes.path import Path
 from chiplotle.tools.mathtools.bezier_interpolation import bezier_interpolation
 
@@ -22,11 +22,11 @@ def bezier_path(points, curvature, interpolation_count = 50):
       return Path(points)
 
    ## else we have a curve...
-   points = VectorArray(points)
+   points = CoordinateArray(points)
 
    curvature = 4 + (1.0 - curvature) * 40
    bi = [0, -0.25]
-   a = [0, (points[2] - points[0] - Vector(0, 0)) / 4.0]
+   a = [0, (points[2] - points[0] - Coordinate(0, 0)) / 4.0]
 
    ## compute bi and a...
    for i in range(2, len(points)-1):
@@ -34,7 +34,7 @@ def bezier_path(points, curvature, interpolation_count = 50):
       a.append(-(points[i+1] - points[i-1] - a[i-1]) * bi[i])
 
    ## compute dxy...
-   dxy = [Vector(0, 0)]
+   dxy = [Coordinate(0, 0)]
    for i in reversed(range(len(points) - 1)):
       dxy.insert(0, a[i] + dxy[0] * bi[i])
  

@@ -19,14 +19,14 @@ class DArrow(_HPGLCompoundDecorator):
 
 
    def _get_head_subcommands(self, coords):
-      head_vector = coords[-1] - coords[-2]
-      r, a = xy_to_polar(head_vector)
+      head_coordinate = coords[-1] - coords[-2]
+      r, a = xy_to_polar(head_coordinate)
       head = Isosceles(coords[-1], self.width, self.length, a)
       return [head]
 
    def _get_tail_subcommands(self, coords):
-      tail_vector = coords[1] - coords[0]
-      r, a = xy_to_polar(tail_vector)
+      tail_coordinate = coords[1] - coords[0]
+      r, a = xy_to_polar(tail_coordinate)
       return [ ]
 
 

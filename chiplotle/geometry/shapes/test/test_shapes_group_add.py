@@ -14,8 +14,8 @@ def test_shapes_group_add_01( ):
    assert isinstance(t, Group)
    assert isinstance(t[0], Path)
    assert isinstance(t[1], Path)
-   assert t[0].points == VectorArray([(3, 4), (5, 6)])
-   assert t[1].points == VectorArray([(7, 8), (9, 10)])
+   assert t[0].points == CoordinateArray([(3, 4), (5, 6)])
+   assert t[1].points == CoordinateArray([(7, 8), (9, 10)])
 
 
 def test_shapes_group_add_02( ):
@@ -25,8 +25,8 @@ def test_shapes_group_add_02( ):
    assert isinstance(t, Group)
    assert isinstance(t[0], Path)
    assert isinstance(t[1], Path)
-   assert t[0].points == VectorArray([(3, 4), (5, 6)])
-   assert t[1].points == VectorArray([(7, 8), (9, 10)])
+   assert t[0].points == CoordinateArray([(3, 4), (5, 6)])
+   assert t[1].points == CoordinateArray([(7, 8), (9, 10)])
 
 
 '''A Group with Groups works as expected.'''
@@ -41,8 +41,8 @@ def test_shapes_group_add_03( ):
    assert isinstance(t[0], Group)
    assert isinstance(t[1], Path)
    assert isinstance(t[0][0], Path)
-   assert t[0][0].points == VectorArray([(3, 4), (5, 6)])
-   assert t[1].points == VectorArray([(7, 8), (9, 10)])
+   assert t[0][0].points == CoordinateArray([(3, 4), (5, 6)])
+   assert t[1].points == CoordinateArray([(7, 8), (9, 10)])
 
 
 def test_shapes_group_add_04( ):
@@ -55,7 +55,7 @@ def test_shapes_group_add_04( ):
    assert isinstance(t[0], Group)
    assert isinstance(t[1], Path)
    assert isinstance(t[0][0], Path)
-   assert t[0][0].points == VectorArray([(3, 4), (5, 6)])
-   assert t[1].points == VectorArray([(7, 8), (9, 10)])
+   assert t[0][0].points == CoordinateArray([(3, 4), (5, 6)])
+   assert t[1].points == CoordinateArray([(7, 8), (9, 10)])
 
 

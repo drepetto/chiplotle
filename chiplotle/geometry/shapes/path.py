@@ -1,6 +1,6 @@
 from chiplotle.geometry.shapes.shape import _Shape
-from chiplotle.geometry.vector import Vector
-from chiplotle.geometry.vectorarray import VectorArray
+from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
    import convert_coordinates_to_hpgl_absolute_path
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
@@ -20,7 +20,7 @@ class Path(_Shape):
    '''
    def __init__(self, points):  
       _Shape.__init__(self)
-      self.points = VectorArray(points)
+      self.points = CoordinateArray(points)
       self.closed = False
 
 
@@ -32,7 +32,7 @@ class Path(_Shape):
 
    @points.setter
    def points(self, arg):
-      self._points = VectorArray(arg)
+      self._points = CoordinateArray(arg)
 
 
    ## PRIVATE PROPERTIES ##

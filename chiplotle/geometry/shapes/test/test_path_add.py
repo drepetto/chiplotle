@@ -1,5 +1,5 @@
 from chiplotle.geometry.shapes.path import Path
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.core import errors
 from py.test import raises
 
@@ -32,18 +32,18 @@ def test_path_radd_02( ):
 
 
 def test_path_add_03( ):
-   '''A Path and a Vector can be added.'''
+   '''A Path and a Coordinate can be added.'''
    a = Path([(1, 2), (3, 4)])
-   t = a + Vector(1, 2)
+   t = a + Coordinate(1, 2)
    assert t is not a
    assert isinstance(t, Path)
    assert t == Path([(2, 4), (4, 6)])
 
 
 def test_path_radd_03( ):
-   '''A Vector and a Path can be added.'''
+   '''A Coordinate and a Path can be added.'''
    a = Path([(1, 2), (3, 4)])
-   t = Vector(1, 2) + a
+   t = Coordinate(1, 2) + a
    assert t is not a
    assert isinstance(t, Path)
    assert t == Path([(2, 4), (4, 6)])
