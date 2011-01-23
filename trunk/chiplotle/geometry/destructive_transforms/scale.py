@@ -4,7 +4,7 @@ def scale(shape, value):
    '''In place scaling.
 
    - `shape` is the shape to be rotated.
-   - `value` is the scaling value. Can be a scalar or an (x, y) vector.
+   - `value` is the scaling value. Can be a scalar or an (x, y) coordinate.
    '''
 
    if isinstance(shape, Group):

@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
-from chiplotle.geometry.vectorarray import VectorArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 
 
 class _AbstractPath(_HPGLCompoundShape):
@@ -27,6 +27,6 @@ class _AbstractPath(_HPGLCompoundShape):
          return self._points
       def fset(self, arg):
          ## TODO: check that there are at least three points.
-         self._points = VectorArray(arg)
+         self._points = CoordinateArray(arg)
       return property(**locals( ))
 

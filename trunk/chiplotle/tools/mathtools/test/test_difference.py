@@ -9,11 +9,11 @@ def test_difference_01( ):
 
 
 def test_difference_02( ):
-   '''Computes the difference of a VectorArray.'''
-   a = VectorArray([(1, 2), (3, 4), (4, 4)])
+   '''Computes the difference of a CoordinateArray.'''
+   a = CoordinateArray([(1, 2), (3, 4), (4, 4)])
    t = mathtools.difference(a)
-   assert t == VectorArray([(2, 2), (1, 0)])
-   assert isinstance(t, VectorArray)
+   assert t == CoordinateArray([(2, 2), (1, 0)])
+   assert isinstance(t, CoordinateArray)
 
 
 def test_difference_03( ):

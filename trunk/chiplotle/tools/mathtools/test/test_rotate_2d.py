@@ -6,12 +6,12 @@ def test_rotate_2d_args_01( ):
    '''Rotate 2d can take a tuple.'''
    xy = (1, 2)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == Vector(*xy)
+   assert t == Coordinate(*xy)
 
 
 def test_rotate_2d_args_02( ):
-   '''Rotate 2d can take a Vector.'''
-   xy = Vector(1, 2)
+   '''Rotate 2d can take a Coordinate.'''
+   xy = Coordinate(1, 2)
    t = mathtools.rotate_2d(xy, 0)
    assert t == xy
 
@@ -20,28 +20,28 @@ def test_rotate_2d_args_03( ):
    '''Rotate 2d can take a list of tuples.'''
    xy = [(1, 2), (2, 3)]
    t = mathtools.rotate_2d(xy, 0)
-   assert t == VectorArray(xy)
+   assert t == CoordinateArray(xy)
 
 
 def test_rotate_2d_args_04( ):
-   '''Rotate 2d can take a VectorArray.'''
-   xy = VectorArray([(1, 2), (2, 3)])
+   '''Rotate 2d can take a CoordinateArray.'''
+   xy = CoordinateArray([(1, 2), (2, 3)])
    t = mathtools.rotate_2d(xy, 0)
    assert t == xy
 
 
 def test_rotate_2d_args_05( ):
-   '''Rotate 2d returns a Vector if it gets a pair.'''
-   xy = Vector(1, 2)
+   '''Rotate 2d returns a Coordinate if it gets a pair.'''
+   xy = Coordinate(1, 2)
    t = mathtools.rotate_2d(xy, 0)
-   assert isinstance(t, Vector)
+   assert isinstance(t, Coordinate)
 
 
 def test_rotate_2d_args_05( ):
-   '''Rotate 2d returns a VectorArray if it gets a list of coordinates.'''
+   '''Rotate 2d returns a CoordinateArray if it gets a list of coordinates.'''
    xy = [(1, 2), (3, 4)]
    t = mathtools.rotate_2d(xy, 0)
-   assert isinstance(t, VectorArray)
+   assert isinstance(t, CoordinateArray)
 
 
 ## values ##
@@ -50,19 +50,19 @@ def test_rotate_2d_04( ):
    '''Rotate 2d leaves (x, y) unchanged on 0 rotation.'''
    xy = (0, 0)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == Vector(*xy)
+   assert t == Coordinate(*xy)
    xy = (1, 0)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == Vector(*xy)
+   assert t == Coordinate(*xy)
    xy = (-1, 0)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == Vector(*xy)
+   assert t == Coordinate(*xy)
    xy = (-1, 1)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == Vector(*xy)
+   assert t == Coordinate(*xy)
    xy = (-1, -2)
    t = mathtools.rotate_2d(xy, 0)
-   assert t == Vector(*xy)
+   assert t == Coordinate(*xy)
 
 
 def test_rotate_2d_05( ):
@@ -109,7 +109,7 @@ def test_rotate_2d_pivot_02( ):
    assert round(t[0], 6) == 2
    assert round(t[1], 6) == 1
    t = mathtools.rotate_2d(xy, math.pi / 4, (1, 1))
-   r = Vector(0.707, -0.707) + Vector(1, 1)
+   r = Coordinate(0.707, -0.707) + Coordinate(1, 1)
    assert round(t[0], 3) == round(r[0], 3)
    assert round(t[1], 3) == round(r[1], 3)
 

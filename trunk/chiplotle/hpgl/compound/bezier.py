@@ -1,7 +1,7 @@
 from chiplotle.hpgl.compound.abstractpath import _AbstractPath
 from chiplotle.hpgl.commands import PU, PD, PA, PR, LT
-from chiplotle.geometry.vectorarray import VectorArray
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.tools.mathtools import bezier_interpolation
 
 
@@ -64,11 +64,11 @@ class Bezier(_AbstractPath):
          self.interpolation_count, self.weight)
 
       result = _AbstractPath._subcommands.fget(self)
-      result.append(PA([self.xy + Vector(*plot_points[0])]))
+      result.append(PA([self.xy + Coordinate(*plot_points[0])]))
       result.append(PD( ))
 
       for point_tuple in plot_points[1:]:
-         position = self.xy + Vector(*point_tuple)
+         position = self.xy + Coordinate(*point_tuple)
          #result.append(PA(position))
          result.append(PA([position]))
       result.append(PU( ))

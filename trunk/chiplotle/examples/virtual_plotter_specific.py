@@ -20,8 +20,8 @@ paper_width = 411 * 40
 paper_length = 254 * 40
 
 plotter = instantiate_virtual_plotter(type="HP7550A", 
-    left_bottom = Vector(0,0), 
-    right_top = Vector(paper_width, paper_length) )
+    left_bottom = Coordinate(0,0), 
+    right_top = Coordinate(paper_width, paper_length) )
 
 plotter.margins.soft.draw_outline()
 plotter.goto_center()

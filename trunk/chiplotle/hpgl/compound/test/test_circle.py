@@ -19,14 +19,14 @@ def test_circle_scale_01( ):
 
    assert Circle._scalable == ['xy', 'radius']
    assert c.radius == 150
-   assert c.xy == Vector(1.5, 3)
+   assert c.xy == Coordinate(1.5, 3)
 
 
 ## transpose ##
 
 def test_circle_transpose_01( ):
    c = Circle((1, 2), 100)
-   hpgltools.transpose(c, Vector(2, 1))
+   hpgltools.transpose(c, Coordinate(2, 1))
 
    assert c.radius == 100
-   assert c.xy == Vector(3, 3)
+   assert c.xy == Coordinate(3, 3)

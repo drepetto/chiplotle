@@ -698,9 +698,9 @@ class CT(_HPGLPrimitive):
 class CV(_HPGLPrimitive):
    '''
    :Curved line generator:
-      Collects vectors (line segments) in the vector buffer so that they
+      Collects coordinates (line segments) in the coordinate buffer so that they
       can be plotted as a group. This allows the plotter to plot in a
-      continuous motion, rather than stopping and starting at each vector 
+      continuous motion, rather than stopping and starting at each coordinate 
       endpoint. As a result, curves appear smoother. 
    
    - `n` : ``int`` 0 or 1, default 1 (on).

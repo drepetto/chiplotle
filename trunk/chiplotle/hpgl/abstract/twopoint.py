@@ -1,12 +1,12 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.geometry.vectorarray import VectorArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.core import errors
 
 class _TwoPoint(_HPGLPrimitive):
    '''Abstract class for commands with 2 coordinate pairs: x1, y1, x2, y2.'''
    def __init__(self, coords=None):
       if coords:
-         coords = VectorArray(coords)
+         coords = CoordinateArray(coords)
          if len(coords) != 2:
             raise errors.InitParameterError('Only two coordinate pairs allowed.')
 
@@ -17,7 +17,7 @@ class _TwoPoint(_HPGLPrimitive):
       def fget(self):
          return self._coords
       def fset(self, arg):
-         self._coords = VectorArray(arg)
+         self._coords = CoordinateArray(arg)
       return property(**locals())
 
 

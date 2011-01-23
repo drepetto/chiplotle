@@ -6,7 +6,7 @@ from py.test import raises
 def test_pu_init_01( ):
    '''PU can be initialized with nothing.'''
    t = PU( )
-   assert type(t.xy) == VectorArray
+   assert type(t.xy) == CoordinateArray
    assert len(t.xy) == 0
    assert len(t.x) == 0
    assert len(t.y) == 0
@@ -14,7 +14,7 @@ def test_pu_init_01( ):
 def test_pu_init_02( ):
    '''PU can be initialized with empty list.'''
    t = PU([ ])
-   assert type(t.xy) == VectorArray
+   assert type(t.xy) == CoordinateArray
    assert len(t.xy) == 0
    assert len(t.x) == 0
    assert len(t.y) == 0
@@ -32,16 +32,16 @@ def test_pu_init_04( ):
 def test_pu_init_05( ):
    '''PU initialize properly with list or tuple of 2.'''
    t = PU([1,2])
-   assert type(t.xy) == VectorArray
-   assert t.xy == VectorArray([1, 2])
+   assert type(t.xy) == CoordinateArray
+   assert t.xy == CoordinateArray([1, 2])
    assert t.x == (1, )
    assert t.y == (2, )
 
 def test_pu_init_06( ):
    '''PU initialize properly with list or tuple of length == 2**n.'''
    t = PU([1,2,3,4])
-   assert type(t.xy) == VectorArray
-   assert t.xy == VectorArray([(1, 2), (3, 4)])
+   assert type(t.xy) == CoordinateArray
+   assert t.xy == CoordinateArray([(1, 2), (3, 4)])
    assert t.x == (1, 3)
    assert t.y == (2, 4)
 

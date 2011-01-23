@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.penplot import _PenPlot
-from chiplotle.geometry.vectorarray import VectorArray
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.core import errors
 from py.test import raises
 
@@ -7,11 +7,11 @@ def test_penplot_01( ):
    '''_PenPlot can be initialized with a flat iterable (list, tuple, etc. )
    of length 2*n as first argument.'''
    p = _PenPlot((1, 2, 3, 4))
-   assert p.xy == VectorArray([(1, 2), (3, 4)])
+   assert p.xy == CoordinateArray([(1, 2), (3, 4)])
    assert p.x == (1, 3)
    assert p.y == (2, 4)
    assert len(p.xy) == 2
-   assert type(p.xy) == VectorArray
+   assert type(p.xy) == CoordinateArray
 
 
 def test_penplot_02( ):
@@ -30,9 +30,9 @@ def test_penplot_04( ):
    '''xy can be set with a list or tuple.'''
    p = _PenPlot((0,0))
    p.xy = (1,2)
-   assert p.xy == VectorArray([(1,2)])
+   assert p.xy == CoordinateArray([(1,2)])
    p.xy = [1,2,3,4]
-   assert p.xy == VectorArray([(1,2),(3,4)])
+   assert p.xy == CoordinateArray([(1,2),(3,4)])
    assert p.x == (1, 3)
    assert p.y == (2, 4)
 
@@ -50,7 +50,7 @@ def test_penplot_06( ):
    '''xy can be set to None'''
    p = _PenPlot((0,0))
    p.xy = None
-   assert isinstance(p.xy, VectorArray)
+   assert isinstance(p.xy, CoordinateArray)
    assert len(p.xy) == 0
    assert len(p.x) == 0
    assert len(p.y) == 0

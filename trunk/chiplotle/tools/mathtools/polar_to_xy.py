@@ -1,4 +1,4 @@
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinate import Coordinate
 import math
 
 
@@ -8,7 +8,7 @@ def polar_to_xy(args):
    where r is the radius and A is the angle in radians.
    '''
    try:
-      r, A = tuple(Vector(*args))
+      r, A = tuple(Coordinate(*args))
    except:
       raise TypeError('`args` must be an (r, A) tuple or a pair of values r, A.')
    x = r * math.cos(A)

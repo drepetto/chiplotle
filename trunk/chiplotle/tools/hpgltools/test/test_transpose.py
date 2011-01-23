@@ -12,56 +12,56 @@ def test_transpose_EA( ):
    '''Transpose works on single EA.'''
    t = EA((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == Vector(2.5, -0.5)
+   assert t.xy == Coordinate(2.5, -0.5)
 
 def test_transpose_ER( ):
    '''Transpose correctly ignores relative positions in ER.'''
    t = ER((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == Vector(1, 2)
+   assert t.xy == Coordinate(1, 2)
 
 def test_transpose_PU( ):
    '''Transpose ignores PU because behavior of PU depends on previous 
    PA or PR.'''
    t = PU((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == VectorArray([1, 2])
+   assert t.xy == CoordinateArray([1, 2])
 
 def test_transpose_PD( ):
    '''Transpose ignores PD.'''
    t = PD((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == VectorArray([1, 2])
+   assert t.xy == CoordinateArray([1, 2])
 
 def test_transpose_PA( ):
    '''Transpose works on a single PA.'''
    t = PA((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == VectorArray([2.5, -0.5])
+   assert t.xy == CoordinateArray([2.5, -0.5])
 
 def test_transpose_PR( ):
    '''Transpose correctly ignores relative positions in PR.'''
    t = PR((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == VectorArray([1, 2])
+   assert t.xy == CoordinateArray([1, 2])
 
 def test_transpose_RA( ):
    '''Transpose works on single RA.'''
    t = RA((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == Vector(2.5, -0.5)
+   assert t.xy == Coordinate(2.5, -0.5)
 
 def test_transpose_RR( ):
    '''Transpose correctly ignores relative positions in RR.'''
    t = RR((1, 2))
    transpose(t, (1.5, -2.5))
-   assert t.xy == Vector(1, 2)
+   assert t.xy == Coordinate(1, 2)
 
 
 def test_transpose_group_01( ):
    t = Group((1, 2), [Circle((10, 10), 100)])
    transpose(t, (1.5, -2.5))
-   assert t.xy == Vector(2.5, -0.5)
-   assert t[0].xy == Vector(10, 10)
+   assert t.xy == Coordinate(2.5, -0.5)
+   assert t[0].xy == Coordinate(10, 10)
    assert t[0].radius == 100
 

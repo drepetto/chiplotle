@@ -1,12 +1,12 @@
 from chiplotle.hpgl import commands 
-from chiplotle.geometry.vector import Vector
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.tools.hpgltools.inflate_hpgl_string import inflate_hpgl_string
 from sys import maxint
 
 class VirtualSerialPort():
    def __init__(self, left_bottom, right_top):
-      left_bottom = Vector(left_bottom)
-      right_top = Vector(right_top)
+      left_bottom = Coordinate(left_bottom)
+      right_top = Coordinate(right_top)
       #print "I am a virtual serial port!"
       self._received_commands_string = ""
       self._next_query_value = ''
