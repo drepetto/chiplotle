@@ -4,7 +4,7 @@ from py.test import raises
 def test_coordinatearray_extend_01( ):
    '''CoordinateArray cannot be extended with a list of (x, y) pairs.'''
    t = CoordinateArray( )
-   assert raises(errors.InitParameterError, 't.extend([(0, 0), (1, 2)])')
+   assert raises(TypeError, 't.extend([(0, 0), (1, 2)])')
 
 
 def test_coordinatearray_extend_02( ):
@@ -19,4 +19,4 @@ def test_coordinatearray_extend_02( ):
 def test_coordinatearray_extend_03( ):
    '''Mixtures are not allowed.'''
    t = CoordinateArray( )
-   assert raises(errors.InitParameterError, 't.extend([Coordinate(0, 0), (3, 2)])')
+   assert raises(TypeError, 't.extend([Coordinate(0, 0), (3, 2)])')

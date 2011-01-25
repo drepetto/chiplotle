@@ -56,7 +56,9 @@ class Path(_Shape):
    def _preformat_points(self):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
       if self.closed:
-         return self._transformed_points + [self._transformed_points[0]]
+         tp = self._transformed_points
+         tp.append(tp[0])
+         return tp
       else:
          return self._transformed_points
 
@@ -64,6 +66,7 @@ class Path(_Shape):
    def _subcommands(self):
       if _Shape.language == 'HPGL':
          ## create hpgl commands...
+         print self._preformat_points
          result = convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
       elif _Shape.language == 'gcode':
          ## create gcode
