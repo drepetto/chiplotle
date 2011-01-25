@@ -66,7 +66,7 @@ class Path(_Shape):
    def _subcommands(self):
       if _Shape.language == 'HPGL':
          ## create hpgl commands...
-         print self._preformat_points
+         #print self._preformat_points
          result = convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
       elif _Shape.language == 'gcode':
          ## create gcode
