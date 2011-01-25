@@ -43,7 +43,11 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
       corners1 = [corners[0], corners[2], corners[4], corners[0]]
       corners2 = [corners[1], corners[3], corners[5], corners[1]]
       
-      return Group([Path(corners1), Path(corners2)])
+      path1 = Path(corners1)
+      path1.closed = True
+      path2 = Path(corners2)
+      path2.closed = True
+      return Group([path1, path2])
 
    else:
       if jump_size is None:
@@ -64,7 +68,10 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
       
       corners = [corners[i] for i in point_order]
       
-      return Path(corners)
+      path = Path(corners)
+      path.closed = True
+      
+      return path
       
 
 ## RUN DEMO CODE
