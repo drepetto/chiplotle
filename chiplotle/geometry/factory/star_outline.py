@@ -1,4 +1,5 @@
 from chiplotle.geometry.shapes.path import Path
+import math
 
 def star_outline(width, height, num_points = 5):  
    '''Constructs a star shape in outline.  '''
