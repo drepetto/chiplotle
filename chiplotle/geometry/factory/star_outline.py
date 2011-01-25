@@ -37,7 +37,10 @@ def star_outline(width, height, num_points = 5):
 
    corners.append(corners[0])
    
-   return Path(corners)
+   path = Path(corners)
+   path.closed = True
+   
+   return path
 
 
 
