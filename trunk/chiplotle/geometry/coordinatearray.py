@@ -101,7 +101,9 @@ class CoordinateArray(object):
 
 
    def append(self, arg):
-      self._data.append(Coordinate(arg))
+      if not isinstance(arg, Coordinate):
+         raise TypeError('arg must be a Coordinate')
+      self._data.append(arg)
 
 
    def extend(self, arg):

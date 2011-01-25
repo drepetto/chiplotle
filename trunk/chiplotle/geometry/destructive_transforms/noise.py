@@ -1,5 +1,6 @@
 from chiplotle.geometry.shapes.group import Group
 from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.coordinate import Coordinate
 import random
 
 def noise(shape, value):
@@ -20,7 +21,7 @@ def noise(shape, value):
       for point in shape.points:
          x_wiggle = random.randrange(-x, x)
          y_wiggle = random.randrange(-y, y)
-         xy = point + (x_wiggle, y_wiggle)         
+         xy = point + Coordinate(x_wiggle, y_wiggle)         
          result.append(xy)
       shape.points = result
 

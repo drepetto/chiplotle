@@ -25,18 +25,21 @@ def ellipse(width, height, segments = 100):
       
       degrees += degrees_incr
  
-   #close the ellipse
-   degrees = 0.0
-   alpha = degrees * pi_div_180
-   sin_alpha = math.sin(alpha);
-   cos_alpha = math.cos(alpha);
-
-   point_x = (half_width * cos_alpha);
-   point_y = (half_height * sin_alpha);
-
-   ellipse_points.append((point_x, point_y))
+ ## NOTE not needed. path closed with `closed` property.
+#   #close the ellipse
+#   degrees = 0.0
+#   alpha = degrees * pi_div_180
+#   sin_alpha = math.sin(alpha);
+#   cos_alpha = math.cos(alpha);
+#
+#   point_x = (half_width * cos_alpha);
+#   point_y = (half_height * sin_alpha);
+#
+#   ellipse_points.append((point_x, point_y))
    
-   return Path(ellipse_points)
+   result = Path(ellipse_points)
+   result.closed = True
+   return result
 
 
 ## RUN DEMO CODE
