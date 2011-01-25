@@ -11,7 +11,7 @@ def noise(shape, value):
    '''
    if isinstance(shape, Group):
       for i in range(len(shape)):
-         shape[i] = noise(shape[i], value)
+         noise(shape[i], value)
    else:
       try:
          x, y = value

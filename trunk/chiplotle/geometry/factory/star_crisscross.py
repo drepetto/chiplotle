@@ -40,8 +40,8 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
       #rearrange points to draw two polygons
       multiplier = int(num_points / 2)
       
-      corners1 = [corners[0], corners[2], corners[4], corners[0]]
-      corners2 = [corners[1], corners[3], corners[5], corners[1]]
+      corners1 = [corners[0], corners[2], corners[4]]
+      corners2 = [corners[1], corners[3], corners[5]]
       
       path1 = Path(corners1)
       path1.closed = True
@@ -62,7 +62,7 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
             return Path(invalid_star)
       
       point_order = []
-      for i in range(0, num_points + 1):
+      for i in range(0, num_points):
          point_num =  (i * jump_size) % num_points
          point_order.append(point_num)
       
