@@ -25,7 +25,7 @@ def noise(shape, value):
          result.append(xy)
       shape.points = result
 
-   return shape
+   #return shape
       
       
    
