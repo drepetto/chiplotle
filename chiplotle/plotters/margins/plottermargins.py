@@ -45,25 +45,21 @@ class _PlotterMargins(object):
    @property
    def bottom_left(self):
       coords = self.all_coordinates
-      #return coords[0:2]
-      return Coordinate(coords[0:2])
+      return Coordinate(*coords[0:2])
 
    @property
    def bottom_right(self):
       coords = self.all_coordinates
-      #return (coords[2], coords[1])
       return Coordinate(coords[2], coords[1])
 
    @property
    def top_right(self):
       coords = self.all_coordinates
-      #return coords[2:4]
-      return Coordinate(coords[2:4])
+      return Coordinate(*coords[2:4])
 
    @property
    def top_left(self):
       coords = self.all_coordinates
-      #return (coords[0], coords[3])
       return Coordinate(coords[0], coords[3])
 
    @property
