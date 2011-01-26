@@ -13,7 +13,8 @@ def perpendicular_noise(shape, value):
    '''
    if isinstance(shape, Group):
       for i in range(len(shape)):
-         shape[i] = perpendicular_noise(shape[i], value)
+         #shape[i] = perpendicular_noise(shape[i], value)
+         perpendicular_noise(shape[i], value)
    else:
       result = [ ]
       points = shape.points
