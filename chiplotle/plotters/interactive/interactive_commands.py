@@ -38,7 +38,7 @@ def interactive_set_plot_window(plotter):
    plotter.set_plot_window(Coordinate(x1, y1), Coordinate(x2, y2))
 
    '''
-from chiplotle.interactive.interactive_commands import *
+from chiplotle.plotters.interactive.interactive_commands import *
 interactive_set_plot_window(plotter)
    '''
    
