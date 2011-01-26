@@ -54,9 +54,7 @@ if __name__ == '__main__':
    gr = Group()
    
    for i in range(5, 10):
-      st = star_outline(1000,1000, num_points = i)
-      st.rotation = (i - 5) * ((math.pi * 2)/5.0)
-      st.pivot = [500,500]
+      st = star_outline(100 * (i * i * i), 100 * (i * i * i), num_points = i)
       gr.append(st)
    
    io.view(gr)
