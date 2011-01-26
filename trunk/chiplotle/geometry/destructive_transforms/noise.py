@@ -35,8 +35,8 @@ if __name__ == "__main__":
    from chiplotle.tools import io
    c1 = circle(100)
    c2 = circle(80)
-   cn = noise(c1, 6)
-   cn += 100
-   g = Group([cn, c2])
-   g = noise(g, 6)
+   noise(c1, 6)
+   c1 += 100
+   g = Group([c1, c2])
+   noise(g, 6)
    io.view(g)
