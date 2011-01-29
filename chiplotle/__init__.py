@@ -22,12 +22,17 @@ from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.coordinate import Coordinate
 
 from chiplotle.hpgl.commands import *
+from chiplotle.hpgl.pen import Pen
+
+## TODO: deprecate...
 from chiplotle.hpgl.compound import *
 from chiplotle.hpgl.compound.decorators import *
-from chiplotle import plotters
-from chiplotle.tools import *
+##
 
+from chiplotle.tools import *
 from chiplotle.tools.plottertools import instantiate_plotters
+from chiplotle import plotters
+
 
 
 ## remove unnecessary modules...
