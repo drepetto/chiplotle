@@ -1,5 +1,5 @@
 
-from chiplotle.interfaces.interface import _Interface
+from chiplotle.core.interfaces.interface import _Interface
 
 class ParentageInterface(_Interface):
    def __init__(self, _client):

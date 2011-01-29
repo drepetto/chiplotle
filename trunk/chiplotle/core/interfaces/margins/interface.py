@@ -1,4 +1,4 @@
-from chiplotle.interfaces.interface import _Interface
+from chiplotle.core.interfaces.interface import _Interface
 from chiplotle.plotters.margins.marginssoft import MarginsSoft
 from chiplotle.plotters.margins.marginshard import MarginsHard
 

@@ -14,14 +14,7 @@ Homepage %s
 """ % (__authors__,__version__,__license__,__url__)
 
 
-### IMPORTS ###
-
-#def _remove_modules():
-#   from types import ModuleType
-#   for key, value in globals().items():
-#      if isinstance(value, ModuleType) and not key.startswith('_'):
-#         globals().pop(key)
-
+## IMPORTS ##
 
 from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.compound import *
@@ -36,11 +29,10 @@ from chiplotle.tools.plottertools import instantiate_plotters
 
 from chiplotle.core import errors
 
-#_remove_modules()
 
 ## remove unnecessary modules...
 globals().pop('cfg')
 globals().pop('hpgl')
-globals().pop('interfaces')
+#globals().pop('interfaces')
 globals().pop('tools')
 globals().pop('utils')
