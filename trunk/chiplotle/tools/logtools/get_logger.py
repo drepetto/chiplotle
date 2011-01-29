@@ -1,5 +1,5 @@
-from chiplotle.cfg.cfg import LOG_FILE
-from chiplotle.cfg.get_config_value import get_config_value
+from chiplotle.core.cfg.cfg import LOG_FILE
+from chiplotle.core.cfg.get_config_value import get_config_value
 import logging
 
 def get_logger(name):

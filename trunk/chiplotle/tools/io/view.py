@@ -1,5 +1,5 @@
 import os
-from chiplotle.cfg.cfg import CONFIG_DIR
+from chiplotle.core.cfg.cfg import CONFIG_DIR
 from chiplotle.tools.io.export import export
 from chiplotle.tools.io._open_file import _open_file
 

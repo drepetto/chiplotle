@@ -1,5 +1,5 @@
-from chiplotle.cfg.cfg import CONFIG_FILE
-from chiplotle.cfg.verify_config_file import verify_config_file
+from chiplotle.core.cfg.cfg import CONFIG_FILE
+from chiplotle.core.cfg.verify_config_file import verify_config_file
 
 
 def read_config_file( ):

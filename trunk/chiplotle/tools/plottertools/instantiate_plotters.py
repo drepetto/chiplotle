@@ -1,4 +1,4 @@
-from chiplotle.cfg.get_config_value import get_config_value
+from chiplotle.core.cfg.get_config_value import get_config_value
 from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
 
 def instantiate_plotters( ):

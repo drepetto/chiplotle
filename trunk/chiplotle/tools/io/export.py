@@ -1,6 +1,6 @@
 from chiplotle.tools.io.save_hpgl import save_hpgl
-from chiplotle.cfg.cfg import CONFIG_DIR
-from chiplotle.cfg._verify_output_directory import _verify_output_directory
+from chiplotle.core.cfg.cfg import CONFIG_DIR
+from chiplotle.core.cfg._verify_output_directory import _verify_output_directory
 import os
 import shutil
 import subprocess
