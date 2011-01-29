@@ -1,9 +1,9 @@
-from chiplotle.cfg.cfg import __version__
+from chiplotle.core.cfg.cfg import __version__
 import os
 
-def _run_chiplotle( ):
+def _run_chiplotle_virtual( ):
    '''The function runs Python, imports Chiplotle and initializes 
-   a plotter.
+   a VIRTUAL plotter.
    '''
    python_code = [ ]
    python_code.append("print ' '")
@@ -15,8 +15,8 @@ def _run_chiplotle( ):
    python_code.append("sys.ps1 = 'chiplotle> '")
    python_code.append("del sys")
    python_code.append("from chiplotle import *")
-   python_code.append("plts = instantiate_plotters( )")
-   python_code.append("plotter = plts[0]")
+   python_code.append("from chiplotle.tools.plottertools import instantiate_virtual_plotter")
+   python_code.append("plotter = instantiate_virtual_plotter()")
 
    ##                                 '\n' does now work on Windowz!
    os.system('''python -i -c "%s"''' % ';'.join(python_code))

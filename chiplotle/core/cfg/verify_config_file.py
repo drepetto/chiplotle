@@ -1,5 +1,5 @@
-from chiplotle.cfg.cfg import CONFIG_FILE, CONFIG_DIR
-from chiplotle.cfg.write_config_file import write_config_file
+from chiplotle.core.cfg.cfg import CONFIG_FILE, CONFIG_DIR
+from chiplotle.core.cfg.write_config_file import write_config_file
 import os
 
 def verify_config_file( ):

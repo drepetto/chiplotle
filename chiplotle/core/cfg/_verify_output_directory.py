@@ -1,5 +1,5 @@
 import os
-from chiplotle.cfg.cfg import CONFIG_DIR
+from chiplotle.core.cfg.cfg import CONFIG_DIR
 
 def _verify_output_directory(directory = None):
    directory = directory or os.path.join(CONFIG_DIR, 'output')

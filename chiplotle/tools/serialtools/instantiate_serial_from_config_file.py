@@ -1,4 +1,4 @@
-from chiplotle.cfg.get_config_value import get_config_value
+from chiplotle.core.cfg.get_config_value import get_config_value
 import serial
 
 def instantiate_serial_from_config_file(port):

@@ -1,4 +1,4 @@
-from chiplotle.cfg.read_config_file import read_config_file
+from chiplotle.core.cfg.read_config_file import read_config_file
 
 def get_config_value(var_name):
    try:

@@ -4,7 +4,7 @@
  *  http://music.columbia.edu/cmc/chiplotle
 '''
 from __future__ import division
-from chiplotle.cfg.get_config_value import get_config_value 
+from chiplotle.core.cfg.get_config_value import get_config_value 
 from chiplotle.core.interfaces.margins.interface import MarginsInterface
 from chiplotle.geometry.shapes.shape import _Shape
 from chiplotle.geometry.coordinate import Coordinate

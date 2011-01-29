@@ -1,4 +1,4 @@
-from chiplotle.cfg.verify_config_file import verify_config_file
+from chiplotle.core.cfg.verify_config_file import verify_config_file
 from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
 from chiplotle.tools.serialtools import sniff_ports_for_plotters
 from chiplotle.tools.serialtools import scan_serial_ports
