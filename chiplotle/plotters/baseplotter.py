@@ -4,12 +4,12 @@
  *  http://music.columbia.edu/cmc/chiplotle
 '''
 from __future__ import division
-from chiplotle.geometry.shapes.shape import _Shape
 from chiplotle.cfg.get_config_value import get_config_value 
+from chiplotle.core.interfaces.margins.interface import MarginsInterface
+from chiplotle.geometry.shapes.shape import _Shape
+from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
-from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.interfaces.margins.interface import MarginsInterface
 from chiplotle.tools.logtools.get_logger import get_logger
 from chiplotle.tools.serialtools import VirtualSerialPort
 import math
