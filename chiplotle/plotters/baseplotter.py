@@ -4,6 +4,7 @@
  *  http://music.columbia.edu/cmc/chiplotle
 '''
 from __future__ import division
+from chiplotle.geometry.shapes.shape import _Shape
 from chiplotle.cfg.get_config_value import get_config_value 
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
@@ -54,24 +55,40 @@ class _BasePlotter(object):
    def write(self, data):
       '''Public access for writing to serial port. 
          data can be an iterator, a string or an _HPGL. '''
-      #if hasattr(data, 'format'):
-      if isinstance(data, _HPGL):
-         self._write_string_to_port(data.format)
-      elif isinstance(data, str):
+      ## TODO: remove _HPGL from this list...
+      if isinstance(data, (_Shape, _HPGL)):
+         data = data.format
+      try:
          self._write_string_to_port(data)
-      elif type(data) in (list, tuple, types.GeneratorType):
+      except TypeError: ## must be an iterable...
          result = [ ]
          for c in data:
-            #if hasattr(c, 'format'):
-            if isinstance(c, _HPGL):
-               result.append(c.format)
-            elif isinstance(c, str):
-               result.append(c)
-            else:
-               raise TypeError('Elements must be strings or _HPGL commands.')
-         self._write_string_to_port(''.join(result))
-      else:
-         raise TypeError('Must be a str, iterator or an _HPGL command.')
+            ## TODO: remove _HPGL from this list...
+            if isinstance(c, (_Shape, _HPGL)):
+               c = c.format
+            result.append(c)
+         try:
+            self._write_string_to_port(''.join(result))
+         except TypeError:
+            raise TypeError('Must be a str, iterator, or a _Shape.')
+         
+#      if isinstance(data, _HPGL):
+#         self._write_string_to_port(data.format)
+#      elif isinstance(data, str):
+#         self._write_string_to_port(data)
+#      elif type(data) in (list, tuple, types.GeneratorType):
+#         result = [ ]
+#         for c in data:
+#            #if hasattr(c, 'format'):
+#            if isinstance(c, _HPGL):
+#               result.append(c.format)
+#            elif isinstance(c, str):
+#               result.append(c)
+#            else:
+#               raise TypeError('Elements must be strings or _HPGL commands.')
+#         self._write_string_to_port(''.join(result))
+#      else:
+#         raise TypeError('Must be a str, iterator or an _HPGL command.')
 
 
    def write_file(self, filename):
@@ -135,7 +152,9 @@ class _BasePlotter(object):
 
    def _write_string_to_port(self, data):
       ''' Write data to serial port. data is expected to be a string.'''
-      assert type(data) is str
+      #assert type(data) is str
+      if not isinstance(data, basestring):
+         raise TypeError('string expected.')
       data = self._filter_unrecognized_commands(data)
       data = self._slice_string_to_buffer_size(data)
       for chunk in data:
