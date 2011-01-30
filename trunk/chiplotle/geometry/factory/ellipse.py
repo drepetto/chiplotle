@@ -2,41 +2,31 @@ from chiplotle.geometry.shapes.path import Path
 import math
 
 def ellipse(width, height, segments = 100):  
-   '''Constructs an ellipse with the given `radius` and number of segments.'''
+   '''
+   Constructs an ellipse with the given width, height, and number of segments.
+   '''
 
-   pi_div_180 = math.pi / 180.0
-   degrees_incr = 360.0 / float(segments)
+   two_pi = math.pi * 2.0
+   
+   rads_incr = two_pi / float(segments)
    half_width = width * 0.5
    half_height = height * 0.5
    
-   degrees = 0.0
+   rads = 0.0
    
    ellipse_points = []
    
-   while degrees < 360.0: 
-      alpha = degrees * pi_div_180
-      sin_alpha = math.sin(alpha);
-      cos_alpha = math.cos(alpha);
+   while rads < two_pi: 
+      sin = math.sin(rads);
+      cos = math.cos(rads);
 
-      point_x = (half_width * cos_alpha);
-      point_y = (half_height * sin_alpha);
+      point_x = (half_width * cos);
+      point_y = (half_height * sin);
 
       ellipse_points.append((point_x, point_y))
       
-      degrees += degrees_incr
+      rads += rads_incr
  
- ## NOTE not needed. path closed with `closed` property.
-#   #close the ellipse
-#   degrees = 0.0
-#   alpha = degrees * pi_div_180
-#   sin_alpha = math.sin(alpha);
-#   cos_alpha = math.cos(alpha);
-#
-#   point_x = (half_width * cos_alpha);
-#   point_y = (half_height * sin_alpha);
-#
-#   ellipse_points.append((point_x, point_y))
-   
    result = Path(ellipse_points)
    result.closed = True
    return result
