@@ -8,15 +8,20 @@ def test_shapes_group__init__01( ):
    t = Group([])
    assert len(t) == 0
 
-
 def test_shapes_group__init__02( ):
+   '''A Group can take no parameters.'''
+   t = Group()
+   assert len(t) == 0
+
+
+def test_shapes_group__init__03( ):
    '''A Group can be initialized with a list of Paths.'''
    t = Group([Path([(1, 2), (3, 4)])])
    assert len(t) == 1
    assert t[0] == Path([(1, 2), (3, 4)])
 
 
-def test_shapes_group__init__03( ):
+def test_shapes_group__init__04( ):
    '''A Group can be initialized with another Group.'''
    t = Group([Group([ ]), Path([(1, 2), (3, 4)])])
    assert len(t) == 2
@@ -24,7 +29,7 @@ def test_shapes_group__init__03( ):
    assert t[1] == Path([(1, 2), (3, 4)])
 
 
-def test_shapes_group__init__04( ):
+def test_shapes_group__init__05( ):
    '''A Group cannot be initialized with a non-_Shape.'''
    assert py.test.raises(TypeError, 'Group([1, 2, 3])')
    assert py.test.raises(TypeError, 'Group("a")')
