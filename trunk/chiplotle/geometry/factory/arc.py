@@ -1,4 +1,5 @@
 from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.shapes.group import Group
 import math
 
 def arc_circle(radius, start_angle, end_angle, segments = 100):
@@ -45,13 +46,18 @@ def arc_ellipse(width, height, start_angle, end_angle, segments = 100):
 
 if __name__ == '__main__':
    from chiplotle.tools import io
+   
+   gr = Group()
+   
    ae = arc_ellipse(1000, 2000, 1.0, math.pi)
    assert isinstance(ae, Path)
    print ae.format
-   io.view(ae)
+   gr.append(ae)
 
    ac = arc_circle(1000, 1.0, math.pi)
    assert isinstance(ac, Path)
    print ac.format
-   io.view(ac)
+   gr.append(ac)
+   
+   io.view(gr)
 
