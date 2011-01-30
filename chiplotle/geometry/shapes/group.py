@@ -17,6 +17,21 @@ class Group(_Shape):
 
    ## PUBLIC PROPERTIES ##
 
+   @property
+   def points(self):
+      '''Returns a flat list of all the Coordinates that form this shape.
+      This property is useful in computing some property of the shape based
+      on all it's points. e.g., centroid, bounding box, etc. 
+
+      NOTE: should this return a list of lists of CoordinateArrays,
+      or a flat CoordinateArray like Path.points? Will we ever need to 
+      preserve the original shape hierarchy?'''
+      coords = [ ]
+      for shape in self:
+         coords += list(shape.points)
+      return coords
+
+
    ## PUBLIC METHODS ##
 
    def append(self, arg):
