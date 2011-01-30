@@ -1,6 +1,15 @@
 from chiplotle.geometry.shapes.path import Path
 import math
 
+def arc_circle(radius, start_angle, end_angle, segments = 100):
+   '''
+   Constructs an arc from a circle with the given radius,
+   and number of segments. Arc goes from start_angle to end_angle,
+   both of which are in radians.
+   '''
+   
+   return arc_ellipse(radius, radius, start_angle, end_angle, segments)
+
 def arc_ellipse(width, height, start_angle, end_angle, segments = 100):  
    '''
    Constructs an arc from an ellipse with the given width, height,
@@ -40,3 +49,9 @@ if __name__ == '__main__':
    assert isinstance(ae, Path)
    print ae.format
    io.view(ae)
+
+   ac = arc_circle(1000, 1.0, math.pi)
+   assert isinstance(ac, Path)
+   print ac.format
+   io.view(ac)
+
