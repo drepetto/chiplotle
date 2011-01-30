@@ -13,6 +13,7 @@ def convert_coordinates_to_hpgl_absolute_path(coords):
    result.append(PU( ))
    result.append(PA([coords[0]]))
    result.append(PD( ))
-   result.append(PA(coords[1:]))
-   result.append(PU())
+   #result.append(PA(coords[1:])) ## this denies the possibility of paths with one coord.
+   result.append(PA(coords))
+   result.append(PU( ))
    return result
