@@ -1,5 +1,6 @@
 from chiplotle.geometry.shapes.path import Path
 from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.factory.line import line
 
 def grid(width, height, width_divisions,height_divisions):
    '''Rectangular grid. 
@@ -26,19 +27,15 @@ def grid(width, height, width_divisions,height_divisions):
    
    ## add horizontal lines
    for i in range(height_divisions + 1):
-      horiz_points = []
       step_y = y_step_size * i
-      horiz_points.append((ul_x, ul_y - step_y))
-      horiz_points.append((ur_x, ur_y - step_y))
-      g.append(Path(horiz_points))
+      l = line((ul_x, ul_y - step_y), (ur_x, ur_y - step_y))
+      g.append(l)
    ## add vertical lines
 
    for i in range(width_divisions + 1):
-      vert_points = []
       step_x = x_step_size * i
-      vert_points.append((ul_x + step_x, ul_y))
-      vert_points.append((bl_x + step_x, bl_y))
-      g.append(Path(vert_points))
+      l = line((ul_x + step_x, ul_y), (bl_x + step_x, bl_y))
+      g.append(l)
 
    return g
 
