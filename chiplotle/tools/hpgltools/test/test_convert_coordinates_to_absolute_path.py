@@ -8,7 +8,8 @@ def test_convert_coordinates_to_absolute_hpgl_path_01( ):
    assert t[0] == PU( )
    assert t[1] == PA([c[0]])
    assert t[2] == PD( )
-   assert t[3] == PA(c[1:])
+   #assert t[3] == PA(c[1:])
+   assert t[3] == PA(c[:])
 
 
 def test_convert_coordinates_to_absolute_hpgl_path_02( ):
@@ -18,7 +19,8 @@ def test_convert_coordinates_to_absolute_hpgl_path_02( ):
    assert t[0] == PU( )
    assert t[1] == PA(c[0].xy)
    assert t[2] == PD( )
-   assert t[3] == PA(c[1:])
+   #assert t[3] == PA(c[1:])
+   assert t[3] == PA(c[:])
 
 
 def test_convert_coordinates_to_absolute_hpgl_path_03( ):
@@ -28,7 +30,8 @@ def test_convert_coordinates_to_absolute_hpgl_path_03( ):
    assert t[0] == PU( )
    assert t[1] == PA([c[0]])
    assert t[2] == PD( )
-   assert t[3] == PA(c[1:])
+   #assert t[3] == PA(c[1:])
+   assert t[3] == PA(c[:])
 
 
 def test_convert_coordinates_to_absolute_hpgl_path_04( ):
