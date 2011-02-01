@@ -4,7 +4,11 @@ from chiplotle.tools.geometrytools.get_bounding_coordinate_pairs import get_boun
 def get_center(shape):
    '''
    
-   Returns a Coordinate() that is in the center of the shape. 
+   Returns a Coordinate() that is in the center of the shape.
+   "center" is defined as being half way between the top/bottom
+   and left/right-most points. This will be different from the
+   centroid, which takes the distribution of the points into
+   consideration.
    
    '''
    
