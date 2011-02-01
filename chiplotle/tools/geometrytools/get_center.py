@@ -1,12 +1,10 @@
 from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.tools.geometrytools.get_bounding_coordinate_pairs import get_bounding_coordinate_pairs
 
-def get_radius(shape):
+def get_center(shape):
    '''
    
-   Returns the distance from the center of the shape to the most distant edge.
-   If the shape is a circle, this will be the radius. If it is some other shape
-   then the meaning of the returned value is undefined. 
+   Returns a Coordinate() that is in the center of the shape. 
    
    '''
    
@@ -15,10 +13,10 @@ def get_radius(shape):
    dist_w = bounds[1][0] - bounds[0][0]
    dist_h = bounds[1][1] - bounds[0][1]
 
-   if dist_w > dist_h:
-      return dist_w/2.0
-   else:
-      return dist_h/2.0
+   x_center = bounds[0][0] + (dist_w/2.0)
+   y_center = bounds[0][1] + (dist_h/2.0)
+   
+   return Coordinate(x_center, y_center)
    
 
 
@@ -31,19 +29,21 @@ if __name__ == '__main__':
    from chiplotle.tools import io
 
    c1 = circle(1000)
-   r1 = get_radius(c1)
+   center1 = get_center(c1)
 
    c2 = circle(1000)
    noise(c2, 500)
-   r2 = get_radius(c2)
+   center2 = get_center(c2)
    
    c3 = circle(1000)
    offset(c3, (250, 250))
-   r3 = get_radius(c3)
+   center3 = get_center(c3)
    
    g = Group([c1, c2, c3])
    
-   print "r1: %f r2: %f r3: %f" % (r1, r2, r3)
+   print center1
+   print center2
+   print center3
    
    io.view(g)
    
