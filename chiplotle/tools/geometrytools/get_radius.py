@@ -11,14 +11,16 @@ def get_radius(shape):
    '''
    
    bounds = get_bounding_coordinate_pairs(shape)
+   w, h = bounds[1] - bounds[0]
+   return max(w, h) / 2.0
    
-   dist_w = bounds[1][0] - bounds[0][0]
-   dist_h = bounds[1][1] - bounds[0][1]
-
-   if dist_w > dist_h:
-      return dist_w/2.0
-   else:
-      return dist_h/2.0
+#   dist_w = bounds[1][0] - bounds[0][0]
+#   dist_h = bounds[1][1] - bounds[0][1]
+#
+#   if dist_w > dist_h:
+#      return dist_w/2.0
+#   else:
+#      return dist_h/2.0
    
 
 

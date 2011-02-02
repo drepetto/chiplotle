@@ -14,12 +14,16 @@ def get_center(shape):
    
    bounds = get_bounding_coordinate_pairs(shape)
    
-   dist_w = bounds[1][0] - bounds[0][0]
-   dist_h = bounds[1][1] - bounds[0][1]
-
-   x_center = bounds[0][0] + (dist_w/2.0)
-   y_center = bounds[0][1] + (dist_h/2.0)
+#   dist_w = bounds[1][0] - bounds[0][0]
+#   dist_h = bounds[1][1] - bounds[0][1]
+#
+#   x_center = bounds[0][0] + (dist_w/2.0)
+#   y_center = bounds[0][1] + (dist_h/2.0)
    
+   w, h = bounds[1] - bounds[0]
+   x_center = bounds[0].x + (w / 2.0)
+   y_center = bounds[0].y + (h / 2.0)
+
    return Coordinate(x_center, y_center)
    
 
