@@ -8,12 +8,11 @@ def bounding_box(shape):
 
    ll, ur = get_bounding_coordinate_pairs(shape)
 
-   width = (ur.x - ll.x)
-   height = (ur.y - ll.y)
-   center_x = ll.x + width / 2.0
-   center_y = ll.y + height / 2.0
+   w, h = ur - ll
+   center_x = ll.x + w / 2.0
+   center_y = ll.y + h / 2.0
    
-   r =  rectangle(width, height)
+   r =  rectangle(w, h)
    offset(r, (center_x, center_y))
    return r
 
