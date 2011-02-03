@@ -1,11 +1,16 @@
 from chiplotle.geometry.coordinate import Coordinate
-
+from chiplotle.geometry.shapes.path import Path
+   
 def get_line_intersection(line_a, line_b):
    '''
    Finds the intersection point, if any, between lines a and b.
    Returns a Coordinate or None if there is no intersection.
    '''
     
+   #make sure we have two lines
+   assert isinstance(line_a, Path) and len(line_a) == 2
+   assert isinstance(line_b, Path) and len(line_b) == 2   
+   
    p0_x, p0_y = line_a[0]
    p1_x, p1_y = line_a[1]
    p2_x, p2_y = line_b[0]
@@ -28,9 +33,6 @@ def get_line_intersection(line_a, line_b):
       t = -1.0
    else:
       t = ( s2_x * (p0_y - p2_y) - s2_y * (p0_x - p2_x)) / t_divisor
-   
-   #print "s: %f" % s
-   #print "t: %f" % t
 
    if s >= 0 and s <= 1 and t >= 0 and t <= 1:
       #Collision detected
@@ -47,8 +49,8 @@ def get_line_intersection(line_a, line_b):
 if __name__ == '__main__':
    from chiplotle.geometry.factory.line import line
    from chiplotle.geometry.shapes.group import Group
-   from chiplotle.tools import io
-
+   from chiplotle.tools import io   
+   
    line_a = line([0,0], [1000,700])
    line_b = line([1000,0], [0, 1000])
    
@@ -75,4 +77,3 @@ if __name__ == '__main__':
    
    g = Group([line_a, line_b, line_c, line_d, line_e, line_f])
    io.view(g)
-   
