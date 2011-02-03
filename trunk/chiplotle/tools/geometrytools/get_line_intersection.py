@@ -1,6 +1,6 @@
 from chiplotle.geometry.coordinate import Coordinate
 
-def find_line_intersection(line_a, line_b):
+def get_line_intersection(line_a, line_b):
    '''
    Finds the intersection point, if any, between lines a and b.
    Returns a Coordinate or None if there is no intersection.
@@ -52,7 +52,7 @@ if __name__ == '__main__':
    line_a = line([0,0], [1000,700])
    line_b = line([1000,0], [0, 1000])
    
-   intersection = find_line_intersection(line_a, line_b)
+   intersection = get_line_intersection(line_a, line_b)
    
    print "intersection: "
    print intersection
@@ -60,7 +60,7 @@ if __name__ == '__main__':
    line_c = line([100, 1100], [900, 1100])
    line_d = line([100, 1200], [900, 1200])
    
-   intersection = find_line_intersection(line_c, line_d)
+   intersection = get_line_intersection(line_c, line_d)
    
    print "intersection: "
    print intersection
@@ -68,7 +68,7 @@ if __name__ == '__main__':
    line_e = line([1100, 100], [1100, 900])
    line_f = line([1200, 100], [1200, 900])
    
-   intersection = find_line_intersection(line_e, line_f)
+   intersection = get_line_intersection(line_e, line_f)
    
    print "intersection: "
    print intersection
