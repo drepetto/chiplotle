@@ -49,31 +49,29 @@ def get_line_intersection(line_a, line_b):
 if __name__ == '__main__':
    from chiplotle.geometry.factory.line import line
    from chiplotle.geometry.shapes.group import Group
-   from chiplotle.tools import io   
+   from chiplotle.tools import io
+   import random
    
-   line_a = line([0,0], [1000,700])
-   line_b = line([1000,0], [0, 1000])
+   #draw a bunch of lines that do not intersect
    
-   intersection = get_line_intersection(line_a, line_b)
-   
-   print "intersection: "
-   print intersection
-   
-   line_c = line([100, 1100], [900, 1100])
-   line_d = line([100, 1200], [900, 1200])
-   
-   intersection = get_line_intersection(line_c, line_d)
-   
-   print "intersection: "
-   print intersection
+   no_intersections = Group()
 
-   line_e = line([1100, 100], [1100, 900])
-   line_f = line([1200, 100], [1200, 900])
+   line_1 = line([random.randrange(0, 4000), random.randrange(0, 4000)], [random.randrange(0, 4000), random.randrange(0, 4000)])
+   no_intersections.append(line_1)
    
-   intersection = get_line_intersection(line_e, line_f)
+   while len(no_intersections) < 500:
+      new_line = line([random.randrange(0, 4000), random.randrange(0, 4000)], [random.randrange(0, 4000), random.randrange(0, 4000)])
+      
+      intersection = False
+      
+      for l in no_intersections:
+         if get_line_intersection(new_line, l) != None:
+            intersection = True
+            break
+         
+      if intersection == False:
+         no_intersections.append(new_line)
+         print "found %d lines..." % len(no_intersections)
+               
+   io.view(no_intersections)
    
-   print "intersection: "
-   print intersection
-   
-   g = Group([line_a, line_b, line_c, line_d, line_e, line_f])
-   io.view(g)
