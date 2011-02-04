@@ -18,6 +18,7 @@ from dxy880 import DXY880
 from hp7475a import HP7475A
 from hp7550a import HP7550A
 from hp7575a import HP7575A
+from hp7576a import HP7576A
 from hp7585b import HP7585B
 from hp7595a import HP7595A
 from hp7596a import HP7596A
