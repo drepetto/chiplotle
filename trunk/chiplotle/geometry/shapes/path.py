@@ -1,9 +1,9 @@
 from chiplotle.geometry.shapes.shape import _Shape
-from chiplotle.geometry.coordinate import Coordinate
+#from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
    import convert_coordinates_to_hpgl_absolute_path
-from chiplotle.tools.mathtools.rotate_2d import rotate_2d
+#from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 from chiplotle.core import errors
 
 ## TODO: add a LineFormatter (or Formatter) class that can be pluged-in to 
@@ -29,7 +29,7 @@ class Path(_Shape):
    @property
    def points(self):
       return self._points
-
+   ## FIXME should this be settable? Probably not...
    @points.setter
    def points(self, arg):
       self._points = CoordinateArray(arg)
@@ -37,17 +37,24 @@ class Path(_Shape):
 
    ## PRIVATE PROPERTIES ##
 
-   @property
-   def _offset_points(self):
-      return self.points + self.offset
-
-   @property
-   def _offset_rotated_points(self):
-      return rotate_2d(self._offset_points, self.rotation, self.pivot)
+#   @property
+#   def _offset_points(self):
+#      return self.points + self.offset
+#
+#   @property
+#   def _offset_rotated_points(self):
+#      return rotate_2d(self._offset_points, self.rotation, self.pivot)
+#
+#   @property
+#   def _transformed_points(self):
+#      points = self._offset_rotated_points
+#      for trans in self.transforms:
+#         points = trans.transform(points)
+#      return points
 
    @property
    def _transformed_points(self):
-      points = self._offset_rotated_points
+      points = self.points
       for trans in self.transforms:
          points = trans.transform(points)
       return points
@@ -154,8 +161,5 @@ if __name__ == '__main__':
    from chiplotle.tools import io
    
    p = Path([(1, 2), (4, 6), (0, 2), (5, 1)])
-   
-   print p.format
    io.view(p)
 
-   ## displaced
