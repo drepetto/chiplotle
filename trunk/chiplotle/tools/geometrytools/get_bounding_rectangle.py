@@ -1,5 +1,5 @@
 from chiplotle.geometry.factory.rectangle import rectangle
-from chiplotle.geometry.destructive_transforms.offset import offset
+from chiplotle.geometry.transforms.offset import offset
 from chiplotle.tools.geometrytools.get_bounding_coordinate_pairs \
    import get_bounding_coordinate_pairs
 
@@ -21,7 +21,7 @@ def get_bounding_rectangle(shape):
 ## DEMO CODE ##
 if __name__ == '__main__':
    from chiplotle.geometry.factory.circle import circle
-   from chiplotle.geometry.destructive_transforms.noise import noise
+   from chiplotle.geometry.transforms.noise import noise
    from chiplotle.geometry.shapes.group import Group
    from chiplotle.tools import io
 

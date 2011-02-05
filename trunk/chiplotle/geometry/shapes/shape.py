@@ -6,7 +6,8 @@ class _Shape(object):
    language = 'HPGL'
 
    def __init__(self):
-      self.transforms = [ ]
+      pass
+      #self.transforms = [ ]
 
 
    ## PUBLIC PROPERTIES ##

@@ -9,10 +9,6 @@ from chiplotle.core import errors
 ## TODO: add a LineFormatter (or Formatter) class that can be pluged-in to 
 ## change the formatting of the line? e.g., dotted, solid, points, etc.
 
-## TODO: if implementing non-destructive transformations, we should have
-## a 'collapse( )' function that applies the transforms destructively to
-## have a time-processing-efficient alternative.
-
 class Path(_Shape):
    '''
       A generic path (connected points). 
@@ -52,22 +48,24 @@ class Path(_Shape):
 #         points = trans.transform(points)
 #      return points
 
-   @property
-   def _transformed_points(self):
-      points = self.points
-      for trans in self.transforms:
-         points = trans.transform(points)
-      return points
+#   @property
+#   def _transformed_points(self):
+#      points = self.points
+#      for trans in self.transforms:
+#         points = trans.transform(points)
+#      return points
 
    @property
    def _preformat_points(self):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
       if self.closed:
-         tp = self._transformed_points
+         #tp = self._transformed_points
+         tp = self.points
          tp.append(tp[0])
          return tp
       else:
-         return self._transformed_points
+         #return self._transformed_points
+         return self.points
 
    @property
    def _subcommands(self):
