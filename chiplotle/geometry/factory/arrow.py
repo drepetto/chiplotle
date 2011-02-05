@@ -1,18 +1,22 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.factory.isosceles import isosceles
+from chiplotle.geometry.transforms.offset import offset
+from chiplotle.geometry.transforms.rotate import rotate
 from chiplotle.geometry.shapes.group import Group
 from chiplotle.tools.mathtools.xy_to_polar import xy_to_polar
 import math
 
 def arrow(path, headwidth, headheight):
-   ## make arrow head...
+   '''Returns an arrow shape.
+
+   - `path` is a Path object.
+   - `headwidth` is the width of the arrow head.
+   - `headheight` is the height of the arrow head.
+   '''
+
    rot, a = xy_to_polar((path[-1] - path[-2]))
    head = isosceles(headwidth, headheight)
-   ## TODO: replace this position/orientation attribute mechanism with
-   ## explicit operation via +/- and rotation operators?
-   head.rotation = rot + math.pi
-   head.offset = path[-1]
-   head.pivot = path[-1]
+   rotate(head, rot + math.pi, (0, 0))
+   offset(head, path[-1])
 
    return Group([head, path])
 
