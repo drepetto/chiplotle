@@ -3,7 +3,7 @@ from chiplotle.geometry.destructive_transforms.offset import offset
 from chiplotle.tools.geometrytools.get_bounding_coordinate_pairs \
    import get_bounding_coordinate_pairs
 
-def bounding_box(shape):
+def get_bounding_rectangle(shape):
    '''Return a bounding box shape (rectangle) enclosing the givne `shape`.'''
 
    ll, ur = get_bounding_coordinate_pairs(shape)
@@ -28,7 +28,7 @@ if __name__ == '__main__':
    c = circle(1000)
    offset(c, (100, 500))
    noise(c, 500)
-   bb = bounding_box(c)
+   bb = get_bounding_rectangle(c)
    
    io.view(Group([bb, c]))
 
