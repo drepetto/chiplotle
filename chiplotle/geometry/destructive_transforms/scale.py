@@ -9,8 +9,9 @@ def scale(shape, value, pivot = Coordinate(0, 0)):
    - `pivot` is the Coordinate around which the shape will be scaled.
    '''
 
-   try: ## if it's a tuple, convert to Coordinate...
-      ## NOTE Coordinate is a poor name for this, Vector is a more general 
+   try: 
+      ## if it's a tuple, convert to Coordinate...
+      ## NOTE Coordinate is a bad name for this, Vector is a more general 
       ## notion and thus more appropriate here.
       value = Coordinate(*value)
    except TypeError:

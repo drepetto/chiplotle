@@ -4,6 +4,14 @@ from chiplotle.tools.geometrytools.get_centroid import get_centroid
 from chiplotle.tools.iterabletools.flatten import flatten
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 
+
+#def rotate(shape, angle, pivot = 'centroid'):
+#   if pivot == 'centroid':
+#      coords = flatten(list(shape.points))
+#      pivot = get_centroid(coords)
+#
+#   return DestructiveTransform(rotate_2d)(shape, angle, pivot))
+
 def rotate(shape, angle, pivot = 'centroid'):
    '''In place rotation.
 
