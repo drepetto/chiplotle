@@ -56,15 +56,24 @@ class Group(_Shape):
 
    ## PRIVATE PROPERTIES ##
 
+#   @property
+#   def _subcommands(self):
+#      result = [ ]
+#      for shape in self:
+#         shape = copy.copy(shape)
+#         shape.transforms.extend(self.transforms)
+#         ## NOTE: which is best?
+#         #result += shape._subcommands
+#         result += [shape]
+#      return result
    @property
+
    def _subcommands(self):
       result = [ ]
       for shape in self:
-         shape = copy.copy(shape)
-         shape.transforms.extend(self.transforms)
          ## NOTE: which is best?
-         #result += shape._subcommands
-         result += [shape]
+         result += shape._subcommands
+         #result += [shape]
       return result
 
 

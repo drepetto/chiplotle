@@ -46,8 +46,8 @@ def get_bounding_coordinate_pairs(shape):
 if __name__ == '__main__':
    from chiplotle.geometry.factory.circle import circle
    from chiplotle.geometry.factory.cross import cross
-   from chiplotle.geometry.destructive_transforms.noise import noise
-   from chiplotle.geometry.destructive_transforms.offset import offset
+   from chiplotle.geometry.transforms.noise import noise
+   from chiplotle.geometry.transforms.offset import offset
    from chiplotle.geometry.shapes.group import Group
    from chiplotle.tools import io
 
