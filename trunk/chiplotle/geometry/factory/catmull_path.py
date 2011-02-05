@@ -16,7 +16,7 @@ if __name__ == '__main__':
    from chiplotle.tools import io
    from chiplotle.geometry.factory.cross import cross
    from chiplotle.geometry.shapes.group import Group
-   from chiplotle.geometry.destructive_transforms.offset import offset
+   from chiplotle.geometry.transforms.offset import offset
    import random
 
    points = [ ]
