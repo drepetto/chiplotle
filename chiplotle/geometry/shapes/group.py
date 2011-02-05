@@ -144,23 +144,3 @@ class Group(_Shape):
       except AttributeError:
          return False
 
-
-
-## DEMO CODE
-if __name__ == '__main__':
-   from chiplotle.geometry.shapes.group import Group
-   from chiplotle.geometry.shapes.rectangle import Rectangle
-   from chiplotle.tools import io
-   import math
-   r1 = Rectangle(100, 200)
-   r1.offset = (0, 0)
-   r2 = Rectangle(200, 100)
-   r2.offset = (0, 100)
-   g1 = Group([r1, r2])
-   g1.rotation = math.pi / 3
-   g1.offset = (100, 100)
-   g2 = Group([g1, Rectangle(50, 400)])
-   print g2.format
-   io.view(g2)
-
-   
