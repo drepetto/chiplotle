@@ -27,6 +27,5 @@ if __name__ == '__main__':
        assert isinstance(ac, Path)
        gr.append(ac)
 
-
    io.view(gr)
 
