@@ -77,7 +77,7 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
 ## RUN DEMO CODE
 if __name__ == '__main__':
    from chiplotle.tools import io
-   from chiplotle.geometry.factory.star import star_crisscross
+   from chiplotle.geometry.factory.star_crisscross import star_crisscross
    from chiplotle.geometry.shapes.group import Group
    from chiplotle.geometry.transforms.offset import offset
    
@@ -85,7 +85,8 @@ if __name__ == '__main__':
    
    for points in range(5, 26):
       for i in range(1, points):
-         s = star_crisscross(1000,1000,num_points = points, jump_size = i, find_valid_jump_size = False)
+         s = star_crisscross(1000, 1000, num_points = points, 
+            jump_size = i, find_valid_jump_size = False)
          offset(s, ((i - 1) * 1000, -(points - 5) * 1000))
          gr1.append(s)
    
