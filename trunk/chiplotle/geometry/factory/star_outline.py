@@ -50,7 +50,7 @@ def star_outline(width, height, num_points = 5):
 ## RUN DEMO CODE
 if __name__ == '__main__':
    from chiplotle.tools import io
-   from chiplotle.geometry.factory.star import star_outline
+   from chiplotle.geometry.factory.star_outline import star_outline
    from chiplotle.geometry.shapes.group import Group
    
    gr1 = Group()
