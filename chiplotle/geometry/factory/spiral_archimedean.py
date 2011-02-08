@@ -1,7 +1,7 @@
 from chiplotle.geometry.shapes.path import Path
 import math
 
-def archimedean_spiral(num_turns = 5, turn_spacing = 100, direction = "cw", segments = 500):  
+def spiral_archimedean(num_turns = 5, turn_spacing = 100, direction = "cw", segments = 500):  
    '''
    Constructs an Archimedean (arithmetic) spiral with the given number of
    turns, turn spacing, direction ("cw" or "ccw"), and number of
@@ -44,7 +44,7 @@ if __name__ == '__main__':
    from chiplotle.geometry.factory.line import line
    from chiplotle.tools import io
    
-   s = archimedean_spiral()
+   s = spiral_archimedean()
    assert isinstance(s, Path)
    
    line_right = line((0,0), (500, 0))
