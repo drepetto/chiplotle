@@ -40,9 +40,7 @@ def archimedean_spiral(num_turns = 5, turn_spacing = 100, direction = "cw", segm
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
-   from chiplotle.tools.geometrytools.get_bounding_rectangle import get_bounding_rectangle
    from chiplotle.geometry.shapes.group import Group
-   from chiplotle.geometry.factory.rectangle import rectangle
    from chiplotle.geometry.factory.line import line
    from chiplotle.tools import io
    
