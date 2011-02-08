@@ -4,7 +4,7 @@ import math
 def archimedean_spiral(num_turns = 5, turn_spacing = 100, direction = "cw", segments = 500):  
    '''
    Constructs an Archimedean (arithmetic) spiral with the given number of
-   turns, turn spacing, direction ("cw" or "ccw"), exponent, and number of
+   turns, turn spacing, direction ("cw" or "ccw"), and number of
    segments.
    
    The default values will create a CW spiral with a right half that is
