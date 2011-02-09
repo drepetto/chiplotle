@@ -3,15 +3,18 @@ import math
 
 def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", segments = 500):  
    '''
-   Constructs an logarithmic spiral with the given number of
-   turns, expansion rate (must be positive), direction ("cw" or "ccw"), and
-   number of segments.
+   Constructs an logarithmic spiral with the given number of turns using the
+   specified number of points.
    
-   expansion_rate will control how large the spiral is for a given number of
+   expansion_rate controls how large the spiral is for a given number of
    turns. Very small numbers will result in tightly-wound spirals. Large numbers
    will give spirals with giant "tails". Typical values range from 0.1 to 0.3
    
+   The logarithmic spiral equation is:
+   
    r = e^(bt)
+   
+   where r is the radius, e is e, b is the expansion rate, and t is theta
    
    '''
    
@@ -24,9 +27,6 @@ def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", se
 
    if expansion_rate < 0.0:
       expansion_rate *= -1.0
-
-   if direction is "ccw":
-      dir_multi = -1.0
    
    #print "theta_incr: %f" % theta_incr
    
@@ -42,7 +42,10 @@ def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", se
    for i in range(segments - 1):
 
       x = math.cos(theta) * math.pow(math.e, (expansion_rate * theta))
-      y = math.sin(theta) * math.pow(math.e, (expansion_rate * theta)) * dir_multi
+      y = math.sin(theta) * math.pow(math.e, (expansion_rate * theta))
+
+      if direction == "ccw":
+         y *= -1.0
       
       #print "x: %f y: %f theta: %f" % (x, y, theta)
 
@@ -59,11 +62,12 @@ def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", se
 if __name__ == '__main__':
    from chiplotle.geometry.shapes.group import Group
    from chiplotle.geometry.factory.line import line
+   from chiplotle.geometry.transforms.offset import offset
    from chiplotle.tools import io
    
    s = spiral_logarithmic()
-   assert isinstance(s, Path)
-   
+
+   #add some lines for scale
    line_right = line((0,0), (500, 0))
    line_left = line((0,0), (-500, 0))
    line_up = line((0,0), (0, 500))
