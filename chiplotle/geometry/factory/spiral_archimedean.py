@@ -4,7 +4,7 @@ import math
 def spiral_archimedean(num_turns = 5, wrapping_constant = 1, scaler = 15.0, direction = "cw", segments = 500):  
    '''
    Constructs an Archimedean (arithmetic) spiral with the given number of
-   turns using the specified number of points
+   turns using the specified number of points.
    
    wrapping_constant controls how tightly the spiral is wound. Several classic
    spirals can be created using different wrapping_constants:
@@ -20,7 +20,7 @@ def spiral_archimedean(num_turns = 5, wrapping_constant = 1, scaler = 15.0, dire
    
    r = a * theta^(1/n) 
    
-   where a is the scaler and n is the wrapping_constant.
+   where r is the radius, a is the scaler, and n is the wrapping_constant.
    
    
    More info:
@@ -70,7 +70,6 @@ def spiral_archimedean(num_turns = 5, wrapping_constant = 1, scaler = 15.0, dire
 
 if __name__ == '__main__':
    from chiplotle.geometry.shapes.group import Group
-   from chiplotle.geometry.factory.line import line
    from chiplotle.geometry.transforms.offset import offset
    from chiplotle.geometry.transforms.rotate import rotate
    from chiplotle.tools import io
