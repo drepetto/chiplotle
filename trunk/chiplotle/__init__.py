@@ -20,6 +20,8 @@ from chiplotle.core import errors
 
 from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.coordinate import Coordinate
+CoordArray = CoordinateArray
+Coord = Coordinate
 
 from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.pen import Pen
@@ -31,6 +33,7 @@ from chiplotle.hpgl.compound.decorators import *
 
 from chiplotle.tools import *
 from chiplotle.tools.plottertools import instantiate_plotters
+from chiplotle.tools.plottertools import instantiate_virtual_plotter
 from chiplotle import plotters
 
 
