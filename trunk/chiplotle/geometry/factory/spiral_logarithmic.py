@@ -25,8 +25,9 @@ def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", se
 
    dir_multi = 1.0
 
-   if expansion_rate < 0.0:
-      expansion_rate *= -1.0
+   expansion_rate = abs(expansion_rate)
+#   if expansion_rate < 0.0:
+#      expansion_rate *= -1.0
    
    #print "theta_incr: %f" % theta_incr
    
