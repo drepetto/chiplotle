@@ -20,8 +20,6 @@ from chiplotle.core import errors
 
 from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.coordinate import Coordinate
-CoordArray = CoordinateArray
-Coord = Coordinate
 
 from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.pen import Pen
@@ -29,6 +27,7 @@ from chiplotle.hpgl.pen import Pen
 #from chiplotle.hpgl.compound import *
 #from chiplotle.hpgl.compound.decorators import *
 
+from chiplotle.geometry.shapes import *
 from chiplotle.geometry.factory import *
 from chiplotle.geometry.transforms import *
 
@@ -39,6 +38,11 @@ from chiplotle.tools import *
 from chiplotle import plotters
 
 
+## shortcuts / abbreviations ##
+
+group = Group
+CoordArray = CoordinateArray
+Coord = Coordinate
 
 ## remove unnecessary modules...
 #globals().pop('hpgl')
