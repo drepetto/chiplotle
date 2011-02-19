@@ -1,6 +1,12 @@
 from chiplotle.geometry.shapes.shape import _Shape
 
 class FormatDecorator(object):
+   '''FormatDecorators know how to wrap Decoratable objects with additional
+   formatting stuff.
+
+   - `sticky` = False reverts the formatting to a previous state or 
+      some default.
+   '''
    
    def __init__(self, sticky=False):
       self.sticky = sticky
