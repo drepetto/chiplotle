@@ -18,11 +18,11 @@ class PenDecorator(FormatDecorator):
 
    @property
    def preformat_commands(self):
-      return self.pen
+      return [self.pen]
 
    @property
    def postformat_commands(self):
-      return PenDefaults()
+      return [PenDefaults()]
 
 
 ## DEMO

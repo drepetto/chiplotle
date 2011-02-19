@@ -33,28 +33,6 @@ class Path(_Shape):
 
    ## PRIVATE PROPERTIES ##
 
-#   @property
-#   def _offset_points(self):
-#      return self.points + self.offset
-#
-#   @property
-#   def _offset_rotated_points(self):
-#      return rotate_2d(self._offset_points, self.rotation, self.pivot)
-#
-#   @property
-#   def _transformed_points(self):
-#      points = self._offset_rotated_points
-#      for trans in self.transforms:
-#         points = trans.transform(points)
-#      return points
-
-#   @property
-#   def _transformed_points(self):
-#      points = self.points
-#      for trans in self.transforms:
-#         points = trans.transform(points)
-#      return points
-
    @property
    def _preformat_points(self):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
@@ -68,15 +46,14 @@ class Path(_Shape):
          return self.points
 
    @property
-   def _subcommands(self):
+   def _infix_commands(self):
       if _Shape.language == 'HPGL':
          ## create hpgl commands...
          #print self._preformat_points
-         result = convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
+         return convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
       elif _Shape.language == 'gcode':
          ## create gcode
          print 'Sorry, no g-code support!'
-      return result 
 
 
    ## OVERRIDES ##

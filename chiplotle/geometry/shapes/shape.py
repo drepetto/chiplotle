@@ -10,10 +10,6 @@ class _Shape(Decoratable):
       Decoratable.__init__(self)
 
 
-   @property
-   def _subcommands(self):
-      raise NotImplementedError
-
 
    ## OVERRIDES ##
    
