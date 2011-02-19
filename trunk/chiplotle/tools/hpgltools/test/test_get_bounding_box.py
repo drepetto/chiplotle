@@ -13,16 +13,3 @@ def test_get_bounding_box_02( ):
    assert t == (Coordinate(1, -2), Coordinate(10, 4))
 
 
-def test_get_bounding_box_03( ):
-   '''The function can take a _HPGLCompound.'''
-   a = Rectangle((100, 200), 10, 10)
-   t = hpgltools.get_bounding_box(a)
-   assert t == (Coordinate(95, 195), Coordinate(105, 205))
-
-
-def test_get_bounding_box_04( ):
-   '''The function can take a Group with _HPGLPrimitives.'''
-   a = Group((100, 200), [PA((2, 2)), PR((10, 10))])
-   t = hpgltools.get_bounding_box(a)
-   ## NOTE: should this return a (102, 202) instead of (100, 200)?
-   assert t == (Coordinate(100, 200), Coordinate(112, 212))
