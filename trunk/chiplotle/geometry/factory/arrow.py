@@ -13,9 +13,9 @@ def arrow(path, headwidth, headheight):
    - `headheight` is the height of the arrow head.
    '''
 
-   rot, a = xy_to_polar((path[-1] - path[-2]))
+   r, a = xy_to_polar((path[-1] - path[-2]))
    head = isosceles(headwidth, headheight)
-   rotate(head, rot + math.pi, (0, 0))
+   rotate(head, a - math.pi / 2, (0, 0))
    offset(head, path[-1])
 
    return Group([head, path])
@@ -25,8 +25,12 @@ def arrow(path, headwidth, headheight):
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
-   from chiplotle.tools import io
-   from chiplotle.geometry.factory.bezier_path import bezier_path
-   path = bezier_path([(0, 0), (100, 100), (0, 200), (100, -200)], 1)
-   e = arrow(path, 10, 20)
-   io.view(e)
+   from chiplotle import *
+   from random import randint
+   coords = [(randint(0, 300), randint(0, 300)) for i in range(3)]
+   p = path(coords)
+   a1 = arrow(p, 10, 20)
+   coords = [(randint(0, 300), randint(0, 300)) for i in range(5)]
+   p = bezier_path(coords, 1)
+   a2 = arrow(p, 10, 20)
+   io.view(group([a1, a2]))
