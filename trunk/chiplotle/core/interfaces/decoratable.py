@@ -5,19 +5,35 @@ class Decoratable(object):
       self.format_decorators = [ ]
 
    @property
-   def format(self):
-      '''Returns a language-specific string representation of self.'''
-      path = [c.format for c in self._subcommands]
-      pre_decos = [ ]
-      post_decos = [ ]
+   def _prefix_commands(self):
+      result = [ ]
       for deco in self.format_decorators:
-         pre_decos.append(deco.preformat)
-         post_decos.append(deco.postformat)
+         result += deco.preformat_commands
+      return result
 
-      pre_decos = ''.join(pre_decos)
-      post_decos = ''.join(post_decos)
-      path = ''.join(path)
 
-      result = pre_decos + path + post_decos
+   @property
+   def _infix_commands(self):
+      raise NotImplementedError
+
+   @property
+   def _suffix_commands(self):
+      result = [ ]
+      for deco in reversed(self.format_decorators):
+         result += deco.postformat_commands
+      return result
+
+   @property
+   def _subcommands(self):
+      '''Returns a list of language-specific commands representing self.'''
+      result = \
+         self._prefix_commands + \
+         self._infix_commands + \
+         self._suffix_commands
       return result
       
+
+   @property
+   def format(self):
+      '''Returns a language-specific string representation of self.'''
+      return ''.join([c.format for c in self._subcommands])
