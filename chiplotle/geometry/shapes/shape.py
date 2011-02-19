@@ -1,24 +1,13 @@
 from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.core.interfaces.decoratable import Decoratable
 
-class _Shape(object):
+class _Shape(Decoratable):
    '''Abstract class from which all geometric shapes inherit.'''
 
    language = 'HPGL'
 
    def __init__(self):
-      pass
-      #self.transforms = [ ]
-
-
-   ## PUBLIC PROPERTIES ##
-
-   @property
-   def format(self):
-      '''Returns the final drawing commands in string format.'''
-      result = ''
-      for c in self._subcommands:
-         result += c.format
-      return result
+      Decoratable.__init__(self)
 
 
    @property
