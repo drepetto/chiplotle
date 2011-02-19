@@ -13,8 +13,10 @@ def arrow(path, headwidth, headheight):
    - `headheight` is the height of the arrow head.
    '''
 
+   ## make arow head...
    r, a = xy_to_polar((path[-1] - path[-2]))
    head = isosceles(headwidth, headheight)
+   offset(head, (0, -headheight))
    rotate(head, a - math.pi / 2, (0, 0))
    offset(head, path[-1])
 
