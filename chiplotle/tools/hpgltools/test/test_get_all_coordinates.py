@@ -10,15 +10,3 @@ def test_get_all_coordinates_01( ):
    assert c[2] == Coordinate(3, 4)
  
 
-def test_get_all_coordinates_02( ):
-   '''get_all_coordinates( ) works with _HPGLCompound.'''
-   t =  [Rectangle((5, 5), 10, 10)]
-   c = hpgltools.get_all_coordinates(t)
-   assert len(c) == 6
-   assert c[0] == Coordinate(5, 5)
-   assert c[1] == Coordinate(0, 10)
-   assert c[2] == Coordinate(10, 10)
-   assert c[3] == Coordinate(10, 0)
-   assert c[4] == Coordinate(0, 0)
-   assert c[5] == Coordinate(0, 10)
- 

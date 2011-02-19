@@ -58,10 +58,3 @@ def test_transpose_RR( ):
    assert t.xy == Coordinate(1, 2)
 
 
-def test_transpose_group_01( ):
-   t = Group((1, 2), [Circle((10, 10), 100)])
-   transpose(t, (1.5, -2.5))
-   assert t.xy == Coordinate(2.5, -0.5)
-   assert t[0].xy == Coordinate(10, 10)
-   assert t[0].radius == 100
-

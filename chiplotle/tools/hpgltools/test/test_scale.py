@@ -57,14 +57,6 @@ def test_scale_RR( ):
    assert t.xy == Coordinate(1.5, 3.0)
    
 
-def test_scale_group_01( ):
-   t = Group((1, 2), [Circle((10, 10), 100)])
-   scale(t, 1.5)
-   assert t.xy == Coordinate(1.5, 3)
-   assert t[0].xy == Coordinate(15, 15)
-   assert t[0].radius == 150
-   
-
 def test_scale_list_01( ):
    t = [PA((1, 2)), PU((3, 4))]
    scale(t, 1.5)
