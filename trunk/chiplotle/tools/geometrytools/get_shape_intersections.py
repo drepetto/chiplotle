@@ -3,20 +3,19 @@ from chiplotle.tools.geometrytools.get_line_intersection \
    import get_line_intersection
 
 def get_shape_intersections(shape1, shape2):
-   '''Returns all intersecting points found in the given shapes.'''
+   '''Returns a generator of all intersecting points found in the 
+   given shapes.'''
 
    if not isinstance(shape1, _Shape) or not isinstance(shape2, _Shape):
       raise TypeError
 
-   result = [ ]
    for i in range(len(shape1)-1):
       for j in range(len(shape2)-1):
          intersection = get_line_intersection(
             line(s1[i], s1[i+1]), 
             line(s2[j], s2[j+1]))
          if intersection:
-            result.append(intersection)
-   return result
+            yield intersection
 
 
 ## demo
