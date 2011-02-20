@@ -11,10 +11,10 @@ def get_line_intersection(line_a, line_b):
    assert isinstance(line_a, Path) and len(line_a) == 2
    assert isinstance(line_b, Path) and len(line_b) == 2   
    
-   p0_x, p0_y = line_a[0]
-   p1_x, p1_y = line_a[1]
-   p2_x, p2_y = line_b[0]
-   p3_x, p3_y = line_b[1]
+   p0_x, p0_y = line_a.points[0]
+   p1_x, p1_y = line_a.points[1]
+   p2_x, p2_y = line_b.points[0]
+   p3_x, p3_y = line_b.points[1]
     
    s1_x = float(p1_x - p0_x)
    s1_y = float(p1_y - p0_y)
@@ -50,17 +50,19 @@ if __name__ == '__main__':
    from chiplotle.geometry.factory.line import line
    from chiplotle.geometry.shapes.group import Group
    from chiplotle.tools import io
-   import random
+   from random import randrange
    
    #draw a bunch of lines that do not intersect
    
    no_intersections = Group()
 
-   line_1 = line([random.randrange(0, 4000), random.randrange(0, 4000)], [random.randrange(0, 4000), random.randrange(0, 4000)])
+   line_1 = line([randrange(0, 4000), randrange(0, 4000)], 
+      [randrange(0, 4000), randrange(0, 4000)])
    no_intersections.append(line_1)
    
-   while len(no_intersections) < 500:
-      new_line = line([random.randrange(0, 4000), random.randrange(0, 4000)], [random.randrange(0, 4000), random.randrange(0, 4000)])
+   while len(no_intersections) < 300:
+      new_line = line([randrange(0, 4000), randrange(0, 4000)], 
+         [randrange(0, 4000), randrange(0, 4000)])
       
       intersection = False
       
