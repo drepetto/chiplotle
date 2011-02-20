@@ -1,4 +1,5 @@
 from chiplotle.geometry.shapes.shape import _Shape
+from chiplotle.geometry.factory.line import line
 from chiplotle.tools.geometrytools.get_line_intersection \
    import get_line_intersection
 
@@ -9,11 +10,11 @@ def get_shape_intersections(shape1, shape2):
    if not isinstance(shape1, _Shape) or not isinstance(shape2, _Shape):
       raise TypeError
 
-   for i in range(len(shape1)-1):
-      for j in range(len(shape2)-1):
+   for i in range(len(shape1.points)-1):
+      for j in range(len(shape2.points)-1):
          intersection = get_line_intersection(
-            line(s1[i], s1[i+1]), 
-            line(s2[j], s2[j+1]))
+            line(shape1.points[i], shape1.points[i+1]), 
+            line(shape2.points[j], shape2.points[j+1]))
          if intersection:
             yield intersection
 
