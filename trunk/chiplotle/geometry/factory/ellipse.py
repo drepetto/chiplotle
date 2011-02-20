@@ -1,7 +1,7 @@
 from chiplotle.geometry.shapes.path import Path
 import math
 
-def ellipse(width, height, segments = 100):  
+def ellipse(width, height, segments = 36):  
    '''
    Constructs an ellipse with the given width, height, and number of segments.
    '''
