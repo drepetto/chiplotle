@@ -58,11 +58,11 @@ class Path(_Shape):
 
    ## OVERRIDES ##
 
-   def __getitem__(self, arg):  
-      return self.points[arg]
-
-   def __setitem__(self, key, arg):
-      self._points[key] = arg
+#   def __getitem__(self, arg):  
+#      return self.points[arg]
+#
+#   def __setitem__(self, key, arg):
+#      self._points[key] = arg
 
    def __len__(self):
       return len(self.points)
