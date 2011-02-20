@@ -44,6 +44,16 @@ def test_coordinate__init__06( ):
    assert raises(errors.InitParameterError, 't = Coordinate((1, 2, 3))')
 
 
+def test_coordinate__init__07( ):
+   '''Coordinate cannot be initialized with a Path.'''
+   assert raises(errors.InitParameterError, 't = Coordinate(Path([1,2]))')
+
+
+def test_coordinate__init__08( ):
+   '''Coordinate cannot be initialized with a Group.'''
+   assert raises(errors.InitParameterError, 't = Coordinate(Group([]))')
+
+
 ## attribute assignment ##
 
 def test_coordinate_attribute_assignment_01( ):

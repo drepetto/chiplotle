@@ -25,8 +25,9 @@ class Coordinate(object):
             raise errors.InitParameterError( )
       elif len(args) == 2:
          from chiplotle.tools.iterabletools.isiterable import isiterable
-         if isiterable(args[0]) or isiterable(args[1]):
-            #raise TypeError('Each element in the pair must be a scalar')
+#         if isiterable(args[0]) or isiterable(args[1]):
+         if not isinstance(args[0], (float, int, long)) or \
+            not isinstance(args[1], (float, int, long)):
             raise errors.InitParameterError( )
          self._x = args[0]
          self._y = args[1]
