@@ -14,11 +14,11 @@ def arrow(path, headwidth, headheight):
    '''
 
    ## make arow head...
-   r, a = xy_to_polar((path[-1] - path[-2]))
+   r, a = xy_to_polar((path.points[-1] - path.points[-2]))
    head = isosceles(headwidth, headheight)
    offset(head, (0, -headheight))
    rotate(head, a - math.pi / 2, (0, 0))
-   offset(head, path[-1])
+   offset(head, path.points[-1])
 
    return Group([head, path])
 
