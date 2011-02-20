@@ -1,5 +1,6 @@
 from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.tools.geometrytools.get_bounding_coordinate_pairs import get_bounding_coordinate_pairs
+from chiplotle.tools.geometrytools.get_minmax_coordinates \
+   import get_minmax_coordinates
 
 def get_radius(shape):
    '''
@@ -10,17 +11,9 @@ def get_radius(shape):
    
    '''
    
-   bounds = get_bounding_coordinate_pairs(shape)
+   bounds = get_minmax_coordinates(shape.points)
    w, h = bounds[1] - bounds[0]
    return max(w, h) / 2.0
-   
-#   dist_w = bounds[1][0] - bounds[0][0]
-#   dist_h = bounds[1][1] - bounds[0][1]
-#
-#   if dist_w > dist_h:
-#      return dist_w/2.0
-#   else:
-#      return dist_h/2.0
    
 
 
