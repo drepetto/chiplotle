@@ -1,5 +1,8 @@
-from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.core.interfaces.decoratable import Decoratable
+from chiplotle.tools.geometrytools.get_center import get_center
+from chiplotle.tools.geometrytools.get_centroid import get_centroid
+from chiplotle.tools.geometrytools.get_bounding_rectangle \
+   import get_bounding_rectangle
 
 class _Shape(Decoratable):
    '''Abstract class from which all geometric shapes inherit.'''
@@ -10,8 +13,25 @@ class _Shape(Decoratable):
       Decoratable.__init__(self)
 
 
-
    ## OVERRIDES ##
-   
+
    def __repr__(self):
-      return self.__class__.__name__ + "( )"
+      return str(self)
+
+   def __str__(self):
+      return '%s(%d)' % (self.__class__.__name__, len(self))
+
+
+   ## PUBLIC PROPERTIES ##
+
+   @property
+   def center(self):
+      return get_center(self.points)
+
+   @property
+   def centroid(self):
+      return get_centroid(self.points)
+
+   @property
+   def bounding_rectangle(self):
+      return get_bounding_rectangle(self)

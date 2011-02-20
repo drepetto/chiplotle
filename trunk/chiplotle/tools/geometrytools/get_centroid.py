@@ -1,16 +1,16 @@
 from chiplotle.geometry.coordinate import Coordinate
 
-def get_centroid(arg):
+def get_centroid(coords):
    '''Returns the centroid of the given coordinates.
    
-   - `arg` is a flat list of Coordinates or a CoordinateArray.
+   - `coords` is a flat list of Coordinates or a CoordinateArray.
    '''
 
    ## convert into a set to remove duplicate coordinates...
-   arg = set(arg)
+   coords = set(coords)
    result = Coordinate(0, 0)
-   for c in arg:
+   for c in coords:
       result += c
-   return result / len(arg)
+   return result / len(coords)
       
       

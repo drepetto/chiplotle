@@ -1,10 +1,12 @@
 from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.tools.geometrytools.get_bounding_coordinate_pairs import get_bounding_coordinate_pairs
+from chiplotle.tools.geometrytools.get_minmax_coordinates \
+   import get_minmax_coordinates
 
-def get_center(shape):
+def get_center(coords):
    '''
    
-   Returns a Coordinate() that is in the center of the shape.
+   Returns a Coordinate() that is in the center of the given
+   set/list of `coords`.
    "center" is defined as being half way between the top/bottom
    and left/right-most points. This will be different from the
    centroid, which takes the distribution of the points into
@@ -12,13 +14,7 @@ def get_center(shape):
    
    '''
    
-   bounds = get_bounding_coordinate_pairs(shape)
-   
-#   dist_w = bounds[1][0] - bounds[0][0]
-#   dist_h = bounds[1][1] - bounds[0][1]
-#
-#   x_center = bounds[0][0] + (dist_w/2.0)
-#   y_center = bounds[0][1] + (dist_h/2.0)
+   bounds = get_minmax_coordinates(coords)
    
    w, h = bounds[1] - bounds[0]
    x_center = bounds[0].x + (w / 2.0)
@@ -27,31 +23,3 @@ def get_center(shape):
    return Coordinate(x_center, y_center)
    
 
-
-## DEMO
-if __name__ == '__main__':
-   from chiplotle.geometry.factory.circle import circle
-   from chiplotle.geometry.transforms.noise import noise
-   from chiplotle.geometry.transforms.offset import offset
-   from chiplotle.geometry.shapes.group import Group
-   from chiplotle.tools import io
-
-   c1 = circle(1000)
-   center1 = get_center(c1)
-
-   c2 = circle(1000)
-   noise(c2, 500)
-   center2 = get_center(c2)
-   
-   c3 = circle(1000)
-   offset(c3, (250, 250))
-   center3 = get_center(c3)
-   
-   g = Group([c1, c2, c3])
-   
-   print center1
-   print center2
-   print center3
-   
-   io.view(g)
-   

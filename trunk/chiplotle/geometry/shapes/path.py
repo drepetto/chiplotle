@@ -3,11 +3,8 @@ from chiplotle.geometry.shapes.shape import _Shape
 from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
    import convert_coordinates_to_hpgl_absolute_path
-#from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 from chiplotle.core import errors
 
-## TODO: add a LineFormatter (or Formatter) class that can be pluged-in to 
-## change the formatting of the line? e.g., dotted, solid, points, etc.
 
 class Path(_Shape):
    '''
@@ -66,12 +63,6 @@ class Path(_Shape):
 
    def __len__(self):
       return len(self.points)
-
-   def __repr__(self):
-      return '%s(%s)' % (self.__class__.__name__, self.points)
-
-   def __str__(self):
-      return '%s(%d)' % (self.__class__.__name__, len(self))
 
 
    ## operators ##
