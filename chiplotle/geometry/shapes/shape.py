@@ -1,8 +1,8 @@
 from chiplotle.core.interfaces.decoratable import Decoratable
 from chiplotle.tools.geometrytools.get_center import get_center
 from chiplotle.tools.geometrytools.get_centroid import get_centroid
-from chiplotle.tools.geometrytools.get_bounding_rectangle \
-   import get_bounding_rectangle
+from chiplotle.tools.geometrytools.get_minmax_coordinates \
+   import get_minmax_coordinates
 
 class _Shape(Decoratable):
    '''Abstract class from which all geometric shapes inherit.'''
@@ -33,5 +33,5 @@ class _Shape(Decoratable):
       return get_centroid(self.points)
 
    @property
-   def bounding_rectangle(self):
-      return get_bounding_rectangle(self)
+   def minmax_coordinates(self):
+      return get_minmax_coordinates(self.points)
