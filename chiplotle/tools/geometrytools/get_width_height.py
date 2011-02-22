@@ -25,10 +25,10 @@ if __name__ == '__main__':
 
    assert isinstance(rw, Path)
    
-   h_w = get_width_height(rw)
+   (width, height) = get_width_height(rw)
    
    #a circle around all the points
-   c = circle(h_w[0]/2.0, 500)
+   c = circle(width/2.0, 500)
    
    g = Group((rw, c))
    
