@@ -1,5 +1,6 @@
-from chiplotle.tools.mathtools.interpolate_linear import interpolate_linear
+from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.shapes.path import Path
+from chiplotle.tools.mathtools.interpolate_linear import interpolate_linear
 
 def path_linear(coords, interpolation_unit):
    '''Returns a path with linearly interpolated segments. 
@@ -13,6 +14,7 @@ def path_linear(coords, interpolation_unit):
       If `interpolation_unit` > coord[i] - coord[i-1], the 
       coord[i] - coord[i-1] segment is not further segmented.
    '''
+   coords = CoordinateArray(coords)
    
    def units_per_path_segment(coords, interpolation_unit):
       result = [ ]
