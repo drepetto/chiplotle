@@ -24,7 +24,7 @@ def test_get_centroid_arg_02( ):
 def test_get_centroid_arg_03( ):
    '''get_centroid( ) can not take a list of tuples.'''
    c = [(1, 2), (-1, -2)]
-   assert py.test.raises(OperandError, 't = geometrytools.get_centroid(c)')
+   assert py.test.raises(TypeError, 't = geometrytools.get_centroid(c)')
 
 
 
