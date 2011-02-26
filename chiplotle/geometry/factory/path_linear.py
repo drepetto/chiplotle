@@ -1,7 +1,7 @@
 from chiplotle.tools.mathtools.interpolate_linear import interpolate_linear
 from chiplotle.geometry.shapes.path import Path
 
-def path_linear_interpolation(coords, interpolation_unit):
+def path_linear(coords, interpolation_unit):
    '''Returns a path with linearly interpolated segments. 
    Visually the result is the same as a plain path, but this is
    useful as an intermediate step in constructing more interesting
@@ -44,7 +44,7 @@ if __name__ == '__main__':
 
    coords = CoordinateArray([random.randint(0, 1000) for i in range(10)])
    #coords = CoordinateArray([0, 0, 300, 0, 300, 300, 0, 300, 0, 0])
-   p = path_linear_interpolation(coords, 100)
+   p = path_linear(coords, 100)
 
    circs =  [ ]
    for coord in p.points:
