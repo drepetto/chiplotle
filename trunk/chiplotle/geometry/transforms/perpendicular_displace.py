@@ -21,7 +21,7 @@ def perpendicular_displace(path, displacements):
       perp = ~d_points[i]
       mag = perp.magnitude
       if mag == 0: ## two points are overlapping.
-         continue
+         disp = 0
       else:
          disp = perp / mag * displacements[i]
 
@@ -35,8 +35,8 @@ if __name__ == '__main__':
    import copy
    import random
 
-   rndpath = [random.randint(0, 1000) for i in range(10)]
-   p = bezier_path(rndpath, .1)
+   rndpath = [random.randint(0, 2000) for i in range(10)]
+   p = bezier_path(rndpath, .1, 80)
    pc = copy.deepcopy(p)
    PenDecorator(Pen(2))(pc)
 
