@@ -16,12 +16,14 @@ def plot_hpgl_file_max_size(file):
    to be as large as possible without distorting either axis.
    '''
    plotter = instantiate_plotters( )[0]
+   plotter.set_origin_bottom_left()
 
    f = io.import_hpgl_file(file)
    
 #   print f
    
-   dimensions = hpgltools.find_hpgl_dimensions(f)
+   #dimensions = hpgltools.find_hpgl_dimensions(f)
+   dimensions = hpgltools.get_bounding_box(f)
    
    print "original dimensions: "
    print dimensions
@@ -37,40 +39,35 @@ def plot_hpgl_file_max_size(file):
    width = plotter.margins.hard.width
    height = plotter.margins.hard.height
    
-   maxScaleWidth = width/widthPlot
-   maxScaleHeight = height/heightPlot
+   maxScaleWidth = float(width) / widthPlot
+   maxScaleHeight = float(height) / heightPlot
    
-   if maxScaleWidth > maxScaleHeight:
-      scaler = maxScaleHeight
-   else:
-      scaler = maxScaleWidth
+   scaler = max(maxScaleHeight, maxScaleWidth)
       
    p1X = 0
    p1Y = 0
    p2X = int(widthPlot * scaler)
    p2Y = int(heightPlot * scaler)
    
-   print minX, minY, maxX, maxY
-   print widthPlot, heightPlot
-   print p1X, p1Y, p2X, p2Y
-   print scaler
+   print 'minX, minY, maxX, maxY: ', minX, minY, maxX, maxY
+   print 'width, height: ', widthPlot, heightPlot
+   print 'p1x, p1y, p2x, p2y: ', p1X, p1Y, p2X, p2Y
+   print 'scaler: ', scaler
 
-   plotter.set_origin_bottom_left()
-   
    hpgltools.scale(f, scaler)
 
-   dimensions = hpgltools.find_hpgl_dimensions(f)
+   #dimensions = hpgltools.find_hpgl_dimensions(f)
+   dimensions = hpgltools.get_bounding_box(f)
    
    hpgltools.transpose(f, [-dimensions[0][0], -dimensions[0][1]])
    
-   dimensions = hpgltools.find_hpgl_dimensions(f)
+   #dimensions = hpgltools.find_hpgl_dimensions(f)
+   dimensions = hpgltools.get_bounding_box(f)
    
    print "scaled dimensions: "
    print dimensions
    
    plotter.write(f)
-   
-
    ## call flush( ) to wait till all data is written before exiting...
    plotter._serial_port.flush( )
 
