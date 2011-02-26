@@ -58,7 +58,7 @@ if __name__ == '__main__':
    from chiplotle.geometry.shapes.path import Path
    from chiplotle.geometry.shapes.group import Group
    from chiplotle.tools import io
-   points  = [(0, 0), (10, 10), (-10, 10), (-10, -10), (10, -10), (0, 0)]
+   points  = [(0, 0), (100, 100), (-100, 100), (-100, -100), (100, -100), (0, 0)]
    e1 = bezier_path(points, 1)
    e2 = bezier_path(points, 0.5)
    e3 = bezier_path(points, 0)
