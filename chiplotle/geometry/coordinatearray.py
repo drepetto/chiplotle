@@ -8,29 +8,6 @@ class CoordinateArray(object):
    def __init__(self, xy=None):
       if xy is None: xy = [ ]
 
-#      ## TODO check and clean up.
-#      try:
-#         xy = Coordinate(xy)
-#      except errors.InitParameterError:
-#         try:
-#            xy = list(xy)
-#         except:
-#            raise errors.InitParameterError
-#      if isinstance(xy, Coordinate):
-#         self._data = [xy]
-#      else:
-#         try:
-#            self._data = [Coordinate(p) for p in xy]
-#         except errors.InitParameterError:
-#            try:
-#               from chiplotle.tools.iterabletools.flat_list_to_pairs \
-#                  import flat_list_to_pairs
-#               self._data = [Coordinate(p) for p in flat_list_to_pairs(xy)]
-#            except:
-#               raise errors.InitParameterError( )
-
-#      if not isinstance(xy, (list, tuple, CoordinateArray)):
-#         raise errors.InitParameterError( )
       try:
          self._data = [Coordinate(*p) for p in xy]
       except (TypeError, errors.InitParameterError):
@@ -52,34 +29,6 @@ class CoordinateArray(object):
       return float
 
 
-#   @apply
-#   def xy( ):
-#      def fget(self):
-#         return self._data
-#      def fset(self, arg):
-#         if isinstance(arg, self.__class__):
-#            self._data = arg[:]
-#         elif isinstance(arg, Coordinate):
-#            self._data = [arg]
-#         elif arg is None:
-#            self._data = [ ]
-#         elif isinstance(arg, (tuple, list)):
-#            self._data = [ ]
-#            from chiplotle.tools.iterabletools.is_flat_list import is_flat_list
-#            from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
-#            if len(arg) > 0 and is_flat_list(arg):
-#               if isinstance(arg[0], Coordinate):
-#                  self._data.extend(arg)
-#               else:
-#                  arg = flat_list_to_pairs(arg)
-#                  self._data.extend([Coordinate(e) for e in arg])
-#            else:
-#               for e in arg:
-#                  self._data.append(Coordinate(e))
-#         else:
-#            raise TypeError('unknown type for coordinates xy.')
-#      return property(**locals( ))
-
    @property
    def xy(self):
       return self._data
@@ -91,6 +40,16 @@ class CoordinateArray(object):
    @property
    def y(self):
       return tuple([xy.y for xy in self._data])
+
+   @property
+   def difference(self):
+      '''Returns the difference between consecutive elements in `self`.
+      i.e., first derivative.
+      '''
+      result = [ ]
+      for i in range(len(self) - 1):
+         result.append(self[i+1] - self[i])
+      return type(self)(result)
 
 
    ## METHODS ##
