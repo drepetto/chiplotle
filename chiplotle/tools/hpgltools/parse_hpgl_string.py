@@ -31,7 +31,7 @@ def parse_hpgl_string(arg):
    ## TODO: Add all the supported escape (DCI) commands.
    dci_commands = ['\x1b\.\(', '\x1b\.Y']
 
-   hpgl_pattern = '[0-9.,]*|'.join(hpgl_commands)
+   hpgl_pattern = '[-0-9.,]*|'.join(hpgl_commands)
    dci_pattern = '[0-9.;]*|'.join(dci_commands)
    pattern = hpgl_pattern + "|" + dci_pattern
    ## this assumes that the re will find each and every hpgl command
