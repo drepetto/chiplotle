@@ -1,5 +1,5 @@
-from chiplotle.geometry.shapes.group import Group
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.group import Group
+from chiplotle.geometry.core.path import Path
 import py.test
 
 

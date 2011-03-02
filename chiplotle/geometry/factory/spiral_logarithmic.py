@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 import math
 
 def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", segments = 500):  
@@ -61,7 +61,7 @@ def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", se
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    from chiplotle.geometry.factory.line import line
    from chiplotle.geometry.transforms.offset import offset
    from chiplotle.tools import io

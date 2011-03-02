@@ -1,5 +1,5 @@
-from chiplotle.geometry.shapes.path import Path
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.lcm import lcm
 import math
 from fractions import gcd
@@ -78,7 +78,7 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
 if __name__ == '__main__':
    from chiplotle.tools import io
    from chiplotle.geometry.factory.star_crisscross import star_crisscross
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    from chiplotle.geometry.transforms.offset import offset
    
    gr1 = Group()

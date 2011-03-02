@@ -1,5 +1,5 @@
 from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.group import Group
 from chiplotle.tools.geometrytools.get_centroid import get_centroid
 from chiplotle.tools.iterabletools.flatten import flatten
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d

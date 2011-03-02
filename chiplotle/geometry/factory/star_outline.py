@@ -1,5 +1,5 @@
-from chiplotle.geometry.shapes.path import Path
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.lcm import lcm
 import math
 from fractions import gcd
@@ -51,7 +51,7 @@ def star_outline(width, height, num_points = 5):
 if __name__ == '__main__':
    from chiplotle.tools import io
    from chiplotle.geometry.factory.star_outline import star_outline
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    
    gr1 = Group()
    

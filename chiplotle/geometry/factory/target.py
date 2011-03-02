@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.factory.circle import circle
 
 def target(outer_radius, inner_radius, circles_count):

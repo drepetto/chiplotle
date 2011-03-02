@@ -8,7 +8,7 @@ def circle(radius, segments = 36):
 
 if __name__ == '__main__':
    from chiplotle.tools import io
-   from chiplotle.geometry.shapes.path import Path
+   from chiplotle.geometry.core.path import Path
    e = circle(10)
    assert isinstance(e, Path)
    print e.format

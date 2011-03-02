@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.coordinate import Coordinate
 
 def scale(shape, value, pivot = Coordinate(0, 0)):

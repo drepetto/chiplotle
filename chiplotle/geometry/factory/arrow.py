@@ -1,7 +1,7 @@
 from chiplotle.geometry.factory.isosceles import isosceles
 from chiplotle.geometry.transforms.offset import offset
 from chiplotle.geometry.transforms.rotate import rotate
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.xy_to_polar import xy_to_polar
 import math
 

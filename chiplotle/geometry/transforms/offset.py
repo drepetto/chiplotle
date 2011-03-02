@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.coordinate import Coordinate
 
 def offset(shape, value):

@@ -24,7 +24,7 @@ if __name__ == '__main__':
    from chiplotle.geometry.transforms.offset import offset
    from chiplotle.geometry.factory.circle import circle
    from chiplotle.geometry.transforms.noise import noise
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
 
    c = circle(1000)

@@ -1,6 +1,6 @@
 from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.shapes.path import Path
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.group import Group
 
 def cross(width, height):
    '''Draws a cross shape.
@@ -18,7 +18,7 @@ def cross(width, height):
 
 if __name__ == '__main__':
    from chiplotle.tools import io
-   from chiplotle.geometry.shapes.path import Path
+   from chiplotle.geometry.core.path import Path
    e = cross(100, 200)
    print e.format
    io.view(e)

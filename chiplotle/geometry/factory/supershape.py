@@ -1,5 +1,5 @@
 from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools import superformula
 import math
 
@@ -33,6 +33,6 @@ def supershape(width, height, m, n1, n2, n3,
 
 if __name__ == '__main__':
    from chiplotle.tools import io
-   from chiplotle.geometry.shapes.path import Path
+   from chiplotle.geometry.core.path import Path
    e = supershape(100, 120, 5, 3.3, 2, 3, b=0.75, travel = 4*math.pi)
    io.view(e)

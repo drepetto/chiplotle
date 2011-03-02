@@ -16,8 +16,8 @@ def get_width_height(coords):
 if __name__ == '__main__':
    from chiplotle.geometry.factory.circle import circle
    from chiplotle.geometry.factory.random_walk_polar import random_walk_polar
-   from chiplotle.geometry.shapes.group import Group
-   from chiplotle.geometry.shapes.path import Path
+   from chiplotle.geometry.core.group import Group
+   from chiplotle.geometry.core.path import Path
    from chiplotle.tools import io
 
    #random points inside a circle
