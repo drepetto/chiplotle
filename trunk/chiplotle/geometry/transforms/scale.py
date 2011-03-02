@@ -1,5 +1,5 @@
 from chiplotle.geometry.core.group import Group
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 
 def scale(shape, value, pivot = Coordinate(0, 0)):
    '''In place scaling.

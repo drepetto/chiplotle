@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 
 class _PlotterMargins(object):
    def __init__(self, plotter, queryCommand):  

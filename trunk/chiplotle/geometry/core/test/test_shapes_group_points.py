@@ -1,6 +1,6 @@
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.path import Path
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 
 def test_shapes_group_points_01( ):
    '''An empty Group has an empty list of points.'''

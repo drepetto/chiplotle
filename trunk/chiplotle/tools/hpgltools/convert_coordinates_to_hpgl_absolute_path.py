@@ -1,5 +1,5 @@
 from chiplotle.hpgl.commands import PU, PA, PD
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
 
 def convert_coordinates_to_hpgl_absolute_path(coords):
    '''Converts an iterator of lists of coordinates

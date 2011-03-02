@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools import superformula
 import math

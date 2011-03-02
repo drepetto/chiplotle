@@ -1,5 +1,5 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools.bezier_interpolation import bezier_interpolation
 

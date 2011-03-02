@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.path import Path
    
 def get_line_intersection(line_a, line_b):

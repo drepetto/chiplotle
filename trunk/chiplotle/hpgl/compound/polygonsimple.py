@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.hpgl.commands import PU, PD, PA
 
 class PolygonSimple(_HPGLCompoundShape):

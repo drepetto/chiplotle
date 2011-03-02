@@ -1,5 +1,5 @@
-from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinate import Coordinate
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
 import math
 
 

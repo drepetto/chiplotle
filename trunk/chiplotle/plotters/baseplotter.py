@@ -7,7 +7,7 @@ from __future__ import division
 from chiplotle.core.cfg.get_config_value import get_config_value 
 from chiplotle.core.interfaces.margins.interface import MarginsInterface
 from chiplotle.geometry.core.shape import _Shape
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.hpgl import commands 
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.tools.logtools.get_logger import get_logger

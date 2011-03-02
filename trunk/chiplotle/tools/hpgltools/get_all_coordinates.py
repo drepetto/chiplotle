@@ -1,6 +1,6 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_relatives_to_absolutes import \
    convert_relatives_to_absolutes
 

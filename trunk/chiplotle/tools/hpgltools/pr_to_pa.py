@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.hpgl.commands import PA, PR
 
 def pr_to_pa(arg, starting_position=None):

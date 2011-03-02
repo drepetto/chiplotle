@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
 
 def catmull_interpolation(control_points, points_to_compute):
       '''Computes Catmull-Rom interpolations from given `control_points`.

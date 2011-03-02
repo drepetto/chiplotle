@@ -1,7 +1,7 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
-from chiplotle.geometry.coordinatearray import CoordinateArray
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinate import Coordinate
 
 
 ## TODO: implement rotation AXIS! 
