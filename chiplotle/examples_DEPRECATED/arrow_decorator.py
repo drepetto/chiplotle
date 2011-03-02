@@ -1,10 +1,8 @@
 from chiplotle import *
+from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.shapes.arrow import arrow
 
-plotter = instantiate_plotters( )[0]
+line = Path([(0, 0), (1000, 1000), (-1000, 1000), (0, 2000)])
+a = arrow(line, 500, 1000)
 
-line = Path([(0, 0), (1000, 1000), (-1000, 1000), (0, 2000)], 1)
-arrow = DArrow(line, 500, 1000)
-
-io.view(arrow)
-#plotter.write(arrow)
-
+io.view(a)
