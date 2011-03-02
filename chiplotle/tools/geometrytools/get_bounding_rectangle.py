@@ -4,7 +4,7 @@ from chiplotle.tools.geometrytools.get_minmax_coordinates \
 def get_bounding_rectangle(shape):
    '''Return a bounding box shape (rectangle) enclosing the givne `shape`.'''
    ## TODO figure out why these cause circular imports (ImportError):
-   from chiplotle.geometry.factory.rectangle import rectangle
+   from chiplotle.geometry.shapes.rectangle import rectangle
    from chiplotle.geometry.transforms.offset import offset
 
    ll, ur = get_minmax_coordinates(shape.points)
@@ -22,7 +22,7 @@ def get_bounding_rectangle(shape):
 ## DEMO CODE ##
 if __name__ == '__main__':
    from chiplotle.geometry.transforms.offset import offset
-   from chiplotle.geometry.factory.circle import circle
+   from chiplotle.geometry.shapes.circle import circle
    from chiplotle.geometry.transforms.noise import noise
    from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io

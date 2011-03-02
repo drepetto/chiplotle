@@ -31,7 +31,7 @@ def noise(shape, value):
    
 ## RUN DEMO CODE
 if __name__ == "__main__":
-   from chiplotle.geometry.factory.circle import circle
+   from chiplotle.geometry.shapes.circle import circle
    from chiplotle.tools import io
    c1 = circle(100)
    c2 = circle(80)

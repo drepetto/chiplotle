@@ -1,4 +1,4 @@
-from chiplotle.geometry.factory.ellipse import ellipse
+from chiplotle.geometry.shapes.ellipse import ellipse
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.path import Path
 

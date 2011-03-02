@@ -1,6 +1,6 @@
 from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.core.group import Group
-from chiplotle.geometry.factory.arc_ellipse import arc_ellipse
+from chiplotle.geometry.shapes.arc_ellipse import arc_ellipse
 
 import math
 

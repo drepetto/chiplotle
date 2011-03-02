@@ -1,4 +1,4 @@
-from chiplotle.geometry.factory.path_linear import path_linear
+from chiplotle.geometry.shapes.path_linear import path_linear
 from chiplotle.geometry.transforms.perpendicular_displace \
    import perpendicular_displace
 

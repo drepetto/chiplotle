@@ -36,7 +36,7 @@ def rotate(shape, angle, pivot = 'centroid'):
 
 ## RUN DEMO CODE
 if __name__ == "__main__":
-   from chiplotle.geometry.factory.rectangle import rectangle
+   from chiplotle.geometry.shapes.rectangle import rectangle
    from chiplotle.tools import io
    r1 = rectangle(100, 40)
    r2 = rectangle(100, 40)

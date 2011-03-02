@@ -1,6 +1,6 @@
 from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.core.group import Group
-from chiplotle.geometry.factory.line import line
+from chiplotle.geometry.shapes.line import line
 
 def grid(width, height, width_divisions,height_divisions):
    '''Rectangular grid. 
