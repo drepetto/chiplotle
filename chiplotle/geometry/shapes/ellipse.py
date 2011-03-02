@@ -35,8 +35,21 @@ def ellipse(width, height, segments = 36):
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
-   from chiplotle.tools import io
-   e = ellipse(10, 20)
-   assert isinstance(e, Path)
-   print e.format
-   io.view(e)
+
+   from chiplotle import *
+   from chiplotle.geometry import *
+
+   import math
+
+   two_pi = math.pi * 2.0
+
+   g = []
+
+   for a in range(0,7):
+      e = ellipse(5000, 1000, 500)
+      assert isinstance(e, Path)
+      rotate(e, (two_pi / 7) * a)
+      g.append(e)
+   
+   io.view(Group(g))
+
