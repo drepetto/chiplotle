@@ -19,8 +19,8 @@ def get_minmax_coordinates(coords):
 
 ## DEMO
 if __name__ == '__main__':
-   from chiplotle.geometry.factory.circle import circle
-   from chiplotle.geometry.factory.cross import cross
+   from chiplotle.geometry.shapes.circle import circle
+   from chiplotle.geometry.shapes.cross import cross
    from chiplotle.geometry.transforms.noise import noise
    from chiplotle.geometry.transforms.offset import offset
    from chiplotle.geometry.core.group import Group

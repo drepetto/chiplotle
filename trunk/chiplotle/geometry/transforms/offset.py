@@ -20,7 +20,7 @@ def offset(shape, value):
 
 ## RUN DEMO CODE
 if __name__ == "__main__":
-   from chiplotle.geometry.factory.rectangle import rectangle
+   from chiplotle.geometry.shapes.rectangle import rectangle
    from chiplotle.tools import io
    r0 = rectangle(100, 40)
    r1 = rectangle(100, 40)

@@ -27,7 +27,7 @@ class PenDecorator(FormatDecorator):
 
 ## DEMO
 if __name__ == '__main__':
-   from chiplotle.geometry.factory.rectangle import rectangle
+   from chiplotle.geometry.shapes.rectangle import rectangle
 
    p = Pen(2, 3, 4, 5, 0.1)
    pd = PenDecorator(p, False)

@@ -47,7 +47,7 @@ def get_line_intersection(line_a, line_b):
 
 ## DEMO
 if __name__ == '__main__':
-   from chiplotle.geometry.factory.line import line
+   from chiplotle.geometry.shapes.line import line
    from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
    from random import randrange

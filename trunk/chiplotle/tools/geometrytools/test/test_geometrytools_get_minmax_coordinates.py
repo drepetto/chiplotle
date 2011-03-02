@@ -1,5 +1,5 @@
 from chiplotle import *
-from chiplotle.geometry.factory.circle import circle
+from chiplotle.geometry.shapes.circle import circle
 from chiplotle.tools.geometrytools.get_minmax_coordinates \
    import get_minmax_coordinates
 import py.test

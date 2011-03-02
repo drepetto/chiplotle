@@ -1,4 +1,4 @@
-from chiplotle.geometry.factory.isosceles import isosceles
+from chiplotle.geometry.shapes.isosceles import isosceles
 from chiplotle.geometry.transforms.offset import offset
 from chiplotle.geometry.transforms.rotate import rotate
 from chiplotle.geometry.core.group import Group

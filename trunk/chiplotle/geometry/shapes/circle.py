@@ -1,4 +1,4 @@
-from chiplotle.geometry.factory.ellipse import ellipse
+from chiplotle.geometry.shapes.ellipse import ellipse
 
 def circle(radius, segments = 36):
    return ellipse(radius * 2, radius * 2, segments)

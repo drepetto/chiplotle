@@ -29,7 +29,7 @@ from chiplotle.hpgl.decorators import *
 #from chiplotle.hpgl.compound.decorators import *
 
 from chiplotle.geometry.core import *
-from chiplotle.geometry.factory import *
+from chiplotle.geometry.shapes import *
 from chiplotle.geometry.transforms import *
 
 from chiplotle.tools.plottertools import instantiate_plotters
