@@ -1,7 +1,7 @@
 from chiplotle.hpgl.compound.hpglcompoundshape import _HPGLCompoundShape
 from chiplotle.hpgl.commands import PU, PD, PA
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 
 class Rectangle(_HPGLCompoundShape):
    '''

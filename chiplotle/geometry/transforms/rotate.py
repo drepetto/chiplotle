@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.group import Group
 from chiplotle.tools.geometrytools.get_centroid import get_centroid
 from chiplotle.tools.iterabletools.flatten import flatten

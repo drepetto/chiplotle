@@ -18,8 +18,8 @@ Homepage %s
 
 from chiplotle.core import errors
 
-from chiplotle.geometry.coordinatearray import CoordinateArray
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinate import Coordinate
 
 from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.pen import Pen

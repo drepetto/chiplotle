@@ -1,5 +1,5 @@
 from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.tools.hpgltools.get_all_coordinates import get_all_coordinates
 
 def get_bounding_box(arg):

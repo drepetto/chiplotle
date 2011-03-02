@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.tools.geometrytools.get_minmax_coordinates \
    import get_minmax_coordinates
 

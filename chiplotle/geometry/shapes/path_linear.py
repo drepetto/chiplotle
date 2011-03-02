@@ -1,4 +1,4 @@
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools.interpolate_linear import interpolate_linear
 

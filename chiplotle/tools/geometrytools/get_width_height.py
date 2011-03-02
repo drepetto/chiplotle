@@ -1,5 +1,5 @@
-from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.coordinatearray import CoordinateArray
+from chiplotle.geometry.core.coordinate import Coordinate
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.geometrytools.get_minmax_coordinates import get_minmax_coordinates
 
 def get_width_height(coords):

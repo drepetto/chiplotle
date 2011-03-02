@@ -1,5 +1,5 @@
 from chiplotle.geometry.core.path import Path
-from chiplotle.geometry.coordinate import Coordinate
+from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.core import errors
 from py.test import raises
 
