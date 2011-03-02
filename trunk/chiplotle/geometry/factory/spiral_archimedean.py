@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 import math
 
 def spiral_archimedean(radius, num_turns = 5, wrapping_constant = 1, direction = "cw", segments = 500):  
@@ -72,7 +72,7 @@ def spiral_archimedean(radius, num_turns = 5, wrapping_constant = 1, direction =
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    from chiplotle.geometry.transforms.offset import offset
    from chiplotle.geometry.transforms.rotate import rotate
    from chiplotle.tools import io

@@ -23,7 +23,7 @@ if __name__ == '__main__':
    from chiplotle.geometry.factory.cross import cross
    from chiplotle.geometry.transforms.noise import noise
    from chiplotle.geometry.transforms.offset import offset
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
 
    c1 = circle(1000)

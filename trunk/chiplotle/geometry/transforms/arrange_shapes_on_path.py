@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.transforms.offset import offset
 
 def arrange_shapes_on_path(shapes, path):

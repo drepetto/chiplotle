@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.shape import _Shape
+from chiplotle.geometry.core.shape import _Shape
 #from chiplotle.geometry.coordinate import Coordinate
 from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \

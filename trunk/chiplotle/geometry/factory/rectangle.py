@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 
 def rectangle(width, height):
    corners = []

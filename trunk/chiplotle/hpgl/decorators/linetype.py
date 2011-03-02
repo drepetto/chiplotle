@@ -21,7 +21,7 @@ class LineTypeDecorator(FormatDecorator):
 ## DEMO
 if __name__ == '__main__':
    from chiplotle.geometry.factory.rectangle import rectangle
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
 
    ltd = LineTypeDecorator(LT(2, .5), False)

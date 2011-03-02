@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools.catmull_interpolation \
    import catmull_interpolation
 
@@ -15,7 +15,7 @@ def catmull_path(points, interpolation_count=50):
 if __name__ == '__main__':
    from chiplotle.tools import io
    from chiplotle.geometry.factory.cross import cross
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.group import Group
    from chiplotle.geometry.transforms.offset import offset
    import random
 

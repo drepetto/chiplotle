@@ -1,5 +1,5 @@
 from chiplotle.geometry.factory.rectangle import rectangle
-from chiplotle.geometry.shapes.group import Group
+from chiplotle.geometry.core.group import Group
 
 def frame(width, height, inset):
    '''A frame (rectangle within a rectangle) with a width, height, and inset.

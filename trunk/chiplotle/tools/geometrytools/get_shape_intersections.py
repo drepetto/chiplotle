@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.shape import _Shape
+from chiplotle.geometry.core.shape import _Shape
 from chiplotle.geometry.factory.line import line
 from chiplotle.tools.geometrytools.get_line_intersection \
    import get_line_intersection

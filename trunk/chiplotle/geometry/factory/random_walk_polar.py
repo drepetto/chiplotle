@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools import polar_to_xy
 import math
 import random

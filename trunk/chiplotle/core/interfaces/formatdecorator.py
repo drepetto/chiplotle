@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.shape import _Shape
+from chiplotle.geometry.core.shape import _Shape
 
 class FormatDecorator(object):
    '''FormatDecorators know how to wrap Decoratable objects with additional

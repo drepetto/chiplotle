@@ -1,6 +1,6 @@
 from chiplotle.geometry.coordinatearray import CoordinateArray
 from chiplotle.geometry.coordinate import Coordinate
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools.bezier_interpolation import bezier_interpolation
 
 
@@ -55,8 +55,8 @@ def bezier_path(points, curvature, interpolation_count = 50):
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
-   from chiplotle.geometry.shapes.path import Path
-   from chiplotle.geometry.shapes.group import Group
+   from chiplotle.geometry.core.path import Path
+   from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
    points  = [(0, 0), (100, 100), (-100, 100), (-100, -100), (100, -100), (0, 0)]
    e1 = bezier_path(points, 1)

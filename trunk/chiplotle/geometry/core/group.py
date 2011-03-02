@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.shape import _Shape
+from chiplotle.geometry.core.shape import _Shape
 import copy
 
 class Group(_Shape):

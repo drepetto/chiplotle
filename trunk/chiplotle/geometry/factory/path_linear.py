@@ -1,5 +1,5 @@
 from chiplotle.geometry.coordinatearray import CoordinateArray
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools.interpolate_linear import interpolate_linear
 
 def path_linear(coords, interpolation_unit):

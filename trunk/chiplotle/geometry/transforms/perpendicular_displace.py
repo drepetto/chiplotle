@@ -1,5 +1,5 @@
 from chiplotle.tools.mathtools.difference import difference
-from chiplotle.geometry.shapes.path import Path
+from chiplotle.geometry.core.path import Path
 import math
 
 def perpendicular_displace(path, displacements):
