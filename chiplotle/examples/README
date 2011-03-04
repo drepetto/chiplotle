@@ -1,0 +1,38 @@
+The examples in this directory are mostly for non-intuitive or special purpose code,
+rather than general usage examples. 
+
+Most Chiplotle classes and methods have examples built into their source code. 
+To see the examples, just open the source file and look at the DEMO CODE section
+near the end. For example, /chiplotle/geometry/shapes/ellipses.py contains:
+
++++++++
+
+## RUN DEMO CODE
+
+if __name__ == '__main__':
+
+   from chiplotle import *
+   from chiplotle.geometry import *
+
+   import math
+
+   two_pi = math.pi * 2.0
+
+   g = []
+
+   for a in range(0,7):
+      e = ellipse(5000, 1000, 500)
+      assert isinstance(e, Path)
+      rotate(e, (two_pi / 7) * a)
+      g.append(e)
+   
+   io.view(Group(g))
+
++++++++
+
+To run this demo code, you do something like:
+
+> cd chiplotle
+> python ./geometry/shapes/ellipse.py
+
+
