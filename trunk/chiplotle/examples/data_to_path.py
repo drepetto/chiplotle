@@ -10,7 +10,7 @@ def main():
 
     plotter = instantiate_virtual_plotter(Coordinate(0, 0), Coordinate(30000, 20000))
 
-    data_file = open("./examples/media/indoor_temp.txt", 'r')
+    data_file = open("./media/indoor_temp.txt", 'r')
     
     data = data_file.readlines()
     
