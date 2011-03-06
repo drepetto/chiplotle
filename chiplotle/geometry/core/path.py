@@ -1,9 +1,8 @@
+from chiplotle.core import errors
 from chiplotle.geometry.core.shape import _Shape
-#from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
    import convert_coordinates_to_hpgl_absolute_path
-from chiplotle.core import errors
 
 
 class Path(_Shape):
@@ -22,7 +21,6 @@ class Path(_Shape):
    @property
    def points(self):
       return self._points
-   ## FIXME should this be settable? Probably not...
    @points.setter
    def points(self, arg):
       self._points = CoordinateArray(arg)
@@ -34,32 +32,21 @@ class Path(_Shape):
    def _preformat_points(self):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
       if self.closed:
-         #tp = self._transformed_points
          tp = self.points
          tp.append(tp[0])
          return tp
       else:
-         #return self._transformed_points
          return self.points
 
    @property
    def _infix_commands(self):
       if _Shape.language == 'HPGL':
-         ## create hpgl commands...
-         #print self._preformat_points
          return convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
       elif _Shape.language == 'gcode':
-         ## create gcode
          print 'Sorry, no g-code support!'
 
 
    ## OVERRIDES ##
-
-#   def __getitem__(self, arg):  
-#      return self.points[arg]
-#
-#   def __setitem__(self, key, arg):
-#      self._points[key] = arg
 
    def __len__(self):
       return len(self.points)
