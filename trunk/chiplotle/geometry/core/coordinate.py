@@ -85,7 +85,10 @@ class Coordinate(object):
       return 'Coordinate(%s, %s)' % (self.x, self.y)
 
    def __str__(self):
-      return '<%s,%s>' % (self.x, self.y)
+      if isinstance(self.x, int) and isinstance(self.y, int):
+         return '<%i,%i>' % (self.x, self.y)
+      else:
+         return '<%.2f,%.2f>' % (self.x, self.y)
 
 
    ## math operators ##
