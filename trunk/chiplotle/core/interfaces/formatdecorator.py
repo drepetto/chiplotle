@@ -9,6 +9,8 @@ class FormatDecorator(object):
    '''
    
    def __init__(self, sticky=False):
+      ## FIXME: this sticky parameter is not doing anything.
+      ## fix or remove.
       self.sticky = sticky
 
 
@@ -21,16 +23,16 @@ class FormatDecorator(object):
       raise NotImplementedError
 
 
-   @property
-   def preformat(self):
-      return ''.join(self.preformat_commands.format)
-
-   @property
-   def postformat(self):
-      if self.sticky:
-         return ''
-      else:
-         return ''.join(self.postformat_commands.format)
+#   @property
+#   def preformat(self):
+#      return ''.join(self.preformat_commands.format)
+#
+#   @property
+#   def postformat(self):
+#      if self.sticky:
+#         return ''
+#      else:
+#         return ''.join(self.postformat_commands.format)
 
 
 
