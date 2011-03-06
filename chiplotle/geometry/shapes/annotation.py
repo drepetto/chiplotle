@@ -46,10 +46,14 @@ class _Annotation(object):
    def _annotate_properties(self):
       cr = '  center: %s' % self.shape.center
       cd = 'centroid: %s' % self.shape.centroid
+      mn, mx = self.shape.minmax_coordinates
+      mn = '     min: %s' % mn
+      mx = '     max: %s' % mx
       ws = '   width: %.2f' % self.shape.width
       hs = '  height: %.2f' % self.shape.height
 
-      label = Label('\n\r'.join([cr, cd, ws, hs]), self.charwidth, self.charheight)
+      fields = '\n\r'.join([cr, cd, mn, mx, ws, hs, ])
+      label = Label(fields, self.charwidth, self.charheight)
       PenDecorator(Pen(self.pen))(label)
       offset(label, self.shape.bottom_left)
       return label
