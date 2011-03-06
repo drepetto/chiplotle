@@ -411,3 +411,21 @@ def test_coordinate__neg__01( ):
    t = Coordinate(-1, -2)
    assert -t == Coordinate(1, 2)
 
+
+## polar ##
+import math
+
+def test_coordinate_polar_01( ):
+   t = Coordinate(1, 0)
+   assert isinstance(t.polar, tuple)
+   assert len(t.polar) == 2
+   assert t.polar[0] == 1
+   assert t.polar[1] == 0
+
+
+def test_coordinate_polar_02( ):
+   t = Coordinate(0, 1)
+   assert t.polar[0] == 1
+   assert round(t.polar[1], 2) == round(math.pi / 2., 2)
+
+

@@ -7,6 +7,9 @@ def xy_to_polar(args):
    '''Converts cartesian to polar coordinates.
    Argument may be two coordinates x, y, a tuple (x, y),
    or a Coordinate(x, y).
+
+   Returns an (r, a) tuple, where `r` is the magnitude, `a` is the angle
+   in radians.
    '''
    x, y = tuple(Coordinate(*args))
 
