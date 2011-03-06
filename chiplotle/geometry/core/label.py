@@ -3,6 +3,7 @@ from chiplotle.hpgl.commands import PA
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.shape import _Shape
 
+
 ## TODO should a Label be a path? Probably not.
 
 class Label(_Shape):
