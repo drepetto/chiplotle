@@ -2,6 +2,10 @@ from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.shapes.circle import circle
 
 def target(outer_radius, inner_radius, circles_count):
+   '''
+   Creates `circles_count` concentric circles.
+   Can be used to create radially filled circles.
+   '''
    
    if not outer_radius > inner_radius:
       raise ValueError('outer_radius must be > inner_radius.')
