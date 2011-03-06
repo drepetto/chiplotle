@@ -10,7 +10,7 @@ def polar_to_xy(args):
    try:
       r, A = tuple(Coordinate(*args))
    except:
-      raise TypeError('`args` must be an (r, A) tuple or a pair of values r, A.')
+      raise TypeError('`args` must be an (r, A) tuple.')
    x = r * math.cos(A)
    y = r * math.sin(A)
    return (x, y)
