@@ -52,8 +52,18 @@ class Coordinate(object):
 
    @property
    def magnitude(self):
-      return math.sqrt(self.x ** 2 + self.y ** 2)
+      #return math.sqrt(self.x ** 2 + self.y ** 2)
+      return self.polar[0]
 
+   @property
+   def angle(self):
+      return self.polar[1]
+
+
+   @property
+   def polar(self):
+      from chiplotle.tools.mathtools.xy_to_polar import xy_to_polar
+      return xy_to_polar(self.xy)
 
    ## OVERRIDES ##
 
