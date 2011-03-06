@@ -1,9 +1,11 @@
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.shapes.line import line
+from chiplotle.geometry.transforms.rotate import rotate
+from chiplotle.geometry.transforms.offset import offset
 import math
 
-def ruler(length, units, min_tick_height):
+def ruler(start_coord, end_coord, units, min_tick_height):
    '''
    A measuring ruler.
    
@@ -12,6 +14,12 @@ def ruler(length, units, min_tick_height):
    - `min_tick_height` is the height of the marks for the smallest units.
       The hight of the other units are multiples of this.
    '''
+   start_coord = Coordinate(*start_coord)
+   end_coord = Coordinate(*end_coord)
+
+   length = (end_coord - start_coord).magnitude
+   angle = (end_coord - start_coord).angle
+
    result = [ ]
    for i, unit in enumerate(units):
       ticks = int(math.ceil(length / unit))
@@ -20,14 +28,16 @@ def ruler(length, units, min_tick_height):
          x2, y2 = unit * t, -min_tick_height * (i + 1)
          tick = line((x1, y1), (x2, y2))
          result.append(tick)
+   g = Group(result)
+   rotate(g, angle, (0, 0))
+   offset(g, start_coord)
    return Group(result)
 
 
 if __name__ == '__main__':
    from chiplotle import * 
       
-   r = ruler(2000, (100, 200, 400), 10)
-   rotate(r, 3.145 / 8, (0, 0))
+   r = ruler((0, 0), (1000, 1000), (100, 200, 400), 10)
    c = circle(30)
    g = Group([r, c])
    io.view(g)
