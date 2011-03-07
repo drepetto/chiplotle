@@ -58,6 +58,6 @@ def main():
     io.view(plotter)
 
 ### run main if called from command line like so: 
-### $> python abstract_masterpiece.py
+### $> python data_do_path.py
 if __name__ == '__main__': main()
 
