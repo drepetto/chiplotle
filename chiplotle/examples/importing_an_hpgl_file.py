@@ -11,7 +11,7 @@ import time
 
 def main():
 
-    f = import_hpgl_file("./media/square.hpgl", 'r')
+    f = import_hpgl_file("./media/square.hpgl")
 
     print "\nHere are the contents of the file, expanded into a list of chiplotle objects:\n"
     print f
