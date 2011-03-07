@@ -862,7 +862,7 @@ class LT(_HPGLPrimitive):
 
    @property
    def format(self):
-      if self.pattern:
+      if self.pattern is not None:
          return '%s%i,%.4f%s' % (self._name, self.pattern, 
          self.length, _HPGLPrimitive._terminator)
       else:
