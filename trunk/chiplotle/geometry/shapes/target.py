@@ -1,7 +1,7 @@
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.shapes.circle import circle
 
-def target(outer_radius, inner_radius, circles_count):
+def target(outer_radius, inner_radius, circles_count, segments=36):
    '''
    Creates `circles_count` concentric circles.
    Can be used to create radially filled circles.
@@ -15,7 +15,7 @@ def target(outer_radius, inner_radius, circles_count):
    result = [ ]
    radius_delta = (outer_radius - inner_radius) / float(circles_count)
    for i in range(circles_count):
-      result.append(circle(inner_radius + radius_delta * i))
+      result.append(circle(inner_radius + radius_delta * i, segments))
      
    return Group(result)
    
