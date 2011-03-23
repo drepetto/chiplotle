@@ -6,7 +6,7 @@ import time
 
 def plot_hpgl_file(file):
    '''Send an HPGL file to the plotter found connected to the computer.'''
-   plotter = instantiate_virtual_plotter((0,0), (20000,15000))
+   plotter = instantiate_virtual_plotter(Coordinate(0,0), Coordinate(20000,15000))
 
    plotter.set_origin_bottom_left()
 
