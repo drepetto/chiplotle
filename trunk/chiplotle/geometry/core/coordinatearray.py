@@ -51,6 +51,13 @@ class CoordinateArray(object):
          result.append(self[i+1] - self[i])
       return type(self)(result)
 
+   @property
+   def cumsum(self):
+      '''Returns the cumulative sum.'''
+      result = [Coordinate(0, 0)]
+      for coord in self:
+         result.append(result[-1] + coord)
+      return type(self)(result)
 
    ## METHODS ##
 
