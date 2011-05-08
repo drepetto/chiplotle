@@ -1,6 +1,8 @@
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.core.coordinate import Coordinate
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
+from chiplotle.geometry.transforms.transformvisitor import TransformVisitor
 import random
 
 def noise(shape, value):
@@ -9,23 +11,21 @@ def noise(shape, value):
    - `value` can be a scalar or a tuple (x, y) that sets the range of the 
       noise for the x and y coordinates.
    '''
-   if isinstance(shape, Group):
-      for i in range(len(shape)):
-         noise(shape[i], value)
-   else:
+   def noisify(coords, value):
       try:
          x, y = value
       except TypeError:
          x = y = value
       result = [ ]
-      for point in shape.points:
+      for point in coords:
          x_wiggle = random.randrange(-x, x)
          y_wiggle = random.randrange(-y, y)
          xy = point + Coordinate(x_wiggle, y_wiggle)         
          result.append(xy)
-      shape.points = result
+      return CoordinateArray(result)
 
-   #return shape
+   t = TransformVisitor(noisify)
+   t.visit(shape, value)
       
       
    
@@ -33,10 +33,10 @@ def noise(shape, value):
 if __name__ == "__main__":
    from chiplotle.geometry.shapes.circle import circle
    from chiplotle.tools import io
-   c1 = circle(100)
-   c2 = circle(80)
-   noise(c1, 6)
-   c1 += 100
+   c1 = circle(1000, 100)
+   c2 = circle(800, 100)
+   noise(c1, 90)
+   c1 += 1000
    g = Group([c1, c2])
-   noise(g, 6)
+   noise(g, 60)
    io.view(g)
