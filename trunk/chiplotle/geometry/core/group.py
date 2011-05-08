@@ -54,19 +54,17 @@ class Group(_Shape):
       return result
 
 
-   ## PRIVATE PROPERTIES ##
+   ## private properties ##
 
    @property
    def _infix_commands(self):
       result = [ ]
       for shape in self:
-         ## NOTE: which is best?
          result += shape._subcommands
-         #result += [shape]
       return result
 
 
-   ## PRIVATE METHODS ##
+   ## private methods ##
 
    def _check_init_shape(self, shape):
       if not isinstance(shape, _Shape):

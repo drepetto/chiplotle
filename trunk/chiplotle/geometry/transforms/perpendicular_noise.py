@@ -1,6 +1,8 @@
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.mathtools.difference import difference
+from chiplotle.geometry.transforms.transformvisitor import TransformVisitor
 import random
 
 def perpendicular_noise(shape, value):
@@ -11,22 +13,19 @@ def perpendicular_noise(shape, value):
    - `value` must be a scalar defining the range of the noise 
       for displacement.
    '''
-   if isinstance(shape, Group):
-      for i in range(len(shape)):
-         #shape[i] = perpendicular_noise(shape[i], value)
-         perpendicular_noise(shape[i], value)
-   else:
+   def perpnoise(coords, value):
       result = [ ]
-      points = shape.points
-      d_points = difference(points)
-      for point, d_point in zip(points[:-1], d_points):
+      d_coords = difference(coords)
+      for coord, d_coord in zip(coords[:-1], d_coords):
          wiggle = random.randrange(-value, value)
-         perp = ~d_point 
-         xy = point + perp / perp.magnitude * wiggle         
+         perp = ~d_coord 
+         xy = coord + perp / perp.magnitude * wiggle         
          result.append(xy)
-      shape.points = result
+      return CoordinateArray(result)
 
-   #return shape
+   t = TransformVisitor(perpnoise)
+   t.visit(shape, value)
+
       
       
    
@@ -34,11 +33,11 @@ def perpendicular_noise(shape, value):
 if __name__ == "__main__":
    from chiplotle.geometry.shapes.circle import circle
    from chiplotle.tools import io
-   c1 = circle(100, 200)
-   c2 = circle(80, 200)
-   c2 += 200
-   perpendicular_noise(c1, 36)
-   perpendicular_noise(c2, 6)
+   c1 = circle(1000, 200)
+   c2 = circle(800, 200)
+   c2 += 2000
+   perpendicular_noise(c1, 360)
+   perpendicular_noise(c2, 60)
    g = Group([c1, c2])
    io.view(g)
 

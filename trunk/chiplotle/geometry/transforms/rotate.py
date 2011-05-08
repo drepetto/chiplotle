@@ -1,14 +1,7 @@
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
-
-
-#def rotate(shape, angle, pivot = 'centroid'):
-#   if pivot == 'centroid':
-#      coords = flatten(list(shape.points))
-#      pivot = get_centroid(coords)
-#
-#   return DestructiveTransform(rotate_2d)(shape, angle, pivot))
+from chiplotle.geometry.transforms.transformvisitor import TransformVisitor
 
 def rotate(shape, angle, pivot = 'centroid'):
    '''In place rotation.
@@ -19,15 +12,14 @@ def rotate(shape, angle, pivot = 'centroid'):
       of the pivot point or a Coordinate. Current supported strings
       is just 'centroid'. This is the default.
    '''
-
    if pivot == 'centroid':
       pivot = shape.centroid
 
-   if isinstance(shape, Group):
-      for s in shape:
-         rotate(s, angle, pivot)
-   else: ## it's a Path...
-      shape.points = rotate_2d(shape.points, angle, pivot)
+   def rotate(coords, angle, pivot = pivot):
+      return rotate_2d(coords, angle, pivot)
+
+   t = TransformVisitor(rotate)
+   t.visit(shape, angle, pivot)
 
 
 
@@ -35,9 +27,9 @@ def rotate(shape, angle, pivot = 'centroid'):
 if __name__ == "__main__":
    from chiplotle.geometry.shapes.rectangle import rectangle
    from chiplotle.tools import io
-   r1 = rectangle(100, 40)
-   r2 = rectangle(100, 40)
-   r3 = rectangle(200, 200)
+   r1 = rectangle(1000, 400)
+   r2 = rectangle(1000, 400)
+   r3 = rectangle(2000, 900)
    rotate(r1, 3.14 / 4)
-   rotate(r2, 3.14 / 4, (100, 100))
+   rotate(r2, 3.14 / 4, (500, 500))
    io.view(Group([r1, r2, r3]))
