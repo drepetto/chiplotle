@@ -2,6 +2,7 @@ from chiplotle.hpgl.label import Label as HPGLLabel
 from chiplotle.hpgl.commands import PA
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.shape import _Shape
+from chiplotle.tools import mathtools
 
 
 ## TODO should a Label be a path? Probably not.
@@ -79,7 +80,7 @@ class Label(_Shape):
             charspace = self.charspace,
             linespace = self.linespace,
             origin = origin,
-            direction = (1, angle),
+            direction = mathtools.polar_to_xy((1, angle)),
             )
          return [PA(self.points[0]), label]
 
