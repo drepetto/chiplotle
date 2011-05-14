@@ -3,6 +3,7 @@ from chiplotle.hpgl.commands import PA
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.shape import _Shape
 from chiplotle.tools import mathtools
+import math
 
 
 ## TODO should a Label be a path? Probably not.
@@ -23,15 +24,15 @@ class Label(_Shape):
    ''' 
 
    HPGL_ORIGIN_MAP = {
-      'bottom-left' : 1,
-      'middle-left' : 2,
-      'top-left' : 3,
-      'bottom-center' : 4,
-      'middle-center' : 5,
-      'top-center' : 6,
+      'bottom-left'  : 1,
+      'middle-left'  : 2,
+      'top-left'     : 3,
+      'bottom-center': 4,
+      'middle-center': 5,
+      'top-center'   : 6,
       'bottom-right' : 7,
       'middle-right' : 8,
-      'top-right' : 9}
+      'top-right'    : 9}
 
 
    def __init__(self, 
@@ -51,6 +52,7 @@ class Label(_Shape):
 
       self.points = [(0, 0), (charwidth, 0), (charwidth, charheight)]
 
+      self.never_upside_down = False
 
    ## PUBLIC PROPERTIES ##
 
@@ -62,21 +64,37 @@ class Label(_Shape):
       self._points = CoordinateArray(arg)
 
 
+   @property
+   def angle(self):
+      return self.points.difference[0].angle
+
+   ## TODO make settable...
+   @property
+   def charwidth(self):
+      return self.points.difference[0].magnitude
+#   @charwidth.setter
+#   def charwidth(self, arg):
+#      self._points
+      
+   @property
+   def charheight(self):
+      return self.points.difference[1].magnitude
+
    ## PRIVATE PROPERTIES ##
 
    @property
    def _infix_commands(self):
-      if _Shape.language == 'HPGL':
-         points_diff = self.points.difference
-         charwidth = points_diff[0].magnitude
-         charheight = points_diff[1].magnitude
-         angle = points_diff[0].angle
-         origin = self.HPGL_ORIGIN_MAP[self.origin]
+      angle = self.angle
+      if self.never_upside_down:
+         if math.pi * 3 / 2.0 > angle > math.pi / 2.0:
+            angle += math.pi
 
+      if _Shape.language == 'HPGL':
+         origin = self.HPGL_ORIGIN_MAP[self.origin]
          label = HPGLLabel(
             text = self.text, 
-            charwidth = charwidth,
-            charheight = charheight,
+            charwidth = self.charwidth,
+            charheight = self.charheight,
             charspace = self.charspace,
             linespace = self.linespace,
             origin = origin,
@@ -89,6 +107,8 @@ class Label(_Shape):
          raise NotImplementedError
 
 
+   def __str__(self):
+      return '%s(%s)' % (self.__class__.__name__, self.text)
 
 ## DEMO CODE
 
@@ -98,7 +118,7 @@ if __name__ == '__main__':
    lb = Label("Hello!", 1, 2, origin = 'bottom-center')
    PenDecorator(Pen(1))(lb) ## we need this for Label to display with hp2xx
 
-   rotate(lb, 3.14 / 4)
+   rotate(lb, 3.14 / 4 * 3)
    c = circle(100 / 2.5)
    g = group([c, lb])
    io.view(g)
