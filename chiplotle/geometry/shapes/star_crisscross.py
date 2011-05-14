@@ -1,4 +1,4 @@
-from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.polygon import Polygon
 from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.lcm import lcm
 import math
@@ -43,11 +43,9 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
       corners1 = [corners[0], corners[2], corners[4]]
       corners2 = [corners[1], corners[3], corners[5]]
       
-      path1 = Path(corners1)
-      path1.closed = True
-      path2 = Path(corners2)
-      path2.closed = True
-      return Group([path1, path2])
+      poly1 = Polygon(corners1)
+      poly2 = Polygon(corners2)
+      return Group([poly1, poly2])
 
    else:
       if jump_size is None:
@@ -59,7 +57,7 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
                jump_size -= 1
          else:
             invalid_star = [[half_width, half_height], [half_width, half_height]]
-            return Path(invalid_star)
+            return Polygon(invalid_star)
       
       point_order = []
       for i in range(0, num_points):
@@ -68,10 +66,7 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
       
       corners = [corners[i] for i in point_order]
       
-      path = Path(corners)
-      path.closed = True
-      
-      return path
+      return  Polygon(corners)
 
 
 ## RUN DEMO CODE

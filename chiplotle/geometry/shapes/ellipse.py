@@ -1,4 +1,4 @@
-from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.polygon import Polygon
 import math
 
 def ellipse(width, height, segments = 36):  
@@ -27,8 +27,7 @@ def ellipse(width, height, segments = 36):
       
       rads += rads_incr
  
-   result = Path(ellipse_points)
-   result.closed = True
+   result = Polygon(ellipse_points)
    return result
 
 

@@ -8,7 +8,6 @@ def line_displaced(start_coord, end_coord, displacements):
    The number of points in the path is determined by the lenght of 
    `displacements`.
    '''
-
    unit = (end_coord - start_coord).magnitude / len(displacements)
 
    path = path_linear((start_coord, end_coord), unit)
