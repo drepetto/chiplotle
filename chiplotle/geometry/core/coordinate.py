@@ -52,6 +52,7 @@ class Coordinate(object):
 
    @property
    def magnitude(self):
+      '''The norm.'''
       #return math.sqrt(self.x ** 2 + self.y ** 2)
       return self.polar[0]
 
@@ -64,6 +65,11 @@ class Coordinate(object):
    def polar(self):
       from chiplotle.tools.mathtools.xy_to_polar import xy_to_polar
       return xy_to_polar(self.xy)
+
+   @property
+   def normalized(self):
+      return self / self.magnitude
+
 
    ## OVERRIDES ##
 
