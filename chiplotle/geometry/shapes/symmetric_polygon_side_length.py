@@ -1,5 +1,5 @@
-from chiplotle.geometry.shapes import circle
-from chiplotle.geometry.transforms import scale
+from chiplotle.geometry.shapes.circle import circle
+from chiplotle.geometry.transforms.scale import scale
 
 def symmetric_polygon_side_length(count, length):
    '''Creates a symmetric polygon with `count` sides, all with the 
