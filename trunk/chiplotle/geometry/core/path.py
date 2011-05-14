@@ -13,7 +13,6 @@ class Path(_Shape):
    def __init__(self, points):  
       _Shape.__init__(self)
       self.points = CoordinateArray(points)
-      self.closed = False
 
 
    ## PUBLIC PROPERTIES ##
@@ -31,12 +30,7 @@ class Path(_Shape):
    @property
    def _preformat_points(self):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
-      if self.closed:
-         tp = self.points
-         tp.append(tp[0])
-         return tp
-      else:
-         return self.points
+      return self.points
 
    @property
    def _infix_commands(self):
@@ -112,7 +106,8 @@ class Path(_Shape):
 
 if __name__ == '__main__':
    from chiplotle.tools import io
+   from chiplotle.geometry.core.coordinatearray import CoordinateArray
    
-   p = Path([(1, 2), (4, 6), (0, 2), (5, 1)])
+   p = Path(CoordinateArray([(1, 2), (4, 6), (0, 2), (5, 1)]) * 1000)
    io.view(p)
 

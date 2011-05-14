@@ -1,4 +1,4 @@
-from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.polygon import Polygon
 from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.lcm import lcm
 import math
@@ -40,11 +40,8 @@ def star_outline(width, height, num_points = 5):
       degrees += degrees_incr
 
    corners.append(corners[0])
+   return Polygon(corners)
    
-   path = Path(corners)
-   path.closed = True
-   
-   return path
 
 
 ## RUN DEMO CODE
