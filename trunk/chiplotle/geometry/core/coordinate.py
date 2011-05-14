@@ -70,6 +70,9 @@ class Coordinate(object):
    def normalized(self):
       return self / self.magnitude
 
+   @property
+   def perpendicular(self):
+      return Coordinate(-self.y, self.x)
 
    ## OVERRIDES ##
 
@@ -188,7 +191,7 @@ class Coordinate(object):
       '''Returns the perpendicular of self.
       http://mathworld.wolfram.com/PerpendicularCoordinate.html
       '''
-      return Coordinate(-self.y, self.x)
+      return self.perpendicular
 
    def __ne__(self, arg):
       return not (self == arg)
