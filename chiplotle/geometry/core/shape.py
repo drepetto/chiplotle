@@ -8,7 +8,7 @@ class _Shape(Decoratable, _ShapePropertiesMixin):
 
    def __init__(self):
       Decoratable.__init__(self)
-      self.transform_constraints = []
+      self.layer = None
 
 
    ## overrides ##
