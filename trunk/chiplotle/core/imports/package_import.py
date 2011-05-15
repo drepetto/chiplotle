@@ -1,5 +1,5 @@
-from chiplotle.utils.imports.get_functions_in_module import _get_functions_in_module
-from chiplotle.utils.imports.remove_modules_from_namespace import \
+from chiplotle.core.imports.get_functions_in_module import _get_functions_in_module
+from chiplotle.core.imports.remove_modules_from_namespace import \
    _remove_modules_from_namespace
 import os
 
