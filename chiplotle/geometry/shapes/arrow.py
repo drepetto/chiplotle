@@ -5,7 +5,7 @@ from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.xy_to_polar import xy_to_polar
 import math
 
-def arrow(path, headwidth, headheight):
+def arrow(path, headwidth, headheight, filled=False):
    '''Returns an arrow shape.
 
    - `path` is a Path object.
@@ -15,7 +15,7 @@ def arrow(path, headwidth, headheight):
 
    ## make arow head...
    r, a = xy_to_polar((path.points[-1] - path.points[-2]))
-   head = isosceles(headwidth, headheight)
+   head = isosceles(headwidth, headheight, filled)
    offset(head, (0, -headheight))
    rotate(head, a - math.pi / 2, (0, 0))
    offset(head, path.points[-1])
