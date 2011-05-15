@@ -63,3 +63,13 @@ def test_layersvisitor_03():
    assert v.layers[2] == [r2]
    assert v.layers[3] == [t]
 
+
+def test_layervisitor_04():
+   '''Shapes without layer are set to layer None, the default.'''
+   r = rectangle(1000, 1000)
+
+   v = LayersVisitor()
+   v.visit(r)
+
+   assert v.layers[None] == [r]
+   assert v.layers.keys() == [None]
