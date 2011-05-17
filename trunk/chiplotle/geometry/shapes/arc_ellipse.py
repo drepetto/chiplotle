@@ -32,7 +32,7 @@ def arc_ellipse(width, height, start_angle, end_angle, segments = 100):
       rads += rads_incr
    ## append final point to get exact end_angle... 
    arc_points.append((half_width * math.cos(end_angle), 
-                      half_width * math.sin(end_angle)))
+                      half_height * math.sin(end_angle)))
    return Path(arc_points)
 
 
