@@ -10,7 +10,7 @@ def arc_circle(radius, start_angle, end_angle, segments = 100):
    and number of segments. Arc goes from start_angle to end_angle,
    both of which are in radians.
    '''
-   
+   radius = radius * 2.0 
    return arc_ellipse(radius, radius, start_angle, end_angle, segments)
 
 
