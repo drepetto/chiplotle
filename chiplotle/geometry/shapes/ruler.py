@@ -38,7 +38,7 @@ def ruler(start_coord, end_coord, units, min_tick_height, symmetric=False):
    g = Group(result)
    rotate(g, angle, (0, 0))
    offset(g, start_coord)
-   return Group(result)
+   return g
 
 
 if __name__ == '__main__':
