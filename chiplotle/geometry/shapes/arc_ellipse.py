@@ -9,7 +9,9 @@ def arc_ellipse(width, height, start_angle, end_angle, segments = 100):
    and number of segments. Arc goes from start_angle to end_angle,
    both of which are in radians.
    '''
-
+   if start_angle > end_angle:
+      end_angle += math.pi * 2
+      
    two_pi = math.pi * 2.0
    
    rads_incr = two_pi / float(segments)
