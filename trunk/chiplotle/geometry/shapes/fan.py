@@ -7,6 +7,8 @@ def fan(radius, start_angle, end_angle, height, segments=100, filled=False):
    (when you can see the hole in the middle).
    
    All angles are assumed to be in radians.'''
+   if start_angle > end_angle:
+      end_angle += math.pi * 2
 
    arc1 = arc_circle(radius - height / 2, start_angle, end_angle, segments)
    arc2 = arc_circle(radius + height / 2, start_angle, end_angle, segments)
