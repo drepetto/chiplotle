@@ -15,4 +15,5 @@ class Visitor(object):
 
    def visit_generic(self, node, *args, **kwargs):
       print '*** In generic Visitor function.'
+      print 'Node: %s' % node
 
