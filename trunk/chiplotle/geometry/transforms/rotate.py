@@ -3,18 +3,13 @@ from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 from chiplotle.geometry.transforms.transformvisitor import TransformVisitor
 
-def rotate(shape, angle, pivot = 'centroid'):
+def rotate(shape, angle, pivot = (0, 0)):
    '''In place rotation.
 
    - `shape` is the shape to be rotated.
    - `angle` is the angle (in radians) of rotation.
-   - `pivot` is the center of rotation. Can be a string description 
-      of the pivot point or a Coordinate. Current supported strings
-      is just 'centroid'. This is the default.
+   - `pivot` is the center of rotation. Must be a Coordinate or (x, y) pair.
    '''
-   if pivot == 'centroid':
-      pivot = shape.centroid
-
    def rotate(coords, angle, pivot = pivot):
       return rotate_2d(coords, angle, pivot)
 
