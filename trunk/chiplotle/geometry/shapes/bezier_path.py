@@ -46,7 +46,8 @@ def bezier_path(points, curvature, interpolation_count = 50):
          points[i] + dxy[i], 
          points[i+1] - dxy[i+1], 
          points[i+1]]
-      plot_points += bezier_interpolation(control_points, interpolation_count, 1)
+      plot_points += bezier_interpolation(control_points, 
+                                          interpolation_count, 1)[:-1]
 
    return Path(plot_points)
 
