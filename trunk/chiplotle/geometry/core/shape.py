@@ -1,5 +1,6 @@
 from chiplotle.core.interfaces.decoratable import Decoratable
 from chiplotle.geometry.core.shapepropertiesmixin import _ShapePropertiesMixin
+from chiplotle.geometry.core.metadata import MetaData
 
 class _Shape(Decoratable, _ShapePropertiesMixin):
    '''Abstract class from which all geometric shapes inherit.'''
@@ -9,6 +10,7 @@ class _Shape(Decoratable, _ShapePropertiesMixin):
    def __init__(self):
       Decoratable.__init__(self)
       self.layer = None
+      self.meta = MetaData()
 
 
    ## overrides ##
@@ -17,4 +19,9 @@ class _Shape(Decoratable, _ShapePropertiesMixin):
       return str(self)
 
    def __str__(self):
-      return '%s(%d)' % (self.__class__.__name__, len(self))
+      name = self.metadata.name or ''
+      tags = self.metadata.tags or ''
+      return '%s(%d) "%s" %s' % (self.__class__.__name__, 
+                               len(self), 
+                               name, 
+                               tags)
