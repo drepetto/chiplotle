@@ -21,7 +21,7 @@ class _Shape(Decoratable, _ShapePropertiesMixin):
    def __str__(self):
       name = self.meta.name or ''
       tags = self.meta.tags or ''
-      return '%s(%d) "%s" %s' % (self.__class__.__name__, 
+      return '%s(%d) %s %s' % (self.__class__.__name__, 
                                len(self), 
                                name, 
                                tags)
