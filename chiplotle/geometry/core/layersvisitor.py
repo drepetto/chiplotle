@@ -5,16 +5,16 @@ class LayersVisitor(Visitor):
    
    def __init__(self):
       self.layers = {}
-      self.group_layer = None
 
-   def visit_Group(self, node, *args, **kwargs):
-      self.group_layer = node.layer
+   def visit_Group(self, node, current_layer=None):
+      if node.layer is not None:
+         current_layer = node.layer
       for s in node:
-         self.visit(s, *args, **kwargs)
+         self.visit(s, current_layer)
 
-   def visit__Shape(self, node, *args, **kwargs):
+   def visit__Shape(self, node, current_layer=None):
       if node.layer is None:
-         self._add_shape_to_layer(node, self.group_layer)
+         self._add_shape_to_layer(node, current_layer)
       else:
          self._add_shape_to_layer(node, node.layer)
       
