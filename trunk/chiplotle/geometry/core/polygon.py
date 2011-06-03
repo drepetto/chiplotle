@@ -21,7 +21,8 @@ class Polygon(Path):
    def _infix_commands(self):
       if Polygon.language == 'HPGL':
          path =  convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
-         result = [PM(0)] + path + [PM(2), EP()]
+         #result = [PM(0)] + path + [PM(2), EP()]
+         result = path[0:2] + [PM(0)] + path[2:] + [PM(2), EP()]
          if self.filled:
             result.append(FP())
          return result
