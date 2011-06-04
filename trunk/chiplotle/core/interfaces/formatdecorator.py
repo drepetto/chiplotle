@@ -8,32 +8,9 @@ class FormatDecorator(object):
       some default.
    '''
    
-   def __init__(self, sticky=False):
-      ## FIXME: this sticky parameter is not doing anything.
-      ## fix or remove.
-      self.sticky = sticky
-
-
    @property
-   def preformat_commands(self):
+   def _subcommands(self):
       raise NotImplementedError
-
-   @property
-   def postformat_commands(self):
-      raise NotImplementedError
-
-
-#   @property
-#   def preformat(self):
-#      return ''.join(self.preformat_commands.format)
-#
-#   @property
-#   def postformat(self):
-#      if self.sticky:
-#         return ''
-#      else:
-#         return ''.join(self.postformat_commands.format)
-
 
 
    ## overrides ##
@@ -41,5 +18,5 @@ class FormatDecorator(object):
    def __call__(self, shape):
       if not isinstance(shape, _Shape):
          raise TypeError('Must be a Shape.')
-      shape.format_decorators.append(self)
+      shape.formatters.append(self)
 

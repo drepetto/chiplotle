@@ -3,19 +3,16 @@ from chiplotle.core.interfaces.formatdecorator import FormatDecorator
 
 class LineTypeDecorator(FormatDecorator):
    
-   def __init__(self, linetype, sticky=False):
-      FormatDecorator.__init__(self, sticky)
+   def __init__(self, linetype):
+      FormatDecorator.__init__(self)
       if not isinstance(linetype, LT):
          raise TypeError
       self.linetype = linetype
 
    @property
-   def preformat_commands(self):
+   def _subcommands(self):
       return [self.linetype]
 
-   @property
-   def postformat_commands(self):
-      return [LT( )]
 
 
 ## DEMO
@@ -24,11 +21,12 @@ if __name__ == '__main__':
    from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
 
-   ltd = LineTypeDecorator(LT(2, .5), False)
    r1 = rectangle(1000, 200)
    r2 = rectangle(300, 800)
+   ltd = LineTypeDecorator(LT(2, .5))
    ltd(r1)
-   print r1.format
    g = Group([r1, r2])
+   ltd = LineTypeDecorator(LT(3, .1))
+   ltd(g)
    print g.format
    io.view(g)

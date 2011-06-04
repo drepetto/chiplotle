@@ -15,7 +15,7 @@ class Path(_Shape):
       self.points = CoordinateArray(points)
 
 
-   ## PUBLIC PROPERTIES ##
+   ## public properties ##
 
    @property
    def points(self):
@@ -25,22 +25,22 @@ class Path(_Shape):
       self._points = CoordinateArray(arg)
 
 
-   ## PRIVATE PROPERTIES ##
+   ## private properties ##
 
    @property
    def _preformat_points(self):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
       return self.points
 
-   @property
-   def _infix_commands(self):
-      if _Shape.language == 'HPGL':
-         return convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
-      elif _Shape.language == 'gcode':
-         print 'Sorry, no g-code support!'
+#   @property
+#   def _infix_commands(self):
+#      if _Shape.language == 'HPGL':
+#         return convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
+#      elif _Shape.language == 'gcode':
+#         print 'Sorry, no g-code support!'
 
 
-   ## OVERRIDES ##
+   ## overrides ##
 
    def __len__(self):
       return len(self.points)
