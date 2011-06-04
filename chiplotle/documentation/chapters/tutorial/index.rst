@@ -47,7 +47,7 @@ To pass the command to the plotter, you use ``plotter.write( )``. So::
 
    chiplotle> plotter.write(SP(1))
 
-Your plotter should pick up pen one. Some common commands, like ``SP``, can be directly sent from the plotter. i.e., the plotter has methods equivalent to some of the HPGL commands. Such is the case of ``PS``::
+Your plotter should pick up pen one. Some common commands, like ``SP``, can be directly sent from the plotter. i.e., the plotter has methods equivalent to some of the HPGL commands. Such is the case of ``SP``::
 
    chiplotle> plotter.select_pen(1)
 
@@ -74,14 +74,6 @@ To replace the pen and have a look at your magnificent square, you select pen ze
 
    chiplotle> plotter.select_pen(0)
    
-
-You can also use Chiplotle's Compound commands, a set of more complex routines that we've
-added to the basic HPGL command set::
-
-    chiplotle> plotter.write(Rectangle([500,500], 100, 100))
-
-That's it! Have a look at the Chiplotle API documentation for a complete list of 
-HPGL commands and Chiplotle Compound commands.
 
 
 Running Chiplotle from a Python script
