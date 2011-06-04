@@ -82,29 +82,29 @@ class Label(_Shape):
 
    ## PRIVATE PROPERTIES ##
 
-   @property
-   def _infix_commands(self):
-      angle = self.angle
-      if self.never_upside_down:
-         if math.pi * 3 / 2.0 > angle > math.pi / 2.0:
-            angle += math.pi
-
-      if _Shape.language == 'HPGL':
-         origin = self.HPGL_ORIGIN_MAP[self.origin]
-         label = HPGLLabel(
-            text = self.text, 
-            charwidth = self.charwidth,
-            charheight = self.charheight,
-            charspace = self.charspace,
-            linespace = self.linespace,
-            origin = origin,
-            direction = mathtools.polar_to_xy((1, angle)),
-            )
-         return [PA(self.points[0]), label]
-
-      elif _Shape.language == 'gcode':
-         print 'Sorry, no g-code support!'
-         raise NotImplementedError
+#   @property
+#   def _infix_commands(self):
+#      angle = self.angle
+#      if self.never_upside_down:
+#         if math.pi * 3 / 2.0 > angle > math.pi / 2.0:
+#            angle += math.pi
+#
+#      if _Shape.language == 'HPGL':
+#         origin = self.HPGL_ORIGIN_MAP[self.origin]
+#         label = HPGLLabel(
+#            text = self.text, 
+#            charwidth = self.charwidth,
+#            charheight = self.charheight,
+#            charspace = self.charspace,
+#            linespace = self.linespace,
+#            origin = origin,
+#            direction = mathtools.polar_to_xy((1, angle)),
+#            )
+#         return [PA(self.points[0]), label]
+#
+#      elif _Shape.language == 'gcode':
+#         print 'Sorry, no g-code support!'
+#         raise NotImplementedError
 
 
    def __str__(self):
