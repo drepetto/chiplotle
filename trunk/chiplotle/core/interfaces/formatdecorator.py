@@ -1,11 +1,8 @@
 from chiplotle.geometry.core.shape import _Shape
 
 class FormatDecorator(object):
-   '''FormatDecorators know how to wrap Decoratable objects with additional
+   '''FormatDecorators know how to wrap Shape objects with additional
    formatting stuff.
-
-   - `sticky` = False reverts the formatting to a previous state or 
-      some default.
    '''
    
    @property

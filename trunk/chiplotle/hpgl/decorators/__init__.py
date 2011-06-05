@@ -1,3 +1,3 @@
-from .pen import PenDecorator
-from .linetype import LineTypeDecorator
-from .filltype import FillTypeDecorator
+from .pen import Pen
+from .linetype import LineType
+from .filltype import FillType

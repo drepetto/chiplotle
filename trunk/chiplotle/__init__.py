@@ -23,7 +23,7 @@ from chiplotle.geometry.core.coordinate import Coordinate
 
 from chiplotle.hpgl.commands import *
 from chiplotle.hpgl.pen import Pen
-from chiplotle.hpgl.decorators import *
+#from chiplotle.hpgl.decorators import *
 
 #from chiplotle.hpgl.compound import *
 #from chiplotle.hpgl.compound.decorators import *

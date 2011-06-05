@@ -5,8 +5,6 @@ from chiplotle.geometry.transforms.offset import offset
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.label import Label
 from chiplotle.geometry.core.coordinate import Coordinate
-from chiplotle.hpgl.pen import Pen
-from chiplotle.hpgl.decorators import PenDecorator
 
 ## TODO should this be a decorator carried around by the shape?
 
@@ -31,11 +29,10 @@ def annotation(shape):
 
 class _Annotation(object):
    
-   def __init__(self, shape, charwidth = 0.05, charheight = 0.1, pen = 6):
+   def __init__(self, shape, charwidth = 0.05, charheight = 0.1):
       self.shape = shape
       self.charwidth = charwidth
       self.charheight = charheight
-      self.pen = pen
 
 
    def _annotate_structure(self):
@@ -54,7 +51,6 @@ class _Annotation(object):
 
       fields = '\n\r'.join([cr, cd, mn, mx, ws, hs, ])
       label = Label(fields, self.charwidth, self.charheight)
-      PenDecorator(Pen(self.pen))(label)
       offset(label, self.shape.bottom_left)
       return label
 
@@ -67,7 +63,6 @@ class _Annotation(object):
       c = circle(20)
       cr = cross(50, 50)
       mark = Group([c, cr, label])
-      PenDecorator(Pen(self.pen))(mark)
 
       offset(label, coord)
       offset(c, coord)
@@ -84,7 +79,6 @@ class _Annotation(object):
       r = rectangle(20, 20)
       cr = cross(50, 50)
       mark = Group([r, cr, label])
-      PenDecorator(Pen(self.pen))(mark)
 
       offset(label, coord)
       offset(r, coord)
@@ -106,6 +100,7 @@ class _Annotation(object):
 ## demo
 if __name__ == '__main__':
    from chiplotle import *
+   from chiplotle.hpgl.decorators import Pen
    from random import randint
    coords = [(randint(0, 4000), randint(0, 4000)) for i in range(20)]
    p = bezier_path(coords, 1)
@@ -113,8 +108,9 @@ if __name__ == '__main__':
    offset(r, (-2000, 1000))
    g1 = Group([r, p])
    an = annotation(g1)
+   Pen(2)(an)
 
    g2 = Group([g1, an])
-   PenDecorator(Pen(1))(g2)
+   Pen(1)(g2)
 
    io.view(g2)
