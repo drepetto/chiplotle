@@ -1,14 +1,18 @@
 from chiplotle.hpgl.commands import FT
 from chiplotle.core.interfaces.formatdecorator import FormatDecorator
 
-class FillTypeDecorator(FormatDecorator):
+
+class FillType(FormatDecorator):
    
-   def __init__(self, filltype):
+   __doc__ = FT.__doc__
+
+   def __init__(self, filltype=None, space=None, angle=None):
       FormatDecorator.__init__(self)
-      if not isinstance(filltype, FT):
-         raise TypeError
       self.filltype = filltype
+      self.space = space
+      self.angle = angle
+
 
    @property
    def _subcommands(self):
-      return [self.filltype]
+      return [FT(self.filltype, self.space, self.angle)]
