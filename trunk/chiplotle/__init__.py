@@ -22,11 +22,9 @@ from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.coordinate import Coordinate
 
 from chiplotle.hpgl.commands import *
+from chiplotle.hpgl import formatters
 from chiplotle.hpgl.pen import Pen
-#from chiplotle.hpgl.decorators import *
 
-#from chiplotle.hpgl.compound import *
-#from chiplotle.hpgl.compound.decorators import *
 
 from chiplotle.geometry.core import *
 from chiplotle.geometry.shapes import *
