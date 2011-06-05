@@ -1,5 +1,5 @@
-from chiplotle.tools.hpgltools import convert_coordinates_to_hpgl_absolute_path
 from chiplotle.core.visitor import Visitor
+from chiplotle.tools.hpgltools import convert_coordinates_to_hpgl_absolute_path
 import chiplotle.hpgl.commands as hpgl
 
 class HPGLFormatVisitor(Visitor):

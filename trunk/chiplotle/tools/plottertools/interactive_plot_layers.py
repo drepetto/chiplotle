@@ -1,8 +1,13 @@
 from chiplotle.geometry.core.layersvisitor import LayersVisitor
+from chiplotle.geometry.core.affixformatvisitor import AffixFormatVisitor
+import copy
 
 def interactive_plot_layers(shape, plotter):
    '''Sorts given `shape` by layers and interactively plots,
    requesting the use to change page every time a layer is done printing.'''
+   shape = copy.deepcopy(shape)
+   v = AffixFormatVisitor()
+   v.visit(shape)
    v = LayersVisitor()
    v.visit(shape)
 
