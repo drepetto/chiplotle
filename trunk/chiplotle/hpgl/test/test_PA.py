@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import PA
 
 def test_PA_01( ):
    t = PA( )

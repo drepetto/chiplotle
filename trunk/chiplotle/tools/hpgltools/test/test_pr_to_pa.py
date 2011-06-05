@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 
 def test_pr_to_pa_01( ):
    '''PR with one coordinate works.'''

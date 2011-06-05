@@ -20,9 +20,6 @@ def plot_hpgl_file_max_size(file):
 
    f = io.import_hpgl_file(file)
    
-#   print f
-   
-   #dimensions = hpgltools.find_hpgl_dimensions(f)
    dimensions = hpgltools.get_bounding_box(f)
    
    print "original dimensions: "
@@ -56,12 +53,10 @@ def plot_hpgl_file_max_size(file):
 
    hpgltools.scale(f, scaler)
 
-   #dimensions = hpgltools.find_hpgl_dimensions(f)
    dimensions = hpgltools.get_bounding_box(f)
    
    hpgltools.transpose(f, [-dimensions[0][0], -dimensions[0][1]])
    
-   #dimensions = hpgltools.find_hpgl_dimensions(f)
    dimensions = hpgltools.get_bounding_box(f)
    
    print "scaled dimensions: "

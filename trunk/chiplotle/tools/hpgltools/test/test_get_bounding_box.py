@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import PA, EA
 
 def test_get_bounding_box_01( ):
    '''The function can take a list of _HPGLPrimitives.'''

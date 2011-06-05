@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import FT
 from py.test import raises
 
 def test_FT_01( ):

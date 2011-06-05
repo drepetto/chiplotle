@@ -1,4 +1,6 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import EA
+
 from py.test import raises
 
 def test_EA_01( ):

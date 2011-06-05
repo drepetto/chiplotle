@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import SetHandshakeMode
 from py.test import raises
 
 def test_dci_sethandshakemode_01( ):

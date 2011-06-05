@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 
 def test_get_all_coordinates_01( ):
    '''get_all_coordinates( ) works with _HPGLPrimitives.'''

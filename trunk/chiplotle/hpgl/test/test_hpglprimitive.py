@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import PU
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
 
 def test_hpglprimitive_terminator_01( ):

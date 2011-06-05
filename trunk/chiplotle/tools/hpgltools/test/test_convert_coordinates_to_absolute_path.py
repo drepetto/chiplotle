@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 from py.test import raises
 
 def test_convert_coordinates_to_absolute_hpgl_path_01( ):

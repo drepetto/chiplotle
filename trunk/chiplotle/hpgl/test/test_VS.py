@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import VS
 
 def test_VS_01( ):
    '''Empty initialization.'''

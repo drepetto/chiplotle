@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import ES
 
 def test_ES_01( ):
    t = ES( )

@@ -21,12 +21,15 @@ from chiplotle.core import errors
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.coordinate import Coordinate
 
-from chiplotle.hpgl.commands import *
+from chiplotle.hpgl import commands as hpgl
 from chiplotle.hpgl import formatters
 from chiplotle.hpgl.pen import Pen
 
-
-from chiplotle.geometry.core import *
+from chiplotle.geometry.core import Group
+from chiplotle.geometry.core import Formation
+from chiplotle.geometry.core import Path
+from chiplotle.geometry.core import Polygon
+from chiplotle.geometry.core import Label
 from chiplotle.geometry.shapes import *
 from chiplotle.geometry.transforms import *
 
@@ -39,7 +42,6 @@ from chiplotle import plotters
 
 ## shortcuts / abbreviations ##
 
-group = Group
 CoordArray = CoordinateArray
 Coord = Coordinate
 

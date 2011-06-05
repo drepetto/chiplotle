@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import IP
 from py.test import raises
 
 def test_IP_01( ):
