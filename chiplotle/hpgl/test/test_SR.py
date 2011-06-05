@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import SR
 import py.test
 
 def test_SR_01( ):

@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 from py.test import raises
 
 def test_inflate_hpgl_string_01( ):

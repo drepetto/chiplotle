@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 from chiplotle.tools.hpgltools import relativize
 
 def test_relativize_01( ):

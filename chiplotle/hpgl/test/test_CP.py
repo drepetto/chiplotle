@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import CP
 
 def test_CP_01( ):
    '''Empty initialization.'''

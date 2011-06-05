@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 
 def test_convert_relatives_to_absolutes_01( ):
    g = [PA((1, 2)), PR([(1, 1), (1, 1)])]

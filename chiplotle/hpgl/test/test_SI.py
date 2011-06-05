@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import SI
 import py.test
 
 def test_SI_01( ):
@@ -14,8 +14,8 @@ def test_SI_02( ):
    assert t.format == 'SI3.00,2.00;'
 
 
-def test_SR_03( ):
+def test_SI_03( ):
 
-   t = SR(3)
+   t = SI(3)
 
    assert py.test.raises(Warning, 't.format')

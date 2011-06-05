@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 
 def test_pens_updown_to_papr_01( ):
    g = [PA((1, 2)), PU([(1, 1), (2, 2)])]

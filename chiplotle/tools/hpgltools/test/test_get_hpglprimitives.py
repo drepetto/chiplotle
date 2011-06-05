@@ -1,4 +1,5 @@
 from chiplotle import *
+from chiplotle.hpgl.commands import *
 from chiplotle.tools.hpgltools.get_hpglprimitives import get_hpglprimitives
 from py.test import raises
 

@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import DR
 from py.test import raises
 
 def test_DR_01( ):

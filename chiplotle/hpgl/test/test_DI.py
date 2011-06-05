@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import DI
 from py.test import raises
 
 def test_DI_01( ):

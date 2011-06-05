@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import *
 import py.test
 
 def test_AA_01( ):

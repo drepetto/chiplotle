@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import WG
 
 def test_WG_01( ):
 

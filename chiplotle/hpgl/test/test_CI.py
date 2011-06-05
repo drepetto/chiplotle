@@ -1,4 +1,4 @@
-from chiplotle import *
+from chiplotle.hpgl.commands import CI
 from py.test import raises
 
 
