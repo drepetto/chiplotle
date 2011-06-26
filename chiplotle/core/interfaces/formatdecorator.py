@@ -15,5 +15,6 @@ class FormatDecorator(object):
    def __call__(self, shape):
       if not isinstance(shape, _Shape):
          raise TypeError('Must be a Shape.')
-      shape.formatters.append(self)
+      #shape.formatters.append(self)
+      shape.formatters.add(self)
 

@@ -18,7 +18,6 @@ def interactive_plot_layers(shape, plotter):
          continue
       print 'Plotting layer [%s]...' % layer
       plotter.write(v.layers[layer])
-      #plotter._sleep_while_buffer_full()
       print 'Done plotting layer [%s].' % layer
 
 

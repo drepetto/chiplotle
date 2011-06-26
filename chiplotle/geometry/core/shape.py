@@ -8,7 +8,7 @@ class _Shape(_ShapePropertiesMixin):
    language = 'HPGL'
 
    def __init__(self):
-      self.formatters = [ ]
+      self.formatters = set( )
       self.layer = None
       self.meta = MetaData()
 
