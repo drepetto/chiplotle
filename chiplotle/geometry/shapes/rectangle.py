@@ -1,4 +1,4 @@
-from chiplotle.geometry.core.path import Path
+from chiplotle.geometry.core.polygon import Polygon
 
 def rectangle(width, height):
    corners = []
@@ -7,7 +7,7 @@ def rectangle(width, height):
    corners.append((width / 2.0, height / 2.0))
    corners.append((width / 2.0, -height / 2.0))
    corners.append((-width / 2.0, -height / 2.0))
-   return Path(corners)
+   return Polygon(corners)
 
 
 
@@ -15,7 +15,8 @@ def rectangle(width, height):
 
 if __name__ == '__main__':
    from chiplotle.tools import io
-   e = rectangle(10, 20)
-   assert isinstance(e, Path)
+   e = rectangle(100, 200)
+   e.filled = True
+   assert isinstance(e, Polygon)
    print e.format
    io.view(e)
