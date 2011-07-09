@@ -9,26 +9,8 @@ def scale(shape, value, pivot = Coordinate(0, 0)):
    - `value` is the scaling value. Can be a scalar or an (x, y) coordinate.
    - `pivot` is the Coordinate around which the shape will be scaled.
    '''
-   pivot = Coordinate(*pivot)
-   try: 
-      ## if it's a tuple, convert to Coordinate...
-      ## NOTE Coordinate is a bad name for this, Vector is a more general 
-      ## notion and thus more appropriate here.
-      value = Coordinate(*value)
-   except TypeError:
-      pass
-
-   def scl(coords, value, pivot):
-      ## TODO use matrices to make this more efficient? 
-      if pivot == Coordinate(0, 0):
-         coords *= value
-      else:
-         offset_points = coords - pivot
-         scaled_points = offset_points * value
-         coords = scaled_points + pivot
-      return coords
-
-   t = TransformVisitor(scl)
+   from chiplotle.tools.geometrytools.scale import scale 
+   t = TransformVisitor(scale)
    t.visit(shape, value, pivot)
 
 
