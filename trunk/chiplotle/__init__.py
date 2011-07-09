@@ -26,7 +26,6 @@ from chiplotle.hpgl import formatters
 from chiplotle.hpgl.pen import Pen
 
 from chiplotle.geometry.core import Group
-from chiplotle.geometry.core import Formation
 from chiplotle.geometry.core import Path
 from chiplotle.geometry.core import Polygon
 from chiplotle.geometry.core import Label
