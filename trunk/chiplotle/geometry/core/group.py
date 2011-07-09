@@ -56,12 +56,12 @@ class Group(_Shape):
 
    ## private properties ##
 
-   @property
-   def _infix_commands(self):
-      result = [ ]
-      for shape in self:
-         result += shape._subcommands
-      return result
+#   @property
+#   def _infix_commands(self):
+#      result = [ ]
+#      for shape in self:
+#         result += shape._subcommands
+#      return result
 
 
    ## private methods ##
