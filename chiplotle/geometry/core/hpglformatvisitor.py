@@ -1,6 +1,7 @@
 from chiplotle.core.visitor import Visitor
 from chiplotle.tools.hpgltools import convert_coordinates_to_hpgl_absolute_path
 import chiplotle.hpgl.commands as hpgl
+import copy
 
 class HPGLFormatVisitor(Visitor):
    '''Visitor that collects shapes and returns their HPGL representation.'''
@@ -10,9 +11,9 @@ class HPGLFormatVisitor(Visitor):
 
 
    def visit_Group(self, node, formatters=None):
-      formatters = self._update_formatters(node, formatters)
+      frmtrs = self._update_formatters(node, formatters)
       for s in node:
-         self.visit(s, formatters)
+         self.visit(s, frmtrs)
 
 
    def visit_Polygon(self, node, formatters=None):

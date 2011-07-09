@@ -42,7 +42,7 @@ def test_layersvisitor_02():
 
    
 def test_layersvisitor_03():
-   '''Nested Groups and Formations work as expected.'''
+   '''Nested Groups work as expected.'''
    r1 = rectangle(1000, 1000)
    r1.layer = 1
    r2 = rectangle(500, 500)
@@ -52,7 +52,7 @@ def test_layersvisitor_03():
 
    rg = Group([r1, r2])
    rg.layer = 2
-   g = Formation([t, rg])
+   g = Group([t, rg])
    g.layer = 3
 
    v = LayersVisitor()

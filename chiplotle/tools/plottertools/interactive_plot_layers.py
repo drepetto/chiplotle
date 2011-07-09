@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
    rg = Group([r1, r2])
    rg.layer = 2
-   g = Formation([t, rg])
+   g = Group([t, rg])
    g.layer = 3
 
    plotter = instantiate_plotters()[0]
