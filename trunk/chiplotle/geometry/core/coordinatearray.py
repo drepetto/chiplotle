@@ -1,7 +1,9 @@
-from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.core import errors
+from chiplotle.geometry.core.coordinate import Coordinate
+from chiplotle.geometry.core.coordinatearraypropertiesmixin import \
+   CoordinateArrayPropertiesMixin
 
-class CoordinateArray(object):
+class CoordinateArray(CoordinateArrayPropertiesMixin):
 
    __slots__ = ('_data', )
 
@@ -41,23 +43,6 @@ class CoordinateArray(object):
    def y(self):
       return tuple([xy.y for xy in self._data])
 
-   @property
-   def difference(self):
-      '''Returns the difference between consecutive elements in `self`.
-      i.e., first derivative.
-      '''
-      result = [ ]
-      for i in range(len(self) - 1):
-         result.append(self[i+1] - self[i])
-      return type(self)(result)
-
-   @property
-   def cumsum(self):
-      '''Returns the cumulative sum.'''
-      result = [Coordinate(0, 0)]
-      for coord in self:
-         result.append(result[-1] + coord)
-      return type(self)(result)
 
    ## METHODS ##
 
