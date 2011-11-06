@@ -10,6 +10,7 @@ def interactive_plot_layers(shape, plotter):
    v.visit(shape)
    v = LayersVisitor()
    v.visit(shape)
+   print 'Layers collected: ', v.layers.keys()
 
    for layer in sorted(v.layers.keys()):
       print 'Please set/change paper for layer [%s].' % layer

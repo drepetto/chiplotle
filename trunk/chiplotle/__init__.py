@@ -29,6 +29,8 @@ from chiplotle.geometry.core import Group
 from chiplotle.geometry.core import Path
 from chiplotle.geometry.core import Polygon
 from chiplotle.geometry.core import Label
+from chiplotle.geometry import shapes
+from chiplotle.geometry import transforms
 from chiplotle.geometry.shapes import *
 from chiplotle.geometry.transforms import *
 
