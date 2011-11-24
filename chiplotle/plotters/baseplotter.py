@@ -22,6 +22,7 @@ import types
 class _BasePlotter(object):
    def __init__(self, serial_port):
       self.type = '_BasePlotter'
+      self._logger = get_logger(self.__class__.__name__)
       self._serial_port = serial_port
       self._hpgl = commands
       self._margins = MarginsInterface(self)
@@ -34,7 +35,6 @@ class _BasePlotter(object):
       self.buffer_size = int(self._buffer_space / 2)
       self.initialize_plotter( )
 
-      self._logger = get_logger(self.__class__.__name__)
       
 
    @property
