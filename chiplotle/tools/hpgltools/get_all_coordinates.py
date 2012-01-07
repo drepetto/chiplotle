@@ -1,5 +1,4 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.hpgl.compound.hpglcompound import _HPGLCompound
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_relatives_to_absolutes import \
    convert_relatives_to_absolutes
@@ -15,10 +14,8 @@ def get_all_coordinates(arg):
       >>> print c
       [CP(1, 2), CP(2, 3), CP(3, 4)]
    '''
-   if isinstance(arg, _HPGLCompound):
-      arg = arg._subcommands
-   elif not isinstance(arg, (list, tuple)):
-      raise TypeError('`arg` must be list, tuple or _HPGLCompound')
+   if not isinstance(arg, (list, tuple)):
+      raise TypeError('`arg` must be list or tuple')
 
    arg = convert_relatives_to_absolutes(arg)
 
@@ -29,6 +26,6 @@ def get_all_coordinates(arg):
             result.extend(e.xy)
          else:
             result.append(e.xy)
-      elif isinstance(e, _HPGLCompound):
-         result += get_all_coordinates(e._subcommands)
+      else:
+         print '"%s" has not abs coords.' % e
    return result
