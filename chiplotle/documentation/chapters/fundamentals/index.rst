@@ -1,19 +1,31 @@
 Chiplotle fundamentals
 ======================
 
-*Chiplotle* is a Python library for procedural / algorithmic drawing specifically designed to control pen plotters. While other drawing computer tools are designed to create art on the screen (or for ordinary printing), Chiplotle knows about and understands the mechanics of drawing with pen plotters, or cutting with machine cutters. 
+In addition to being an HPGL plotter driver, *Chiplotle* is a vector drawing librarly specifically designed to work with these HPGL plotters. While other drawing computer tools are designed to create art on the screen (or for ordinary raster printing), Chiplotle knows about and understands some of the mechanics of drawing with pen plotters. 
 
-How does Chiplote communicate with these wonderful machines?
-During the 70s and 80s, a variety of languages were developed by different manufacturers to control different brands of pen plotters, but the one language that gained most popularity and eventually became sort of a standard is HPGL (Hewlett-Packard Graphics Language). 
-Chiplotle supports all the standard HPGL commands, giving the user full control of these plotters. 
-
-With Chiplotle the user has direct access both the the HPGL commands and to higher abstract shapes that generate the necessary HPGL code to generate these shapes. Thus, one can think of Chiplotle as consisting of three layers:
+One can think of Chiplotle as consisting of three layers:
 
 #. A high abstraction layer consisting of platonic shapes, like `line`, `circle`, `label`, etc.'
 #. An interface / communication layer consisting of the HPGL language.
-#. A hardware layer consisting of the plotting machine itself.
+#. A plotter driver wich manages communication between your hardware and software.
 
-Further, Chiplotle provides plotter interfaces that allow the user to contol the plotter as if through a control panel. 
+HPGL
+****
+
+How does Chiplote communicate with a plotter?
+During the 70s and 80s, a variety of languages were developed by different manufacturers to control different brands of pen plotters, but the one language that gained most popularity and eventually became sort of a standard is HPGL (Hewlett-Packard Graphics Language). 
+
+Chiplotle supports all the standard HPGL commands, giving you full control of these plotters. 
+
+Further, Chiplotle provides plotter interfaces that allow you to contol the plotter as if through a control panel. 
+
+
+Chiplotle vector drawing
+************************
+
+In addition to being an HPGL plotter driver, Chiplotle is also a general purpose vector drawing librarly. 
+With Chiplotle you can create generic shapes that can be sent to an HPGL plotter directly for drawing, without you knowing anything about the underlying HPGL language. 
+
 
 
 Chiplotle geometry
@@ -24,19 +36,25 @@ Shapes
 
 Chiplotle comes built in with a set of common shapes, like `line`, `circle`, `rectangle`, `ellipse`, etc.
 
+These shapes are agnostic of any particular drawing language, such as HPGL or g-code. 
+
 
 Transforms
 -----------
 
-Core classes
-------------
+Chiplotle allows you to apply your standard geometric transformations to any shapes you may create with it. 
 
 
 
 Chiplotle-HPGL commands
 *****************************
 
-Each HPGL command in Chiplotle is implemented as a Class. Chiplotle HPGL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others don't::
+In addition to the generic shape constructors, in Chiplotle you have access to specific HPGL command definitions. 
+
+All the standard HPGL commands are implemented in Chiplotle, and their class names corresponds to the two letter mnemonic used in the HPGL.
+Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_hpgl>` for a list and documentation of all the HPGL commands.
+
+Chiplotle HPGL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others don't::
 
    chiplotle> PD( )
    PD(xy=[])
@@ -50,8 +68,4 @@ All Chiplotle HPGL commands have a ``format`` attribute. This attribute returns 
    chiplotle> t = PD( )
    chiplotle> t.format
    'PD;'
-
-
-All the standard HPGL commands are implemented in Chiplotle, and their class names corresponds to the two letter mnemonic used in the HPGL.
-Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_hpgl>` for a list and documentation of all the HPGL commands.
 
