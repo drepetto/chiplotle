@@ -32,7 +32,7 @@ def test_plotter_write_03( ):
 def test_plotter_write_04( ):
    '''write( ) can take list/tuple of Chiplotle HPGL commands.'''
    p = instantiate_virtual_plotter( )
-   commands = [PA((1000, 0)), CI(500)]
+   commands = [PA([(1000, 0)]), CI(500)]
    p.write(commands)
    assert p.format == 'IN;' + ''.join([c.format for c in commands])
 

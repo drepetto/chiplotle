@@ -1,6 +1,7 @@
 from chiplotle.hpgl import commands as hpgl
 from chiplotle.tools.hpgltools.parse_hpgl_string import parse_hpgl_string
 from chiplotle.tools.logtools.apply_logger import apply_logger
+from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
 
 def inflate_hpgl_string(string, filter_commands=None):
    '''Reads a text string and "inflates" it by creating
@@ -62,7 +63,16 @@ def _parse_hpgl_command_string(cmd_string):
    e.g., 'PD1,2,3,4' --> 'PD' and '(1,2,3,4)'.
    '''
    head = cmd_string[0:2]
-   if head in ('PU','PD','PA','PR', 'RA','RR','ER','EA','IP','IW','SC'):
+   if head in ('PU','PD','PA','PR','IP','IW','SC'):
+      coords = cmd_string[2:].split(',')
+      if coords == ['']:
+         coords = []
+      coords = [eval(n) for n in coords]
+      coords = flat_list_to_pairs(coords)
+      body = '(%s)' % coords
+      print '*' * 30
+      print body
+   elif head in ('RA','RR','ER','EA',):
       body = '(%s)' % cmd_string[2:]
    elif head in ('AR', 'AA'):
       parameters = cmd_string[2:].split(',')

@@ -1,12 +1,12 @@
 from chiplotle.geometry.core.coordinate import Coordinate
+import numpy as np
 
 class CoordinateArrayPropertiesMixin(object):
 
    @property
    def centroid(self):
       coords = set(self._data)
-      return sum(coords) / float(len(coords))
-
+      return sum(coords, Coordinate(0, 0)) / float(len(coords))
 
    @property
    def center(self):
@@ -15,24 +15,17 @@ class CoordinateArrayPropertiesMixin(object):
       centroid, which takes the distribution of the points into
       consideration.
       '''
-      min_coord, max_coord = self.minmax
-      w, h = max_coord - min_coord
-      x_center = min_coord.x + (w / 2.0)
-      y_center = min_coord.y + (h / 2.0)
-      return Coordinate(x_center, y_center)
-   
+      return sum(self.minmax, Coordinate(0, 0)) / 2.0
 
    @property
    def minmax(self):
-      '''Returns the pair of minimum and maximum coordinates.'''
+      '''Returns the minimum and maximum coordinates.'''
       if len(self._data) == 0:
          return None
-      max_x = max(self.x)
-      min_x = min(self.x)
-      max_y = max(self.y)
-      min_y = min(self.y)
-      return (Coordinate(min_x, min_y), Coordinate(max_x, max_y))
-
+      coords= [list(c) for c in self._data]
+      mx    = np.max(coords, 0).tolist()
+      mn    = np.min(coords, 0).tolist()
+      return (Coordinate(*mn), Coordinate(*mx))
 
    @property
    def difference(self):
@@ -48,7 +41,8 @@ class CoordinateArrayPropertiesMixin(object):
    @property
    def cumsum(self):
       '''Returns the cumulative sum.'''
-      result = [Coordinate(0, 0)]
+      dimensions = len(self[0])
+      result = [Coordinate(*([0] * dimensions))]
       for coord in self:
          result.append(result[-1] + coord)
       return type(self)(result)

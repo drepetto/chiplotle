@@ -2,10 +2,10 @@ from chiplotle import *
 from chiplotle.hpgl.commands import *
 
 def test_convert_relatives_to_absolutes_01( ):
-   g = [PA((1, 2)), PR([(1, 1), (1, 1)])]
+   g = [PA([(1, 2)]), PR([(1, 1), (1, 1)])]
    t = hpgltools.convert_relatives_to_absolutes(g)
    assert len(t) == 2
-   assert t[0] == PA((1, 2))
+   assert t[0] == PA([(1, 2)])
    assert t[1] == PA([(2, 3), (3, 4)])
 
 

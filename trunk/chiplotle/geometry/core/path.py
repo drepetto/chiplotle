@@ -1,4 +1,3 @@
-from chiplotle.core import errors
 from chiplotle.geometry.core.shape import _Shape
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path \
@@ -62,10 +61,7 @@ class Path(_Shape):
       return self.__add__(arg)
 
    def __mul__(self, arg):
-      try:
-         return Path(self.points * arg)
-      except errors.InitParameterError:
-         raise errors.OperandError( )
+      return Path(self.points * arg)
 
    def __imul__(self, arg):
       self.points = self.points * arg
@@ -75,10 +71,7 @@ class Path(_Shape):
       return self * arg
 
    def __sub__(self, arg):
-      try:
-         return self + (-arg)
-      except:
-         raise errors.OperandError( )
+      return self + (-arg)
    
    def __isub__(self, arg):
       self.points = self.points - arg

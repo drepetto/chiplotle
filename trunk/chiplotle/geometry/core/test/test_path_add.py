@@ -4,31 +4,18 @@ from chiplotle.core import errors
 from py.test import raises
 
 def test_path_add_01( ):
-   '''A Path and an int can be added.
-   The operation returns a new instance (copy) of Path.'''
-   a = Path([(1, 2), (3, 4)])
-   t = a + 2
-   assert t is not a
-   assert isinstance(t, Path)
-   assert t == Path([(3, 4), (5, 6)])
+   '''A Path and an int cannot be added.'''
+   assert raises(TypeError, 'Path([(1, 2), (3, 4)]) + 3')
 
 
 def test_path_add_02( ):
-   '''A Path and a float can be added.'''
-   a = Path([(1, 2), (3, 4)])
-   t = a + 2.1
-   assert t is not a
-   assert isinstance(t, Path)
-   assert t == Path([(3.1, 4.1), (5.1, 6.1)])
+   '''A Path and a float cannot be added.'''
+   assert raises(TypeError, 'Path([(1, 2), (3, 4)]) + 3.2')
 
 
 def test_path_radd_02( ):
-   '''A float and a Path can be added.'''
-   a = Path([(1, 2), (3, 4)])
-   t = 2.1 + a
-   assert t is not a
-   assert isinstance(t, Path)
-   assert t == Path([(3.1, 4.1), (5.1, 6.1)])
+   '''A float and a Path cannot be added.'''
+   assert raises(TypeError, '3.2 + Path([(1, 2), (3, 4)])')
 
 
 def test_path_add_03( ):
@@ -52,35 +39,33 @@ def test_path_radd_03( ):
 def test_path_add_04( ):
    '''A Path and a duple cannot be added.'''
    a = Path([(1, 2), (3, 4)])
-   assert raises(errors.OperandError, 'a + (1, 2)')
+   assert raises(TypeError, 'a + (1, 2)')
 
 
 def test_path_radd_04( ):
    '''A duple and a Path cannot be added.'''
    a = Path([(1, 2), (3, 4)])
-   assert raises(errors.OperandError, '(1, 2) + a')
+   assert raises(TypeError, '(1, 2) + a')
 
 
 def test_path_add_05( ):
-   '''A Path and a triple cannot be added.'''
+   '''A 2D Path and a triple cannot be added.'''
    a = Path([(1, 2), (3, 4)])
-   assert raises(errors.OperandError, 'a + (1, 2, 3)')
+   assert raises(TypeError, 'a + (1, 2, 3)')
 
 
 def test_path_add_06( ):
    '''A Path and a Path cannot be added.'''
    a = Path([(1, 2), (3, 4)])
    b = Path([(2, 3)])
-   assert raises(errors.OperandError, 'a + b')
+   assert raises(TypeError, 'a + b')
 
 
 ## in place addition __iadd__ ##
 
 def test_path_iadd_01( ):
-   '''A float and a Path can be added.'''
+   '''A float and a Path cannot be added.'''
    t = Path([(1, 2), (3, 4)])
-   t += 2.1
-   assert isinstance(t, Path)
-   assert t == Path([(3.1, 4.1), (5.1, 6.1)])
+   assert raises(TypeError, 't += 3.2')
 
 

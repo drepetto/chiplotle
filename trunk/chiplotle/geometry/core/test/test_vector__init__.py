@@ -13,18 +13,14 @@ def test_coordinate__init__01( ):
 
 def test_coordinate__init__02( ):
    '''Coordinate cannot be initialized with a duple.'''
-   assert raises(errors.InitParameterError, 'Coordinate((1, 2))')
+   assert raises(TypeError, 'Coordinate((1, 2))')
 
 
 def test_coordinate__init__03( ):
-   '''Coordinate can be initialized with a Coordinate.'''
+   '''Coordinate cannot be initialized with a Coordinate.'''
    ##In this case, the constructor returns the existing coordinate.'''
    a = Coordinate(1, 2)
-   t = Coordinate(a)
-   assert t is not a
-   assert t == Coordinate(1, 2)
-   assert t.x == 1
-   assert t.y == 2
+   assert raises(TypeError, 't = Coordinate(a)')
 
 
 def test_coordinate__init__04( ):
@@ -35,23 +31,18 @@ def test_coordinate__init__04( ):
 
 
 def test_coordinate__init__05( ):
-   '''Coordinate cannot be initialized with a single number.'''
-   assert raises(errors.InitParameterError, 't = Coordinate(4)')
-
+   '''Coordinate can be initialized with a single number.'''
+   a = Coordinate(1)
+   assert a._coords == [1]
 
 def test_coordinate__init__06( ):
    '''Coordinate cannot be initialized with a triple.'''
-   assert raises(errors.InitParameterError, 't = Coordinate((1, 2, 3))')
+   assert raises(TypeError, 't = Coordinate((1, 2, 3))')
 
 
 def test_coordinate__init__07( ):
    '''Coordinate cannot be initialized with a Path.'''
-   assert raises(errors.InitParameterError, 't = Coordinate(Path([1,2]))')
-
-
-def test_coordinate__init__08( ):
-   '''Coordinate cannot be initialized with a Group.'''
-   assert raises(errors.InitParameterError, 't = Coordinate(Group([]))')
+   assert raises(TypeError, 't = Coordinate(Path([1,2]))')
 
 
 ## attribute assignment ##
@@ -60,8 +51,6 @@ def test_coordinate_attribute_assignment_01( ):
    '''Coordinates are immutable.
    Attributes cannot be set (rebound).'''
    t = Coordinate(1, 2)
-   assert raises(AttributeError, 't.x = 2')
-   assert raises(AttributeError, 't.y = 2')
    assert raises(AttributeError, 't.xy = 2')
    assert raises(AttributeError, 't.foo = 3')
    assert raises(TypeError, 't[0] = 2')
@@ -110,126 +99,6 @@ def test_coordinate__ne__02( ):
    assert t != None
 
 
-## __add__ ##
-
-def test_coordinate__add__01( ):
-   '''Two Coordinates can be added.'''
-   a = Coordinate(1, 2)
-   b = Coordinate(3, 4)
-   t = a + b
-   assert isinstance(t, Coordinate)
-   assert t is not a
-   assert t is not b
-   assert t == Coordinate(4, 6)
-
-
-def test_coordinate__add__02( ):
-   '''A Coordinate and an int scalar can be added.'''
-   a = Coordinate(1, 2)
-   t = a + 4
-   assert isinstance(t, Coordinate)
-   assert t is not a
-   assert t == Coordinate(5, 6)
-
-
-def test_coordinate__radd__02( ):
-   '''An int scalar and a  Coordinate can be added.'''
-   a = Coordinate(1, 2)
-   t = 4 + a
-   assert isinstance(t, Coordinate)
-   assert t is not a
-   assert t == Coordinate(5, 6)
-
-
-def test_coordinate__add__03( ):
-   '''A Coordinate and a float scalar can be added.'''
-   a = Coordinate(1, 2)
-   t = a + 4.2
-   assert isinstance(t, Coordinate)
-   assert t is not a
-   assert t == Coordinate(5.2, 6.2)
-
-
-def test_coordinate__radd__03( ):
-   '''A float scalar and a Coordinate scalar can be added.'''
-   a = Coordinate(1, 2)
-   t = 4.2 + a
-   assert isinstance(t, Coordinate)
-   assert t is not a
-   assert t == Coordinate(5.2, 6.2)
-
-
-def test_coordinate__add__04( ):
-   '''A Coordinate and a tuple pair cannot be added.'''
-   a = Coordinate(1, 2)
-   assert raises(errors.OperandError, 'a + (3, 4)')
-
-
-def test_coordinate__radd__04( ):
-   '''A tuple pair and a Coordinate cannot be added.'''
-   a = Coordinate(1, 2)
-   assert raises(errors.OperandError, '(3, 4) + a')
-
-
-def test_coordinate__add__05( ):
-   '''A Coordinate and a CoordinateArray can be added.'''
-   a = Coordinate(1, 2)
-   b = CoordinateArray([(3, 4), (5, 6)])
-   t = a + b
-   assert isinstance(t, CoordinateArray)
-   assert t[0] == Coordinate(4, 6)
-   assert t[1] == Coordinate(6, 8)
-
-
-def test_coordinate__radd__05( ):
-   '''A CoordinateArray and a Coordinate can be added.'''
-   a = Coordinate(1, 2)
-   b = CoordinateArray([(3, 4), (5, 6)])
-   t = b + a
-   assert isinstance(t, CoordinateArray)
-   assert t[0] == Coordinate(4, 6)
-   assert t[1] == Coordinate(6, 8)
-
-
-def test_coordinate__add__06( ):
-   '''A Coordinate and a triple cannot be added.'''
-   a = Coordinate(1, 2)
-   b = (3, 4, 5)
-   assert raises(errors.OperandError, 'a + b')
-
-def test_coordinate__radd__06( ):
-   '''A triple and a Coordinate cannot be added.'''
-   a = Coordinate(1, 2)
-   b = (3, 4, 5)
-   assert raises(errors.OperandError, 'b + a')
-
-
-## __mul__ ##
-
-def test_coordinate__mul__01( ):
-   '''A Coordinate can be multiplied with a scalar.'''
-   a = Coordinate(1, 2)
-   b = 2.5
-   t = a * b
-   assert isinstance(t, Coordinate)
-   assert t is not a
-   assert t == Coordinate(2.5, 5)
-
-
-def test_coordinate__mul__02( ):
-   '''A Coordinate cannot be multiplied with a pair.'''
-   a = Coordinate(2, 3)
-   assert raises(errors.OperandError, 'a * (2, 3)')
-
-
-def test_coordinate__mul__03( ):
-   '''A Coordinate can be multiplied with another Coordinate.'''
-   a = Coordinate(2, 3)
-   t = a * Coordinate(2, 3)
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(4, 9)
-
-
 
 ## div ##
 
@@ -247,25 +116,23 @@ def test_coordinate__div__02( ):
    
 
 def test_coordinate__div__03( ):
-   '''A Coordinate can be divided by a Coordinate.'''
+   '''A Coordinate cannot be divided by a Coordinate.'''
    a = Coordinate(1, 2)
    b = Coordinate(2, 4)
-   t = a / b
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(0.5, 0.5)
+   assert raises(TypeError, 't = a / b')
 
 
 def test_coordinate__div__04( ):
    '''A Coordinate cannot be divided by a duple.'''
    a = Coordinate(1, 2)
    b = (2, 4)
-   assert raises(errors.OperandError, 'a / b')
+   assert raises(TypeError, 'a / b')
 
 
 def test_coordinate__div__05( ):
-   '''Division raises an OperandError on wrong type.'''
+   '''Division raises an Error on wrong type.'''
    a = Coordinate(1, 2)
-   assert raises(errors.OperandError, 'a / (1, 2, 3)')
+   assert raises(TypeError, 'a / (1, 2, 3)')
 
 
 def test_coordinate__floordiv__01( ):
@@ -277,12 +144,10 @@ def test_coordinate__floordiv__01( ):
 
 
 def test_coordinate__floordiv__02( ):
-   '''Floor division works with two Coordinates.'''
+   '''Floor division does not work with two Coordinates.'''
    a = Coordinate(1, 2)
    b = Coordinate(2, -4)
-   t = a // b
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(0, -1)
+   assert raises(TypeError, 't = a // b')
 
 
 def test_coordinate__floordiv__03( ):
@@ -294,61 +159,7 @@ def test_coordinate__floordiv__03( ):
 def test_coordinate__floordiv__04( ):
    '''Floor Division raises an OperandError on wrong type.'''
    a = Coordinate(1, 2)
-   assert raises(errors.OperandError, 'a // (1, 2, 3)')
-
-
-## __sub__, __rsub__ ##
-
-def test_coordinate__sub__01( ):
-   '''Coordinate pair can substract with other coordinate pairs.'''
-   a = Coordinate(1, 2)
-   b = Coordinate(0.5, 0.5)
-   t = a - b
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(0.5, 1.5)
-
-
-def test_coordinate__sub__02( ):
-   '''Coordinate pair cannot substract a tuple.'''
-   a = Coordinate(1, 2)
-   assert raises(errors.OperandError, 'a - (0.5, 0.5)')
-
-
-def test_coordinate__rsub__02( ):
-   '''A tuple can substract a Coordinate.'''
-   a = Coordinate(1, 2)
-   assert raises(errors.OperandError, '(0.5, 0.5) - a')
-
-
-def test_coordinate__sub__03( ):
-   '''An int can be substracted from a Coordinate.'''
-   a = Coordinate(1, 2)
-   t = a - 1
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(0, 1)
-
-def test_coordinate__rsub__03( ):
-   '''A Coordinate can be substracted from an int.'''
-   a = Coordinate(1, 2)
-   t = 1 - a
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(0, -1)
-
-
-def test_coordinate__sub__04( ):
-   '''An float can be substracted from a Coordinate.'''
-   a = Coordinate(1, 2)
-   t = a - 1.5
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(-0.5, 0.5)
-
-def test_coordinate__rsub__04( ):
-   '''A Coordinate can be substracted from a float.'''
-   a = Coordinate(1, 2)
-   t = 1.5 - a
-   assert isinstance(t, Coordinate)
-   assert t == Coordinate(0.5, -0.5)
-
+   assert raises(TypeError, 'a // (1, 2, 3)')
 
 
 ## __hash__ ##

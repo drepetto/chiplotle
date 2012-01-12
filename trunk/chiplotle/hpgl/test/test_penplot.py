@@ -1,37 +1,24 @@
 from chiplotle.hpgl.abstract.penplot import _PenPlot
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
-from chiplotle.core import errors
 from py.test import raises
 
 def test_penplot_01( ):
-   '''_PenPlot can be initialized with a flat iterable (list, tuple, etc. )
-   of length 2*n as first argument.'''
-   p = _PenPlot((1, 2, 3, 4))
-   assert p.xy == CoordinateArray([(1, 2), (3, 4)])
-   assert p.x == (1, 3)
-   assert p.y == (2, 4)
-   assert len(p.xy) == 2
-   assert type(p.xy) == CoordinateArray
-
-
-def test_penplot_02( ):
-   '''_PenPlot complaines with lenghts != 2*n .'''
-   assert raises(errors.InitParameterError,  '_PenPlot((1,2,3))')
+   '''_PenPlot cannot be initialized with a flat iterable'''
+   assert raises(TypeError, 'p = _PenPlot((1, 2, 3, 4))')
 
 
 def test_penplot_03( ):
    '''xy cannot be set with an single number.'''
-   p = _PenPlot((1,2))
-   ## TODO should be TypeError?
-   assert raises(errors.InitParameterError, 'p.xy = 3')
+   p = _PenPlot([(1,2)])
+   assert raises(TypeError, 'p.xy = 3')
 
 
 def test_penplot_04( ):
    '''xy can be set with a list or tuple.'''
-   p = _PenPlot((0,0))
-   p.xy = (1,2)
+   p = _PenPlot([(0,0)])
+   p.xy = [(1,2)]
    assert p.xy == CoordinateArray([(1,2)])
-   p.xy = [1,2,3,4]
+   p.xy = [(1,2),(3,4)]
    assert p.xy == CoordinateArray([(1,2),(3,4)])
    assert p.x == (1, 3)
    assert p.y == (2, 4)
@@ -39,16 +26,14 @@ def test_penplot_04( ):
 
 def test_penplot_05( ):
    '''xy assignment must have lenth == 2*n'''
-   p = _PenPlot((0,0))
-   ## TODO should be TypeError?
-   assert raises(errors.InitParameterError, 'p.xy =(1,)')
-   assert raises(errors.InitParameterError, 'p.xy =(1,2,3)')
-   assert raises(errors.InitParameterError, 'p.xy =(1,2,3,4,5)')
+   p = _PenPlot([(0,0)])
+   assert raises(TypeError, 'p.xy =(1,)')
+   assert raises(TypeError, 'p.xy =(1,2,3)')
 
 
 def test_penplot_06( ):
    '''xy can be set to None'''
-   p = _PenPlot((0,0))
+   p = _PenPlot([(0,0)])
    p.xy = None
    assert isinstance(p.xy, CoordinateArray)
    assert len(p.xy) == 0

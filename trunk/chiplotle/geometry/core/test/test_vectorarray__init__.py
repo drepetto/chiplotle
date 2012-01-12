@@ -4,33 +4,19 @@ from py.test import raises
 def test_coordinatearray__init__01( ):
    '''CoordinateArray can be empty.'''
    t = CoordinateArray( )
-   assert isinstance(t.xy, list)
+   assert isinstance(t.coords, list)
    assert isinstance(t.x, tuple)
    assert isinstance(t.y, tuple)
    for e in t:
       assert isinstance(e, Coordinate)
 
 
-def test_coordinatearray__init__02( ):
-   '''CoordinateArray can initialize with a flat list of numbers.'''
-   t = CoordinateArray([1, 2, 3, 4])
-   assert isinstance(t.xy, list)
-   for e in t:
-      assert isinstance(e, Coordinate)
-   assert t.xy == [Coordinate(1, 2), Coordinate(3, 4)]
-
-
 def test_coordinatearray__init__03( ):
    '''CoordinateArray can take a list of tuple pairs.'''
    t = CoordinateArray([(1, 2), (3, 4), (5, 6)])
-   assert t.xy == [Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)]
+   assert t[:] == [Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)]
    for e in t:
       assert isinstance(e, Coordinate)
-
-
-def test_coordinatearray__init__04( ):
-   '''A flat list must have an even number of elements.'''
-   assert raises(errors.InitParameterError, 't = CoordinateArray([1, 2, 3, 4, 5])')
 
 
 ## iadd ##
@@ -44,32 +30,15 @@ def test_coordinatearray__iadd__01( ):
    assert isinstance(t, CoordinateArray)
    assert t is not b
    assert id(t) == tid
-   assert t.xy == [Coordinate(2, 3), Coordinate(4, 5)]
+   assert t[:] == [Coordinate(2, 3), Coordinate(4, 5)]
 
 
 def test_coordinatearray__iadd__02( ):
-   '''In place addition with a scalar.'''
+   '''In place addition with a scalar raises.'''
    t = CoordinateArray([(1, 2), (3, 4)])
    tid = id(t)
    b = 1
-   t += b
-   assert isinstance(t, CoordinateArray)
-   assert id(t) == tid
-   assert t.xy == [Coordinate(2, 3), Coordinate(4, 5)]
-
-
-## radd ##
-
-def test_coordinatearray__radd__01( ):
-   '''A scalar and a CoordinateArray can be added.'''
-   a = CoordinateArray([(1, 2), (3, 4)])
-   b = 2
-
-   t = b + a
-
-   assert isinstance(t, CoordinateArray)
-   assert t is not a
-   assert t.xy == [Coordinate(3, 4), Coordinate(5, 6)]
+   assert raises(TypeError, 't += b')
 
 
 ## div ##
@@ -93,34 +62,12 @@ def test_coordinatearray__div__02( ):
    t = a / b
 
    assert isinstance(t, CoordinateArray)
-   assert t.xy == [Coordinate(.5, 1), Coordinate(2, 4)]
+   assert t[:] == [Coordinate(.5, 1), Coordinate(2, 4)]
 
 
 ## rdiv ##
 
-#def test_coordinatearray__rdiv__01( ):
-#   '''A scalar can be divided by a CoordinateArray.'''
-#   a = CoordinateArray([(1, 2), (4, 8)])
-#   b = 2.
-#
-#   t = b / a
-#
-#   assert isinstance(t, CoordinateArray)
-#   assert t.xy == [(2, 1), (0.5, 0.25)]
-
-
 ## idiv ##
-
-#def test_coordinatearray__idiv__01( ):
-#   '''In place division with another CoordinateArray works.'''
-#   t = CoordinateArray([(1., 2), (4, 8)])
-#   b = CoordinateArray([(2, 2), (4, 4)])
-#
-#   t /= b
-#
-#   assert isinstance(t, CoordinateArray)
-#   assert t.xy == [(0.5, 1), (1, 2)]
-
 
 def test_coordinatearray__idiv__02( ):
    '''In place division with another CoordinateArray works.'''
@@ -130,7 +77,7 @@ def test_coordinatearray__idiv__02( ):
    t /= b
    assert isinstance(t, CoordinateArray)
    assert id(t) == tid
-   assert t.xy == [Coordinate(0.5, 1), Coordinate(2, 4)]
+   assert t[:] == [Coordinate(0.5, 1), Coordinate(2, 4)]
 
 
 ## eq / ne ##

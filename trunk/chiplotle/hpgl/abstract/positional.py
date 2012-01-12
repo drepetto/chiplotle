@@ -16,6 +16,8 @@ class _Positional(_HPGLPrimitive):
       def fget(self):
          return self._coords
       def fset(self, arg):
+         if not len(arg) == 2:
+            raise ValueError('Positional HPGL commands are 2D')
          self._coords = Coordinate(*arg)
       return property(**locals())
 

@@ -1,6 +1,5 @@
 from chiplotle.geometry.core.group import Group
-from chiplotle.tools import mathtools
-#from chiplotle.tools.geometrytools.get_center import get_center
+from chiplotle.tools.mathtools.rotate_2d import rotate_coordinate_2d
 from chiplotle.tools.geometrytools.scale import scale
 
 class TransformLock(Group):
@@ -23,9 +22,8 @@ class TransformLock(Group):
    def rotate_to_offset(points, angle, pivot):
       def offset(points, value):
          return points + value
-      #center = get_center(points)
       center = points.center
-      new_coord = mathtools.rotate_2d(center, angle, pivot)
+      new_coord = rotate_coordinate_2d(center, angle, pivot)
       diff = new_coord - center
       return offset, [diff]
 

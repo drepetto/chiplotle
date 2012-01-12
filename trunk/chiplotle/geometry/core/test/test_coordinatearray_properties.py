@@ -1,7 +1,9 @@
 from chiplotle import *
 
 def ca_square(wh):
-   return CoordinateArray([(0, 0), (wh, 0), (wh, wh), (0, wh), (0, 0)])
+   coords = [(0, 0), (wh, 0), (wh, wh), (0, wh), (0, 0)]
+   coords = [Coordinate(*c) for c in coords]
+   return CoordinateArray(coords)
 
 def test_coordinatearray_properties_center_01():
    wh = 100

@@ -2,6 +2,7 @@ from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 import math
 
+## TODO: refactor, this is nasty. Take one type only!
 
 def rotate_2d(xy, angle, pivot=(0, 0)):
    '''2D rotation.
@@ -15,15 +16,15 @@ def rotate_2d(xy, angle, pivot=(0, 0)):
    try:
       xy = Coordinate(*xy)
       pivot = Coordinate(*pivot)
-      result = _rotate_coordinate_2d(xy, angle, pivot)
+      result = rotate_coordinate_2d(xy, angle, pivot)
    except:
       xy = CoordinateArray(xy)
       pivot = Coordinate(*pivot)
-      result = _rotate_coordinatearray_2d(xy, angle, pivot)
+      result = rotate_coordinatearray_2d(xy, angle, pivot)
    return result
 
 
-def _rotate_coordinate_2d(xy, angle, pivot):
+def rotate_coordinate_2d(xy, angle, pivot):
    '''Coordinate 2D rotation.
 
    - `xy` is an (x, y) coordinate pair.
@@ -32,6 +33,7 @@ def _rotate_coordinate_2d(xy, angle, pivot):
 
    Returns a Coordinate.
    '''
+   pivot = Coordinate(*list(pivot))
    ## rotate counter-clockwise...
    angle = -angle
    #cp = Coordinate(xy)
@@ -41,7 +43,7 @@ def _rotate_coordinate_2d(xy, angle, pivot):
    result = Coordinate(x, y) + pivot
    return result
 
-def _rotate_coordinatearray_2d(xylst, angle, pivot):
+def rotate_coordinatearray_2d(xylst, angle, pivot):
    '''2D rotation of list of coordinate pairs (CoordinateArray).
 
    - `xylst` list of (x, y) coordinate pairs.
@@ -52,7 +54,7 @@ def _rotate_coordinatearray_2d(xylst, angle, pivot):
    '''
    result = CoordinateArray( )
    for xy in xylst:
-      r = _rotate_coordinate_2d(xy, angle, pivot)
+      r = rotate_coordinate_2d(xy, angle, pivot)
       result.append(r)
    return result
 
