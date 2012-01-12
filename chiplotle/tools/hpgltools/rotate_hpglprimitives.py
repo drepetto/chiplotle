@@ -1,5 +1,5 @@
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive
-from chiplotle.tools.mathtools.rotate_2d import rotate_2d
+from chiplotle.tools.mathtools.rotate_2d import rotate_coordinate_2d
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.coordinate import Coordinate
 
@@ -14,12 +14,13 @@ def rotate_hpglprimitives(arg, angle):
 
       ## should we check for CoordinateArray and Coordinate instead?
       if hasattr(e, 'xy'): 
+         pivot = Coordinate(0, 0)
          if isinstance(e.xy, CoordinateArray):
             result = [ ]
             for cp in e.xy:
-               result.append(Coordinate(rotate_2d(cp, angle)))
+               result.append(rotate_coordinate_2d(cp, angle, pivot))
             e.xy = CoordinateArray(result)
          elif isinstance(e.xy, Coordinate):
-            e.xy = Coordinate(rotate_2d(e.xy, angle))
+            e.xy = rotate_coordinate_2d(e.xy, angle, pivot)
          
 

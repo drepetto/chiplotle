@@ -11,14 +11,14 @@ def test_shapes_group_points_01( ):
 
 def test_shapes_group_points_02( ):
    '''A flat Group has a CoordinateArray.'''
-   t = Group([Path([1, 2, 3, 4]), Path([4, 2, 4, 2])])
+   t = Group([Path([(1, 2), (3, 4)]), Path([(4, 2), (4, 2)])])
    assert t.points == CoordinateArray([(1, 2), (3, 4), 
       (4, 2), (4, 2)])
 
 
 def test_shapes_group_points_03( ):
    '''A non-flat Group has a CoordinateArray.'''
-   g = Group([Path([1, 2, 3, 4]), Path([4, 2, 4, 2])])
-   t = Group([g, Path([100, 200])])
+   g = Group([Path([(1, 2), (3, 4)]), Path([(4, 2), (4, 2)])])
+   t = Group([g, Path([(100, 200)])])
    assert t.points == CoordinateArray([(1, 2), (3, 4), (4, 2), (4, 2), (100, 200)])
 

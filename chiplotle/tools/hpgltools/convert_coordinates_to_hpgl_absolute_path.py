@@ -9,11 +9,13 @@ def convert_coordinates_to_hpgl_absolute_path(coords):
    if not isinstance(coords, (list, tuple, CoordinateArray)):
       raise TypeError('`coords` must be a list of coordinates or CoordinateArray.')
 
+   coords = [list(c) for c in coords]
    result = [ ]
    result.append(PU( ))
    result.append(PA([coords[0]]))
    result.append(PD( ))
-   #result.append(PA(coords[1:])) ## this denies the possibility of paths with one coord.
+   ## this denies the possibility of paths with one coord.
+   #result.append(PA(coords[1:])) 
    result.append(PA(coords))
    result.append(PU( ))
    return result

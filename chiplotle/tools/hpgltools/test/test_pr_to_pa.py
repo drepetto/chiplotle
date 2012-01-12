@@ -3,7 +3,7 @@ from chiplotle.hpgl.commands import *
 
 def test_pr_to_pa_01( ):
    '''PR with one coordinate works.'''
-   pr = PR((1, 2))
+   pr = PR([(1, 2)])
    t = hpgltools.pr_to_pa(pr, (0, 0))
    assert isinstance(t, PA) 
    assert t.xy == CoordinateArray([(1, 2)])

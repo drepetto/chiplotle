@@ -83,7 +83,7 @@ class HPGLFormatVisitor(Visitor):
                            origin      = origin,
                            direction   = polar_to_xy((1, angle))
                            )
-      return [hpgl.PA(label.points[0]), hpgllabel]
+      return [hpgl.PA([label.points[0]]), hpgllabel]
 
 
    def _formatters_to_hpgl(self, formatters):

@@ -21,7 +21,7 @@ def test_inflate_hpgl_string_03( ):
    assert len(t) == 4
    assert t[0] == IN( )
    assert t[1] == PU( )
-   assert t[2] == PA((10, 10))
+   assert t[2] == PA([(10, 10)])
    assert t[3] == CI(100)
 
 
@@ -31,7 +31,7 @@ def test_inflate_hpgl_string_04( ):
    t = hpgltools.inflate_hpgl_string(s)
    assert len(t) == 4
    assert t[0] == IN( )
-   assert t[1] == PA((10, 10))
+   assert t[1] == PA([(10, 10)])
    assert t[2] == PD( )
    assert t[3] == CI(100)
 
