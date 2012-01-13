@@ -22,3 +22,13 @@ def test_coordinatearray_properties_minmax_01():
    t = ca_square(wh)
    assert t.minmax == (Coordinate(0, 0), Coordinate(wh, wh))
 
+
+def test_coordinatearray_difference_01( ):
+   t = CoordinateArray([(1, 2), (3, 4), (4, 4)])
+   assert t.difference == CoordinateArray([(2, 2), (1, 0)])
+   assert isinstance(t, CoordinateArray)
+
+
+def test_coordinatearray_cumsum_01( ):
+   t = CoordinateArray([(1, 1), (1, 1), (1, 1)])
+   assert t.cumsum == CoordinateArray([(0, 0), (1, 1), (2, 2), (3, 3)])
