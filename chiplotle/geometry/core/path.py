@@ -31,13 +31,6 @@ class Path(_Shape):
       '''Points (coordinates) ready for formatting (conversion to HPGL).'''
       return self.points
 
-#   @property
-#   def _infix_commands(self):
-#      if _Shape.language == 'HPGL':
-#         return convert_coordinates_to_hpgl_absolute_path(self._preformat_points)
-#      elif _Shape.language == 'gcode':
-#         print 'Sorry, no g-code support!'
-
 
    ## overrides ##
 

@@ -1,6 +1,5 @@
 from chiplotle.tools.io.save_hpgl import save_hpgl
 from chiplotle.core.cfg.cfg import CONFIG_DIR
-from chiplotle.core.cfg._verify_output_directory import _verify_output_directory
 import os
 import shutil
 import subprocess
@@ -23,7 +22,6 @@ def export(expr, filename, format = 'eps'):
 
    '''
 
-   _verify_output_directory( )
    temp_file = os.path.join(CONFIG_DIR, 'output', 'tmp.hpgl')
    save_hpgl(expr, temp_file)
 

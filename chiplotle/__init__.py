@@ -1,4 +1,5 @@
 from chiplotle.core.cfg.cfg import __version__
+from chiplotle.core.cfg.initialize_files import initialize_files
 __authors__ = "Victor Adan, Douglas Repetto"
 __license__ = "GPL"
 __url__     = "http://music.columbia.edu/cmc/chiplotle"
@@ -12,6 +13,9 @@ License %s
 Homepage %s
 
 """ % (__authors__,__version__,__license__,__url__)
+
+initialize_files()
+globals().pop('initialize_files')
 
 
 ## IMPORTS ##
