@@ -1,4 +1,3 @@
-from chiplotle.core.cfg.verify_config_file import verify_config_file
 from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
 from chiplotle.tools.serialtools import sniff_ports_for_plotters
 from chiplotle.tools.serialtools import scan_serial_ports
@@ -13,8 +12,6 @@ def search_and_instantiate_plotters( ):
    from chiplotle.tools.plottertools import instantiate_plotter_from_id
    from chiplotle.tools.plottertools import interactive_choose_plotter
 
-   verify_config_file( )
-   
    print 'Scanning serial ports...'
    ports = scan_serial_ports( ).values( )
    print 'Found ports:' 
