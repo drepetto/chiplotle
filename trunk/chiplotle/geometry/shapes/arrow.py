@@ -28,11 +28,8 @@ def arrow(path, headwidth, headheight, filled=False):
 
 if __name__ == '__main__':
    from chiplotle import *
-   from random import randint
-   coords = [(randint(0, 300), randint(0, 300)) for i in range(3)]
-   p = path(coords)
-   a1 = arrow(p, 10, 20)
-   coords = [(randint(0, 300), randint(0, 300)) for i in range(5)]
-   p = bezier_path(coords, 1)
-   a2 = arrow(p, 10, 20)
-   io.view(group([a1, a2]))
+
+   coords = [(0, 0), (0, 1000), (2000, 1000)]
+   p = shapes.bezier_path(coords, 1)
+   a = arrow(p, 100, 200)
+   io.view(a, 'png')
