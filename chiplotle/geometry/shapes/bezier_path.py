@@ -26,7 +26,7 @@ def bezier_path(points, curvature, interpolation_count = 50):
 
    curvature = 4 + (1.0 - curvature) * 40
    bi = [0, -0.25]
-   a = [0, (points[2] - points[0] - Coordinate(0, 0)) / 4.0]
+   a = [Coordinate(0, 0), (points[2] - points[0] - Coordinate(0, 0)) / 4.0]
 
    ## compute bi and a...
    for i in range(2, len(points)-1):
@@ -59,7 +59,7 @@ if __name__ == '__main__':
    from chiplotle.geometry.core.path import Path
    from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
-   points  = [(0, 0), (100, 100), (-100, 100), (-100, -100), (100, -100), (0, 0)]
+   points  = [(0, 0), (1000, 1000), (-1000, 1000), (-1000, -1000), (1000, -1000), (0, 0)]
    e1 = bezier_path(points, 1)
    e2 = bezier_path(points, 0.5)
    e3 = bezier_path(points, 0)
