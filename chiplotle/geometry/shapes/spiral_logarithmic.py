@@ -1,7 +1,10 @@
 from chiplotle.geometry.core.path import Path
 import math
 
-def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", segments = 500):  
+def spiral_logarithmic(num_turns = 5, 
+                       expansion_rate = 0.2, 
+                       direction = "cw", 
+                       segments = 500):  
    '''
    Constructs an logarithmic spiral with the given number of turns using the
    specified number of points.
@@ -23,39 +26,23 @@ def spiral_logarithmic(num_turns = 5, expansion_rate = 0.2, direction = "cw", se
    theta = 0.0
    theta_incr = total_rads / float(segments - 1)
 
-   dir_multi = 1.0
-
    expansion_rate = abs(expansion_rate)
-#   if expansion_rate < 0.0:
-#      expansion_rate *= -1.0
    
-   #print "theta_incr: %f" % theta_incr
-   
-   spiral_points = []
-
-   
-   x = 0.0
-   y = 0.0
-   
-   spiral_points.append((x, y))
+   x, y = 0.0, 0.0
+   spiral_points = [(x, y)]
    theta += theta_incr
    
    for i in range(segments - 1):
-
       x = math.cos(theta) * math.pow(math.e, (expansion_rate * theta))
       y = math.sin(theta) * math.pow(math.e, (expansion_rate * theta))
 
       if direction == "ccw":
          y *= -1.0
       
-      #print "x: %f y: %f theta: %f" % (x, y, theta)
-
       spiral_points.append((x, y))
       theta += theta_incr
       
-   result = Path(spiral_points)
-
-   return result
+   return Path(spiral_points)
 
 
 ## RUN DEMO CODE
