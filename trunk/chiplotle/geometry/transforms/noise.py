@@ -36,7 +36,7 @@ if __name__ == "__main__":
    c1 = circle(1000, 100)
    c2 = circle(800, 100)
    noise(c1, 90)
-   c1 += 1000
+   c1 += Coordinate(1000, 1000)
    g = Group([c1, c2])
    noise(g, 60)
    io.view(g)

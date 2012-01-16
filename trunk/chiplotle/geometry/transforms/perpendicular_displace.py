@@ -37,15 +37,16 @@ def perpendicular_displace(path, displacements):
 ## ~~~~~~~~~~~~~~~ demo ~~~~~~~~~~~
 if __name__ == '__main__':
    from chiplotle import *
+   from chiplotle.hpgl.formatters.pen import Pen
    import copy
-   import random
+   from random import randint
    import math
 
-   rndpath = [random.randint(0, 2000) for i in range(2 * 4)]
+   rndpath = [(randint(0, 2000), randint(0, 2000)) for i in range(2 * 4)]
    p = bezier_path(rndpath, .1, 80)
    print '*** ', p
    pc = copy.deepcopy(p)
-   PenDecorator(Pen(2))(pc)
+   Pen(2)(pc)
 
    d = [math.sin(x / math.pi) * 30 for x in range(len(p.points))]
 

@@ -32,10 +32,11 @@ def perpendicular_noise(shape, value):
 ## RUN DEMO CODE
 if __name__ == "__main__":
    from chiplotle.geometry.shapes.circle import circle
+   from chiplotle.geometry.core.coordinate import Coordinate
    from chiplotle.tools import io
    c1 = circle(1000, 200)
    c2 = circle(800, 200)
-   c2 += 2000
+   c2 += Coordinate(2000, 2000)
    perpendicular_noise(c1, 360)
    perpendicular_noise(c2, 60)
    g = Group([c1, c2])
