@@ -30,7 +30,7 @@ if __name__ == '__main__':
    
    gr = Group()
    
-   for radius in range(100, 1000, 10):
+   for radius in range(100, 1000, 100):
        ac = arc_circle(radius, 1.0, math.pi)
        assert isinstance(ac, Path)
        gr.append(ac)

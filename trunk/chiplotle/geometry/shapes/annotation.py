@@ -100,7 +100,7 @@ class _Annotation(object):
 ## demo
 if __name__ == '__main__':
    from chiplotle import *
-   from chiplotle.hpgl.decorators import Pen
+   from chiplotle.hpgl.formatters import Pen
    from random import randint
    coords = [(randint(0, 4000), randint(0, 4000)) for i in range(20)]
    p = bezier_path(coords, 1)
