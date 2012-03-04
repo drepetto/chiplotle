@@ -34,11 +34,11 @@ def main():
        if whichGesture == 0:
            print "circle!"
            #plotter.circle(random.randint(10,5000), random.randint(1,180))
-           plotter.write(CI(random.randint(10,5000), random.randint(1,180)))
+           plotter.write(hpgl.CI(random.randint(10,5000), random.randint(1,180)))
        
        elif whichGesture == 1:
            print "rect!"
-           plotter.write(ER((random.randint(10,5000), random.randint(10,5000))))        
+           plotter.write(hpgl.ER((random.randint(10,5000), random.randint(10,5000))))        
 
        elif whichGesture == 2:
            print "filled rect!"
@@ -56,8 +56,8 @@ def main():
            print "fill type: %d space: %d angle: %d" % (ft, space, angle)
            #plotter.fill_type(ft, space, angle)
            #plotter.filled_rectangle_relative(random.randint(10,2000), random.randint(10,2000))
-           plotter.write(RR((random.randint(10, 2000), random.randint(10, 2000))))
-           plotter.write(FT(ft, space, angle))
+           plotter.write(hpgl.RR((random.randint(10, 2000), random.randint(10, 2000))))
+           plotter.write(hpgl.FT(ft, space, angle))
 
        elif whichGesture == 3:
            print "draw a crazy line!"

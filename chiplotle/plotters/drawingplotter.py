@@ -20,44 +20,44 @@ class _DrawingPlotter(_BasePlotter):
       or a Coordinate: goto(Coordinate(100,100))
       '''
       if len(args) == 1:
-         self.write(self._hpgl.PA(args))
+         self.write(self._hpgl.PA([args]))
       elif len(args) == 2:
-         self.write(self._hpgl.PA((args[0], args[1])))
+         self.write(self._hpgl.PA([args]))
       else:
          print "Please use either: goto(x, y) or goto(Coordinate(x, y))"
 
    def goto_center(self):
-      self.write(self._hpgl.PA(self.margins.soft.center))
+      self.write(self._hpgl.PA([self.margins.soft.center]))
 
    def goto_bottom_left(self):
       coord = self.margins.soft.bottom_left
       ## pad with 1 to guarantee plotter motion...
       coord = coord.x + 1, coord.y + 1
-      self.write(self._hpgl.PA(coord))
+      self.write(self._hpgl.PA([coord]))
 
    def goto_bottom_right(self):
       coord = self.margins.soft.bottom_right
       ## pad with 1 to guarantee plotter motion...
       coord = coord.x - 1, coord.y + 1
-      self.write(self._hpgl.PA(coord))
+      self.write(self._hpgl.PA([coord]))
 
    def goto_origin(self):
-      self.write(self._hpgl.PA([0,0]))
+      self.write(self._hpgl.PA([(0,0)]))
 
    def goto_top_left(self):
       coord = self.margins.soft.top_left
       ## pad with 1 to guarantee plotter motion...
       coord = coord.x + 1, coord.y - 1
-      self.write(self._hpgl.PA(coord))
+      self.write(self._hpgl.PA([coord]))
 
    def goto_top_right(self):
       coord = self.margins.soft.top_right
       ## pad with 1 to guarantee plotter motion...
       coord = coord.x - 1, coord.y - 1
-      self.write(self._hpgl.PA(coord))
+      self.write(self._hpgl.PA([coord]))
 
    def nudge(self, x, y):
-      self.write(self._hpgl.PR((x,y)))
+      self.write(self._hpgl.PR([(x,y)]))
 
 
    ## pen control ##
