@@ -171,11 +171,13 @@ class _BasePlotter(object):
       sleep = 1.0 / 8
       while elapsed_time < total_time:
          if self._serial_port.inWaiting( ): 
-            return self._serial_port.readline(eol='\r')
+            try:
+               return self._serial_port.readline(eol='\r') # <-- old pyserial
+            except:
+               return self._serial_port.readline()
          else:
             time.sleep(sleep)
             elapsed_time += sleep
-      #print 'Waited for %s secs... No response from plotter.' % total_time
       msg = 'Waited for %s secs... No response from plotter.' % total_time
       self._logger.error(msg)
       return 
@@ -183,11 +185,9 @@ class _BasePlotter(object):
 
    @property
    def _buffer_space(self):
-      #print "getting _buffer_space..."
       self._serial_port.flushInput()
       self._serial_port.write(self._hpgl.B().format)
       bs = self._read_port()
-      #print "buffer space: ", bs
       return int(bs)
 
    def _send_query(self, query):

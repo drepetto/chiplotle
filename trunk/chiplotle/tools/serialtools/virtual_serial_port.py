@@ -133,7 +133,7 @@ class VirtualSerialPort():
       return 10
       
       
-   def readline(self, eol):
+   def readline(self, eol=None):
       #print "returning: " + self._next_query_value
       return_value = self._next_query_value
       self._next_query_value = None
