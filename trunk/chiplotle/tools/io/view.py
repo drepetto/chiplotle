@@ -1,20 +1,21 @@
-import os
 from chiplotle.core.cfg.cfg import CONFIG_DIR
 from chiplotle.tools.io.export import export
 from chiplotle.tools.io._open_file import _open_file
+import os
+import time
 
-def view(expr, format='eps'):
+def view(expr, fmt='eps'):
    '''Displays Chiplotle-HPGL objects for prevewing.
 
    - `expr` can be an iterable (e.g., list) or a Chiplotle-HPGL object.
-   - `format` is the file format to which the given `expr` will be 
+   - `fmt` is the file format to which the given `expr` will be 
       converted for viewing. The default is 'eps'.
    '''
 
-   ## get output dir.
-   OUTPUT_DIR = os.path.join(CONFIG_DIR, 'output')
-   file_name = os.path.join(OUTPUT_DIR, 'tmp')
+   outdir   = os.path.join(CONFIG_DIR, 'output')
+   filename = time.strftime('%Y%m%d_%H%M%S')
+   filepath = os.path.join(outdir, filename)
+   imgfile  = export(expr, filepath, fmt)
 
-   export(expr, file_name, format)
    ## show!
-   _open_file(file_name + '.%s' % format)
+   _open_file(imgfile)

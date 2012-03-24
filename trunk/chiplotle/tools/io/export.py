@@ -1,40 +1,41 @@
 from chiplotle.tools.io.save_hpgl import save_hpgl
 from chiplotle.core.cfg.cfg import CONFIG_DIR
-import os
-import shutil
 import subprocess
 
-def export(expr, filename, format = 'eps'):
+def export(expr, filename, fmt = 'eps'):
    '''Export Chiplotle-HPGL objects to an image file format via ``hp2xx``.
 
    - `expr` can be an iterable (e.g., list) of Chiplotle-HPGL objects or a
       single Chiplotle-HPGL object.
    - `filename` the file name, including path but without extension.
-   - `format` is a string describing the format of the file to which the 
+   - `fmt` is a string describing the format of the file to which the 
       Chiplotle-HPGL objects will be exported. Default is 'eps'. 
-      Valid formats are: cad, dxf, em, 
-      epic, eps, esc2, fig, gpt, hpgl, img, jpg, mf, nc, pbm, pcl, pcx, 
-      png, pre, rgip, svg, tiff.
+      Valid formats are: jpg, png, tiff and many others. 
+      Please see the ``hp2xx`` documentation for details.
 
    .. note::
       You must have ``hp2xx`` installed before you can export Chiplote-HPGL
       objects to image files.
-
    '''
 
-   temp_file = os.path.join(CONFIG_DIR, 'output', 'tmp.hpgl')
-   save_hpgl(expr, temp_file)
+   htmlfile = '{0}.hpgl'.format(filename)
+   imgfile  = '{0}.{1}'.format(filename, fmt)
+   save_hpgl(expr, htmlfile)
 
-   command = 'hp2xx --truesize -p 1 -m %s -f %s.%s %s' % \
-      (format, filename, format, temp_file)
-   p = subprocess.Popen(command, shell = True,
-      stdout = subprocess.PIPE, stderr = subprocess.PIPE)
+   cmd = 'hp2xx --truesize -p 1 -m %s -f %s %s' % (fmt, imgfile, htmlfile)
+   p = subprocess.Popen(cmd, 
+                        shell  = True,
+                        stdout = subprocess.PIPE, 
+                        stderr = subprocess.PIPE)
    stdout, stderr = p.communicate( )
-   #print 'hp2xx output:'
-   #print 'stdout:', stdout
-   #print 'stderr:', stderr
+
    if 'not found' in stderr:
-      print 'ATTENTION: hp2xx is not installed in your system.'
-      print '\thp2xx must be installed for export( ) and view( )'
-      print '\tto work.'
-      
+      print _hp2xxError()
+   
+   return imgfile
+
+
+def _hp2xxError():
+   msg = '''ATTENTION: hp2xx is not installed in your system.
+         hp2xx must be installed for previewing art.'''
+   return msg
