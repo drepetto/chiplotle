@@ -2,7 +2,6 @@ from chiplotle import *
 from chiplotle.hpgl.commands import *
 from chiplotle.tools.plottertools.instantiate_virtual_plotter \
    import instantiate_virtual_plotter
-#from chiplotle.tools.plottertools import instantiate_plotters
 
 
 def test_plotter_write_01( ):
