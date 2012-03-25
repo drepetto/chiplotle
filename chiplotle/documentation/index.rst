@@ -15,8 +15,8 @@ Chiplotle  (|release|) documentation
    :maxdepth: 1
 
    chapters/tutorial/index
-   chapters/fundamentals/index
    chapters/plotters/index
+   chapters/fundamentals/index
    chapters/faq/index
    chapters/mailinglist/index
 
