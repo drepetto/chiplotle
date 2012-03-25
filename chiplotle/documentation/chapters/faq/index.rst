@@ -53,6 +53,9 @@ You can also send HPGL files to your plotter from within a live Chiplotle sessio
 I installed chiplotle in Windowz 98. Unfortunately running ``chiplotle`` from the ``cmd`` shell does not work. Windowz  isn't recognizing the ``chiplotle`` command. 
 
 **A:**
+Windows is not very friendly with Chiplotle!
+You will have to add Python (if not done so already) and the Chiplotle script files to your path. These are usually installed under ``C:\Python26`` and ``C:\Python26\Scripts``.
+
 Windows has a built-in dialog for changing environment variables
 (following guide applies to XP classical view): Right-click the icon for
 your machine (usually located on your Desktop and called “My Computer”) and
@@ -78,3 +81,5 @@ command prompt will expand strings wrapped into percent signs automatically::
 
    echo %PATH%
 
+.. note::
+   Don't forget to also install ``hp2xx``.
