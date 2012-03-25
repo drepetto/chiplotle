@@ -22,7 +22,7 @@ def export(expr, filename, fmt = 'eps'):
    imgfile  = '{0}.{1}'.format(filename, fmt)
    save_hpgl(expr, htmlfile)
 
-   cmd = 'hp2xx --truesize -p 1 -m %s -f %s %s' % (fmt, imgfile, htmlfile)
+   cmd = 'hp2xx --truesize -p 1 -m %s -f "%s" "%s"' % (fmt, imgfile, htmlfile)
    p = subprocess.Popen(cmd, 
                         shell  = True,
                         stdout = subprocess.PIPE, 
