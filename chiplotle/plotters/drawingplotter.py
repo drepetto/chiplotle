@@ -81,22 +81,22 @@ class _DrawingPlotter(_BasePlotter):
          Set origin to bottom, left
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
-      self.write(self._hpgl.IP([self.margins.soft.left,
-         self.margins.soft.bottom,
-         self.margins.soft.right,
-         self.margins.soft.top]))
-      self.write(self._hpgl.SC([0, self.margins.soft.width, 0, self.margins.soft.height]))
+      self.write(self._hpgl.IP(
+         [(self.margins.soft.left, self.margins.soft.bottom),
+         (self.margins.soft.right, self.margins.soft.top)]))
+      self.write(self._hpgl.SC([(0, self.margins.soft.width), 
+                                (0, self.margins.soft.height)]))
  
    def set_origin_top_left(self):
       """
          Set origin to upper, left
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
-      self.write(self._hpgl.IP([self.margins.soft.left,
-         self.margins.soft.top,
-         self.margins.soft.right,
-         self.margins.soft.bottom]))
-      self.write(self._hpgl.SC([0, self.margins.soft.width, 0, -self.margins.soft.height]))
+      self.write(self._hpgl.IP(
+         [(self.margins.soft.left, self.margins.soft.top),
+         (self.margins.soft.right, self.margins.soft.bottom)]))
+      self.write(self._hpgl.SC([(0, self.margins.soft.width), 
+                                (0, -self.margins.soft.height)]))
 
 
    def set_origin_bottom_right(self):
@@ -104,38 +104,37 @@ class _DrawingPlotter(_BasePlotter):
          Set origin to bottom, right
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
-      self.write(self._hpgl.IP([self.margins.soft.left,
-         self.margins.soft.top,
-         self.margins.soft.right,
-         self.margins.soft.bottom]))
-      self.write(self._hpgl.SC([-self.margins.soft.width,0,self.margins.soft.height,0]))
+      self.write(self._hpgl.IP(
+         [(self.margins.soft.left, self.margins.soft.top),
+         (self.margins.soft.right, self.margins.soft.bottom)]))
+      self.write(self._hpgl.SC([(-self.margins.soft.width,0),
+                                (self.margins.soft.height,0)]))
 
    def set_origin_top_right(self):
       """
          Set origin to top, right
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
-      self.write(self._hpgl.IP([self.margins.soft.left,
-         self.margins.soft.bottom,
-         self.margins.soft.right,
-         self.margins.soft.top]))
-      self.write(self._hpgl.SC([-self.margins.soft.width,0,-self.margins.soft.height,0]))
+      self.write(self._hpgl.IP(
+         [(self.margins.soft.left, self.margins.soft.bottom),
+         (self.margins.soft.right, self.margins.soft.top)]))
+      self.write(self._hpgl.SC([(-self.margins.soft.width,0),
+                                (-self.margins.soft.height,0)]))
       
    def set_origin_center(self):
       """
          Set origin to center, center
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
-      self.write(self._hpgl.IP([self.margins.soft.left,
-         self.margins.soft.bottom,
-         self.margins.soft.right,
-         self.margins.soft.top]))
+      self.write(self._hpgl.IP(
+         [(self.margins.soft.left, self.margins.soft.bottom),
+         (self.margins.soft.right, self.margins.soft.top)]))
       
       w_div_2 = self.margins.soft.width/2
       h_div_2 = self.margins.soft.height/2
       
-      self.write(self._hpgl.SC([-w_div_2, w_div_2, 
-         -h_div_2, h_div_2]))
+      self.write(self._hpgl.SC([(-w_div_2, w_div_2),
+                                (-h_div_2, h_div_2)]))
 
    def set_origin_current_location(self):
       """
@@ -143,10 +142,9 @@ class _DrawingPlotter(_BasePlotter):
       """
       
       self.write(self._hpgl.SC()) #reset scaling first!
-      self.write(self._hpgl.IP([self.margins.soft.left,
-         self.margins.soft.bottom,
-         self.margins.soft.right,
-         self.margins.soft.top]))
+      self.write(self._hpgl.IP(
+         [(self.margins.soft.left, self.margins.soft.bottom),
+         (self.margins.soft.right, self.margins.soft.top)]))
       
       position = self.actual_position[0]
       posx = float(position.x)
@@ -156,7 +154,7 @@ class _DrawingPlotter(_BasePlotter):
       p2x = p1x + self.margins.hard.width
       p2y = p1y + self.margins.hard.height
       
-      self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))
+      self.write(self._hpgl.SC([(p1x,p2x), (p1y,p2y)]))
       
       position = self.actual_position[0]
       posx = float(position.x)
@@ -169,10 +167,9 @@ class _DrawingPlotter(_BasePlotter):
          Set origin to given point [x, y]
       """   
       self.write(self._hpgl.SC()) #reset scaling first!
-      self.write(self._hpgl.IP([self.margins.soft.left,
-         self.margins.soft.bottom,
-         self.margins.soft.right,
-         self.margins.soft.top]))
+      self.write(self._hpgl.IP(
+         [(self.margins.soft.left, self.margins.soft.bottom),
+         (self.margins.soft.right, self.margins.soft.top)]))
          
       posx = point[0]
       posy = point[1]
@@ -181,13 +178,13 @@ class _DrawingPlotter(_BasePlotter):
       p2x = p1x + self.margins.hard.width
       p2y = p1y + self.margins.hard.height
       
-      self.write(self._hpgl.SC([p1x,p2x,p1y,p2y]))   
+      self.write(self._hpgl.SC([(p1x,p2x),(p1y,p2y)]))   
 
    def rotate(self, angle = 0):
       self.write(self._hpgl.RO(angle))
 
    def scale(self, xMin, xMax, yMin, yMax):
-      self.write(self._hpgl.SC((xMin, xMax, yMin, yMax)))
+      self.write(self._hpgl.SC([(xMin, xMax), (yMin, yMax)]))
 
    ## window setting ##
 
@@ -209,8 +206,8 @@ class _DrawingPlotter(_BasePlotter):
       y2 = right_top.y
       print "right: %d top: %d" % (x2, y2)
       
-      self.write(self._hpgl.IP([x1, y1, x2, y2]))
-      self.write(self._hpgl.IW([x1, y1, x2, y2]))
+      self.write(self._hpgl.IP([(x1, y1), (x2, y2)]))
+      self.write(self._hpgl.IW([(x1, y1), (x2, y2)]))
 
       print "Plot window set to:"
       print self.output_p1p2     
