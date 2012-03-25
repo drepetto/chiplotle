@@ -70,8 +70,6 @@ def _parse_hpgl_command_string(cmd_string):
       coords = [eval(n) for n in coords]
       coords = flat_list_to_pairs(coords)
       body = '(%s)' % coords
-      print '*' * 30
-      print body
    elif head in ('RA','RR','ER','EA',):
       body = '(%s)' % cmd_string[2:]
    elif head in ('AR', 'AA'):

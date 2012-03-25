@@ -56,6 +56,29 @@ def test_inflate_hpgl_string_06( ):
    assert t[1] == AA((10, 10), 90, 10.2)
 
 
+## two point commands ##
+
+def test_inflate_hpgl_string_IW():
+   '''IW.'''
+   s = 'IW1,2,3,4;'
+   t = hpgltools.inflate_hpgl_string(s)
+   assert len(t) == 1
+   assert t[0] == IW([(1, 2), (3, 4)])
+
+def test_inflate_hpgl_string_SC():
+   '''SC.'''
+   s = 'SC1,2,3,4;'
+   t = hpgltools.inflate_hpgl_string(s)
+   assert len(t) == 1
+   assert t[0] == SC([(1, 2), (3, 4)])
+
+def test_inflate_hpgl_string_IP():
+   '''IP.'''
+   s = 'IP1,2,3,4;'
+   t = hpgltools.inflate_hpgl_string(s)
+   assert len(t) == 1
+   assert t[0] == IP([(1, 2), (3, 4)])
+
 ## FILTERING ##
 
 def test_inflate_hpgl_string__filter_01( ):
