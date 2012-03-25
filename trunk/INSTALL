@@ -8,13 +8,16 @@ Dependencies
 
 To install Chiplotle you must already have Python 2.5 or Python 2.6 installed in your computer. 
 
-Chiplotle also requires NumPy and PySerial to work. You can download NumPy and PySerial from their respective websites.
+Chiplotle has the following dependencies:
 
-NumPy:
+NumPy (for number crunching):
 http://numpy.scipy.org/
 
-PySerial:
-http://pyserial.wiki.sourceforge.net/pySerial
+PySerial (for serial communication):
+http://pyserial.sourceforge.net/
+
+hp2xx (for image export / hpgl preview):
+http://www.gnu.org/software/hp2xx/hp2xx.html
 
 
 Installing the official release
@@ -27,7 +30,7 @@ If you have the Python `setuptools <http://pypi.python.org/pypi/setuptools>`__ u
 
 If you don't have  *setuptools*, follow these steps:
  
-1. Download the latest release from http://pypi.python.org/pypi/Chiplotle.
+1. Download the latest Chiplotle release from http://pypi.python.org/pypi/Chiplotle.
 
 2. Untar the downloaded file (e.g. `tar xzvf Chiplotle-NNN.tar.gz`,
    where `NNN` is the version number of the latest release).
