@@ -50,7 +50,7 @@ You can also send HPGL files to your plotter from within a live Chiplotle sessio
    chiplotle> plotter.write_file('my_file.hpgl')  
 
 **Q:**
-I installed chiplotle in Windowz 98. Unfortunately running ``chiplotle`` from the _cmd_ shell does not work. Windowz  isn't recognizing the ``chiplotle`` command. 
+I installed chiplotle in Windowz 98. Unfortunately running ``chiplotle`` from the ``cmd`` shell does not work. Windowz  isn't recognizing the ``chiplotle`` command. 
 
 **A:**
 Windows has a built-in dialog for changing environment variables
@@ -70,11 +70,11 @@ Another way of adding variables to your environment is using the set command::
      
      set PATH=%PATH%;C:\path\to\chiplotle_executable
 
- To make this setting permanent, you could add the corresponding command
+To make this setting permanent, you could add the corresponding command
 line to your ``autoexec.bat``. ``msconfig`` is a graphical interface to this file.
 
- Viewing environment variables can also be done more straight-forward: The
+Viewing environment variables can also be done more straight-forward: The
 command prompt will expand strings wrapped into percent signs automatically::
 
- echo %PATH%
+   echo %PATH%
 

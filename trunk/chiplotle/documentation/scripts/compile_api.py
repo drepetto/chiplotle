@@ -1,31 +1,7 @@
 #!/usr/bin/env python
 
 
-def compile_compound( ):
-   from chiplotle.hpgl import compound
-
-   content = 'Chiplotle Compound Commands\n'
-   content += '===========================\n\n'
-   #content += ':mod: `chiplotle.hpgl.compound`\n\n'
-
-   ## get classes in compound...
-   for cls in dir(compound):
-      if not cls.startswith('_'):
-         content += '.. autoclass:: chiplotle.hpgl.compound.%s\n' % cls
-         content += '\t:members:\n'
-         content += '\t:undoc-members:\n'
-         content += '\t:show-inheritance:\n'
-         #content += '\t:inherited-members:\n'
-         content += '\n'
-
-
-   file = open('../chapters/api/chiplotle_compound.rst', 'w')
-
-   file.write(content)
-   file.close( )
-
-
-def compile_plotters( ):
+def compile_plotters():
    from chiplotle import plotters
 
    content = 'Chiplotle Known Plotters\n'
@@ -47,11 +23,11 @@ def compile_plotters( ):
    file = open('../chapters/api/plotters.rst', 'w')
 
    file.write(content)
-   file.close( )
+   file.close()
 
 
 ## TODO: change this so that the tool modules are automatically discovered.
-def compile_tools( ):
+def compile_tools():
    from chiplotle import hpgltools
    from chiplotle import io
    from chiplotle import mathtools
@@ -61,32 +37,59 @@ def compile_tools( ):
 
    content += 'HPGL Tools\n'
    content += '-------------\n\n'
-   for cls in dir(hpgltools):
-      if not cls.startswith('_'):
-         content += '.. autofunction:: chiplotle.tools.hpgltools.%s\n' % cls
-         content += '\n'
+   content += _autofunction(hpgltools)
+
    content += 'Input-output tools\n'
    content += '---------------------\n\n'
-   for cls in dir(io):
-      if not cls.startswith('_'):
-         content += '.. autofunction:: chiplotle.tools.io.%s\n' % cls
-         content += '\n'
+   content += _autofunction(io)
+
    content += 'Math tools\n'
    content += '--------------\n\n'
-   for cls in dir(mathtools):
-      if not cls.startswith('_'):
-         content += '.. autofunction:: chiplotle.tools.mathtools.%s\n' % cls
-         content += '\n'
-
-
+   content += _autofunction(mathtools)
 
    file = open('../chapters/api/tools.rst', 'w')
-
    file.write(content)
-   file.close( )
+   file.close()
+
+def compile_geometry():
+   from chiplotle.geometry import core
+   from chiplotle.geometry import shapes
+   from chiplotle.geometry import transforms
+
+   content = 'Chiplotle Geometry / Shapes\n'
+   content += '============================\n\n'
+
+   content += 'Shapes\n'
+   content += '--------\n\n'
+   content += _autofunction(shapes)
+
+   content += 'Transforms\n'
+   content += '-------------\n\n'
+   content += _autofunction(transforms)
+
+#   content += 'Core\n'
+#   content += '-------------\n\n'
+#   content += _autofunction(core)
+
+   
+   file = open('../chapters/api/geometry.rst', 'w')
+   file.write(content)
+   file.close()
+
+
+## helpers ##
+
+def _autofunction(module):
+   modulename = module.__name__
+   ret = []
+   for cls in dir(module):
+      if not cls.startswith('_'):
+         af = '.. autofunction:: %s.%s' % (modulename, cls)
+         ret.append(af)
+   return '\n'.join(ret) + '\n\n'
 
 
 if __name__ == '__main__':
-   compile_compound( )
-   compile_plotters( )
-   compile_tools( )
+   compile_plotters()
+   compile_tools()
+   compile_geometry()

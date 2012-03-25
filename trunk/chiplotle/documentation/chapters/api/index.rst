@@ -4,7 +4,7 @@ Chiplotle API
 
 .. toctree::
    
-   chiplotle_hpgl
-   chiplotle_compound
+   geometry
+   hpgl
    plotters
    tools

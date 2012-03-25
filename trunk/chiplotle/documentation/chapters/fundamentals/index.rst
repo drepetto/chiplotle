@@ -1,6 +1,8 @@
 Chiplotle fundamentals
 ======================
 
+.. warning:: This section needs fleshing out.
+
 In addition to being an HPGL plotter driver, *Chiplotle* is a vector drawing librarly specifically designed to work with these HPGL plotters. While other drawing computer tools are designed to create art on the screen (or for ordinary raster printing), Chiplotle knows about and understands some of the mechanics of drawing with pen plotters. 
 
 One can think of Chiplotle as consisting of three layers:
