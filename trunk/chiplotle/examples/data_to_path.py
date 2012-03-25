@@ -4,7 +4,6 @@
 
 from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_virtual_plotter
-from chiplotle.geometry import *
 
 def main():
 
@@ -28,7 +27,7 @@ def main():
         points.append(c)
         x += 10
         
-    data_path = Path(points)
+    data_path = shapes.path(points)
     
     plotter.select_pen(4)
     plotter.write(data_path)
@@ -43,13 +42,13 @@ def main():
     (min, max) = data_path.minmax_coordinates
     (width, height) = max - min
 
-    r = rectangle(width, height)
+    r = shapes.rectangle(width, height)
     
     #a rectangle has its center at (0,0)
     #so we shift it over so that its lower, left corner is (0,0)
     #and we shift it some more to fit around our offset data
-    offset(r, (width/2, height/2))
-    offset(r, min)
+    transforms.offset(r, (width/2, height/2))
+    transforms.offset(r, min)
     
     plotter.select_pen(6)
     plotter.write(r)
