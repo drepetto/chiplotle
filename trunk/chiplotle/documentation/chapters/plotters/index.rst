@@ -27,9 +27,9 @@ Sometimes you may want to work on your plotter code without having to actually c
    >>> from chiplotle import *
    >>> commands = []
    >>> commands.append(SP(1))
-   >>> commands.append(PA([0,0]))
+   >>> commands.append(PA([(0,0)]))
    >>> commands.append(PD())
-   >>> commands.append(PA([1000,1000]))
+   >>> commands.append(PA([(1000,1000)]))
    >>> commands.append(PU())
    >>> commands.append(SP(0))
    >>> io.view(commands)
