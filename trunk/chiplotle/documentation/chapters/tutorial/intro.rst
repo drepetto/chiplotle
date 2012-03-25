@@ -43,7 +43,7 @@ Let's pick up a pen. In HPGL, the command to pick up a pen is ``SP``, which stan
 Many HPGL commands take one or more parameters; if a command takes parameters you put them inside a set of ``()`` after the command name. ``SP`` takes a pen number, so to select pen 1 we pass ``1`` as a parameter as we did above.
 
 .. note::
-   Remember that you can always refer to the :doc:`Chiplotle API </chapters/api/chiplotle_hpgl>` for information on the HPGL commands and its required parameters. You can also use the Python ``help( )`` function to find information about any Python object. Thus, to learn what parameters you need to pass to a command you can type::
+   Remember that you can always refer to the :doc:`Chiplotle API </chapters/api/hpgl>` for information on the HPGL commands and its required parameters. You can also use the Python ``help( )`` function to find information about any Python object. Thus, to learn what parameters you need to pass to a command you can type::
 
       chiplotle> help(SP)
 

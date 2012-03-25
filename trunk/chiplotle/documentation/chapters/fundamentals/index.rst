@@ -54,7 +54,7 @@ Chiplotle-HPGL commands
 In addition to the generic shape constructors, in Chiplotle you have access to specific HPGL command definitions. 
 
 All the standard HPGL commands are implemented in Chiplotle, and their class names corresponds to the two letter mnemonic used in the HPGL.
-Refer to the :doc:`Chiplotle API </chapters/api/chiplotle_hpgl>` for a list and documentation of all the HPGL commands.
+Refer to the :doc:`Chiplotle API </chapters/api/hpgl>` for a list and documentation of all the HPGL commands.
 
 Chiplotle HPGL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others don't::
 

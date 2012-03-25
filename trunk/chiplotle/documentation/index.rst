@@ -1,6 +1,6 @@
 .. _contents:
 
-Chiplotle  (|release|) documentation
+Chiplotle  |release|  documentation
 =====================================
 
 
@@ -21,7 +21,7 @@ Chiplotle  (|release|) documentation
    chapters/mailinglist/index
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    chapters/api/index
 
