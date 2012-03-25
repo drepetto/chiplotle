@@ -10,12 +10,13 @@ import time
 
 def main():
 
+    print 'Importing media/square.hpgl'
     f = import_hpgl_file("./media/square.hpgl")
 
-    print "\nHere are the contents of the file, expanded into a list of chiplotle objects:\n"
+    print "Here are the contents of the file, expanded into a list of chiplotle objects:"
     print f
     
-    print "\nAnd here are the raw hpgl commands:\n"
+    print "\nAnd here are the raw hpgl commands:"
     
     for c in f:
         print c.format
