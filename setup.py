@@ -17,19 +17,14 @@ setup(name              = 'Chiplotle',
       license           = 'GPL', 
 
       include_package_data = True,
-      packages = ['chiplotle'], #find_packages( ),
-      ## numpy seems to not install properly via easy_install.
-      ## better to have the user figure out how to install it manually.
-      #install_requires=['pyserial', 'numpy'],
-      install_requires=['pyserial'],
-      entry_points = {'console_scripts':[
-         'chiplotle = chiplotle.cfg._run_chiplotle:_run_chiplotle',
-         ]},
-      scripts = [ 
+      packages             = ['chiplotle'], #find_packages( ),
+      install_requires     = ['pyserial', 'numpy'],
+      entry_points         = {'console_scripts':
+         ['chiplotle = chiplotle.core.cfg._run_chiplotle:_run_chiplotle',]},
+      scripts              = [ 
          'chiplotle/scripts/envelope.py',
          'chiplotle/scripts/find_hpgl_file_dimensions.py',
          'chiplotle/scripts/plot_hpgl_file_max_size.py',
-         'chiplotle/scripts/plot_hpgl_file_max_size_virtual.py',
          'chiplotle/scripts/plot_hpgl_file.py',
          'chiplotle/scripts/plot_hpgl_file_virtual.py',
          'chiplotle/scripts/typewriter.py',

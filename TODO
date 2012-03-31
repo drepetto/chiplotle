@@ -1,3 +1,7 @@
+Add default view format to config.py for io.view()
+
+---------------------------------------
+
 NOTE: the methods below should all be in input_mask() form, right? We're moving away from camelCaps. 
 
 -----------------------
