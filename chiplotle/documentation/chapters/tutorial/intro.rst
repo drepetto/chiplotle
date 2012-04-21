@@ -38,18 +38,18 @@ HPGL
 
 Let's pick up a pen. In HPGL, the command to pick up a pen is ``SP``, which stands for "select pen". In Chiplotle we instantiate an instance of that command like so::
 
-   chiplotle> SP(1)
+   chiplotle> hpgl.SP(1)
 
 Many HPGL commands take one or more parameters; if a command takes parameters you put them inside a set of ``()`` after the command name. ``SP`` takes a pen number, so to select pen 1 we pass ``1`` as a parameter as we did above.
 
 .. note::
    Remember that you can always refer to the :doc:`Chiplotle API </chapters/api/hpgl>` for information on the HPGL commands and its required parameters. You can also use the Python ``help( )`` function to find information about any Python object. Thus, to learn what parameters you need to pass to a command you can type::
 
-      chiplotle> help(SP)
+      chiplotle> help(hpgl.SP)
 
 To pass the command to the plotter, you use ``plotter.write( )``. So::
 
-   chiplotle> plotter.write(SP(1))
+   chiplotle> plotter.write(hpgl.SP(1))
 
 Your plotter should pick up pen one. Some common commands, like ``SP``, can be directly sent from the plotter. i.e., the plotter has methods equivalent to some of the HPGL commands. Such is the case of ``SP``::
 
@@ -57,14 +57,14 @@ Your plotter should pick up pen one. Some common commands, like ``SP``, can be d
 
 This effectively instantiates a ``SP`` command instance and send the command to the plotter.
 
-Now let's move the pen. To move the pen while it is in the up position, you use ``PU([(x,y)])``, and to move the pen while it's down you use ``PD([(x,y)])``. `x` and `y` are the coordinates you want to move the pen to.
+Now let's move the pen. To move the pen while it is in the up position, you use ``hpgl.PU([(x,y)])``, and to move the pen while it's down you use ``hpgl.PD([(x,y)])``. `x` and `y` are the coordinates you want to move the pen to.
 If you want to do a ``PU`` or ``PD`` without moving, just pass a blank set of coordinates.
 So to draw a square you might do something like::
 
    chiplotle> plotter.select_pen(1)
-   chiplotle> plotter.write(PU([(100,100)]))
-   chiplotle> plotter.write(PD([(200,100), (200,200), (100,200), (100,100)]))
-   chiplotle> plotter.write(PU([]))
+   chiplotle> plotter.write(hpgl.PU([(100,100)]))
+   chiplotle> plotter.write(hpgl.PD([(200,100), (200,200), (100,200), (100,100)]))
+   chiplotle> plotter.write(hpgl.PU([]))
 
 There are plotter shortcuts for ``PU`` and ``PD``::
 
@@ -100,8 +100,8 @@ If you only have one plotter (or only care to use one plotter) you can get the f
  Now you can simply enter a series of Chiplote commands::
 
    plotter.select_pen(1)
-   plotter.write(PU([(100,100)])
-   plotter.write(PD([(200,100), (200,200), (100,200), (100,100)]))
+   plotter.write(hpgl.PU([(100,100)])
+   plotter.write(hpgl.PD([(200,100), (200,200), (100,200), (100,100)]))
    plotter.select_pen(0)
 
 and save your script as a .py file (see examples/square.py for an example). 
@@ -120,7 +120,7 @@ A slightly more sophisticated Python script that draws a random zigzag::
    plotter.select_pen(1)
    
    coords = [(x, random.randint(0, 1000)) for x in range(0, 1000, 10)]
-   plotter.write(PD(coords))
+   plotter.write(hpgl.PD(coords))
        
    plotter.select_pen(0)
 

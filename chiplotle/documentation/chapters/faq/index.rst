@@ -25,10 +25,10 @@ Yes. The plotters buffer will fill up quickly, so you need to be listenning to t
 
 This is one of the tasks that Chiplotle manages for you so you don't have to worry about these low level technicalities.   
 The easiest way to communicate with a plotter is to run Chiplotle by typing ``chiplotle`` from your terminal. 
-This will run python and load, Chiplotle library, and instantiate soft-plotters for your hardware plotters found. Once in Chiplotle, send your HPGL file with the ``write_file(filename)`` method of the instantiated plotter(s), or send newly createdHPGL commands via the ``write( )`` method, like so::
+This will run python and load, Chiplotle library, and instantiate soft-plotters for your hardware plotters found. Once in Chiplotle, send your HPGL file with the ``write_file(filename)`` method of the instantiated plotter(s), or send newly createdHPGL commands via the ``write()`` method, like so::
 
    chiplotle> plotter.write_file('my_file.hpgl')  
-   chiplotle> plotter.write(PA( ))
+   chiplotle> plotter.write(hpgl.PA())
 
 
 The ``plotter`` does the buffer managing for you.

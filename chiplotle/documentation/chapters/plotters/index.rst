@@ -26,12 +26,12 @@ Sometimes you may want to work on your plotter code without having to actually c
 
    >>> from chiplotle import *
    >>> commands = []
-   >>> commands.append(SP(1))
-   >>> commands.append(PA([(0,0)]))
-   >>> commands.append(PD())
-   >>> commands.append(PA([(1000,1000)]))
-   >>> commands.append(PU())
-   >>> commands.append(SP(0))
+   >>> commands.append(hpgl.SP(1))
+   >>> commands.append(hpgl.PA([(0,0)]))
+   >>> commands.append(hpgl.PD())
+   >>> commands.append(hpgl.PA([(1000,1000)]))
+   >>> commands.append(hpgl.PU())
+   >>> commands.append(hpgl.SP(0))
    >>> io.view(commands)
    
 * The above technique can also be used to write your commands out to an hpgl file for later viewing with your favorite hpgl viewer/converter::
