@@ -1,6 +1,7 @@
-from chiplotle.core.imports.get_functions_in_module import _get_functions_in_module
-from chiplotle.core.imports.remove_modules_from_namespace import \
-   _remove_modules_from_namespace
+from chiplotle.core.imports.get_functions_in_module \
+   import _get_functions_in_module
+from chiplotle.core.imports.remove_modules_from_namespace \
+   import _remove_modules_from_namespace
 import os
 
 def _package_import(path, namespace):
@@ -18,13 +19,6 @@ def _package_import(path, namespace):
             functions = _get_functions_in_module(submod)
             for f in functions:
                namespace[f.__name__] = f
-
-#      elif os.path.isdir(os.path.join(path, element)):
-#         if not element in ('.svn', 'test'):
-#            submod = '.'.join([module, element])
-#            namespace[element] = __import__(submod, fromlist =['*'])
-#      else:
-#         print 'Not a dir, not a file, what is %s?' % element
 
    ## remove modules
    _remove_modules_from_namespace(namespace)

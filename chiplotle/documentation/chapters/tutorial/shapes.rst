@@ -25,6 +25,18 @@ To get information about a function call ``help()`` on it::
    help(shapes.circle)
 
 
+Properties
+-----------
+
+Shapes have properties, like center, centroid, width, height, etc.::
+
+   >>> c = shapes.circle(1000)
+   >>> c.center
+   Coordinate([0.0, 0.0])
+   >>> c.width
+   2000.0
+   
+
 
 Groups
 ------
@@ -65,4 +77,37 @@ An arrow:
    coords = [(0, 0), (0, 1000), (1000, 1000)]
    p = shapes.bezier_path(coords, 1)
    a = arrow(p, 100, 200)
+
+
+Transforms
+==========
+
+Shapes can be transformed:
+
+Offset::
+
+   >>> c = shapes.circle(1000)
+   >>> c.center
+   Coordinate([0.0, 0.0])
+   >>> transforms.offset(c, (100, 200))
+   >>> c.center
+   Coordinate([100.0, 200.0])
+
+Scale::
+
+   >>> c = shapes.circle(1000)
+   >>> c.width
+   2000.0
+   >>> transforms.scale(c, 2.4)
+   >>> c.width
+   4800.0
+
+Rotate::
+
+   >>> r = shapes.rectangle(100, 200)
+   >>> r.height
+   200.0
+   >>> transforms.rotate(r, 3.14 / 4)
+   >>> r.height
+   212.16017194397654
 
