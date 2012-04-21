@@ -58,16 +58,16 @@ Refer to the :doc:`Chiplotle API </chapters/api/hpgl>` for a list and documentat
 
 Chiplotle HPGL commands can be instantiated as you would normally instantiate any other class. Some commands require arguments, others don't::
 
-   chiplotle> PD( )
+   chiplotle> hpgl.PD()
    PD(xy=[])
 
-   chiplotle> CI(10)
+   chiplotle> hpgl.CI(10)
    CI(chordangle=None, radius=10.0)
 
 All Chiplotle HPGL commands have a ``format`` attribute. This attribute returns a string representation of the HPGL command as sent to the plotter.
 ::
 
-   chiplotle> t = PD( )
+   chiplotle> t = hpgl.PD()
    chiplotle> t.format
    'PD;'
 
