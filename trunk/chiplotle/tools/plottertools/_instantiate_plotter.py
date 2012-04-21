@@ -1,4 +1,5 @@
-from chiplotle.tools.serialtools import instantiate_serial_from_config_file
+from chiplotle.tools.serialtools.instantiate_serial_from_config_file \
+   import instantiate_serial_from_config_file
 from chiplotle import plotters
 
 def _instantiate_plotter(port, id):

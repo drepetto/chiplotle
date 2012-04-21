@@ -1,7 +1,6 @@
 from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
-from chiplotle.tools.serialtools import sniff_ports_for_plotters
-from chiplotle.tools.serialtools import scan_serial_ports
-#from chiplotle.tools.serialtools import instantiate_serial_from_config_file
+from chiplotle.tools.serialtools.sniff_ports_for_plotters import sniff_ports_for_plotters
+from chiplotle.tools.serialtools.scan_serial_ports import scan_serial_ports
 
 def search_and_instantiate_plotters( ):
    '''Dynamically searches and instantiates all found plotters.
