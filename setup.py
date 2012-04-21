@@ -7,7 +7,7 @@ use_setuptools( ) # <-- this must come before setup import
 from setuptools import setup, find_packages
 
 setup(name              = 'Chiplotle', 
-      version           = '0.4.0', 
+      version           = '0.4.1', 
       description       = 'Chiplotle is an HPGL Python API.',
       long_description  = 'Chiplotle is an HPGL Python API.',
       author            = 'Víctor Adán and Douglas Repetto',
