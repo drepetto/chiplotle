@@ -1,5 +1,4 @@
 import glob
-#import serial
 
 def scan_serial_ports_linux( ):
    from chiplotle.tools.serialtools import scan_serial_ports_from_list
