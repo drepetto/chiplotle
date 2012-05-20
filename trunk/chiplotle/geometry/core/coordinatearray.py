@@ -37,6 +37,10 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
    def y(self):
       return tuple(self.coords[1] if self.coords else ())
 
+   @property
+   def magnitude(self):
+      diff = self.difference
+      return sum([coord.magnitude for coord in diff])
 
    ## METHODS ##
 

@@ -1,8 +1,4 @@
 from chiplotle.geometry.core.coordinate import Coordinate
-#from chiplotle.tools.geometrytools.get_center import get_center
-#from chiplotle.tools.geometrytools.get_centroid import get_centroid
-from chiplotle.tools.geometrytools.get_minmax_coordinates \
-   import get_minmax_coordinates
 
 class _ShapePropertiesMixin(object):
 
@@ -12,17 +8,14 @@ class _ShapePropertiesMixin(object):
    @property
    def center(self):
       return self.points.center
-      #return get_center(self.points)
 
    @property
    def centroid(self):
       return self.points.centroid
-      #return get_centroid(self.points)
 
    @property
    def minmax_coordinates(self):
       return self.points.minmax
-      #return get_minmax_coordinates(self.points)
 
    @property
    def width(self):
