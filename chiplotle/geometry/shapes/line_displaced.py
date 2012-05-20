@@ -1,4 +1,4 @@
-from chiplotle.geometry.shapes.path_linear import path_linear
+from chiplotle.geometry.shapes.path import path
 from chiplotle.geometry.transforms.perpendicular_displace \
    import perpendicular_displace
 
@@ -8,14 +8,9 @@ def line_displaced(start_coord, end_coord, displacements):
    The number of points in the path is determined by the lenght of 
    `displacements`.
    '''
-   unit = (end_coord - start_coord).magnitude / len(displacements)
-
-   path = path_linear((start_coord, end_coord), unit)
-   perpendicular_displace(path, displacements)
-   
-   return path
-
-   
+   p = path([start_coord, end_coord])
+   perpendicular_displace(p, displacements)
+   return p
    
 
 if __name__ == '__main__':

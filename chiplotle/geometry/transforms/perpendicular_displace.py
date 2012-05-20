@@ -1,37 +1,37 @@
-from chiplotle.tools.mathtools.difference import difference
+from chiplotle.tools.geometrytools.split_coordinatearray_proportionally \
+   import split_coordinatearray_proportionally
 from chiplotle.geometry.core.path import Path
-import math
 
 def perpendicular_displace(path, displacements):
    '''Displaces a path along its perpendiculars.
    
    - `path` is a Path instance.
    - `displacement` is a list of displacement values (scalars). 
-
-   Precondition: len(path) == len(displacement)
    ''' 
    if not isinstance(path, Path):
       raise TypeError('`path` should be of type Path.')
-   if len(path.points) != len(displacements):
-      raise ValueError('len(path) != len(displacements).')
 
    ## TODO may want to check here for identical consecutive coords
    ## to avoid 0 differences.
-   result = [ ]
-   d_points = difference(path.points)
-   d_points.append(d_points[-1])
-   for i in range(len(path.points)):
-      perp = d_points[i].perpendicular.normalized
-      disp = perp * displacements[i]
-#      perp = d_points[i].perpendicular
-#      mag = perp.magnitude
-#      if mag == 0: ## two points are overlapping.
-#         disp = 0
-#      else:
-#         disp = perp / mag * displacements[i]
+   count    = len(displacements)
+   points   = split_coordinatearray_proportionally(path.points, count)
+   d_points = points.difference
 
-      result.append(path.points[i] + disp)
+   result  = []
+   for i in range(len(d_points)):
+      norm = d_points[i].perpendicular.normalized
+      disp = norm * displacements[i]
+      result.append(points[i] + disp)
+
    path.points = Path(result).points
+#   result = [ ]
+#   d_points = path.points.difference
+#   d_points.append(d_points[-1])
+#   for i in range(len(path.points)):
+#      perp = d_points[i].perpendicular.normalized
+#      disp = perp * displacements[i]
+#      result.append(path.points[i] + disp)
+#   path.points = Path(result).points
 
 
 ## ~~~~~~~~~~~~~~~ demo ~~~~~~~~~~~
@@ -42,13 +42,12 @@ if __name__ == '__main__':
    from random import randint
    import math
 
-   rndpath = [(randint(0, 2000), randint(0, 2000)) for i in range(2 * 4)]
-   p = bezier_path(rndpath, .1, 80)
-   print '*** ', p
-   pc = copy.deepcopy(p)
-   Pen(2)(pc)
+   struct = shapes.circle(1000, randint(5, 12))
+   disp   = copy.deepcopy(struct)
+   Pen(2)(struct)
+   Pen(1)(disp)
 
-   d = [math.sin(x / math.pi) * 30 for x in range(len(p.points))]
+   d = [math.sin(x / math.pi / 4) * 300 for x in range(400)]
 
-   perpendicular_displace(p, d)
-   io.view(group([p, pc]))
+   perpendicular_displace(struct, d)
+   io.view(group([struct, disp]))
