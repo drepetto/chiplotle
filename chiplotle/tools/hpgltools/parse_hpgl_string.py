@@ -7,16 +7,17 @@ def parse_hpgl_string(arg):
    if not isinstance(arg, str):
       raise TypeError('`arg` must be of type string.')
 
-   hpgl_commands = ['AA','AF','AH','AP','AR','AS',
+   string_commands   = ['LB', 'DT']
+   numeric_commands  = ['AA','AF','AH','AP','AR','AS',
       'BF','BL',
       'CA','CC','CI','CM','CP','CS','CT','CV',
-      'DC','DF','DI','DP','DR','DS','DT','DV', #DL
+      'DC','DF','DI','DP','DR','DS','DV', #DL
       'EA','EC','EP','ER','ES','EW',
       'FP','FR','FS','FT',
       'GC', #GM GP
       'IM','IN','IP','IV','IW',
       'KY',
-      'LB','LO','LT',
+      'LO','LT',
       'NR',
       'OA','OC','OD','OE','OF','OG','OH','OI','OK','OL','OO','OP','OS','OT','OW',
       'PA','PB','PD','PG','PM','PR','PS','PT','PU',
@@ -35,11 +36,14 @@ def parse_hpgl_string(arg):
    # 'PA1.99,-5.00;' -- the ,- construction wasn't being parsed correctly.
    # Don't understand why normal negative integers were being parsed
    # correctly though...
-   hpgl_pattern = '[-0-9.,]*|'.join(hpgl_commands)
-   dci_pattern = '[0-9.;]*|'.join(dci_commands)
-   pattern = hpgl_pattern + "|" + dci_pattern
+   # TODO: the whole parser needs to be rewritten. This is simple,
+   #       but inaccurate, especially for DT/LB commands.
+   numeric_pattern= '|'.join([c + '[-0-9.,]*' for c in numeric_commands])
+   dci_pattern    = '|'.join([c + '[0-9.;]*' for c in dci_commands])
+   string_pattern = '|'.join([c + '[^;]+' for c in string_commands])
+   pattern = '|'.join([numeric_pattern, string_pattern, dci_pattern])
    ## this assumes that the re will find each and every hpgl command
    ## with the pattern. Any command not matched will effectively be
-   ## romoved... we don't want that. 
+   ## removed... we don't want that. 
    result = re.findall(pattern, arg) 
    return result
