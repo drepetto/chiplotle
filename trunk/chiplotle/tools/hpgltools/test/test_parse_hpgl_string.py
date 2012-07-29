@@ -25,6 +25,12 @@ def test_parse_hpgl_string_04( ):
    t = hpgltools.parse_hpgl_string(s)
    assert t == ['IN', 'SP2', 'PU', 'PA2,-1', 'PD', 'RR100', 'PU']
 
+def test_parse_hpgl_string_05():
+   '''LB'''
+   s = 'DT#;LBHello World#;'
+   t = hpgltools.parse_hpgl_string(s)
+   print t
+   assert t == ['DT#', 'LBHello World#']
 
 ## DCI (escape) commands ##
 
