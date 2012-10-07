@@ -72,24 +72,6 @@ class _BasePlotter(object):
          except TypeError:
             raise TypeError('Must be a str, iterator, or a _Shape.')
          
-#      if isinstance(data, _HPGL):
-#         self._write_string_to_port(data.format)
-#      elif isinstance(data, str):
-#         self._write_string_to_port(data)
-#      elif type(data) in (list, tuple, types.GeneratorType):
-#         result = [ ]
-#         for c in data:
-#            #if hasattr(c, 'format'):
-#            if isinstance(c, _HPGL):
-#               result.append(c.format)
-#            elif isinstance(c, str):
-#               result.append(c)
-#            else:
-#               raise TypeError('Elements must be strings or _HPGL commands.')
-#         self._write_string_to_port(''.join(result))
-#      else:
-#         raise TypeError('Must be a str, iterator or an _HPGL command.')
-
 
    def write_file(self, filename):
       '''Sends the HPGL content of the given `filename` to the plotter.'''
@@ -179,8 +161,8 @@ class _BasePlotter(object):
             time.sleep(sleep)
             elapsed_time += sleep
       msg = 'Waited for %s secs... No response from plotter.' % total_time
-      self._logger.error(msg)
-      return 
+      raise RuntimeError(msg)
+      #self._logger.error(msg)
    
 
    @property
