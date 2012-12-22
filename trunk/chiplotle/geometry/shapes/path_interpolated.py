@@ -4,7 +4,7 @@ from chiplotle.geometry.core.path import Path
 from chiplotle.tools.mathtools.bezier_interpolation import bezier_interpolation
 
 
-def bezier_path(points, curvature, interpolation_count = 50):
+def path_interpolated(points, curvature, interpolation_count = 50):
    '''Returns a Path with bezier interpolation between the given `points`.
    The interpolation is computed so that the resulting path touches the 
    given points.
