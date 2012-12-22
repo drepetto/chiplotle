@@ -56,13 +56,12 @@ def path_interpolated(points, curvature, interpolation_count = 50):
 ## RUN DEMO CODE
 
 if __name__ == '__main__':
-   from chiplotle.geometry.core.path import Path
    from chiplotle.geometry.core.group import Group
    from chiplotle.tools import io
    points  = [(0, 0), (1000, 1000), (-1000, 1000), (-1000, -1000), (1000, -1000), (0, 0)]
-   e1 = bezier_path(points, 1)
-   e2 = bezier_path(points, 0.5)
-   e3 = bezier_path(points, 0)
+   e1 = path_interpolated(points, 1)
+   e2 = path_interpolated(points, 0.5)
+   e3 = path_interpolated(points, 0)
    assert isinstance(e1, Path)
 
    io.view(Group([e1, e2, e3]))
