@@ -4,8 +4,8 @@ from chiplotle.geometry.shapes.arc_ellipse import arc_ellipse
 
 import math
 
-def arc_circle(radius, 
-               start_angle, end_angle, 
+def arc_circle(radius,
+               start_angle, end_angle,
                segments = 100, segmentation_mode = '2PI'):
    '''
    Constructs an arc from a circle with the given radius,
@@ -16,9 +16,9 @@ def arc_circle(radius,
          the whole circle into the given number of segments,
          the second segments the arc.
    '''
-   radius = radius * 2.0 
-   return arc_ellipse(radius, radius, 
-                      start_angle, end_angle, 
+   radius = radius * 2.0
+   return arc_ellipse(radius, radius,
+                      start_angle, end_angle,
                       segments, segmentation_mode)
 
 
@@ -27,9 +27,9 @@ def arc_circle(radius,
 
 if __name__ == '__main__':
    from chiplotle.tools import io
-   
+
    gr = Group()
-   
+
    for radius in range(100, 1000, 100):
        ac = arc_circle(radius, 1.0, math.pi)
        assert isinstance(ac, Path)

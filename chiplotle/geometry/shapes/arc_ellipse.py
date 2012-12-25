@@ -2,9 +2,9 @@ from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.path import Path
 import math
 
-def arc_ellipse(width, height, 
-                start_angle, end_angle, 
-                segments = 100, segmentation_mode = '2PI'):  
+def arc_ellipse(width, height,
+                start_angle, end_angle,
+                segments = 100, segmentation_mode = '2PI'):
    '''
    Constructs an arc from an ellipse with the given width, height,
    and number of segments. Arc goes from start_angle to end_angle,
@@ -16,7 +16,7 @@ def arc_ellipse(width, height,
    '''
    if start_angle > end_angle:
       end_angle += math.pi * 2
-   
+
    def _divide_2pi():
       return (math.pi * 2) / float(segments)
    def _divide_arc():
@@ -47,7 +47,7 @@ def arc_ellipse(width, height,
 if __name__ == '__main__':
    from chiplotle.tools import io
    from chiplotle.geometry.core.group import Group
-   
+
    gr = Group()
    for radius in range(100, 1000, 10):
        ae = arc_ellipse(radius, radius * 2, 0, math.pi/2, 5, 'arc')

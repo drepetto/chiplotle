@@ -2,18 +2,18 @@ from chiplotle.hpgl.abstract.hpgl import _HPGL
 
 class _HPGLEscape(_HPGL):
 
-   _escape = chr(27)
+    _escape = chr(27)
 
 
-   ## PUBLIC PROPERTIES ##
+    ## PUBLIC PROPERTIES ##
 
-   @property
-   def format(self):
-      return '%s.%s' % (self._escape, self._name)
+    @property
+    def format(self):
+        return '%s.%s' % (self._escape, self._name)
 
 
-   ## OVERRIDES ##
+    ## OVERRIDES ##
 
-   def __repr__(self):
-      return 'Escape(%s, %s)' % (repr(self._escape), self._name)
+    def __repr__(self):
+        return 'Escape(%s, %s)' % (repr(self._escape), self._name)
 

@@ -2,63 +2,63 @@
 from chiplotle import *
 
 def envelope( ):
-   plotter = instantiate_plotters( )[0]
+    plotter = instantiate_plotters( )[0]
 
-   to_address = []
-   from_address = []
+    to_address = []
+    from_address = []
 
-   print ("\n\renter FROM ADDRESS (blank line to end):")
+    print ("\n\renter FROM ADDRESS (blank line to end):")
 
-   finished = 0
-   while finished == 0:
-    
-      line = raw_input("")
-      if len(line) == 0:
-         finished = 1
-      else:
-         from_address.append(line)
+    finished = 0
+    while finished == 0:
 
-   print ("enter TO ADDRESS (blank line to end):")
+        line = raw_input("")
+        if len(line) == 0:
+            finished = 1
+        else:
+            from_address.append(line)
 
-   finished = 0
-   while finished == 0:
+    print ("enter TO ADDRESS (blank line to end):")
 
-      line = raw_input("")
-      if len(line) == 0:
-         finished = 1
-      else:
-         to_address.append(line)
+    finished = 0
+    while finished == 0:
 
-   input = raw_input("\n\renter pen number for plotting FROM ADDRESS:\n")
-   pen_num = int(input)
+        line = raw_input("")
+        if len(line) == 0:
+            finished = 1
+        else:
+            to_address.append(line)
 
-   plotter.write(SP(pen_num))
+    input = raw_input("\n\renter pen number for plotting FROM ADDRESS:\n")
+    pen_num = int(input)
 
-   raw_input("\n\rmove pen to top left of FROM: address field and hit return to start plotting...")
-   print("plotting FROM: address...")
+    plotter.write(SP(pen_num))
 
-   for line in from_address:
-      plotter.write(LB(line))
-      plotter.write(LB("\n\r"))
+    raw_input("\n\rmove pen to top left of FROM: address field and hit return to start plotting...")
+    print("plotting FROM: address...")
 
-   input = raw_input("\n\renter pen number for plotting TO ADDRESS:\n")
-   pen_num = int(input)
+    for line in from_address:
+        plotter.write(LB(line))
+        plotter.write(LB("\n\r"))
 
-   plotter.write(SP(pen_num))
+    input = raw_input("\n\renter pen number for plotting TO ADDRESS:\n")
+    pen_num = int(input)
 
-   raw_input("\n\rmove pen to top left of TO ADDRESS field and hit return to start plotting...")
-   print("plotting TO ADDRESS...")
+    plotter.write(SP(pen_num))
 
-   num_lines = len(to_address)
-   line_num = 0
+    raw_input("\n\rmove pen to top left of TO ADDRESS field and hit return to start plotting...")
+    print("plotting TO ADDRESS...")
 
-   for line in to_address:
-      plotter.write(LB(line))
-      plotter.write(LB("\n\r"))
+    num_lines = len(to_address)
+    line_num = 0
 
-   plotter.write(SP(0))
-   print("done!")
+    for line in to_address:
+        plotter.write(LB(line))
+        plotter.write(LB("\n\r"))
+
+    plotter.write(SP(0))
+    print("done!")
 
 
 if __name__ == '__main__':
-   envelope( )
+    envelope( )
