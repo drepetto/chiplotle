@@ -4,7 +4,7 @@ from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_virtual_plotter
 
 '''
-Demonstrates the use of a virtual plotter with the generic plotter. 
+Demonstrates the use of a virtual plotter with the generic plotter.
 Paper will automatically be set to 8.5x11" (ANSI A).
 
 You must have hp2xx installed for io.view() to work!

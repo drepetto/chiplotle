@@ -4,11 +4,11 @@
  *  http://music.columbia.edu/cmc/chiplotle
 '''
 from __future__ import division
-from chiplotle.core.cfg.get_config_value import get_config_value 
+from chiplotle.core.cfg.get_config_value import get_config_value
 from chiplotle.core.interfaces.margins.interface import MarginsInterface
 from chiplotle.geometry.core.shape import _Shape
 from chiplotle.geometry.core.coordinate import Coordinate
-from chiplotle.hpgl import commands 
+from chiplotle.hpgl import commands
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 from chiplotle.tools.logtools.get_logger import get_logger
 from chiplotle.tools.serialtools import VirtualSerialPort
@@ -35,7 +35,7 @@ class _BasePlotter(object):
       self.buffer_size = int(self._buffer_space / 2)
       self.initialize_plotter( )
 
-      
+
 
    @property
    def margins(self):
@@ -53,7 +53,7 @@ class _BasePlotter(object):
 
 
    def write(self, data):
-      '''Public access for writing to serial port. 
+      '''Public access for writing to serial port.
          data can be an iterator, a string or an _HPGL. '''
       ## TODO: remove _HPGL from this list...
       if isinstance(data, (_Shape, _HPGL)):
@@ -71,7 +71,7 @@ class _BasePlotter(object):
             self._write_string_to_port(''.join(result))
          except TypeError:
             raise TypeError('Must be a str, iterator, or a _Shape.')
-         
+
 
    def write_file(self, filename):
       '''Sends the HPGL content of the given `filename` to the plotter.'''
@@ -100,7 +100,7 @@ class _BasePlotter(object):
 
    def _filter_unrecognized_commands(self, commands):
       assert isinstance(commands, str)
-      result = [ ] 
+      result = [ ]
       #commands = re.split('[\n;]+', commands)
       commands = commands.split(';')
       for comm in commands:
@@ -142,7 +142,7 @@ class _BasePlotter(object):
       for chunk in data:
          self._sleep_while_buffer_full( )
          self._serial_port.write(chunk)
-      
+
 
    ### PRIVATE QUERIES ###
 
@@ -152,7 +152,7 @@ class _BasePlotter(object):
       total_time = self.maximum_response_wait_time
       sleep = 1.0 / 8
       while elapsed_time < total_time:
-         if self._serial_port.inWaiting( ): 
+         if self._serial_port.inWaiting( ):
             try:
                return self._serial_port.readline(eol='\r') # <-- old pyserial
             except:
@@ -163,7 +163,7 @@ class _BasePlotter(object):
       msg = 'Waited for %s secs... No response from plotter.' % total_time
       raise RuntimeError(msg)
       #self._logger.error(msg)
-   
+
 
    @property
    def _buffer_space(self):
@@ -194,10 +194,10 @@ class _BasePlotter(object):
 
    @property
    def actual_position(self):
-      '''Output the actual position of the plotter pen. Returns a tuple 
+      '''Output the actual position of the plotter pen. Returns a tuple
       (Coordinate(x, y), pen status)'''
       response = self._send_query(self._hpgl.OA( )).split(',')
-      return [Coordinate(eval(response[0]), eval(response[1])), 
+      return [Coordinate(eval(response[0]), eval(response[1])),
          eval(response[2].strip('\r'))]
 
    @property
@@ -206,18 +206,18 @@ class _BasePlotter(object):
 
    @property
    def commanded_position(self):
-      '''Output the commanded position of the plotter pen. Returns a tuple 
+      '''Output the commanded position of the plotter pen. Returns a tuple
       [Coordinate(x, y), pen status]'''
-      response = self._send_query(self._hpgl.OC( )).split(',')      
-      return [Coordinate(eval(response[0]), eval(response[1])), 
+      response = self._send_query(self._hpgl.OC( )).split(',')
+      return [Coordinate(eval(response[0]), eval(response[1])),
          eval(response[2].strip('\r'))]
-          
+
    @property
    def digitized_point(self):
-      '''Returns last digitized point. Returns a tuple 
+      '''Returns last digitized point. Returns a tuple
       [Coordinate(x, y), pen status]'''
       response = self._send_query(self._hpgl.OD( )).split(',')
-      return [Coordinate(eval(response[0]), eval(response[1])), 
+      return [Coordinate(eval(response[0]), eval(response[1])),
          eval(response[2].strip('\r'))]
 
    @property
@@ -254,7 +254,7 @@ class _BasePlotter(object):
    def escape_plotter_on(self):
       self.write( self._hpgl.On() )
 
-   
+
    ## OVERRIDES ##
 
    def __str__(self):
@@ -276,8 +276,8 @@ class _BasePlotter(object):
          return self._serial_port.format
       else:
          return None
- 
- 
+
+
    def clear(self):
       '''
       Tells the virtual serial port to forget its stored commands.
@@ -287,5 +287,5 @@ class _BasePlotter(object):
          self._serial_port.clear()
       else:
          pass
-         
-         
+
+

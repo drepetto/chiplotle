@@ -4,8 +4,8 @@ import math
 
 def circle(radius, segments = 36):
    '''Returns a circle.'''
-   coords = [(math.cos(math.pi * 2 / segments * r) * radius, 
-              math.sin(math.pi * 2 / segments * r) * radius) 
+   coords = [(math.cos(math.pi * 2 / segments * r) * radius,
+              math.sin(math.pi * 2 / segments * r) * radius)
               for r in range(segments)]
    return Polygon(coords)
 

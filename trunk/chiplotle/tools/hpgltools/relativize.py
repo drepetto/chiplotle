@@ -4,61 +4,61 @@ import numpy
 
 ## TODO: this works, but is quite ugly. Refactor!
 def relativize(data):
-   '''Converts all absolute coordinate commands (PA, RA, EA, AA)
-   into relative commands (PR, RR, ER, AR), so that everything
-   has in realtive coordinate values.'''
-   ## main body...
-   last_position = None
-   delta = None
-   result = [ ]
-   for e in data:
-      ## absolute...
-      if isinstance(e, (hpgl.PA, hpgl.RA, hpgl.EA, hpgl.AA)):
-         if isinstance(e, hpgl.PA):
-            ## handle delta...
-            if not last_position is None:
-               delta = e.xy[0] - last_position
-            last_position = e.xy[-1]
-         else:
-            ## handle delta...
-            if not last_position is None:
-               delta = e.xy - last_position
-            last_position = e.xy
-         result += _return_relative_from_absolute(e, delta)
-
-      ## relative...
-      elif isinstance(e, (hpgl.PR, hpgl.RR, hpgl.ER, hpgl.AR)):
-         if isinstance(e, hpgl.PR):
-            coords = [list(c) for c in e.xy]
-            if not last_position is None:
-               last_position += Coordinate(*numpy.sum(coords, axis = 0))
+    '''Converts all absolute coordinate commands (PA, RA, EA, AA)
+    into relative commands (PR, RR, ER, AR), so that everything
+    has in realtive coordinate values.'''
+    ## main body...
+    last_position = None
+    delta = None
+    result = [ ]
+    for e in data:
+        ## absolute...
+        if isinstance(e, (hpgl.PA, hpgl.RA, hpgl.EA, hpgl.AA)):
+            if isinstance(e, hpgl.PA):
+                ## handle delta...
+                if not last_position is None:
+                    delta = e.xy[0] - last_position
+                last_position = e.xy[-1]
             else:
-               last_position = Coordinate(*numpy.sum(coords, axis = 0))
-            result.append(e)
-         else:
-            last_position = (last_position or 0) + e.xy
+                ## handle delta...
+                if not last_position is None:
+                    delta = e.xy - last_position
+                last_position = e.xy
+            result += _return_relative_from_absolute(e, delta)
 
-      else:
-         result.append(e)
-   return result
+        ## relative...
+        elif isinstance(e, (hpgl.PR, hpgl.RR, hpgl.ER, hpgl.AR)):
+            if isinstance(e, hpgl.PR):
+                coords = [list(c) for c in e.xy]
+                if not last_position is None:
+                    last_position += Coordinate(*numpy.sum(coords, axis = 0))
+                else:
+                    last_position = Coordinate(*numpy.sum(coords, axis = 0))
+                result.append(e)
+            else:
+                last_position = (last_position or 0) + e.xy
+
+        else:
+            result.append(e)
+    return result
 
 
 def _return_relative_from_absolute(command, delta):
-   result = [ ]
-   if isinstance(command, hpgl.PA):
-      if delta is not None:
-         result.append(hpgl.PR([delta]))
-      coords = [list(c) for c in command.xy]
-      diff = numpy.diff(coords, axis=0).tolist( )
-      if len(diff) > 0:
-         result.append(hpgl.PR(diff))
-   elif isinstance(command, hpgl.RA) and delta is not None:
-      result.append(hpgl.RR(delta))
-   elif isinstance(command, hpgl.EA) and delta is not None:
-      result.append(hpgl.ER(delta))
-   elif isinstance(command, hpgl.AA) and delta is not None:
-      result.append(hpgl.AR(delta))
-   return result
+    result = [ ]
+    if isinstance(command, hpgl.PA):
+        if delta is not None:
+            result.append(hpgl.PR([delta]))
+        coords = [list(c) for c in command.xy]
+        diff = numpy.diff(coords, axis=0).tolist( )
+        if len(diff) > 0:
+            result.append(hpgl.PR(diff))
+    elif isinstance(command, hpgl.RA) and delta is not None:
+        result.append(hpgl.RR(delta))
+    elif isinstance(command, hpgl.EA) and delta is not None:
+        result.append(hpgl.ER(delta))
+    elif isinstance(command, hpgl.AA) and delta is not None:
+        result.append(hpgl.AR(delta))
+    return result
 
 
 ## Trash...

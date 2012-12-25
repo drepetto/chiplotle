@@ -8,12 +8,12 @@ class Pen(FormatDecorator):
    - `sticky` boolean; set to False to set plotter back to default values
       at the end of the decorated shape. Set to True to skip reset.
    '''
-   
-   def __init__(self, 
-                number, 
-                velocity    = None, 
-                force       = None, 
-                acceleration= None, 
+
+   def __init__(self,
+                number,
+                velocity    = None,
+                force       = None,
+                acceleration= None,
                 thickness   = None):
       FormatDecorator.__init__(self)
       self.number       = number
@@ -24,10 +24,10 @@ class Pen(FormatDecorator):
 
    @property
    def _subcommands(self):
-      p = HPGLPen(self.number, 
-              self.velocity, 
-              self.force, 
-              self.acceleration, 
+      p = HPGLPen(self.number,
+              self.velocity,
+              self.force,
+              self.acceleration,
               self.thickness)
       return [p]
 

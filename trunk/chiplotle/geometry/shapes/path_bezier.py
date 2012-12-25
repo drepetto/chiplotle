@@ -5,12 +5,12 @@ def path_bezier(control_points, weight=1, interpolation_count=50):
     """
     Rational Bezier curve.
     """
-    ## cycle weights... 
+    ## cycle weights...
     if isinstance(weight, (list, tuple)):
         w_len = len(weight)
         p_len = len(control_points)
         weight = weight * (p_len // w_len) + weight[: p_len % w_len]
-        
+
     plot_points = bezier_interpolation(control_points,
                                        interpolation_count,
                                        weight)
@@ -34,14 +34,14 @@ if __name__ == '__main__':
     c = group([])
     ## draws a cross at each control point
     for i in points:
-       r = cross(100,100)
-       offset(r, i)
-       c.append(r)
+        r = cross(100,100)
+        offset(r, i)
+        c.append(r)
 
     ## draws the rational bezier curve for each weight set
     for w in weights:
-       b = path_bezier(points, weight=w)
-       c.append(b)
+        b = path_bezier(points, weight=w)
+        c.append(b)
 
     io.view(c)
 

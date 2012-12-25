@@ -8,7 +8,7 @@ from chiplotle.hpgl.abstract.twopoint import _TwoPoint
 class PU(_PenPlot):
    '''
    :Pen Up:
-      Raises the pen from the plotting surface. Use this instruction 
+      Raises the pen from the plotting surface. Use this instruction
       to prevent stray lines from being drawn.
 
    - `xy` : A ``list`` or ``tuple`` of x, y positions of the form \
@@ -22,7 +22,7 @@ class PU(_PenPlot):
 class PD(_PenPlot):
    '''
    :Pen Down:
-      Lowers the pen onto the writing surface for drawing and moves it 
+      Lowers the pen onto the writing surface for drawing and moves it
       to the coordinates/increments you specified.
 
    - `xy` : A ``list`` or ``tuple`` of x, y positions of the form \
@@ -36,7 +36,7 @@ class PD(_PenPlot):
 class PA(_PenPlot):
    '''
    :Plot Absolute:
-      Establishes absolute plotting and moves the pen to specified 
+      Establishes absolute plotting and moves the pen to specified
       absolute coordinates using the current pen position.
    '''
 
@@ -47,8 +47,8 @@ class PA(_PenPlot):
 class PR(_PenPlot):
    '''
    :Plot Relative:
-      Establishes relative plotting and moves the pen (using the current 
-      position) to the specified points, each successive move relative 
+      Establishes relative plotting and moves the pen (using the current
+      position) to the specified points, each successive move relative
       to the last current pen location.
    '''
 
@@ -59,14 +59,14 @@ class PR(_PenPlot):
 class CI(_HPGLPrimitive):
    '''
    :Circle:
-      Draws a circle using the specified radius and chord tolerance. 
-      If you want a filled circle, refer to the 
-      :class:`~chiplotle.hpgl.commands.WG` or 
+      Draws a circle using the specified radius and chord tolerance.
+      If you want a filled circle, refer to the
+      :class:`~chiplotle.hpgl.commands.WG` or
       :class:`~chiplotle.hpgl.commands.PM` instruction.
    '''
    _scalable = ['radius']
 
-   def __init__(self, radius, chordangle=None):   
+   def __init__(self, radius, chordangle=None):
       self.radius = radius
       self.chordangle = chordangle
 
@@ -83,7 +83,7 @@ class CI(_HPGLPrimitive):
    @property
    def format(self):
       if self.chordangle:
-         return '%s%.2f,%.2f%s' % (self._name, self.radius, self.chordangle, 
+         return '%s%.2f,%.2f%s' % (self._name, self.radius, self.chordangle,
                               _HPGLPrimitive._terminator)
       else:
          return '%s%.2f%s' % (self._name, self.radius, _HPGLPrimitive._terminator)
@@ -96,7 +96,7 @@ class CC(_HPGLPrimitive):
       drawn when you select one of the arc-font character sets for labeling.
    '''
 
-   def __init__(self, angle=None):   
+   def __init__(self, angle=None):
       self.angle = angle
 
    @property
@@ -110,18 +110,18 @@ class CC(_HPGLPrimitive):
 class AF(_HPGLPrimitive):
    '''
    :Advance full page:
-      Advances roll paper one full page length and establishes the 
+      Advances roll paper one full page length and establishes the
       origin at the center of the new page.
    '''
-   
+
 
 class AH(_HPGLPrimitive):
    '''
    :Advance half page:
-      Advances roll paper one half page length and establishes the 
+      Advances roll paper one half page length and establishes the
       origin at the center of the new page.
    '''
-   
+
 
 class AP(_HPGLPrimitive):
    '''
@@ -149,7 +149,7 @@ class AP(_HPGLPrimitive):
    codes are 0 to 255 with default of 95 on the DraftMaster
    '''
 
-   def __init__(self, n=None):   
+   def __init__(self, n=None):
       self.n = n
 
    @property
@@ -158,7 +158,7 @@ class AP(_HPGLPrimitive):
          return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
       else:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
-         
+
 
 class AA(_Arc):
    '''
@@ -198,24 +198,24 @@ class AS(_HPGLPrimitive):
       combinations. Slowing the acceleration may improve line
       quality if you are using heavier than recommended media.
 
-   - `accel` : ``int`` [1 to 4] , ``None``.  
+   - `accel` : ``int`` [1 to 4] , ``None``.
    - `pen` : ``int`` [1 to 8], ``None``. When ``None``, accel is \
       applied to all pens.
    '''
 
-   def __init__(self, accel=None, pen=None):   
+   def __init__(self, accel=None, pen=None):
       self.accel = accel
       self.pen = pen
 
    @property
    def format(self):
       if self.accel and self.pen:
-         return '%s%i,%i%s' % (self._name, self.accel, self.pen, 
+         return '%s%i,%i%s' % (self._name, self.accel, self.pen,
                               _HPGLPrimitive._terminator)
       elif self.accel:
-         return '%s%i%s' % (self._name, self.accel, _HPGLPrimitive._terminator)  
+         return '%s%i%s' % (self._name, self.accel, _HPGLPrimitive._terminator)
       else:
-         return '%s%s' % (self._name, _HPGLPrimitive._terminator) 
+         return '%s%s' % (self._name, _HPGLPrimitive._terminator)
 
 
 class EA(_Positional):
@@ -269,22 +269,22 @@ class RR(_Positional):
 
 
 class VS(_HPGLPrimitive):
-   ''' 
+   '''
    :Pen Velocity:
       Set's pen velocity.
 
-   - `vel` : ``float`` [0.0 to 127.9999] (depends on plotter), ``None``. 
+   - `vel` : ``float`` [0.0 to 127.9999] (depends on plotter), ``None``.
    - `pen` : ``int`` [1 to 8].
    '''
 
    def __init__(self, vel=None, pen=None):
       self.vel = vel
       self.pen = pen
-     
+
    @property
    def format(self):
       if self.vel and self.pen:
-         return '%s%i,%i%s' % (self._name, self.vel, self.pen, 
+         return '%s%i,%i%s' % (self._name, self.vel, self.pen,
             _HPGLPrimitive._terminator)
       elif self.vel:
          return '%s%i%s' % (self._name, self.vel, _HPGLPrimitive._terminator)
@@ -295,8 +295,8 @@ class VS(_HPGLPrimitive):
 class FS(_HPGLPrimitive):
    '''
    :Force Select:
-      Sets pen pressure to the paper for one or all pens. Use this 
-      instruction to optimize pen life and line quality for each pen 
+      Sets pen pressure to the paper for one or all pens. Use this
+      instruction to optimize pen life and line quality for each pen
       and paper combination.
 
    - `force` : ``int`` [1 to 8]
@@ -310,7 +310,7 @@ class FS(_HPGLPrimitive):
    @property
    def format(self):
       if self.force and self.pen:
-         return '%s%i,%i%s' % (self._name, self.force, self.pen, 
+         return '%s%i,%i%s' % (self._name, self.force, self.pen,
                               _HPGLPrimitive._terminator)
       elif self.force:
          return '%s%i%s' % (self._name, self.force, _HPGLPrimitive._terminator)
@@ -321,11 +321,11 @@ class FS(_HPGLPrimitive):
 class EP(_HPGLPrimitive):
    '''
    :Edge Polygon:
-      Outlines the polygon currently stored in the polygon buffer. 
-      Use this instruction to edge polygons that you defined in polygon mode 
-      (:class:`~chiplotle.hpgl.commands.PM`) and with the rectangle and 
-      wedge instructions (:class:`~chiplotle.hpgl.commands.RA`, 
-      :class:`~chiplotle.hpgl.commands.RR` and 
+      Outlines the polygon currently stored in the polygon buffer.
+      Use this instruction to edge polygons that you defined in polygon mode
+      (:class:`~chiplotle.hpgl.commands.PM`) and with the rectangle and
+      wedge instructions (:class:`~chiplotle.hpgl.commands.RA`,
+      :class:`~chiplotle.hpgl.commands.RR` and
       :class:`~chiplotle.hpgl.commands.WG`).
    '''
 
@@ -335,28 +335,28 @@ class BF(_HPGLPrimitive):
    Buffer plot.
 
    '''
-   
+
 
 class DC(_HPGLPrimitive):
    '''
    :Digitizer Clear:
       Terminates digitize mode. For example, if you are using an interrupt
       routine in a digitizing program to branch to another plotting function,
-      use DC to clear the digitize mode immediately after branching. 
+      use DC to clear the digitize mode immediately after branching.
    '''
-   
+
 
 class DF(_HPGLPrimitive):
    '''
    :Default:
       Sets certain plotter functions to predefined default conditions.
-      Use this instruction to return the plotter to a known state while 
-      maintaining the current location of P1 and P2. When you use DF at 
+      Use this instruction to return the plotter to a known state while
+      maintaining the current location of P1 and P2. When you use DF at
       the beginning of a program, unwanted graphics parameters such as
       character size, slant, or scaling are not inherited from another
-      program. 
+      program.
    '''
-   
+
 
 class DP(_HPGLPrimitive):
    '''
@@ -366,29 +366,29 @@ class DP(_HPGLPrimitive):
       graphics program or to obtain the coordinates of a point or points
       on plot.
    '''
-   
+
 
 class FP(_HPGLPrimitive):
    '''
    :Fill Polygon:
       Fills the polygon currently in the polygon buffer. Use FP to fill
       polygons defined in polygon mode (
-      :class:`~chiplotle.hpgl.commands.PM`) and defined with the edge 
+      :class:`~chiplotle.hpgl.commands.PM`) and defined with the edge
       rectangle and wedge instructions (
-      :class:`~chiplotle.hpgl.commands.EA`, 
-      :class:`~chiplotle.hpgl.commands.ER`, and 
+      :class:`~chiplotle.hpgl.commands.EA`,
+      :class:`~chiplotle.hpgl.commands.ER`, and
       :class:`~chiplotle.hpgl.commands.EW`).
    '''
-   
+
 
 class FR(_HPGLPrimitive):
    '''
    :Advance Frame:
-      Advances paper to the next plot frame and calculates a relative 
-      coordinate system for that frame. Use FR to do multi-frame long-axis 
+      Advances paper to the next plot frame and calculates a relative
+      coordinate system for that frame. Use FR to do multi-frame long-axis
       plotting.
    '''
-   
+
 
 class NR(_HPGLPrimitive):
    '''
@@ -397,48 +397,48 @@ class NR(_HPGLPrimitive):
       However, you cannot take the plotter out of the view state with NR
       instruction.
    '''
-   
+
 
 class OA(_HPGLPrimitive):
    '''
    :Output Actual Pen Status:
       Outputs the current pen location (in plotter units) and up/down position.
       Use this information to position a label or figure, to determine the
-      parameters of a window, or to determine the pen's curent location if you 
+      parameters of a window, or to determine the pen's curent location if you
       moved it using front-panel cursor buttons.
    '''
-   
+
 
 class OC(_HPGLPrimitive):
    '''
    :Output Commanded Pen Status:
-      Ouput the location and up/down position of the last commanded pen move 
+      Ouput the location and up/down position of the last commanded pen move
       instruction. Use OC to position a label or determine the parameters of
-      an instruction that tried to move the pen beyond the limits of some 
-      window. You can also use this instruction when you want to know the 
+      an instruction that tried to move the pen beyond the limits of some
+      window. You can also use this instruction when you want to know the
       pen's location in user units.
    '''
-   
+
 
 class OD(_HPGLPrimitive):
    '''
    :Output Digitized Point and Pen Status:
-      Outputs the X,Y coordinates and up/down pen position associated 
-      with the last digitized point. Use this instruction after the 
+      Outputs the X,Y coordinates and up/down pen position associated
+      with the last digitized point. Use this instruction after the
       :class:`~chiplotle.hpgl.commands.DP` instruction to
       return the coordinates of the digitized point to your computer.
    '''
-   
+
 
 class OE(_HPGLPrimitive):
    '''
    :Output Error:
-      Output a number corresponding to the type of HP-GL error (if any) 
-      received by the plotter after the most recent 
-      :class:`~chiplotle.hpgl.commands.IN` or 
-      :class:`~chiplotle.hpgl.commands.OE` instruction. Use this 
-      instruction for debugging programs. 
-   
+      Output a number corresponding to the type of HP-GL error (if any)
+      received by the plotter after the most recent
+      :class:`~chiplotle.hpgl.commands.IN` or
+      :class:`~chiplotle.hpgl.commands.OE` instruction. Use this
+      instruction for debugging programs.
+
    =========  ========  ========================
    bit value  error no  meaning
    =========  ========  ========================
@@ -452,28 +452,28 @@ class OE(_HPGLPrimitive):
    64         7         unused
    128        8         pinch wheels raised
    =========  ========  ========================
-   
-   .. note:: 
+
+   .. note::
       some error meanings change depending on the plotter!
    '''
-   
+
 
 class OF(_HPGLPrimitive):
    '''
    :Output Factors:
-      Outputs the number of plotter units per millimeter in each axis. 
-      This lets you use the plotter with sofware that needs to know 
+      Outputs the number of plotter units per millimeter in each axis.
+      This lets you use the plotter with sofware that needs to know
       the size of a plotter unit.
    '''
-   
+
 
 class OG(_HPGLPrimitive):
    '''
    :Output Group Count:
-      Outputs the data block number of the current group count and 
-      whether the escape function has been activated. Use this 
-      instruction at the end of a data block in spooling applications, 
-      where it is important to know the current data block number and 
+      Outputs the data block number of the current group count and
+      whether the escape function has been activated. Use this
+      instruction at the end of a data block in spooling applications,
+      where it is important to know the current data block number and
       whether the data block has been transferred.
    '''
 
@@ -481,30 +481,30 @@ class OG(_HPGLPrimitive):
 class OH(_HPGLPrimitive):
    '''
    :Output Hard-Clip Limits:
-      Outputs the X,Y coordinates of the current hard-clip limits. 
-      Use this instruction to determine the plotter unit dimension of 
+      Outputs the X,Y coordinates of the current hard-clip limits.
+      Use this instruction to determine the plotter unit dimension of
       the area in which plotting can occur.
    '''
-   
+
 
 class OI(_HPGLPrimitive):
    '''
    :Output Identification:
-      Outputs the plotter's identifying model number. This information is 
-      useful in a remote operating configuration to determine which plotter 
+      Outputs the plotter's identifying model number. This information is
+      useful in a remote operating configuration to determine which plotter
       model is on-line, or when software needs the plotter's model number.
-   ''' 
+   '''
 
 
 class OK(_HPGLPrimitive):
    '''
    :Output Key:
-      Outputs a number that indicates which, if any, of the front-panel 
-      function keys has been pressed. use this instruction with the 
-      :class:`~chiplotle.hpgl.commands.WD` instruction when designing 
+      Outputs a number that indicates which, if any, of the front-panel
+      function keys has been pressed. use this instruction with the
+      :class:`~chiplotle.hpgl.commands.WD` instruction when designing
       interactive programs.
    '''
-   
+
 
 class OL(_HPGLPrimitive):
    '''
@@ -516,29 +516,29 @@ class OL(_HPGLPrimitive):
 class OO(_HPGLPrimitive):
    '''
    :Output Options:
-      Outputs eight option parameters indicating the features implemented 
-      on the plotter. Some software packages use this feature to determine 
+      Outputs eight option parameters indicating the features implemented
+      on the plotter. Some software packages use this feature to determine
       which plotter capabilities exist.
    '''
-   
+
 
 class OP(_HPGLPrimitive):
    '''
    :Output P1 and P2:
-      Outputs the X,Y coordinates (in plotter units) of the current 
-      scaling points P1 and P2. Use this instruction to determine the 
-      numberic coordinates or P1 and P2 when they have been set manually, 
-      and to help compute the number of plotter units per user units when 
-      scaling is on.  This instruction can also be used with the input 
-      window (:class:`~chiplotle.hpgl.commands.IW`) instruction to 
+      Outputs the X,Y coordinates (in plotter units) of the current
+      scaling points P1 and P2. Use this instruction to determine the
+      numberic coordinates or P1 and P2 when they have been set manually,
+      and to help compute the number of plotter units per user units when
+      scaling is on.  This instruction can also be used with the input
+      window (:class:`~chiplotle.hpgl.commands.IW`) instruction to
       programmatically set the window to P1 and P2.
    '''
-   
+
 
 class OS(_HPGLPrimitive):
    '''
    :Output Status:
-      Outputs the decimal value of the status byte. Use this instruction in 
+      Outputs the decimal value of the status byte. Use this instruction in
       debugging operations and in digitizing applications.
 
    =========  ============  =========
@@ -553,37 +553,37 @@ class OS(_HPGLPrimitive):
    64         6             unused
    128        7             unused
    =========  ============  =========
-   
+
    power-on status == 24 (bits 3 & 4 set)
    '''
-   
+
 
 class OT(_HPGLPrimitive):
    '''
    :Output Carousel Type:
-      Outputs information on the type of carousel loaded and the 
+      Outputs information on the type of carousel loaded and the
       stalls occupied.
    '''
-   
+
 
 class OW(_HPGLPrimitive):
    '''
    :Output Window:
-      Outputs the X,Y coordinates of the lower-left and upper-right 
-      corners of the window area in which plotting can occur. 
-      This instruction is especially useful when the window area 
-      (defined by :class:`~chiplotle.hpgl.commands.IW`) extends beyond 
+      Outputs the X,Y coordinates of the lower-left and upper-right
+      corners of the window area in which plotting can occur.
+      This instruction is especially useful when the window area
+      (defined by :class:`~chiplotle.hpgl.commands.IW`) extends beyond
       the hard-clip limits.
    '''
-   
+
 
 class PB(_HPGLPrimitive):
    '''
    :Print Buffer Label:
       Prints the contents of the label buffer.
    '''
-   
-      
+
+
 class PS(_HPGLPrimitive):
    '''
    :Page Size:
@@ -597,7 +597,7 @@ class PS(_HPGLPrimitive):
    @property
    def format(self):
       if self.length and self.width:
-         return '%s%i,%i%s' % (self._name, self.length, self.width, 
+         return '%s%i,%i%s' % (self._name, self.length, self.width,
             _HPGLPrimitive._terminator)
       elif self.length:
          return '%s%i%s' % (self._name, self.length, _HPGLPrimitive._terminator)
@@ -609,8 +609,8 @@ class BL(_HPGLPrimitive):
    '''
    :Buffer label:
       Stores a label in the label buffer. You can then use the
-      output length (:class:`~chiplotle.hpgl.commands.OL`) instruction 
-      to determine its space requirement prior to drawing it. Or, you 
+      output length (:class:`~chiplotle.hpgl.commands.OL`) instruction
+      to determine its space requirement prior to drawing it. Or, you
       can use the plot buffer (:class:`~chiplotle.hpgl.commands.PB`)
       instruction to repeatedly plot this label.
    '''
@@ -629,43 +629,43 @@ class BL(_HPGLPrimitive):
 class IN(_HPGLPrimitive):
    '''
    :Initialize:
-      Resets most plotter functions to their default settings. Use this 
-      instruction to return the plotter to a known state and to cancel 
-      settings that may have been changed by a previous program. 
+      Resets most plotter functions to their default settings. Use this
+      instruction to return the plotter to a known state and to cancel
+      settings that may have been changed by a previous program.
    '''
-   
+
 
 class SS(_HPGLPrimitive):
    '''
    :Select standard character set:
 
    '''
-   
+
 
 class XT(_HPGLPrimitive):
    '''
    :X tick:
 
    '''
-   
+
 
 class YT(_HPGLPrimitive):
    '''
    :Y tick:
-   
+
    '''
-   
+
 
 class CS(_HPGLPrimitive):
    '''
    :Standard character set:
-      Designates a character set as the standard character set for labeling 
-      instruction. Use this instruction to change the default ANSI ASCII 
-      english set to one with characters appropriate to your application. 
+      Designates a character set as the standard character set for labeling
+      instruction. Use this instruction to change the default ANSI ASCII
+      english set to one with characters appropriate to your application.
       This instruction is particularly useful if you plot most of your
       labels in a language other than english.
    '''
-   def __init__(self, set=0):   
+   def __init__(self, set=0):
       self.set = set
 
    @property
@@ -676,18 +676,18 @@ class CS(_HPGLPrimitive):
 class CT(_HPGLPrimitive):
    '''
    :Chord tolerance:
-      Determines whether the chord tolerance parameter of the 
-      :class:`~chiplotle.hpgl.commands.CI`, 
-      :class:`~chiplotle.hpgl.commands.AA`, 
+      Determines whether the chord tolerance parameter of the
+      :class:`~chiplotle.hpgl.commands.CI`,
+      :class:`~chiplotle.hpgl.commands.AA`,
       :class:`~chiplotle.hpgl.commands.AR`
-      and :class:`~chiplotle.hpgl.commands.WG` instructions is 
-      interpreted as a chord angle in degrees or as a deviation distance 
+      and :class:`~chiplotle.hpgl.commands.WG` instructions is
+      interpreted as a chord angle in degrees or as a deviation distance
       in current units.
 
-   - `type` : ``int`` 0 or 1, default 0. 
+   - `type` : ``int`` 0 or 1, default 0.
 
    '''
-   def __init__(self, type=0):   
+   def __init__(self, type=0):
       self.type = type
 
    @property
@@ -700,9 +700,9 @@ class CV(_HPGLPrimitive):
    :Curved line generator:
       Collects coordinates (line segments) in the coordinate buffer so that they
       can be plotted as a group. This allows the plotter to plot in a
-      continuous motion, rather than stopping and starting at each coordinate 
-      endpoint. As a result, curves appear smoother. 
-   
+      continuous motion, rather than stopping and starting at each coordinate
+      endpoint. As a result, curves appear smoother.
+
    - `n` : ``int`` 0 or 1, default 1 (on).
    - `inputdelay` : ``int`` [0 to 8,388,607] msec, default 100.
    '''
@@ -714,25 +714,25 @@ class CV(_HPGLPrimitive):
    @property
    def format(self):
       if self.n and self.inputdelay:
-         return '%s%i%i%s' % (self._name, self.n, self.inputdelay, 
+         return '%s%i%i%s' % (self._name, self.n, self.inputdelay,
          _HPGLPrimitive._terminator)
       elif self.n:
          return '%s%i%s' % (self._name, self.n, _HPGLPrimitive._terminator)
       else:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
-         
+
 
 class CA(_HPGLPrimitive):
    '''
    :Designate alternate character set:
-      Designates a character set as the alternate character set to be 
-      used in labeling instructions. Use this instruction to provide an 
+      Designates a character set as the alternate character set to be
+      used in labeling instructions. Use this instruction to provide an
       additional character set that you can easily access in a program.
-   
+
    - `set` : ``int`` [-1, 0 to 59, 60, 70, 80, 99, 100, 101], default 0.
    '''
 
-   def __init__(self, set=0):   
+   def __init__(self, set=0):
       self.set = set
 
    @property
@@ -743,22 +743,22 @@ class CA(_HPGLPrimitive):
 class CM(_HPGLPrimitive):
    '''
    :Character selection mode:
-      Specifies mode of character set selection and usage. Use this 
-      instruction to select the alternate HP 8-bit, ISO 7-bit, or 
+      Specifies mode of character set selection and usage. Use this
+      instruction to select the alternate HP 8-bit, ISO 7-bit, or
       ISO 8-bit character modes.
 
    - `switch` : ``int`` [0 to 3], default 0.
    - `fallback` : ``int`` 0 or 1, default 0.
    '''
 
-   def __init__(self, switch=None, fallback=None):   
+   def __init__(self, switch=None, fallback=None):
       self.switch = switch
       self.fallback = fallback
 
    @property
    def format(self):
       if self.switch and self.fallback:
-         return '%s%i,%i%s' % (self._name, self.switch, self.fallback, 
+         return '%s%i,%i%s' % (self._name, self.switch, self.fallback,
          _HPGLPrimitive._terminator)
       elif self.switch:
          return '%s%i%s' % (self._name, self.switch, _HPGLPrimitive._terminator)
@@ -773,14 +773,14 @@ class CP(_HPGLPrimitive):
       current pen location.
    '''
 
-   def __init__(self, spaces=None, lines=None):   
+   def __init__(self, spaces=None, lines=None):
       self.spaces = spaces
       self.lines = lines
 
    @property
    def format(self):
       if self.spaces and self.lines:
-         return '%s%s,%s%s' % (self._name, self.spaces, self.lines, 
+         return '%s%s,%s%s' % (self._name, self.spaces, self.lines,
          _HPGLPrimitive._terminator)
       elif self.spaces:
          return '%s%s%s' % (self._name, self.spaces, _HPGLPrimitive._terminator)
@@ -792,16 +792,16 @@ class DT(_HPGLPrimitive):
    '''
    :Define Label Terminator:
       Specifies the ASCII character to be used as the label terminator.
-      Use this instruction to define a new label terminator if your 
+      Use this instruction to define a new label terminator if your
       computer cannot use the default terminator (ETX, decimal code 3).
    '''
 
-   def __init__(self, terminator=chr(3)):   
+   def __init__(self, terminator=chr(3)):
       self.labelterminator = terminator
 
    @property
    def format(self):
-      return '%s%c%s' % (self._name, self.labelterminator, 
+      return '%s%c%s' % (self._name, self.labelterminator,
       _HPGLPrimitive._terminator)
 
 
@@ -811,13 +811,13 @@ class LB(_HPGLPrimitive):
       Plots text using the currently defined character set.
    '''
 
-   def __init__(self, text):   
+   def __init__(self, text):
       self.text = text
       self.labelTerminator = chr(3)
 
    @property
    def format(self):
-      return '%s%s%s%s' % (self._name, self.text, self.labelTerminator, 
+      return '%s%s%s%s' % (self._name, self.text, self.labelTerminator,
          _HPGLPrimitive._terminator)
 
 
@@ -827,7 +827,7 @@ class SP(_HPGLPrimitive):
 
    '''
 
-   def __init__(self, pen = 0):   
+   def __init__(self, pen = 0):
       self.pen = pen
 
    @property
@@ -856,14 +856,14 @@ class LT(_HPGLPrimitive):
    =  ============================
    '''
 
-   def __init__(self, pattern=None, length=4):   
+   def __init__(self, pattern=None, length=4):
       self.pattern = pattern
       self.length = length
 
    @property
    def format(self):
       if self.pattern is not None:
-         return '%s%i,%.4f%s' % (self._name, self.pattern, 
+         return '%s%i,%.4f%s' % (self._name, self.pattern,
          self.length, _HPGLPrimitive._terminator)
       else:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
@@ -872,20 +872,20 @@ class LT(_HPGLPrimitive):
 class FT(_HPGLPrimitive):
    '''
    :Fill Type:
-      Selects the shading pattern used in polygons 
-      (:class:`~chiplotle.hpgl.commands.FP`), rectangles 
-      (:class:`~chiplotle.hpgl.commands.RA` or 
-      :class:`~chiplotle.hpgl.commands.RR`), or wedges 
-      (:class:`~chiplotle.hpgl.commands.WG`). Use this instruction to 
-      enhance plots with solid fill, parallel lines (hatching), 
-      cross-hatching, or a fill pattern you designed using the 
+      Selects the shading pattern used in polygons
+      (:class:`~chiplotle.hpgl.commands.FP`), rectangles
+      (:class:`~chiplotle.hpgl.commands.RA` or
+      :class:`~chiplotle.hpgl.commands.RR`), or wedges
+      (:class:`~chiplotle.hpgl.commands.WG`). Use this instruction to
+      enhance plots with solid fill, parallel lines (hatching),
+      cross-hatching, or a fill pattern you designed using the
       user-defined fill type (UF) instruction.
-   
+
    - `type` : ``int`` 1 or 2,  Solid (space and angle ignored) \
       3:  Hatching, 4:  Cross hatching.
    '''
 
-   def __init__(self, type=None, space=None, angle=None):   
+   def __init__(self, type=None, space=None, angle=None):
       self.type = type
       self.space = space
       self.angle = angle
@@ -896,7 +896,7 @@ class FT(_HPGLPrimitive):
          return '%s%i,%s,%s%s' % (self._name, self.type, self.space,
          self.angle, _HPGLPrimitive._terminator)
       elif not None in (self.type, self.space):
-         return '%s%i,%s%s' % (self._name, self.type, self.space, 
+         return '%s%i,%s%s' % (self._name, self.type, self.space,
          _HPGLPrimitive._terminator)
       elif not self.type is None:
          return '%s%i%s' % (self._name, self.type, _HPGLPrimitive._terminator)
@@ -905,19 +905,19 @@ class FT(_HPGLPrimitive):
       else:
          ### TODO: raise this type of warning in all other commands where
          ### this may be necessary.
-         raise(Warning("Can't format %s with given parameters." % self._name)) 
+         raise(Warning("Can't format %s with given parameters." % self._name))
 
 
 class PM(_HPGLPrimitive):
    '''
    :Polygon Mode:
-      Enter polygon mode for defining shapes such as block letters, 
-      logos, surface charts, or any unique or intricate area for 
-      subsequent filling and/or edging. Fill polygons using the fill 
-      polygon (FP) instruction and/or outline them using the edge polygon 
+      Enter polygon mode for defining shapes such as block letters,
+      logos, surface charts, or any unique or intricate area for
+      subsequent filling and/or edging. Fill polygons using the fill
+      polygon (FP) instruction and/or outline them using the edge polygon
       (EP) instruction.
    '''
-   def __init__(self, n = 0):   
+   def __init__(self, n = 0):
       self.n = n
 
    @property
@@ -928,14 +928,14 @@ class PM(_HPGLPrimitive):
 class EC(_HPGLPrimitive):
    '''
    :Enable Cut Line:
-      Draws a dashed cut line between 'pages' on roll paper to indicate 
-      where to cut the paper. Used with 
-      :class:`~chiplotle.hpgl.commands.AF`, 
-      :class:`~chiplotle.hpgl.commands.AH` and 
+      Draws a dashed cut line between 'pages' on roll paper to indicate
+      where to cut the paper. Used with
+      :class:`~chiplotle.hpgl.commands.AF`,
+      :class:`~chiplotle.hpgl.commands.AH` and
       :class:`~chiplotle.hpgl.commands.PG` instructions.
    '''
 
-   def __init__(self, n = 0):   
+   def __init__(self, n = 0):
       self.n = n
 
    @property
@@ -946,11 +946,11 @@ class EC(_HPGLPrimitive):
 class PG(_HPGLPrimitive):
    '''
    :Page Feed:
-      Advances roll paper one page length and establishes the plotter-unit 
+      Advances roll paper one page length and establishes the plotter-unit
       origin at the center of the new page.
    '''
 
-   def __init__(self, n = None):   
+   def __init__(self, n = None):
       self.n = n
 
    @property
@@ -964,14 +964,14 @@ class PG(_HPGLPrimitive):
 class GC(_HPGLPrimitive):
    '''
    :Group Count:
-      Allows you to assign an arbitrary number that will be output by the 
-      :class:`~chiplotle.hpgl.commands.OG` instruction. Use 
-      :class:`~chiplotle.hpgl.commands.GC` with the 
-      :class:`~chiplotle.hpgl.commands.OG` instruction to monitor the 
+      Allows you to assign an arbitrary number that will be output by the
+      :class:`~chiplotle.hpgl.commands.OG` instruction. Use
+      :class:`~chiplotle.hpgl.commands.GC` with the
+      :class:`~chiplotle.hpgl.commands.OG` instruction to monitor the
       successful transfer of data blocks in spooling applications.
    '''
 
-   def __init__(self, count=None):   
+   def __init__(self, count=None):
       self.count = count
 
    @property
@@ -990,12 +990,12 @@ class GC(_HPGLPrimitive):
 #class IM(_HPGLPrimitive):
 
 class SL(_HPGLPrimitive):
-   ''' 
-   :Character Slant: 
+   '''
+   :Character Slant:
       Argument is tan of desired angle.
    '''
 
-   def __init__(self, tan = 0):   
+   def __init__(self, tan = 0):
       self.tan = tan
 
    @property
@@ -1006,17 +1006,17 @@ class SL(_HPGLPrimitive):
 class SA(_HPGLPrimitive):
    '''
    :Select alternate character set:
-   
+
    '''
-   
+
 
 class RO(_HPGLPrimitive):
-   ''' 
+   '''
    :Rotate coordinate system:
-   
+
    '''
 
-   def __init__(self, angle = 0):   
+   def __init__(self, angle = 0):
       self.angle = angle
 
    @property
@@ -1025,12 +1025,12 @@ class RO(_HPGLPrimitive):
 
 
 class RP(_HPGLPrimitive):
-   ''' 
-   :Replot:  
-   
+   '''
+   :Replot:
+
    '''
 
-   def __init__(self, n = 1):   
+   def __init__(self, n = 1):
       self.n = n
 
    @property
@@ -1039,9 +1039,9 @@ class RP(_HPGLPrimitive):
 
 
 class SM(_HPGLPrimitive):
-   ''' 
-   :Symbol Mode:  
-      Plots the char at each plotted point. 
+   '''
+   :Symbol Mode:
+      Plots the char at each plotted point.
       char can be any printing ascii char, except ';'
       Calling without an argument cancels symbol mode.
    '''
@@ -1061,41 +1061,41 @@ class SC(_TwoPoint):
    '''
    :Scale:
       Establishes a user-unit coordinate system by mapping user-defined
-      values onto the scaling points P1 and P2. Thus, you can plot in 
+      values onto the scaling points P1 and P2. Thus, you can plot in
       units convenient to your application. In addition, you can use this
       instruction to establish automatic isotropic scaling or to relocate
       the origin and set a specific ratio of plotter units to user units.
-      
+
    .. note:: DraftMaster also has a more complex version of 'SC' that \
       is not implemented yet.
    '''
 
    def __init__(self, coords=None):
-     _TwoPoint.__init__(self, coords) 
+      _TwoPoint.__init__(self, coords)
 
 
 class IP(_TwoPoint):
    '''
    :Input P1 and P2:
-      Allows you to establish new or default locations for the scaling 
-      points P1 and P2. P1 and P2 are used by the scale instruction 
-      (:class:`~chiplotle.hpgl.commands.SC`) 
-      to establish user-unit scaling. 
-      The :class:`~chiplotle.hpgl.commands.IP` instruction is often used to 
-      ensure that a plot is always the same size, regardless of how P1 
-      and P2 might have been set from the front panel or the size of media 
+      Allows you to establish new or default locations for the scaling
+      points P1 and P2. P1 and P2 are used by the scale instruction
+      (:class:`~chiplotle.hpgl.commands.SC`)
+      to establish user-unit scaling.
+      The :class:`~chiplotle.hpgl.commands.IP` instruction is often used to
+      ensure that a plot is always the same size, regardless of how P1
+      and P2 might have been set from the front panel or the size of media
       loaded in the plotter.
    '''
 
-   def __init__(self, coords=None):   
-      _TwoPoint.__init__(self, coords) 
+   def __init__(self, coords=None):
+      _TwoPoint.__init__(self, coords)
 
 
 class IV(_HPGLPrimitive):
    '''
    :Invoke Character Slot:
-      Invokes a character set slot into either the right or left half of 
-      the in-use code table. Primarily used with ISO modes of character 
+      Invokes a character set slot into either the right or left half of
+      the in-use code table. Primarily used with ISO modes of character
       selection.
    '''
 
@@ -1113,20 +1113,20 @@ class IV(_HPGLPrimitive):
       elif self.slot == self.left == None:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
-         raise(Warning("Can't format %s with given parameters." % self._name)) 
+         raise(Warning("Can't format %s with given parameters." % self._name))
 
 
 class IW(_TwoPoint):
    '''
    :Input Window:
-      Defines a rectangular area, or window, that establishes soft-clip 
-      limits.  Subsequent programmed pen motion will be restricted to this 
-      area. Use this instruction when you want to be sure that your plot 
+      Defines a rectangular area, or window, that establishes soft-clip
+      limits.  Subsequent programmed pen motion will be restricted to this
+      area. Use this instruction when you want to be sure that your plot
       falls within a specified area.
    '''
 
    def __init__(self, coords=None):
-      _TwoPoint.__init__(self, coords) 
+      _TwoPoint.__init__(self, coords)
 
 
 ### TODO this is the exact same pattern as that of all other commands with
@@ -1134,8 +1134,8 @@ class IW(_TwoPoint):
 class KY(_HPGLPrimitive):
    '''
    :Define Key:
-      Assigns a predefined function to one of the frontal panel function 
-      keys.  Use this instruction with the WD instruction when designing 
+      Assigns a predefined function to one of the frontal panel function
+      keys.  Use this instruction with the WD instruction when designing
       interactive programs.
    '''
 
@@ -1153,13 +1153,13 @@ class KY(_HPGLPrimitive):
       elif self.key == self.function == None:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
-         raise(Warning("Can't format %s with given parameters." % self._name)) 
+         raise(Warning("Can't format %s with given parameters." % self._name))
 
 
 class PT(_HPGLPrimitive):
    '''
    :Pen Thickness:
-      Determines the spacing between the parallel lines in solid fill 
+      Determines the spacing between the parallel lines in solid fill
       patterns, according to the pen tip thickness.
 
    - `thickness` : ``float`` [0.1 to 5] mm, default is 0.3mm.
@@ -1171,20 +1171,20 @@ class PT(_HPGLPrimitive):
    @property
    def format(self):
       return '%s%.2f%s' % (self._name, self.thickness, _HPGLPrimitive._terminator)
-      
+
 
 class SI(_HPGLPrimitive):
    '''
    :Absolute character size:
-      Specifies the size of labeling characters in centimeters. 
-      Use this instruction to establish character sizing that is not 
+      Specifies the size of labeling characters in centimeters.
+      Use this instruction to establish character sizing that is not
       dependent on the settings of P1 and P2.
 
-   - `width` : ``float`` [-110 to 110] cm, excluding 0. 
-   - `height` : ``float`` [-110 to 110] cm, excluding 0. 
+   - `width` : ``float`` [-110 to 110] cm, excluding 0.
+   - `height` : ``float`` [-110 to 110] cm, excluding 0.
    '''
 
-   def __init__(self, width = None, height = None):   
+   def __init__(self, width = None, height = None):
       assert width != 0
       assert height != 0
 
@@ -1194,7 +1194,7 @@ class SI(_HPGLPrimitive):
    @property
    def format(self):
       if self.width and self.height:
-         return '%s%.2f,%.2f%s' % (self._name, self.width, self.height, 
+         return '%s%.2f,%.2f%s' % (self._name, self.width, self.height,
             _HPGLPrimitive._terminator)
       elif None == self.width == self.height:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
@@ -1211,17 +1211,17 @@ class SR(SI):
       the character sizes adjust to occupy the same relative ammount of
       space.
 
-   - `width` : ``float`` [-100 to 100] percent, excluding 0. 
-   - `height` : ``float`` [-100 to 100] percent, excluding 0. 
+   - `width` : ``float`` [-100 to 100] percent, excluding 0.
+   - `height` : ``float`` [-100 to 100] percent, excluding 0.
    '''
-   
-      
+
+
 class DI(_HPGLPrimitive):
    '''
    :Absolute direction:
       Specifies the direction in which labels are drawn, independent of
-      P1 and P2 settings. Use this instruction to change labeling 
-      direction when you are labeling line charts, schematic drawings, 
+      P1 and P2 settings. Use this instruction to change labeling
+      direction when you are labeling line charts, schematic drawings,
       blueprints, and survey boudaries.
 
    - `run` : ``float``. cos(angle)
@@ -1235,21 +1235,21 @@ class DI(_HPGLPrimitive):
    @property
    def format(self):
       if not None in (self.run, self.rise):
-         return '%s%.2f,%.2f%s' % (self._name, self.run, self.rise, 
+         return '%s%.2f,%.2f%s' % (self._name, self.run, self.rise,
          _HPGLPrimitive._terminator)
       elif None == self.run == self.rise:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
          raise(Warning("Can't format %s without all parameters." % self._name))
-         
+
 
 class DR(DI):
    '''
    :Relative Direction:
-      Specifies the direction in which labels are drawn relative to 
-      the scaling points P1 and P2. Label direction is adjusted when 
-      P1 and P2 change so that labels maintain the same relationship 
-      to the plotted data. Use :class:`~chiplotle.hpgl.commands.DI` 
+      Specifies the direction in which labels are drawn relative to
+      the scaling points P1 and P2. Label direction is adjusted when
+      P1 and P2 change so that labels maintain the same relationship
+      to the plotted data. Use :class:`~chiplotle.hpgl.commands.DI`
       if you want label direction to be independent or P1 and P2.
 
    - `run` : ``float``. cos(angle)
@@ -1261,7 +1261,7 @@ class DR(DI):
 #class DL(_HPGLPrimitive):
 #   '''
 #   Define Downloadable Character
-#   Allows you to design characters and store them in a buffer for 
+#   Allows you to design characters and store them in a buffer for
 #   repeated use by character set -1.
 #   SYNTAX: DL character number (,pen control), X-coordinate, Y-coordinate
 #   (,..., (,pen control(,...,))); or DL character number; or DL;
@@ -1275,7 +1275,7 @@ class DR(DI):
 class DS(_HPGLPrimitive):
    '''
    :Designate Character Set into Slot:
-      Designates up to four character sets to be immediately available for 
+      Designates up to four character sets to be immediately available for
       plotting. Used with ISO character sets and modes.
    '''
 
@@ -1286,7 +1286,7 @@ class DS(_HPGLPrimitive):
    @property
    def format(self):
       if self.slot and self.set:
-         return '%s%i,%i%s' % (self._name, self.slot, self.set, 
+         return '%s%i,%i%s' % (self._name, self.slot, self.set,
          _HPGLPrimitive._terminator)
       else:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
@@ -1297,8 +1297,8 @@ class DV(_HPGLPrimitive):
    :Direction Vertical:
       Specifies vertical mode as the direction for subsequent labels.
       Use this instruction to 'stack' horizontal characters in a column.
-      A carriage return and a line feed lace the next 'column' to the 
-      left of the previous one. 
+      A carriage return and a line feed lace the next 'column' to the
+      left of the previous one.
    '''
 
    def __init__(self, vertical=0):
@@ -1307,7 +1307,7 @@ class DV(_HPGLPrimitive):
    @property
    def format(self):
       return '%s%i%s' % (self._name, self.vertical, _HPGLPrimitive._terminator)
-         
+
 
 class ES(_HPGLPrimitive):
    '''
@@ -1318,7 +1318,7 @@ class ES(_HPGLPrimitive):
    - `charspace` : ``float``, ``None``. Spacing between characters.
    - `linespace` : ``float``, ``None``. Spacing between lines.
 
-   Character and line spacing values add (or substract) a fraction of the 
+   Character and line spacing values add (or substract) a fraction of the
    standard spacing. 0 is the standard, positive values increase
    space and negative values reduce space. 1 doubles the standard space,
    0.5 adds half the standard space, and -1 substracts the standar space,
@@ -1332,22 +1332,22 @@ class ES(_HPGLPrimitive):
    @property
    def format(self):
       if not None in (self.charspace, self.linespace):
-         return '%s%.2f,%.2f%s' % (self._name, self.charspace, self.linespace, 
+         return '%s%.2f,%.2f%s' % (self._name, self.charspace, self.linespace,
             _HPGLPrimitive._terminator)
       elif not self.charspace is None:
          return '%s%.2f%s' % (self._name, self.charspace, _HPGLPrimitive._terminator)
       else:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
-         
+
 
 class LO(_HPGLPrimitive):
    '''
    :Label Origin:
-      Positions labels relative to current pen location. Use LO to center, 
+      Positions labels relative to current pen location. Use LO to center,
       left justify, or right justify label. The label can be drawn above or
-      below the current pen location and can also be offset by an amount equal 
+      below the current pen location and can also be offset by an amount equal
       to 1/2 the character's width and height.
-      
+
    - `origin` : ``int`` [1-9] or [11-19].
    '''
 
@@ -1362,10 +1362,10 @@ class LO(_HPGLPrimitive):
 class EW(_HPGLPrimitive):
    '''
    :Edge Wedge:
-      Outlines any wedge. Use these instructions to produce sectors of 
+      Outlines any wedge. Use these instructions to produce sectors of
       a pie chart.
 
-   - `radius` : ``float``. 
+   - `radius` : ``float``.
    - `startangle` : ``float`` [0 - 360] degrees.
    - `sweepangle` : ``float`` [0 - 360] degrees.
    - `chordangle` : ``float`` [0.36 - 50] degrees.
@@ -1382,18 +1382,18 @@ class EW(_HPGLPrimitive):
    @property
    def format(self):
       if self.chordangle:
-         return '%s%.2f,%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
-         self.startangle, self.sweepangle, self.chordangle, 
+         return '%s%.2f,%.2f,%.2f,%.2f%s' % (self._name, self.radius,
+         self.startangle, self.sweepangle, self.chordangle,
          _HPGLPrimitive._terminator)
       else:
-         return '%s%.2f,%.2f,%.2f%s' % (self._name, self.radius, 
+         return '%s%.2f,%.2f,%.2f%s' % (self._name, self.radius,
          self.startangle, self.sweepangle, _HPGLPrimitive._terminator)
 
 
 class WG(EW):
    '''
    :Filled wedge:
-   
+
    '''
 
 
@@ -1415,12 +1415,12 @@ class TL(_HPGLPrimitive):
    @property
    def format(self):
       return '%s%.4f,%.4f%s' % (self._name, self.tp, self.tn, _HPGLPrimitive._terminator)
-        
+
 
 class WD(_HPGLPrimitive):
    '''
    :Write to display:
-   
+
    '''
 
    def __init__(self, text):
@@ -1437,26 +1437,26 @@ class WD(_HPGLPrimitive):
 class B(_HPGLEscape):
    '''
    :Escape output buffer space:
-   
+
    '''
-   
+
 
 class On(_HPGLEscape):
    '''
    :On:
       Places the plotter in a programmed on-state.
-      Instructs the plotter to interpret data as HPGL and DCI instructions, 
+      Instructs the plotter to interpret data as HPGL and DCI instructions,
       rather than plotting the data stream as literal text characters.
    '''
 
    @property
    def _name(self):
       return '('
-   
+
 
 class Off(_HPGLEscape):
    '''
-   :Off: 
+   :Off:
       Places the plotter in a programmed off-state.
    '''
    @property
@@ -1481,7 +1481,7 @@ class ExtendedError(_HPGLEscape):
    15         framing, parity, or overrun error
    16         input buffer overflow
    =========  ========
-   
+
    '''
    @property
    def _name(self):
@@ -1490,7 +1490,7 @@ class ExtendedError(_HPGLEscape):
 
 class K(_HPGLEscape):
    '''
-   :Abort command: 
+   :Abort command:
       Tells the plotter to discard commands in its buffer.
    '''
 
@@ -1504,7 +1504,7 @@ class SetHandshakeMode(_HPGLEscape):
    2 (ENQ-ACK)
    3 (hardwire)
    '''
-   def __init__(self, mode=None):   
+   def __init__(self, mode=None):
       self.mode = mode
 
    @apply
@@ -1516,7 +1516,7 @@ class SetHandshakeMode(_HPGLEscape):
             raise ValueError('mode must be in (0,1,2,3).')
          self._mode = mode
       return property(**locals( ))
-         
+
    @property
    def _name(self):
       return 'P'
