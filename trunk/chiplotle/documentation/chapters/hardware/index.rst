@@ -6,7 +6,7 @@ Serial cables
 
 Not all serial cables will work with all (or any) pen plotters, so make sure you've got the right cable before you decide your plotter is broken!
 Ideally you would want to get your plotter's operation manual to see the schematics of the serial cable it expects. Unfortunately these are sometimes hard to find. If you are completely in the dark, try `this cable <http://search.digikey.com/scripts/DkSearch/dksus.dll?Detail&name=AE1370-ND>`_. 
-The schematics are `here <http://chiplotle.org/manual/_static/SerialPlotterCable_Chiplotle.pdf>`_.
+The schematics are :download:`here <../../downloads/SerialPlotterCable_Chiplotle.pdf>`.
 We have successfully used this cable with the Roland DX series.
 
 .. note:: A 9 to 25 pin serial cable is usually what you need.
