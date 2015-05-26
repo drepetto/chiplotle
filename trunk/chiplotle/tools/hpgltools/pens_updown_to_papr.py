@@ -1,4 +1,5 @@
 from chiplotle.hpgl.commands import PA, PR, PU, PD
+from chiplotle.geometry.core.coordinate import Coordinate
 import copy
 
 def pens_updown_to_papr(lst):
@@ -12,6 +13,7 @@ def pens_updown_to_papr(lst):
 
     result = [ ]
     last_penplot = None
+    
     for e in lst:
         if isinstance(e, (PU, PD)):
             if len(e.xy) > 0:
@@ -20,9 +22,10 @@ def pens_updown_to_papr(lst):
                     print(msg)
                     last_penplot = PA( )
                 last_penplot.xy = e.xy
-                e.xy = None
-                result.append(e)
-                result.append(copy.copy(last_penplot))
+                new_coord = copy.deepcopy(e)
+                new_coord.xy = None
+                result.append(new_coord)
+                result.append(last_penplot)
             else:
                 result.append(e)
         else:

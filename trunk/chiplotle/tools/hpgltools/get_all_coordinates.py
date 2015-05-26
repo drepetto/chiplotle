@@ -14,11 +14,12 @@ def get_all_coordinates(arg):
         >>> print c
         [CP(1, 2), CP(2, 3), CP(3, 4)]
     '''
+    
     if not isinstance(arg, (list, tuple)):
         raise TypeError('`arg` must be list or tuple')
-
+    
     arg = convert_relatives_to_absolutes(arg)
-
+    
     result = [ ]
     for e in arg:
         if isinstance(e, _HPGLPrimitive) and hasattr(e, 'xy'):
@@ -27,5 +28,5 @@ def get_all_coordinates(arg):
             else:
                 result.append(e.xy)
         else:
-            print '"%s" has not abs coords.' % e
+            print '"%s" has no abs coords.' % e
     return result
