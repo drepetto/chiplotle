@@ -21,6 +21,12 @@ def pens_updown_to_papr(lst):
                     msg = "*** WARNING: %s with coordinates found without prior PA or PR. PA assumed." % e
                     print(msg)
                     last_penplot = PA( )
+                
+                if isinstance(e, PU):
+                    last_penplot = PU( )
+                elif isinstance(e, PD):
+                    last_penplot = PD( )
+                
                 last_penplot.xy = e.xy
                 new_coord = copy.deepcopy(e)
                 new_coord.xy = None
