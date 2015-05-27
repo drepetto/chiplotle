@@ -1,6 +1,5 @@
 from chiplotle.hpgl.commands import PA, PR, PU, PD
 from chiplotle.geometry.core.coordinate import Coordinate
-import copy
 
 def pens_updown_to_papr(lst):
     '''Converts all PU((x1, y1, x2, y2) and PD(x1, y1, x2, y2) found in `lst`
@@ -14,8 +13,12 @@ def pens_updown_to_papr(lst):
     result = [ ]
     last_move = None
     
+    pen_down = False
+    pen_up = True
+    
     for e in lst:
         if isinstance(e, (PU, PD)):
+                
             if len(e.xy) > 0:
                 if last_move is None:
                     msg = "*** WARNING: %s with coordinates found without prior PA or PR. PA assumed." % e
@@ -32,17 +35,34 @@ def pens_updown_to_papr(lst):
                 new_move.xy = e.xy
                 
                 up_down_command = None
-                if isinstance(e, PU):
-                    up_down_command = PU( )
-                elif isinstance(e, PD):
-                    up_down_command = PD( )
                 
-                result.append(up_down_command)
+                if isinstance(e, PU):
+                    if pen_down:
+                        up_down_command = PU( )
+                        result.append(up_down_command)
+                        pen_up = True
+                        pen_down = False
+                        
+                elif isinstance(e, PD):
+                    if pen_up:
+                        up_down_command = PD( )
+                        result.append(up_down_command)
+                        pen_down = True
+                        pen_up = False
+
+                    
                 result.append(new_move)
                 
                 last_move = new_move
             else:
-                result.append(e)
+                if isinstance(e, PU):
+                    if pen_down:
+                        result.append(e)
+                        pen_up = True
+                elif isinstance(e, PD):
+                    if pen_up:
+                        result.append(e)
+                        pen_down = True
         else:
             if isinstance(e, PR):
                 last_move = PR( )
