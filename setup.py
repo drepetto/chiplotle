@@ -31,3 +31,6 @@ setup(name              = 'Chiplotle',
          'chiplotle/scripts/view_hpgl_file.py',
          ], 
       )
+
+# just testing git
+
