@@ -19,6 +19,7 @@ def what_plotter_in_port(port, wait_time=10):
     try:
         ser.flushInput()
         ser.flushOutput()
+        ser.write('IN;')
         ser.write('OI;')
     except serial.serialutil.SerialException:
         return None
