@@ -20,8 +20,9 @@ def pens_updown_to_papr(lst):
                     print(msg)
                     last_penplot = PA( )
                 last_penplot.xy = e.xy
-                e.xy = None
-                result.append(e)
+                ec = copy.copy(e)
+                ec.xy = None
+                result.append(ec)
                 result.append(copy.copy(last_penplot))
             else:
                 result.append(e)

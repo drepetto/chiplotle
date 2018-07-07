@@ -4,7 +4,7 @@
 from setuptools import setup, find_packages
 
 setup(name              = 'Chiplotle',
-      version           = '0.4.2',
+      version           = '0.4.3',
       description       = 'Chiplotle is an HPGL Python API.',
       long_description  = 'Chiplotle is an HPGL Python API.',
       author            = 'Víctor Adán and Douglas Repetto',
