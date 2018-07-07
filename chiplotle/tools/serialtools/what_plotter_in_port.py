@@ -1,6 +1,10 @@
 import serial
 import time
 
+from chiplotle.tools.logtools.get_logger import get_logger
+
+logger = get_logger(__name__)
+
 def what_plotter_in_port(port, wait_time=10):
     '''Check if there's a powered-on plotter in `port` port.
 
@@ -15,7 +19,11 @@ def what_plotter_in_port(port, wait_time=10):
         raise TypeError('`port` must be a string.')
 
     from chiplotle.tools.serialtools import instantiate_serial_from_config_file
-    ser = instantiate_serial_from_config_file(port)
+    try:
+        ser = instantiate_serial_from_config_file(port)
+    except Exception as e:
+        logger.info("Failed to instantiate serial device {} ({})".format(port, e))
+        return None
     try:
         ser.flushInput()
         ser.flushOutput()

@@ -14,7 +14,7 @@ setup(name              = 'Chiplotle',
       license           = 'GPL',
 
       include_package_data = True,
-      packages             = ['chiplotle'],
+      packages             = find_packages(), 
       install_requires     = ['pyserial<=3', 'numpy<=2'],
       entry_points         = {'console_scripts':
          ['chiplotle = chiplotle.core.cfg._run_chiplotle:_run_chiplotle',]},

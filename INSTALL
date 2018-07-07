@@ -9,16 +9,10 @@ Dependencies
 
 Chiplotle has the following dependencies:
 
-Python 2.7
-
-NumPy (for number crunching):
-http://numpy.scipy.org/
-
-PySerial (for serial communication):
-http://pyserial.sourceforge.net/
-
-hp2xx (for image export / hpgl preview):
-http://www.gnu.org/software/hp2xx/hp2xx.html
+- Python 2.7
+- NumPy (for number crunching): http://numpy.scipy.org/
+- PySerial (for serial communication): http://pyserial.sourceforge.net/
+- hp2xx (for image export / hpgl preview): http://www.gnu.org/software/hp2xx/hp2xx.html
 
 
 Installing the official release
@@ -61,21 +55,36 @@ If you'd like to be at the cutting edge of the Chiplotle development use the fol
 
 2. Check out Chiplotle's `trunk` development like so::
 
-      git clone https://github.com/drepetto/chiplotle.git
+        git clone https://github.com/drepetto/chiplotle.git
 
-3. Create and activate a Python virtual environment::
-
-   virtualenv _venv -p python2
-   source _venv/bin/activate
+3. Create and activate a Python virtual environment:: 
+   
+        virtualenv _venv -p python2
+        source _venv/bin/activate
 
 4. Install Chiplotle in development mode::
 
-   pip install -e .
+        pip install -e .
 
 5. For development and testing::
 
-   pip install -r requirements-dev.txt
+        pip install -r requirements-dev.txt
 
 6. To run tests::
  
-   tox -r
+        tox -r
+
+hp2xx
+=====
+
+Mac OS X 10.13 note: To compile (without X11 preview), simply comment out::
+
+        # Generic UNIX + X11 previewer (default) 
+        
+and un-comment::
+
+        # Generic UNIX, no previewer 
+        
+in the ``generic.mak`` Makefile. Then use this Makefile to compile `hp2xx` following the `hp2xx` installation instructions.
+
+
