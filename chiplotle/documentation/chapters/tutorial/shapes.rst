@@ -60,10 +60,7 @@ A set of achs:
 
 ::
 
-   g = shapes.group()
-   for radius in range(100, 1000, 100):
-      a = shapes.arc_circle(radius, 1.0, math.pi)
-      gr.append(a)
+   gr = shapes.group([shapes.arc_circle(radius, 1, 3.14) for radius in range(100, 1000, 100)])
 
 .. note:: Remember that to view a shape you call ``io.view(arg)``, where `arg` is the shape object. Here we would execute ``io.view(gr)``.
 

@@ -4,7 +4,7 @@
 from setuptools import setup, find_packages
 
 setup(name              = 'Chiplotle',
-      version           = '0.4.2',
+      version           = '0.4.3',
       description       = 'Chiplotle is an HPGL Python API.',
       long_description  = 'Chiplotle is an HPGL Python API.',
       author            = 'Víctor Adán and Douglas Repetto',
@@ -14,7 +14,7 @@ setup(name              = 'Chiplotle',
       license           = 'GPL',
 
       include_package_data = True,
-      packages             = ['chiplotle'],
+      packages             = find_packages(), 
       install_requires     = ['pyserial<=3', 'numpy<=2'],
       entry_points         = {'console_scripts':
          ['chiplotle = chiplotle.core.cfg._run_chiplotle:_run_chiplotle',]},
