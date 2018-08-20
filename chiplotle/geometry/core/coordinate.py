@@ -1,5 +1,8 @@
+import numbers
 import operator
 import math
+
+import numpy as np
 
 
 class Coordinate(object):
@@ -13,7 +16,7 @@ class Coordinate(object):
 #         return super(Coordinate, cls).__new__(cls)
 
     def __init__(self, *args):
-        if args and not isinstance(args[0], (int, float)):
+        if args and not isinstance(args[0], numbers.Number):
             raise TypeError('Arguments must all be scalars')
         self._coords = list(args)
 
@@ -70,7 +73,7 @@ class Coordinate(object):
         return len(self._coords)
 
     def __repr__(self):
-        return 'Coordinate(%s)' % self._coords
+        return 'Coordinate({})'.format(self._coords)
 
     def __str__(self):
         return '<%s>' % ','.join([str(c) for c in self._coords])
