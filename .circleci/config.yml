@@ -28,6 +28,10 @@ shared: &shared
             - "venv"
 
       - run:
+          name: Set up chiplotle
+          command: yes | python -c 'import chiplotle'
+
+      - run:
           name: Run tests
           command: |
             . venv/bin/activate
