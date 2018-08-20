@@ -1,3 +1,10 @@
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from builtins import input
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.geometry.core.layersvisitor import LayersVisitor
 from chiplotle.geometry.core.affixformatvisitor import AffixFormatVisitor
 import copy

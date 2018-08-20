@@ -1,9 +1,16 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
+from builtins import object
 from chiplotle.hpgl import commands
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.tools.hpgltools.inflate_hpgl_string import inflate_hpgl_string
 from sys import maxsize
 
-class VirtualSerialPort():
+class VirtualSerialPort(object):
     def __init__(self, left_bottom, right_top):
         left_bottom = Coordinate(*left_bottom)
         right_top = Coordinate(*right_top)

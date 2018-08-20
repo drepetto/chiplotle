@@ -1,4 +1,10 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
+from future import standard_library
+standard_library.install_aliases()
 def sniff_ports_for_plotters(ports):
     '''Sniffs all given serial `ports` in search for pen plotters.
     The function returns a dictionary of plotter names found, with keys

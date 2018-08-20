@@ -1,3 +1,9 @@
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.hpgl import commands as hpgl
 from chiplotle.tools.hpgltools.parse_hpgl_string import parse_hpgl_string
 from chiplotle.tools.logtools.apply_logger import apply_logger

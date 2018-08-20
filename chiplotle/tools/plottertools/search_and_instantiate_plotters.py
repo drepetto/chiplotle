@@ -1,3 +1,9 @@
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.tools.plottertools._instantiate_plotter import _instantiate_plotter
 from chiplotle.tools.serialtools.sniff_ports_for_plotters import sniff_ports_for_plotters
 from chiplotle.tools.serialtools.scan_serial_ports import scan_serial_ports

@@ -1,3 +1,9 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.tools.hpgltools.pens_updown_to_papr import pens_updown_to_papr
 from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute
 from chiplotle.tools.hpgltools.pr_to_pa import pr_to_pa

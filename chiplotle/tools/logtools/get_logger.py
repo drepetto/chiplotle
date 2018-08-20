@@ -1,3 +1,9 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.core.cfg.cfg import LOG_FILE
 from chiplotle.core.cfg.get_config_value import get_config_value
 import logging

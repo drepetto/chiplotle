@@ -1,3 +1,9 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.core.imports.get_functions_in_module \
     import _get_functions_in_module
 from chiplotle.core.imports.remove_modules_from_namespace \

@@ -1,3 +1,9 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.core.cfg.cfg import __version__
 from chiplotle.core.cfg.initialize_files import initialize_files
 __authors__ = "Victor Adan, Douglas Repetto"

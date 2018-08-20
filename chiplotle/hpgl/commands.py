@@ -1,3 +1,10 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
+from builtins import chr
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle.hpgl.abstract.arc import _Arc
 from chiplotle.hpgl.abstract.hpglescape import _HPGLEscape
 from chiplotle.hpgl.abstract.hpglprimitive import _HPGLPrimitive

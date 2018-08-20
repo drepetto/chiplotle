@@ -1,7 +1,13 @@
 #!/usr/bin/env python
 
 '''A simple example that shows how to load existing hpgl code into chiplotle.'''
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import division
+from __future__ import absolute_import
 
+from future import standard_library
+standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.tools.io.import_hpgl_file import import_hpgl_file
 from chiplotle.tools.plottertools import instantiate_virtual_plotter

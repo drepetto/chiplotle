@@ -1,4 +1,11 @@
+from __future__ import unicode_literals
+from __future__ import print_function
+from __future__ import division
+from __future__ import absolute_import
 
+from builtins import zip
+from future import standard_library
+standard_library.install_aliases()
 def flat_list_to_pairs(lst):
     '''Returns a list of pairs created from consecutive elements of the given
     flat list `lst`.
