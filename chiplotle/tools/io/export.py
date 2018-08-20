@@ -24,9 +24,10 @@ def export(expr, filename, fmt = 'eps'):
 
     cmd = 'hp2xx --truesize -p 1 -m %s -f "%s" "%s"' % (fmt, imgfile, htmlfile)
     p = subprocess.Popen(cmd,
-                                shell  = True,
-                                stdout = subprocess.PIPE,
-                                stderr = subprocess.PIPE)
+                         shell=True,
+                         stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE,
+                         universal_newlines=True)
     stdout, stderr = p.communicate( )
 
     if 'not found' in stderr:
