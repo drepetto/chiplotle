@@ -1,7 +1,7 @@
 from chiplotle.hpgl import commands
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.tools.hpgltools.inflate_hpgl_string import inflate_hpgl_string
-from sys import maxint
+from sys import maxsize
 
 class VirtualSerialPort():
     def __init__(self, left_bottom, right_top):

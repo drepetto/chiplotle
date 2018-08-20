@@ -12,7 +12,7 @@ class TransformLock(Group):
                             }
 
    def get_transform(self, transform):
-      fn = transform.func_name
+      fn = transform.__name__
       transform = self.transform_map.get(fn)
       if transform is None:
          raise ValueError("Don't know transform '%s'." % fn)

@@ -13,5 +13,5 @@ if __name__ == '__main__':
     from chiplotle.tools import io
 
     l = line((0,0), (1000,1000))
-    print l.format
+    print(l.format)
     io.view(l)

@@ -4,12 +4,12 @@ from chiplotle import *
 ## HELPER FUNCTIONS ##
 
 def _query_font_size( ):
-    char_height = float(raw_input("font height (in cm)? "))
-    char_width = float(raw_input("font width (in cm)? "))
+    char_height = float(input("font height (in cm)? "))
+    char_width = float(input("font width (in cm)? "))
     return char_width, char_height
 
 def _query_pen( ):
-    pen_num = int(raw_input("which pen? "))
+    pen_num = int(input("which pen? "))
     return pen_num
 
 
@@ -25,7 +25,7 @@ def typewriter( ):
 
     pen_num = _query_pen( )
 
-    set_size = raw_input("set font size (y/N)? ")
+    set_size = input("set font size (y/N)? ")
 
     if set_size.lower( ) == "y":
         cw, ch = _query_font_size( )
@@ -42,13 +42,13 @@ def typewriter( ):
     finished = False
 
     while finished == False:
-        line = raw_input(">>> ")
+        line = input(">>> ")
         if len(line) == 0:
             print("(enter): blank line")
             print("p: select new pen")
             print("s: set new font size")
             print("q: quit")
-            response = raw_input("command: ")
+            response = input("command: ")
             if response == "p":
                 pen_num = _query_pen( )
                 plotter.select_pen(pen_num)

@@ -9,20 +9,20 @@ class _TwoPoint(_HPGLPrimitive):
                 raise ValueError('Only two coordinate pairs allowed.')
 
 
-    @apply
     def coords( ):
         def fget(self):
             return self._coords
         def fset(self, arg):
             self._coords = CoordinateArray(arg)
         return property(**locals())
+    coords = coords()
 
 
     @property
     def format(self):
         if self.coords:
             coords = self.coords[0].xy + self.coords[1].xy
-            coords = map(str, coords)
+            coords = list(map(str, coords))
             coords = ','.join(coords)
             return '%s%s%s' % (self._name, coords, _HPGLPrimitive._terminator)
         else:

@@ -35,7 +35,7 @@ def path_interpolated(points, curvature, interpolation_count = 50):
 
     ## compute dxy...
     dxy = [Coordinate(0, 0)]
-    for i in reversed(range(len(points) - 1)):
+    for i in reversed(list(range(len(points) - 1))):
         dxy.insert(0, a[i] + dxy[0] * bi[i])
 
     ## compute interpolated points...

@@ -14,8 +14,8 @@ def main():
    bottom = plotter.margins.soft.bottom
    top = plotter.margins.soft.top
 
-   print "width: %d height: %d" % (plotter.margins.soft.width, plotter.margins.soft.height)
-   pens = raw_input("\nhow many pens do you want to use? ")
+   print("width: %d height: %d" % (plotter.margins.soft.width, plotter.margins.soft.height))
+   pens = input("\nhow many pens do you want to use? ")
    numPens = int(pens)
 
    #start in a random spot
@@ -28,15 +28,15 @@ def main():
        whichGesture = random.randint(0,5)
 
        if whichGesture == 0:
-           print "circle!"
+           print("circle!")
            plotter.write(hpgl.CI(random.randint(10,5000), random.randint(1,180)))
 
        elif whichGesture == 1:
-           print "rect!"
+           print("rect!")
            plotter.write(hpgl.ER((random.randint(10,5000), random.randint(10,5000))))
 
        elif whichGesture == 2:
-           print "filled rect!"
+           print("filled rect!")
            ft = random.randint(1,8)
            if ft == 1 or ft == 2:
                ft = 1
@@ -48,20 +48,20 @@ def main():
            space = random.randint(10,100)
            angle = random.randint(0,3) * 45
 
-           print "fill type: %d space: %d angle: %d" % (ft, space, angle)
+           print("fill type: %d space: %d angle: %d" % (ft, space, angle))
            plotter.write(hpgl.RR((random.randint(10, 2000), random.randint(10, 2000))))
            plotter.write(hpgl.FT(ft, space, angle))
 
        elif whichGesture == 3:
-           print "draw a crazy line!"
+           print("draw a crazy line!")
            plotter.pen_down()
            plotter.goto(random.randint(left, right), random.randint(bottom, top))
            plotter.pen_up()
 
        elif whichGesture == 4:
-           print "draw an abstract shape!"
+           print("draw an abstract shape!")
            numPoints = random.randint(2,4)
-           print "numPoints: ", numPoints
+           print("numPoints: ", numPoints)
            firstX = random.randint(left, right)
            firstY = random.randint(bottom, top)
            plotter.goto(firstX, firstY)
@@ -75,7 +75,7 @@ def main():
            plotter.pen_up()
 
        elif whichGesture == 5:
-           print "just jump around!"
+           print("just jump around!")
            plotter.goto(random.randint(left, right), random.randint(bottom, top))
 
        #pick a new pen?

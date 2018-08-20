@@ -24,7 +24,7 @@ class _DrawingPlotter(_BasePlotter):
       elif len(args) == 2:
          self.write(self._hpgl.PA([args]))
       else:
-         print "Please use either: goto(x, y) or goto(Coordinate(x, y))"
+         print("Please use either: goto(x, y) or goto(Coordinate(x, y))")
 
    def goto_center(self):
       self.write(self._hpgl.PA([self.margins.soft.center]))
@@ -195,22 +195,22 @@ class _DrawingPlotter(_BasePlotter):
          left_bottom = Coordinate(left_bottom)
          right_top = Coordinate(right_top)
       except TypeError:
-         print "Please pass in two coordinate pairs."
+         print("Please pass in two coordinate pairs.")
          return
 
-      print "Setting plot window..."
+      print("Setting plot window...")
       x1 = left_bottom.x
       y1 = left_bottom.y
-      print "left: %d bottom: %d" % (x1, y1)
+      print("left: %d bottom: %d" % (x1, y1))
       x2 = right_top.x
       y2 = right_top.y
-      print "right: %d top: %d" % (x2, y2)
+      print("right: %d top: %d" % (x2, y2))
 
       self.write(self._hpgl.IP([(x1, y1), (x2, y2)]))
       self.write(self._hpgl.IW([(x1, y1), (x2, y2)]))
 
-      print "Plot window set to:"
-      print self.output_p1p2
+      print("Plot window set to:")
+      print(self.output_p1p2)
 
 
    ## paper control ##

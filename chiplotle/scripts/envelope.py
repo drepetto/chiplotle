@@ -12,7 +12,7 @@ def envelope( ):
     finished = 0
     while finished == 0:
 
-        line = raw_input("")
+        line = input("")
         if len(line) == 0:
             finished = 1
         else:
@@ -23,30 +23,30 @@ def envelope( ):
     finished = 0
     while finished == 0:
 
-        line = raw_input("")
+        line = input("")
         if len(line) == 0:
             finished = 1
         else:
             to_address.append(line)
 
-    input = raw_input("\n\renter pen number for plotting FROM ADDRESS:\n")
+    input = input("\n\renter pen number for plotting FROM ADDRESS:\n")
     pen_num = int(input)
 
     plotter.write(SP(pen_num))
 
-    raw_input("\n\rmove pen to top left of FROM: address field and hit return to start plotting...")
+    input("\n\rmove pen to top left of FROM: address field and hit return to start plotting...")
     print("plotting FROM: address...")
 
     for line in from_address:
         plotter.write(LB(line))
         plotter.write(LB("\n\r"))
 
-    input = raw_input("\n\renter pen number for plotting TO ADDRESS:\n")
+    input = input("\n\renter pen number for plotting TO ADDRESS:\n")
     pen_num = int(input)
 
     plotter.write(SP(pen_num))
 
-    raw_input("\n\rmove pen to top left of TO ADDRESS field and hit return to start plotting...")
+    input("\n\rmove pen to top left of TO ADDRESS field and hit return to start plotting...")
     print("plotting TO ADDRESS...")
 
     num_lines = len(to_address)

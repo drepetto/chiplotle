@@ -13,7 +13,7 @@ def main():
 
     data = data_file.readlines()
 
-    print "read %d data points." % len(data)
+    print("read %d data points." % len(data))
 
     #make an empty list and fill it with data points as coordinates
     points = []

@@ -3,7 +3,7 @@
  *
  *  http://music.columbia.edu/cmc/chiplotle
 '''
-from __future__ import division
+
 from chiplotle.core.cfg.get_config_value import get_config_value
 from chiplotle.core.interfaces.margins.interface import MarginsInterface
 from chiplotle.geometry.core.shape import _Shape
@@ -135,7 +135,7 @@ class _BasePlotter(object):
    def _write_string_to_port(self, data):
       ''' Write data to serial port. data is expected to be a string.'''
       #assert type(data) is str
-      if not isinstance(data, basestring):
+      if not isinstance(data, str):
          raise TypeError('string expected.')
       data = self._filter_unrecognized_commands(data)
       data = self._slice_string_to_buffer_size(data)

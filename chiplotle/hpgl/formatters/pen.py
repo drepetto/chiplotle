@@ -40,4 +40,4 @@ if __name__ == '__main__':
    pd = Pen(2, 3, 4, 5, 0.1)
    r = rectangle(100, 20)
    pd(r)
-   print r.format
+   print(r.format)

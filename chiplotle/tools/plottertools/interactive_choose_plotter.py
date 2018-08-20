@@ -1,13 +1,13 @@
 from chiplotle.tools.serialtools.virtual_serial_port import VirtualSerialPort
 
 def interactive_choose_plotter(serial):
-    print "\nChoose the plotter that best fits your hardware."
-    print "When in doubt choose the generic 'Plotter'."
+    print("\nChoose the plotter that best fits your hardware.")
+    print("When in doubt choose the generic 'Plotter'.")
     from chiplotle import plotters
     plotters = _get_instantiated_plotters_from_module(plotters)
     for i, plotter in enumerate(plotters):
-        print '[%d] %s' % (i,  plotter.__class__.__name__)
-    return plotters[int(raw_input())].__class__(serial)
+        print('[%d] %s' % (i,  plotter.__class__.__name__))
+    return plotters[int(input())].__class__(serial)
 
 
 def _get_instantiated_plotters_from_module(module):

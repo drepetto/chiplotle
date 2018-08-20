@@ -16,7 +16,7 @@ class AffixFormatVisitor(Visitor):
 
     def visit__Shape(self, node, formatters=None):
         frmtrs = self._update_formatters(node, formatters)
-        node.formatters = frmtrs.values()
+        node.formatters = list(frmtrs.values())
 
 
 

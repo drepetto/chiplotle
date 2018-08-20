@@ -79,5 +79,5 @@ class Label(object):
 
 ## demo
 if __name__ == '__main__':
-    print Label('Hello!').format
-    print Label('Adios!', 1, 2, direction = (1, 2)).format
+    print(Label('Hello!').format)
+    print(Label('Adios!', 1, 2, direction = (1, 2)).format)

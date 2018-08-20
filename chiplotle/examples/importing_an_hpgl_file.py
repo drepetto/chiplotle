@@ -10,16 +10,16 @@ import time
 
 def main():
 
-    print 'Importing media/square.hpgl'
+    print('Importing media/square.hpgl')
     f = import_hpgl_file("./media/square.hpgl")
 
-    print "Here are the contents of the file, expanded into a list of chiplotle objects:"
-    print f
+    print("Here are the contents of the file, expanded into a list of chiplotle objects:")
+    print(f)
 
-    print "\nAnd here are the raw hpgl commands:"
+    print("\nAnd here are the raw hpgl commands:")
 
     for c in f:
-        print c.format
+        print(c.format)
 
     # We can use io.view() to take a look...
     io.view(f)
@@ -43,13 +43,13 @@ def main():
     # We know from looking at the contents of the file above that the first thing
     # the hpgl code does is select pen 1. Let's change that to pen 2:
 
-    print "\nbefore:"
-    print f[0]
+    print("\nbefore:")
+    print(f[0])
 
     f[0] = hpgl.SP(2)
 
-    print "\nafter:"
-    print f[0]
+    print("\nafter:")
+    print(f[0])
 
     # We'll clear the virtual plotter so that we can start a new drawing:
     plotter.clear()
@@ -68,8 +68,8 @@ def main():
     # the last pen up (PU;) command:
     f.insert(len(f) - 1, c)
 
-    print "\nWe've inserted a circle (Path) into the list of commands:"
-    print f
+    print("\nWe've inserted a circle (Path) into the list of commands:")
+    print(f)
 
     plotter.clear()
     plotter.select_pen(3)

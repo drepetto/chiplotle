@@ -25,6 +25,6 @@ if __name__ == "__main__":
     scale(r1, 5, (500, 250))
     scale(r2, (10, 20))
     g = Group([r0, r1, r2])
-    print g.format
+    print(g.format)
     io.view(g)
 

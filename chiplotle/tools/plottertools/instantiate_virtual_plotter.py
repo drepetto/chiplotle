@@ -21,17 +21,17 @@ def instantiate_virtual_plotter(left_bottom = Coordinate(0,0),
       map = get_config_value('serial_port_to_plotter_map')
       ## if user has set fixed port to plotter mapping...
       if map is not None:
-         for k, v in map.items( ):
+         for k, v in list(map.items( )):
             which_plotter = v
       else:
          which_plotter = "Plotter"
 
    ser = VirtualSerialPort(left_bottom, right_top)
    plotter = instantiate_plotter_from_id(ser, which_plotter)
-   print "\nInstantiated plotter %s:" % plotter
+   print("\nInstantiated plotter %s:" % plotter)
    coords = plotter.margins.soft.all_coordinates
-   print "   Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords
-   print "   Buffer Size: %s" % plotter.buffer_size
+   print("   Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords)
+   print("   Buffer Size: %s" % plotter.buffer_size)
 
    return plotter
 

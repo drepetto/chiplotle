@@ -25,7 +25,7 @@ if __name__ == '__main__':
     from chiplotle import io
 
     p = Polygon([(0, 0), (2000, 0), (1000, 1000), (0, 500)], 0)
-    print p.points
-    print p._preformat_points
+    print(p.points)
+    print(p._preformat_points)
 
     io.view(p)

@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
         if intersection == False:
             no_intersections.append(new_line)
-            print "found %d lines..." % len(no_intersections)
+            print("found %d lines..." % len(no_intersections))
 
     io.view(no_intersections)
 

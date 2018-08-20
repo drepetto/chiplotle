@@ -22,8 +22,8 @@ def plot_hpgl_file_max_size(file):
 
     dimensions = hpgltools.get_bounding_box(f)
 
-    print "original dimensions: "
-    print dimensions
+    print("original dimensions: ")
+    print(dimensions)
 
     minX = dimensions[0][0]
     minY = dimensions[0][1]
@@ -46,10 +46,10 @@ def plot_hpgl_file_max_size(file):
     p2X = int(widthPlot * scaler)
     p2Y = int(heightPlot * scaler)
 
-    print 'minX, minY, maxX, maxY: ', minX, minY, maxX, maxY
-    print 'width, height: ', widthPlot, heightPlot
-    print 'p1x, p1y, p2x, p2y: ', p1X, p1Y, p2X, p2Y
-    print 'scaler: ', scaler
+    print('minX, minY, maxX, maxY: ', minX, minY, maxX, maxY)
+    print('width, height: ', widthPlot, heightPlot)
+    print('p1x, p1y, p2x, p2y: ', p1X, p1Y, p2X, p2Y)
+    print('scaler: ', scaler)
 
     hpgltools.scale(f, scaler)
 
@@ -59,8 +59,8 @@ def plot_hpgl_file_max_size(file):
 
     dimensions = hpgltools.get_bounding_box(f)
 
-    print "scaled dimensions: "
-    print dimensions
+    print("scaled dimensions: ")
+    print(dimensions)
 
     plotter.write(f)
     ## call flush( ) to wait till all data is written before exiting...
@@ -69,7 +69,7 @@ def plot_hpgl_file_max_size(file):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print 'Must give HPGL file to plot.\nExample: $ plot_hpgl_file_max_size.py myfile.hpgl'
+        print('Must give HPGL file to plot.\nExample: $ plot_hpgl_file_max_size.py myfile.hpgl')
         sys.exit(2)
     file = sys.argv[1]
 

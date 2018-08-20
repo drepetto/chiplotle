@@ -13,7 +13,7 @@ class TransformVisitor(Visitor):
 
 
     def visit_TransformLock(self, node, *args, **kwargs):
-        if self.transform.func_name in node.lock_transforms:
+        if self.transform.__name__ in node.lock_transforms:
             self._handle_transform_map(node, *args, **kwargs)
         else:
             for s in node:

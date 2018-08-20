@@ -11,7 +11,7 @@ class _Positional(_HPGLPrimitive):
 
     ## PUBLIC ATTRIBUTES ##
 
-    @apply
+
     def xy( ):
         def fget(self):
             return self._coords
@@ -20,22 +20,23 @@ class _Positional(_HPGLPrimitive):
                 raise ValueError('Positional HPGL commands are 2D')
             self._coords = Coordinate(*arg)
         return property(**locals())
+    xy = xy()
 
-    @apply
     def x( ):
         def fget(self):
             return self._coords.x
         def fset(self, arg):
             self.xy = Coordinate(arg, self.y)
         return property(**locals())
+    x = x()
 
-    @apply
     def y( ):
         def fget(self):
             return self._coords.y
         def fset(self, arg):
             self.xy = Coordinate(self.x, arg)
         return property(**locals())
+    y = y()
 
 
 

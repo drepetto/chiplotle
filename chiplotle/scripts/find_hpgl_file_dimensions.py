@@ -19,15 +19,15 @@ def find_hpgl_file_dimensions(file):
     width = maxX - minX
     height = maxY - minY
 
-    print ""
-    print "bounding box: ", dimensions
-    print "width: %d height: %d" % (width, height)
+    print("")
+    print("bounding box: ", dimensions)
+    print("width: %d height: %d" % (width, height))
 
 
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print 'Must give HPGL file.\nExample: $ find_hpgl_file_dimensions myfile.hpgl'
+        print('Must give HPGL file.\nExample: $ find_hpgl_file_dimensions myfile.hpgl')
         sys.exit(2)
     file = sys.argv[1]
 

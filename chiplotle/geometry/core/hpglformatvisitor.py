@@ -88,7 +88,7 @@ class HPGLFormatVisitor(Visitor):
 
     def _formatters_to_hpgl(self, formatters):
         result = []
-        for f in formatters.values():
+        for f in list(formatters.values()):
             result += f._subcommands
         return result
 

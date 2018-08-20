@@ -35,9 +35,9 @@ def _remove_files(skip_files, files):
 
 def replace_in_files(dir, old, new, skip_dirs=['.svn'], confirm=True):
     skip_files = ['replace-in-files', '.pyc', '.rst']
-    print 'Replacing ...'
-    print '    "%s"' % old
-    print '    "%s"' % new
+    print('Replacing ...')
+    print('    "%s"' % old)
+    print('    "%s"' % new)
     total_files_changed = 0
     for root, dirs, files in os.walk(dir):
         _remove_dirs(skip_dirs, dirs)
@@ -47,8 +47,8 @@ def replace_in_files(dir, old, new, skip_dirs=['.svn'], confirm=True):
             result = _replace_in_file(root, file, old, new)
             if result:
                 total_files_changed += 1
-    print '... in %s file(s)' % total_files_changed
-    print ''
+    print('... in %s file(s)' % total_files_changed)
+    print('')
 
 
 def _replace_in_file(root, file, old, new):
@@ -61,8 +61,8 @@ def _replace_in_file(root, file, old, new):
     for line in old_text:
         if old in line:
             if confirm:
-                print line,
-                replace = raw_input('Replace [y/n]? ')
+                print(line, end=' ')
+                replace = input('Replace [y/n]? ')
                 if replace.lower( ) == 'y':
                     line = line.replace(old, new)
                     file_is_changed = True
@@ -82,7 +82,7 @@ def _replace_in_file(root, file, old, new):
 if __name__ == '__main__':
     import sys
     if len(sys.argv) < 4:
-        print _usage( )
+        print(_usage( ))
         sys.exit(2)
 
     dir = sys.argv[1]

@@ -14,29 +14,29 @@ class _PenPlot(_HPGLPrimitive):
 
     ### MANAGED ATTRIBUTES ###
 
-    @apply
     def xy( ):
         def fget(self):
             return self._coords
         def fset(self, arg):
             self._coords = CoordinateArray(arg)
         return property(**locals())
+    xy = xy()
 
-    @apply
     def x( ):
         def fget(self):
             return self._coords.x
         def fset(self, arg):
             self.xy.x = arg
         return property(**locals())
+    x = x()
 
-    @apply
     def y( ):
         def fget(self):
             return self._coords.y
         def fset(self, arg):
             self.xy.y = arg
         return property(**locals())
+    y = y()
 
 
     ### FORMATTING ###

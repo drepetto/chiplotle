@@ -30,7 +30,7 @@ def export(expr, filename, fmt = 'eps'):
     stdout, stderr = p.communicate( )
 
     if 'not found' in stderr:
-        print _hp2xxError()
+        print(_hp2xxError())
 
     return imgfile
 

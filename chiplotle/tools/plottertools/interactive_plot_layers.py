@@ -10,16 +10,16 @@ def interactive_plot_layers(shape, plotter):
     v.visit(shape)
     v = LayersVisitor()
     v.visit(shape)
-    print 'Layers collected: ', v.layers.keys()
+    print('Layers collected: ', list(v.layers.keys()))
 
     for layer in sorted(v.layers.keys()):
-        print 'Please set/change paper for layer [%s].' % layer
-        reply = raw_input('Hit ENTER to plot layer, "n" to skip:')
+        print('Please set/change paper for layer [%s].' % layer)
+        reply = input('Hit ENTER to plot layer, "n" to skip:')
         if reply.lower( ) == 'n':
             continue
-        print 'Plotting layer [%s]...' % layer
+        print('Plotting layer [%s]...' % layer)
         plotter.write(v.layers[layer])
-        print 'Done plotting layer [%s].' % layer
+        print('Done plotting layer [%s].' % layer)
 
 
 

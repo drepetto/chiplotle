@@ -28,5 +28,5 @@ def get_all_coordinates(arg):
             else:
                 result.append(e.xy)
         else:
-            print '"%s" has no abs coords.' % e
+            print('"%s" has no abs coords.' % e)
     return result

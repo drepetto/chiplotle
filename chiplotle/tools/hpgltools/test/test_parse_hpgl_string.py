@@ -29,7 +29,7 @@ def test_parse_hpgl_string_05():
     '''LB'''
     s = 'DT#;LBHello World#;'
     t = hpgltools.parse_hpgl_string(s)
-    print t
+    print(t)
     assert t == ['DT#', 'LBHello World#']
 
 ## DCI (escape) commands ##

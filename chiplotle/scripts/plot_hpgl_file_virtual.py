@@ -18,7 +18,7 @@ def plot_hpgl_file(file):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print 'Must give HPGL file to plot.\nExample: $ plot_hpgl_file.py myfile.hpgl'
+        print('Must give HPGL file to plot.\nExample: $ plot_hpgl_file.py myfile.hpgl')
         sys.exit(2)
     file = sys.argv[1]
 

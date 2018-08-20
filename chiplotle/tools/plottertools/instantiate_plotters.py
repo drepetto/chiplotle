@@ -14,7 +14,7 @@ def instantiate_plotters( ):
     ## if user has set fixed port to plotter mapping...
     if map is not None:
         result = [ ]
-        for k, v in map.items( ):
+        for k, v in list(map.items( )):
             p = _instantiate_plotter(k, v)
             result.append(p)
     else:

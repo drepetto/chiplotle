@@ -45,5 +45,5 @@ if __name__ == '__main__':
     from chiplotle.tools import io
     gr = grid(1000, 2000, 10, 20)
     assert isinstance(gr, Group)
-    print gr.format
+    print(gr.format)
     io.view(gr)

@@ -84,4 +84,4 @@ def _parse_hpgl_command_string(cmd_string):
 
 if __name__ == '__main__':
     string = 'IN;PU;PD1,2,3,4;'
-    print inflate_hpgl_string(string)
+    print(inflate_hpgl_string(string))

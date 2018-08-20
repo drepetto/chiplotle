@@ -168,7 +168,7 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
 
 if __name__ == '__main__':
     ca = CoordinateArray([(1, 2), (3, 4)])
-    print ca
-    print ca.coords
-    print ca.x
-    print ca.y
+    print(ca)
+    print(ca.coords)
+    print(ca.x)
+    print(ca.y)

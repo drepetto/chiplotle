@@ -7,7 +7,7 @@ def test_layervisitor_01():
     r = rectangle(1000, 1000)
     v = LayersVisitor()
     v.visit(r)
-    assert v.layers.keys() == [None]
+    assert list(v.layers.keys()) == [None]
     assert v.layers[None] == [r]
 
 def test_layersvisitor_02():
@@ -16,7 +16,7 @@ def test_layersvisitor_02():
     l = Layer([r1], 1)
     v = LayersVisitor()
     v.visit(l)
-    assert v.layers.keys() == [1]
+    assert list(v.layers.keys()) == [1]
     assert v.layers[1] == [r1]
 
 def test_layersvisitor_03():
@@ -32,7 +32,7 @@ def test_layersvisitor_03():
     v = LayersVisitor()
     v.visit(l3)
 
-    assert v.layers.keys() == [1, 2, 3]
+    assert list(v.layers.keys()) == [1, 2, 3]
     assert v.layers[1] == [r1]
     assert v.layers[2] == [r2]
     assert v.layers[3] == [t3]
@@ -58,7 +58,7 @@ def test_layersvisitor_04():
     v = LayersVisitor()
     v.visit(l3)
 
-    assert v.layers.keys() == [1, 3]
+    assert list(v.layers.keys()) == [1, 3]
     assert v.layers[1] == [r1]
     assert v.layers[3] == [t3, r2]
 

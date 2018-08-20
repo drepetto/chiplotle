@@ -1,4 +1,4 @@
-from __future__ import division
+
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.geometrytools.split_vector_equidistantly import \
     split_vector_equidistantly
@@ -36,4 +36,4 @@ class Rounder(object):
 
 if __name__ == '__main__':
     ca = CoordinateArray([(20, 0), (20, 500), (20, 1000)])
-    print split_coordinatearray_proportionally(ca, 8)
+    print(split_coordinatearray_proportionally(ca, 8))

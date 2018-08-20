@@ -11,26 +11,26 @@ def search_and_instantiate_plotters( ):
     from chiplotle.tools.plottertools import instantiate_plotter_from_id
     from chiplotle.tools.plottertools import interactive_choose_plotter
 
-    print 'Scanning serial ports...'
-    ports = scan_serial_ports( ).values( )
-    print 'Found ports:'
-    print '  ' + '\n  '.join(ports)
+    print('Scanning serial ports...')
+    ports = list(scan_serial_ports( ).values( ))
+    print('Found ports:')
+    print('  ' + '\n  '.join(ports))
 
     ## get serial ports that have a plotter connected...
-    print '\nSniffing for plotters in all serial ports...'
+    print('\nSniffing for plotters in all serial ports...')
     plotters_found = sniff_ports_for_plotters(ports)
     if len(plotters_found) == 0:
-        print 'Found no plotter connected to any of the serial ports.'
-        print 'Is your plotter on?\n'
+        print('Found no plotter connected to any of the serial ports.')
+        print('Is your plotter on?\n')
         ## return a list so we don't get a python error when trying
         ## to index the result.
         return [None]
     else:
-        for serial_address, pln in plotters_found.items( ):
-            print '   Found plotter %s in port %s' % (pln, serial_address)
+        for serial_address, pln in list(plotters_found.items( )):
+            print('   Found plotter %s in port %s' % (pln, serial_address))
     ## instantiate a plotter for every port with a plotter...
     result = [ ]
-    for serial_address, pln in plotters_found.items( ):
+    for serial_address, pln in list(plotters_found.items( )):
         plotter = _instantiate_plotter(serial_address, pln)
         result.append(plotter)
     return result

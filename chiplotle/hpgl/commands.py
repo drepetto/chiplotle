@@ -70,7 +70,6 @@ class CI(_HPGLPrimitive):
       self.radius = radius
       self.chordangle = chordangle
 
-   @apply
    def radius( ):
       def fget(self):
          '''The radius of the circle.'''
@@ -79,6 +78,7 @@ class CI(_HPGLPrimitive):
          ### TODO: check for type here?
          self._radius = arg
       return property(**locals( ))
+   radius = radius()
 
    @property
    def format(self):
@@ -905,7 +905,7 @@ class FT(_HPGLPrimitive):
       else:
          ### TODO: raise this type of warning in all other commands where
          ### this may be necessary.
-         raise(Warning("Can't format %s with given parameters." % self._name))
+         raise Warning
 
 
 class PM(_HPGLPrimitive):
@@ -1113,7 +1113,7 @@ class IV(_HPGLPrimitive):
       elif self.slot == self.left == None:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
-         raise(Warning("Can't format %s with given parameters." % self._name))
+         raise Warning
 
 
 class IW(_TwoPoint):
@@ -1153,7 +1153,7 @@ class KY(_HPGLPrimitive):
       elif self.key == self.function == None:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
-         raise(Warning("Can't format %s with given parameters." % self._name))
+         raise Warning
 
 
 class PT(_HPGLPrimitive):
@@ -1199,7 +1199,7 @@ class SI(_HPGLPrimitive):
       elif None == self.width == self.height:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
-         raise(Warning("Can't format %s without all parameters." % self._name))
+         raise Warning
 
 
 class SR(SI):
@@ -1240,7 +1240,7 @@ class DI(_HPGLPrimitive):
       elif None == self.run == self.rise:
          return '%s%s' % (self._name, _HPGLPrimitive._terminator)
       else:
-         raise(Warning("Can't format %s without all parameters." % self._name))
+         raise Warning
 
 
 class DR(DI):
@@ -1507,7 +1507,6 @@ class SetHandshakeMode(_HPGLEscape):
    def __init__(self, mode=None):
       self.mode = mode
 
-   @apply
    def mode( ):
       def fget(self):
          return self._mode
@@ -1516,6 +1515,7 @@ class SetHandshakeMode(_HPGLEscape):
             raise ValueError('mode must be in (0,1,2,3).')
          self._mode = mode
       return property(**locals( ))
+   mode = mode()
 
    @property
    def _name(self):

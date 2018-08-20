@@ -20,5 +20,5 @@ if __name__ == '__main__':
     from chiplotle.tools import io
     from chiplotle.geometry.core.path import Path
     e = cross(100, 200)
-    print e.format
+    print(e.format)
     io.view(e)

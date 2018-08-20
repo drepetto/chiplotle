@@ -6,6 +6,6 @@ def read_config_file( ):
 
     globals = { }
     locals = { }
-    execfile(CONFIG_FILE, globals, locals)
+    exec(compile(open(CONFIG_FILE).read(), CONFIG_FILE, 'exec'), globals, locals)
     return locals
 

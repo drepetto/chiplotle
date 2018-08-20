@@ -7,21 +7,21 @@ def interactive_open_serial(baudrate, bytesize, parity, stopbits, timeout,
     the user to select a port.  The function returns a Serial instance.
     '''
     ports = scan_serial_ports( )
-    print "Available ports:\n"
-    for k, port in ports.items( ):
-        print "(%d) %s" % (k, port.portstr)
+    print("Available ports:\n")
+    for k, port in list(ports.items( )):
+        print("(%d) %s" % (k, port.portstr))
     ## get user's input...
     while True:
-        sp = raw_input("\nChoose serial port number: ")
+        sp = input("\nChoose serial port number: ")
         ## check response...
         try:
             sp = int(sp)
-            if not sp in ports.keys( ):
+            if not sp in list(ports.keys( )):
                 raise ValueError
             else:
                 break
         except ValueError:
-            print 'Whoops! wrong port number. Try again...'
+            print('Whoops! wrong port number. Try again...')
     ## configure port...
     selected_serial = ports[sp]
     selected_serial.baudrate = baudrate
@@ -32,5 +32,5 @@ def interactive_open_serial(baudrate, bytesize, parity, stopbits, timeout,
     selected_serial.xonxoff = xonxoff
     selected_serial.rtscts = rtscts
     selected_serial.open( )
-    print "Okay, opening %s." % selected_serial.portstr
+    print("Okay, opening %s." % selected_serial.portstr)
     return selected_serial

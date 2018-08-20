@@ -1,7 +1,7 @@
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 
 def _scale_command(obj, val):
-    attrs = obj.__dict__.keys()
+    attrs = list(obj.__dict__.keys())
     for scalable_attr in obj.__class__._scalable:
         a = getattr(obj, scalable_attr)
         setattr(obj, scalable_attr, a * val)

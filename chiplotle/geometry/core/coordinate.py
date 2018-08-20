@@ -13,7 +13,7 @@ class Coordinate(object):
 #         return super(Coordinate, cls).__new__(cls)
 
     def __init__(self, *args):
-        if args and not isinstance(args[0], (int, float, long)):
+        if args and not isinstance(args[0], (int, float)):
             raise TypeError('Arguments must all be scalars')
         self._coords = list(args)
 
@@ -78,11 +78,11 @@ class Coordinate(object):
     ## math operators ##
 
     def __abs__(self):
-        return Coordinate(*map(abs, self._coords))
+        return Coordinate(*list(map(abs, self._coords)))
 
     def __add__(self, arg):
         if isinstance(arg, Coordinate):
-            coords = map(operator.add, self._coords, arg._coords)
+            coords = list(map(operator.add, self._coords, arg._coords))
             return Coordinate(*coords)
         try:
             return arg.__radd__(self)
@@ -94,7 +94,7 @@ class Coordinate(object):
 
     def __sub__(self, arg):
         if isinstance(arg, Coordinate):
-            coords = map(operator.sub, self._coords, arg._coords)
+            coords = list(map(operator.sub, self._coords, arg._coords))
             return Coordinate(*coords)
         try:
             return arg.__rsub__(self)
@@ -117,10 +117,10 @@ class Coordinate(object):
         return Coordinate(*coords)
 
     def __mul__(self, arg):
-        if not isinstance(arg, (Coordinate, int, float, long)):
+        if not isinstance(arg, (Coordinate, int, float)):
             raise TypeError
         if isinstance(arg, Coordinate):
-            coords = map(operator.mul, self._coords, arg._coords)
+            coords = list(map(operator.mul, self._coords, arg._coords))
         else:
             coords = [c * arg for c in self._coords]
         return Coordinate(*coords)
@@ -157,9 +157,9 @@ if __name__ == '__main__':
     cm = c * 2
     cd = c / 2
     cn = -c
-    print 'len(c) =', len(c)
-    print c
-    print cp
-    print cs
-    print cm
-    print cd
+    print('len(c) =', len(c))
+    print(c)
+    print(cp)
+    print(cs)
+    print(cm)
+    print(cd)

@@ -37,8 +37,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Chiplotle'
-copyright = u'2009-2012, Víctor Adán, Douglas Repetto'
+project = 'Chiplotle'
+copyright = '2009-2012, Víctor Adán, Douglas Repetto'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -178,8 +178,8 @@ htmlhelp_basename = 'Chiplotledoc'
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-  ('index', 'Chiplotle.tex', u'Chiplotle Documentation',
-   u'Víctor Adán, Douglas Repetto', 'manual'),
+  ('index', 'Chiplotle.tex', 'Chiplotle Documentation',
+   'Víctor Adán, Douglas Repetto', 'manual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

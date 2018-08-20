@@ -1,4 +1,4 @@
-from __future__ import division
+
 from chiplotle.tools.mathtools.interpolate_linear import interpolate_linear
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 
@@ -11,7 +11,7 @@ def split_vector_equidistantly(vector, count) :
     '''
     xs = [interpolate_linear(0, vector.x, i / count) for i in range(1, count)]
     ys = [interpolate_linear(0, vector.y, i / count) for i in range(1, count)]
-    coords = [(0, 0)] + zip(xs, ys) + [vector]
+    coords = [(0, 0)] + list(zip(xs, ys)) + [vector]
     return CoordinateArray(coords)
 
 
@@ -19,4 +19,4 @@ if __name__ == '__main__':
     from chiplotle import Coordinate
     v = Coordinate(-10, 12)
     c = 4
-    print split_vector_equidistantly(v, c)
+    print(split_vector_equidistantly(v, c))

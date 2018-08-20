@@ -1,4 +1,4 @@
-from __future__ import division
+
 from chiplotle.geometry.core.coordinate import Coordinate
 import math
 

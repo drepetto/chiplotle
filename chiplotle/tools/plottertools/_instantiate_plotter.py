@@ -19,11 +19,11 @@ def _instantiate_plotter(port, id):
     from chiplotle.tools.plottertools import interactive_choose_plotter
     plotter = instantiate_plotter_from_id(ser, id)
     if not plotter:
-        print "\nChiplotle does not have a software Plotter type that"
-        print "matches your hardware plotter %s." % id
+        print("\nChiplotle does not have a software Plotter type that")
+        print("matches your hardware plotter %s." % id)
         plotter = interactive_choose_plotter(ser)
-    print "\nInstantiated plotter %s:" % plotter
+    print("\nInstantiated plotter %s:" % plotter)
     coords = plotter.margins.soft.all_coordinates
-    print "    Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords
-    print "    Buffer Size: %s" % plotter.buffer_size
+    print("    Drawing limits: (left %s; bottom %s; right %s; top %s)" % coords)
+    print("    Buffer Size: %s" % plotter.buffer_size)
     return plotter

@@ -16,5 +16,5 @@ def isosceles(width, height, filled=False):
 if __name__ == '__main__':
     from chiplotle.tools import io
     e = isosceles(200, 400, filled=True)
-    print e.format
+    print(e.format)
     io.view(e)

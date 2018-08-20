@@ -17,7 +17,7 @@ class _HPGL(object):
 
     def __eq__(self, arg):
         if type(arg) == type(self):
-            for attr in self.__dict__.keys( ):
+            for attr in list(self.__dict__.keys( )):
                 if getattr(self, attr) != getattr(arg, attr):
                     return False
             return True

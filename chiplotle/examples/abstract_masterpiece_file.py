@@ -14,13 +14,13 @@ def abstract_masterpiece_file(file):
 
       io.view(plot)
 
-      saveit = raw_input("\nsave this one (y/n)? ")
+      saveit = input("\nsave this one (y/n)? ")
       if 'y' in saveit:
          io.save_hpgl(plot, file)
-         print "saved " + file
+         print("saved " + file)
          saved = True
 
-   print "bye!"
+   print("bye!")
 
 def generate_plot():
 
@@ -31,8 +31,8 @@ def generate_plot():
    bottom = 0
    top = 20000
 
-   print "width: %d height: %d" % (width, height)
-   pens = raw_input("\nhow many pens do you want to use? ")
+   print("width: %d height: %d" % (width, height))
+   pens = input("\nhow many pens do you want to use? ")
    numPens = int(pens)
 
    plot = []
@@ -50,7 +50,7 @@ def generate_plot():
        whichGesture = random.randint(0,5)
 
        if whichGesture == 0:
-           print "circle!"
+           print("circle!")
            #plotter.circle(random.randint(10,5000), random.randint(1,180))
            x = random.randint(left, right)
            y = random.randint(bottom, top)
@@ -58,14 +58,14 @@ def generate_plot():
 
 
        elif whichGesture == 1:
-           print "rect!"
+           print("rect!")
            x = random.randint(left, right)
            y = random.randint(bottom, top)
            #plotter.edgeRectRelative(random.randint(10,5000), random.randint(10,5000))
            plot.append(ER([random.randint(10,5000), random.randint(10,5000)]))
 
        elif whichGesture == 2:
-           print "filled rect!"
+           print("filled rect!")
            ft = random.randint(1,8)
            if ft == 1 or ft == 2:
                ft = 1
@@ -77,7 +77,7 @@ def generate_plot():
            space = random.randint(10,100)
            angle = random.randint(0,3) * 45
 
-           print "fill type: %d space: %d angle: %d" % (ft, space, angle)
+           print("fill type: %d space: %d angle: %d" % (ft, space, angle))
            #plotter.fill_type(ft, space, angle)
            #plotter.shadeRectRelative(random.randint(10,2000), random.randint(10,2000))
            plot.append(FT(ft, space, angle))
@@ -85,7 +85,7 @@ def generate_plot():
 
 
        elif whichGesture == 3:
-           print "draw a crazy line!"
+           print("draw a crazy line!")
            #plotter.pen_down()
            #plotter.goto(random.randint(left, right), random.randint(bottom, top))
            #plotter.pen_up()
@@ -95,9 +95,9 @@ def generate_plot():
 
 
        elif whichGesture == 4:
-           print "draw an abstract shape!"
+           print("draw an abstract shape!")
            numPoints = random.randint(2,4)
-           print "numPoints: ", numPoints
+           print("numPoints: ", numPoints)
            firstX = random.randint(left, right)
            firstY = random.randint(bottom, top)
            #plotter.goto(firstX, firstY)
@@ -120,7 +120,7 @@ def generate_plot():
            plot.append(PU())
 
        elif whichGesture == 5:
-           print "just jump around!"
+           print("just jump around!")
            #plotter.goto(random.randint(left, right), random.randint(bottom, top))
            plot.append(PA([random.randint(left, right), random.randint(bottom, top)]))
 
@@ -142,7 +142,7 @@ def generate_plot():
 ### $> python abstract_masterpiece.py
 if __name__ == '__main__':
    if len(sys.argv) < 2:
-      print 'Must give output filename.\nExample: $ abstract_masterpiece_file.py myfile.hpgl'
+      print('Must give output filename.\nExample: $ abstract_masterpiece_file.py myfile.hpgl')
       sys.exit(2)
    file = sys.argv[1]
 

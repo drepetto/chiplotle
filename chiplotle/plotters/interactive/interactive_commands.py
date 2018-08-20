@@ -22,15 +22,15 @@ def interactive_set_plot_window(plotter):
     plotter.write(IW())
     #plotter.write(SC())
 
-    print "Interactive set plot window:"
-    print "Move pen to lower left and press enter."
-    raw_input()
+    print("Interactive set plot window:")
+    print("Move pen to lower left and press enter.")
+    input()
     position = plotter.actual_position[0]
     x1 = position.x
     y1 = position.y
 
-    print "Move pen to upper right and press enter."
-    raw_input()
+    print("Move pen to upper right and press enter.")
+    input()
     position = plotter.actual_position[0]
     x2 = position.x
     y2 = position.y
@@ -54,18 +54,18 @@ def interactive_set_plot_window_and_units(plotter):
 
     interactive_set_plot_window(plotter)
 
-    print "Enter value for left side (typically 0):"
-    left = int(raw_input())
-    print "Enter value for bottom side (typically 0):"
-    bottom = int(raw_input())
-    print "Enter value for right side (width of plot in your units):"
-    right = int(raw_input())
-    print "Enter value for top side (height of plot in your units):"
-    top = int(raw_input())
+    print("Enter value for left side (typically 0):")
+    left = int(input())
+    print("Enter value for bottom side (typically 0):")
+    bottom = int(input())
+    print("Enter value for right side (width of plot in your units):")
+    right = int(input())
+    print("Enter value for top side (height of plot in your units):")
+    top = int(input())
 
     plotter.write(SC([left,right,bottom,top]))
-    print "new soft margins:"
-    print plotter.margins.soft
+    print("new soft margins:")
+    print(plotter.margins.soft)
 
     '''
 from chiplotle.interactive.interactive_commands import *
@@ -99,17 +99,17 @@ def interactive_set_plot_window_auto_units(plotter):
     mm_w = width/40.0
     mm_h = width/40.0
 
-    print "Window size is:"
-    print "%f inches x %f inches" % (inches_w, inches_h)
-    print "%f cm x %f cm" % (cm_w, cm_h)
-    print "%f mm x %f mm" % (mm_w, mm_h)
+    print("Window size is:")
+    print("%f inches x %f inches" % (inches_w, inches_h))
+    print("%f cm x %f cm" % (cm_w, cm_h))
+    print("%f mm x %f mm" % (mm_w, mm_h))
 
-    print "Choose units:"
-    print "1) inches"
-    print "2) cm"
-    print "3) mm"
+    print("Choose units:")
+    print("1) inches")
+    print("2) cm")
+    print("3) mm")
 
-    units = int(raw_input())
+    units = int(input())
 
     left = plotter.margins.soft.left
     bottom = plotter.margins.soft.bottom
@@ -124,7 +124,7 @@ def interactive_set_plot_window_auto_units(plotter):
         right = left + 40
         top = righ + 40
     else:
-        print "That wasn't one of the choices!"
+        print("That wasn't one of the choices!")
         return
 
     plotter.write(IP([left, bottom,right,top]))
@@ -134,8 +134,8 @@ def interactive_set_plot_window_auto_units(plotter):
 
     #These margins will be WRONG!!! They'll be the floor integer margins,
     #not the margins set via the set_plot_window() above. ARRRRG!
-    print "new soft margins:"
-    print plotter.margins.soft
+    print("new soft margins:")
+    print(plotter.margins.soft)
 
     '''
 from chiplotle.plotters.interactive.interactive_commands import *
@@ -151,18 +151,18 @@ def interactive_define_polygon_simple(plotter):
 
     points = []
 
-    print "Interactive define PolygonSimple:"
-    print "Move pen to each point and press enter. Press x when finished adding points."
-    print "The final point (a duplicate of first point) will be added automatically."
+    print("Interactive define PolygonSimple:")
+    print("Move pen to each point and press enter. Press x when finished adding points.")
+    print("The final point (a duplicate of first point) will be added automatically.")
     while True:
-        input = raw_input()
+        input = input()
         if input is 'x':
             break;
 
         point = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
         points.append(point)
-        print "added:"
-        print point
+        print("added:")
+        print(point)
 
     poly = PolygonSimple([0,0], points)
 
@@ -177,19 +177,19 @@ def interactive_define_rectangle(plotter):
 
     points = []
 
-    print "Interactive define Rectangle:"
-    print "Move pen to lower, left corner and press enter."
+    print("Interactive define Rectangle:")
+    print("Move pen to lower, left corner and press enter.")
 
-    input = raw_input()
+    input = input()
     lower_left = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print "lower_left:"
-    print lower_left
+    print("lower_left:")
+    print(lower_left)
 
-    print "Move pen to upper, right corner and press enter."
-    input = raw_input()
+    print("Move pen to upper, right corner and press enter.")
+    input = input()
     upper_right = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print "upper_right:"
-    print upper_right
+    print("upper_right:")
+    print(upper_right)
 
     rectangle = Rectangle([lower_left], upper_right.x, upper_right.y)
 
@@ -209,19 +209,19 @@ def interactive_define_ellipse(plotter):
 
     points = []
 
-    print "Interactive define Rectangle:"
-    print "Move pen to lower, left corner and press enter."
+    print("Interactive define Rectangle:")
+    print("Move pen to lower, left corner and press enter.")
 
-    input = raw_input()
+    input = input()
     lower_left = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print "lower_left:"
-    print lower_left
+    print("lower_left:")
+    print(lower_left)
 
-    print "Move pen to upper, right corner and press enter."
-    input = raw_input()
+    print("Move pen to upper, right corner and press enter.")
+    input = input()
     upper_right = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print "upper_right:"
-    print upper_right
+    print("upper_right:")
+    print(upper_right)
 
     rectangle = Rectangle([lower_left], upper_right.x, upper_right.y)
 

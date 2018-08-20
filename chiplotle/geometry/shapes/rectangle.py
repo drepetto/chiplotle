@@ -18,5 +18,5 @@ if __name__ == '__main__':
     e = rectangle(100, 200)
     e.filled = True
     assert isinstance(e, Polygon)
-    print e.format
+    print(e.format)
     io.view(e)
