@@ -18,7 +18,7 @@ class VirtualSerialPort():
         self.right = right_top.x
         self.bottom = left_bottom.y
         self.top = right_top.y
-        self.buffer_size = maxint
+        self.buffer_size = maxsize
         self.portstr = "VirtualSerialPort"
 
     def write(self, command):
