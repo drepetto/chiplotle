@@ -1,10 +1,11 @@
 from chiplotle.core.visitor import Visitor
 
+
 class LayersVisitor(Visitor):
     '''Sorts / splits shapes based on the layers they live in.'''
 
     def __init__(self):
-        self.layers = {}
+        self.layers = dict()
 
     def visit_Layer(self, node, current_layer=None, tree=''):
         for s in node:

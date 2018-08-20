@@ -27,12 +27,12 @@ def test_layersvisitor_03():
 
     l1 = Layer([r1], 1)
     l2 = Layer([l1, r2], 2)
-    l3  = Layer([t3, l2], 3)
+    l3 = Layer([t3, l2], 3)
 
     v = LayersVisitor()
     v.visit(l3)
 
-    assert list(v.layers.keys()) == [1, 2, 3]
+    assert set(v.layers.keys()) == {1, 2, 3}
     assert v.layers[1] == [r1]
     assert v.layers[2] == [r2]
     assert v.layers[3] == [t3]
@@ -58,7 +58,7 @@ def test_layersvisitor_04():
     v = LayersVisitor()
     v.visit(l3)
 
-    assert list(v.layers.keys()) == [1, 3]
+    assert set(v.layers.keys()) == {1, 3}
     assert v.layers[1] == [r1]
     assert v.layers[3] == [t3, r2]
 
