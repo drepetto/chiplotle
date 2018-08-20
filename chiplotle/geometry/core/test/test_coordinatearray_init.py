@@ -67,7 +67,7 @@ def test_coordinatearray__div__02( ):
 
 ## rdiv ##
 
-## idiv ##
+## itruediv ##
 
 def test_coordinatearray__idiv__02( ):
     '''In place division with another CoordinateArray works.'''

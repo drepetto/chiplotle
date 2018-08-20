@@ -126,9 +126,9 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
         return CoordinateArray([a / arg for a in self._data])
 
     def __truediv__(self, arg):
-        return self / arg
+        return self.__div__(arg)
 
-    def __idiv__(self, arg):
+    def __itruediv__(self, arg):
         self._data = (self / arg)._data
         return self
 
