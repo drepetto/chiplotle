@@ -23,7 +23,6 @@ shared: &shared
             pip install tox
             pip install codecov
             pip install -r requirements.txt
-            pip install -r requirements-dev.txt
 
       - run:
           name: Set up chiplotle
