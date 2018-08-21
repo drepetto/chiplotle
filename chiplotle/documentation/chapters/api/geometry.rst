@@ -8,7 +8,6 @@ Shapes
 .. autofunction:: chiplotle.geometry.shapes.arc_circle
 .. autofunction:: chiplotle.geometry.shapes.arc_ellipse
 .. autofunction:: chiplotle.geometry.shapes.arrow
-.. autofunction:: chiplotle.geometry.shapes.bezier_path
 .. autofunction:: chiplotle.geometry.shapes.catmull_path
 .. autofunction:: chiplotle.geometry.shapes.circle
 .. autofunction:: chiplotle.geometry.shapes.cross
@@ -26,6 +25,8 @@ Shapes
 .. autofunction:: chiplotle.geometry.shapes.lock_group
 .. autofunction:: chiplotle.geometry.shapes.path
 .. autofunction:: chiplotle.geometry.shapes.path_linear
+.. autofunction:: chiplotle.geometry.shapes.path_interpolated
+.. autofunction:: chiplotle.geometry.shapes.path_bezier
 .. autofunction:: chiplotle.geometry.shapes.radial_ruler
 .. autofunction:: chiplotle.geometry.shapes.random_walk_cartesian
 .. autofunction:: chiplotle.geometry.shapes.random_walk_polar
