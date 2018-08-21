@@ -28,8 +28,8 @@ def inflate_hpgl_string(string, filter_commands=None):
 
     filter_commands = filter_commands or [ ]
 
-    if not isinstance(string, type('abc')):
-        raise TypeError('`string` must be a string')
+    if not isinstance(string, (str, bytes)):
+        raise TypeError('`string` must be a string or bytes')
     if not isinstance(filter_commands, (list, tuple)):
         msg = '`filter_commands` must be a list of string HPGL commands.'
         raise TypeError(msg)
