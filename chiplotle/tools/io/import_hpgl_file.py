@@ -22,8 +22,6 @@ def import_hpgl_file(filename, filter_commands=None):
         PD(xy=[ 100.  100.]), SP(pen=0)]
     '''
 
-    f = open(filename)
-    fs = f.read()
-    f.close()
-
-    return inflate_hpgl_string(fs, filter_commands)
+    with open(filename, 'r', encoding='utf8') as f:
+        file_contents = f.read()
+        return inflate_hpgl_string(file_contents, filter_commands)
