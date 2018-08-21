@@ -13,7 +13,7 @@ shared: &shared
           command: |
             if [[ ${PYTHON_VERSION} == 2* ]]; then
               mkdir .venv
-              virtualenv ./venv
+              virtualenv .venv
             else
               python3 -m venv .venv
             fi
