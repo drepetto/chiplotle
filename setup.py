@@ -17,7 +17,7 @@ setup(name              = about['__title__'],
       long_description  = about['__description__'],
       author            = about['__author__'],
       author_email      = about['__author_email__'],
-      url               = 'http://music.columbia.edu/cmc/chiplotle',
+      url               = about['__url__'],
       keywords          = 'vector graphics hpgl plotter plot pen',
       license           = about['__license__'],
 

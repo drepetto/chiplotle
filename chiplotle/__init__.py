@@ -7,10 +7,8 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.core.cfg.cfg import __version__
 from chiplotle.core.cfg.initialize_files import initialize_files
+from .__version__ import __author__, __version__, __license__, __url__, __copyright__, __description__
 
-__authors__ = "Victor Adan, Douglas Repetto"
-__license__ = "GPL"
-__url__ = "http://music.columbia.edu/cmc/chiplotle"
 __doc__ = """Chiplotle
 Python library for pen plotting.
 
@@ -20,7 +18,7 @@ License %s
 Homepage %s
 
 """ % (
-    __authors__,
+    __author__,
     __version__,
     __license__,
     __url__,
