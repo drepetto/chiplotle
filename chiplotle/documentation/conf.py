@@ -18,13 +18,21 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-import sys, os
+import os
+import shutil
 
 
 about = dict()
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, "..", "__version__.py"), "r") as f:
     exec(f.read(), about)
+
+chiplotle_config_dir = os.path.expanduser("~/.chiplotle")
+if not os.path.exists(chiplotle_config_dir):
+    os.makedirs(os.path.join(chiplotle_config_dir))
+    os.makedirs(os.path.join(chiplotle_config_dir, 'output'))
+    shutil.copyfile(os.path.join(here, 'chiplotle_config.py'),
+                    os.path.join(chiplotle_config_dir, 'config.py'))
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
