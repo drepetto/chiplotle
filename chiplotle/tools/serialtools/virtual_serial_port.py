@@ -3,6 +3,8 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+from six import string_types, text_type
+
 standard_library.install_aliases()
 from builtins import object
 from chiplotle.hpgl import commands
@@ -45,7 +47,7 @@ class VirtualSerialPort(object):
         '''
 
         #make sure we received a string, not a tuple or something
-        assert type(command) is str
+        assert isinstance(command, (string_types, text_type))
 
         if command.startswith(commands.B().format):
             #let's say we have 4MB of memory to avoid buffered writes

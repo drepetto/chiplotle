@@ -12,6 +12,8 @@ from builtins import range
 from builtins import open
 from builtins import int
 from future import standard_library
+from six import string_types, text_type
+
 standard_library.install_aliases()
 from chiplotle.core.cfg.get_config_value import get_config_value
 from chiplotle.core.interfaces.margins.interface import MarginsInterface
@@ -84,11 +86,8 @@ class _BasePlotter(object):
 
    def write_file(self, filename):
       '''Sends the HPGL content of the given `filename` to the plotter.'''
-      if not isinstance(filename, str):
-         raise TypeError('Argument must be a string with the file name.')
-      f = open(filename, 'r')
-      chars = f.read( )
-      f.close( )
+      with open(filename, 'r') as f:
+          chars = f.read( )
       chars = chars.replace('\n',';')
       comms = re.split(';+', chars)
       comms = [c + ';' for c in comms if c != '']
@@ -98,7 +97,7 @@ class _BasePlotter(object):
    ### PRIVATE METHODS ###
 
    def _is_HPGL_command_known(self, hpglCommand):
-      if isinstance(hpglCommand, str):
+      if isinstance(hpglCommand, (string_types, text_type)):
          command_head = hpglCommand[0:2]
       elif hasattr(hpglCommand, '_name'):
          command_head = hpglCommand._name
@@ -108,7 +107,7 @@ class _BasePlotter(object):
 
 
    def _filter_unrecognized_commands(self, commands):
-      assert isinstance(commands, str)
+      self._check_is_string(commands)
       result = [ ]
       #commands = re.split('[\n;]+', commands)
       commands = commands.split(';')
@@ -144,14 +143,16 @@ class _BasePlotter(object):
    def _write_string_to_port(self, data):
       ''' Write data to serial port. data is expected to be a string.'''
       #assert type(data) is str
-      if not isinstance(data, str):
-         raise TypeError('string expected.')
+      self._check_is_string(data)
       data = self._filter_unrecognized_commands(data)
       data = self._slice_string_to_buffer_size(data)
       for chunk in data:
          self._sleep_while_buffer_full( )
          self._serial_port.write(chunk)
 
+   def _check_is_string(self, data):
+      if not isinstance(data, (string_types, text_type)):
+         raise TypeError('string expected.')
 
    ### PRIVATE QUERIES ###
 

@@ -11,6 +11,7 @@ from chiplotle.tools.plottertools.instantiate_plotter_from_id \
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.core.cfg.get_config_value import get_config_value
 
+
 def instantiate_virtual_plotter(left_bottom = Coordinate(0,0),
                                 right_top = Coordinate(10320, 7920),
                                 type=None):
