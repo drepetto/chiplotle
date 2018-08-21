@@ -4,20 +4,22 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 from builtins import range
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.shapes.line import line
 
-def grid(width, height, width_divisions,height_divisions):
-    '''Rectangular grid.
+
+def grid(width, height, width_divisions, height_divisions):
+    """Rectangular grid.
 
     - `width` : ``int`` or ``float``, width of the rectangle.
     - `height` : ``int`` or ``float``, height of the rectangle.
     - `width_divisions` : ``int``, number of horizontal equidistant partitions.
     - `height_divisions` : ``int``, number of vertical equidistant partitions.
 
-    '''
+    """
 
     ul_x = width
     bl_x = ul_x
@@ -46,10 +48,12 @@ def grid(width, height, width_divisions,height_divisions):
 
     return g
 
+
 ## RUN DEMO CODE
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from chiplotle.tools import io
+
     gr = grid(1000, 2000, 10, 20)
     assert isinstance(gr, Group)
     print(gr.format)

@@ -5,6 +5,7 @@ from __future__ import absolute_import
 from builtins import range
 from builtins import int
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.polygon import Polygon
 from chiplotle.geometry.core.group import Group
@@ -12,14 +13,17 @@ from chiplotle.tools.mathtools.lcm import lcm
 import math
 from fractions import gcd
 
-def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_jump_size = True):
-    '''
+
+def star_crisscross(
+    width, height, num_points=5, jump_size=None, find_valid_jump_size=True
+):
+    """
         Draws a star with criscrossing lines.
 
         jump_size determines how many points to skip between connected points.
         an illegal jump size (one that does not result in a valid crisscross star)
         is ignored and replaced with a dot in the center of the star.
-    '''
+    """
     corners = []
     pi_div_180 = math.pi / 180.0
     half_width = width * 0.5
@@ -31,11 +35,11 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
 
     while degrees < 360.0 + degrees_offset:
         alpha = degrees * pi_div_180
-        sin_alpha = math.sin(alpha);
-        cos_alpha = math.cos(alpha);
+        sin_alpha = math.sin(alpha)
+        cos_alpha = math.cos(alpha)
 
-        point_x = (half_width * cos_alpha);
-        point_y = (half_height * sin_alpha);
+        point_x = half_width * cos_alpha
+        point_y = half_height * sin_alpha
 
         corners.append((point_x, point_y))
 
@@ -44,8 +48,8 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
     corners.append(corners[0])
 
     if num_points == 6:
-        #special case, ignore jump_size
-        #rearrange points to draw two polygons
+        # special case, ignore jump_size
+        # rearrange points to draw two polygons
         multiplier = int(num_points / 2)
 
         corners1 = [corners[0], corners[2], corners[4]]
@@ -57,7 +61,7 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
 
     else:
         if jump_size is None:
-            jump_size = int(num_points/2)
+            jump_size = int(num_points / 2)
 
         if gcd(num_points, jump_size) != 1:
             if find_valid_jump_size:
@@ -69,16 +73,16 @@ def star_crisscross(width, height, num_points = 5, jump_size = None, find_valid_
 
         point_order = []
         for i in range(0, num_points):
-            point_num =  (i * jump_size) % num_points
+            point_num = (i * jump_size) % num_points
             point_order.append(point_num)
 
         corners = [corners[i] for i in point_order]
 
-        return  Polygon(corners)
+        return Polygon(corners)
 
 
 ## RUN DEMO CODE
-if __name__ == '__main__':
+if __name__ == "__main__":
     from chiplotle.tools import io
     from chiplotle.geometry.shapes.star_crisscross import star_crisscross
     from chiplotle.geometry.core.group import Group
@@ -88,11 +92,10 @@ if __name__ == '__main__':
 
     for points in range(5, 26):
         for i in range(1, points):
-            s = star_crisscross(1000, 1000, num_points = points,
-                jump_size = i, find_valid_jump_size = False)
+            s = star_crisscross(
+                1000, 1000, num_points=points, jump_size=i, find_valid_jump_size=False
+            )
             offset(s, ((i - 1) * 1000, -(points - 5) * 1000))
             gr1.append(s)
 
     io.view(gr1)
-
-

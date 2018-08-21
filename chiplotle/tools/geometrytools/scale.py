@@ -3,16 +3,18 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
 
+
 def scale(coords, value, pivot):
-    '''Scales the given coordinates by the given value
+    """Scales the given coordinates by the given value
     around the given pivot point.
     - `coords` is a CoordinateArray.
     - `value` is a tuple or Coordinate.
     - `pivot` is a tuple or Coordinate.
-    '''
+    """
     pivot = Coordinate(*pivot)
     try:
         ## NOTE Coordinate is a bad name for this.
@@ -29,4 +31,3 @@ def scale(coords, value, pivot):
         scaled_points = offset_points * value
         coords = scaled_points + pivot
     return coords
-

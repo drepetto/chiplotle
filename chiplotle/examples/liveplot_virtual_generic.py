@@ -5,16 +5,17 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_virtual_plotter
 
-'''
+"""
 Demonstrates the use of a virtual plotter with the generic plotter.
 Paper will automatically be set to 8.5x11" (ANSI A).
 
 You must have hp2xx installed for io.view() to work!
-'''
+"""
 
 plotter = instantiate_virtual_plotter()
 
@@ -30,4 +31,3 @@ plotter.select_pen(4)
 plotter.write(hpgl.CI(125))
 
 io.view(plotter)
-

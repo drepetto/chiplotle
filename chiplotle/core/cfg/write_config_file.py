@@ -4,24 +4,27 @@ from __future__ import division
 from __future__ import absolute_import
 from builtins import open
 from future import standard_library
+
 standard_library.install_aliases()
 import time
 
 
 def write_config_file(path):
-    with open(path, 'w') as f:
+    with open(path, "w") as f:
         ## set preamble...
-        preamble =  '## Chiplotle configuration file.\n'
-        preamble += '## Created by Chiplotle on %s.\n' % time.strftime("%d %B %Y %H:%M:%S")
-        preamble += '##\n'
-        preamble += '## This file houses all the configuration variables employed\n'
-        preamble += '## by Chiplotle. You can set them manually to suit your needs.\n'
-        preamble += '## Do not delete them! If you want them to have no effect\n'
+        preamble = "## Chiplotle configuration file.\n"
+        preamble += "## Created by Chiplotle on %s.\n" % time.strftime(
+            "%d %B %Y %H:%M:%S"
+        )
+        preamble += "##\n"
+        preamble += "## This file houses all the configuration variables employed\n"
+        preamble += "## by Chiplotle. You can set them manually to suit your needs.\n"
+        preamble += "## Do not delete them! If you want them to have no effect\n"
         preamble += '## simply set them to "None".\n'
-        preamble += '##\n'
-        preamble += '## This file is executed via the ``execfile( )`` function,\n'
+        preamble += "##\n"
+        preamble += "## This file is executed via the ``execfile( )`` function,\n"
         preamble += "## so all its content should adhere to the Python syntax.\n"
-        preamble += '\n\n'
+        preamble += "\n\n"
         f.write(preamble)
 
         f.write("# Configuration Variables ---------------------------------\n\n")
@@ -64,11 +67,10 @@ def write_config_file(path):
         f.write("verbose = True\n")
         f.write("\n\n")
 
+
 #       f.write("## PDF viewer. Set for previewing HPGL commands via the\n")
 #       f.write("## ``view( )`` function. If set to `None`, the viewer will\n")
 #       f.write("## use the OS dependent generic file opener.\n")
 #       f.write("## e.g., `open` in OS X, `xdg-open` in Linux.\n")
 #       f.write("pdf_viewer = None")
 #       f.write('\n\n')
-
-

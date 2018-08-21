@@ -3,6 +3,7 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.hpgl import commands as hpgl
@@ -10,13 +11,13 @@ import numpy
 
 ## TODO: this works, but is quite ugly. Refactor!
 def relativize(data):
-    '''Converts all absolute coordinate commands (PA, RA, EA, AA)
+    """Converts all absolute coordinate commands (PA, RA, EA, AA)
     into relative commands (PR, RR, ER, AR), so that everything
-    has in realtive coordinate values.'''
+    has in realtive coordinate values."""
     ## main body...
     last_position = None
     delta = None
-    result = [ ]
+    result = []
     for e in data:
         ## absolute...
         if isinstance(e, (hpgl.PA, hpgl.RA, hpgl.EA, hpgl.AA)):
@@ -37,9 +38,9 @@ def relativize(data):
             if isinstance(e, hpgl.PR):
                 coords = [list(c) for c in e.xy]
                 if not last_position is None:
-                    last_position += Coordinate(*numpy.sum(coords, axis = 0))
+                    last_position += Coordinate(*numpy.sum(coords, axis=0))
                 else:
-                    last_position = Coordinate(*numpy.sum(coords, axis = 0))
+                    last_position = Coordinate(*numpy.sum(coords, axis=0))
                 result.append(e)
             else:
                 last_position = (last_position or 0) + e.xy
@@ -50,12 +51,12 @@ def relativize(data):
 
 
 def _return_relative_from_absolute(command, delta):
-    result = [ ]
+    result = []
     if isinstance(command, hpgl.PA):
         if delta is not None:
             result.append(hpgl.PR([delta]))
         coords = [list(c) for c in command.xy]
-        diff = numpy.diff(coords, axis=0).tolist( )
+        diff = numpy.diff(coords, axis=0).tolist()
         if len(diff) > 0:
             result.append(hpgl.PR(diff))
     elif isinstance(command, hpgl.RA) and delta is not None:
@@ -68,7 +69,7 @@ def _return_relative_from_absolute(command, delta):
 
 
 ## Trash...
-#def relativize(data):
+# def relativize(data):
 #   '''Converts all absolute coordinate commands (PA, RA, EA, AA)
 #   into relative commands (PR, RR, ER, AR), so that everything
 #   has in realtive coordinate values.'''

@@ -4,9 +4,12 @@ from __future__ import print_function
 from __future__ import absolute_import
 
 from future import standard_library
+
 standard_library.install_aliases()
+
+
 def factors(n):
-    '''Return factors of positive `n` in increasing order::
+    """Return factors of positive `n` in increasing order::
 
         >>> mathtools.factors(84)
         [1, 2, 2, 3, 7]
@@ -27,7 +30,7 @@ def factors(n):
         18 [1, 2, 3, 3]
         19 [1, 19]
 
-    '''
+    """
 
     if not isinstance(n, int):
         raise TypeError

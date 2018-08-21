@@ -6,6 +6,7 @@ from builtins import int
 from builtins import map
 from builtins import str
 from future import standard_library
+
 standard_library.install_aliases()
 import numbers
 import operator
@@ -16,19 +17,18 @@ import numpy as np
 
 class Coordinate(object):
 
-    __slots__ = ('_coords')
+    __slots__ = "_coords"
 
-#   def __new__(cls, *args):
-#      if len(args) == 1 and isinstance(args[0], Coordinate):
-#         return args[0]
-#      else:
-#         return super(Coordinate, cls).__new__(cls)
+    #   def __new__(cls, *args):
+    #      if len(args) == 1 and isinstance(args[0], Coordinate):
+    #         return args[0]
+    #      else:
+    #         return super(Coordinate, cls).__new__(cls)
 
     def __init__(self, *args):
         if args and not isinstance(args[0], numbers.Number):
-            raise TypeError('Arguments must all be scalars')
+            raise TypeError("Arguments must all be scalars")
         self._coords = list(args)
-
 
     @property
     def xy(self):
@@ -44,8 +44,8 @@ class Coordinate(object):
 
     @property
     def magnitude(self):
-        '''The norm.'''
-        return math.sqrt(sum([c**2 for c in self._coords]))
+        """The norm."""
+        return math.sqrt(sum([c ** 2 for c in self._coords]))
 
     @property
     def normalized(self):
@@ -55,6 +55,7 @@ class Coordinate(object):
     @property
     def polar(self):
         from chiplotle.tools.mathtools.xy_to_polar import xy_to_polar
+
         return xy_to_polar(self.xy)
 
     @property
@@ -82,10 +83,10 @@ class Coordinate(object):
         return len(self._coords)
 
     def __repr__(self):
-        return 'Coordinate({})'.format(self._coords)
+        return "Coordinate({})".format(self._coords)
 
     def __str__(self):
-        return '<%s>' % ','.join([str(c) for c in self._coords])
+        return "<%s>" % ",".join([str(c) for c in self._coords])
 
     ## math operators ##
 
@@ -101,8 +102,8 @@ class Coordinate(object):
         except Exception:
             raise TypeError
 
-#   def __radd__(self, arg):
-#      return self + arg
+    #   def __radd__(self, arg):
+    #      return self + arg
 
     def __sub__(self, arg):
         if isinstance(arg, Coordinate):
@@ -114,7 +115,7 @@ class Coordinate(object):
             raise TypeError
 
     def __rsub__(self, arg):
-        return - (self - arg)
+        return -(self - arg)
 
     def __truediv__(self, arg):
         coords = [c / float(arg) for c in self._coords]
@@ -154,14 +155,13 @@ class Coordinate(object):
         return Coordinate(*coords)
 
     def __invert__(self):
-        '''Returns the perpendicular of self.
+        """Returns the perpendicular of self.
         http://mathworld.wolfram.com/PerpendicularCoordinate.html
-        '''
+        """
         return self.perpendicular
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     c = Coordinate(1, 2, 3)
     cp = c + c
@@ -169,7 +169,7 @@ if __name__ == '__main__':
     cm = c * 2
     cd = c / 2
     cn = -c
-    print('len(c) =', len(c))
+    print("len(c) =", len(c))
     print(c)
     print(cp)
     print(cs)

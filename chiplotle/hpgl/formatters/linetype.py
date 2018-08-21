@@ -5,9 +5,11 @@ from __future__ import absolute_import
 from builtins import range
 from builtins import str
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import LT
 from chiplotle.core.interfaces.formatdecorator import FormatDecorator
+
 
 class LineType(FormatDecorator):
 
@@ -15,8 +17,8 @@ class LineType(FormatDecorator):
 
     def __init__(self, linetype=None, length=4):
         FormatDecorator.__init__(self)
-        self.linetype  = linetype
-        self.length    = length
+        self.linetype = linetype
+        self.length = length
 
     @property
     def _subcommands(self):
@@ -24,7 +26,7 @@ class LineType(FormatDecorator):
 
 
 ## DEMO
-if __name__ == '__main__':
+if __name__ == "__main__":
     from chiplotle import *
 
     lines = Group()
@@ -45,5 +47,5 @@ if __name__ == '__main__':
     formatters.Pen(1)(lines)
     offset(lines, (0, 1000))
     io.view(lines)
-    #p = plottertools.instantiate_plotters()[0]
-    #p.write(lines)
+    # p = plottertools.instantiate_plotters()[0]
+    # p.write(lines)

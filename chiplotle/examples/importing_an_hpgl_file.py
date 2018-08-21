@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
-'''A simple example that shows how to load existing hpgl code into chiplotle.'''
+"""A simple example that shows how to load existing hpgl code into chiplotle."""
 from __future__ import print_function
 from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.tools.io.import_hpgl_file import import_hpgl_file
@@ -14,12 +15,15 @@ from chiplotle.tools.plottertools import instantiate_virtual_plotter
 
 import time
 
+
 def main():
 
-    print('Importing media/square.hpgl')
+    print("Importing media/square.hpgl")
     f = import_hpgl_file("./media/square.hpgl")
 
-    print("Here are the contents of the file, expanded into a list of chiplotle objects:")
+    print(
+        "Here are the contents of the file, expanded into a list of chiplotle objects:"
+    )
     print(f)
 
     print("\nAnd here are the raw hpgl commands:")
@@ -66,7 +70,6 @@ def main():
     io.view(plotter)
     time.sleep(1)
 
-
     # Now maybe I want to add a little somethingsomething:
     c = shapes.circle(1000)
 
@@ -84,4 +87,5 @@ def main():
     io.view(plotter)
 
 
-if __name__ == '__main__': main()
+if __name__ == "__main__":
+    main()

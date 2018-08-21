@@ -3,13 +3,16 @@ from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
-from chiplotle.tools.serialtools.instantiate_serial_from_config_file \
-    import instantiate_serial_from_config_file
+from chiplotle.tools.serialtools.instantiate_serial_from_config_file import (
+    instantiate_serial_from_config_file
+)
 from chiplotle import plotters
 
+
 def _instantiate_plotter(port, id):
-    '''Instantiate a Plotter object with given `id` at port `port`.
+    """Instantiate a Plotter object with given `id` at port `port`.
 
     - `port` a ``str`` address or number of serial port.
         Usually something like '/def/ttyS0' in posix systems or 'COM1' Windowz.
@@ -17,12 +20,13 @@ def _instantiate_plotter(port, id):
     - `id` is the string ID of the plotter to be instantiated. e.g., 'DXY-1300'
 
     - use instantiate_virtual_plotter for VirtualPlotters
-    '''
+    """
 
     ser = instantiate_serial_from_config_file(port)
 
     from chiplotle.tools.plottertools import instantiate_plotter_from_id
     from chiplotle.tools.plottertools import interactive_choose_plotter
+
     plotter = instantiate_plotter_from_id(ser, id)
     if not plotter:
         print("\nChiplotle does not have a software Plotter type that")

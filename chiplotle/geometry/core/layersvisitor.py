@@ -4,27 +4,27 @@ from __future__ import division
 from __future__ import absolute_import
 from builtins import dict
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.core.visitor import Visitor
 
 
 class LayersVisitor(Visitor):
-    '''Sorts / splits shapes based on the layers they live in.'''
+    """Sorts / splits shapes based on the layers they live in."""
 
     def __init__(self):
         self.layers = dict()
 
-    def visit_Layer(self, node, current_layer=None, tree=''):
+    def visit_Layer(self, node, current_layer=None, tree=""):
         for s in node:
             self.visit(s, node.name, tree=tree)
 
-    def visit_Group(self, node, current_layer=None, tree=''):
+    def visit_Group(self, node, current_layer=None, tree=""):
         for s in node:
             self.visit(s, current_layer, tree)
 
-    def visit__Shape(self, node, current_layer=None, tree=''):
+    def visit__Shape(self, node, current_layer=None, tree=""):
         self._add_shape_to_layer(node, current_layer)
-
 
     ## private ##
 
@@ -34,10 +34,11 @@ class LayersVisitor(Visitor):
         else:
             self.layers[layer] = [shape]
 
+
 ## DEPRECATED ##
 ################################################
 #
-#class LayersVisitor(Visitor):
+# class LayersVisitor(Visitor):
 #   '''Sorts / splits shapes based on the layers they live in.'''
 #
 #   def __init__(self):

@@ -3,38 +3,40 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.shape import _Shape
 import copy
 
+
 class Group(_Shape):
-    '''A group collects together multiple _Shapes, so they
+    """A group collects together multiple _Shapes, so they
     can be treated as a single object.
     The elements in a group are stored in order, like a list, so that
     order-specific operation can be performed on groups.
     i.e., Groups are lists, not sets.
-    '''
+    """
+
     def __init__(self, shapes=None):
         _Shape.__init__(self)
-        self._shapes = [ ]
-        if shapes is None: shapes = [ ]
+        self._shapes = []
+        if shapes is None:
+            shapes = []
         self.extend(shapes)
-
 
     ## PUBLIC PROPERTIES ##
 
     @property
     def points(self):
-        '''Returns a flat list of all the Coordinates that form this shape.
+        """Returns a flat list of all the Coordinates that form this shape.
         This property is useful in computing some property of the shape based
-        on all it's points. e.g., centroid, bounding box, etc. '''
-        coords = [ ]
+        on all it's points. e.g., centroid, bounding box, etc. """
+        coords = []
         for shape in self:
             coords += list(shape.points)
         return CoordinateArray(coords)
-        #return coords
-
+        # return coords
 
     ## PUBLIC METHODS ##
 
@@ -57,32 +59,29 @@ class Group(_Shape):
         result = self._shapes.pop(indx)
         return result
 
-
     ## private properties ##
 
-#   @property
-#   def _infix_commands(self):
-#      result = [ ]
-#      for shape in self:
-#         result += shape._subcommands
-#      return result
-
+    #   @property
+    #   def _infix_commands(self):
+    #      result = [ ]
+    #      for shape in self:
+    #         result += shape._subcommands
+    #      return result
 
     ## private methods ##
 
     def _check_init_shape(self, shape):
         if not isinstance(shape, _Shape):
-            raise TypeError('shape must be an _Shape object.')
+            raise TypeError("shape must be an _Shape object.")
 
     def _check_init_shapes(self, shapes):
         for s in shapes:
             self._check_init_shape(s)
 
-
     ## OVERRIDES ##
 
     def __delitem__(self, indx):
-        del(self._shapes[indx])
+        del (self._shapes[indx])
 
     def __getitem__(self, indx):
         return self._shapes[indx]
@@ -132,7 +131,7 @@ class Group(_Shape):
         return self
 
     def __neg__(self):
-        self._shapes = [s.__neg__( ) for s in self]
+        self._shapes = [s.__neg__() for s in self]
         return self
 
     def __eq__(self, arg):
@@ -140,4 +139,3 @@ class Group(_Shape):
             return self._shapes == arg._shapes
         except AttributeError:
             return False
-

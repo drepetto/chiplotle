@@ -5,14 +5,16 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 from builtins import int
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.tools.plottertools import instantiate_plotters
 from chiplotle.tools import *
 import sys
 import time
 
+
 def plot_hpgl_file_max_size(file):
-    '''
+    """
     Scale an HPGL file so that it will plot as large as possible on the
     the plotter found connected to the computer.
 
@@ -21,8 +23,8 @@ def plot_hpgl_file_max_size(file):
 
     Plot origin will be on the bottom, left and plot will be scaled
     to be as large as possible without distorting either axis.
-    '''
-    plotter = instantiate_plotters( )[0]
+    """
+    plotter = instantiate_plotters()[0]
     plotter.set_origin_bottom_left()
 
     f = io.import_hpgl_file(file)
@@ -53,10 +55,10 @@ def plot_hpgl_file_max_size(file):
     p2X = int(widthPlot * scaler)
     p2Y = int(heightPlot * scaler)
 
-    print('minX, minY, maxX, maxY: ', minX, minY, maxX, maxY)
-    print('width, height: ', widthPlot, heightPlot)
-    print('p1x, p1y, p2x, p2y: ', p1X, p1Y, p2X, p2Y)
-    print('scaler: ', scaler)
+    print("minX, minY, maxX, maxY: ", minX, minY, maxX, maxY)
+    print("width, height: ", widthPlot, heightPlot)
+    print("p1x, p1y, p2x, p2y: ", p1X, p1Y, p2X, p2Y)
+    print("scaler: ", scaler)
 
     hpgltools.scale(f, scaler)
 
@@ -71,12 +73,14 @@ def plot_hpgl_file_max_size(file):
 
     plotter.write(f)
     ## call flush( ) to wait till all data is written before exiting...
-    plotter._serial_port.flush( )
+    plotter._serial_port.flush()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print('Must give HPGL file to plot.\nExample: $ plot_hpgl_file_max_size.py myfile.hpgl')
+        print(
+            "Must give HPGL file to plot.\nExample: $ plot_hpgl_file_max_size.py myfile.hpgl"
+        )
         sys.exit(2)
     file = sys.argv[1]
 

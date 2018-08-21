@@ -3,11 +3,12 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_plotters
 
-plotter = instantiate_plotters( )[0]
+plotter = instantiate_plotters()[0]
 
 assert plotter._buffer_space
 assert plotter.id

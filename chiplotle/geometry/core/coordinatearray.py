@@ -5,22 +5,24 @@ from __future__ import absolute_import
 from builtins import zip
 from builtins import str
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
-from chiplotle.geometry.core.coordinatearraypropertiesmixin import \
+from chiplotle.geometry.core.coordinatearraypropertiesmixin import (
     CoordinateArrayPropertiesMixin
+)
 import numpy as np
+
 
 class CoordinateArray(CoordinateArrayPropertiesMixin):
 
-    __slots__ = ('_data', )
+    __slots__ = ("_data",)
 
     def __init__(self, coords=None):
-        '''`coords` is a list of Coordinate objs or iterables.'''
+        """`coords` is a list of Coordinate objs or iterables."""
         if coords is None:
-            coords = [ ]
+            coords = []
         self._data = [Coordinate(*list(p)) for p in coords]
-
 
     ## PUBLIC PROPERTIES ##
 
@@ -54,9 +56,8 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
 
     def append(self, arg):
         if not isinstance(arg, Coordinate):
-            raise TypeError('arg must be a Coordinate')
+            raise TypeError("arg must be a Coordinate")
         self._data.append(arg)
-
 
     def extend(self, arg):
         if isinstance(arg, CoordinateArray):
@@ -65,8 +66,7 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
             for e in arg:
                 self.append(e)
         else:
-            raise TypeError('`arg` must be a list or CoordinateArray.')
-
+            raise TypeError("`arg` must be a list or CoordinateArray.")
 
     ## OVERRIDES ##
 
@@ -74,11 +74,10 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
         return len(self._data)
 
     def __repr__(self):
-        return 'CoordinateArray(%s)' % self._data
+        return "CoordinateArray(%s)" % self._data
 
     def __str__(self):
-        return 'CoordinateArray(%s)' % ', '.join([str(coord) for coord in self._data])
-
+        return "CoordinateArray(%s)" % ", ".join([str(coord) for coord in self._data])
 
     ## accessors / modifiers ##
 
@@ -87,7 +86,7 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
             yield c
 
     def __delitem__(self, i):
-        del(self._data[i])
+        del (self._data[i])
 
     def __getitem__(self, arg):
         return self._data[arg]
@@ -113,7 +112,7 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
                 raise ValueError("CoordinateArrays must have same length.")
             coords = [a + b for a, b in zip(self._data, arg._data)]
             return CoordinateArray(coords)
-        raise TypeError('Unknown type for CoordinateArray addition')
+        raise TypeError("Unknown type for CoordinateArray addition")
 
     def __radd__(self, arg):
         return self + arg
@@ -121,7 +120,6 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
     def __iadd__(self, arg):
         self._data = (self + arg)._data
         return self
-
 
     ## substraction ##
 
@@ -160,21 +158,20 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
         except AttributeError:
             return False
 
-
     def __ne__(self, arg):
         return not (self == arg)
 
     def __neg__(self):
-        return CoordinateArray([-c  for c in self])
+        return CoordinateArray([-c for c in self])
 
     def __invert__(self):
-        '''Returns the perpendiculars of the Coordinates contained in self.'''
+        """Returns the perpendiculars of the Coordinates contained in self."""
         if self.ndim != 2:
-            raise ValueError('inversion only works on 2D currently.')
+            raise ValueError("inversion only works on 2D currently.")
         return CoordinateArray([~v for v in self])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     ca = CoordinateArray([(1, 2), (3, 4)])
     print(ca)
     print(ca.coords)

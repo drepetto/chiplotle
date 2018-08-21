@@ -4,18 +4,20 @@ from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.tools import *
 import sys
 
+
 def find_hpgl_file_dimensions(file):
-    '''
+    """
     prints width, height, and minimum and maximum x,y coordinates found in hpgl plot file
-    '''
+    """
 
     f = io.import_hpgl_file(file)
 
-    #dimensions = hpgltools.find_hpgl_dimensions(f)
+    # dimensions = hpgltools.find_hpgl_dimensions(f)
     dimensions = hpgltools.get_bounding_box(f)
 
     minX = dimensions[0].x
@@ -30,10 +32,9 @@ def find_hpgl_file_dimensions(file):
     print("width: %d height: %d" % (width, height))
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print('Must give HPGL file.\nExample: $ find_hpgl_file_dimensions myfile.hpgl')
+        print("Must give HPGL file.\nExample: $ find_hpgl_file_dimensions myfile.hpgl")
         sys.exit(2)
     file = sys.argv[1]
 

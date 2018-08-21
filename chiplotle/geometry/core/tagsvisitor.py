@@ -3,12 +3,13 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.core.visitor import Visitor
 
 
 class TagsVisitor(Visitor):
-    '''Sort / group shapes by tags.'''
+    """Sort / group shapes by tags."""
 
     def __init__(self):
         self.tags = {}
@@ -21,7 +22,6 @@ class TagsVisitor(Visitor):
     def visit__Shape(self, node, *args, **kwargs):
         self._sort_by_tag(node)
 
-
     ## private ##
 
     def _sort_by_tag(self, shape):
@@ -30,4 +30,3 @@ class TagsVisitor(Visitor):
                 self.tags[tag].append(shape)
             else:
                 self.tags[tag] = [shape]
-

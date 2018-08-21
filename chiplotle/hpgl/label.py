@@ -3,11 +3,13 @@ from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import LB, PA, ES, LO, SL, DI, DV, SI
 
+
 class Label(object):
-    '''Text label.
+    """Text label.
 
     * `xy`: 2-tuple of coordinates pair for label location.
     * `text`: The actual text to be printed.
@@ -37,19 +39,20 @@ class Label(object):
     * `slant`: slant of characters (italic). Possible values: [0-1).
         0 is vertical, 0.5 is 45 degs., ...
     * `vertical`: Print text from left to right (False) or top down (True).
-    '''
+    """
 
-
-    def __init__(self,
+    def __init__(
+        self,
         text,
-        charwidth = None,
-        charheight = None,
-        charspace = None,
-        linespace = None,
-        origin = 1,
-        slant = 0,
-        direction = None,
-        vertical = False):
+        charwidth=None,
+        charheight=None,
+        charspace=None,
+        linespace=None,
+        origin=1,
+        slant=0,
+        direction=None,
+        vertical=False,
+    ):
 
         self.text = text
         self.charwidth = charwidth
@@ -61,14 +64,13 @@ class Label(object):
         self.slant = slant
         self.vertical = vertical
 
-
     @property
     def _subcommands(self):
-        result = [ ]
+        result = []
         if self.direction:
             result.append(DI(*self.direction))
         else:
-            result.append(DI( ))
+            result.append(DI())
         result.append(SI(self.charwidth, self.charheight))
         result.append(ES(self.charspace, self.linespace))
         result.append(LO(self.origin))
@@ -80,10 +82,10 @@ class Label(object):
 
     @property
     def format(self):
-        return ''.join([c.format for c in self._subcommands])
+        return "".join([c.format for c in self._subcommands])
 
 
 ## demo
-if __name__ == '__main__':
-    print(Label('Hello!').format)
-    print(Label('Adios!', 1, 2, direction = (1, 2)).format)
+if __name__ == "__main__":
+    print(Label("Hello!").format)
+    print(Label("Adios!", 1, 2, direction=(1, 2)).format)

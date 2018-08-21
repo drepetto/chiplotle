@@ -3,11 +3,13 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import AS, FS, PT, SP, VS
 
+
 class Pen(object):
-    '''The Pen class houses the following HPGL pen settable properties:
+    """The Pen class houses the following HPGL pen settable properties:
         AS, FS, SP and VS.
 
     - `number` : ``int`` [1 to 8] pen number.
@@ -15,10 +17,11 @@ class Pen(object):
     - `force` : ``int`` pen force.
     - `acceleration` : ``int`` [1 to 4] pen velocity.
     - `thickness` : ``float`` [0.1 to 5] mm.
-    '''
+    """
 
-    def __init__(self, number, velocity=None, force=None, acceleration=None,
-        thickness=None):
+    def __init__(
+        self, number, velocity=None, force=None, acceleration=None, thickness=None
+    ):
 
         assert isinstance(number, int)
 
@@ -27,7 +30,6 @@ class Pen(object):
         self.number = number
         self.velocity = velocity
         self.thickness = thickness
-
 
     @property
     def _subcommands(self):
@@ -42,11 +44,9 @@ class Pen(object):
             result.append(PT(self.thickness))
         return result
 
-
     @property
     def format(self):
-        result = ''
+        result = ""
         for c in self._subcommands:
             result += c.format
         return result
-

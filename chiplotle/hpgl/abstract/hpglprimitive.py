@@ -4,28 +4,29 @@ from __future__ import division
 from __future__ import absolute_import
 from builtins import str
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.hpgl.abstract.hpgl import _HPGL
 
+
 class _HPGLPrimitive(_HPGL):
 
-    _terminator = ';'
-
+    _terminator = ";"
 
     @property
     def format(self):
-        return '%s%s' % (self._name, _HPGLPrimitive._terminator)
+        return "%s%s" % (self._name, _HPGLPrimitive._terminator)
 
     ### OVERRIDES ###
 
     ### TODO: [VA] make this simpler. remove all but the name?
     def __repr__(self):
-        attributes = [ ]
+        attributes = []
         for a in dir(self):
-            if not a.startswith('_'):
+            if not a.startswith("_"):
                 if not callable(getattr(self, a)):
-                    #if a not in ('x', 'y', 'format', 'terminator'):
-                    if a not in ('x', 'y', 'format'):
-                        attributes.append( '%s=%s' %(a, str(getattr(self, a))) )
-        result = '%s(%s)' % (self._name, ', '.join(attributes))
+                    # if a not in ('x', 'y', 'format', 'terminator'):
+                    if a not in ("x", "y", "format"):
+                        attributes.append("%s=%s" % (a, str(getattr(self, a))))
+        result = "%s(%s)" % (self._name, ", ".join(attributes))
         return result

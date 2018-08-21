@@ -5,6 +5,7 @@ from __future__ import absolute_import
 from builtins import range
 from builtins import int
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.group import Group
@@ -13,8 +14,9 @@ from chiplotle.geometry.transforms.rotate import rotate
 from chiplotle.geometry.transforms.offset import offset
 import math
 
+
 def ruler(start_coord, end_coord, units, min_tick_height, symmetric=False):
-    '''
+    """
     A measuring ruler.
 
     - `units` is a list of units on which to put marks, from smaller
@@ -23,14 +25,14 @@ def ruler(start_coord, end_coord, units, min_tick_height, symmetric=False):
         The hight of the other units are multiples of this.
     - `symmetric` set to True to draw the tick lines symmetrically around
         the invisible center-line.
-    '''
+    """
     start_coord = Coordinate(*start_coord)
     end_coord = Coordinate(*end_coord)
 
     length = (end_coord - start_coord).magnitude
     angle = (end_coord - start_coord).angle
 
-    result = [ ]
+    result = []
     for i, unit in enumerate(units):
         ticks = int(math.ceil(length / unit))
         for t in range(ticks):
@@ -49,7 +51,7 @@ def ruler(start_coord, end_coord, units, min_tick_height, symmetric=False):
     return g
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from chiplotle import *
 
     r = ruler((0, 0), (1000, 1000), (100, 200, 400), 10)

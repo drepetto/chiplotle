@@ -3,6 +3,7 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import FT
 from chiplotle.core.interfaces.formatdecorator import FormatDecorator
@@ -17,7 +18,6 @@ class FillType(FormatDecorator):
         self.filltype = filltype
         self.space = space
         self.angle = angle
-
 
     @property
     def _subcommands(self):

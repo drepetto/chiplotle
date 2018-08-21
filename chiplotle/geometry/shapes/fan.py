@@ -3,16 +3,18 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.polygon import Polygon
 from chiplotle.geometry.shapes.arc_circle import arc_circle
 import math
 
+
 def fan(radius, start_angle, end_angle, height, segments=100, filled=False):
-    '''A Fan is a slice of a donut seen from above
+    """A Fan is a slice of a donut seen from above
     (when you can see the hole in the middle).
 
-    All angles are assumed to be in radians.'''
+    All angles are assumed to be in radians."""
     if start_angle > end_angle:
         end_angle += math.pi * 2
 
@@ -24,7 +26,7 @@ def fan(radius, start_angle, end_angle, height, segments=100, filled=False):
 
 ## RUN DEMO CODE
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     from chiplotle.tools import io
     import math
 

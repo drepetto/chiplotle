@@ -3,14 +3,15 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.core.cfg.cfg import __version__
 from chiplotle.core.cfg.initialize_files import initialize_files
+
 __authors__ = "Victor Adan, Douglas Repetto"
 __license__ = "GPL"
-__url__     = "http://music.columbia.edu/cmc/chiplotle"
-__doc__     = \
-"""Chiplotle
+__url__ = "http://music.columbia.edu/cmc/chiplotle"
+__doc__ = """Chiplotle
 Python library for pen plotting.
 
 Copyright %s
@@ -18,10 +19,15 @@ Version %s
 License %s
 Homepage %s
 
-""" % (__authors__,__version__,__license__,__url__)
+""" % (
+    __authors__,
+    __version__,
+    __license__,
+    __url__,
+)
 
 initialize_files()
-globals().pop('initialize_files')
+globals().pop("initialize_files")
 
 
 ## IMPORTS ##
@@ -57,6 +63,6 @@ CoordArray = CoordinateArray
 Coord = Coordinate
 
 ## remove unnecessary modules...
-#globals().pop('hpgl')
-#globals().pop('tools')
-#globals().pop('utils')
+# globals().pop('hpgl')
+# globals().pop('tools')
+# globals().pop('utils')

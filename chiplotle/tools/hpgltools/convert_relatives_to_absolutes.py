@@ -3,6 +3,7 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.tools.hpgltools.pens_updown_to_papr import pens_updown_to_papr
 from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolute
@@ -11,13 +12,14 @@ from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.hpgl.commands import PR, PA, ER, EA, RA, RR, AR, AA
 
+
 def convert_relatives_to_absolutes(lst):
     if not isinstance(lst, (list, tuple)):
-        raise TypeError('`lst` must be a list or tuple.')
+        raise TypeError("`lst` must be a list or tuple.")
 
     lst = pens_updown_to_papr(lst)
 
-    result = [ ]
+    result = []
     last_position = Coordinate(0, 0)
     command = None
     for e in lst:

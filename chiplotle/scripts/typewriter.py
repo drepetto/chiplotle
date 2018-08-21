@@ -6,37 +6,41 @@ from __future__ import absolute_import
 from builtins import int
 from builtins import input
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle import *
 
 ## HELPER FUNCTIONS ##
 
-def _query_font_size( ):
+
+def _query_font_size():
     char_height = float(input("font height (in cm)? "))
     char_width = float(input("font width (in cm)? "))
     return char_width, char_height
 
-def _query_pen( ):
+
+def _query_pen():
     pen_num = int(input("which pen? "))
     return pen_num
 
 
 ## MAIN FUNCTION ##
 
-def typewriter( ):
+
+def typewriter():
     print("***************************")
     print("* CHIPLOTLE TYPEWRITER!!! *")
     print("***************************")
     print("")
 
-    plotter = instantiate_plotters( )[0]
+    plotter = instantiate_plotters()[0]
 
-    pen_num = _query_pen( )
+    pen_num = _query_pen()
 
     set_size = input("set font size (y/N)? ")
 
-    if set_size.lower( ) == "y":
-        cw, ch = _query_font_size( )
+    if set_size.lower() == "y":
+        cw, ch = _query_font_size()
         plotter.write(SI(cw, ch))
 
     plotter.select_pen(pen_num)
@@ -58,10 +62,10 @@ def typewriter( ):
             print("q: quit")
             response = input("command: ")
             if response == "p":
-                pen_num = _query_pen( )
+                pen_num = _query_pen()
                 plotter.select_pen(pen_num)
             elif response == "s":
-                cw, ch = _query_font_size( )
+                cw, ch = _query_font_size()
                 plotter.write(SI(cw, ch))
             elif response == "q":
                 finished = True
@@ -73,5 +77,5 @@ def typewriter( ):
     print("l8r.")
 
 
-if __name__ == '__main__':
-    typewriter( )
+if __name__ == "__main__":
+    typewriter()

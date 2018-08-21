@@ -3,17 +3,17 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
+
 
 class _PlotterMargins(object):
     def __init__(self, plotter, queryCommand):
         self._plotter = plotter
         self._queryCommand = queryCommand
 
-
     ## PROPERTIES ##
-
 
     @property
     def left(self):
@@ -43,7 +43,7 @@ class _PlotterMargins(object):
 
     @property
     def center(self):
-        #return (self.right + self.left) / 2., (self.top + self.bottom) / 2.
+        # return (self.right + self.left) / 2., (self.top + self.bottom) / 2.
         x = (self.right + self.left) / 2.
         y = (self.top + self.bottom) / 2.
         return Coordinate(x, y)
@@ -70,11 +70,10 @@ class _PlotterMargins(object):
 
     @property
     def all_coordinates(self):
-        self._plotter._serial_port.flushInput( )
+        self._plotter._serial_port.flushInput()
         self._plotter._write_string_to_port(self._queryCommand.format)
-        m = self._plotter._read_port( ).rstrip('\r').split(',')
+        m = self._plotter._read_port().rstrip("\r").split(",")
         return tuple([eval(n) for n in m])
-
 
     ## METHODS ##
 
@@ -86,18 +85,17 @@ class _PlotterMargins(object):
 
     def draw_corners(self, pen=1):
         from chiplotle.hpgl.compound import Cross
+
         coords = self.all_coordinates
         size = 100
-        corners = [ ]
-        corners.append(Cross(coords[0:2], width = size, height = size, pen = 1))
-        corners.append(Cross((coords[0], coords[3]), size,  size))
-        corners.append(Cross((coords[2], coords[1]), size,  size))
-        corners.append(Cross(coords[2:4], size,  size))
+        corners = []
+        corners.append(Cross(coords[0:2], width=size, height=size, pen=1))
+        corners.append(Cross((coords[0], coords[3]), size, size))
+        corners.append(Cross((coords[2], coords[1]), size, size))
+        corners.append(Cross(coords[2:4], size, size))
         self._plotter.write(corners)
-
 
     ## OVERRIDES ##
 
     def __repr__(self):
-        return '%s%s' % (self.__class__.__name__, self.all_coordinates)
-
+        return "%s%s" % (self.__class__.__name__, self.all_coordinates)

@@ -3,31 +3,34 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 from chiplotle.geometry.transforms.transformvisitor import TransformVisitor
 
-def rotate(shape, angle, pivot = (0, 0)):
-    '''In place rotation.
+
+def rotate(shape, angle, pivot=(0, 0)):
+    """In place rotation.
 
     - `shape` is the shape to be rotated.
     - `angle` is the angle (in radians) of rotation.
     - `pivot` is the center of rotation. Must be a Coordinate or (x, y) pair.
-    '''
-    def rotate(coords, angle, pivot = pivot):
+    """
+
+    def rotate(coords, angle, pivot=pivot):
         return rotate_2d(coords, angle, pivot)
 
     t = TransformVisitor(rotate)
     t.visit(shape, angle, pivot)
 
 
-
 ## RUN DEMO CODE
 if __name__ == "__main__":
     from chiplotle.geometry.shapes.rectangle import rectangle
     from chiplotle.tools import io
+
     r1 = rectangle(1000, 400)
     r2 = rectangle(1000, 400)
     r3 = rectangle(2000, 900)

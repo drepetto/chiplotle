@@ -6,16 +6,18 @@ from __future__ import absolute_import
 from builtins import int
 from builtins import input
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle import *
 
-def envelope( ):
-    plotter = instantiate_plotters( )[0]
+
+def envelope():
+    plotter = instantiate_plotters()[0]
 
     to_address = []
     from_address = []
 
-    print ("\n\renter FROM ADDRESS (blank line to end):")
+    print("\n\renter FROM ADDRESS (blank line to end):")
 
     finished = 0
     while finished == 0:
@@ -26,7 +28,7 @@ def envelope( ):
         else:
             from_address.append(line)
 
-    print ("enter TO ADDRESS (blank line to end):")
+    print("enter TO ADDRESS (blank line to end):")
 
     finished = 0
     while finished == 0:
@@ -42,7 +44,9 @@ def envelope( ):
 
     plotter.write(SP(pen_num))
 
-    input("\n\rmove pen to top left of FROM: address field and hit return to start plotting...")
+    input(
+        "\n\rmove pen to top left of FROM: address field and hit return to start plotting..."
+    )
     print("plotting FROM: address...")
 
     for line in from_address:
@@ -54,7 +58,9 @@ def envelope( ):
 
     plotter.write(SP(pen_num))
 
-    input("\n\rmove pen to top left of TO ADDRESS field and hit return to start plotting...")
+    input(
+        "\n\rmove pen to top left of TO ADDRESS field and hit return to start plotting..."
+    )
     print("plotting TO ADDRESS...")
 
     num_lines = len(to_address)
@@ -68,5 +74,5 @@ def envelope( ):
     print("done!")
 
 
-if __name__ == '__main__':
-    envelope( )
+if __name__ == "__main__":
+    envelope()

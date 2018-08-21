@@ -3,10 +3,12 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import EW
 
-def test_EW_01( ):
+
+def test_EW_01():
 
     t = EW(10, 0, 90)
 
@@ -14,10 +16,10 @@ def test_EW_01( ):
     assert t.startangle == 0
     assert t.sweepangle == 90
     assert t.chordangle is None
-    assert t.format == 'EW10.00,0.00,90.00;'
+    assert t.format == "EW10.00,0.00,90.00;"
 
 
-def test_EW_02( ):
+def test_EW_02():
 
     t = EW(10, 0, 90, 4)
 
@@ -25,5 +27,4 @@ def test_EW_02( ):
     assert t.startangle == 0
     assert t.sweepangle == 90
     assert t.chordangle == 4
-    assert t.format == 'EW10.00,0.00,90.00,4.00;'
-
+    assert t.format == "EW10.00,0.00,90.00,4.00;"
