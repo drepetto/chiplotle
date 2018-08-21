@@ -10,27 +10,17 @@ Chiplotle  |release|  documentation
    chapters/about/index
    install
    chapters/configuration/index
-
-.. toctree::
-   :maxdepth: 1
+   chapters/api/index
 
    chapters/tutorial/index
    chapters/plotters/index
    chapters/hardware/index
    chapters/fundamentals/index
+
    chapters/faq/index
-   chapters/mailinglist/index
-
-.. toctree::
-   :maxdepth: 1
-
-   chapters/api/index
-   chapters/contributors/index
-
-.. toctree::
-   :maxdepth: 1
-
    chapters/resources/index
+   chapters/mailinglist/index
+   chapters/contributors/index
 
 
 

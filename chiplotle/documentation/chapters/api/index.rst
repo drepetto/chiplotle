@@ -1,6 +1,6 @@
 
-Chiplotle API
-=============
+API
+===
 
 .. toctree::
    
