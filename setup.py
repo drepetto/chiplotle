@@ -19,8 +19,21 @@ setup(
     author=about["__author__"],
     author_email=about["__author_email__"],
     url=about["__url__"],
-    keywords="vector graphics hpgl plotter plot pen",
+    keywords=["vector", "graphics", "hpgl", "plotter", "plot", "pen"],
     license=about["__license__"],
+    classifiers=[
+        # How mature is this project? Common values are
+        #   3 - Alpha
+        #   4 - Beta
+        #   5 - Production/Stable
+        'Intended Audience :: Developers',
+        'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+    ],
     include_package_data=True,
     packages=find_packages(),
     install_requires=["pyserial<=3", "numpy<=2"],
