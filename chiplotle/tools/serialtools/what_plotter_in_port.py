@@ -3,6 +3,8 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
+from six import text_type, string_types
+
 standard_library.install_aliases()
 import serial
 import time
@@ -17,7 +19,7 @@ def what_plotter_in_port(port, wait_time=10):
     Returns the ID of the plotter found or None.'''
 
     assert isinstance(wait_time, int)
-    if not isinstance(port, str):
+    if not isinstance(port, (string_types, text_type)):
         raise TypeError('`port` must be a string.')
 
     from chiplotle.tools.serialtools import instantiate_serial_from_config_file
