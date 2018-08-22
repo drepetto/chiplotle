@@ -1,8 +1,10 @@
 # Chiplotle
 
-[![CircleCI](https://circleci.com/gh/willprice/chiplotle.svg?style=shield)](https://circleci.com/gh/willprice/chiplotle)
+[![CircleCI Status](https://circleci.com/gh/willprice/chiplotle.svg?style=shield)](https://circleci.com/gh/willprice/chiplotle)
+[![Code coverage Status](https://codecov.io/gh/willprice/chiplotle/branch/master/graph/badge.svg)](https://codecov.io/gh/willprice/chiplotle)
 [![Documentation Status](https://readthedocs.org/projects/chiplotle/badge/?version=latest)](https://chiplotle.readthedocs.io/en/latest/?badge=latest)
-[![PyPI version](https://badge.fury.io/py/Chiplotle.svg)](https://badge.fury.io/py/Chiplotle)
+[![PyPI Version](https://badge.fury.io/py/Chiplotle.svg)](https://badge.fury.io/py/Chiplotle)
+
 
 Chiplotle is a Python library that implements and extends the HPGL
 (Hewlett-Packard Graphics Language) plotter control language. It
