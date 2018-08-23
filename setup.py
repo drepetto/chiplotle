@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 about = dict()
 here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, "chiplotle", "__version__.py"), "r") as f:
+with open(os.path.join(here, "src", "chiplotle", "__version__.py"), "r") as f:
     exec(f.read(), about)
 
 
@@ -34,8 +34,12 @@ setup(
         'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
     ],
-    include_package_data=True,
-    packages=find_packages(),
+    # XXX: UNUSURE
+    packages=find_packages("src"),
+    # XXX: UNUSURE
+    #include_package_data=True,
+    # XXX: UNUSURE
+    package_dir={'': 'src'},
     install_requires=["pyserial<=3", "numpy<=2"],
     entry_points={
         "console_scripts": [
@@ -43,12 +47,12 @@ setup(
         ]
     },
     scripts=[
-        "chiplotle/scripts/envelope.py",
-        "chiplotle/scripts/find_hpgl_file_dimensions.py",
-        "chiplotle/scripts/plot_hpgl_file_max_size.py",
-        "chiplotle/scripts/plot_hpgl_file.py",
-        "chiplotle/scripts/plot_hpgl_file_virtual.py",
-        "chiplotle/scripts/typewriter.py",
-        "chiplotle/scripts/view_hpgl_file.py",
+        "src/chiplotle/scripts/envelope.py",
+        "src/chiplotle/scripts/find_hpgl_file_dimensions.py",
+        "src/chiplotle/scripts/plot_hpgl_file_max_size.py",
+        "src/chiplotle/scripts/plot_hpgl_file.py",
+        "src/chiplotle/scripts/plot_hpgl_file_virtual.py",
+        "src/chiplotle/scripts/typewriter.py",
+        "src/chiplotle/scripts/view_hpgl_file.py",
     ],
 )

@@ -1,7 +1,7 @@
 .PHONY: all docs test compile upload_to_pypi clean format
 
 
-LIBRARY_DIR := chiplotle
+LIBRARY_DIR := src
 SRC_FILES := $(shell find $(LIBRARY_DIR)) 
 SRC_FILES += setup.py
 TEST_FILES := $(shell find $(LIBRARY_DIR) -iname test*.py)
