@@ -41,7 +41,7 @@ setup(
     # XXX: UNUSURE
     package_dir={'': 'src'},
     install_requires=[
-        "pyserial<=3",
+        "pyserial>=3",
         "numpy<=2",
         "future>=0.16.0"
     ],
