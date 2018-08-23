@@ -5,7 +5,6 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle.core.cfg.cfg import __version__
 from chiplotle.core.cfg.initialize_files import initialize_files
 from .__version__ import __author__, __version__, __license__, __url__, __copyright__, __description__
 

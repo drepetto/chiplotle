@@ -7,8 +7,6 @@ from future import standard_library
 standard_library.install_aliases()
 import os
 
-__version__ = "0.4.1"
-
 home_path = os.environ.get("HOME") or os.environ.get("HOMEPATH")
 
 CHIPLOTLE_DIR = os.path.dirname(__file__).rstrip("cfg")
