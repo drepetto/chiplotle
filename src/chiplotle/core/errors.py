@@ -15,7 +15,7 @@ class _ChiplotleError(Exception):
     ## OVERRIDES ##
 
     def __eq__(self, arg):
-        return self.__clas__.__name__ == arg.__class__.__name__
+        return self.__class__.__name__ == arg.__class__.__name__
 
     def __repr__(self):
         return "%s( )" % self.__class__.__name__
