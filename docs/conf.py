@@ -19,12 +19,13 @@ from future import standard_library
 
 standard_library.install_aliases()
 import os
+import sys
 import shutil
 
 
 about = dict()
 here = os.path.abspath(os.path.dirname(__file__))
-with open(os.path.join(here, "..", "__version__.py"), "r") as f:
+with open(os.path.join(here, "..", "src", "chiplotle", "__version__.py"), "r") as f:
     exec(f.read(), about)
 
 chiplotle_config_dir = os.path.expanduser("~/.chiplotle")
@@ -37,7 +38,7 @@ if not os.path.exists(chiplotle_config_dir):
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-# sys.path.append(os.path.abspath('.'))
+sys.path.append(os.path.join(here, '..', 'src'))
 
 # -- General configuration -----------------------------------------------------
 

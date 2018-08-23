@@ -9,7 +9,7 @@ TEST_FILES := $(shell find $(LIBRARY_DIR) -iname test*.py)
 all: test
 
 docs:
-	$(MAKE) html -C chiplotle/documentation
+	$(MAKE) html -C docs
 
 test: compile
 	tox
