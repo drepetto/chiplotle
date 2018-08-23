@@ -28,6 +28,7 @@ shared: &shared
           name: Set up chiplotle
           command: |
             source .venv/bin/activate
+            cd src
             (yes || true) | python -c "import chiplotle"
 
       - run:
