@@ -40,7 +40,11 @@ setup(
     #include_package_data=True,
     # XXX: UNUSURE
     package_dir={'': 'src'},
-    install_requires=["pyserial<=3", "numpy<=2"],
+    install_requires=[
+        "pyserial<=3",
+        "numpy<=2",
+        "future>=0.16.0"
+    ],
     entry_points={
         "console_scripts": [
             "chiplotle = chiplotle.core.cfg._run_chiplotle:_run_chiplotle"
