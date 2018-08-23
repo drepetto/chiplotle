@@ -5,6 +5,9 @@
 [![Documentation Status](https://readthedocs.org/projects/chiplotle/badge/?version=latest)](https://chiplotle.readthedocs.io/en/latest/?badge=latest)
 [![PyPI Version](https://badge.fury.io/py/Chiplotle.svg)](https://badge.fury.io/py/Chiplotle)
 
+**WARNING: This is a python 3 port WIP**, you should not use this fork until
+this warning is removed.
+
 
 Chiplotle is a Python library that implements and extends the HPGL
 (Hewlett-Packard Graphics Language) plotter control language. It
