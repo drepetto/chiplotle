@@ -3,7 +3,7 @@ FAQ
 ***
 
 **Q:**
-I'm trying to use Chiplotle with Windowz but it seems Chiplotle can't find my hardware. What should I do?
+I'm trying to use Chiplotle with Windows but it seems Chiplotle can't find my hardware. What should I do?
 
 **A:**
 No communication between Chiplotle and your hardware could be due to a variety of reasons. Check out the :doc:`Hardware </chapters/hardware/index>` section for some possible causes.
@@ -50,7 +50,7 @@ You can also send HPGL files to your plotter from within a live Chiplotle sessio
    chiplotle> plotter.write_file('my_file.hpgl')  
 
 **Q:**
-I installed chiplotle in Windowz 98. Unfortunately running ``chiplotle`` from the ``cmd`` shell does not work. Windowz  isn't recognizing the ``chiplotle`` command. 
+I installed chiplotle in Windows 98. Unfortunately running ``chiplotle`` from the ``cmd`` shell does not work. Windows  isn't recognizing the ``chiplotle`` command. 
 
 **A:**
 Windows is not very friendly with Chiplotle!

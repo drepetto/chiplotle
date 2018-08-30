@@ -16,8 +16,8 @@ We have successfully used this cable with the Roland DX series.
 USB to Serial Adapters
 ----------------------
 
-In Windowz, Chiplotle currently only supports **COM** ports to communicate with your plotter. On computers with real good-old RS-232 serial ports Chiplotle has no problem. Modern computers usually no longer have serial ports, so you need to use a USB to Serial interface to connect your plotter to your computer. Because Chiplotle only supports **COM** ports, what you need is a USB to Serial interface with drivers that supports VCP (Virtual COM Port), so that your USB to Serial interface shows up as a **COM** port. 
-You may want to get USB to Serial interface with the `FTDI Chip <http://www.ftdichip.com>`_; it has VCP drivers and works well on Windowz. 
+In Windows, Chiplotle currently only supports **COM** ports to communicate with your plotter. On computers with real good-old RS-232 serial ports Chiplotle has no problem. Modern computers usually no longer have serial ports, so you need to use a USB to Serial interface to connect your plotter to your computer. Because Chiplotle only supports **COM** ports, what you need is a USB to Serial interface with drivers that supports VCP (Virtual COM Port), so that your USB to Serial interface shows up as a **COM** port. 
+You may want to get USB to Serial interface with the `FTDI Chip <http://www.ftdichip.com>`_; it has VCP drivers and works well on Windows. 
 
 In OSX and Linux your USB to Serial interface will appear in your /dev directory as::
 
