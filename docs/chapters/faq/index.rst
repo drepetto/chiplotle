@@ -15,17 +15,17 @@ When I send a text file with HPGL commands to my serial port in the following wa
    $ stty /dev/ttyUSB0 9600
    $ cat bird.hpgl > /dev/ttyUSB0
 
-my plotter starts drawing fine but will eventually just start pausing and drawing random straight lines. What's goind on? Do I have to be concerned with overflowing the plotter's internal RAM?
+my plotter starts drawing fine but will eventually just start pausing and drawing random straight lines. What's going on? Do I have to be concerned with overflowing the plotter's internal RAM?
 
 **A:**
-Yes. The plotters buffer will fill up quickly, so you need to be listenning to the plotter for any buffer overflow warnings and errors. This is generally done in one of two ways:
+Yes. The plotters buffer will fill up quickly, so you need to be listening to the plotter for any buffer overflow warnings and errors. This is generally done in one of two ways:
 
-#. Setting up hardware hand-shacking between the plotter and your computer. 
+#. Setting up hardware hand-shaking between the plotter and your computer. 
 #. Querying the plotter for its buffer size before sending data to avoid truncation.
 
 This is one of the tasks that Chiplotle manages for you so you don't have to worry about these low level technicalities.   
 The easiest way to communicate with a plotter is to run Chiplotle by typing ``chiplotle`` from your terminal. 
-This will run python and load, Chiplotle library, and instantiate soft-plotters for your hardware plotters found. Once in Chiplotle, send your HPGL file with the ``write_file(filename)`` method of the instantiated plotter(s), or send newly createdHPGL commands via the ``write()`` method, like so::
+This will run python, load Chiplotle, and instantiate soft-plotters for your hardware plotters found. Once in Chiplotle, send your HPGL file with the ``write_file(filename)`` method on the instantiated plotter(s), or send newly created HPGL commands via the ``write()`` method, like so::
 
    chiplotle> plotter.write_file('my_file.hpgl')  
    chiplotle> plotter.write(hpgl.PA())
@@ -76,7 +76,7 @@ Another way of adding variables to your environment is using the set command::
 To make this setting permanent, you could add the corresponding command
 line to your ``autoexec.bat``. ``msconfig`` is a graphical interface to this file.
 
-Viewing environment variables can also be done more straight-forward: The
+Viewing environment variables can also be accomplished via ``cmd.exe``: The
 command prompt will expand strings wrapped into percent signs automatically::
 
    echo %PATH%
