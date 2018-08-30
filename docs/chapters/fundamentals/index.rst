@@ -7,14 +7,14 @@ In addition to being an HPGL plotter driver, *Chiplotle* is a vector drawing lib
 
 One can think of Chiplotle as consisting of three layers:
 
-#. A high abstraction layer consisting of platonic shapes, like `line`, `circle`, `label`, etc.'
+#. A high abstraction layer consisting of 2D shapes, like `line`, `circle`, `label`, etc.'
 #. An interface / communication layer consisting of the HPGL language.
-#. A plotter driver wich manages communication between your hardware and software.
+#. A plotter driver which manages communication between your hardware and software.
 
 HPGL
 ****
 
-How does Chiplote communicate with a plotter?
+How does Chiplotle communicate with a plotter?
 During the 70s and 80s, a variety of languages were developed by different manufacturers to control different brands of pen plotters, but the one language that gained most popularity and eventually became sort of a standard is HPGL (Hewlett-Packard Graphics Language). 
 
 Chiplotle supports all the standard HPGL commands, giving you full control of these plotters. 
