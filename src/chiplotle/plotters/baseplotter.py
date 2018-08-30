@@ -12,7 +12,7 @@ from builtins import range
 from builtins import open
 from builtins import int
 from future import standard_library
-from six import string_types, text_type
+from six import string_types
 
 standard_library.install_aliases()
 from chiplotle.core.cfg.get_config_value import get_config_value
@@ -91,7 +91,7 @@ class _BasePlotter(object):
     ### PRIVATE METHODS ###
 
     def _is_HPGL_command_known(self, hpglCommand):
-        if isinstance(hpglCommand, (string_types, text_type)):
+        if self._check_is_bytes(hpglCommand):
             command_head = hpglCommand[0:2]
         elif hasattr(hpglCommand, "_name"):
             command_head = hpglCommand._name
@@ -100,7 +100,7 @@ class _BasePlotter(object):
         return command_head.upper() in self.allowedHPGLCommands
 
     def _filter_unrecognized_commands(self, commands):
-        self._check_is_string(commands)
+        self._check_is_bytes(commands)
         result = []
         # commands = re.split('[\n;]+', commands)
         commands = commands.split(";")
@@ -133,16 +133,16 @@ class _BasePlotter(object):
     def _write_string_to_port(self, data):
         """ Write data to serial port. data is expected to be a string."""
         # assert type(data) is str
-        self._check_is_string(data)
+        self._check_is_bytes(data)
         data = self._filter_unrecognized_commands(data)
         data = self._slice_string_to_buffer_size(data)
         for chunk in data:
             self._sleep_while_buffer_full()
             self._serial_port.write(chunk)
 
-    def _check_is_string(self, data):
-        if not isinstance(data, (string_types, text_type)):
-            raise TypeError("string expected.")
+    def _check_is_bytes(self, data):
+        if not isinstance(data, bytes):
+            raise TypeError("Bytes expected.")
 
     ### PRIVATE QUERIES ###
 

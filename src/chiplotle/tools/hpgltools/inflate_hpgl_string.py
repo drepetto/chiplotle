@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
-from six import string_types, text_type
+from six import string_types
 
 standard_library.install_aliases()
 from chiplotle.hpgl import commands as hpgl
@@ -31,7 +31,7 @@ def inflate_hpgl_string(string, filter_commands=None):
 
     filter_commands = filter_commands or []
 
-    if not isinstance(string, (string_types, text_type)):
+    if not isinstance(string, string_types):
         raise TypeError("`string` must be a string or bytes")
     if not isinstance(filter_commands, (list, tuple)):
         msg = "`filter_commands` must be a list of string HPGL commands."

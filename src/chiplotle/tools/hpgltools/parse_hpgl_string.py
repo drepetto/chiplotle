@@ -3,7 +3,7 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
-from six import text_type, string_types
+from six import string_types
 
 standard_library.install_aliases()
 import re
@@ -13,8 +13,8 @@ def parse_hpgl_string(arg):
     """The function takes a string `arg` of HPGL commands, parses them
     (separates them) and returns them in a list.
     """
-    if not isinstance(arg, (text_type, string_types)):
-        raise TypeError("`arg` must be of type string")
+    if not isinstance(arg, string_types):
+        raise TypeError("`arg` must be of type string or bytes")
 
     string_commands = ["LB", "DT"]
     numeric_commands = [

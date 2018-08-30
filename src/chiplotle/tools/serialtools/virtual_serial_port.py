@@ -3,7 +3,6 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
-from six import string_types, text_type
 
 standard_library.install_aliases()
 from builtins import object
@@ -47,8 +46,8 @@ class VirtualSerialPort(object):
             gotta iterate through all possible weirdo commands.
         """
 
-        # make sure we received a string, not a tuple or something
-        assert isinstance(command, (string_types, text_type))
+        # make sure we received bytes
+        assert isinstance(command, bytes)
 
         if command.startswith(commands.B().format):
             # let's say we have 4MB of memory to avoid buffered writes
