@@ -19,15 +19,24 @@ Start Chiplotle by typing ``chiplotle`` from the terminal::
    $ chiplotle
 
 .. note::
-   If you've installed Chiplotle using Subversion, make sure the ``chiplotle/scritps`` directory is in your ``PATH`` variable so that your system knows about Chiplotle's scripts.
+   If you've installed Chiplotle using git, make sure the ``chiplotle/scripts`` directory is in your ``PATH`` variable so that your system knows about Chiplotle's scripts.
 
 The ``chiplotle`` script is a simple convenience script that does two things:
 
-#. It loads the Python interpreted.
-#. It finds all the plotters connected to your computer, instantiates their corresponding software interfaces and assigns these to the ``plts`` list variable. The first plotter found is also assigned to the ``plotter`` variable for convenience. i.e., if you only have one plotter you can call ``plotter`` instead of ``plts[0]``.
+#. It loads the Python interpreter.
+#. It finds all the plotters connected to your computer, instantiates
+   their corresponding software interfaces and assigns these to the
+   ``plts`` list variable. The first plotter found is also assigned to
+   the ``plotter`` variable for convenience. i.e., if you only have one
+   plotter you can call ``plotter`` instead of ``plts[0]``.
 
 .. note :: 
-   If your plotter type is unrecognized, the function will display a list of plotters that Chiplotle knows about for you to choose from.  Select the one that most closely matches the plotter ID identifying your hardware. If there is no match, you can use the generic Plotter, although you should be aware that some HPGL commands may not work with your hardware.
+   If your plotter type is unrecognized, the function will display a
+   list of plotters that Chiplotle knows about for you to choose from.
+   Select the one that most closely matches the plotter ID identifying
+   your hardware. If there is no match, you can use the generic Plotter,
+   although you should be aware that some HPGL commands may not work
+   with your hardware.
 
 Chiplotle will then print out some basic information about your plotter(s), including drawing area and memory. Now it's time to plot!
 
