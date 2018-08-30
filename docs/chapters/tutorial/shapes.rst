@@ -54,18 +54,19 @@ Groups thus behave just like primitive shapes.
 Examples
 --------
 
-A set of achs:
+A set of arcs:
 
-.. image:: images/arches.png
+.. image:: images/arcs.png
 
 ::
 
+   import math
    g = shapes.group()
    for radius in range(100, 1000, 100):
       a = shapes.arc_circle(radius, 1.0, math.pi)
-      gr.append(a)
+      g.append(a)
 
-.. note:: Remember that to view a shape you call ``io.view(arg)``, where `arg` is the shape object. Here we would execute ``io.view(gr)``.
+.. note:: Remember that to view a shape you call ``io.view(arg)``, where `arg` is the shape object. Here we would execute ``io.view(g)``.
 
 
 An arrow:
@@ -75,7 +76,7 @@ An arrow:
 ::
 
    coords = [(0, 0), (0, 1000), (1000, 1000)]
-   p = shapes.bezier_path(coords, 1)
+   p = shapes.path_bezier(coords, 1)
    a = arrow(p, 100, 200)
 
 
