@@ -21,6 +21,8 @@ from future import standard_library
 standard_library.install_aliases()
 from .dpx2000 import DPX2000
 from .dpx3300 import DPX3300
+from .dxy1100 import DXY1100
+from .dxy1200 import DXY1200
 from .dxy1300 import DXY1300
 from .dxy880 import DXY880
 from .hp7475a import HP7475A
