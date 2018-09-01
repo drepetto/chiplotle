@@ -1,0 +1,21 @@
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v1.4.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: check-added-large-files
+    -   id: check-ast
+    -   id: check-case-conflict
+    -   id: check-docstring-first
+    -   id: check-symlinks
+    -   id: debug-statements
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/willprice/pre-commit-hooks
+    rev: v0.0.1
+    hooks:
+    -   id: black-formatter
+-   repo: http://github.com/danielhoherd/pre-commit-circleci
+    rev: v0.0.1
+    hooks:
+    - id: circleci-validate
