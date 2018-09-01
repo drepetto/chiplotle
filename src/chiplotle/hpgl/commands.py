@@ -860,7 +860,7 @@ class LB(_HPGLPrimitive):
 
     def __init__(self, text):
         self.text = text
-        self.labelTerminator = bytes([3])
+        self.labelTerminator = chr(3).encode('ascii')
 
     @property
     def format(self):
