@@ -9,6 +9,7 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 
 from future import standard_library
+from six import string_types
 
 standard_library.install_aliases()
 from chiplotle.plotters.baseplotter import _BasePlotter
@@ -16,6 +17,28 @@ from chiplotle.geometry.core.coordinate import Coordinate
 
 
 class _DrawingPlotter(_BasePlotter):
+    def get_allowedHPGLCommands(self):
+        return self._allowed_hpgl_commands
+
+    def set_allowedHPGLCommands(self, allowed_hpgl_commands):
+        def str_to_bytes(str_or_bytes):
+            if isinstance(str_or_bytes, bytes):
+                return str_or_bytes
+            elif isinstance(str_or_bytes, string_types):
+                return str_or_bytes.encode("ascii")
+            raise TypeError(
+                "Expected HPGL command {} to be str or bytes but was {}".format(
+                    repr(str_or_bytes), type(str_or_bytes)
+                )
+            )
+
+        self._allowed_hpgl_commands = tuple(
+            [str_to_bytes(hpgl_command) for hpgl_command in allowed_hpgl_commands]
+        )
+
+    allowedHPGLCommands = property(
+        fget=get_allowedHPGLCommands, fset=set_allowedHPGLCommands
+    )
 
     ## motion ##
 
