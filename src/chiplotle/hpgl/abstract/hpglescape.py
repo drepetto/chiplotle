@@ -11,13 +11,13 @@ from chiplotle.hpgl.abstract.hpgl import _HPGL
 
 class _HPGLEscape(_HPGL):
 
-    _escape = chr(27)
+    _escape = chr(27).encode('ascii')
 
     ## PUBLIC PROPERTIES ##
 
     @property
     def format(self):
-        return "%s.%s" % (self._escape, self._name)
+        return b"%s.%s" % (self._escape, self._name)
 
     ## OVERRIDES ##
 

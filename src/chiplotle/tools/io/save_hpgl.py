@@ -27,5 +27,5 @@ def save_hpgl(expr, filename):
 
     ## create HPGL file
     file = open("%s" % filename, "w")
-    file.writelines(hpgl)
+    file.writelines([command.decode('ascii') for command in hpgl])
     file.close()

@@ -23,7 +23,7 @@ def test_goto_01():
 def test_gotocenter_01():
     p = instantiate_virtual_plotter()
     p.goto_center()
-    assert p._serial_port._received_commands_string == "IN;PA5160.00,3960.00;"
+    assert p._serial_port._received_commands_string == b"IN;PA5160.00,3960.00;"
     assert p._serial_port.get_received_commands() == [IN(), PA([(5160.0, 3960.0)])]
 
 

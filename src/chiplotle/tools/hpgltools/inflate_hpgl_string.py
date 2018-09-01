@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 from __future__ import division
 from __future__ import absolute_import
 from future import standard_library
-from six import string_types
 
 standard_library.install_aliases()
 from chiplotle.hpgl import commands as hpgl
@@ -13,7 +12,7 @@ from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
 
 
 def inflate_hpgl_string(string, filter_commands=None):
-    """Reads a text string and "inflates" it by creating
+    """Reads a string or bytes and "inflates" it by creating
     Chiplotle-HPGL class instances of the found HPGL commands.
 
     Example::
@@ -31,23 +30,26 @@ def inflate_hpgl_string(string, filter_commands=None):
 
     filter_commands = filter_commands or []
 
-    if not isinstance(string, string_types):
+    if not isinstance(string, (str, bytes)):
         raise TypeError("`string` must be a string or bytes")
     if not isinstance(filter_commands, (list, tuple)):
         msg = "`filter_commands` must be a list of string HPGL commands."
         raise TypeError(msg)
 
+    if isinstance(string, bytes):
+        string = string.decode('ascii')
+
     _unsupported_commands = ("PW", "PC", "LA", "WU", "BP")
-    comms = parse_hpgl_string(string)
+    commands = parse_hpgl_string(string)
     result = []
-    for c in comms:
-        if c:  ## not an empty string: ''
-            head = c[0:2]
+    for command in commands:
+        if command:  ## not an empty string: ''
+            head = command[0:2]
             if head in filter_commands:
                 continue
             if head in _unsupported_commands:
                 continue
-            command = inflate_hpgl_string_command(c)
+            command = inflate_hpgl_string_command(command)
             result.append(command)
     return result
 

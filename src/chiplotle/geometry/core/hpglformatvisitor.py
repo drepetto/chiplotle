@@ -44,7 +44,7 @@ class HPGLFormatVisitor(Visitor):
 
     @property
     def format(self):
-        return "".join([c.format for c in self.hpgl])
+        return b"".join([c.format for c in self.hpgl])
 
     ## private methods ##
 

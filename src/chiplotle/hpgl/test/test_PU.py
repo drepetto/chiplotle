@@ -66,16 +66,16 @@ def test_pu_init_06():
 def test_pu_format_01():
     """Empty PU( )."""
     t = PU()
-    assert t.format == "PU;"
+    assert t.format == b"PU;"
 
 
 def test_pu_format_02():
     """Floats are left floats at format."""
     t = PU([(1, 0.)])
-    assert t.format == "PU1.00,0.00;"
+    assert t.format == b"PU1.00,0.00;"
 
 
 def test_pu_format_03():
     """Ints are kept ints at format."""
     t = PU([(0, 0)])
-    assert t.format == "PU0,0;"
+    assert t.format == b"PU0,0;"

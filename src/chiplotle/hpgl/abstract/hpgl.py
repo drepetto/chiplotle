@@ -15,7 +15,7 @@ class _HPGL(object):
 
     @property
     def _name(self):
-        return self.__class__.__name__
+        return self.__class__.__name__.encode('ascii')
 
     @property
     def format(self):

@@ -96,14 +96,14 @@ class CI(_HPGLPrimitive):
     @property
     def format(self):
         if self.chordangle:
-            return "%s%.2f,%.2f%s" % (
+            return b"%s%.2f,%.2f%s" % (
                 self._name,
                 self.radius,
                 self.chordangle,
                 _HPGLPrimitive._terminator,
             )
         else:
-            return "%s%.2f%s" % (self._name, self.radius, _HPGLPrimitive._terminator)
+            return b"%s%.2f%s" % (self._name, self.radius, _HPGLPrimitive._terminator)
 
 
 class CC(_HPGLPrimitive):
@@ -119,9 +119,9 @@ class CC(_HPGLPrimitive):
     @property
     def format(self):
         if self.angle:
-            return "%s%i%s" % (self._name, self.angle, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.angle, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class AF(_HPGLPrimitive):
@@ -172,9 +172,9 @@ class AP(_HPGLPrimitive):
     @property
     def format(self):
         if self.n:
-            return "%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class AA(_Arc):
@@ -228,16 +228,16 @@ class AS(_HPGLPrimitive):
     @property
     def format(self):
         if self.accel and self.pen:
-            return "%s%i,%i%s" % (
+            return b"%s%i,%i%s" % (
                 self._name,
                 self.accel,
                 self.pen,
                 _HPGLPrimitive._terminator,
             )
         elif self.accel:
-            return "%s%i%s" % (self._name, self.accel, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.accel, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class EA(_Positional):
@@ -306,16 +306,16 @@ class VS(_HPGLPrimitive):
     @property
     def format(self):
         if self.vel and self.pen:
-            return "%s%i,%i%s" % (
+            return b"%s%i,%i%s" % (
                 self._name,
                 self.vel,
                 self.pen,
                 _HPGLPrimitive._terminator,
             )
         elif self.vel:
-            return "%s%i%s" % (self._name, self.vel, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.vel, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class FS(_HPGLPrimitive):
@@ -336,16 +336,16 @@ class FS(_HPGLPrimitive):
     @property
     def format(self):
         if self.force and self.pen:
-            return "%s%i,%i%s" % (
+            return b"%s%i,%i%s" % (
                 self._name,
                 self.force,
                 self.pen,
                 _HPGLPrimitive._terminator,
             )
         elif self.force:
-            return "%s%i%s" % (self._name, self.force, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.force, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class EP(_HPGLPrimitive):
@@ -627,16 +627,16 @@ class PS(_HPGLPrimitive):
     @property
     def format(self):
         if self.length and self.width:
-            return "%s%i,%i%s" % (
+            return b"%s%i,%i%s" % (
                 self._name,
                 self.length,
                 self.width,
                 _HPGLPrimitive._terminator,
             )
         elif self.length:
-            return "%s%i%s" % (self._name, self.length, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.length, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class BL(_HPGLPrimitive):
@@ -655,9 +655,9 @@ class BL(_HPGLPrimitive):
     @property
     def format(self):
         if self.label:
-            return "%s%s%s" % (self._name, chr(3), _HPGLPrimitive._terminator)
+            return b"%s%s%s" % (self._name, chr(3), _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class IN(_HPGLPrimitive):
@@ -705,7 +705,7 @@ class CS(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.set, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.set, _HPGLPrimitive._terminator)
 
 
 class CT(_HPGLPrimitive):
@@ -728,7 +728,7 @@ class CT(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.type, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.type, _HPGLPrimitive._terminator)
 
 
 class CV(_HPGLPrimitive):
@@ -750,16 +750,16 @@ class CV(_HPGLPrimitive):
     @property
     def format(self):
         if self.n and self.inputdelay:
-            return "%s%i%i%s" % (
+            return b"%s%i%i%s" % (
                 self._name,
                 self.n,
                 self.inputdelay,
                 _HPGLPrimitive._terminator,
             )
         elif self.n:
-            return "%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class CA(_HPGLPrimitive):
@@ -777,7 +777,7 @@ class CA(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.set, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.set, _HPGLPrimitive._terminator)
 
 
 class CM(_HPGLPrimitive):
@@ -798,16 +798,16 @@ class CM(_HPGLPrimitive):
     @property
     def format(self):
         if self.switch and self.fallback:
-            return "%s%i,%i%s" % (
+            return b"%s%i,%i%s" % (
                 self._name,
                 self.switch,
                 self.fallback,
                 _HPGLPrimitive._terminator,
             )
         elif self.switch:
-            return "%s%i%s" % (self._name, self.switch, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.switch, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class CP(_HPGLPrimitive):
@@ -824,16 +824,16 @@ class CP(_HPGLPrimitive):
     @property
     def format(self):
         if self.spaces and self.lines:
-            return "%s%s,%s%s" % (
+            return b"%s%i,%i%s" % (
                 self._name,
                 self.spaces,
                 self.lines,
                 _HPGLPrimitive._terminator,
             )
         elif self.spaces:
-            return "%s%s%s" % (self._name, self.spaces, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.spaces, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class DT(_HPGLPrimitive):
@@ -849,7 +849,7 @@ class DT(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%c%s" % (self._name, self.labelterminator, _HPGLPrimitive._terminator)
+        return b"%s%c%s" % (self._name, self.labelterminator, _HPGLPrimitive._terminator)
 
 
 class LB(_HPGLPrimitive):
@@ -860,13 +860,13 @@ class LB(_HPGLPrimitive):
 
     def __init__(self, text):
         self.text = text
-        self.labelTerminator = chr(3)
+        self.labelTerminator = bytes([3])
 
     @property
     def format(self):
-        return "%s%s%s%s" % (
+        return b"%s%s%s%s" % (
             self._name,
-            self.text,
+            self.text.encode('ascii'),
             self.labelTerminator,
             _HPGLPrimitive._terminator,
         )
@@ -883,7 +883,7 @@ class SP(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.pen, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.pen, _HPGLPrimitive._terminator)
 
 
 class LT(_HPGLPrimitive):
@@ -914,14 +914,14 @@ class LT(_HPGLPrimitive):
     @property
     def format(self):
         if self.pattern is not None:
-            return "%s%i,%.4f%s" % (
+            return b"%s%i,%.4f%s" % (
                 self._name,
                 self.pattern,
                 self.length,
                 _HPGLPrimitive._terminator,
             )
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class FT(_HPGLPrimitive):
@@ -948,7 +948,7 @@ class FT(_HPGLPrimitive):
     @property
     def format(self):
         if not None in (self.type, self.space, self.angle):
-            return "%s%i,%s,%s%s" % (
+            return b"%s%i,%.2f,%.2f%s" % (
                 self._name,
                 self.type,
                 self.space,
@@ -956,16 +956,16 @@ class FT(_HPGLPrimitive):
                 _HPGLPrimitive._terminator,
             )
         elif not None in (self.type, self.space):
-            return "%s%i,%s%s" % (
+            return b"%s%i,%.2f%s" % (
                 self._name,
                 self.type,
                 self.space,
                 _HPGLPrimitive._terminator,
             )
         elif not self.type is None:
-            return "%s%i%s" % (self._name, self.type, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.type, _HPGLPrimitive._terminator)
         elif None == self.type == self.space == self.angle:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
         else:
             ### TODO: raise this type of warning in all other commands where
             ### this may be necessary.
@@ -987,7 +987,7 @@ class PM(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
 
 
 class EC(_HPGLPrimitive):
@@ -1005,7 +1005,7 @@ class EC(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
 
 
 class PG(_HPGLPrimitive):
@@ -1021,9 +1021,9 @@ class PG(_HPGLPrimitive):
     @property
     def format(self):
         if self.n:
-            return "%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class GC(_HPGLPrimitive):
@@ -1042,9 +1042,9 @@ class GC(_HPGLPrimitive):
     @property
     def format(self):
         if not self.count is None:
-            return "%s%i%s" % (self._name, self.count, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.count, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 ### TODO implement these:
@@ -1066,7 +1066,7 @@ class SL(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%.4f%s" % (self._name, self.tan, _HPGLPrimitive._terminator)
+        return b"%s%.4f%s" % (self._name, self.tan, _HPGLPrimitive._terminator)
 
 
 class SA(_HPGLPrimitive):
@@ -1087,7 +1087,7 @@ class RO(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.angle, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.angle, _HPGLPrimitive._terminator)
 
 
 class RP(_HPGLPrimitive):
@@ -1101,7 +1101,7 @@ class RP(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.n, _HPGLPrimitive._terminator)
 
 
 class SM(_HPGLPrimitive):
@@ -1118,9 +1118,9 @@ class SM(_HPGLPrimitive):
     @property
     def format(self):
         if self.char:
-            return "%s%c%s" % (self._name, self.char, _HPGLPrimitive._terminator)
+            return b"%s%c%s" % (self._name, self.char, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class SC(_TwoPoint):
@@ -1172,16 +1172,16 @@ class IV(_HPGLPrimitive):
     @property
     def format(self):
         if not None in (self.slot, self.left):
-            return "%s%i%i%s" % (
+            return b"%s%i%i%s" % (
                 self._name,
                 self.slot,
                 self.left,
                 _HPGLPrimitive._terminator,
             )
         elif not self.slot is None:
-            return "%s%i%s" % (self._name, self.slot, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.slot, _HPGLPrimitive._terminator)
         elif self.slot == self.left == None:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
         else:
             raise Warning
 
@@ -1216,16 +1216,16 @@ class KY(_HPGLPrimitive):
     @property
     def format(self):
         if not None in (self.key, self.function):
-            return "%s%i%i%s" % (
+            return b"%s%i%i%s" % (
                 self._name,
                 self.key,
                 self.function,
                 _HPGLPrimitive._terminator,
             )
         elif not self.key is None:
-            return "%s%i%s" % (self._name, self.key, _HPGLPrimitive._terminator)
+            return b"%s%i%s" % (self._name, self.key, _HPGLPrimitive._terminator)
         elif self.key == self.function == None:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
         else:
             raise Warning
 
@@ -1244,7 +1244,7 @@ class PT(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%.2f%s" % (self._name, self.thickness, _HPGLPrimitive._terminator)
+        return b"%s%.2f%s" % (self._name, self.thickness, _HPGLPrimitive._terminator)
 
 
 class SI(_HPGLPrimitive):
@@ -1268,14 +1268,14 @@ class SI(_HPGLPrimitive):
     @property
     def format(self):
         if self.width and self.height:
-            return "%s%.2f,%.2f%s" % (
+            return b"%s%.2f,%.2f%s" % (
                 self._name,
                 self.width,
                 self.height,
                 _HPGLPrimitive._terminator,
             )
         elif None == self.width == self.height:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
         else:
             raise Warning
 
@@ -1313,14 +1313,14 @@ class DI(_HPGLPrimitive):
     @property
     def format(self):
         if not None in (self.run, self.rise):
-            return "%s%.2f,%.2f%s" % (
+            return b"%s%.2f,%.2f%s" % (
                 self._name,
                 self.run,
                 self.rise,
                 _HPGLPrimitive._terminator,
             )
         elif None == self.run == self.rise:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
         else:
             raise Warning
 
@@ -1368,14 +1368,14 @@ class DS(_HPGLPrimitive):
     @property
     def format(self):
         if self.slot and self.set:
-            return "%s%i,%i%s" % (
+            return b"%s%i,%i%s" % (
                 self._name,
                 self.slot,
                 self.set,
                 _HPGLPrimitive._terminator,
             )
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class DV(_HPGLPrimitive):
@@ -1392,7 +1392,7 @@ class DV(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.vertical, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.vertical, _HPGLPrimitive._terminator)
 
 
 class ES(_HPGLPrimitive):
@@ -1418,16 +1418,16 @@ class ES(_HPGLPrimitive):
     @property
     def format(self):
         if not None in (self.charspace, self.linespace):
-            return "%s%.2f,%.2f%s" % (
+            return b"%s%.2f,%.2f%s" % (
                 self._name,
                 self.charspace,
                 self.linespace,
                 _HPGLPrimitive._terminator,
             )
         elif not self.charspace is None:
-            return "%s%.2f%s" % (self._name, self.charspace, _HPGLPrimitive._terminator)
+            return b"%s%.2f%s" % (self._name, self.charspace, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
 
 
 class LO(_HPGLPrimitive):
@@ -1446,7 +1446,7 @@ class LO(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%i%s" % (self._name, self.origin, _HPGLPrimitive._terminator)
+        return b"%s%i%s" % (self._name, self.origin, _HPGLPrimitive._terminator)
 
 
 class EW(_HPGLPrimitive):
@@ -1472,7 +1472,7 @@ class EW(_HPGLPrimitive):
     @property
     def format(self):
         if self.chordangle:
-            return "%s%.2f,%.2f,%.2f,%.2f%s" % (
+            return b"%s%.2f,%.2f,%.2f,%.2f%s" % (
                 self._name,
                 self.radius,
                 self.startangle,
@@ -1481,7 +1481,7 @@ class EW(_HPGLPrimitive):
                 _HPGLPrimitive._terminator,
             )
         else:
-            return "%s%.2f,%.2f,%.2f%s" % (
+            return b"%s%.2f,%.2f,%.2f%s" % (
                 self._name,
                 self.radius,
                 self.startangle,
@@ -1514,7 +1514,7 @@ class TL(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%.4f,%.4f%s" % (
+        return b"%s%.4f,%.4f%s" % (
             self._name,
             self.tp,
             self.tn,
@@ -1533,7 +1533,7 @@ class WD(_HPGLPrimitive):
 
     @property
     def format(self):
-        return "%s%s%s" % (self._name, self.text, chr(3))  # no terminator??
+        return b"%s%s%s" % (self._name, self.text, chr(3))  # no terminator??
 
 
 ### ESCAPES ###
@@ -1556,7 +1556,7 @@ class On(_HPGLEscape):
 
     @property
     def _name(self):
-        return "("
+        return b"("
 
 
 class Off(_HPGLEscape):
@@ -1567,7 +1567,7 @@ class Off(_HPGLEscape):
 
     @property
     def _name(self):
-        return ")"
+        return b")"
 
 
 class ExtendedError(_HPGLEscape):
@@ -1592,7 +1592,7 @@ class ExtendedError(_HPGLEscape):
 
     @property
     def _name(self):
-        return "E"
+        return b"E"
 
 
 class K(_HPGLEscape):
@@ -1631,11 +1631,11 @@ class SetHandshakeMode(_HPGLEscape):
 
     @property
     def _name(self):
-        return "P"
+        return b"P"
 
     @property
     def format(self):
         if self.mode is None:
-            return "%s.%s" % (self._escape, self._name)
+            return b"%s.%s" % (self._escape, self._name)
         else:
-            return "%s.%s%i" % (self._escape, self._name, self.mode)
+            return b"%s.%s%i" % (self._escape, self._name, self.mode)

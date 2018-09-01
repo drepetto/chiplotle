@@ -25,7 +25,7 @@ def test_CI_03():
     t = CI(1, 90)
     assert t.radius == 1
     assert t.chordangle == 90
-    assert t.format == "CI1.00,90.00;"
+    assert t.format == b"CI1.00,90.00;"
 
 
 ## _scalable ##

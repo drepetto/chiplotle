@@ -13,7 +13,7 @@ def test_AA_01():
 
     assert t.angle == 180
     assert t.chordtolerance is None
-    assert t.format == "AA0,0,180.00;"
+    assert t.format == b"AA0,0,180.00;"
 
 
 def test_AA_02():
@@ -21,7 +21,7 @@ def test_AA_02():
 
     assert t.angle == 180
     assert t.chordtolerance == 45
-    assert t.format == "AA0,0,180.00,45.00;"
+    assert t.format == b"AA0,0,180.00,45.00;"
 
 
 def test_AA_03():
@@ -33,14 +33,14 @@ def test_AA_format_01():
     """Ints format as ints."""
     t = AA((0, 0), 180)
 
-    assert t.format == "AA0,0,180.00;"
+    assert t.format == b"AA0,0,180.00;"
 
 
 def test_AA_format_02():
     """Floats format as floats."""
     t = AA((0, 0.0), 180)
 
-    assert t.format == "AA0.00,0.00,180.00;"
+    assert t.format == b"AA0.00,0.00,180.00;"
 
 
 def test_AA_angle_01():

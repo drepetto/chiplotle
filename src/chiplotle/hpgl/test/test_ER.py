@@ -23,4 +23,4 @@ def test_ER_03():
     """ER can initialize with a list of length 2."""
     t = ER([1, 2])
     assert t.xy == Coordinate(1, 2)
-    assert t.format == "ER1,2;"
+    assert t.format == b"ER1,2;"

@@ -11,6 +11,8 @@ from __future__ import absolute_import
 from builtins import range
 from builtins import open
 from builtins import int
+from collections import Iterable
+
 from future import standard_library
 from six import string_types
 
@@ -63,21 +65,23 @@ class _BasePlotter(object):
         """Public access for writing to serial port.
          data can be an iterator, a string or an _HPGL. """
         ## TODO: remove _HPGL from this list...
-        if isinstance(data, (_Shape, _HPGL)):
+        if isinstance(data, _HPGL):
             data = data.format
-        try:
-            self._write_string_to_port(data)
-        except TypeError:  ## must be an iterable...
+        elif isinstance(data, bytes):
+            pass
+        elif isinstance(data, Iterable):
             result = []
             for c in data:
                 ## TODO: remove _HPGL from this list...
                 if isinstance(c, (_Shape, _HPGL)):
                     c = c.format
+                else:
+                    print(c, type(c))
                 result.append(c)
-            try:
-                self._write_string_to_port("".join(result))
-            except TypeError:
-                raise TypeError("Must be a str, iterator, or a _Shape.")
+            data = b"".join(result)
+        else:
+            raise TypeError("Unknown type {}, can't write to serial".format(type(data)))
+        self._write_bytes_to_port(data)
 
     def write_file(self, filename):
         """Sends the HPGL content of the given `filename` to the plotter."""
@@ -91,29 +95,29 @@ class _BasePlotter(object):
     ### PRIVATE METHODS ###
 
     def _is_HPGL_command_known(self, hpglCommand):
-        if self._check_is_bytes(hpglCommand):
+        try:
             command_head = hpglCommand[0:2]
-        elif hasattr(hpglCommand, "_name"):
-            command_head = hpglCommand._name
-        else:
-            raise TypeError("Don't know type %s" % hpglCommand)
+        except TypeError:
+            try:
+                command_head = hpglCommand._name
+            except AttributeError:
+                raise TypeError("Don't know type %s" % type(hpglCommand))
         return command_head.upper() in self.allowedHPGLCommands
 
     def _filter_unrecognized_commands(self, commands):
         self._check_is_bytes(commands)
         result = []
         # commands = re.split('[\n;]+', commands)
-        commands = commands.split(";")
+        commands = commands.split(b";")
         for comm in commands:
             if comm:  ## if not an empty string.
                 if self._is_HPGL_command_known(comm):
-                    # result.append(comm)
-                    result.append(comm + ";")
+                    result.append(comm + b";")
                 else:
                     msg = "HPGL command `%s` not recognized by %s. Command not sent."
                     msg = msg % (comm, self.type)
                     self._logger.warning(msg)
-        return "".join(result)
+        return b"".join(result)
 
     def _sleep_while_buffer_full(self):
         """
@@ -130,9 +134,8 @@ class _BasePlotter(object):
             result.append(data[i * self.buffer_size : (i + 1) * self.buffer_size])
         return result
 
-    def _write_string_to_port(self, data):
+    def _write_bytes_to_port(self, data):
         """ Write data to serial port. data is expected to be a string."""
-        # assert type(data) is str
         self._check_is_bytes(data)
         data = self._filter_unrecognized_commands(data)
         data = self._slice_string_to_buffer_size(data)
@@ -142,7 +145,7 @@ class _BasePlotter(object):
 
     def _check_is_bytes(self, data):
         if not isinstance(data, bytes):
-            raise TypeError("Bytes expected.")
+            raise TypeError("Expected bytes but got {}".format(type(data)))
 
     ### PRIVATE QUERIES ###
 
@@ -154,7 +157,7 @@ class _BasePlotter(object):
         while elapsed_time < total_time:
             if self._serial_port.inWaiting():
                 try:
-                    return self._serial_port.readline(eol="\r")  # <-- old pyserial
+                    return self._serial_port.readline(eol=b"\r")  # <-- old pyserial
                 except:
                     return self._serial_port.readline()
             else:
@@ -188,16 +191,16 @@ class _BasePlotter(object):
     def id(self):
         """Get id of plotter. Returns a string."""
         id = self._send_query(self._hpgl.OI())
-        return id.strip("\r")
+        return id.strip(b"\r")
 
     @property
     def actual_position(self):
         """Output the actual position of the plotter pen. Returns a tuple
       (Coordinate(x, y), pen status)"""
-        response = self._send_query(self._hpgl.OA()).split(",")
+        response = self._send_query(self._hpgl.OA()).split(b",")
         return [
             Coordinate(eval(response[0]), eval(response[1])),
-            eval(response[2].strip("\r")),
+            eval(response[2].strip(b"\r")),
         ]
 
     @property
@@ -208,20 +211,20 @@ class _BasePlotter(object):
     def commanded_position(self):
         """Output the commanded position of the plotter pen. Returns a tuple
       [Coordinate(x, y), pen status]"""
-        response = self._send_query(self._hpgl.OC()).split(",")
+        response = self._send_query(self._hpgl.OC()).split(b",")
         return [
             Coordinate(eval(response[0]), eval(response[1])),
-            eval(response[2].strip("\r")),
+            eval(response[2].strip(b"\r")),
         ]
 
     @property
     def digitized_point(self):
         """Returns last digitized point. Returns a tuple
       [Coordinate(x, y), pen status]"""
-        response = self._send_query(self._hpgl.OD()).split(",")
+        response = self._send_query(self._hpgl.OD()).split(b",")
         return [
             Coordinate(eval(response[0]), eval(response[1])),
-            eval(response[2].strip("\r")),
+            eval(response[2].strip(b"\r")),
         ]
 
     @property
@@ -243,9 +246,9 @@ class _BasePlotter(object):
     @property
     def output_p1p2(self):
         """Returns the current settings for P1, P2. Returns two Coordinates"""
-        response = self._send_query(self._hpgl.OP()).split(",")
+        response = self._send_query(self._hpgl.OP()).split(b",")
         cp1 = Coordinate(eval(response[0]), eval(response[1]))
-        cp2 = Coordinate(eval(response[2]), eval(response[3].strip("\r")))
+        cp2 = Coordinate(eval(response[2]), eval(response[3].strip(b"\r")))
         return (cp1, cp2)
 
     @property

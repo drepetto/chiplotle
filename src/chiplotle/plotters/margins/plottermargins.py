@@ -71,8 +71,8 @@ class _PlotterMargins(object):
     @property
     def all_coordinates(self):
         self._plotter._serial_port.flushInput()
-        self._plotter._write_string_to_port(self._queryCommand.format)
-        m = self._plotter._read_port().rstrip("\r").split(",")
+        self._plotter._write_bytes_to_port(self._queryCommand.format)
+        m = self._plotter._read_port().rstrip(b"\r").split(b",")
         return tuple([eval(n) for n in m])
 
     ## METHODS ##

@@ -46,7 +46,8 @@ class Pen(object):
 
     @property
     def format(self):
-        result = ""
+        result = b""
         for c in self._subcommands:
+            print(c)
             result += c.format
         return result

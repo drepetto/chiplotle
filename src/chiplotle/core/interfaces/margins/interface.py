@@ -16,7 +16,7 @@ class MarginsInterface(_Interface):
         self._soft = MarginsSoft(client)
         self._hard = None
         ## check if hard margin (OH) is supported by plotter...
-        if "OH" in client.allowedHPGLCommands:
+        if b"OH" in client.allowedHPGLCommands:
             self._hard = MarginsHard(client)
 
     @property

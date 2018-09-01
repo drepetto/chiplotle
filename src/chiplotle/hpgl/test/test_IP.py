@@ -12,7 +12,7 @@ from py.test import raises
 def test_IP_01():
     """IP can be empty."""
     t = IP()
-    assert t.format == "IP;"
+    assert t.format == b"IP;"
     assert isinstance(t.coords, CoordinateArray)
 
 

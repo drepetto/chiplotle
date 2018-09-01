@@ -71,18 +71,18 @@ class Label(object):
             result.append(DI(*self.direction))
         else:
             result.append(DI())
-        result.append(SI(self.charwidth, self.charheight))
-        result.append(ES(self.charspace, self.linespace))
-        result.append(LO(self.origin))
-        result.append(SL(self.slant))
-        result.append(DV(self.vertical))
+        result.append(SI(width=self.charwidth, height=self.charheight))
+        result.append(ES(charspace=self.charspace, linespace=self.linespace))
+        result.append(LO(origin=self.origin))
+        result.append(SL(tan=self.slant))
+        result.append(DV(vertical=self.vertical))
         result.append(LB(self.text))
 
         return result
 
     @property
     def format(self):
-        return "".join([c.format for c in self._subcommands])
+        return b"".join([c.format for c in self._subcommands])
 
 
 ## demo

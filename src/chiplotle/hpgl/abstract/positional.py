@@ -59,7 +59,7 @@ class _Positional(_HPGLPrimitive):
     @property
     def format(self):
         if isinstance(self.x, int) and isinstance(self.y, int):
-            coordinates = "%i,%i" % (self.x, self.y)
+            coordinates = b"%i,%i" % (self.x, self.y)
         else:
-            coordinates = "%.2f,%.2f" % (self.x, self.y)
-        return "%s%s%s" % (self._name, coordinates, _HPGLPrimitive._terminator)
+            coordinates = b"%.2f,%.2f" % (self.x, self.y)
+        return b"%s%s%s" % (self._name, coordinates, _HPGLPrimitive._terminator)

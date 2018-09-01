@@ -14,7 +14,7 @@ def test_PA_01():
 
     assert t.xy == CoordinateArray([])
     assert isinstance(t.xy, CoordinateArray)
-    assert t.format == "PA;"
+    assert t.format == b"PA;"
 
 
 ## eq ##

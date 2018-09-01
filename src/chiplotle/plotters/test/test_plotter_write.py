@@ -15,9 +15,9 @@ from chiplotle.tools.plottertools.instantiate_virtual_plotter import (
 def test_plotter_write_01():
     """write( ) can take a string of raw HPGL commands."""
     p = instantiate_virtual_plotter()
-    commands = "SP1;PA0,0;PD;PU;"
+    commands = b"SP1;PA0,0;PD;PU;"
     p.write(commands)
-    assert p.format == "IN;" + commands
+    assert p.format == b"IN;" + commands
 
 
 def test_plotter_write_02():
@@ -25,15 +25,15 @@ def test_plotter_write_02():
     p = instantiate_virtual_plotter()
     command = CI(1000)
     p.write(command)
-    assert p.format == "IN;" + command.format
+    assert p.format == b"IN;" + command.format
 
 
 def test_plotter_write_03():
     """write( ) can take list/tuple of string HPGL commands."""
     p = instantiate_virtual_plotter()
-    commands = ["SP2;", "PA0,0;", "PD;", "PU;"]
+    commands = [b"SP2;", b"PA0,0;", b"PD;", b"PU;"]
     p.write(commands)
-    assert p.format == "IN;" + "".join(commands)
+    assert p.format == b"IN;" + b"".join(commands)
 
 
 def test_plotter_write_04():
@@ -41,4 +41,4 @@ def test_plotter_write_04():
     p = instantiate_virtual_plotter()
     commands = [PA([(1000, 0)]), CI(500)]
     p.write(commands)
-    assert p.format == "IN;" + "".join([c.format for c in commands])
+    assert p.format == b"IN;" + b"".join([c.format for c in commands])

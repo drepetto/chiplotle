@@ -13,8 +13,8 @@ def parse_hpgl_string(arg):
     """The function takes a string `arg` of HPGL commands, parses them
     (separates them) and returns them in a list.
     """
-    if not isinstance(arg, string_types):
-        raise TypeError("`arg` must be of type string or bytes")
+    if not isinstance(arg, str):
+        raise TypeError("`arg` must be a string but was {}".format(type(arg)))
 
     string_commands = ["LB", "DT"]
     numeric_commands = [

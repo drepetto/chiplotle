@@ -12,7 +12,7 @@ def test_DR_01():
     t = DR()
 
     assert t.run == t.rise == None
-    assert t.format == "DR;"
+    assert t.format == b"DR;"
 
 
 def test_DR_02():
@@ -32,7 +32,7 @@ def test_DR_03():
 
     assert t.run == 0
     assert t.rise == 25.3
-    assert t.format == "DR0.00,25.30;"
+    assert t.format == b"DR0.00,25.30;"
 
 
 def test_DR_03():
@@ -42,4 +42,4 @@ def test_DR_03():
 
     assert t.run == 10
     assert t.rise == 0
-    assert t.format == "DR10.00,0.00;"
+    assert t.format == b"DR10.00,0.00;"

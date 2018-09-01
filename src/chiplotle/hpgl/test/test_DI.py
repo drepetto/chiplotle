@@ -12,7 +12,7 @@ def test_DI_01():
     t = DI()
 
     assert t.run == t.rise == None
-    assert t.format == "DI;"
+    assert t.format == b"DI;"
 
 
 def test_DI_02():
@@ -32,4 +32,4 @@ def test_DI_03():
 
     assert t.run == 0
     assert t.rise == 25.3
-    assert t.format == "DI0.00,25.30;"
+    assert t.format == b"DI0.00,25.30;"

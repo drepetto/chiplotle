@@ -24,7 +24,7 @@ def test_pen_02():
     assert t.velocity == None
     assert t.thickness == None
 
-    assert t.format == "SP2;"
+    assert t.format == b"SP2;"
 
 
 def test_pen_03():
@@ -36,7 +36,7 @@ def test_pen_03():
     assert t.velocity == 3
     assert t.thickness == 0.1
 
-    assert t.format == "SP2;AS5,2;FS4,2;VS3,2;PT0.10;"
+    assert t.format == b"SP2;AS5,2;FS4,2;VS3,2;PT0.10;"
 
 
 def test_pen_04():
@@ -48,4 +48,4 @@ def test_pen_04():
     assert t.velocity == 3
     assert t.thickness == None
 
-    assert t.format == "SP2;FS4,2;VS3,2;"
+    assert t.format == b"SP2;FS4,2;VS3,2;"

@@ -13,14 +13,14 @@ def test_SR_01():
 
     t = SR()
 
-    assert t.format == "SR;"
+    assert t.format == b"SR;"
 
 
 def test_SR_02():
 
     t = SR(3, 2)
 
-    assert t.format == "SR3.00,2.00;"
+    assert t.format == b"SR3.00,2.00;"
 
 
 def test_SR_03():

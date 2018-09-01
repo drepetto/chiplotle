@@ -13,7 +13,7 @@ def test_CP_01():
     t = CP()
     assert t.spaces is None
     assert t.lines is None
-    assert t.format == "CP;"
+    assert t.format == b"CP;"
 
 
 def test_CP_02():
@@ -21,7 +21,7 @@ def test_CP_02():
     t = CP(2)
     assert t.spaces == 2
     assert t.lines is None
-    assert t.format == "CP2;"
+    assert t.format == b"CP2;"
 
 
 def test_CP_03():
@@ -29,4 +29,4 @@ def test_CP_03():
     t = CP(2, 1)
     assert t.spaces == 2
     assert t.lines == 1
-    assert t.format == "CP2,1;"
+    assert t.format == b"CP2,1;"

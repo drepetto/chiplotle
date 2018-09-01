@@ -59,11 +59,11 @@ class _PenPlot(_HPGLPrimitive):
     @property
     def format(self):
         if self.xy.dtype == int:
-            coordinates = ["%i,%i" % tuple(p) for p in self.xy]
+            coordinates = [b"%i,%i" % tuple(p) for p in self.xy]
         else:
-            coordinates = ["%.2f,%.2f" % tuple(p) for p in self.xy]
-        return "%s%s%s" % (
+            coordinates = [b"%.2f,%.2f" % tuple(p) for p in self.xy]
+        return b"%s%s%s" % (
             self._name,
-            ",".join(coordinates),
+            b",".join(coordinates),
             _HPGLPrimitive._terminator,
         )

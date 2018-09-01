@@ -31,11 +31,11 @@ class _Arc(_Positional):
     @property
     def format(self):
         if isinstance(self.x, int) and isinstance(self.y, int):
-            coordinates = "%i,%i" % (self.x, self.y)
+            coordinates = b"%i,%i" % (self.x, self.y)
         else:
-            coordinates = "%.2f,%.2f" % (self.x, self.y)
-        result = "%s%s,%.2f" % (self._name, coordinates, self.angle)
+            coordinates = b"%.2f,%.2f" % (self.x, self.y)
+        result = b"%s%s,%.2f" % (self._name, coordinates, self.angle)
         if self.chordtolerance:
-            result += ",%.2f" % self.chordtolerance
+            result += b",%.2f" % self.chordtolerance
         result += _HPGLPrimitive._terminator
         return result

@@ -16,8 +16,8 @@ from chiplotle.plotters.drawingplotter import _DrawingPlotter
 class DXY1300(_DrawingPlotter):
     def __init__(self, ser, **kwargs):
         self.allowedHPGLCommands = tuple(
-            [
-                "\x1b.",
+            [x.encode('ascii') for x in
+             ("\x1b.",
                 "AA",
                 "AR",
                 "CA",
@@ -74,7 +74,7 @@ class DXY1300(_DrawingPlotter):
                 "WG",
                 "XT",
                 "YT",
-            ]
+              )]
         )
         _DrawingPlotter.__init__(self, ser, **kwargs)
         self.type = "DXY-1300"

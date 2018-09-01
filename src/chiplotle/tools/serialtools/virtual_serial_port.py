@@ -17,8 +17,8 @@ class VirtualSerialPort(object):
         left_bottom = Coordinate(*left_bottom)
         right_top = Coordinate(*right_top)
         # print "I am a virtual serial port!"
-        self._received_commands_string = ""
-        self._next_query_value = ""
+        self._received_commands_string = b""
+        self._next_query_value = b""
         self.commanded_x = 0
         self.commanded_y = 0
         # pen_status: 0 == up, 1 == down
@@ -58,7 +58,7 @@ class VirtualSerialPort(object):
             return
         elif command.startswith(commands.OH().format):
             # hard margins
-            out_string = "%d, %d, %d, %d\r" % (
+            out_string = b"%d, %d, %d, %d\r" % (
                 self.left,
                 self.bottom,
                 self.right,
@@ -68,7 +68,7 @@ class VirtualSerialPort(object):
             return
         elif command.startswith(commands.OW().format):
             # soft margins
-            out_string = "%d, %d, %d, %d\r" % (
+            out_string = b"%d, %d, %d, %d\r" % (
                 self.left,
                 self.bottom,
                 self.right,
@@ -81,7 +81,7 @@ class VirtualSerialPort(object):
             return
         elif command.startswith(commands.OA().format):
             # actual position
-            out_string = "%i, %i, %i\r" % (
+            out_string = b"%i, %i, %i\r" % (
                 self.commanded_x,
                 self.commanded_y,
                 self.pen_status,
@@ -90,7 +90,7 @@ class VirtualSerialPort(object):
             return
         elif command.startswith(commands.OC().format):
             # commanded position
-            out_string = "%i, %i, %i\r" % (
+            out_string = b"%i, %i, %i\r" % (
                 self.commanded_x,
                 self.commanded_y,
                 self.pen_status,
@@ -99,7 +99,7 @@ class VirtualSerialPort(object):
             return
         elif command.startswith(commands.OP().format):
             # output P1P2
-            out_string = "%d, %d, %d, %d\r" % (
+            out_string = b"%d, %d, %d, %d\r" % (
                 self.left,
                 self.bottom,
                 self.right,
@@ -116,27 +116,27 @@ class VirtualSerialPort(object):
         # this breaks for buffered writes since we don't always
         # receive a full PA1000,1000 type command
 
-        split_data = command.split(";")
+        split_data = command.split(b";")
 
         for point in split_data:
-            if point.startswith("PA"):
-                point_parts = point.strip("PA").split(",")
+            if point.startswith(b"PA"):
+                point_parts = point.strip(b"PA").split(b",")
                 self.commanded_x = eval(point_parts[len(point_parts) - 2])
                 self.commanded_y = eval(point_parts[len(point_parts) - 1])
-            elif point.startswith("PD"):
-                if "," in point:
-                    point_parts = point.strip("PD").split(",")
+            elif point.startswith(b"PD"):
+                if b"," in point:
+                    point_parts = point.strip(b"PD").split(b",")
                     self.commanded_x = eval(point_parts[len(point_parts) - 2])
                     self.commanded_y = eval(point_parts[len(point_parts) - 1])
                 self.pen_status = 1
-            elif point.startswith("PU"):
-                if "," in point:
-                    point_parts = point.strip("PU").split(",")
+            elif point.startswith(b"PU"):
+                if b"," in point:
+                    point_parts = point.strip(b"PU").split(b",")
                     self.commanded_x = eval(point_parts[len(point_parts) - 2])
                     self.commanded_y = eval(point_parts[len(point_parts) - 1])
                 self.pen_status = 0
-            if point.startswith("PR"):
-                point_parts = point.strip("PR").split(",")
+            if point.startswith(b"PR"):
+                point_parts = point.strip(b"PR").split(b",")
                 self.commanded_x += eval(point_parts[len(point_parts) - 2])
                 self.commanded_y += eval(point_parts[len(point_parts) - 1])
 

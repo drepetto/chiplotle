@@ -15,7 +15,7 @@ def is_primitive_absolute(command):
 
     if not isinstance(command, _HPGL):
         raise TypeError("command is not an _HPGL")
-    if command._name in ("AA", "EA", "PA", "RA"):
+    if command._name in (b"AA", b"EA", b"PA", b"RA"):
         return True
     else:
         return False

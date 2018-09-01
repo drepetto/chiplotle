@@ -2,7 +2,8 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
-from builtins import open
+
+import io
 from future import standard_library
 
 standard_library.install_aliases()
@@ -15,5 +16,6 @@ def read_config_file():
 
     globals = {}
     locals = {}
-    exec(compile(open(CONFIG_FILE).read(), CONFIG_FILE, "exec"), globals, locals)
+    with io.open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+        exec(compile(f.read(), CONFIG_FILE, "exec"), globals, locals)
     return locals

@@ -33,8 +33,8 @@ class _TwoPoint(_HPGLPrimitive):
     def format(self):
         if self.coords:
             coords = self.coords[0].xy + self.coords[1].xy
-            coords = list(map(str, coords))
-            coords = ",".join(coords)
-            return "%s%s%s" % (self._name, coords, _HPGLPrimitive._terminator)
+            coords = list(map(lambda coord: str(coord).encode('ascii'), coords))
+            coords = b",".join(coords)
+            return b"%s%s%s" % (self._name, coords, _HPGLPrimitive._terminator)
         else:
-            return "%s%s" % (self._name, _HPGLPrimitive._terminator)
+            return b"%s%s" % (self._name, _HPGLPrimitive._terminator)
