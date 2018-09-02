@@ -4,6 +4,8 @@ from __future__ import print_function
 from __future__ import division
 from __future__ import unicode_literals
 from __future__ import absolute_import
+
+import os
 from builtins import input
 from builtins import range
 from builtins import int
@@ -11,102 +13,149 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle import *
+from chiplotle.hpgl.commands import *
+import chiplotle.tools.io as io
 import random
+import argparse
+
+parser = argparse.ArgumentParser(
+    description="Draw random shapes and lines",
+    formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+)
+parser.add_argument("--output", type=str, help="Path to output file")
+parser.add_argument("--view", action="store_true", help="Show plot as well as output?")
+parser.add_argument(
+    "-n", "--pen-count", type=int, default=1, help="How many pens to use?"
+)
 
 
-def main():
+def main(args, width=30000, height=20000, left=0, right=30000, bottom=0, top=20000):
+    pen_count = args.pen_count
 
-    plotter = instantiate_plotters()[0]
-
-    width = plotter.margins.soft.width
-    height = plotter.margins.soft.height
-    left = plotter.margins.soft.left
-    right = plotter.margins.soft.right
-    bottom = plotter.margins.soft.bottom
-    top = plotter.margins.soft.top
-
-    print(
-        "width: %d height: %d"
-        % (plotter.margins.soft.width, plotter.margins.soft.height)
-    )
-    pens = input("\nhow many pens do you want to use? ")
-    numPens = int(pens)
+    print("width: %d height: %d" % (width, height))
 
     # start in a random spot
-    plotter.goto(random.randint(left, right), random.randint(bottom, top))
-    penNum = 1
+    plot = abstract_masterpiece(top, bottom, left, right, height, width, pen_count)
+    if args.output is None or args.view:
+        io.view(plot)
+    if args.output is not None:
+        output_name, extension = os.path.splitext(args.output)
+        io.export(plot, output_name, fmt=extension[1:])
 
+
+def abstract_masterpiece(top, bottom, left, right, height, width, pen_count):
+    plot = [PA([random_point(top, bottom, left, right)])]
+    pen_id = 1
     while True:
-        plotter.select_pen(penNum)
+        plot.append(SP(pen_id))
+        gesture_id = random.randint(0, 5)
 
-        whichGesture = random.randint(0, 5)
+        if gesture_id == 0:
+            feature = random_circle()
+        elif gesture_id == 1:
+            feature = random_rect()
+        elif gesture_id == 2:
+            feature = random_filled_rect()
+        elif gesture_id == 3:
+            feature = random_line(top, bottom, left, right)
+        elif gesture_id == 4:
+            feature = random_shape(top, bottom, left, right, width, height)
+        else:
+            feature = random_pen_move(top, bottom, left, right)
+        plot.extend(feature)
 
-        if whichGesture == 0:
-            print("circle!")
-            plotter.write(hpgl.CI(random.randint(10, 5000), random.randint(1, 180)))
-
-        elif whichGesture == 1:
-            print("rect!")
-            plotter.write(hpgl.ER((random.randint(10, 5000), random.randint(10, 5000))))
-
-        elif whichGesture == 2:
-            print("filled rect!")
-            ft = random.randint(1, 8)
-            if ft == 1 or ft == 2:
-                ft = 1
-            if ft == 3 or ft == 4 or ft == 5:
-                ft = 3
-            if ft == 6 or ft == 7 or ft == 8:
-                ft = 4
-
-            space = random.randint(10, 100)
-            angle = random.randint(0, 3) * 45
-
-            print("fill type: %d space: %d angle: %d" % (ft, space, angle))
-            plotter.write(hpgl.RR((random.randint(10, 2000), random.randint(10, 2000))))
-            plotter.write(hpgl.FT(ft, space, angle))
-
-        elif whichGesture == 3:
-            print("draw a crazy line!")
-            plotter.pen_down()
-            plotter.goto(random.randint(left, right), random.randint(bottom, top))
-            plotter.pen_up()
-
-        elif whichGesture == 4:
-            print("draw an abstract shape!")
-            numPoints = random.randint(2, 4)
-            print("numPoints: ", numPoints)
-            firstX = random.randint(left, right)
-            firstY = random.randint(bottom, top)
-            plotter.goto(firstX, firstY)
-            plotter.pen_down()
-            xRange = width / 5
-            yRange = height / 5
-
-            for i in range(numPoints):
-                plotter.nudge(
-                    random.randint(int(-xRange), int(xRange)),
-                    random.randint(int(-yRange), int(yRange)),
-                )
-            plotter.goto(firstX, firstY)
-            plotter.pen_up()
-
-        elif whichGesture == 5:
-            print("just jump around!")
-            plotter.goto(random.randint(left, right), random.randint(bottom, top))
-
-        # pick a new pen?
-        pickPen = random.randint(0, 99)
-        if pickPen < 25:
-            penNum += 1
-
-        if penNum == numPens + 1:
+        pen_id = randomly_switch_pen(pen_id)
+        if pen_id == pen_count + 1:
             break
+    plot.append(SP(0))
+    return plot
 
-    plotter.select_pen(0)
+
+def random_shape(top, bottom, left, right, width, height):
+    feature = []
+    print("draw an abstract shape!")
+    polygon_edges = random.randint(2, 4)
+    print("polygon_edges: ", polygon_edges)
+    firstX = random.randint(left, right)
+    firstY = random.randint(bottom, top)
+    feature.append(PA([(firstX, firstY)]))
+    feature.append(PD())
+    xRange = width / 5
+    yRange = height / 5
+    for i in range(polygon_edges):
+        feature.append(
+            PR(
+                [
+                    (
+                        random.randint(int(-xRange), int(xRange)),
+                        random.randint(int(-yRange), int(yRange)),
+                    )
+                ]
+            )
+        )
+    feature.append(PA([(firstX, firstY)]))
+    feature.append(PU())
+    return feature
 
 
-### run main if called from command line like so:
-### $> python abstract_masterpiece.py
+def random_line(top, bottom, left, right):
+    feature = []
+    print("draw a crazy line!")
+    feature.append(PD())
+    feature.append(PA([random_point(top, bottom, left, right)]))
+    feature.append(PU())
+    return feature
+
+
+def random_filled_rect():
+    feature = []
+    print("filled rect!")
+    ft = random.randint(1, 8)
+    if ft == 1 or ft == 2:
+        ft = 1
+    if ft == 3 or ft == 4 or ft == 5:
+        ft = 3
+    if ft == 6 or ft == 7 or ft == 8:
+        ft = 4
+    space = random.randint(10, 100)
+    angle = random.randint(0, 3) * 45
+    print("fill type: %d space: %d angle: %d" % (ft, space, angle))
+    feature.append(hpgl.RR(random_point(2000, 10, 10, 2000)))
+    feature.append(hpgl.FT(ft, space, angle))
+    return feature
+
+
+def random_rect():
+    feature = []
+    print("rect!")
+    feature.append(hpgl.ER(random_point(5000, 10, 10, 5000)))
+    return feature
+
+
+def random_circle():
+    feature = []
+    print("circle!")
+    feature.append(hpgl.CI(random.randint(10, 5000), random.randint(1, 180)))
+    return feature
+
+
+def random_point(top, bottom, left, right):
+    return random.randint(left, right), random.randint(bottom, top)
+
+
+def random_pen_move(top, bottom, left, right):
+    feature = []
+    print("just jump around!")
+    feature.append(PA([random_point(top, bottom, left, right)]))
+    return feature
+
+
+def randomly_switch_pen(pen_id, probability=0.25):
+    assert probability <= 1.0
+    if random.random() < probability:
+        pen_id += 1
+    return pen_id
+
+
 if __name__ == "__main__":
-    main()
+    main(parser.parse_args())
