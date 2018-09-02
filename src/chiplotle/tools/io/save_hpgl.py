@@ -20,12 +20,13 @@ def save_hpgl(expr, filename):
     hpgl = []
     if isinstance(expr, (list, tuple)):
         for o in expr:
-            assert isinstance(o, _HPGL)
+            if not isinstance(o, _HPGL):
+                raise TypeError("Expected HPGL expression but got {}".format(o))
             hpgl.append(o.format)
     else:
         hpgl.append(expr.format)
 
     ## create HPGL file
     file = open("%s" % filename, "w")
-    file.writelines([command.decode('ascii') for command in hpgl])
+    file.writelines([command.decode("ascii") for command in hpgl])
     file.close()
