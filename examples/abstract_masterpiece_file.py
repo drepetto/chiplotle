@@ -12,6 +12,7 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.tools import *
+from chiplotle.hpgl.commands import *
 import random
 import sys
 
@@ -51,7 +52,7 @@ def generate_plot():
 
     # start in a random spot
 
-    plot.append(PA([random.randint(left, right), random.randint(bottom, top)]))
+    plot.append(PA([(random.randint(left, right), random.randint(bottom, top))]))
 
     penNum = 1
 
@@ -100,7 +101,9 @@ def generate_plot():
             # plotter.goto(random.randint(left, right), random.randint(bottom, top))
             # plotter.pen_up()
             plot.append(PD())
-            plot.append(PA([random.randint(left, right), random.randint(bottom, top)]))
+            plot.append(
+                PA([(random.randint(left, right), random.randint(bottom, top))])
+            )
             plot.append(PU())
 
         elif whichGesture == 4:
@@ -111,7 +114,7 @@ def generate_plot():
             firstY = random.randint(bottom, top)
             # plotter.goto(firstX, firstY)
             # plotter.pen_down()
-            plot.append(PA([firstX, firstY]))
+            plot.append(PA([(firstX, firstY)]))
             plot.append(PD())
 
             xRange = width / 5
@@ -131,13 +134,15 @@ def generate_plot():
             # plotter.goto(firstX, firstY)
             # plotter.pen_up()
 
-            plot.append(PA([firstX, firstY]))
+            plot.append(PA([(firstX, firstY)]))
             plot.append(PU())
 
         elif whichGesture == 5:
             print("just jump around!")
             # plotter.goto(random.randint(left, right), random.randint(bottom, top))
-            plot.append(PA([random.randint(left, right), random.randint(bottom, top)]))
+            plot.append(
+                PA([(random.randint(left, right), random.randint(bottom, top))])
+            )
 
         # pick a new pen?
         pickPen = random.randint(0, 99)
