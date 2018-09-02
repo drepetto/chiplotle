@@ -27,13 +27,13 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
         else:
             for coord in coords:
                 if not (isinstance(coord, Iterable) and len(coord) == 2):
-                    raise ValueError(
+                    raise TypeError(
                         "Expected coordinate to be pair of (x, y) values, but was {}".format(
                             coord
                         )
                     )
 
-        self._data = [Coordinate(*p) for p in coords]
+        self._data = [Coordinate(*list(p)) for p in coords]
 
     ## PUBLIC PROPERTIES ##
 

@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+
+import pytest
 from future import standard_library
 
 standard_library.install_aliases()
@@ -12,7 +14,8 @@ from py.test import raises
 
 def test_penplot_01():
     """_PenPlot cannot be initialized with a flat iterable"""
-    assert raises(TypeError, "p = _PenPlot((1, 2, 3, 4))")
+    with pytest.raises(TypeError):
+        _PenPlot((1, 2, 3, 4))
 
 
 def test_penplot_03():

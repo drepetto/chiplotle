@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+
+import pytest
 from future import standard_library
 
 standard_library.install_aliases()
@@ -32,14 +34,18 @@ def test_pu_init_02():
 
 def test_pu_init_03():
     """PU argument must be list-like (list, tuple, Ndarray,...)."""
-    assert raises(TypeError, "PU(4)")
+    with pytest.raises(TypeError):
+        PU(4)
 
 
 def test_pu_init_04():
     """PU argument must be a list or tuple of length == 2*n"""
-    assert raises(TypeError, "PU([1])")
-    assert raises(TypeError, "PU([1,2,3])")
-    assert raises(TypeError, "PU([1,2,3,4,5])")
+    with pytest.raises(TypeError):
+        PU([1])
+    with pytest.raises(TypeError):
+        PU([1, 2, 3])
+    with pytest.raises(TypeError):
+        PU([1, 2, 3, 4, 5])
 
 
 def test_pu_init_05():

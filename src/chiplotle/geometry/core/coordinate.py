@@ -25,10 +25,10 @@ class Coordinate(object):
     #      else:
     #         return super(Coordinate, cls).__new__(cls)
 
-    def __init__(self, *args):
-        if args and not isinstance(args[0], numbers.Number):
+    def __init__(self, *coords):
+        if coords and not isinstance(coords[0], numbers.Number):
             raise TypeError("Arguments must all be scalars")
-        self._coords = list(args)
+        self._coords = list(coords)
 
     @property
     def xy(self):

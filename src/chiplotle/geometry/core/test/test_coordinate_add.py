@@ -1,6 +1,8 @@
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+
+import pytest
 from future import standard_library
 
 standard_library.install_aliases()
@@ -22,13 +24,15 @@ def test_coordinate__add__01():
 def test_coordinate__add__02():
     """A Coordinate and an int scalar cannot be added."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "t = a + 4")
+    with pytest.raises(TypeError):
+        t = a + 4
 
 
 def test_coordinate__radd__02():
     """An int scalar and a  Coordinate cannot be added."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "t = 4 + a")
+    with pytest.raises(TypeError):
+        t = 4 + a
 
 
 def test_coordinate__add__03():
