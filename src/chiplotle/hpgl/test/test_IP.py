@@ -1,12 +1,13 @@
 from __future__ import print_function
 from __future__ import division
 from __future__ import absolute_import
+
+import pytest
 from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.hpgl.commands import IP
-from py.test import raises
 
 
 def test_IP_01():
@@ -18,7 +19,8 @@ def test_IP_01():
 
 def test_IP_02():
     """IP cannot take a flat tuple."""
-    assert raises(TypeError, "t = IP((1,2,3,4))")
+    with pytest.raises(ValueError):
+        IP((1, 2, 3, 4))
 
 
 def test_IP_03():
@@ -29,10 +31,11 @@ def test_IP_03():
 
 def test_IP_04():
     """IP can take two an only two coordinate pairs."""
-    assert raises(ValueError, "t = IP([Coordinate(1, 2)])")
-    assert raises(
-        ValueError, "t = IP([Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)])"
-    )
+    with pytest.raises(ValueError):
+        t = IP([Coordinate(1, 2)])
+
+    with pytest.raises(ValueError):
+        IP([Coordinate(1, 2), Coordinate(3, 4), Coordinate(5, 6)])
 
 
 def test_IP_05():

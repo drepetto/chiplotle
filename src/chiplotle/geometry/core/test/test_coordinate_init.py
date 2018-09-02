@@ -51,7 +51,7 @@ def test_coordinate__init__06():
 
 def test_coordinate__init__07():
     """Coordinate cannot be initialized with a Path."""
-    assert raises(TypeError, "t = Coordinate(Path([1,2]))")
+    assert raises(TypeError, "t = Coordinate(Path([(1, 2)]))")
 
 
 ## attribute assignment ##

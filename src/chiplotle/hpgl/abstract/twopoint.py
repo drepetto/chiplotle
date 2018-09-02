@@ -14,9 +14,11 @@ class _TwoPoint(_HPGLPrimitive):
     """Abstract class for commands with 2 coordinate pairs: x1, y1, x2, y2."""
 
     def __init__(self, coords=None):
+        if coords and len(coords) != 2:
+            raise ValueError(
+                "Expected two coordinate pairs but got {}".format(len(coords))
+            )
         self.coords = coords
-        if self.coords and len(self.coords) != 2:
-            raise ValueError("Only two coordinate pairs allowed.")
 
     def coords():
         def fget(self):
@@ -33,7 +35,7 @@ class _TwoPoint(_HPGLPrimitive):
     def format(self):
         if self.coords:
             coords = self.coords[0].xy + self.coords[1].xy
-            coords = list(map(lambda coord: str(coord).encode('ascii'), coords))
+            coords = list(map(lambda coord: str(coord).encode("ascii"), coords))
             coords = b",".join(coords)
             return b"%s%s%s" % (self._name, coords, _HPGLPrimitive._terminator)
         else:

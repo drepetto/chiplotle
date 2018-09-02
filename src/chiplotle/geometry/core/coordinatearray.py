@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from __future__ import absolute_import
 from builtins import zip
 from builtins import str
+from collections import Iterable
+
 from future import standard_library
 
 standard_library.install_aliases()
@@ -22,7 +24,16 @@ class CoordinateArray(CoordinateArrayPropertiesMixin):
         """`coords` is a list of Coordinate objs or iterables."""
         if coords is None:
             coords = []
-        self._data = [Coordinate(*list(p)) for p in coords]
+        else:
+            for coord in coords:
+                if not (isinstance(coord, Iterable) and len(coord) == 2):
+                    raise ValueError(
+                        "Expected coordinate to be pair of (x, y) values, but was {}".format(
+                            coord
+                        )
+                    )
+
+        self._data = [Coordinate(*p) for p in coords]
 
     ## PUBLIC PROPERTIES ##
 
