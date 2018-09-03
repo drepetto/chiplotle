@@ -1,5 +1,5 @@
 pytest==3.7.4
-pytest-cov
+pytest-cov==2.5.1
 tox>=2,<3
 numpy==1.15.0
 pyserial==3.4
