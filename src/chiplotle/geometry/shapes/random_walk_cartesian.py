@@ -7,7 +7,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.geometry.core.path import Path
-import math
 import random
 
 

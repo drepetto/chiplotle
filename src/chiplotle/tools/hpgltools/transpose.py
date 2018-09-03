@@ -11,8 +11,6 @@ from chiplotle.geometry.core.coordinate import *
 
 
 def _transpose_command(arg, val):
-    from chiplotle.tools.iterabletools.ispair import ispair
-
     val = Coordinate(*val)
     if is_primitive_absolute(arg):
         arg.xy = arg.xy + val

@@ -9,7 +9,6 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.hpgl.commands import PU
-from py.test import raises
 
 ### INITIALIZATION ###
 

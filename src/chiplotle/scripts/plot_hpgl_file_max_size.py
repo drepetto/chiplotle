@@ -10,7 +10,6 @@ standard_library.install_aliases()
 from chiplotle.tools.plottertools import instantiate_plotters
 from chiplotle.tools import *
 import sys
-import time
 
 
 def plot_hpgl_file_max_size(file):

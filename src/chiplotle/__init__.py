@@ -6,7 +6,14 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.core.cfg.initialize_files import initialize_files
-from .__version__ import __author__, __version__, __license__, __url__, __copyright__, __description__
+from .__version__ import (
+    __author__,
+    __version__,
+    __license__,
+    __url__,
+    __copyright__,
+    __description__,
+)
 
 __doc__ = """Chiplotle
 Python library for pen plotting.
@@ -29,37 +36,32 @@ globals().pop("initialize_files")
 
 ## IMPORTS ##
 
-from chiplotle.core import errors
+from .core import errors
 
-from chiplotle.geometry.core.coordinatearray import CoordinateArray
-from chiplotle.geometry.core.coordinate import Coordinate
+from .geometry.core.coordinatearray import CoordinateArray
+from .geometry.core.coordinate import Coordinate
 
-from chiplotle.hpgl import commands as hpgl
-from chiplotle.hpgl import formatters
-from chiplotle.hpgl.pen import Pen
+from .hpgl import commands as hpgl
+from .hpgl import formatters
+from .hpgl.pen import Pen
 
-from chiplotle.geometry.core import Group
-from chiplotle.geometry.core import Path
-from chiplotle.geometry.core import Polygon
-from chiplotle.geometry.core import Label
-from chiplotle.geometry import shapes
-from chiplotle.geometry import transforms
-from chiplotle.geometry.shapes import *
-from chiplotle.geometry.transforms import *
+from .geometry.core import Group
+from .geometry.core import Path
+from .geometry.core import Polygon
+from .geometry.core import Label
+from .geometry import shapes
+from .geometry import transforms
+from .geometry.shapes import *
+from .geometry.transforms import *
 
-from chiplotle.tools.plottertools import instantiate_plotters
-from chiplotle.tools.plottertools import instantiate_virtual_plotter
-from chiplotle.tools import *
+from .tools.plottertools import instantiate_plotters
+from .tools.plottertools import instantiate_virtual_plotter
+from .tools import *
 
-from chiplotle import plotters
+from . import plotters
 
 
 ## shortcuts / abbreviations ##
 
 CoordArray = CoordinateArray
 Coord = Coordinate
-
-## remove unnecessary modules...
-# globals().pop('hpgl')
-# globals().pop('tools')
-# globals().pop('utils')

@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle.hpgl.commands import LB, PA, ES, LO, SL, DI, DV, SI
+from chiplotle.hpgl.commands import LB, ES, LO, SL, DI, DV, SI
 
 
 class Label(object):

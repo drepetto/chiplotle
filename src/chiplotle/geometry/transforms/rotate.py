@@ -5,7 +5,6 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.group import Group
 from chiplotle.tools.mathtools.rotate_2d import rotate_2d
 from chiplotle.geometry.transforms.transformvisitor import TransformVisitor

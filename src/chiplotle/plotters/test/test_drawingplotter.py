@@ -37,11 +37,6 @@ def test_goto_bottom_right():
     p.goto_bottom_right()
 
 
-def test_goto_bottom_right():
-    p = instantiate_virtual_plotter()
-    p.goto_bottom_right()
-
-
 def test_goto_origin():
     p = instantiate_virtual_plotter()
     p.goto_origin()

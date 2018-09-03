@@ -7,7 +7,6 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.geometry.shapes.ellipse import ellipse
 from chiplotle.geometry.core.group import Group
-from chiplotle.geometry.core.path import Path
 
 
 def donut(width, height, inset, segments=100):

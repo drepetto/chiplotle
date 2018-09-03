@@ -7,8 +7,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.tools.hpgltools.inflate_hpgl_string import inflate_hpgl_string
-from chiplotle.hpgl import commands as hpgl
-import re
 
 
 def import_hpgl_file(filename, filter_commands=None):

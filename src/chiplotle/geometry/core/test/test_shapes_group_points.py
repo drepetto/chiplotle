@@ -7,7 +7,6 @@ standard_library.install_aliases()
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.path import Path
-from chiplotle.geometry.core.coordinate import Coordinate
 
 
 def test_shapes_group_points_01():

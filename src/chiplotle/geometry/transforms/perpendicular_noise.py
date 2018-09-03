@@ -7,7 +7,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.geometry.core.group import Group
-from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.tools.mathtools.difference import difference
 from chiplotle.geometry.transforms.transformvisitor import TransformVisitor

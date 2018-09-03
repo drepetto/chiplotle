@@ -5,7 +5,6 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_plotters
 
 plotter = instantiate_plotters()[0]

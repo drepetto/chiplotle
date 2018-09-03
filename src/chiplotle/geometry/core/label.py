@@ -5,12 +5,7 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle.hpgl.label import Label as HPGLLabel
-from chiplotle.hpgl.commands import PA
-from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.shape import _Shape
-from chiplotle.tools import mathtools
-import math
 
 
 ## TODO should a Label be a path? Probably not.

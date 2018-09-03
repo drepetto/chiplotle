@@ -6,7 +6,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
-from chiplotle.geometry.core.path import Path
+from chiplotle import Path
 
 
 def get_line_intersection(line_a, line_b):

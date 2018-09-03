@@ -9,7 +9,6 @@ standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.tools.plottertools import instantiate_virtual_plotter
 import sys
-import time
 
 
 def plot_hpgl_file(file):

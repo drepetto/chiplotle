@@ -6,7 +6,9 @@ from future import standard_library
 from six import string_types
 
 standard_library.install_aliases()
-from chiplotle.hpgl import commands as hpgl
+# WARNING: Do not remove the line below, it is not dead code, it is needed for inflate_hpgl_string
+# which uses `eval` to construct the correct HPGL command.
+from chiplotle.hpgl import commands as hpgl  # NOQA
 from chiplotle.tools.hpgltools.parse_hpgl_string import parse_hpgl_string
 from chiplotle.tools.logtools.apply_logger import apply_logger
 from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
@@ -38,7 +40,7 @@ def inflate_hpgl_string(string, filter_commands=None):
         raise TypeError(msg)
 
     if isinstance(string, bytes):
-        string = string.decode('ascii')
+        string = string.decode("ascii")
 
     _unsupported_commands = ("PW", "PC", "LA", "WU", "BP")
     commands = parse_hpgl_string(string)

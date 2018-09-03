@@ -11,9 +11,6 @@ from chiplotle.geometry.shapes.circle import circle
 from chiplotle.geometry.shapes.cross import cross
 from chiplotle.geometry.shapes.rectangle import rectangle
 from chiplotle.geometry.transforms.offset import offset
-from chiplotle.geometry.core.group import Group
-from chiplotle.geometry.core.label import Label
-from chiplotle.geometry.core.coordinate import Coordinate
 
 ## TODO should this be a decorator carried around by the shape?
 

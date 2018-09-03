@@ -8,7 +8,6 @@ standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.hpgl.commands import *
 import math
-from py.test import raises
 
 
 def test_rotate_hpglprimitives_01():

@@ -1,10 +1,9 @@
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
-from future import standard_library
-
-standard_library.install_aliases()
-from chiplotle.core.imports.package_import import _package_import
-
-_package_import(__path__[0], globals())
+from .arrange_shapes_on_path import arrange_shapes_on_path
+from .center_at import center_at
+from .noise import noise
+from .offset import offset
+from .perpendicular_displace import perpendicular_displace
+from .perpendicular_noise import perpendicular_noise
+from .rotate import rotate
+from .scale import scale
+from .transformvisitor import TransformVisitor

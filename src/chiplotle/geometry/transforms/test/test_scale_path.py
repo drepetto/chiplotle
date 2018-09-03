@@ -6,7 +6,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle import *
-import py.test
 
 
 def test_scale_path_01():

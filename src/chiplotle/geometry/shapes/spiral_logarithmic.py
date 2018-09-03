@@ -56,7 +56,6 @@ def spiral_logarithmic(num_turns=5, expansion_rate=0.2, direction="cw", segments
 if __name__ == "__main__":
     from chiplotle.geometry.core.group import Group
     from chiplotle.geometry.shapes.line import line
-    from chiplotle.geometry.transforms.offset import offset
     from chiplotle.tools import io
 
     s = spiral_logarithmic()

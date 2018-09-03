@@ -6,7 +6,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.geometry.core.transformlock import TransformLock
-from chiplotle.geometry.core.shape import _Shape
 
 
 def lock_group(shapes, lock_transforms):

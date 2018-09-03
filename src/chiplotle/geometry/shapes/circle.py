@@ -7,7 +7,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.geometry.core.polygon import Polygon
-from chiplotle.geometry.transforms.scale import scale
 import math
 
 

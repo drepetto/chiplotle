@@ -1,3 +1,15 @@
+"""
+Interactive plotter routines.
+
+Note that these routines may not work on your plotter. They are
+known to work on most HP and Roland plotters, but they do NOT
+work on the Houston Instruments DMP-60 (and probably other Houston
+Instruments plotters). This is because the DMP-60 interprets manual
+pen moves as attempts to reset the origin, which interferes with
+these routines.
+"""
+
+
 from __future__ import print_function
 from __future__ import division
 from __future__ import unicode_literals
@@ -9,18 +21,6 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.hpgl.commands import SC, IP, IW
-
-"""
-Interactive plotter routines.
-
-Note that these routines may not work on your plotter. They are
-known to work on most HP and Roland plotters, but they do NOT
-work on the Houston Instruments DMP-60 (and probably other Houston
-Instruments plotters). This is because the DMP-60 interprets manual
-pen moves as attempts to reset the origin, which interferes with
-these routines.
-
-"""
 
 
 def interactive_set_plot_window(plotter):
@@ -56,6 +56,11 @@ interactive_set_plot_window(plotter)
 def interactive_set_plot_window_and_units(plotter):
     """
     User sets window size and then defines units inside of that window.
+
+    Example:
+
+        >>> from chiplotle.interactive.interactive_commands import *
+        >>> interactive_set_plot_window_and_units(plotter)
     """
     plotter.write(IP())
     plotter.write(IW())
@@ -76,16 +81,16 @@ def interactive_set_plot_window_and_units(plotter):
     print("new soft margins:")
     print(plotter.margins.soft)
 
-    """
-from chiplotle.interactive.interactive_commands import *
-interactive_set_plot_window_and_units(plotter)
-    """
-
 
 def interactive_set_plot_window_auto_units(plotter):
     """
     User sets window size and then units are automatically set
     to user's choise of inches, millimeters, or centimeters.
+
+    Example:
+
+        >>> from chiplotle.plotters.interactive.interactive_commands import *
+        >>> interactive_set_plot_window_auto_units(plotter)
     """
     plotter.write(IP())
     plotter.write(IW())
@@ -144,102 +149,3 @@ def interactive_set_plot_window_auto_units(plotter):
     # not the margins set via the set_plot_window() above. ARRRRG!
     print("new soft margins:")
     print(plotter.margins.soft)
-
-    """
-from chiplotle.plotters.interactive.interactive_commands import *
-interactive_set_plot_window_auto_units(plotter)
-    """
-
-
-def interactive_define_polygon_simple(plotter):
-    """
-    Interactive routine to define points in a PolygonSimple object.
-    """
-    from chiplotle.hpgl.compound.polygon_simple import PolygonSimple
-
-    points = []
-
-    print("Interactive define PolygonSimple:")
-    print(
-        "Move pen to each point and press enter. Press x when finished adding points."
-    )
-    print("The final point (a duplicate of first point) will be added automatically.")
-    while True:
-        input = input()
-        if input is "x":
-            break
-
-        point = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-        points.append(point)
-        print("added:")
-        print(point)
-
-    poly = PolygonSimple([0, 0], points)
-
-    return poly
-
-
-def interactive_define_rectangle(plotter):
-    """
-    Interactive routine to define points in a Rectangle object.
-    """
-    from chiplotle.hpgl.compound.rectangle import Rectangle
-
-    points = []
-
-    print("Interactive define Rectangle:")
-    print("Move pen to lower, left corner and press enter.")
-
-    input = input()
-    lower_left = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print("lower_left:")
-    print(lower_left)
-
-    print("Move pen to upper, right corner and press enter.")
-    input = input()
-    upper_right = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print("upper_right:")
-    print(upper_right)
-
-    rectangle = Rectangle([lower_left], upper_right.x, upper_right.y)
-
-    return rectangle
-
-
-"""
-from chiplotle.plotters.interactive.interactive_commands import *
-interactive_define_rectangle(plotter)
-"""
-
-
-def interactive_define_ellipse(plotter):
-    """
-    Interactive routine to define center and radii of an ellipse.
-    """
-    from chiplotle.hpgl.compound.rectangle import Ellipse
-
-    points = []
-
-    print("Interactive define Rectangle:")
-    print("Move pen to lower, left corner and press enter.")
-
-    input = input()
-    lower_left = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print("lower_left:")
-    print(lower_left)
-
-    print("Move pen to upper, right corner and press enter.")
-    input = input()
-    upper_right = Coordinate(plotter.actual_position[0].x, plotter.actual_position[0].y)
-    print("upper_right:")
-    print(upper_right)
-
-    rectangle = Rectangle([lower_left], upper_right.x, upper_right.y)
-
-    return rectangle
-
-
-"""
-from chiplotle.plotters.interactive.interactive_commands import *
-interactive_define_rectangle(plotter)
-"""

@@ -7,7 +7,6 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.shape import _Shape
-import copy
 
 
 class Group(_Shape):

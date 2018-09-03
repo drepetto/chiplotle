@@ -6,7 +6,6 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.tools.io.save_hpgl import save_hpgl
-from chiplotle.core.cfg.cfg import CONFIG_DIR
 import subprocess
 
 

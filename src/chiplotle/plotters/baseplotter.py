@@ -14,7 +14,6 @@ from builtins import int
 from collections import Iterable
 
 from future import standard_library
-from six import string_types
 
 standard_library.install_aliases()
 from chiplotle.core.cfg.get_config_value import get_config_value
@@ -27,9 +26,7 @@ from chiplotle.tools.logtools.get_logger import get_logger
 from chiplotle.tools.serialtools import VirtualSerialPort
 import math
 import re
-import serial
 import time
-import types
 
 
 class _BasePlotter(object):

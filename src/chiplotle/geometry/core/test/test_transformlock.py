@@ -4,7 +4,6 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.transformlock import TransformLock

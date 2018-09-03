@@ -5,12 +5,8 @@ from __future__ import absolute_import
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle.hpgl.commands import PM, EP, FP, FT, SP
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
 from chiplotle.geometry.core.path import Path
-from chiplotle.tools.hpgltools.convert_coordinates_to_hpgl_absolute_path import (
-    convert_coordinates_to_hpgl_absolute_path
-)
 
 
 class Polygon(Path):

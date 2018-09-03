@@ -8,7 +8,6 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.tools.plottertools import instantiate_plotters
 import sys
-import time
 
 
 def plot_hpgl_file(file):

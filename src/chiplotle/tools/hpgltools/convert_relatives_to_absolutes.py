@@ -10,7 +10,7 @@ from chiplotle.tools.hpgltools.is_primitive_absolute import is_primitive_absolut
 from chiplotle.tools.hpgltools.pr_to_pa import pr_to_pa
 from chiplotle.geometry.core.coordinate import Coordinate
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
-from chiplotle.hpgl.commands import PR, PA, ER, EA, RA, RR, AR, AA
+from chiplotle.hpgl.commands import PR, ER, EA, RA, RR, AR, AA
 
 
 def convert_relatives_to_absolutes(lst):
@@ -21,7 +21,6 @@ def convert_relatives_to_absolutes(lst):
 
     result = []
     last_position = Coordinate(0, 0)
-    command = None
     for e in lst:
         ## if has absolute position, keep track of last point...
         if is_primitive_absolute(e):

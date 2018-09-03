@@ -6,7 +6,6 @@ from builtins import range
 from future import standard_library
 
 standard_library.install_aliases()
-from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.shapes.line import line
 

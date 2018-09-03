@@ -12,8 +12,6 @@ import numbers
 import operator
 import math
 
-import numpy as np
-
 
 class Coordinate(object):
 

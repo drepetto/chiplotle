@@ -18,9 +18,6 @@ def search_and_instantiate_plotters():
     instantiates all plotters found. If a plotter is not recognized,
     the function interactively queries user for plotter type."""
 
-    from chiplotle.tools.plottertools import instantiate_plotter_from_id
-    from chiplotle.tools.plottertools import interactive_choose_plotter
-
     print("Scanning serial ports...")
     ports = list(scan_serial_ports().values())
     print("Found ports:")

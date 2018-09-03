@@ -1,10 +1,6 @@
-from __future__ import unicode_literals
-from __future__ import print_function
-from __future__ import division
-from __future__ import absolute_import
-from future import standard_library
-
-standard_library.install_aliases()
-from chiplotle.core.imports.package_import import _package_import
-
-_package_import(__path__[0], globals())
+from .flat_list_to_dovetail_pairs import flat_list_to_dovetail_pairs
+from .flat_list_to_pairs import flat_list_to_pairs
+from .flatten import flatten
+from .is_flat_list import is_flat_list
+from .isiterable import isiterable
+from .ispair import ispair
