@@ -5,7 +5,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import SR
-import py.test
+import pytest
 
 
 def test_SR_01():
@@ -27,4 +27,4 @@ def test_SR_03():
 
     t = SR(3)
 
-    assert py.test.raises(Warning, "t.format")
+    assert pytest.raises(Warning, "t.format")

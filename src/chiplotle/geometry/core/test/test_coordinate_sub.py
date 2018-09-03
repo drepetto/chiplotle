@@ -5,7 +5,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle import *
-from py.test import raises
+from pytest import raises
 
 
 def test_coordinate__sub__01():

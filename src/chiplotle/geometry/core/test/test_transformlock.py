@@ -11,7 +11,7 @@ from chiplotle.geometry import shapes
 from chiplotle.geometry import transforms
 import copy
 import math
-import py.test
+import pytest
 
 ## test construction ##
 
@@ -33,7 +33,7 @@ def test_transformlock_02():
 def test_transformlock_03():
     """A TransformLock takes exactly two arguments."""
     expr = "t = TransformLock([shapes.rectangle(100, 100)])"
-    assert py.test.raises(TypeError, expr)
+    assert pytest.raises(TypeError, expr)
 
 
 ## test transforms ##

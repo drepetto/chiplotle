@@ -8,7 +8,7 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle import *
 import math
-from py.test import raises
+from pytest import raises
 
 ## arguments ##
 

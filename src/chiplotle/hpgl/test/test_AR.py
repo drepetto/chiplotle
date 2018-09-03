@@ -6,7 +6,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import AR
-import py.test
+import pytest
 
 
 def test_AR_01():
@@ -27,7 +27,7 @@ def test_AR_02():
 
 def test_AR_03():
     """AR must take at least two arguments: position and angle."""
-    assert py.test.raises(TypeError, "AR((0, 0))")
+    assert pytest.raises(TypeError, "AR((0, 0))")
 
 
 def test_AR_format_01():

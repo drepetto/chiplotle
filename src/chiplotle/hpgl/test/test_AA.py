@@ -5,7 +5,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import *
-import py.test
+import pytest
 
 
 def test_AA_01():
@@ -26,7 +26,7 @@ def test_AA_02():
 
 def test_AA_03():
     """AA must take at least two arguments: position and angle."""
-    assert py.test.raises(TypeError, "AA((0, 0))")
+    assert pytest.raises(TypeError, "AA((0, 0))")
 
 
 def test_AA_format_01():
@@ -45,7 +45,7 @@ def test_AA_format_02():
 
 def test_AA_angle_01():
     """Angle must be between -360 and 360."""
-    assert py.test.raises(ValueError, "AA((0, 0), 1200)")
+    assert pytest.raises(ValueError, "AA((0, 0), 1200)")
 
 
 ## eq ##

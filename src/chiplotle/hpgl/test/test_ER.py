@@ -6,7 +6,7 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.hpgl.commands import ER
-from py.test import raises
+from pytest import raises
 
 
 def test_ER_01():

@@ -5,12 +5,12 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.tools import mathtools
-import py.test
+import pytest
 
 
 def test_mathtools_factors_01():
-    assert py.test.raises(TypeError, "mathtools.factors(7.5)")
-    assert py.test.raises(ValueError, "mathtools.factors(0)")
+    assert pytest.raises(TypeError, "mathtools.factors(7.5)")
+    assert pytest.raises(ValueError, "mathtools.factors(0)")
 
 
 def test_mathtools_factors_02():

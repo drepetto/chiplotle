@@ -6,13 +6,13 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle import *
-import py.test
+import pytest
 
 
 def test_pen_01():
     """Pen must take one argument at least."""
 
-    assert py.test.raises(TypeError, "t = Pen( )")
+    assert pytest.raises(TypeError, "t = Pen( )")
 
 
 def test_pen_02():

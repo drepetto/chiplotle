@@ -6,7 +6,7 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.geometry.core.path import Path
 from chiplotle.geometry.core.coordinate import Coordinate
-from py.test import raises
+from pytest import raises
 
 
 def test_path_sub_01():

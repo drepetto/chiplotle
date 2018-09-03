@@ -5,7 +5,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import SI
-import py.test
+import pytest
 
 
 def test_SI_01():
@@ -25,4 +25,4 @@ def test_SI_03():
 
     t = SI(3)
 
-    assert py.test.raises(Warning, "t.format")
+    assert pytest.raises(Warning, "t.format")

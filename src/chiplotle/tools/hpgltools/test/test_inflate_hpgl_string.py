@@ -6,7 +6,7 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle import *
 from chiplotle.hpgl.commands import *
-from py.test import raises
+from pytest import raises
 
 
 def test_inflate_hpgl_string_01():

@@ -6,7 +6,7 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.geometry.core.group import Group
 from chiplotle.geometry.core.path import Path
-import py.test
+import pytest
 
 
 def test_shapes_group__init__01():
@@ -38,6 +38,6 @@ def test_shapes_group__init__04():
 
 def test_shapes_group__init__05():
     """A Group cannot be initialized with a non-_Shape."""
-    assert py.test.raises(TypeError, "Group([1, 2, 3])")
-    assert py.test.raises(TypeError, 'Group("a")')
-    assert py.test.raises(TypeError, "Group(0)")
+    assert pytest.raises(TypeError, "Group([1, 2, 3])")
+    assert pytest.raises(TypeError, 'Group("a")')
+    assert pytest.raises(TypeError, "Group(0)")

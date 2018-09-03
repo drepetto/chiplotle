@@ -9,7 +9,7 @@ from future import standard_library
 standard_library.install_aliases()
 from chiplotle.hpgl.abstract.penplot import _PenPlot
 from chiplotle.geometry.core.coordinatearray import CoordinateArray
-from py.test import raises
+from pytest import raises
 
 
 def test_penplot_01():
@@ -54,7 +54,7 @@ def test_penplot_06():
 
 ## FORMATTING ##
 
-## TODO: these two tests work fine when py.test -x is run on this test
+## TODO: these two tests work fine when pytest -x is run on this test
 ## flile only, but not when run on all files in directory... figure out
 ## why.
 # def test_penplot_format_01( ):

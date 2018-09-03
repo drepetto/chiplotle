@@ -5,7 +5,7 @@ from future import standard_library
 
 standard_library.install_aliases()
 from chiplotle.hpgl.commands import DI
-from py.test import raises
+from pytest import raises
 
 
 def test_DI_01():
