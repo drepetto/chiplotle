@@ -22,7 +22,8 @@ def test_DI_02():
 
     assert t.run == 23
     assert t.rise == None
-    assert raises(Warning, "t.format")
+    with raises(Warning):
+        t.format
 
 
 def test_DI_03():

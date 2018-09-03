@@ -11,7 +11,8 @@ from pytest import raises
 
 def test_CI_01():
     """CI must have at least one argument (radius)."""
-    assert raises(TypeError, "CI()")
+    with raises(TypeError):
+        CI()
 
 
 def test_CI_02():
@@ -33,10 +34,3 @@ def test_CI_03():
 
 def test_CI_scalable_01():
     assert CI._scalable == ["radius"]
-
-
-### RADIUS ###
-
-# def test_CI_radius_02( ):
-#   '''Radius must be scalar.'''
-#   assert raises(TypeError, 't = CI([1])')

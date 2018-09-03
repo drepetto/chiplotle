@@ -9,8 +9,10 @@ import pytest
 
 
 def test_mathtools_factors_01():
-    assert pytest.raises(TypeError, "mathtools.factors(7.5)")
-    assert pytest.raises(ValueError, "mathtools.factors(0)")
+    with pytest.raises(TypeError):
+        mathtools.factors(7.5)
+    with pytest.raises(ValueError):
+        mathtools.factors(0)
 
 
 def test_mathtools_factors_02():

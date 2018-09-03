@@ -18,7 +18,8 @@ def test_inflate_hpgl_string_01():
 
 def test_inflate_hpgl_string_02():
     """The first argument must be a string."""
-    assert raises(TypeError, "t = hpgltools.inflate_hpgl_string([1,2,3])")
+    with raises(TypeError):
+        t = hpgltools.inflate_hpgl_string([1, 2, 3])
 
 
 def test_inflate_hpgl_string_03():
@@ -105,6 +106,6 @@ def test_inflate_hpgl_string__filter_01():
 
 def test_inflate_hpgl_string__filter_02():
     """The `filter_commands' argument must be a list of two-letter HPGL strings."""
-    e = "t = hpgltools.inflate_hpgl_string('IN;PU;PA10,10;CI100;', 'IN;PU;')"
 
-    assert raises(TypeError, e)
+    with raises(TypeError):
+        t = hpgltools.inflate_hpgl_string("IN;PU;PA10,10;CI100;", "IN;PU;")

@@ -21,7 +21,8 @@ def test_penplot_01():
 def test_penplot_03():
     """xy cannot be set with an single number."""
     p = _PenPlot([(1, 2)])
-    assert raises(TypeError, "p.xy = 3")
+    with raises(TypeError):
+        p.xy = 3
 
 
 def test_penplot_04():
@@ -38,8 +39,10 @@ def test_penplot_04():
 def test_penplot_05():
     """xy assignment must have lenth == 2*n"""
     p = _PenPlot([(0, 0)])
-    assert raises(TypeError, "p.xy =(1,)")
-    assert raises(TypeError, "p.xy =(1,2,3)")
+    with raises(TypeError):
+        p.xy = (1,)
+    with raises(TypeError):
+        p.xy = (1, 2, 3)
 
 
 def test_penplot_06():

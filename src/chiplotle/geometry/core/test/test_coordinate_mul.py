@@ -21,7 +21,8 @@ def test_coordinate__mul__01():
 def test_coordinate__mul__02():
     """A Coordinate cannot be multiplied with a pair."""
     a = Coordinate(2, 3)
-    assert raises(TypeError, "a * (2, 3)")
+    with raises(TypeError):
+        a * (2, 3)
 
 
 def test_coordinate__mul__03():

@@ -29,16 +29,19 @@ def test_path_rmul_01():
 def test_path_mul_02():
     """A Path and a duple cannot be multiplied."""
     a = Path([(1, 2), (3, 4)])
-    assert raises(TypeError, "a * (1, 2)")
+    with raises(TypeError):
+        a * (1, 2)
 
 
 def test_path_rmul_02():
     """A duple and a Path cannot be multiplied."""
     a = Path([(1, 2), (3, 4)])
-    assert raises(TypeError, "(1, 2) * a")
+    with raises(TypeError):
+        (1, 2) * a
 
 
 def test_path_mul_03():
     """A Path cannot be multiplied with a triple."""
     a = Path([(1, 2), (3, 4)])
-    assert raises(TypeError, "a * (1, 2, 3)")
+    with raises(TypeError):
+        a * (1, 2, 3)

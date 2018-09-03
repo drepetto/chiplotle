@@ -24,4 +24,5 @@ def test_dci_sethandshakemode_02():
 
 def test_dci_sethandshakemode_03():
     """SetHandshakeMode cannot take a value other than None, 0, 1, 2 or 3."""
-    assert raises(ValueError, "t = SetHandshakeMode(32)")
+    with raises(ValueError):
+        t = SetHandshakeMode(32)

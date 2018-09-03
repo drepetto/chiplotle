@@ -38,25 +38,29 @@ def test_coordinate__radd__02():
 def test_coordinate__add__03():
     """A Coordinate and a float scalar cannot be added."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "t = a + 4.2")
+    with raises(TypeError):
+        t = a + 4.2
 
 
 def test_coordinate__radd__03():
     """A float scalar and a Coordinate can be added."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "t = 4.2 + a")
+    with raises(TypeError):
+        t = 4.2 + a
 
 
 def test_coordinate__add__04():
     """A Coordinate and a tuple pair cannot be added."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "a + (3, 4)")
+    with raises(TypeError):
+        a + (3, 4)
 
 
 def test_coordinate__radd__04():
     """A tuple pair and a Coordinate cannot be added."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "(3, 4) + a")
+    with raises(TypeError):
+        (3, 4) + a
 
 
 def test_coordinate__add__05():
@@ -83,11 +87,13 @@ def test_coordinate__add__06():
     """A 2D Coordinate and a triple cannot be added."""
     a = Coordinate(1, 2)
     b = (3, 4, 5)
-    assert raises(TypeError, "a + b")
+    with raises(TypeError):
+        a + b
 
 
 def test_coordinate__radd__06():
     """A triple and a 2D Coordinate cannot be added."""
     a = Coordinate(1, 2)
     b = (3, 4, 5)
-    assert raises(TypeError, "b + a")
+    with raises(TypeError):
+        b + a

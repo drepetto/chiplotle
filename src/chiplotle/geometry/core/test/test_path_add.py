@@ -11,17 +11,20 @@ from pytest import raises
 
 def test_path_add_01():
     """A Path and an int cannot be added."""
-    assert raises(TypeError, "Path([(1, 2), (3, 4)]) + 3")
+    with raises(TypeError):
+        Path([(1, 2), (3, 4)]) + 3
 
 
 def test_path_add_02():
     """A Path and a float cannot be added."""
-    assert raises(TypeError, "Path([(1, 2), (3, 4)]) + 3.2")
+    with raises(TypeError):
+        Path([(1, 2), (3, 4)]) + 3.2
 
 
 def test_path_radd_02():
     """A float and a Path cannot be added."""
-    assert raises(TypeError, "3.2 + Path([(1, 2), (3, 4)])")
+    with raises(TypeError):
+        3.2 + Path([(1, 2), (3, 4)])
 
 
 def test_path_add_03():
@@ -45,26 +48,30 @@ def test_path_radd_03():
 def test_path_add_04():
     """A Path and a duple cannot be added."""
     a = Path([(1, 2), (3, 4)])
-    assert raises(TypeError, "a + (1, 2)")
+    with raises(TypeError):
+        a + (1, 2)
 
 
 def test_path_radd_04():
     """A duple and a Path cannot be added."""
     a = Path([(1, 2), (3, 4)])
-    assert raises(TypeError, "(1, 2) + a")
+    with raises(TypeError):
+        (1, 2) + a
 
 
 def test_path_add_05():
     """A 2D Path and a triple cannot be added."""
     a = Path([(1, 2), (3, 4)])
-    assert raises(TypeError, "a + (1, 2, 3)")
+    with raises(TypeError):
+        a + (1, 2, 3)
 
 
 def test_path_add_06():
     """A Path and a Path cannot be added."""
     a = Path([(1, 2), (3, 4)])
     b = Path([(2, 3)])
-    assert raises(TypeError, "a + b")
+    with raises(TypeError):
+        a + b
 
 
 ## in place addition __iadd__ ##
@@ -73,4 +80,5 @@ def test_path_add_06():
 def test_path_iadd_01():
     """A float and a Path cannot be added."""
     t = Path([(1, 2), (3, 4)])
-    assert raises(TypeError, "t += 3.2")
+    with raises(TypeError):
+        t += 3.2

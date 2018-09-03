@@ -23,31 +23,36 @@ def test_coordinatearray__add__02():
     """Two CoordinateArrays of different length cannot be added."""
     a = CoordinateArray([(1, 2), (3, 4)])
     b = CoordinateArray([(1, 1), (2, 2), (3, 3)])
-    assert raises(ValueError, "t = a + b")
+    with raises(ValueError):
+        t = a + b
 
 
 def test_coordinatearray__add__03():
     """A CoordinateArray and an int cannot be added."""
     a = CoordinateArray([(1, 2), (3, 4)])
-    assert raises(TypeError, "t = a + 2")
+    with raises(TypeError):
+        t = a + 2
 
 
 def test_coordinatearray__radd__04():
     """An int and a CoordinateArray cannot be added."""
     a = CoordinateArray([(1, 2), (3, 4)])
-    assert raises(TypeError, "t = 2 + a")
+    with raises(TypeError):
+        t = 2 + a
 
 
 def test_coordinatearray__add__05():
     """A CoordinateArray and a float cannot be added."""
     a = CoordinateArray([(1, 2), (3, 4)])
-    assert raises(TypeError, "t = a + 2.3")
+    with raises(TypeError):
+        t = a + 2.3
 
 
 def test_coordinatearray__add__06():
     """A float and a CoordinateArray cannot be added."""
     a = CoordinateArray([(1, 2), (3, 4)])
-    assert raises(TypeError, "t = 2.3 + a")
+    with raises(TypeError):
+        t = 2.3 + a
 
 
 def test_coordinatearray__add__07():

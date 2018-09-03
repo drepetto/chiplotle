@@ -21,14 +21,16 @@ def test_coordinate__init__01():
 
 def test_coordinate__init__02():
     """Coordinate cannot be initialized with a duple."""
-    assert raises(TypeError, "Coordinate((1, 2))")
+    with raises(TypeError):
+        Coordinate((1, 2))
 
 
 def test_coordinate__init__03():
     """Coordinate cannot be initialized with a Coordinate."""
     ##In this case, the constructor returns the existing coordinate.'''
     a = Coordinate(1, 2)
-    assert raises(TypeError, "t = Coordinate(a)")
+    with raises(TypeError):
+        t = Coordinate(a)
 
 
 def test_coordinate__init__04():
@@ -46,12 +48,14 @@ def test_coordinate__init__05():
 
 def test_coordinate__init__06():
     """Coordinate cannot be initialized with a triple."""
-    assert raises(TypeError, "t = Coordinate((1, 2, 3))")
+    with raises(TypeError):
+        t = Coordinate((1, 2, 3))
 
 
 def test_coordinate__init__07():
     """Coordinate cannot be initialized with a Path."""
-    assert raises(TypeError, "t = Coordinate(Path([(1, 2)]))")
+    with raises(TypeError):
+        t = Coordinate(Path([(1, 2)]))
 
 
 ## attribute assignment ##
@@ -61,9 +65,12 @@ def test_coordinate_attribute_assignment_01():
     """Coordinates are immutable.
     Attributes cannot be set (rebound)."""
     t = Coordinate(1, 2)
-    assert raises(AttributeError, "t.xy = 2")
-    assert raises(AttributeError, "t.foo = 3")
-    assert raises(TypeError, "t[0] = 2")
+    with raises(AttributeError):
+        t.xy = 2
+    with raises(AttributeError):
+        t.foo = 3
+    with raises(TypeError):
+        t[0] = 2
 
 
 ## __eq__ ##
@@ -125,27 +132,31 @@ def test_coordinate__div__01():
 def test_coordinate__div__02():
     """Denominator 0 raises ZeroDivisionError."""
     a = Coordinate(1, 2)
-    assert raises(ZeroDivisionError, "t = a / 0")
+    with raises(ZeroDivisionError):
+        t = a / 0
 
 
 def test_coordinate__div__03():
     """A Coordinate cannot be divided by a Coordinate."""
     a = Coordinate(1, 2)
     b = Coordinate(2, 4)
-    assert raises(TypeError, "t = a / b")
+    with raises(TypeError):
+        t = a / b
 
 
 def test_coordinate__div__04():
     """A Coordinate cannot be divided by a duple."""
     a = Coordinate(1, 2)
     b = (2, 4)
-    assert raises(TypeError, "a / b")
+    with raises(TypeError):
+        a / b
 
 
 def test_coordinate__div__05():
     """Division raises an Error on wrong type."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "a / (1, 2, 3)")
+    with raises(TypeError):
+        a / (1, 2, 3)
 
 
 def test_coordinate__floordiv__01():
@@ -160,19 +171,22 @@ def test_coordinate__floordiv__02():
     """Floor division does not work with two Coordinates."""
     a = Coordinate(1, 2)
     b = Coordinate(2, -4)
-    assert raises(TypeError, "t = a // b")
+    with raises(TypeError):
+        t = a // b
 
 
 def test_coordinate__floordiv__03():
     """Denominator 0 raises ZeroDivisionError."""
     a = Coordinate(1, 2)
-    assert raises(ZeroDivisionError, "t = a // 0")
+    with raises(ZeroDivisionError):
+        t = a // 0
 
 
 def test_coordinate__floordiv__04():
     """Floor Division raises an OperandError on wrong type."""
     a = Coordinate(1, 2)
-    assert raises(TypeError, "a // (1, 2, 3)")
+    with raises(TypeError):
+        a // (1, 2, 3)
 
 
 ## __hash__ ##
@@ -200,7 +214,8 @@ def test_coordinate__getitem__01():
     t = Coordinate(1, 2)
     assert t[0] == 1
     assert t[1] == 2
-    assert raises(IndexError, "t[3]")
+    with raises(IndexError):
+        t[3]
 
 
 ## __len__ ##

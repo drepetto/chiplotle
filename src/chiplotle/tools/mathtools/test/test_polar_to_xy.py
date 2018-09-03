@@ -23,22 +23,26 @@ def test_polar_to_xy_01():
 
 def test_polar_to_xy_02():
     """The function cannot take two values r and A"""
-    assert raises(TypeError, "mathtools.polar_to_xy(1, 0)")
+    with raises(TypeError):
+        mathtools.polar_to_xy(1, 0)
 
 
 def test_polar_to_xy_03():
     """Three arguments throw a TypeError."""
-    assert raises(TypeError, "mathtools.polar_to_xy(1, 2, 3)")
+    with raises(TypeError):
+        mathtools.polar_to_xy(1, 2, 3)
 
 
 def test_polar_to_xy_04():
     """One numeric argument throws a TypeError."""
-    assert raises(TypeError, "mathtools.polar_to_xy(1)")
+    with raises(TypeError):
+        mathtools.polar_to_xy(1)
 
 
 def test_polar_to_xy_05():
     """One tuple argument with > 2 arguments throws a TypeError."""
-    assert raises(TypeError, "mathtools.polar_to_xy((1, 2, 3))")
+    with raises(TypeError):
+        mathtools.polar_to_xy((1, 2, 3))
 
 
 ## values 90 degs. ##

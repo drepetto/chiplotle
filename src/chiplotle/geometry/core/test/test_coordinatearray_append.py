@@ -11,7 +11,8 @@ from pytest import raises
 def test_coordinatearray_append_01():
     """CoordinateArray cannot be appended an (x, y) pair."""
     t = CoordinateArray()
-    assert raises(TypeError, "t.append((0, 0))")
+    with raises(TypeError):
+        t.append((0, 0))
 
 
 def test_coordinatearray_append_02():

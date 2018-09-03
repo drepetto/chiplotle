@@ -12,7 +12,8 @@ import pytest
 def test_pen_01():
     """Pen must take one argument at least."""
 
-    assert pytest.raises(TypeError, "t = Pen( )")
+    with pytest.raises(TypeError):
+        t = Pen()
 
 
 def test_pen_02():

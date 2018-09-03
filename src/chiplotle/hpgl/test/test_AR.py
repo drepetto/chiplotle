@@ -27,7 +27,8 @@ def test_AR_02():
 
 def test_AR_03():
     """AR must take at least two arguments: position and angle."""
-    assert pytest.raises(TypeError, "AR((0, 0))")
+    with pytest.raises(TypeError):
+        AR((0, 0))
 
 
 def test_AR_format_01():

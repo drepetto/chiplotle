@@ -46,7 +46,8 @@ def test_coordinatearray__iadd__02():
     t = CoordinateArray([(1, 2), (3, 4)])
     tid = id(t)
     b = 1
-    assert raises(TypeError, "t += b")
+    with raises(TypeError):
+        t += b
 
 
 ## div ##

@@ -43,4 +43,5 @@ def test_convert_coordinates_to_absolute_hpgl_path_03():
 def test_convert_coordinates_to_absolute_hpgl_path_04():
     """Argument must be a list of coordinate pairs.."""
     c = [1, 2, 3, 4]
-    assert raises(TypeError, "hpgltools.convert_coordinates_to_hpgl_absolute_path(c)")
+    with raises(TypeError):
+        hpgltools.convert_coordinates_to_hpgl_absolute_path(c)

@@ -44,4 +44,5 @@ def test_FT_05():
     assert t.type is None
     assert t.space == 0.23
     assert t.angle is None
-    assert raises(Warning, "t.format")
+    with raises(Warning):
+        t.format

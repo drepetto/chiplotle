@@ -22,7 +22,8 @@ def test_DR_02():
 
     assert t.run == 23
     assert t.rise == None
-    assert raises(Warning, "t.format")
+    with raises(Warning):
+        t.format
 
 
 def test_DR_03():
@@ -35,7 +36,7 @@ def test_DR_03():
     assert t.format == b"DR0.00,25.30;"
 
 
-def test_DR_03():
+def test_DR_04():
     """rise can be 0."""
 
     t = DR(10, 0)
