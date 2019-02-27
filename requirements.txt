@@ -1,6 +1,6 @@
 pytest-cov==2.6.1
 pytest==4.1.1
-numpy==1.16.0
+numpy==1.16.2
 tox==3.7.0
 pyserial==3.4
 future==0.17.1
