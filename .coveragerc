@@ -1,0 +1,9 @@
+[run]
+branch = true
+source = chiplotle
+omit = */test*.py
+
+[paths]
+source = 
+	chiplotle
+	.tox/*/lib/python*/site-packages/chiplotle

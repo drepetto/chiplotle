@@ -1,0 +1,30 @@
+from __future__ import division
+from __future__ import print_function
+from __future__ import unicode_literals
+from __future__ import absolute_import
+from future import standard_library
+
+standard_library.install_aliases()
+from chiplotle.geometry.core.polygon import Polygon
+
+
+def rectangle(width, height):
+    corners = []
+    corners.append((-width / 2.0, -height / 2.0))
+    corners.append((-width / 2.0, height / 2.0))
+    corners.append((width / 2.0, height / 2.0))
+    corners.append((width / 2.0, -height / 2.0))
+    corners.append((-width / 2.0, -height / 2.0))
+    return Polygon(corners)
+
+
+## RUN DEMO CODE
+
+if __name__ == "__main__":
+    from chiplotle.tools import io
+
+    e = rectangle(100, 200)
+    e.filled = True
+    assert isinstance(e, Polygon)
+    print(e.format)
+    io.view(e)

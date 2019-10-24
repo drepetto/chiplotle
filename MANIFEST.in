@@ -1,5 +1,1 @@
-include INSTALL
-include README
-include COPYING
-include setup.py
-global-include test*.py
+include README.md INSTALL.rst COPYING
