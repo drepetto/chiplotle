@@ -74,13 +74,13 @@ def _parse_hpgl_command_string(cmd_string):
         coords = re.split('[, ]', cmd_string[2:].strip())
         if coords == ['']:
             coords = []
-        coords = [eval(n) for n in coords]
+        coords = [eval(n) for n in coords if n != '']  # whitespace as separator
         coords = flat_list_to_pairs(coords)
         body = '(%s)' % coords
     elif head in ('RA','RR','ER','EA',):
         body = '(%s)' % cmd_string[2:]
     elif head in ('AR', 'AA'):
-        parameters = re.split('[, ]', cmd_string[2:])
+        parameters = re.split('[, ]', cmd_string[2:].strip())
         x = parameters.pop(0)
         y = parameters.pop(0)
         body = '(%s,%s),%s' % (x, y, ','.join(parameters))

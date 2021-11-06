@@ -11,6 +11,8 @@ def parse_hpgl_string(arg):
     # find label terminator first (DT)
     try:
         terminator = re.search('DT(.*?)(,[01])?;', arg).group(1)
+        if len(terminator) == 0:
+            terminator = '\x03'  # EOT
     except:
         terminator = '\x03'  # EOT
 
