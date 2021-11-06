@@ -19,4 +19,4 @@ def import_hpgl_file(filename, filter_commands=None):
     fs = f.read()
     f.close()
 
-    return inflate_hpgl_string(fs, filter_commands)
+    return inflate_hpgl_string(fs.replace("\n", ""), filter_commands)

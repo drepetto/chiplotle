@@ -2,6 +2,7 @@ from chiplotle.hpgl import commands as hpgl
 from chiplotle.tools.hpgltools.parse_hpgl_string import parse_hpgl_string
 from chiplotle.tools.logtools.apply_logger import apply_logger
 from chiplotle.tools.iterabletools.flat_list_to_pairs import flat_list_to_pairs
+import re
 
 def inflate_hpgl_string(string, filter_commands=None):
     '''Reads a text string and "inflates" it by creating
@@ -50,8 +51,12 @@ def inflate_hpgl_string_command(cmd_string):
     '''
     head, body = _parse_hpgl_command_string(cmd_string)
     try:
-        result = eval('hpgl.%s(%s)' % (head, body))
-        return result
+        if head in ("DT", "LB", "BL"):
+            result = eval('hpgl.%s("%s")' % (head, body))
+            return result
+        else:
+            result = eval('hpgl.%s(%s)' % (head, body))
+            return result
     except:
         msg = 'Could not create %s(%s)...' % (head, body)
         msg += ' The command is either malformed or unrecognized.'
@@ -64,19 +69,23 @@ def _parse_hpgl_command_string(cmd_string):
     '''
     head = cmd_string[0:2]
     if head in ('PU','PD','PA','PR','IP','IW','SC'):
-        coords = cmd_string[2:].split(',')
+        # NOTE: some files have whitespace as separator,
+        # even though that's not the official grammar
+        coords = re.split('[, ]', cmd_string[2:].strip())
         if coords == ['']:
             coords = []
-        coords = [eval(n) for n in coords]
+        coords = [eval(n) for n in coords if n != '']  # whitespace as separator
         coords = flat_list_to_pairs(coords)
         body = '(%s)' % coords
     elif head in ('RA','RR','ER','EA',):
         body = '(%s)' % cmd_string[2:]
     elif head in ('AR', 'AA'):
-        parameters = cmd_string[2:].split(',')
+        parameters = re.split('[, ]', cmd_string[2:].strip())
         x = parameters.pop(0)
         y = parameters.pop(0)
         body = '(%s,%s),%s' % (x, y, ','.join(parameters))
+    elif head in ('LB', 'BL'):
+        body = cmd_string[2:-1]  # skip the terminator
     else:
         body = cmd_string[2:]
     return head, body
